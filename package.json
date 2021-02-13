@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "shared-modules",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@storybook/addon-a11y": "^6.1.17",
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/addon-notes": "^5.3.21",
+    "@storybook/react": "^6.1.17",
+    "@storybook/theming": "^6.1.17",
+    "@wpmudev/shared-ui": "^2.10.4",
+    "babel-loader": "^8.2.2",
+    "lerna": "^3.22.1",
+    "lerna-changelog": "^1.0.1",
+    "react-is": "^17.0.1"
+  },
+  "scripts": {
+    "build": "npx lerna run build",
+    "storybook": "start-storybook -p 6006 --no-dll",
+    "build-storybook": "build-storybook --no-dll"
+  }
+}
