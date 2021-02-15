@@ -4,7 +4,10 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@storybook/addon-a11y": "^6.1.17",
@@ -30,11 +33,11 @@
   "changelog": {
     "repo": "wpmudev/shared-ui-react",
     "labels": {
-        "new": "New Features",
-        "improvement": "Improvements",
-        "accessibility": "Accessibility Changes",
-        "bug": "Bug Fixes",
-        "documentation": "Documentation"
+      "new": "New Features",
+      "improvement": "Improvements",
+      "accessibility": "Accessibility Changes",
+      "bug": "Bug Fixes",
+      "documentation": "Documentation"
     },
     "cacheDir": ".changelog"
   }
