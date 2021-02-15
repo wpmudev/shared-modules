@@ -5,3 +5,4 @@ node_modules
 .changelog
 .developer-notes
 lerna-debug.log
+build-storybook.log
