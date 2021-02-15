@@ -1,4 +1,7 @@
+storybook-static
 node_modules
 .DS_Store
-lerna-debug.log
+.npmrc
 .changelog
+.developer-notes
+lerna-debug.log
