@@ -23,6 +23,19 @@
   "scripts": {
     "build": "npx lerna run build",
     "storybook": "start-storybook -p 6006 --no-dll",
-    "build-storybook": "build-storybook --no-dll"
+    "build-storybook": "build-storybook --no-dll",
+    "init-logs": "node_modules/.bin/lerna-changelog",
+    "logs": "lerna-changelog"
+  },
+  "changelog": {
+    "repo": "wpmudev/shared-ui-react",
+    "labels": {
+        "new": "New Features",
+        "improvement": "Improvements",
+        "accessibility": "Accessibility Changes",
+        "bug": "Bug Fixes",
+        "documentation": "Documentation"
+    },
+    "cacheDir": ".changelog"
   }
 }
