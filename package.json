@@ -11,6 +11,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
     "@storybook/addon-a11y": "^6.1.17",
     "@storybook/addon-actions": "^6.1.17",
@@ -31,6 +32,7 @@
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll",
     "deploy": "yarn run build-storybook && gh-pages -d storybook-static -b gh-pages -m \"🚀 Update showcase with latest changes.\"",
+    "chromatic": "yarn run build-storybook && npx chromatic --project-token=8qcmh09rb9f --storybook-build-dir storybook-static",
     "init-logs": "node_modules/.bin/lerna-changelog",
     "logs": "lerna-changelog"
   },
