@@ -29,6 +29,7 @@
     "build": "npx lerna run build",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll",
+    "deploy": "yarn run build-storybook && gh-pages -d storybook-static -b gh-pages -m \"🚀 Update showcase with latest changes.\"",
     "init-logs": "node_modules/.bin/lerna-changelog",
     "logs": "lerna-changelog"
   },
