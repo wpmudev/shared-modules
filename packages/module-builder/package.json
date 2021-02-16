@@ -22,7 +22,7 @@
     "lib"
   ],
   "bin": {
-    "sui-builder": "./lib/module-builder.js"
+    "module-builder": "./lib/module-builder.js"
   },
   "repository": {
     "type": "git",
