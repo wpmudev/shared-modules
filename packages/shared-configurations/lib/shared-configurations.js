@@ -1,7 +1,5 @@
-'use strict';
+import React from "react";
 
-module.exports = sharedConfigurations;
+const Configurations = ({ children }) => <div style={ { padding: 10, backgroundColor: "lightblue" } }>Say hello: { children }</div>;
 
-function sharedConfigurations() {
-    // TODO
-}
+export { Configurations };
