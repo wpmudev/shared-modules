@@ -1,8 +1,0 @@
-storybook-static
-node_modules
-.DS_Store
-.npmrc
-.changelog
-.developer-notes
-lerna-debug.log
-build-storybook.log
