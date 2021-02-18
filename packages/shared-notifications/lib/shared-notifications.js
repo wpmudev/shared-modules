@@ -1,7 +1,5 @@
-'use strict';
+import React from "react";
 
-module.exports = sharedNotifications;
+const Notifications = ({ children }) => <div style={ { padding: 5, backgroundColor: "lightgreen" } }>Notify something: { children }</div>;
 
-function sharedNotifications() {
-    // TODO
-}
+export { Notifications };
