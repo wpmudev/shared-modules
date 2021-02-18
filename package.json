@@ -13,9 +13,11 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.12.0",
     "lerna": "^3.22.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "webpack": "^5.23.0"
   },
   "scripts": {
-	"build": "lerna exec --parallel -- babel --root-mode upward lib -d dist --ignore **/*.stories.js,**/*.spec.js"
+    "build": "lerna exec --parallel -- babel --root-mode upward lib -d dist --ignore **/*.stories.js,**/*.spec.js"
   }
 }
