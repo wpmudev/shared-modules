@@ -20,6 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/wpmudev/shared-modules.git"
   },
+  "bin": {
+	"shared-compiler": "./lib/shared-compiler.js"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },

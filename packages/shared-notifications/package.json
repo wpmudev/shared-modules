@@ -21,6 +21,7 @@
     "url": "git+https://github.com/wpmudev/shared-modules.git"
   },
   "scripts": {
+	"build": "shared-compiler",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "devDependencies": {
+    "@wpmudev/shared-compiler": "^1.0.0",
     "react": "^17.0.1"
   },
   "peerDependencies": {

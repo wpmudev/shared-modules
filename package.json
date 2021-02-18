@@ -19,5 +19,7 @@
   "dependencies": {
     "@octokit/core": "^3.2.5"
   },
-  "scripts": {}
+  "scripts": {
+	"build": "lerna run build"
+  }
 }
