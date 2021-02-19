@@ -5,12 +5,15 @@
   "keywords": [],
   "author": "Leighton Sapir <2328848+iamleigh@users.noreply.github.com>",
   "license": "ISC",
-  "main": "lib/shared-notifications.js",
+  "main": "dist/shared-notifications.cjs.js",
+  "module": "dist/shared-notifications.esm.js",
+  "src": "lib/shared-notifications.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
+    "dist",
     "lib"
   ],
   "publishConfig": {
