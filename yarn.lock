@@ -3300,6 +3300,11 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@wpmudev/react-box@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-box/-/react-box-1.0.2.tgz#a7de69de2d9cc13d3a4699f1ccb7248b09656cbd"
+  integrity sha512-DTdiqLTBp8MREXx53qzzlMKMJ5xkcc+TQrCNmj/iHbLajko1pn9MEquhMUAZV8ZtKIz3kz+fyF6amD9swLJ4zw==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
