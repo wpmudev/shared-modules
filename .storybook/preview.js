@@ -1,6 +1,50 @@
 import React from "react";
 import "@wpmudev/shared-ui/dist/css/shared-ui.min.css"; // Get SUI styles.
 
+// List custom viewports.
+const customViewports = {
+	xl: {
+		name: 'Desktop',
+		styles: {
+			width: '1500px',
+			height: '938px'
+		},
+		type: 'desktop'
+	},
+	lg: {
+		name: 'Laptop',
+		styles: {
+			width: '1200px',
+			height: '750px'
+		},
+		type: 'desktop'
+	},
+	md: {
+		name: 'Tablet',
+		styles: {
+			width: '783px',
+			height: '1253px'
+		},
+		type: 'tablet'
+	},
+	sm: {
+		name: 'Mobile',
+		styles: {
+			width: '480px',
+			height: '800px'
+		},
+		type: 'mobile'
+	},
+	xs: {
+		name: 'Smaller',
+		styles: {
+			width: '375px',
+			height: '667px'
+		},
+		type: 'mobile'
+	},
+};
+
 // Edit parameters.
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -13,6 +57,9 @@ export const parameters = {
 			}
 		]
 	},
+	viewport: {
+		viewports: customViewports
+	}
 };
 
 // Edit "preview" markup.
