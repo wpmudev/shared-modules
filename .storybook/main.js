@@ -8,15 +8,15 @@ module.exports = {
 		"@storybook/addon-essentials",
 		"@storybook/addon-a11y"
 	],
-	webpackFinal: async ( config ) => {
-		// Change the order of resolution of main fields.
-		config.resolve.mainFields = [
-			'src',
-			'module',
-			'main'
-		];
+	// webpackFinal: async ( config ) => {
+	// 	// Change the order of resolution of main fields.
+	// 	config.resolve.mainFields = [
+	// 		'src',
+	// 		'module',
+	// 		'main'
+	// 	];
 
-		// Return the altered config
-		return config;
-	}
+	// 	// Return the altered config
+	// 	return config;
+	// }
 };
