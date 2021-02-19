@@ -51,6 +51,9 @@ async function build() {
 	outputOptions.forEach( async ( options ) => {
 		await bundle.write( options );
 	});
+
+	console.log( "📦 Package " + name + " compiled." );
+
 }
 
 build();
