@@ -1,5 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
+import { Box, BoxBody } from "@wpmudev/react-box";
 
-const Configurations = ({ children }) => <div style={ { padding: 10, backgroundColor: "lightblue" } }>Say hello: { children }</div>;
+export class Configurations extends Component {
+	constructor( props ) {
+		super( props );
+	}
 
-export { Configurations };
+	render() {
+		return (
+			<Box>
+				<BoxBody>
+					<p>Hello World!</p>
+				</BoxBody>
+			</Box>
+		);
+	}
+}
