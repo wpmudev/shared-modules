@@ -25,7 +25,8 @@ const inputOptions = {
 				"@babel/preset-env",
 				"@babel/preset-react"
 			],
-			babelHelpers: "bundled"
+			babelHelpers: "bundled",
+			exclude: 'node_modules/**'
 		})
 	]
 };
