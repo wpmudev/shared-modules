@@ -13,7 +13,7 @@ export const primary = ( args ) => {
 		</NoticeOffer>
 	);
 };
-primary.storyName = "Default";
+primary.storyName = "Notice Offer";
 primary.args = {
 	title: "Don’t Miss Out On Subscription / Recurring Payment Support",
 	price: 65,
