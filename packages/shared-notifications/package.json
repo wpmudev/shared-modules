@@ -24,7 +24,7 @@
     "url": "git+https://github.com/wpmudev/shared-modules.git"
   },
   "scripts": {
-	"build": "shared-compiler",
+    "build": "shared-compiler",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
@@ -37,5 +37,12 @@
   },
   "peerDependencies": {
     "react": "^17.0.1"
+  },
+  "dependencies": {
+    "@wpmudev/react-button": "^1.0.0",
+    "styled-components": "^5.2.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }

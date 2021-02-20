@@ -1,5 +1,3 @@
-import React from "react";
+import { NoticeOffer } from "./parts/notice-offer";
 
-const Notifications = ({ children }) => <div style={ { padding: 5, backgroundColor: "lightgreen" } }>Notify something: { children }</div>;
-
-export { Notifications };
+export { NoticeOffer };
