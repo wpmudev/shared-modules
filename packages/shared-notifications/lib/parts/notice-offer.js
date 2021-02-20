@@ -236,7 +236,18 @@ const Price = styled.p`
 export class NoticeOffer extends Component {
 	constructor( props ) {
 		super( props );
+
+		// Call functions.
+		this.closeButtonClicked = this.closeButtonClicked.bind(this);
 	}
+
+	closeButtonClicked = e => {
+		const noticeBox = e.currentTarget.closest(".sui-notice-offer"),
+			event = new Event("noticeOfferClosed");
+
+		noticeBox.dispatchEvent(event);
+		noticeBox.remove();
+	};
 
 	render() {
 		const title = this.props.title;
@@ -270,19 +281,27 @@ export class NoticeOffer extends Component {
 		const hasButton = hasButtonLabel && hasButtonLink;
 
 		return (
-			<Wrapper { ...this.props }>
+			<Wrapper
+				className="sui-notice-offer"
+				{ ...this.props }>
 
 				<Header>
+
 					{ hasDiscount && (
 						<Ribbon>{ discount }% Off</Ribbon>
 					)}
+
 					{ null !== title && '' !== title && <Title>{ title }</Title> }
-					<button className="sui-button-icon sui-button-white">
+
+					<button
+						className="sui-button-icon sui-button-white"
+						onClick={e => this.closeButtonClicked(e)}>
 						<span className="sui-icon-close sui-sm" aria-hidden="true" />
 						<span className="sui-screen-reader-text">
 							Close this offer
 						</span>
 					</button>
+
 				</Header>
 
 				<Body>
@@ -310,7 +329,9 @@ export class NoticeOffer extends Component {
 					<Border><span /></Border>
 
 					<PriceWrapper>
+
 						<PriceLabel>Pay Only</PriceLabel>
+
 						{ hasDiscount
 							? (
 								<Price>
@@ -320,6 +341,7 @@ export class NoticeOffer extends Component {
 							)
 							: <Price><strong>${ price }</strong>/month</Price>
 						}
+
 						{ hasButton && (
 							<Button
 								label={ buttonLabel }
@@ -328,9 +350,11 @@ export class NoticeOffer extends Component {
 								target="_blank"
 							/>
 						)}
+
 						{ hasDisclaimer && (
 							<p className="sui-disclaimer">* { disclaimer } *</p>
 						)}
+
 					</PriceWrapper>
 
 				</Body>
