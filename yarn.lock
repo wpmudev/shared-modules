@@ -3327,6 +3327,11 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-box/-/react-box-1.0.2.tgz#a7de69de2d9cc13d3a4699f1ccb7248b09656cbd"
   integrity sha512-DTdiqLTBp8MREXx53qzzlMKMJ5xkcc+TQrCNmj/iHbLajko1pn9MEquhMUAZV8ZtKIz3kz+fyF6amD9swLJ4zw==
 
+"@wpmudev/react-button@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.0.tgz#76406ae28c500c7751e905fa614b148aa258a098"
+  integrity sha512-dwJuNWWcQL9yT3ijVy24Ux3PrpCuOu6FP3icTf6NDmZgPUthqOSdQg75sPHtCg7ZwWXtaX5gJ28Bie3zUcY8pA==
+
 "@wpmudev/shared-ui@^2.10.4":
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.10.4.tgz#1cb95d1d7df89427b0202bc92e79e3771c3c5411"
