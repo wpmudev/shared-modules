@@ -253,10 +253,8 @@ export class NoticeOffer extends Component {
 		const title = this.props.title;
 		const price = this.props.price;
 		const discount = this.props.discount;
-		const imagePath = this.props.imagePath;
-		const imageName = this.props.imageName;
-		const imageExt = this.props.imageExt;
-		const retinaImage = this.props.retinaImage;
+		const image1x = this.props.image;
+		const image2x = this.props.imageRetina;
 		const disclaimer = this.props.disclaimer;
 		const buttonLabel = this.props.buttonLabel;
 		const buttonLink = this.props.buttonLink;
@@ -266,13 +264,8 @@ export class NoticeOffer extends Component {
 
 		const hasDiscount = (null !== discount && "" !== discount && 0 !== discount) || discount > 0;
 
-		const image1x = imagePath + imageName + '.' + imageExt;
-		const image2x = imagePath + imageName + '@2x.' + imageExt;
-
-		const hasImagePath = null !== imagePath && '' !== imagePath;
-		const hasImageName = null !== imageName && '' !== imageName;
-		const hasImageExt = null !== imageExt && '' !== imageExt;
-		const hasImage = hasImagePath && hasImageName && hasImageExt;
+		const hasImage1x = null !== image1x && "" !== image1x;
+		const hasImage2x = null !== image2x && "" !== image2x;
 
 		const hasDisclaimer = ( null !== disclaimer && "" !== disclaimer );
 
@@ -306,11 +299,11 @@ export class NoticeOffer extends Component {
 
 				<Body>
 
-					{ hasImage && ! retinaImage && (
+					{ hasImage1x && !hasImage2x && (
 						<Image src={ image1x } alt="" aria-hidden="true" />
 					)}
 
-					{ hasImage && retinaImage && (
+					{ hasImage1x && hasImage2x && (
 						<Image
 							src={ image1x }
 							srcSet={ image1x + ' 1x,' + image2x + ' 2x' }

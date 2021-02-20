@@ -1,5 +1,7 @@
 import React from "react";
 import { NoticeOffer } from "../lib/shared-notifications";
+import imageFile1x from "./images/notice-offer.png";
+import imageFile2x from "./images/notice-offer@2x.png";
 
 export default {
 	title: "Notifications/Notice Offer",
@@ -18,10 +20,8 @@ primary.args = {
 	title: "Don’t Miss Out On Subscription / Recurring Payment Support",
 	price: 65,
 	discount: 60,
-	imagePath: "https://singlesite.test/wp-content/plugins/forminator/assets/images/",
-	imageName: "forminator-create-modal",
-	imageExt: "png",
-	retinaImage: true,
+	image: imageFile1x,
+	imageRetina: imageFile2x,
 	disclaimer: "Only admin users can see this message",
 	buttonLabel: "Get 60% Off Forminator Pro",
 	buttonLink: "https://premium.wpmudev.com/"
