@@ -275,7 +275,10 @@ const NoticeOffer = ({
 				)}
 				{ null !== title && '' !== title && <Title>{ title }</Title> }
 				<button className="sui-button-icon sui-button-white">
-					<span className="sui-icon-close sui-sm" />
+					<span className="sui-icon-close sui-sm" aria-hidden="true" />
+					<span className="sui-screen-reader-text">
+						Close this offer
+					</span>
 				</button>
 			</Header>
 
