@@ -85,7 +85,7 @@ const Title = styled.h2`
 	font-weight: bold !important;
 	letter-spacing: normal !important;
 
-	+ .sui-button-icon {
+	& + & .sui-button-icon {
 		margin-left: 0 !important;
 	}
 
