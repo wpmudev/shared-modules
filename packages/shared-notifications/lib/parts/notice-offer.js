@@ -74,7 +74,7 @@ const Ribbon = styled.div`
 `;
 
 const Title = styled.h2`
-	min-with: 1px;
+	min-width: 1px;
 	flex: 1;
 	margin: 0 20px !important;
 	padding: 11px 0 !important;
