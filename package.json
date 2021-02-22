@@ -23,6 +23,11 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-is": "^17.0.1",
+    "stylelint": "^13.11.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
     "webpack": "^5.23.0"
   },
   "dependencies": {
@@ -32,7 +37,8 @@
     "build": "lerna run build",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll",
-    "deploy": "yarn build-storybook && gh-pages -d storybook-static -b gh-pages -m \"🚀 Update showcase with latest changes.\""
+    "deploy": "yarn build-storybook && gh-pages -d storybook-static -b gh-pages -m \"🚀 Update showcase with latest changes.\"",
+    "lint:css": "stylelint './packages/**/*.js'"
   },
   "peerDependencies": {
     "typescript": "^4.1.5"
