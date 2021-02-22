@@ -229,7 +229,7 @@ const Price = styled.p`
 	strong {
 		font-size: 28px;
 		font-weight: bold;
-		letter-spacing: -0.5p;
+		letter-spacing: -0.5px;
 	}
 `;
 
