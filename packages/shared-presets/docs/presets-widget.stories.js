@@ -3,14 +3,10 @@ import { action } from "@storybook/addon-actions";
 import { PresetsWidget, PresetsWidgetItem } from "../lib/shared-presets";
 
 export default {
-	title: "Presets/Widget",
-	component: PresetsWidget,
-	subcomponents: {
-		"Item": PresetsWidgetItem
-	}
+	title: "Presets/Widget"
 }
 
-export const primary = ( args, subargs ) => {
+export const primary = ( args ) => {
 	return (
 		<PresetsWidget { ...args }>
 
@@ -19,7 +15,6 @@ export const primary = ( args, subargs ) => {
 				description="Recommended performance config for every site."
 				applyLabel="Apply"
 				applyAction={ action( "Apply this preset." ) }
-				{ ...subargs["PresetsWidgetItem"] }
 			>
 				<div
 					name="Option 1"
