@@ -1,18 +1,4 @@
-import React, { Component } from "react";
-import { Box, BoxBody } from "@wpmudev/react-box";
+import { PresetsWidget } from "./widget/wrapper";
+import { PresetsWidgetItem } from "./widget/item";
 
-export class Configurations extends Component {
-	constructor( props ) {
-		super( props );
-	}
-
-	render() {
-		return (
-			<Box>
-				<BoxBody>
-					<p>Hello World!</p>
-				</BoxBody>
-			</Box>
-		);
-	}
-}
+export { PresetsWidget, PresetsWidgetItem }
