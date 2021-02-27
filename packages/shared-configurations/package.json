@@ -1,9 +1,9 @@
 {
   "name": "@wpmudev/shared-configurations",
-  "version": "1.0.0",
-  "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
+  "version": "0.0.0",
+  "description": "Components for preset configurations.",
   "keywords": [],
-  "author": "Leighton Sapir <2328848+iamleigh@users.noreply.github.com>",
+  "author": "WPMU DEV (https://premium.wpmudev.org/)",
   "license": "ISC",
   "main": "dist/shared-configurations.cjs.js",
   "module": "dist/shared-configurations.esm.js",
