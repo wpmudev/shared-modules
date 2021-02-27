@@ -39,6 +39,11 @@
     "react": "^17.0.1"
   },
   "dependencies": {
-    "@wpmudev/react-box": "^1.0.2"
+    "@wpmudev/react-box": "^1.0.2",
+    "@wpmudev/react-button": "^1.0.0",
+    "styled-components": "^5.2.1"
+  },
+  "resolutions": {
+	"styled-components": "^5"
   }
 }
