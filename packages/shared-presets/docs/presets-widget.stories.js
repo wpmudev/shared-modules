@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { PresetsWidget, PresetsWidgetItem } from "../lib/shared-configurations";
+import { PresetsWidget, PresetsWidgetItem } from "../lib/shared-presets";
 
 export default {
 	title: "Presets/Widget",
