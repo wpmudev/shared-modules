@@ -1,0 +1,34 @@
+{
+  "name": "@wpmudev/shared-tutorials-list",
+  "version": "1.0.0",
+  "description": "WPMU DEV Shared Tutorials List",
+  "author": "WPMU DEV (https://premium.wpmudev.org/)",
+  "homepage": "https://github.com/wpmudev/shared-modules#readme",
+  "license": "GPL-3.0",
+  "main": "dist/shared-tutorials-list.cjs.js",
+  "module": "dist/shared-tutorials-list.esm.js",
+  "source": "lib/shared-tutorials-list.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wpmudev/shared-modules.git",
+    "directory": "packages/shared-tutorials-list"
+  },
+  "scripts": {
+    "build": "shared-compiler",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/wpmudev/shared-modules/issues"
+  }
+}
