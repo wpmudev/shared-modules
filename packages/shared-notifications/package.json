@@ -11,7 +11,7 @@
       "url": "https://iamleigh.com/"
     }
   ],
-  "license": "ISC",
+  "license": "GPL-3.0",
   "main": "dist/shared-notifications.cjs.js",
   "module": "dist/shared-notifications.esm.js",
   "src": "lib/shared-notifications.js",
