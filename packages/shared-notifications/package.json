@@ -1,7 +1,7 @@
 {
   "name": "@wpmudev/shared-notifications",
   "version": "0.0.0",
-  "description": "Highlighted notification components.",
+  "description": "WPMU DEV Shared Notifications",
   "keywords": [],
   "author": "Leighton Sapir <2328848+iamleigh@users.noreply.github.com>",
   "license": "ISC",
