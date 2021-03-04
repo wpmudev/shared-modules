@@ -37,5 +37,17 @@
   "bugs": {
     "url": "https://github.com/wpmudev/shared-modules/issues"
   },
-  "homepage": "https://github.com/wpmudev/shared-modules#readme"
+  "homepage": "https://github.com/wpmudev/shared-modules#readme",
+  "devDependencies": {
+    "@wpmudev/shared-compiler": "^1.0.0",
+    "react": "^17.0.1"
+  },
+  "dependencies": {
+    "@wpmudev/react-notifications": "^1.0.1",
+    "@wpmudev/react-post": "^1.0.5",
+    "styled-components": "^5.2.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  }
 }

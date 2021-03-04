@@ -3368,6 +3368,18 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.0.tgz#76406ae28c500c7751e905fa614b148aa258a098"
   integrity sha512-dwJuNWWcQL9yT3ijVy24Ux3PrpCuOu6FP3icTf6NDmZgPUthqOSdQg75sPHtCg7ZwWXtaX5gJ28Bie3zUcY8pA==
 
+"@wpmudev/react-notifications@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.1.tgz#3e26761a6e76085d9e5ba4b1b6cf435ebd0e4e4b"
+  integrity sha512-rXWcvM07mlfktUim+0GXaRiXIYLAUaSih5hrtHYDLKRO1JS9/XkuYoTCrZybPUF6Fep4LOpEvtuQB0xb9daOaA==
+
+"@wpmudev/react-post@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-post/-/react-post-1.0.5.tgz#e2a8526df8f362cd0c5d8d1352b738e2e21faf69"
+  integrity sha512-TPutBkUN0hGX32ZnWlkHiT2hyMPUgBZwB2usHONTtRU+X/NBx1mh8WKHJ6Xch2nJ5TtnIEC4Mw/76gDwGve7OQ==
+  dependencies:
+    styled-components "^5.2.1"
+
 "@wpmudev/shared-ui@^2.10.4":
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.10.4.tgz#1cb95d1d7df89427b0202bc92e79e3771c3c5411"
