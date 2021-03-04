@@ -27,7 +27,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wpmudev/shared-modules.git"
+    "url": "git+https://github.com/wpmudev/shared-modules.git",
+    "directory": "packages/shared-tutorials-slider"
   },
   "scripts": {
     "build": "shared-compiler",
