@@ -32,6 +32,7 @@
     "directory": "packages/shared-notice-offer"
   },
   "scripts": {
+    "build": "shared-compiler",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
