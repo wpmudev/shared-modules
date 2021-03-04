@@ -46,5 +46,8 @@
     "@wpmudev/react-notifications": "^1.0.1",
     "@wpmudev/react-post": "^1.0.5",
     "styled-components": "^5.2.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
