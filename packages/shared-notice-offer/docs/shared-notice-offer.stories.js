@@ -1,5 +1,5 @@
 import React from "react";
-import { NoticeOffer } from "../lib/shared-notifications";
+import { NoticeOffer } from "../lib/shared-notice-offer";
 import imageFile1x from "./images/notice-offer.png";
 import imageFile2x from "./images/notice-offer@2x.png";
 
