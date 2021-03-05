@@ -1,3 +1,3 @@
-import { NoticeOffer } from "./parts/notice-offer";
+import { NoticeOffer } from "@wpmudev/shared-notice-offer";
 
 export { NoticeOffer };
