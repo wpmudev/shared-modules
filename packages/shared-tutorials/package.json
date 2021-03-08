@@ -12,7 +12,9 @@
     }
   ],
   "license": "GPL-3.0",
-  "main": "lib/shared-tutorials.js",
+  "main": "dist/shared-tutorials.cjs.js",
+  "module": "dist/shared-tutorials.esm.js",
+  "src": "lib/shared-tutorials.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
