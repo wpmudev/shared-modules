@@ -44,6 +44,7 @@
     "@wpmudev/shared-tutorials-slider": "^0.0.0"
   },
   "devDependencies": {
+    "@wpmudev/shared-compiler": "^1.0.0",
     "react": "^17.0.1"
   }
 }
