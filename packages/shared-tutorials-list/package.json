@@ -2,15 +2,19 @@
   "name": "@wpmudev/shared-tutorials-list",
   "version": "1.0.0",
   "description": "WPMU DEV Shared Tutorials List",
+  "keywords": [],
   "author": "WPMU DEV (https://premium.wpmudev.org/)",
   "contributors": [
     {
       "name": "Leighton Sapir",
       "email": "2328848+iamleigh@users.noreply.github.com",
       "url": "https://iamleigh.com/"
+    },
+    {
+      "name": "Danae Millán",
+      "email": "41606954+a-danae@users.noreply.github.com"
     }
   ],
-  "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "license": "GPL-3.0",
   "main": "dist/shared-tutorials-list.cjs.js",
   "module": "dist/shared-tutorials-list.esm.js",
@@ -38,6 +42,7 @@
   "bugs": {
     "url": "https://github.com/wpmudev/shared-modules/issues"
   },
+  "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.0",
     "react": "^17.0.1"
