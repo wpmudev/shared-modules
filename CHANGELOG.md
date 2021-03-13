@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (2021-03-12)
+## Unreleased (2021-03-13)
 
 #### New Features
 * `shared-tutorials-list`
@@ -13,6 +13,12 @@
   * [#10](https://github.com/wpmudev/shared-modules/pull/10) 🐛 fix/notice-offer: Re-organize and re-locate notifications sub-packages. ([@iamleigh](https://github.com/iamleigh))
 
 #### Bug Fixes
+* `react-tutorials-slider`, `react-tutorials`
+  * [#17](https://github.com/wpmudev/shared-modules/pull/17) 🐛 fix/tutorials-slider: Use old name for package. ([@iamleigh](https://github.com/iamleigh))
+* `react-tutorials-list`, `react-tutorials`
+  * [#18](https://github.com/wpmudev/shared-modules/pull/18) 🐛 fix/tutorials-list: Use old name for package. ([@iamleigh](https://github.com/iamleigh))
+* `react-tutorials`
+  * [#16](https://github.com/wpmudev/shared-modules/pull/16) 🐛 fix/tutorials: Use old name for package. ([@iamleigh](https://github.com/iamleigh))
 * `shared-tutorials-slider`
   * [#13](https://github.com/wpmudev/shared-modules/pull/13) 🐛 fix/tutorials-slider: Add missing tooltip. ([@iamleigh](https://github.com/iamleigh))
 
