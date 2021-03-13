@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "dependencies": {
-    "@wpmudev/shared-tutorials-list": "^1.0.0",
+    "@wpmudev/react-tutorials-list": "^1.0.9",
     "@wpmudev/react-tutorials-slider": "^1.0.11"
   },
   "devDependencies": {

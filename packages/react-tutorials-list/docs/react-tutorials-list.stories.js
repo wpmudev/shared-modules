@@ -1,5 +1,5 @@
 import React from 'react';
-import { TutorialsList } from '../lib/shared-tutorials-list';
+import { TutorialsList } from '../lib/react-tutorials-list';
 
 // Import documentation.
 import Documentation from '../README.md';
