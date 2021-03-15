@@ -21,14 +21,25 @@ const inputOptions = {
 	],
 	plugins: [
 		resolve(),
+		postcss({
+			modules: true
+		}),
 		babel({
 			presets: [
 				'@babel/preset-env',
 				'@babel/preset-react'
 			],
 			babelHelpers: 'bundled',
-			exclude: 'node_modules/**'
-		})
+			exclude: 'node_modules/**',
+			plugins: [
+				'@babel/plugin-proposal-class-properties',
+				'@babel/plugin-proposal-private-methods'
+			]
+		}),
+	],
+	external: [
+		'react',
+		'styled-components'
 	]
 };
 
