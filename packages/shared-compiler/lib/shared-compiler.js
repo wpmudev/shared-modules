@@ -1,31 +1,31 @@
 #!/usr/bin/env node
-const rollup = require( "rollup" );
-const path = require( "path" );
-const resolve = require( "@rollup/plugin-node-resolve" ).default;
-const babel = require( "@rollup/plugin-babel" ).default;
+const rollup = require( 'rollup' );
+const path = require( 'path' );
+const resolve = require( '@rollup/plugin-node-resolve' ).default;
+const babel = require( '@rollup/plugin-babel' ).default;
 
 const currentWorkingPath = process.cwd();
-const { src, name } = require( path.join( currentWorkingPath, "package.json" ) );
+const { src, name } = require( path.join( currentWorkingPath, 'package.json' ) );
 
 const inputPath = path.join( currentWorkingPath, src );
 
 // Get package name without scope.
-const fileName = name.replace( "@wpmudev/", "" );
+const fileName = name.replace( '@wpmudev/', '' );
 
 // Input options.
 const inputOptions = {
 	input: inputPath,
 	external: [
-		"react"
+		'react'
 	],
 	plugins: [
 		resolve(),
 		babel({
 			presets: [
-				"@babel/preset-env",
-				"@babel/preset-react"
+				'@babel/preset-env',
+				'@babel/preset-react'
 			],
-			babelHelpers: "bundled",
+			babelHelpers: 'bundled',
 			exclude: 'node_modules/**'
 		})
 	]
@@ -35,11 +35,11 @@ const inputOptions = {
 const outputOptions = [
 	{
 		file: `dist/${fileName}.cjs.js`,
-		format: "cjs"
+		format: 'cjs'
 	},
 	{
 		file: `dist/${fileName}.esm.js`,
-		format: "esm"
+		format: 'esm'
 	}
 ];
 
@@ -52,7 +52,7 @@ async function build() {
 		await bundle.write( options );
 	});
 
-	console.log( "📦 Package " + name + " compiled." );
+	console.log( '📦 Package ' + name + ' compiled.' );
 
 }
 
