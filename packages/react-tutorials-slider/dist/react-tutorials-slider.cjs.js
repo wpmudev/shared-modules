@@ -414,7 +414,7 @@ function _assertThisInitialized$2(self) {
 }
 
 function _possibleConstructorReturn$2(self, call) {
-  if (call && (typeof call === "object" || typeof call === "function")) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   }
 
@@ -531,6 +531,7 @@ function _templateObject() {
 
   return data;
 }
+
 var aria = aria || {};
 aria.KeyCode = {
   TAB: 9,
@@ -627,6 +628,7 @@ var Excerpt = styled__default['default'].div(_templateObject7(), function (props
 var ReadMore = styled__default['default'].p(_templateObject8(), function (props) {
   return props.banner ? "" : "margin: 4px 0 0;";
 });
+
 var Post = /*#__PURE__*/function (_Component) {
   _inherits$2(Post, _Component);
 
