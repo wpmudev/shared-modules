@@ -31,12 +31,16 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
+  "bugs": {
+    "url": "https://github.com/wpmudev/shared-modules/issues"
+  },
   "dependencies": {
     "@babel/core": "^7.12.17",
     "@babel/preset-env": "^7.12.17",
     "@babel/preset-react": "^7.12.13",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
-    "rollup": "^2.39.0"
+    "rollup": "^2.39.0",
+    "rollup-plugin-postcss": "^4.0.0"
   }
 }
