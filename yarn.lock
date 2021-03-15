@@ -3378,10 +3378,10 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.1.tgz#3e26761a6e76085d9e5ba4b1b6cf435ebd0e4e4b"
   integrity sha512-rXWcvM07mlfktUim+0GXaRiXIYLAUaSih5hrtHYDLKRO1JS9/XkuYoTCrZybPUF6Fep4LOpEvtuQB0xb9daOaA==
 
-"@wpmudev/react-post@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-post/-/react-post-1.0.5.tgz#e2a8526df8f362cd0c5d8d1352b738e2e21faf69"
-  integrity sha512-TPutBkUN0hGX32ZnWlkHiT2hyMPUgBZwB2usHONTtRU+X/NBx1mh8WKHJ6Xch2nJ5TtnIEC4Mw/76gDwGve7OQ==
+"@wpmudev/react-post@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-post/-/react-post-1.0.6.tgz#99434a7fd8fd202c2db6f0fc13c6e9877b48337c"
+  integrity sha512-gq7CEpXoP/qDi8j1cl74UA7xSlk+FufGs6EwkT+JTBQ/QLFv+CU7o2S6GkOtLPjM0vKpJHNt8YBUQjgf3QEleQ==
   dependencies:
     styled-components "^5.2.1"
 
