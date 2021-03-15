@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (2021-03-13)
+## Released (2021-03-13)
 
 #### New Features
 * `shared-tutorials-list`
