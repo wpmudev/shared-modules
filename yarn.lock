@@ -3395,6 +3395,13 @@
   dependencies:
     styled-components "^5.2.1"
 
+"@wpmudev/react-post@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-post/-/react-post-1.0.7.tgz#9ce56f4193f7e2c599f20d607180846cfad0d9e6"
+  integrity sha512-HFBgmJmfQ1l4pF6RMTxBXFDEplZO/agmI1haFyhYsuYQA4WOpqjZSEmdCAtfZD8y4eYQtLv5CSPv7uf/gkZDZA==
+  dependencies:
+    styled-components "^5.2.1"
+
 "@wpmudev/shared-ui@^2.10.4":
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.10.4.tgz#1cb95d1d7df89427b0202bc92e79e3771c3c5411"
