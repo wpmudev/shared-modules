@@ -36,7 +36,7 @@
   },
   "scripts": {
     "build": "lerna run build",
-    "storybook": "start-storybook -p 6006 --no-dll",
+    "storybook": "start-storybook -p 6007 --no-dll",
     "build-storybook": "build-storybook --no-dll",
     "deploy": "yarn build-storybook && gh-pages -d storybook-static -b gh-pages -m \"🚀 Update showcase with latest changes.\"",
     "lint:css": "stylelint './packages/**/*.js'",
