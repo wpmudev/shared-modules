@@ -806,6 +806,12 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "closeButtonClicked", function (e) {
+      _this.hideComponent(e);
+
+      _this.props.onCloseClick(e);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "hideComponent", function (e) {
       var sliderBox = e.currentTarget.closest(".sui-tutorials-slider-box"),
           event = new Event("sliderTutorialClosed");
       sliderBox.dispatchEvent(event);
@@ -909,6 +915,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       isShowingAll: window.innerWidth > screen$1.tablet
     };
     _this.closeButtonClicked = _this.closeButtonClicked.bind(_assertThisInitialized(_this));
+    _this.hideComponent = _this.hideComponent.bind(_assertThisInitialized(_this));
     _this.openLink = _this.openLink.bind(_assertThisInitialized(_this));
     _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized(_this));
     _this.navigationButtonClicked = _this.navigationButtonClicked.bind(_assertThisInitialized(_this));
