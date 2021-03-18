@@ -204,6 +204,7 @@ export class TutorialsSlider extends Component {
 		};
 
 		this.closeButtonClicked = this.closeButtonClicked.bind(this);
+		this.hideComponent = this.hideComponent.bind(this);
 		this.openLink = this.openLink.bind(this);
 		this.handleKeydown = this.handleKeydown.bind(this);
 		this.navigationButtonClicked = this.navigationButtonClicked.bind(this);
@@ -211,6 +212,11 @@ export class TutorialsSlider extends Component {
 	}
 
 	closeButtonClicked = e => {
+		this.hideComponent(e);
+		this.props.onCloseClick(e);
+	};
+
+	hideComponent = e => {
 		const sliderBox = e.currentTarget.closest(".sui-tutorials-slider-box"),
 			event = new Event("sliderTutorialClosed");
 
