@@ -1,10 +1,22 @@
 # Changelog
 
-## Unreleased (2021-03-15)
+## Unreleased (2021-03-18)
+
+#### Improvements
+* `react-tutorials-slider`
+  * [#23](https://github.com/wpmudev/shared-modules/pull/23) 🐛 fix/tutorials-slider: Pass onClick function to children. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
+## Released (2021-03-15)
 
 #### Improvements
 * `react-tutorials-list`, `react-tutorials-slider`
   * [#20](https://github.com/wpmudev/shared-modules/pull/20) 🐛 enhance/tutorials: Upgrade `@wpmudev/react-post` dependency. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
 
 ## Released (2021-03-13)
 
@@ -27,3 +39,6 @@
   * [#16](https://github.com/wpmudev/shared-modules/pull/16) 🐛 fix/tutorials: Use old name for package. ([@iamleigh](https://github.com/iamleigh))
 * `shared-tutorials-slider`
   * [#13](https://github.com/wpmudev/shared-modules/pull/13) 🐛 fix/tutorials-slider: Add missing tooltip. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
