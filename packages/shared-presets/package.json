@@ -1,14 +1,7 @@
 {
-<<<<<<< HEAD:packages/shared-configurations/package.json
-  "private": true,
-  "name": "@wpmudev/shared-configurations",
-  "version": "1.0.0",
-  "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
-=======
   "name": "@wpmudev/shared-presets",
   "version": "0.0.0",
   "description": "Components for preset configurations.",
->>>>>>> f5da2e1a93457eb569fcb8ac8713a7546a81233a:packages/shared-presets/package.json
   "keywords": [],
   "author": "WPMU DEV (https://premium.wpmudev.org/)",
   "license": "ISC",
