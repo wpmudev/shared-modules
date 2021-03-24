@@ -1,6 +1,21 @@
 # Changelog
 
-## Unreleased (2021-03-18)
+## Unreleased (2021-03-24)
+
+#### Improvements
+* `shared-notifications-discount`, `shared-notifications`
+  * [#24](https://github.com/wpmudev/shared-modules/pull/24) 🐛 fix(shared-notifications-discount): Rename package. ([@iamleigh](https://github.com/iamleigh))
+
+#### Bug Fixes
+* `shared-notifications-discount`
+  * [#26](https://github.com/wpmudev/shared-modules/pull/26) 🐛 fix(shared-notifications-discount): Make package private. ([@iamleigh](https://github.com/iamleigh))
+* `shared-notifications`
+  * [#25](https://github.com/wpmudev/shared-modules/pull/25) 🐛 fix(shared-notifications): Make package private. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
+## Released (2021-03-24)
 
 #### Improvements
 * `react-tutorials-slider`
