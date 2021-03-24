@@ -17,7 +17,7 @@ export const primary = ( args ) => {
 };
 primary.storyName = "Notice Offer";
 primary.args = {
-	title: "Don’t Miss Out On Subscription / Recurring Payment Support",
+	title: "Don't Miss Out On Subscription / Recurring Payment Support",
 	price: 65,
 	discount: 60,
 	image: imageFile1x,
