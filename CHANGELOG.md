@@ -27,7 +27,7 @@
   * [#8](https://github.com/wpmudev/shared-modules/pull/8) ✨ new/tutorials-slider: Create new component. ([@iamleigh](https://github.com/iamleigh))
 
 #### Improvements
-* `shared-notifications-offer`, `shared-notifications`
+* `shared-notifications-discount`, `shared-notifications`
   * [#10](https://github.com/wpmudev/shared-modules/pull/10) 🐛 fix/notice-offer: Re-organize and re-locate notifications sub-packages. ([@iamleigh](https://github.com/iamleigh))
 
 #### Bug Fixes
