@@ -239,9 +239,15 @@ export class NoticeOffer extends Component {
 
 		// Call functions.
 		this.closeButtonClicked = this.closeButtonClicked.bind(this);
+		this.hideComponent = this.hideComponent.bind(this);
 	}
 
 	closeButtonClicked = e => {
+		this.props.hideComponent(e);
+		this.props.onCloseClick(e);
+	};
+
+	hideComponent = e => {
 		const noticeBox = e.currentTarget.closest(".sui-notice-offer"),
 			event = new Event("noticeOfferClosed");
 
