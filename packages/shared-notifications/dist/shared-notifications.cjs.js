@@ -411,4 +411,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
   return NoticeOffer;
 }(React.Component);
 
-exports.NoticeOffer = NoticeOffer;
+var Notifications = {};
+Notifications.Offer = NoticeOffer;
+
+exports.Notifications = Notifications;

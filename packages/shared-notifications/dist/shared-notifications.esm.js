@@ -402,4 +402,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
   return NoticeOffer;
 }(Component);
 
-export { NoticeOffer };
+var Notifications = {};
+Notifications.Offer = NoticeOffer;
+
+export { Notifications };
