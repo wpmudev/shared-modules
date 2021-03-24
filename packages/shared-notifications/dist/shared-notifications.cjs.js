@@ -335,6 +335,12 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props); // Call functions.
 
     _defineProperty(_assertThisInitialized(_this), "closeButtonClicked", function (e) {
+      _this.hideComponent(e);
+
+      _this.props.onCloseClick(e);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "hideComponent", function (e) {
       var noticeBox = e.currentTarget.closest(".sui-notice-offer"),
           event = new Event("noticeOfferClosed");
       noticeBox.dispatchEvent(event);
@@ -342,6 +348,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
     });
 
     _this.closeButtonClicked = _this.closeButtonClicked.bind(_assertThisInitialized(_this));
+    _this.hideComponent = _this.hideComponent.bind(_assertThisInitialized(_this));
     return _this;
   }
 
