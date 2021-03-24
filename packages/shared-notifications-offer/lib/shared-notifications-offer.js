@@ -233,7 +233,7 @@ const Price = styled.p`
 	}
 `;
 
-export class NoticeOffer extends Component {
+export class NoticeDiscount extends Component {
 	constructor( props ) {
 		super( props );
 
