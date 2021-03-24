@@ -1,3 +1,7 @@
 import { NoticeOffer } from "@wpmudev/shared-notifications-offer";
 
-export { NoticeOffer };
+const Notifications = {};
+
+Notifications.Offer = NoticeOffer;
+
+export { Notifications };
