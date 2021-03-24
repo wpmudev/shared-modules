@@ -243,7 +243,7 @@ export class NoticeOffer extends Component {
 	}
 
 	closeButtonClicked = e => {
-		this.props.hideComponent(e);
+		this.hideComponent(e);
 		this.props.onCloseClick(e);
 	};
 
