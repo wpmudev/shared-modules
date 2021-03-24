@@ -1,5 +1,5 @@
 {
-  "name": "@wpmudev/shared-notifications-offer",
+  "name": "@wpmudev/shared-notifications-discount",
   "version": "1.0.0",
   "description": "WPMU DEV Shared Offers Notification",
   "keywords": [],
@@ -12,9 +12,9 @@
     }
   ],
   "license": "GPL-3.0",
-  "main": "dist/shared-notifications-offer.cjs.js",
-  "module": "dist/shared-notifications-offer.esm.js",
-  "src": "lib/shared-notifications-offer.js",
+  "main": "dist/shared-notifications-discount.cjs.js",
+  "module": "dist/shared-notifications-discount.esm.js",
+  "src": "lib/shared-notifications-discount.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -29,7 +29,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wpmudev/shared-modules.git",
-    "directory": "packages/shared-notifications-offer"
+    "directory": "packages/shared-notifications-discount"
   },
   "scripts": {
     "build": "shared-compiler",
