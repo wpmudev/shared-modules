@@ -1,4 +1,10 @@
-import { PresetsWidget } from "./widget/wrapper";
-import { PresetsWidgetItem } from "./widget/item";
+import { PresetsTable } from './elements/table';
+import { PresetsAccordion } from './elements/accordion';
+import { PresetsWidget } from './sections/shared-presets-widget';
 
-export { PresetsWidget, PresetsWidgetItem }
+const Presets = {};
+
+Presets.Table = PresetsTable;
+Presets.Accordion = PresetsAccordion;
+
+export { Presets, PresetsWidget };
