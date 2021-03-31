@@ -1,55 +1,51 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
-import { PresetsWidget, PresetsWidgetItem } from "../lib/shared-presets";
+import { PresetsWidget } from '../lib/shared-presets';
 
 export default {
 	title: "Presets/Widget"
 }
 
-export const primary = ( args ) => {
-	return (
-		<PresetsWidget { ...args }>
+const Template = ({ presets, settings, ...args }) => {
+    return (
+        <PresetsWidget {...args}>
+            { presets.map( ( preset, index ) => (
+                <div key={ index } { ...preset }>
+                    <div name="Lazy Load" status="Active" />
+                    <div name="CDN" status="Active" />
+                    <div name="Super-Smush" status="Active" />
+                    <div name="PNG to JPEG Conversion" status="Active" />
+                    <div name="Image Resizing" status="Active" />
+                </div>
+            ) ) }
+        </PresetsWidget>
+    );
+};
 
-			<PresetsWidgetItem
-				title="Basic config"
-				description="Recommended performance config for every site."
-				applyLabel="Apply"
-				applyAction={ action( "Apply this preset." ) }
-			>
-				<div
-					name="Option 1"
-					status="Active"
-				/>
-				<div
-					name="Option 2"
-					status="Active"
-				/>
-			</PresetsWidgetItem>
-
-		</PresetsWidget>
-	);
-}
-primary.storyName = "Default";
+export const primary = Template.bind({});
+primary.storyName = "Default"
 primary.args = {
-	title: "Preset Configs",
-	description: "Configs bundle your Smush settings and make them available to download and apply on your other sites.",
-	saveLabel: "Save New",
-	saveAction: action(
-		'You clicked on "Save New" button. Use `saveAction` ' +
-		'argument to pass a function that adds a new preset.'
-	),
-	configsLabel: "Manage Configs",
-	configsLink: "/"
+    title: 'Preset Configs',
+    message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
+    notice: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
+    presets: [
+        {
+            title: 'Basic Config',
+            description: 'Recommended performance config for every site.',
+            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+        },
+        {
+            title: 'Config Name',
+            description: 'Donec ullamcorper nulla non metus auctor fringilla.',
+            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+        }
+    ],
 };
+primary.argTypes = {};
 
-export const secondary = ( args ) => {
-	return (
-		<PresetsWidget { ...args }>
-		</PresetsWidget>
-	);
-}
-secondary.storyName = "Empty";
+export const secondary = Template.bind({});
+secondary.storyName = "Empty"
 secondary.args = {
-	title: "Preset Configs",
-	description: "Configs bundle your Smush settings and make them available to download and apply on your other sites."
+    ...primary.args,
+    presets: []
 };
+secondary.argTypes = {};
