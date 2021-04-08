@@ -52,6 +52,7 @@ export class PresetsPage extends Component {
 
     render() {
         const { free, empty } = this.state;
+        const welcome = this.props.welcome || {};
 
         const items = Children.map( this.props.children, item => {
             return (
@@ -94,13 +95,13 @@ export class PresetsPage extends Component {
                     <NoticeBlue>
                         
                         <img
-                            src={ this.props.welcomeImage }
-                            alt={ this.props.welcomeImageAlt || '' }
+                            src={ welcome.image }
+                            alt={ welcome.imageAlt || '' }
                             aria-hidden="true"
                         />
 
                         <Notifications type="info">
-                            <p>{ this.props.welcomeMessage }</p>
+                            <p>{ welcome.message }</p>
                         </Notifications>
 
                     </NoticeBlue>
