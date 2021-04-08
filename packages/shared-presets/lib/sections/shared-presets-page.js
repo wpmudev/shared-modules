@@ -6,12 +6,6 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../elements/accordion-item';
 
-const BodyTop = styled(BoxBody)`
-    .sui-wrap & {
-        padding-bottom: 0;
-    }
-`;
-
 const NoticeBlue = styled.div`
     .sui-wrap & {
         display: flex;
@@ -93,7 +87,7 @@ export class PresetsPage extends Component {
                     />
                 </BoxHeader>
 
-                <BodyTop>
+                <BoxBody>
 
                     <p>{ this.props.message }</p>
 
@@ -107,7 +101,7 @@ export class PresetsPage extends Component {
 
                     </NoticeBlue>
 
-                </BodyTop>
+                </BoxBody>
 
                 { !empty && (
                     <div
