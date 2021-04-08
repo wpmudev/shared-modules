@@ -8,11 +8,11 @@ export default {
     parameters: {}
 }
 
-const Template = ({ presets, settings, ...args }) => {
+const Template = ({ children, settings, ...args }) => {
     return (
         <PresetsPage {...args}>
-            { presets.map( ( preset, index ) => (
-                <div key={ index } { ...preset }>
+            { children.map( ( child, index ) => (
+                <div key={ index } { ...child }>
                     <div name="Lazy Load" status="Active" />
                     <div name="CDN" status="Active" />
                     <div name="Super-Smush" status="Active" />
@@ -38,19 +38,6 @@ primary.args = {
             <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>
         )
     },
-    presets: [
-        {
-            default: true,
-            title: 'Basic Config',
-            description: 'Recommended performance config for every site.',
-            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
-        },
-        {
-            title: 'Config Name',
-            description: 'Vestibulum id ligula porta felis euismod semper.',
-            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
-        },
-    ],
 };
 primary.argTypes = {
     title: {
@@ -95,16 +82,20 @@ primary.argTypes = {
             type: 'object'
         }
     },
-    presets: {
-        name: 'presets',
-        type: {
-            name: 'object',
-            required: false
-        },
-        description: '...',
-        control: {
-            type: 'object'
-        }
+    children: {
+        defaultValue: [
+            {
+                default: true,
+                title: 'Basic Config',
+                description: 'Recommended performance config for every site.',
+                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+            },
+            {
+                title: 'Config Name',
+                description: 'Vestibulum id ligula porta felis euismod semper.',
+                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+            },
+        ],
     },
 };
 
@@ -112,8 +103,10 @@ export const secondary = Template.bind({});
 secondary.storyName = "Empty"
 secondary.args = {
     ...primary.args,
-    presets: []
 };
 secondary.argTypes = {
-    ...primary.argTypes
+    ...primary.argTypes,
+    children: {
+        defaultValue: []
+    }
 };
