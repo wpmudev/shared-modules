@@ -3,7 +3,7 @@ import { PresetsPage } from '../lib/shared-presets';
 import image2x from './images/hero-smush@2x.png';
 
 export default {
-	title: "Presets/Page"
+	title: "Presets/Page/Free"
 }
 
 const Template = ({ presets, settings, ...args }) => {
@@ -47,7 +47,7 @@ primary.args = {
 primary.argTypes = {};
 
 export const secondary = Template.bind({});
-secondary.storyName = "Free"
+secondary.storyName = "Empty"
 secondary.args = {
     ...primary.args,
     free: true,
