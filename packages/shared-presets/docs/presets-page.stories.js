@@ -32,10 +32,16 @@ primary.args = {
     updateMessage: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
     presets: [
         {
+            default: true,
             title: 'Basic Config',
             description: 'Recommended performance config for every site.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
-        }
+        },
+        {
+            title: 'Config Name',
+            description: 'Vestibulum id ligula porta felis euismod semper.',
+            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+        },
     ],
 };
 primary.argTypes = {};
