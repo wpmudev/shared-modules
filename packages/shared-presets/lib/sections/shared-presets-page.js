@@ -53,6 +53,7 @@ export class PresetsPage extends Component {
     render() {
         const { free, empty } = this.state;
         const welcome = this.props.welcome || {};
+        const update = this.props.update || {};
 
         const items = Children.map( this.props.children, item => {
             return (
@@ -127,7 +128,7 @@ export class PresetsPage extends Component {
 
                 { !free && (
                     <BoxFooter>
-                        <p className="sui-description">{ this.props.updateMessage }</p>
+                        <p className="sui-description">{ update.message }</p>
                     </BoxFooter>
                 )}
 
