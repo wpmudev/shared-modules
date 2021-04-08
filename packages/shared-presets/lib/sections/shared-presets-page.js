@@ -122,7 +122,7 @@ export class PresetsPage extends Component {
 
                 { !free && (
                     <BoxFooter>
-                        <p className="sui-description" style={ { flex: 1, textAlign: 'center' } }>{ this.props.updateMessage }</p>
+                        <p className="sui-description">{ this.props.updateMessage }</p>
                     </BoxFooter>
                 )}
 
