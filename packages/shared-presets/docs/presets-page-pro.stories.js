@@ -27,6 +27,17 @@ const Template = ({ presets, settings, ...args }) => {
 export const primary = Template.bind({});
 primary.storyName = "Default"
 primary.args = {
+    title: 'Preset Configs',
+    message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
+    welcome: {
+        image: image2x,
+        message: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.'
+    },
+    update: {
+        message: (
+            <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>
+        )
+    },
     presets: [
         {
             default: true,
@@ -45,10 +56,9 @@ primary.argTypes = {
     title: {
         type: {
             name: 'string',
-            required: true
+            required: false
         },
         description: '...',
-        defaultValue: 'Preset Configs',
         control: {
             type: 'text'
         }
@@ -56,10 +66,9 @@ primary.argTypes = {
     message: {
         type: {
             name: 'string',
-            required: true
+            required: false
         },
         description: '...',
-        defaultValue: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
         control: {
             type: 'text'
         }
@@ -71,10 +80,6 @@ primary.argTypes = {
             required: false
         },
         description: '...',
-        defaultValue: {
-            image: image2x,
-            message: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.'
-        },
         control: {
             type: 'object'
         }
@@ -83,10 +88,20 @@ primary.argTypes = {
         name: 'update',
         type: {
             name: 'object',
-            required: true
+            required: false
         },
         description: '...',
-        defaultValue: null,
+        control: {
+            type: 'object'
+        }
+    },
+    presets: {
+        name: 'presets',
+        type: {
+            name: 'object',
+            required: false
+        },
+        description: '...',
         control: {
             type: 'object'
         }
@@ -96,6 +111,9 @@ primary.argTypes = {
 export const secondary = Template.bind({});
 secondary.storyName = "Empty"
 secondary.args = {
-    ...primary.args
+    ...primary.args,
+    presets: []
 };
-secondary.argTypes = {};
+secondary.argTypes = {
+    ...primary.argTypes
+};
