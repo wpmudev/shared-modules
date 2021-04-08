@@ -102,7 +102,7 @@ export class PresetsPage extends Component {
                                 aria-hidden="true"
                             />
 
-                            <Notifications type="info">
+                            <Notifications type="info" dismiss>
                                 <p>{ welcome.message }</p>
                             </Notifications>
 
