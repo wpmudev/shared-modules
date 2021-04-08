@@ -6,20 +6,29 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../elements/accordion-item';
 
-const NoticeBlue = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-
-    & > img {
-        max-width: 100px;
-        display: block;
-        flex: 0 0 auto;
-        margin-right: 30px;
+const BodyTop = styled(BoxBody)`
+    .sui-wrap & {
+        padding-bottom: 0;
     }
+`;
 
-    & > div.sui-notice {
-        min-width: 1px;
-        flex: 1;
+const NoticeBlue = styled.div`
+    .sui-wrap & {
+        display: flex;
+        flex-flow: row wrap;
+
+        > img {
+            max-width: 100px;
+            display: block;
+            align-self: flex-end;
+            flex: 0 0 auto;
+            margin-right: 30px;
+        }
+
+        > div.sui-notice {
+            min-width: 1px;
+            flex: 1;
+        }
     }
 `;
 
@@ -84,7 +93,7 @@ export class PresetsPage extends Component {
                     />
                 </BoxHeader>
 
-                <BoxBody style={ { paddingBottom: 0 } }>
+                <BodyTop>
 
                     <p>{ this.props.message }</p>
 
@@ -98,7 +107,7 @@ export class PresetsPage extends Component {
                         />
                     </NoticeBlue>
 
-                </BoxBody>
+                </BodyTop>
 
                 { !empty && (
                     <div
