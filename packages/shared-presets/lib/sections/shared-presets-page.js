@@ -93,7 +93,11 @@ export class PresetsPage extends Component {
 
                     <NoticeBlue>
                         
-                        <img src={ this.props.welcomeImage } />
+                        <img
+                            src={ this.props.welcomeImage }
+                            alt={ this.props.welcomeImageAlt || '' }
+                            aria-hidden="true"
+                        />
 
                         <Notifications type="info">
                             <p>{ this.props.welcomeMessage }</p>
