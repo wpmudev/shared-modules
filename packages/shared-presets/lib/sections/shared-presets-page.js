@@ -100,11 +100,11 @@ export class PresetsPage extends Component {
                     <NoticeBlue>
                         
                         <img src={ this.props.welcomeImage } />
-                        
-                        <Notifications
-                            type="info"
-                            message={ this.props.welcomeMessage }
-                        />
+
+                        <Notifications type="info">
+                            <p>{ this.props.welcomeMessage }</p>
+                        </Notifications>
+
                     </NoticeBlue>
 
                 </BodyTop>
@@ -120,10 +120,9 @@ export class PresetsPage extends Component {
 
                 { free && (
                     <BoxBody>
-                        <Notifications
-                            type="upsell"
-                            message={ this.props.freeMessage }
-                        />
+                        <Notifications type="upsell">
+                            <p>{ this.props.freeMessage }</p>
+                        </Notifications>
                     </BoxBody>
                 )}
 

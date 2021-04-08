@@ -58,10 +58,9 @@ export class PresetsWidget extends Component {
                     <p>{ this.props.message }</p>
 
                     { empty && (
-                        <Notifications
-                            type="info"
-                            message={ this.props.notice }
-                        />
+                        <Notifications type="info">
+                            <p>{ this.props.notice }</p>
+                        </Notifications>
                     )}
 
                 </BoxBody>
