@@ -93,19 +93,21 @@ export class PresetsPage extends Component {
 
                     <p>{ this.props.message }</p>
 
-                    <NoticeBlue>
-                        
-                        <img
-                            src={ welcome.image }
-                            alt={ welcome.imageAlt || '' }
-                            aria-hidden="true"
-                        />
+                    { welcome.message && (
+                        <NoticeBlue>
+                            
+                            <img
+                                src={ welcome.image }
+                                alt={ welcome.imageAlt || '' }
+                                aria-hidden="true"
+                            />
 
-                        <Notifications type="info">
-                            <p>{ welcome.message }</p>
-                        </Notifications>
+                            <Notifications type="info">
+                                <p>{ welcome.message }</p>
+                            </Notifications>
 
-                    </NoticeBlue>
+                        </NoticeBlue>
+                    )}
 
                 </BoxBody>
 
