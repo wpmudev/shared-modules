@@ -3,8 +3,6 @@ import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../elements/accordion-item';
-import { Accordion, AccordionItemHeader, AccordionItemBody } from '@wpmudev/react-accordion';
-import { Dropdown } from '@wpmudev/react-dropdown';
 
 export class PresetsWidget extends Component {
     constructor( props ) {
