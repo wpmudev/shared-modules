@@ -6,24 +6,56 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../elements/accordion-item';
 
+// UTILS: Default Values.
+const utils = {
+	gutter: 30,
+	gutter_md: 20
+};
+
+const screen = {
+	mobile: 480,
+	tablet: 783,
+	laptop: 1200,
+	desktop: 1500
+};
+
+const device = {
+	mobile: `(min-width: ${screen.mobile}px)`,
+	tablet: `(min-width: ${screen.tablet}px)`,
+	laptop: `(min-width: ${screen.laptop}px)`,
+	desktop: `(min-width: ${screen.desktop}px)`
+};
+
 const NoticeBlue = styled.div`
-    .sui-wrap & {
-        display: flex;
-        flex-flow: row wrap;
+.sui-wrap && {
+    display: flex;
+    flex-flow: row wrap;
+
+    > img {
+        max-width: 100px;
+        display: none;
+        align-self: flex-end;
+        flex: 0 0 auto;
+        margin-right: 30px;
+    }
+
+    > div.sui-notice {
+        min-width: 1px;
+        flex: 1;
+        padding-bottom: ${utils.gutter_md};
+    }
+
+    @media ${device.tablet} {
 
         > img {
-            max-width: 100px;
             display: block;
-            align-self: flex-end;
-            flex: 0 0 auto;
-            margin-right: 30px;
         }
 
         > div.sui-notice {
-            min-width: 1px;
-            flex: 1;
+            padding-bottom: ${utils.gutter};
         }
     }
+}
 `;
 
 export class PresetsPage extends Component {
@@ -32,7 +64,8 @@ export class PresetsPage extends Component {
 
         this.state = {
             free: false,
-            empty: false
+            empty: false,
+            loading: false
         }
     }
 
@@ -77,19 +110,23 @@ export class PresetsPage extends Component {
             <Box>
 
                 <BoxHeader title={ this.props.title }>
-                    <Button
-                        icon="upload-cloud"
-                        label={ this.props.uploadLabel || 'Upload' }
-                        design="ghost"
-                    />
-                    <Button
-                        icon="save"
-                        label={ this.props.saveLabel || 'Save Config' }
-                        color="blue"
-                    />
+                    <div>
+                        <Button
+                            icon="upload-cloud"
+                            label={ this.props.uploadLabel || 'Upload' }
+                            design="ghost"
+                        />
+                        <Button
+                            icon="save"
+                            label={ this.props.saveLabel || 'Save Config' }
+                            color="blue"
+                        />
+                    </div>
                 </BoxHeader>
 
-                <BoxBody>
+                <BoxBody
+                    paddingBottom={ welcome.message ? 0 : 30 }
+                >
 
                     <p>{ this.props.message }</p>
 
