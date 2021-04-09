@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "@wpmudev/react-accordion": "^1.0.0",
-    "@wpmudev/react-box": "^1.0.3",
-    "@wpmudev/react-button": "^1.0.3",
+    "@wpmudev/react-box": "^1.1.0",
+    "@wpmudev/react-button": "^1.0.4",
     "@wpmudev/react-button-icon": "^1.0.1",
     "@wpmudev/react-dropdown": "^1.0.0",
     "@wpmudev/react-notifications": "^1.0.4",
