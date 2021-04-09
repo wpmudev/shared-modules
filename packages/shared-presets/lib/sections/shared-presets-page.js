@@ -166,7 +166,10 @@ export class PresetsPage extends Component {
                 )}
 
                 { !free && (
-                    <BoxFooter>
+                    <BoxFooter
+                        display="block"
+                        alignment="center"
+                    >
                         <p className="sui-description">{ update.message }</p>
                     </BoxFooter>
                 )}
