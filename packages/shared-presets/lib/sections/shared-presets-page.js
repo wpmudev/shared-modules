@@ -158,11 +158,23 @@ export class PresetsPage extends Component {
                 )}
 
                 { free && (
-                    <BoxBody>
+                    <BoxFooter
+                        display="block"
+                    >
                         <Notifications type="upsell">
                             <p>{ this.props.freeMessage }</p>
+                            { this.props.freeButton && (
+                                <p>
+                                    <Button
+                                        label={ this.props.freeButton }
+                                        color="purple"
+                                        href="https://wpmudev.com/"
+                                        target="_blank"
+                                    />
+                                </p>
+                            )}
                         </Notifications>
-                    </BoxBody>
+                    </BoxFooter>
                 )}
 
                 { !free && (
