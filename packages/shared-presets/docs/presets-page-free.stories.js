@@ -43,6 +43,9 @@ primary.args = {
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
         },
     ],
+    free: true,
+    freeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once... Try it free today!',
+    freeButton: 'Try The Hub'
 };
 primary.argTypes = {};
 
@@ -50,7 +53,6 @@ export const secondary = Template.bind({});
 secondary.storyName = "Empty"
 secondary.args = {
     ...primary.args,
-    free: true,
-    freeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once... Try it free today!'
+    presets: []
 };
 secondary.argTypes = {};
