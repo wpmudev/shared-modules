@@ -91,6 +91,7 @@ export class PresetsPage extends Component {
         const items = Children.map( this.props.children, item => {
             return (
                 <PresetsAccordionItem
+                    default={ item.props.default || false }
                     title={ item.props.title }
                     description={ item.props.description }
                     image={ item.props.image }
