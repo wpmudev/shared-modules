@@ -6,11 +6,11 @@ export default {
 	title: "Presets/Page/Free"
 }
 
-const Template = ({ presets, settings, ...args }) => {
+const Template = ({ children, ...args }) => {
     return (
         <PresetsPage {...args}>
-            { presets.map( ( preset, index ) => (
-                <div key={ index } { ...preset }>
+            { children.map( ( child, index ) => (
+                <div key={ index } { ...child }>
                     <div name="Lazy Load" status="Active" />
                     <div name="CDN" status="Active" />
                     <div name="Super-Smush" status="Active" />
@@ -24,21 +24,7 @@ const Template = ({ presets, settings, ...args }) => {
 
 export const primary = Template.bind({});
 primary.storyName = "Default"
-primary.args = {
-    presets: [
-        {
-            default: true,
-            title: 'Basic Config',
-            description: 'Recommended performance config for every site.',
-            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
-        },
-        {
-            title: 'Config Name',
-            description: 'Vestibulum id ligula porta felis euismod semper.',
-            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
-        },
-    ],
-};
+primary.args = {};
 primary.argTypes = {
     title: {
         type: {
@@ -80,21 +66,51 @@ primary.argTypes = {
     free: {
         type: {
             name: 'object',
-            required: true
+            required: false
         },
-        description: '. . .',
+        description: 'Configure obbject to show free message. There are 3 variables: `state` that is a boolean and manages to show/hide the free content, `message` is required in order to show free notice, and `button` to rename notice button label.',
         defaultValue: {
             state: true,
             message: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once... Try it free today!',
             button: 'Try The Hub'
+        },
+    },
+    update: {
+        type: {
+            name: 'string',
+            required: false
+        },
+        description: '...',
+        defaultValue: (
+            <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>
+        ),
+        control: {
+            type: 'text'
         }
+    },
+    children: {
+        defaultValue: [
+            {
+                default: true,
+                title: 'Basic Config',
+                description: 'Recommended performance config for every site.',
+                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+            },
+            {
+                title: 'Config Name',
+                description: 'Vestibulum id ligula porta felis euismod semper.',
+                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+            },
+        ]
     },
 };
 
 export const secondary = Template.bind({});
 secondary.storyName = "Empty"
-secondary.args = {
-    ...primary.args,
-    presets: []
+secondary.args = {};
+secondary.argTypes = {
+    ...primary.argTypes,
+    children: {
+        defaultValue: []
+    },
 };
-secondary.argTypes = {};
