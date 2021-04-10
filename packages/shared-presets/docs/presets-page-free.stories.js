@@ -27,8 +27,10 @@ primary.storyName = "Default"
 primary.args = {
     title: 'Preset Configs',
     message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
-    welcomeImage: image2x,
-    welcomeMessage: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.',
+    welcome: {
+        image: image2x,
+        message: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.'
+    },
     updateMessage: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
     presets: [
         {
