@@ -70,7 +70,7 @@ export class PresetsAccordionItem extends Component {
 
     render() {
         const { open } = this.state;
-        const { editAction, applyAction } = this.props;
+        const { editAction, applyAction, deleteAction, downloadAction } = this.props;
 
         let clazz = !open
             ? 'sui-accordion-item'
@@ -99,10 +99,26 @@ export class PresetsAccordionItem extends Component {
                     onClick={ e => this.toggle(e) }
                     >
                     <Dropdown position="right">
-                        <div name={ this.props.applyLabel || 'Apply' } icon="check" />
-                        <div name={ this.props.downloadLabel || 'Download' } icon="download" />
-                        <div name={ this.props.editLabel || 'Name and Description' } icon="pencil" />
-                        <div name={ this.props.deleteLabel || 'Delete' } icon="trash" />
+                        <div
+                            name={ this.props.applyLabel || 'Apply' }
+                            icon="check"
+                            onClick={ e => applyAction }
+                        />
+                        <div
+                            name={ this.props.downloadLabel || 'Download' }
+                            icon="download"
+                            onClick={ e => downloadAction }
+                        />
+                        <div
+                            name={ this.props.editLabel || 'Name and Description' }
+                            icon="pencil"
+                            onClick={ e => editAction }
+                        />
+                        <div
+                            name={ this.props.deleteLabel || 'Delete' }
+                            icon="trash"
+                            onClick={ e => deleteAction }
+                        />
                     </Dropdown>
                 </AccordionItemHeader>
 

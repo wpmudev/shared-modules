@@ -110,9 +110,11 @@ export class PresetsPage extends Component {
                     applyLabel={ item.props.applyLabel }
                     applyAction={ item.props.applyAction }
                     downloadLabel={ item.props.downloadLabel }
+                    downloadAction={ item.props.downloadAction }
                     editLabel={ item.props.editLabel }
                     editAction={ item.props.editAction }
                     deleteLabel={ item.props.deleteLabel }
+                    deleteAction={ item.props.deleteAction }
                 >
                     { item.props.children }
                 </PresetsAccordionItem>
