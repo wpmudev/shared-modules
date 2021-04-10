@@ -98,7 +98,6 @@ export class PresetsPage extends Component {
     render() {
         const { free, empty } = this.state;
         const welcome = this.props.welcome || {};
-        const update = this.props.update || {};
         const freez = this.props.free || {};
 
         const items = Children.map( this.props.children, item => {
@@ -195,12 +194,12 @@ export class PresetsPage extends Component {
                     </BoxFooter>
                 )}
 
-                { !free && (
+                { !free && this.props.update && '' !== this.props.update && (
                     <BoxFooter
                         display="block"
                         alignment="center"
                     >
-                        <p className="sui-description">{ update.message }</p>
+                        <p className="sui-description">{ this.props.update }</p>
                     </BoxFooter>
                 )}
 
