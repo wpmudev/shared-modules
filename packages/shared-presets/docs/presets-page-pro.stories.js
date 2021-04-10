@@ -28,7 +28,7 @@ export const primary = Template.bind({});
 primary.storyName = "Default"
 primary.args = {
     title: 'Preset Configs',
-    message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
+    description: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
     welcome: {
         image: image2x,
         message: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.'
@@ -50,7 +50,7 @@ primary.argTypes = {
             type: 'text'
         }
     },
-    message: {
+    description: {
         type: {
             name: 'string',
             required: false
