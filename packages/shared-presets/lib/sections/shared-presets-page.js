@@ -151,7 +151,9 @@ export class PresetsPage extends Component {
                 { !empty && (
                     <div
                         className="sui-accordion sui-accordion-flushed"
-                        { ... !free && { style: { borderBottom: 0 } } }
+                        style={ {
+                            borderBottomWidth: 0
+                        } }
                     >
                         { items }
                     </div>
