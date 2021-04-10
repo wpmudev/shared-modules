@@ -65,19 +65,17 @@ primary.argTypes = {
             message: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.'
         }
     },
-    // update: {
-    //     type: {
-    //         name: 'string',
-    //         required: false
-    //     },
-    //     description: '...',
-    //     defaultValue: (
-    //         <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>
-    //     ),
-    //     control: {
-    //         type: 'text'
-    //     }
-    // },
+    update: {
+        type: {
+            name: 'string',
+            required: true
+        },
+        description: 'Presets Configurations box requires a title.',
+        defaultValue: <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>,
+        control: {
+            type: 'object'
+        }
+    },
     children: {
         defaultValue: [
             {

@@ -78,14 +78,12 @@ primary.argTypes = {
     update: {
         type: {
             name: 'string',
-            required: false
+            required: true
         },
-        description: '...',
-        defaultValue: (
-            <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>
-        ),
+        description: 'Presets Configurations box requires a title.',
+        defaultValue: <>Created or updated the configs via the Hub? <a href="#">Re-check</a> to get the updated list.</>,
         control: {
-            type: 'text'
+            type: 'object'
         }
     },
     children: {
