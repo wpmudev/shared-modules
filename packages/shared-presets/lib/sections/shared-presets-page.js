@@ -71,6 +71,18 @@ export class PresetsPage extends Component {
 
     componentDidMount() {
         const items = this.props.children;
+        const freez = this.props.free || {};
+        
+        let isFree = false;
+
+        // Check if free state exists.
+        if ( freez.state && 'undefined' !== typeof freez.state ) {
+            
+            // Check if free state is boolean.
+            if ( 'boolean' && typeof freez.state ) {
+                isFree = freez.state;
+            }
+        }
 
         if ( 0 === items.length ) {
             this.setState({
@@ -79,7 +91,7 @@ export class PresetsPage extends Component {
         }
 
         this.setState({
-            free: this.props.free
+            free: isFree
         });
     }
 
@@ -87,6 +99,7 @@ export class PresetsPage extends Component {
         const { free, empty } = this.state;
         const welcome = this.props.welcome || {};
         const update = this.props.update || {};
+        const freez = this.props.free || {};
 
         const items = Children.map( this.props.children, item => {
             return (
@@ -129,7 +142,9 @@ export class PresetsPage extends Component {
                     paddingBottom={ welcome.message ? 0 : 30 }
                 >
 
-                    <p>{ this.props.message }</p>
+                    { this.props.description && (
+                        <p>{ this.props.description }</p>
+                    )}
 
                     { welcome.message && (
                         <NoticeBlue>
@@ -160,16 +175,16 @@ export class PresetsPage extends Component {
                     </div>
                 )}
 
-                { free && (
+                { free && freez.message && '' !== freez.message && (
                     <BoxFooter
                         display="block"
                     >
                         <Notifications type="upsell">
-                            <p>{ this.props.freeMessage }</p>
-                            { this.props.freeButton && (
+                            <p>{ freez.message }</p>
+                            { freez.button && '' !== freez.message && (
                                 <p>
                                     <Button
-                                        label={ this.props.freeButton }
+                                        label={ freez.button }
                                         color="purple"
                                         href="https://wpmudev.com/"
                                         target="_blank"
