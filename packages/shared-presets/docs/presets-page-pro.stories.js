@@ -34,6 +34,7 @@ primary.argTypes = {
             required: true
         },
         description: 'Presets Configurations box requires a title.',
+        defaultValue: 'Presets Configs',
         table: {
             defaultValue: {
                 summary: 'Presets Configs'
