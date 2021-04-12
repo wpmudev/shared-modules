@@ -46,7 +46,7 @@
     "@wpmudev/react-button-icon": "^1.0.1",
     "@wpmudev/react-dropdown": "^1.0.0",
     "@wpmudev/react-notifications": "^1.0.4",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.3"
   },
   "resolutions": {
     "styled-components": "^5"
