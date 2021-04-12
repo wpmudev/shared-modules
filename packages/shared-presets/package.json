@@ -4,7 +4,7 @@
   "description": "Components for preset configurations.",
   "keywords": [],
   "author": "WPMU DEV (https://premium.wpmudev.org/)",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "main": "dist/shared-presets.cjs.js",
   "module": "dist/shared-presets.esm.js",
   "src": "lib/shared-presets.js",
