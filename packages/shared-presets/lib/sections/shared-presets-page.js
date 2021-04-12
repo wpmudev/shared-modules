@@ -187,7 +187,7 @@ export class PresetsPage extends Component {
                                     <Button
                                         label={ freez.button }
                                         color="purple"
-                                        href="https://wpmudev.com/"
+                                        href={ freez.buttonHref || 'https://wpmudev.com/hub-welcome/' }
                                         target="_blank"
                                     />
                                 </p>
