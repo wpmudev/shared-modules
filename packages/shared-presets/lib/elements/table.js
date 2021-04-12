@@ -1,7 +1,6 @@
 import React, { Component, Children } from 'react';
 import styled from 'styled-components';
 
-// UTILS: Create elements.
 const Table = styled.table`
 	width: 100%;
 	margin: 0;

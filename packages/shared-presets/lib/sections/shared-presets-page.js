@@ -1,30 +1,11 @@
 import React, { Component, Children } from 'react';
+import { device, utils } from '@wpmudev/shared-utils';
 import styled from 'styled-components';
 
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../elements/accordion-item';
-
-// UTILS: Default Values.
-const utils = {
-	gutter: 30,
-	gutter_md: 20
-};
-
-const screen = {
-	mobile: 480,
-	tablet: 783,
-	laptop: 1200,
-	desktop: 1500
-};
-
-const device = {
-	mobile: `(min-width: ${screen.mobile}px)`,
-	tablet: `(min-width: ${screen.tablet}px)`,
-	laptop: `(min-width: ${screen.laptop}px)`,
-	desktop: `(min-width: ${screen.desktop}px)`
-};
 
 const NoticeBlue = styled.div`
 .sui-wrap && {
