@@ -61,7 +61,11 @@ export class PresetsAccordionItem extends Component {
     }
 
     toggle = e => {
-        if ( 'sui-dropdown' !== e.target.className ) {
+        if (
+            'sui-dropdown' !== e.target.className ||
+            'sui-button-icon undefined' !== e.target.className ||
+            'sui-icon-widget-settings-config' !== e.target.className
+        ) {
             this.setState({
                 open: !this.state.open
             });
