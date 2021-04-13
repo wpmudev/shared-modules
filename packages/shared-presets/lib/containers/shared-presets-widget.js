@@ -2,7 +2,7 @@ import React, { Component, Children } from 'react';
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
-import { PresetsAccordionItem } from '../elements/accordion-item';
+import { PresetsAccordionItem } from '../components/accordion-item';
 
 export class PresetsWidget extends Component {
     constructor( props ) {
