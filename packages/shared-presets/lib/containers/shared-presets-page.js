@@ -23,7 +23,7 @@ const NoticeBlue = styled.div`
     > div.sui-notice {
         min-width: 1px;
         flex: 1;
-        padding-bottom: ${utils.gutter_md};
+        padding-bottom: ${utils.gutter_md}px;
     }
 
     @media ${device.tablet} {
@@ -33,7 +33,7 @@ const NoticeBlue = styled.div`
         }
 
         > div.sui-notice {
-            padding-bottom: ${utils.gutter};
+            padding-bottom: ${utils.gutter}px;
         }
     }
 }
