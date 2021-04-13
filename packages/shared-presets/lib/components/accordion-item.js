@@ -12,7 +12,7 @@ import { PresetsTable } from './table';
 const Header = styled.div`
 	margin: 0 0 20px;
 
-	> div {
+	> div:not(.sui-tooltip) {
 
 		@media ${device.tablet} {
 			min-width: 1px;
@@ -20,7 +20,7 @@ const Header = styled.div`
 		}
 	}
 
-	> button {
+	> div.sui-tooltip {
 		margin: 10px 0 0 !important;
 
 		@media ${device.tablet} {
@@ -135,12 +135,17 @@ export class PresetsAccordionItem extends Component {
                                         { this.props.description }
                                     </Description>
                                 </div>
-                                <ButtonIcon
-                                    icon="pencil"
-                                    label={ this.props.editLabel }
-                                    design="outlined"
-                                    onClick={ e => editAction }
-                                />
+                                <div
+                                    className="sui-tooltip"
+                                    data-tooltip={ this.props.editLabel || 'Edit Name and Description' }
+                                >
+                                    <ButtonIcon
+                                        icon="pencil"
+                                        label={ this.props.editLabel }
+                                        design="outlined"
+                                        onClick={ e => editAction }
+                                    />
+                                </div>
                             </Header>
 
                             <PresetsTable>
