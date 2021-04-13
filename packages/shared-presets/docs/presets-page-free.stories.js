@@ -96,8 +96,8 @@ primary.argTypes = {
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
             },
             {
-                title: 'Config Name',
-                description: 'Vestibulum id ligula porta felis euismod semper.',
+                title: 'designtest.com / JAN / 2021',
+                description: 'Lazy Load, CDN, Super-Smush, PNG to JPEG Conversion, Image Resizing',
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
             },
         ]
