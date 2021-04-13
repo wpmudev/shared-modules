@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import { device } from '@wpmudev/shared-utils';
+import { device } from './utils';
 
 import { AccordionItemHeader, AccordionItemBody } from '@wpmudev/react-accordion';
 import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
