@@ -33,10 +33,6 @@
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.0",
-    "@wpmudev/shared-utils": "^1.0.0",
-    "react": "^17.0.2"
-  },
-  "peerDependencies": {
     "react": "^17.0.2"
   },
   "dependencies": {
@@ -46,7 +42,7 @@
     "@wpmudev/react-button-icon": "^1.0.1",
     "@wpmudev/react-dropdown": "^1.0.0",
     "@wpmudev/react-notifications": "^1.0.4",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.3"
   },
   "resolutions": {
     "styled-components": "^5"

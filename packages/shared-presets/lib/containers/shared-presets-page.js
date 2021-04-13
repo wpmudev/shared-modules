@@ -1,11 +1,11 @@
 import React, { Component, Children } from 'react';
-import { device, utils } from '@wpmudev/shared-utils';
+import { device, utils } from '../components/utils';
 import styled from 'styled-components';
 
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
-import { PresetsAccordionItem } from '../elements/accordion-item';
+import { PresetsAccordionItem } from '../components/accordion-item';
 
 const NoticeBlue = styled.div`
 .sui-wrap && {
@@ -174,16 +174,14 @@ export class PresetsPage extends Component {
                     >
                         <Notifications type="upsell">
                             <p>{ freez.message }</p>
-                            { freez.button && '' !== freez.message && (
-                                <p>
-                                    <Button
-                                        label={ freez.button }
-                                        color="purple"
-                                        href={ freez.buttonHref || 'https://wpmudev.com/hub-welcome/' }
-                                        target="_blank"
-                                    />
-                                </p>
-                            )}
+                            <p>
+                                <Button
+                                    label={ freez.button || 'Try The Hub' }
+                                    color="purple"
+                                    href={ freez.buttonHref || 'https://wpmudev.com/hub-welcome/' }
+                                    target="_blank"
+                                />
+                            </p>
                         </Notifications>
                     </BoxFooter>
                 )}
