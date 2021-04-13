@@ -51,9 +51,9 @@ const Authentic = styled.svg`
 
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
 .sui-wrap && {
-    
+
     > .sui-accordion-col-auto {
-        
+
         > .sui-dropdown {
 
             [class*=sui-icon-] {
@@ -91,6 +91,11 @@ export class PresetsAccordionItem extends Component {
         }
     }
 
+	accordionHeadApplyClicked = ( e ) => {
+		e.stopPropagation();
+		this.props.applyAction( this.props.id );
+	}
+
     render() {
         const { open } = this.state;
         const { editAction, applyAction, deleteAction, downloadAction } = this.props;
@@ -124,6 +129,7 @@ export class PresetsAccordionItem extends Component {
                     <Button
                         label={ this.props.applyLabel || 'Apply' }
                         design="ghost"
+						onClick={ this.accordionHeadApplyClicked }
                     />
                     <Dropdown position="right">
                         <div
