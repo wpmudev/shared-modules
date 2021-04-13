@@ -53,12 +53,12 @@ export class PresetsPage extends Component {
     componentDidMount() {
         const items = this.props.children;
         const freez = this.props.free || {};
-        
+
         let isFree = false;
 
         // Check if free state exists.
         if ( freez.state && 'undefined' !== typeof freez.state ) {
-            
+
             // Check if free state is boolean.
             if ( 'boolean' && typeof freez.state ) {
                 isFree = freez.state;
@@ -84,6 +84,7 @@ export class PresetsPage extends Component {
         const items = Children.map( this.props.children, item => {
             return (
                 <PresetsAccordionItem
+					id={ item.props.id }
                     default={ item.props.default || false }
                     title={ item.props.title }
                     description={ item.props.description }
@@ -130,7 +131,7 @@ export class PresetsPage extends Component {
 
                     { welcome.message && (
                         <NoticeBlue>
-                            
+
                             <img
                                 src={ welcome.image }
                                 alt={ welcome.imageAlt || '' }
