@@ -77,6 +77,9 @@ primary.argTypes = {
             type: 'object'
         }
     },
+	saveNewConfig: {
+		defaultValue: () => console.log( 'Saving new config' ),
+	},
     children: {
         defaultValue: [
             {
