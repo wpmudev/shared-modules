@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 import styled from "styled-components";
 import { device } from '@wpmudev/shared-utils';
 
