@@ -53,12 +53,12 @@ export class PresetsPage extends Component {
     componentDidMount() {
         const items = this.props.children;
         const freez = this.props.free || {};
-        
+
         let isFree = false;
 
         // Check if free state exists.
         if ( freez.state && 'undefined' !== typeof freez.state ) {
-            
+
             // Check if free state is boolean.
             if ( 'boolean' && typeof freez.state ) {
                 isFree = freez.state;
@@ -111,7 +111,18 @@ export class PresetsPage extends Component {
                             icon="upload-cloud"
                             label={ this.props.uploadLabel || 'Upload' }
                             design="ghost"
+							htmlFor="sui-upload-configs-input"
                         />
+						<input
+							id="sui-upload-configs-input"
+							type="file"
+							name="config_file"
+							className="sui-hidden"
+							value=""
+							readOnly="readonly"
+							onChange={ this.props.uploadConfig }
+							accept=".json"
+						/>
                         <Button
                             icon="save"
                             label={ this.props.saveLabel || 'Save Config' }
@@ -130,7 +141,7 @@ export class PresetsPage extends Component {
 
                     { welcome.message && (
                         <NoticeBlue>
-                            
+
                             <img
                                 src={ welcome.image }
                                 alt={ welcome.imageAlt || '' }
