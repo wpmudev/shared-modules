@@ -126,12 +126,12 @@ export class PresetsAccordionItem extends Component {
                         <div
                             name={ this.props.applyLabel || 'Apply' }
                             icon="check"
-                            onClick={ e => applyAction }
+                            onClick={ () => applyAction( this.props.id ) }
                         />
                         <div
                             name={ this.props.downloadLabel || 'Download' }
                             icon="download"
-                            onClick={ e => downloadAction }
+                            onClick={ () => downloadAction( this.props.id ) }
                         />
                         <div
                             name={ this.props.editLabel || 'Name and Description' }
@@ -147,7 +147,7 @@ export class PresetsAccordionItem extends Component {
                 </AccordionItemHeaderAlt>
 
                 <AccordionItemBody>
-                    
+
                     <Box>
 
                         <BoxBody>
@@ -183,7 +183,7 @@ export class PresetsAccordionItem extends Component {
                                 label={ this.props.applyLabel || 'Apply' }
                                 icon="check"
                                 design="ghost"
-                                onClick={ e => applyAction }
+                                onClick={ () => applyAction( this.props.id ) }
                             />
                         </BoxFooter>
 
