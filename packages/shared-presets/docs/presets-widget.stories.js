@@ -29,14 +29,24 @@ primary.args = {
     notice: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
     presets: [
         {
+			id: 1,
             title: 'Basic Config',
             description: 'Recommended performance config for every site.',
-            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+			editAction: () => console.log( 'Editing config' ),
+			applyAction: () => console.log( 'Applying config' ),
+			deleteAction: () => console.log( 'Deleting config' ),
+			downloadAction: () => console.log( 'Downloading config' ),
         },
         {
+			id: 2,
             title: 'Config Name',
             description: 'Donec ullamcorper nulla non metus auctor fringilla.',
-            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+            image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+			editAction: () => console.log( 'Editing config' ),
+			applyAction: () => console.log( 'Applying config' ),
+			deleteAction: () => console.log( 'Deleting config' ),
+			downloadAction: () => console.log( 'Downloading config' ),
         }
     ],
 };

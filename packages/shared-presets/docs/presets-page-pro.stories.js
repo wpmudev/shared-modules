@@ -80,15 +80,25 @@ primary.argTypes = {
     children: {
         defaultValue: [
             {
+				id: 1,
                 default: true,
                 title: 'Basic Config',
                 description: 'Recommended performance config for every site.',
-                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+				editAction: () => console.log( 'Editing config' ),
+				applyAction: () => console.log( 'Applying config' ),
+				deleteAction: () => console.log( 'Deleting config' ),
+				downloadAction: () => console.log( 'Downloading config' ),
             },
             {
+				id: 2,
                 title: 'designtest.com / JAN / 2021',
                 description: 'Lazy Load, CDN, Super-Smush, PNG to JPEG Conversion, Image Resizing',
-                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png'
+                image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+				editAction: () => console.log( 'Editing config' ),
+				applyAction: () => console.log( 'Applying config' ),
+				deleteAction: () => console.log( 'Deleting config' ),
+				downloadAction: () => console.log( 'Downloading config' ),
             },
         ]
     },
