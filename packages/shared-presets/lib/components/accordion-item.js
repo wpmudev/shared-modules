@@ -49,6 +49,25 @@ const Authentic = styled.svg`
     margin-left: 10px;
 `;
 
+const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
+.sui-wrap && {
+    
+    > .sui-accordion-col-auto {
+        
+        > .sui-dropdown {
+
+            [class*=sui-icon-] {
+                margin-right: 0 !important;
+            }
+
+            ul {
+                min-width: 192px;
+            }
+        }
+    }
+}
+`;
+
 export class PresetsAccordionItem extends Component {
     constructor( props ) {
         super( props );
@@ -96,7 +115,8 @@ export class PresetsAccordionItem extends Component {
         return (
             <div className={ clazz }>
 
-                <AccordionItemHeader
+                <AccordionItemHeaderAlt
+                    className="sui-accordion-item-header"
                     state={ open ? 'true' : 'false' }
                     title={ title }
                     image={ this.props.image }
@@ -124,7 +144,7 @@ export class PresetsAccordionItem extends Component {
                             onClick={ e => deleteAction }
                         />
                     </Dropdown>
-                </AccordionItemHeader>
+                </AccordionItemHeaderAlt>
 
                 <AccordionItemBody>
                     
