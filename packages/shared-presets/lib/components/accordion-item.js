@@ -145,12 +145,12 @@ export class PresetsAccordionItem extends Component {
                         <div
                             name={ this.props.editLabel || 'Name and Description' }
                             icon="pencil"
-                            onClick={ e => editAction }
+                            onClick={ () => editAction( this.props.id ) }
                         />
                         <div
                             name={ this.props.deleteLabel || 'Delete' }
                             icon="trash"
-                            onClick={ e => deleteAction }
+                            onClick={ () => deleteAction( this.props.id ) }
                         />
                     </Dropdown>
                 </AccordionItemHeaderAlt>
@@ -176,7 +176,7 @@ export class PresetsAccordionItem extends Component {
                                         icon="pencil"
                                         label={ this.props.editLabel }
                                         design="outlined"
-                                        onClick={ e => editAction }
+                                        onClick={ () => editAction( this.props.id ) }
                                     />
                                 </div>
                             </Header>

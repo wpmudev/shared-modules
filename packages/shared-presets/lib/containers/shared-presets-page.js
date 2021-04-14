@@ -117,6 +117,7 @@ export class PresetsPage extends Component {
                             icon="save"
                             label={ this.props.saveLabel || 'Save Config' }
                             color="blue"
+							onClick={ this.props.saveNewConfig }
                         />
                     </div>
                 </BoxHeader>
