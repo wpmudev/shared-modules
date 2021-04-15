@@ -46,7 +46,6 @@ export class PresetsPage extends Component {
 
     render() {
         const { free, empty } = this.state;
-        const welcome = this.props.welcome || {};
         const freez = this.props.free || {};
 
         const items = Children.map( this.props.children, item => {
@@ -102,9 +101,7 @@ export class PresetsPage extends Component {
                     </div>
                 </BoxHeader>
 
-                <BoxBody
-                    paddingBottom={ welcome.message ? 0 : 30 }
-                >
+                <BoxBody>
 
                     { this.props.description && (
                         <p>{ this.props.description }</p>
