@@ -7,38 +7,6 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
-const NoticeBlue = styled.div`
-.sui-wrap && {
-    display: flex;
-    flex-flow: row wrap;
-
-    > img {
-        max-width: 100px;
-        display: none;
-        align-self: flex-end;
-        flex: 0 0 auto;
-        margin-right: 30px;
-    }
-
-    > div.sui-notice {
-        min-width: 1px;
-        flex: 1;
-        padding-bottom: ${utils.gutter_md}px;
-    }
-
-    @media ${device.tablet} {
-
-        > img {
-            display: block;
-        }
-
-        > div.sui-notice {
-            padding-bottom: ${utils.gutter}px;
-        }
-    }
-}
-`;
-
 export class PresetsPage extends Component {
     constructor( props ) {
         super( props );
@@ -140,22 +108,6 @@ export class PresetsPage extends Component {
 
                     { this.props.description && (
                         <p>{ this.props.description }</p>
-                    )}
-
-                    { welcome.message && (
-                        <NoticeBlue>
-
-                            <img
-                                src={ welcome.image }
-                                alt={ welcome.imageAlt || '' }
-                                aria-hidden="true"
-                            />
-
-                            <Notifications type="info" dismiss>
-                                <p>{ welcome.message }</p>
-                            </Notifications>
-
-                        </NoticeBlue>
                     )}
 
                 </BoxBody>

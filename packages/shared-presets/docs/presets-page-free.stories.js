@@ -53,17 +53,6 @@ primary.argTypes = {
             type: 'text'
         }
     },
-    welcome: {
-        type: {
-            name: 'object',
-            required: false
-        },
-        description: 'Welcome message is a blue notification with dismiss property. To show this element, `message` variable is required. Use `image` variable to show an image next to message.',
-        defaultValue: {
-            image: image2x,
-            message: 'Use configs to save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub.'
-        }
-    },
     free: {
         type: {
             name: 'object',
