@@ -126,11 +126,13 @@ export class PresetsAccordionItem extends Component {
                     title={ title }
                     image={ this.props.image }
                     onClick={ e => this.toggle(e) }>
-                    <Button
-                        label={ this.props.applyLabel || 'Apply' }
-                        design="ghost"
-						onClick={ this.accordionHeadApplyClicked }
-                    />
+                    { this.props.showApplyButton && (
+                        <Button
+                            label={ this.props.applyLabel || 'Apply' }
+                            design="ghost"
+                            onClick={ this.accordionHeadApplyClicked }
+                        />
+                    )}
                     <Dropdown position="right">
                         <div
                             name={ this.props.applyLabel || 'Apply' }

@@ -89,6 +89,7 @@ export class PresetsPage extends Component {
                     title={ item.props.title }
                     description={ item.props.description }
                     image={ item.props.image }
+                    showApplyButton={true}
                     applyLabel={ item.props.applyLabel }
                     applyAction={ item.props.applyAction }
                     downloadLabel={ item.props.downloadLabel }
