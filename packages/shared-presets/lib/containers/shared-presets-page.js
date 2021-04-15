@@ -107,6 +107,12 @@ export class PresetsPage extends Component {
                         <p>{ this.props.description }</p>
                     )}
 
+                    { empty && (
+                        <Notifications type="info">
+                            <p>{ this.props.empty }</p>
+                        </Notifications>
+                    )}
+
                 </BoxBody>
 
                 { !empty && (
@@ -142,6 +148,8 @@ export class PresetsPage extends Component {
                     <BoxFooter
                         display="block"
                         alignment="center"
+                        paddingTop={ empty ? 0 : 30 }
+                        border={ empty ? 0 : 1 }
                     >
                         <p className="sui-description">{ this.props.update }</p>
                     </BoxFooter>

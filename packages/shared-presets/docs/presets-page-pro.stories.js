@@ -55,6 +55,22 @@ primary.argTypes = {
             type: 'text'
         }
     },
+    empty: {
+        type: {
+            name: 'string',
+            required: true
+        },
+        description: 'Presets Configurations box requires an empty message in case users remove all presets.',
+        defaultValue: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
+        table: {
+            defaultValue: {
+                summary: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!'
+            }
+        },
+        control: {
+            type: 'text'
+        }
+    },
     update: {
         type: {
             name: 'string',
