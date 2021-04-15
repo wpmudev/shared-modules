@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased (2021-03-24)
+## Unreleased (2021-04-15)
+
+#### New Features
+* `shared-presets`
+  * [#27](https://github.com/wpmudev/shared-modules/pull/27) ✨ new(shared-presets): Create new package. ([@iamleigh](https://github.com/iamleigh))
 
 #### Improvements
 * `shared-notifications-discount`, `shared-notifications`
@@ -12,7 +16,8 @@
 * `shared-notifications`
   * [#25](https://github.com/wpmudev/shared-modules/pull/25) 🐛 fix(shared-notifications): Make package private. ([@iamleigh](https://github.com/iamleigh))
 
-#### Committers: 1
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
 - Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
 
 ## Released (2021-03-24)
