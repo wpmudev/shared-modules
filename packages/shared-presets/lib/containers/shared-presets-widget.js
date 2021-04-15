@@ -48,10 +48,20 @@ export class PresetsWidget extends Component {
         return (
             <Box>
 
-                <BoxHeader
-                    titleIcon="wrench-tool"
-                    title={ this.props.title }
-                />
+                { !empty && (
+                    <BoxHeader
+                        titleIcon="wrench-tool"
+                        title={ this.props.title }
+                        tagLabel={ this.props.children.length }
+                    />
+                )}
+
+                { empty && (
+                    <BoxHeader
+                        titleIcon="wrench-tool"
+                        title={ this.props.title }
+                    />
+                )}
 
                 <BoxBody>
 
