@@ -305,15 +305,15 @@ var Border = styled__default['default'].div(_templateObject8 || (_templateObject
 var PriceWrapper = styled__default['default'].div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\tpadding: 10px 20px 30px;\n\ttext-align: center;\n\n\t.sui-button {\n\t\tmargin-top: 15px !important;\n\t\tmargin-right: 0 !important;\n\t}\n\n\t.sui-disclaimer {\n\t\tmargin: 20px 0 0 !important;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: none;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpadding: 12px 30px 20px;\n\t}\n"])), device.tablet, device.tablet);
 var PriceLabel = styled__default['default'].h3(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n\tcolor: #666 !important;\n\tfont-size: 12px !important;\n\tline-height: 16px !important;\n\tfont-weight: 400 !important;\n\tletter-spacing: -0.23px !important;\n\n\t@media ", " {\n\t\ttext-transform: uppercase;\n\t}\n"])), device.tablet);
 var Price = styled__default['default'].p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n\tfont-size: 15px !important;\n\tline-height: 40px !important;\n\tletter-spacing: -0.27px !important;\n\n\tspan {\n\t\tmargin-right: 6px;\n\t\tcolor: #FF6D6D;\n\t\tfont-size: 18px;\n\t\tfont-weight: bold;\n\t\ttext-decoration: line-through;\n\t\tletter-spacing: -0.32px;\n\t}\n\n\tstrong {\n\t\tfont-size: 28px;\n\t\tfont-weight: bold;\n\t\tletter-spacing: -0.5px;\n\t}\n"])));
-var NoticeOffer = /*#__PURE__*/function (_Component) {
-  _inherits(NoticeOffer, _Component);
+var NoticeDiscount = /*#__PURE__*/function (_Component) {
+  _inherits(NoticeDiscount, _Component);
 
-  var _super = _createSuper(NoticeOffer);
+  var _super = _createSuper(NoticeDiscount);
 
-  function NoticeOffer(props) {
+  function NoticeDiscount(props) {
     var _this;
 
-    _classCallCheck(this, NoticeOffer);
+    _classCallCheck(this, NoticeDiscount);
 
     _this = _super.call(this, props); // Call functions.
 
@@ -335,7 +335,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(NoticeOffer, [{
+  _createClass(NoticeDiscount, [{
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -391,7 +391,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return NoticeOffer;
+  return NoticeDiscount;
 }(React.Component);
 
-exports.NoticeOffer = NoticeOffer;
+exports.NoticeDiscount = NoticeDiscount;
