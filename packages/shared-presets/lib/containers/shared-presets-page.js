@@ -112,7 +112,18 @@ export class PresetsPage extends Component {
                             icon="upload-cloud"
                             label={ this.props.uploadLabel || 'Upload' }
                             design="ghost"
+							htmlFor="sui-upload-configs-input"
                         />
+						<input
+							id="sui-upload-configs-input"
+							type="file"
+							name="config_file"
+							className="sui-hidden"
+							value=""
+							readOnly="readonly"
+							onChange={ this.props.uploadConfig }
+							accept=".json"
+						/>
                         <Button
                             icon="save"
                             label={ this.props.saveLabel || 'Save Config' }
