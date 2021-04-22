@@ -36,9 +36,11 @@ export class PresetsWidget extends Component {
                     applyLabel={ item.props.applyLabel }
                     applyAction={ item.props.applyAction }
                     downloadLabel={ item.props.downloadLabel }
+                    downloadAction={ item.props.downloadAction }
                     editLabel={ item.props.editLabel }
                     editAction={ item.props.editAction }
                     deleteLabel={ item.props.deleteLabel }
+                    deleteAction={ item.props.deleteAction }
                 >
                     { item.props.children }
                 </PresetsAccordionItem>
@@ -89,11 +91,13 @@ export class PresetsWidget extends Component {
                         icon="save"
                         label="Save Config"
                         color="blue"
+						onClick={ this.props.saveNewConfig }
                     />
                     <Button
                         icon="wrench-tool"
                         label="Manage Configs"
                         design="ghost"
+						href={ this.props.manageConfigsUrl }
                     />
                 </BoxFooter>
 
