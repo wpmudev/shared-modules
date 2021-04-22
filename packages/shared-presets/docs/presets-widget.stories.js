@@ -30,7 +30,7 @@ primary.args = {
     presets: [
         {
 			id: 1,
-            title: 'Basic Config',
+            name: 'Basic Config',
             description: 'Recommended performance config for every site.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 			editAction: () => console.log( 'Editing config' ),
@@ -40,7 +40,7 @@ primary.args = {
         },
         {
 			id: 2,
-            title: 'Config Name',
+            name: 'Config Name',
             description: 'Donec ullamcorper nulla non metus auctor fringilla.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 			editAction: () => console.log( 'Editing config' ),

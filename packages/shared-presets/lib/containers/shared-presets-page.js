@@ -53,7 +53,7 @@ export class PresetsPage extends Component {
                 <PresetsAccordionItem
 					id={ item.props.id }
                     default={ item.props.default || false }
-                    title={ item.props.title }
+                    name={ item.props.name }
                     description={ item.props.description }
                     image={ item.props.image }
                     showApplyButton={true}
