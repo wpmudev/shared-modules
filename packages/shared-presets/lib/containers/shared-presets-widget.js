@@ -87,12 +87,12 @@ export class PresetsWidget extends Component {
                 <BoxFooter>
                     <Button
                         icon="save"
-                        label="Save Config"
+                        label={ this.props.saveLabel }
                         color="blue"
                     />
                     <Button
                         icon="wrench-tool"
-                        label="Manage Configs"
+                        label={ this.props.manageLabel }
                         design="ghost"
                     />
                 </BoxFooter>
