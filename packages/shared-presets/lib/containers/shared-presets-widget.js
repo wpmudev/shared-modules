@@ -5,24 +5,8 @@ import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
 export class PresetsWidget extends Component {
-    constructor( props ) {
-        super( props );
-
-        this.state = {
-			loading: true,
-        }
-    }
-
-    componentDidMount() {
-		this.setState({
-			loading: this.props.loading
-		});
-    }
-
     render() {
-        const { loading } = this.state;
-
-        const { children: configsList } = this.props,
+        const { isLoading, children: configsList } = this.props,
 			isEmpty = ! configsList || 0 === configsList.length;
 
         const items = Children.map( configsList, item => {
@@ -47,7 +31,7 @@ export class PresetsWidget extends Component {
         return (
             <Box>
 
-                { ! loading && ! isEmpty && (
+                { ! isLoading && ! isEmpty && (
                     <BoxHeader
                         titleIcon="wrench-tool"
                         title={ this.props.title }
@@ -66,7 +50,7 @@ export class PresetsWidget extends Component {
 
                     <p>{ this.props.message }</p>
 
-                    { ! loading && isEmpty && (
+                    { ! isLoading && isEmpty && (
                         <Notifications type="info">
                             <p>{ this.props.notice }</p>
                         </Notifications>
@@ -74,7 +58,7 @@ export class PresetsWidget extends Component {
 
                 </BoxBody>
 
-				{ loading && (
+				{ isLoading && (
 					<div>
 						<span>
 							<span className="sui-icon-loader" aria-hidden="true"></span>

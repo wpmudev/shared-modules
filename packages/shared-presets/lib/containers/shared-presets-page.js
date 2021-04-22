@@ -8,25 +8,8 @@ import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
 export class PresetsPage extends Component {
-    constructor( props ) {
-        super( props );
-
-        this.state = {
-            empty: false,
-            loading: true
-        }
-    }
-
-    componentDidMount() {
-		this.setState({
-			loading: this.props.loading
-		});
-    }
-
     render() {
-        const { loading } = this.state;
-
-        const { freeData, children: configsList } = this.props,
+        const { freeData, isLoading, children: configsList } = this.props,
 			isEmpty = ! configsList || 0 === configsList.length;
 
 		const items = Children.map( configsList, item => (
@@ -86,7 +69,7 @@ export class PresetsPage extends Component {
                         <p>{ this.props.description }</p>
                     )}
 
-                    { ! loading && isEmpty && (
+                    { ! isLoading && isEmpty && (
                         <Notifications type="info">
                             <p>{ this.props.empty }</p>
                         </Notifications>
@@ -94,7 +77,7 @@ export class PresetsPage extends Component {
 
                 </BoxBody>
 
-				{ loading && (
+				{ isLoading && (
 					<div>
 						<span>
 							<span className="sui-icon-loader" aria-hidden="true"></span>

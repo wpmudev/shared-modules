@@ -55,7 +55,7 @@ primary.argTypes = {
             type: 'text'
         }
     },
-	loading: {
+	isLoading: {
         type: {
             name: 'boolean',
             required: false
