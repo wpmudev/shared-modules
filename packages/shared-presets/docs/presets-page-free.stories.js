@@ -9,7 +9,7 @@ export default {
 const Template = ({ children, ...args }) => {
     return (
         <PresetsPage {...args}>
-            { children.map( ( child, index ) => (
+            { children && children.map( ( child, index ) => (
                 <div key={ index } { ...child }>
                     <div name="Lazy Load" status="Active" />
                     <div name="CDN" status="Active" />
@@ -49,6 +49,28 @@ primary.argTypes = {
         },
         description: 'A description might be necessary to let users know what the component is about.',
         defaultValue: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
+        control: {
+            type: 'text'
+        }
+    },
+	loading: {
+        type: {
+            name: 'boolean',
+            required: false
+        },
+        description: 'Whether the configurations list is being loaded',
+        defaultValue: false,
+        control: {
+            type: 'boolean'
+        }
+	},
+    loadingLabel: {
+        type: {
+            name: 'string',
+            required: true
+        },
+        description: 'The text to be displayed when "loading" is set to "true".',
+        defaultValue: 'Updating the config list...',
         control: {
             type: 'text'
         }

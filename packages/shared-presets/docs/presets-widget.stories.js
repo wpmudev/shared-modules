@@ -8,7 +8,7 @@ export default {
 const Template = ({ presets, settings, ...args }) => {
     return (
         <PresetsWidget {...args}>
-            { presets.map( ( preset, index ) => (
+            { presets && presets.map( ( preset, index ) => (
                 <div key={ index } { ...preset }>
                     <div name="Lazy Load" status="Active" />
                     <div name="CDN" status="Active" />
@@ -25,6 +25,8 @@ export const primary = Template.bind({});
 primary.storyName = "Default"
 primary.args = {
     title: 'Preset Configs',
+	loading: false,
+	loadingLabel: 'Updating the config list...',
     message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
     notice: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
     presets: [
@@ -50,7 +52,6 @@ primary.args = {
         }
     ],
 };
-primary.argTypes = {};
 
 export const secondary = Template.bind({});
 secondary.storyName = "Empty"

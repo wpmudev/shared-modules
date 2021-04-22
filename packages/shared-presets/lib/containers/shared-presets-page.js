@@ -14,7 +14,7 @@ export class PresetsPage extends Component {
         this.state = {
             free: false,
             empty: false,
-            loading: false
+            loading: true
         }
     }
 
@@ -33,11 +33,15 @@ export class PresetsPage extends Component {
             }
         }
 
-        if ( 0 === items.length ) {
+		if ( ! items || 0 === items.length ) {
             this.setState({
                 empty: true
             });
         }
+
+		this.setState({
+			loading: this.props.loading
+		});
 
         this.setState({
             free: isFree
@@ -45,31 +49,29 @@ export class PresetsPage extends Component {
     }
 
     render() {
-        const { free, empty } = this.state;
+        const { free, empty, loading } = this.state;
         const freez = this.props.free || {};
 
-        const items = Children.map( this.props.children, item => {
-            return (
-                <PresetsAccordionItem
-					id={ item.props.id }
-                    default={ item.props.default || false }
-                    title={ item.props.title }
-                    description={ item.props.description }
-                    image={ item.props.image }
-                    showApplyButton={true}
-                    applyLabel={ item.props.applyLabel }
-                    applyAction={ item.props.applyAction }
-                    downloadLabel={ item.props.downloadLabel }
-                    downloadAction={ item.props.downloadAction }
-                    editLabel={ item.props.editLabel }
-                    editAction={ item.props.editAction }
-                    deleteLabel={ item.props.deleteLabel }
-                    deleteAction={ item.props.deleteAction }
-                >
-                    { item.props.children }
-                </PresetsAccordionItem>
-            );
-        });
+		const items = Children.map( this.props.children, item => (
+			<PresetsAccordionItem
+				id={ item.props.id }
+				default={ item.props.default || false }
+				title={ item.props.title }
+				description={ item.props.description }
+				image={ item.props.image }
+				showApplyButton={true}
+				applyLabel={ item.props.applyLabel }
+				applyAction={ item.props.applyAction }
+				downloadLabel={ item.props.downloadLabel }
+				downloadAction={ item.props.downloadAction }
+				editLabel={ item.props.editLabel }
+				editAction={ item.props.editAction }
+				deleteLabel={ item.props.deleteLabel }
+				deleteAction={ item.props.deleteAction }
+			>
+				{ item.props.children }
+			</PresetsAccordionItem>
+		) );
 
         return (
             <Box>
@@ -107,13 +109,22 @@ export class PresetsPage extends Component {
                         <p>{ this.props.description }</p>
                     )}
 
-                    { empty && (
+                    { ! loading && empty && (
                         <Notifications type="info">
                             <p>{ this.props.empty }</p>
                         </Notifications>
                     )}
 
                 </BoxBody>
+
+				{ loading && (
+					<div>
+						<span>
+							<span className="sui-icon-loader" aria-hidden="true"></span>
+							{ this.props.loadingLabel }
+						</span>
+					</div>
+				) }
 
                 { !empty && (
                     <div
