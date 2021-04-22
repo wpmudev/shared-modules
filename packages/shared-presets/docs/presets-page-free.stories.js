@@ -91,14 +91,13 @@ primary.argTypes = {
             type: 'text'
         }
     },
-    free: {
+    freeData: {
         type: {
             name: 'object',
             required: false
         },
         description: 'Configure obbject to show free message. There are 3 variables: `state` that is a boolean and manages to show/hide the free content, `message` is required in order to show free notice, and `button` to rename notice button label.',
         defaultValue: {
-            state: true,
             message: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once... Try it free today!',
             button: 'Try The Hub'
         },
