@@ -64,7 +64,7 @@ primary.argTypes = {
             type: 'boolean'
         }
 	},
-    loadingLabel: {
+    loadingText: {
         type: {
             name: 'string',
             required: true
@@ -75,7 +75,7 @@ primary.argTypes = {
             type: 'text'
         }
     },
-    empty: {
+    emptyNotice: {
         type: {
             name: 'string',
             required: true

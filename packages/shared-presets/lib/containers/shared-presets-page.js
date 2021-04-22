@@ -69,7 +69,7 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 
 				{ ! isLoading && isEmpty && (
 					<Notifications type="info">
-						<p>{ props.empty }</p>
+						<p>{ props.emptyNotice }</p>
 					</Notifications>
 				)}
 
@@ -79,7 +79,7 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 				<div>
 					<span>
 						<span className="sui-icon-loader" aria-hidden="true"></span>
-						{ props.loadingLabel }
+						{ props.loadingText }
 					</span>
 				</div>
 			) }

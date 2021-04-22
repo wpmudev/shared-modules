@@ -44,11 +44,11 @@ export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) 
 
 			<BoxBody>
 
-				<p>{ props.message }</p>
+				<p>{ props.description }</p>
 
 				{ ! isLoading && isEmpty && (
 					<Notifications type="info">
-						<p>{ props.notice }</p>
+						<p>{ props.emptyNotice }</p>
 					</Notifications>
 				)}
 
@@ -58,7 +58,7 @@ export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) 
 				<div>
 					<span>
 						<span className="sui-icon-loader" aria-hidden="true"></span>
-						{ props.loadingLabel }
+						{ props.loadingText }
 					</span>
 				</div>
 			) }
