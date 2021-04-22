@@ -9,29 +9,23 @@ export class PresetsWidget extends Component {
         super( props );
 
         this.state = {
-            empty: false,
 			loading: true,
         }
     }
 
     componentDidMount() {
-        const items = this.props.children;
-
-        if ( ! items || 0 === items.length ) {
-            this.setState({
-                empty: true
-            });
-        }
-
 		this.setState({
 			loading: this.props.loading
 		});
     }
 
     render() {
-        const { empty, loading } = this.state;
+        const { loading } = this.state;
 
-        const items = Children.map( this.props.children, item => {
+        const { children: configsList } = this.props,
+			isEmpty = ! configsList || 0 === configsList.length;
+
+        const items = Children.map( configsList, item => {
             return (
                 <PresetsAccordionItem
                     default={ item.props.default || false }
@@ -53,7 +47,7 @@ export class PresetsWidget extends Component {
         return (
             <Box>
 
-                { ! loading && ! empty && (
+                { ! loading && ! isEmpty && (
                     <BoxHeader
                         titleIcon="wrench-tool"
                         title={ this.props.title }
@@ -61,7 +55,7 @@ export class PresetsWidget extends Component {
                     />
                 )}
 
-                { empty && (
+                { isEmpty && (
                     <BoxHeader
                         titleIcon="wrench-tool"
                         title={ this.props.title }
@@ -72,7 +66,7 @@ export class PresetsWidget extends Component {
 
                     <p>{ this.props.message }</p>
 
-                    { ! loading && empty && (
+                    { ! loading && isEmpty && (
                         <Notifications type="info">
                             <p>{ this.props.notice }</p>
                         </Notifications>
@@ -89,7 +83,7 @@ export class PresetsWidget extends Component {
 					</div>
 				) }
 
-                { !empty && (
+                { ! isEmpty && (
                     <div
                         className="sui-accordion sui-accordion-flushed"
                         style={ { borderBottom: 0 } }

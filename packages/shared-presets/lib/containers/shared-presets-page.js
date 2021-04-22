@@ -18,24 +18,18 @@ export class PresetsPage extends Component {
     }
 
     componentDidMount() {
-        const items = this.props.children;
-
-		if ( ! items || 0 === items.length ) {
-            this.setState({
-                empty: true
-            });
-        }
-
 		this.setState({
 			loading: this.props.loading
 		});
     }
 
     render() {
-        const { empty, loading } = this.state;
-        const { freeData } = this.props;
+        const { loading } = this.state;
 
-		const items = Children.map( this.props.children, item => (
+        const { freeData, children: configsList } = this.props,
+			isEmpty = ! configsList || 0 === configsList.length;
+
+		const items = Children.map( configsList, item => (
 			<PresetsAccordionItem
 				id={ item.props.id }
 				default={ item.props.default || false }
@@ -92,7 +86,7 @@ export class PresetsPage extends Component {
                         <p>{ this.props.description }</p>
                     )}
 
-                    { ! loading && empty && (
+                    { ! loading && isEmpty && (
                         <Notifications type="info">
                             <p>{ this.props.empty }</p>
                         </Notifications>
@@ -109,7 +103,7 @@ export class PresetsPage extends Component {
 					</div>
 				) }
 
-                { !empty && (
+                { ! isEmpty && (
                     <div
                         className="sui-accordion sui-accordion-flushed"
                         style={ {
@@ -142,8 +136,8 @@ export class PresetsPage extends Component {
                     <BoxFooter
                         display="block"
                         alignment="center"
-                        paddingTop={ empty ? 0 : 30 }
-                        border={ empty ? 0 : 1 }
+                        paddingTop={ isEmpty ? 0 : 30 }
+                        border={ isEmpty ? 0 : 1 }
                     >
                         <p className="sui-description">{ this.props.update }</p>
                     </BoxFooter>
