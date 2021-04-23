@@ -30,7 +30,7 @@ export class PresetsWidget extends Component {
             return (
                 <PresetsAccordionItem
                     default={ item.props.default || false }
-                    title={ item.props.title }
+                    name={ item.props.name }
                     description={ item.props.description }
                     image={ item.props.image }
                     applyLabel={ item.props.applyLabel }
