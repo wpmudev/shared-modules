@@ -89,13 +89,13 @@ export class PresetsWidget extends Component {
                 <BoxFooter>
                     <Button
                         icon="save"
-                        label="Save Config"
+                        label={ this.props.saveLabel }
                         color="blue"
 						onClick={ this.props.saveNewConfig }
                     />
                     <Button
                         icon="wrench-tool"
-                        label="Manage Configs"
+                        label={ this.props.manageLabel }
                         design="ghost"
 						href={ this.props.manageConfigsUrl }
                     />
