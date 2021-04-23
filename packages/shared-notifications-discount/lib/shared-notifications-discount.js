@@ -321,7 +321,7 @@ export class NoticeDiscount extends Component {
 					<Content>
 						{ this.props.children }
 						{ hasDisclaimer && (
-							<p className="sui-disclaimer">* { disclaimer } *</p>
+							<p className="sui-disclaimer">* { disclaimer }</p>
 						)}
 					</Content>
 
