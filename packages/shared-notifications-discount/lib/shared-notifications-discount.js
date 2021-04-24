@@ -329,16 +329,18 @@ export class NoticeDiscount extends Component {
 
 					<PriceWrapper>
 
-						<PriceLabel>Pay Only</PriceLabel>
+						{ 'undefined' !== typeof this.props.priceLabel && '' !== this.props.priceLabel && (
+							<PriceLabel>{ this.props.priceLabel }</PriceLabel>
+						)}
 
 						{ hasDiscount
 							? (
 								<Price>
 									<span>${ price }</span>
-									<strong>${ newPrice }</strong>/month
+									<strong>${ newPrice }</strong>/{ this.props.priceTime || 'month' }
 								</Price>
 							)
-							: <Price><strong>${ price }</strong>/month</Price>
+							: <Price><strong>${ price }</strong>/{ this.props.priceTime || 'month' }</Price>
 						}
 
 						{ hasButton && (
