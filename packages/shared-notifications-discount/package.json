@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@wpmudev/shared-notifications-discount",
   "version": "1.0.0",
   "description": "WPMU DEV Shared Offers Notification",
