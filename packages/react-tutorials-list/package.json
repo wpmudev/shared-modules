@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@wpmudev/react-tutorials-list",
   "version": "1.0.12",
   "description": "WPMU DEV Shared Tutorials List",

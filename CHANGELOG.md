@@ -1,6 +1,30 @@
 # Changelog
 
-## Unreleased (2021-04-15)
+## Unreleased (2021-04-24)
+
+#### Improvements
+* `shared-notifications-discount`
+  * [#38](https://github.com/wpmudev/shared-modules/pull/38) 🐛 fix(notifications-discount): Make price label and time editable. ([@iamleigh](https://github.com/iamleigh))
+  * [#36](https://github.com/wpmudev/shared-modules/pull/36) 🐛 fix(shared-notifications-discount): Upgrade dependencies. ([@iamleigh](https://github.com/iamleigh))
+* `shared-presets`
+  * [#35](https://github.com/wpmudev/shared-modules/pull/35) 🐛 fix(module-presets): Make config items name match the key from the Hub. ([@a-danae](https://github.com/a-danae))
+
+#### Bug Fixes
+* `shared-notifications-discount`
+  * [#37](https://github.com/wpmudev/shared-modules/pull/37) 🐛 fix(react-notifications-discount): Remove final asterisk from disclaimer text. ([@iamleigh](https://github.com/iamleigh))
+* `shared-presets`
+  * [#34](https://github.com/wpmudev/shared-modules/pull/34) 🐛 fix(react-presets): Widget's buttons can't be translated. ([@a-danae](https://github.com/a-danae))
+  * [#33](https://github.com/wpmudev/shared-modules/pull/33) 🐛 fix(react-presets): Add missing action callbacks to the widget component. ([@a-danae](https://github.com/a-danae))
+
+#### Documentation
+* `shared-notifications-discount`
+  * [#39](https://github.com/wpmudev/shared-modules/pull/39) 📝 docs(notifications-discount): Installation instructions. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
+## Released (2021-04-15)
 
 #### New Features
 * `shared-presets`

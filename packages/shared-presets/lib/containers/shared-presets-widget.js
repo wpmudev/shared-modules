@@ -35,15 +35,17 @@ export class PresetsWidget extends Component {
             return (
                 <PresetsAccordionItem
                     default={ item.props.default || false }
-                    title={ item.props.title }
+                    name={ item.props.name }
                     description={ item.props.description }
                     image={ item.props.image }
                     applyLabel={ item.props.applyLabel }
                     applyAction={ item.props.applyAction }
                     downloadLabel={ item.props.downloadLabel }
+                    downloadAction={ item.props.downloadAction }
                     editLabel={ item.props.editLabel }
                     editAction={ item.props.editAction }
                     deleteLabel={ item.props.deleteLabel }
+                    deleteAction={ item.props.deleteAction }
                 >
                     { item.props.children }
                 </PresetsAccordionItem>
@@ -101,13 +103,15 @@ export class PresetsWidget extends Component {
                 <BoxFooter>
                     <Button
                         icon="save"
-                        label="Save Config"
+                        label={ this.props.saveLabel }
                         color="blue"
+						onClick={ this.props.saveNewConfig }
                     />
                     <Button
                         icon="wrench-tool"
-                        label="Manage Configs"
+                        label={ this.props.manageLabel }
                         design="ghost"
+						href={ this.props.manageConfigsUrl }
                     />
                 </BoxFooter>
 

@@ -10,7 +10,7 @@ export class PresetsAccordion extends Component {
         const items = Children.map( this.props.children, item => {
             return (
                 <PresetsAccordionItem
-                    title={ item.props.title }
+                    name={ item.props.name }
                     description={ item.props.description }
                     applyLabel={ item.props.applyLabel }
                     editLabel={ item.props.editLabel }

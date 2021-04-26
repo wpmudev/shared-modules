@@ -3373,54 +3373,60 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@wpmudev/react-accordion@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-accordion/-/react-accordion-1.0.1.tgz#16cc2dcbebccc00c9b1e553937be0df5eabb3f36"
-  integrity sha512-E46WE0BTJBAwhg72uzrqb90hRWmAJr6OhppmWtc1VULvh19QjWG7QjzImslnVTXfsmRG2fcz2iQg6BYMgid/FA==
+"@wpmudev/react-accordion@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-accordion/-/react-accordion-1.0.4.tgz#56dd72c167c153c45a6da617d0e87dc130035213"
+  integrity sha512-5pVQtx7jgyrmTsBinUYnldoeUIjJ07l1qTzcH0rjaZ1c1LOnxplmrW673y8rSwH6RjcY/qzweAv18jGzZ7mDSQ==
   dependencies:
-    "@wpmudev/react-button-icon" "^1.0.1"
+    "@wpmudev/react-button-icon" "^1.1.0"
     styled-components "^5.2.3"
 
-"@wpmudev/react-box@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-box/-/react-box-1.2.1.tgz#a2179b3dc470ca8d02be281dc00874f24a7880e9"
-  integrity sha512-Qa/2rwYaDTKbXLf0UWkMJ2m5D9j368DSeWWxJ0TN2nLzkNybZCz8CZK5cM9RUboGTEdZzm9xBggMbMcrmcSNFQ==
+"@wpmudev/react-box@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-box/-/react-box-1.2.4.tgz#50826438c90e4c8df1f81183c0ad19dbe8e429b4"
+  integrity sha512-/JOXH9FHskQVjNQMSLdlDaCAVMS7DkdcRPB9m5Ql9ypZgXFlJ5ED8EfnP39ov3rcE8lwY+oM9p/GVU7AsPa33g==
   dependencies:
     styled-components "^5.2.3"
 
-"@wpmudev/react-button-icon@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-button-icon/-/react-button-icon-1.0.1.tgz#2e1a68a9065bdfcc84923da0c296f9ba7744c94c"
-  integrity sha512-j+oDQf/dy4O+sDZfHWt0Wnv0J/5E5l802g6y/hgRdBPNW8IBgrtCQwxlTGJc4+jWcb7eHsWoo0xPf3jALB2QLQ==
+"@wpmudev/react-button-icon@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-button-icon/-/react-button-icon-1.1.0.tgz#dff9b97492fa19ca0b9e6f33f145efb82e218007"
+  integrity sha512-DjtRKk2e3xAVe/Y7aU546ZyKtx2P3bdQh9CAiQtST2e91gv2xVnMVi4Rzp75HmDcp6qcsk7Aw/q2QBt+hOz03Q==
 
 "@wpmudev/react-button@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.0.tgz#76406ae28c500c7751e905fa614b148aa258a098"
   integrity sha512-dwJuNWWcQL9yT3ijVy24Ux3PrpCuOu6FP3icTf6NDmZgPUthqOSdQg75sPHtCg7ZwWXtaX5gJ28Bie3zUcY8pA==
 
-"@wpmudev/react-button@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.5.tgz#e95b97d057e6f72e56a3fcfd8b8df576d50704e4"
-  integrity sha512-3XbXPYPefVr5ksiTJBMwp2G2vVOaHt+XDgnpmEcbySraATadGuhDu5Wa7xCJD+tQW74AdyMCSFzRUb0mI3Zr8Q==
+"@wpmudev/react-button@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.6.tgz#dc9914c38299536cda957d120b3312bbdf21861e"
+  integrity sha512-apbiuxal7Bbnrgmw3DDdh+imtO1VyiBvka+8R1x4K2zIRUlGcSNnFpn4TIfMk19toYwjiE5GQWacLIHdX99ohQ==
 
-"@wpmudev/react-dropdown@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-dropdown/-/react-dropdown-1.0.1.tgz#ee4fe863e4535dbd8795d6c13e12a11fe7807793"
-  integrity sha512-yHnz+uqfWN8Ra6mPxi9A5tYvc/QTd4CXq9VC0+lepOVbyMVepQQtldhaX8BQ/QJkBNsD8Jlj9GpCmlq/3z/+Rg==
+"@wpmudev/react-button@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.8.tgz#1585948c9fa163207ad746480fd9c89fade498e7"
+  integrity sha512-WtDlblxL9/S1jo7IvnBDl6ponQdNl8Kkj6+OIUktpLmLWnIQbycQrQJXZYYUoUKH8fDgaVLK1q+fQ4K1R9xH2A==
+
+"@wpmudev/react-dropdown@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-dropdown/-/react-dropdown-1.1.2.tgz#59b448b20e5b60db581d4217bfee54e28acdefd0"
+  integrity sha512-WYyqb/pqOFgp/7GY663ZmQ3GQ6zwXEKHFcxzMzaZxICldvwldJbw7XanblIG7hGjbMojtoZMc74zEmG6yHFghg==
   dependencies:
-    "@wpmudev/react-button-icon" "^1.0.1"
+    "@wpmudev/react-button-icon" "^1.1.0"
+    styled-components "^5.2.3"
 
 "@wpmudev/react-notifications@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.1.tgz#3e26761a6e76085d9e5ba4b1b6cf435ebd0e4e4b"
   integrity sha512-rXWcvM07mlfktUim+0GXaRiXIYLAUaSih5hrtHYDLKRO1JS9/XkuYoTCrZybPUF6Fep4LOpEvtuQB0xb9daOaA==
 
-"@wpmudev/react-notifications@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.5.tgz#bedb4288c401bc47ba7d0fb6fa95a16b510cf089"
-  integrity sha512-XyblIuHFcUO6xve+K3mJYNciVztKEidjsYMk+REjkDbynRlxdrJyIe+jd6dzZ/CUWDLLtoG0CdkYRfZAgS07Qg==
+"@wpmudev/react-notifications@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.8.tgz#a4ccd31a2ecb0faca3909bc5dafc2fd1581b9e14"
+  integrity sha512-23H217Zmgk/JsuNd27uo1ZQykJDJGkoZExaQdKL7X1m2mXd32duPxo7rdU93Z/JlVaU8JDy+PArJbT/mrQ1QWQ==
   dependencies:
-    "@wpmudev/react-button-icon" "^1.0.1"
+    "@wpmudev/react-button-icon" "^1.1.0"
 
 "@wpmudev/react-post@^1.0.7":
   version "1.0.7"
