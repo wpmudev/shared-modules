@@ -191,16 +191,9 @@ export class PresetsPage extends Component {
                         <p>{ this.props.description }</p>
                     )}
 
-                    { empty && (
-                        <Notifications
-                            type={ loading ? 'loading' : 'info' }
-                        >
-                            { loading && (
-                                <p>{ this.props.loadingLabel }</p>
-                            )}
-                            { !loading && (
-                                <p>{ this.props.empty }</p>
-                            )}
+                    { !loading && empty && (
+                        <Notifications type="info">
+                            <p>{ this.props.empty }</p>
                         </Notifications>
                     )}
 
