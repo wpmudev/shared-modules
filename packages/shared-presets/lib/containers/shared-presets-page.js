@@ -124,15 +124,6 @@ export class PresetsPage extends Component {
 
                 </BoxBody>
 
-				{ loading && (
-					<div>
-						<span>
-							<span className="sui-icon-loader" aria-hidden="true"></span>
-							{ this.props.loadingLabel }
-						</span>
-					</div>
-				) }
-
                 { !empty && (
                     <div
                         className="sui-accordion sui-accordion-flushed"
