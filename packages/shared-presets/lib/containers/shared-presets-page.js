@@ -7,6 +7,38 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
+const LoadingContent = styled.div`
+.sui-wrap && {
+    position: relative;
+    z-index: 2;
+}
+`;
+
+const LoadingWrap = styled.div`
+.sui-wrap && {
+    pointer-events: none;
+}`;
+
+const LoadingMask = styled.div`
+.sui-wrap && {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 0 0 4px 4px;
+
+    > p {
+
+    }
+}
+`;
+
 export const PresetsPage = ( { freeData, isLoading, children: configsList, ...props } ) => {
 	const isEmpty = ! configsList || 0 === configsList.length;
 
@@ -14,7 +46,7 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 		<PresetsAccordionItem
 			id={ item.props.id }
 			default={ item.props.default || false }
-			title={ item.props.title }
+			name={ item.props.name }
 			description={ item.props.description }
 			image={ item.props.image }
 			showApplyButton={true}
@@ -30,6 +62,56 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 			{ item.props.children }
 		</PresetsAccordionItem>
 	) );
+
+	const Table = (
+		<React.Fragment>
+			{ !isEmpty && (
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={ {
+						borderBottomWidth: 0
+					} }
+				>
+					{ items }
+				</div>
+			)}
+		</React.Fragment>
+	);
+
+	const Footer = (
+		<React.Fragment>
+
+			{ freeData && (
+				<BoxFooter
+					display="block"
+				>
+					<Notifications type="upsell">
+						<p>{ freeData.message }</p>
+						<p>
+							<Button
+								label={ freeData.button || 'Try The Hub' }
+								color="purple"
+								href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
+								target="_blank"
+							/>
+						</p>
+					</Notifications>
+				</BoxFooter>
+			)}
+
+			{ !freeData && props.update && '' !== props.update && (
+				<BoxFooter
+					display="block"
+					alignment="center"
+					paddingTop={ isEmpty ? 0 : 30 }
+					border={ isEmpty ? 0 : 1 }
+				>
+					<p className="sui-description">{ props.update }</p>
+				</BoxFooter>
+			)}
+
+		</React.Fragment>
+	);
 
 	return (
 		<Box>
@@ -67,7 +149,7 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 					<p>{ props.description }</p>
 				)}
 
-				{ ! isLoading && isEmpty && (
+				{ !isLoading && isEmpty && (
 					<Notifications type="info">
 						<p>{ props.emptyNotice }</p>
 					</Notifications>
@@ -76,52 +158,29 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 			</BoxBody>
 
 			{ isLoading && (
-				<div>
-					<span>
-						<span className="sui-icon-loader" aria-hidden="true"></span>
-						{ props.loadingText }
-					</span>
-				</div>
-			) }
-
-			{ ! isEmpty && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={ {
-						borderBottomWidth: 0
-					} }
-				>
-					{ items }
-				</div>
-			)}
-
-			{ freeData && (
-				<BoxFooter
-					display="block"
-				>
-					<Notifications type="upsell">
-						<p>{ freeData.message }</p>
-						<p>
-							<Button
-								label={ freeData.button || 'Try The Hub' }
-								color="purple"
-								href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
-								target="_blank"
+				<LoadingContent>
+					<LoadingWrap aria-hidden="true">
+						{ Table }
+						{ Footer }
+					</LoadingWrap>
+					<LoadingMask>
+						<p className="sui-description">
+							<span
+								className="sui-icon-loader sui-loading"
+								aria-hidden="true"
+								style={ { marginRight: 10 } }
 							/>
+							{ props.loadingText }
 						</p>
-					</Notifications>
-				</BoxFooter>
+					</LoadingMask>
+				</LoadingContent>
 			)}
 
-			{ props.update && (
-				<BoxFooter
-					display="block"
-					alignment="center"
-					paddingTop={ isEmpty ? 0 : 30 }
-					border={ isEmpty ? 0 : 1 }
-				>
-					<p className="sui-description">{ props.update }</p>
-				</BoxFooter>
+			{ !isLoading && (
+				<React.Fragment>
+					{ Table }
+					{ Footer }
+				</React.Fragment>
 			)}
 
 		</Box>

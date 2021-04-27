@@ -572,22 +572,53 @@ function _createSuper$1(Derived) {
   };
 }
 
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _defineProperty$1$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty$1$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
+  }
 
-    return target;
-  };
-
-  return _extends$1.apply(this, arguments);
+  return target;
 }
 
 function _objectWithoutPropertiesLoose$1(source, excluded) {
@@ -626,14 +657,16 @@ function _objectWithoutProperties$1(source, excluded) {
   return target;
 }
 
-var ButtonIcon = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
+var ButtonIcon = function ButtonIcon(_ref) {
   var label = _ref.label,
       icon = _ref.icon,
+      iconSize = _ref.iconSize,
       _ref$design = _ref.design,
       design = _ref$design === void 0 ? "solid" : _ref$design,
       color = _ref.color,
       className = _ref.className,
-      props = _objectWithoutProperties$1(_ref, ["label", "icon", "design", "color", "className"]);
+      loading = _ref.loading,
+      props = _objectWithoutProperties$1(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -643,12 +676,12 @@ var ButtonIcon = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     "aria-hidden": "true"
   });
   var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: "sui-icon-" + icon,
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sui-screen-reader-text"
   }, label));
-  className = '' !== className ? 'sui-button-icon ' + className : 'sui-button-icon'; // Set button color.
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
 
   switch (color) {
     case "blue":
@@ -681,24 +714,16 @@ var ButtonIcon = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
   } // Set loading class.
 
 
-  if (props.loading) {
+  if (loading) {
     className += " sui-button-onload";
   }
 
-  if (props.href) {
-    return /*#__PURE__*/React.createElement("a", _extends$1({
-      ref: ref,
-      className: className,
-      disabled: props.disabled || props.loading
-    }, props), props.loading ? loader : content);
-  }
-
-  return /*#__PURE__*/React.createElement("button", _extends$1({
-    ref: ref,
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
     className: className,
-    disabled: props.disabled || props.loading
-  }, props), props.loading ? loader : content);
-});
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
 
 var Notifications = /*#__PURE__*/function (_Component) {
   _inherits$1(Notifications, _Component);
@@ -799,7 +824,7 @@ function _defineProperty$2(obj, key, value) {
   return obj;
 }
 
-function ownKeys(object, enumerableOnly) {
+function ownKeys$1(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -813,18 +838,18 @@ function ownKeys(object, enumerableOnly) {
   return keys;
 }
 
-function _objectSpread2(target) {
+function _objectSpread2$1(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
+      ownKeys$1(Object(source), true).forEach(function (key) {
         _defineProperty$2(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys(Object(source)).forEach(function (key) {
+      ownKeys$1(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -876,7 +901,8 @@ var Button = function Button(_ref) {
       design = _ref$design === void 0 ? "solid" : _ref$design,
       color = _ref.color,
       className = _ref.className,
-      props = _objectWithoutProperties$2(_ref, ["label", "icon", "design", "color", "className"]);
+      loading = _ref.loading,
+      props = _objectWithoutProperties$2(_ref, ["label", "icon", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -922,7 +948,7 @@ var Button = function Button(_ref) {
   } // Set loading class.
 
 
-  if (props.loading) {
+  if (loading) {
     className += " sui-button-onload";
   }
 
@@ -934,10 +960,10 @@ var Button = function Button(_ref) {
     htmlTag = 'label';
   }
 
-  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$1({
     className: className,
-    disabled: props.disabled || props.loading
-  }, props), props.loading ? loader : content);
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
 };
 
 var screen$1 = {
@@ -975,8 +1001,8 @@ function _createClass$2(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _extends$2() {
-  _extends$2 = Object.assign || function (target) {
+function _extends$1() {
+  _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -990,7 +1016,7 @@ function _extends$2() {
     return target;
   };
 
-  return _extends$2.apply(this, arguments);
+  return _extends$1.apply(this, arguments);
 }
 
 function _inherits$2(subClass, superClass) {
@@ -1084,22 +1110,53 @@ function _taggedTemplateLiteral$2(strings, raw) {
   }));
 }
 
-function _extends$1$1() {
-  _extends$1$1 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _defineProperty$1$2(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return obj;
+}
+
+function ownKeys$2(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$2(Object(source), true).forEach(function (key) {
+        _defineProperty$1$2(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$2(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
+  }
 
-    return target;
-  };
-
-  return _extends$1$1.apply(this, arguments);
+  return target;
 }
 
 function _objectWithoutPropertiesLoose$3(source, excluded) {
@@ -1138,14 +1195,16 @@ function _objectWithoutProperties$3(source, excluded) {
   return target;
 }
 
-var ButtonIcon$1 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
+var ButtonIcon$1 = function ButtonIcon(_ref) {
   var label = _ref.label,
       icon = _ref.icon,
+      iconSize = _ref.iconSize,
       _ref$design = _ref.design,
       design = _ref$design === void 0 ? "solid" : _ref$design,
       color = _ref.color,
       className = _ref.className,
-      props = _objectWithoutProperties$3(_ref, ["label", "icon", "design", "color", "className"]);
+      loading = _ref.loading,
+      props = _objectWithoutProperties$3(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1155,12 +1214,12 @@ var ButtonIcon$1 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     "aria-hidden": "true"
   });
   var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: "sui-icon-" + icon,
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sui-screen-reader-text"
   }, label));
-  className = '' !== className ? 'sui-button-icon ' + className : 'sui-button-icon'; // Set button color.
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
 
   switch (color) {
     case "blue":
@@ -1193,24 +1252,16 @@ var ButtonIcon$1 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
   } // Set loading class.
 
 
-  if (props.loading) {
+  if (loading) {
     className += " sui-button-onload";
   }
 
-  if (props.href) {
-    return /*#__PURE__*/React.createElement("a", _extends$1$1({
-      ref: ref,
-      className: className,
-      disabled: props.disabled || props.loading
-    }, props), props.loading ? loader : content);
-  }
-
-  return /*#__PURE__*/React.createElement("button", _extends$1$1({
-    ref: ref,
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$2({
     className: className,
-    disabled: props.disabled || props.loading
-  }, props), props.loading ? loader : content);
-});
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
 
 function _templateObject$1() {
   var data = _taggedTemplateLiteral$2(["\n    width: 30px;\n    height: 30px;\n    margin-right: 10px;\n    border-radius: 10px;\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n"]);
@@ -1272,7 +1323,7 @@ var AccordionItemHeader = /*#__PURE__*/function (_Component3) {
       var actions = /*#__PURE__*/React.createElement("div", {
         className: "sui-accordion-col-auto"
       }, this.props.children, indicator);
-      return /*#__PURE__*/React.createElement("div", _extends$2({
+      return /*#__PURE__*/React.createElement("div", _extends$1({
         className: "sui-accordion-item-header"
       }, this.props), title, actions);
     }
@@ -1304,22 +1355,53 @@ var AccordionItemBody = /*#__PURE__*/function (_Component4) {
   return AccordionItemBody;
 }(Component);
 
-function _extends$3() {
-  _extends$3 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _defineProperty$3(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return obj;
+}
+
+function ownKeys$3(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$3(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$3(Object(source), true).forEach(function (key) {
+        _defineProperty$3(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$3(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
+  }
 
-    return target;
-  };
-
-  return _extends$3.apply(this, arguments);
+  return target;
 }
 
 function _objectWithoutPropertiesLoose$4(source, excluded) {
@@ -1358,14 +1440,16 @@ function _objectWithoutProperties$4(source, excluded) {
   return target;
 }
 
-var ButtonIcon$2 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
+var ButtonIcon$2 = function ButtonIcon(_ref) {
   var label = _ref.label,
       icon = _ref.icon,
+      iconSize = _ref.iconSize,
       _ref$design = _ref.design,
       design = _ref$design === void 0 ? "solid" : _ref$design,
       color = _ref.color,
       className = _ref.className,
-      props = _objectWithoutProperties$4(_ref, ["label", "icon", "design", "color", "className"]);
+      loading = _ref.loading,
+      props = _objectWithoutProperties$4(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1375,12 +1459,12 @@ var ButtonIcon$2 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     "aria-hidden": "true"
   });
   var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: "sui-icon-" + icon,
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sui-screen-reader-text"
   }, label));
-  className = '' !== className ? 'sui-button-icon ' + className : 'sui-button-icon'; // Set button color.
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
 
   switch (color) {
     case "blue":
@@ -1413,24 +1497,16 @@ var ButtonIcon$2 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
   } // Set loading class.
 
 
-  if (props.loading) {
+  if (loading) {
     className += " sui-button-onload";
   }
 
-  if (props.href) {
-    return /*#__PURE__*/React.createElement("a", _extends$3({
-      ref: ref,
-      className: className,
-      disabled: props.disabled || props.loading
-    }, props), props.loading ? loader : content);
-  }
-
-  return /*#__PURE__*/React.createElement("button", _extends$3({
-    ref: ref,
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$3({
     className: className,
-    disabled: props.disabled || props.loading
-  }, props), props.loading ? loader : content);
-});
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
 
 function _classCallCheck$3(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -1454,8 +1530,8 @@ function _createClass$3(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _extends$4() {
-  _extends$4 = Object.assign || function (target) {
+function _extends$2() {
+  _extends$2 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -1469,7 +1545,7 @@ function _extends$4() {
     return target;
   };
 
-  return _extends$4.apply(this, arguments);
+  return _extends$2.apply(this, arguments);
 }
 
 function _inherits$3(subClass, superClass) {
@@ -1551,22 +1627,65 @@ function _createSuper$3(Derived) {
   };
 }
 
-function _extends$1$2() {
-  _extends$1$2 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _taggedTemplateLiteral$3(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
     }
+  }));
+}
 
-    return target;
-  };
+function _defineProperty$4(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-  return _extends$1$2.apply(this, arguments);
+  return obj;
+}
+
+function ownKeys$4(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$4(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$4(Object(source), true).forEach(function (key) {
+        _defineProperty$4(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$4(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
 }
 
 function _objectWithoutPropertiesLoose$5(source, excluded) {
@@ -1605,14 +1724,16 @@ function _objectWithoutProperties$5(source, excluded) {
   return target;
 }
 
-var ButtonIcon$3 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
+var ButtonIcon$3 = function ButtonIcon(_ref) {
   var label = _ref.label,
       icon = _ref.icon,
+      iconSize = _ref.iconSize,
       _ref$design = _ref.design,
       design = _ref$design === void 0 ? "solid" : _ref$design,
       color = _ref.color,
       className = _ref.className,
-      props = _objectWithoutProperties$5(_ref, ["label", "icon", "design", "color", "className"]);
+      loading = _ref.loading,
+      props = _objectWithoutProperties$5(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1622,12 +1743,12 @@ var ButtonIcon$3 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     "aria-hidden": "true"
   });
   var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: "sui-icon-" + icon,
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sui-screen-reader-text"
   }, label));
-  className = '' !== className ? 'sui-button-icon ' + className : 'sui-button-icon'; // Set button color.
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
 
   switch (color) {
     case "blue":
@@ -1660,23 +1781,78 @@ var ButtonIcon$3 = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
   } // Set loading class.
 
 
-  if (props.loading) {
+  if (loading) {
     className += " sui-button-onload";
   }
 
-  if (props.href) {
-    return /*#__PURE__*/React.createElement("a", _extends$1$2({
-      ref: ref,
-      className: className,
-      disabled: props.disabled || props.loading
-    }, props), props.loading ? loader : content);
-  }
-
-  return /*#__PURE__*/React.createElement("button", _extends$1$2({
-    ref: ref,
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$4({
     className: className,
-    disabled: props.disabled || props.loading
-  }, props), props.loading ? loader : content);
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+function _templateObject2$1() {
+  var data = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
+
+  _templateObject2$1 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject$2() {
+  var data = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
+
+  _templateObject$2 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var Link = styled.a(_templateObject$2(), function (props) {
+  return 'blue' === props.color ? 'color: #17A8E3 !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'color: #1ABC9C !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'color: #FECF2F !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'color: #FF6D6D !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'color: #8D00B1 !important;' : '';
+}, function (props) {
+  return 'blue' === props.color ? 'background-color: #E1F6FF !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'background-color: #D1F1EA !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'background-color: #FFF5D5 !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'background-color: #FFE5E9 !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'background-color: #F9E1FF !important;' : '';
+});
+var Button$1 = styled.button(_templateObject2$1(), function (props) {
+  return 'blue' === props.color ? 'color: #17A8E3 !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'color: #1ABC9C !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'color: #FECF2F !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'color: #FF6D6D !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'color: #8D00B1 !important;' : '';
+}, function (props) {
+  return 'blue' === props.color ? 'background-color: #E1F6FF !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'background-color: #D1F1EA !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'background-color: #FFF5D5 !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'background-color: #FFE5E9 !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'background-color: #F9E1FF !important;' : '';
 });
 
 var Dropdown = /*#__PURE__*/function (_Component) {
@@ -1702,8 +1878,7 @@ var Dropdown = /*#__PURE__*/function (_Component) {
 
   _createClass$3(Dropdown, [{
     key: "toggle",
-    value: function toggle(e) {
-      e.stopPropagation();
+    value: function toggle() {
       this.setState({
         open: !this.state.open
       });
@@ -1755,12 +1930,12 @@ var Dropdown = /*#__PURE__*/function (_Component) {
         var label = /*#__PURE__*/React.createElement(Fragment, null, icon, option.props.name, tag);
 
         if (option.props.href) {
-          return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", _extends$4({
+          return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Link, _extends$2({
             href: option.props.href
           }, option.props), label));
         }
 
-        return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("button", option.props, label));
+        return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Button$1, option.props, label));
       });
       var clazz = !open ? 'sui-dropdown' : 'sui-dropdown open';
 
@@ -1784,7 +1959,10 @@ var Dropdown = /*#__PURE__*/function (_Component) {
 
       return /*#__PURE__*/React.createElement("div", {
         className: clazz,
-        ref: this.setWrapperRef
+        ref: this.setWrapperRef,
+        onClick: function onClick(e) {
+          return e.stopPropagation();
+        }
       }, /*#__PURE__*/React.createElement(ButtonIcon$3, {
         icon: "widget-settings-config",
         label: open ? 'Open menu' : 'Close menu',
@@ -1802,8 +1980,8 @@ var Dropdown = /*#__PURE__*/function (_Component) {
   return Dropdown;
 }(Component);
 
-var _templateObject$2;
-var Table = styled.table(_templateObject$2 || (_templateObject$2 = _taggedTemplateLiteral(["\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\t&:first-child {\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\tpadding-right: 20px;\n\t\t\t}\n\t\t}\n\t}\n"])));
+var _templateObject$3;
+var Table = styled.table(_templateObject$3 || (_templateObject$3 = _taggedTemplateLiteral(["\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\t&:first-child {\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\tpadding-right: 20px;\n\t\t\t}\n\t\t}\n\t}\n"])));
 var PresetsTable = /*#__PURE__*/function (_Component) {
   _inherits(PresetsTable, _Component);
 
@@ -1832,9 +2010,9 @@ var PresetsTable = /*#__PURE__*/function (_Component) {
   return PresetsTable;
 }(Component);
 
-var _templateObject$3, _templateObject2$1, _templateObject3$1, _templateObject4, _templateObject5;
-var Header$1 = styled.div(_templateObject$3 || (_templateObject$3 = _taggedTemplateLiteral(["\n\tmargin: 0 0 20px;\n\n\t> div:not(.sui-tooltip) {\n\n\t\t@media ", " {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 1;\n\t\t}\n\t}\n\n\t> div.sui-tooltip {\n\t\tmargin: 10px 0 0 !important;\n\n\t\t@media ", " {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-top: 0 !important;\n\t\t\tmargin-left: 10px !important;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n"])), device$1.tablet, device$1.tablet, device$1.tablet);
-var Label = styled.p(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n"])));
+var _templateObject$4, _templateObject2$2, _templateObject3$1, _templateObject4, _templateObject5;
+var Header$1 = styled.div(_templateObject$4 || (_templateObject$4 = _taggedTemplateLiteral(["\n\tmargin: 0 0 20px;\n\n\t> div:not(.sui-tooltip) {\n\n\t\t@media ", " {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 1;\n\t\t}\n\t}\n\n\t> div.sui-tooltip {\n\t\tmargin: 10px 0 0 !important;\n\n\t\t@media ", " {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-top: 0 !important;\n\t\t\tmargin-left: 10px !important;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n"])), device$1.tablet, device$1.tablet, device$1.tablet);
+var Label = styled.p(_templateObject2$2 || (_templateObject2$2 = _taggedTemplateLiteral(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n"])));
 var Description = styled.p(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["\n\tmargin: 3px 0 0 !important;\n"])));
 var Authentic = styled.svg(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n"])));
 var AccordionItemHeaderAlt = styled(AccordionItemHeader)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n.sui-wrap && {\n\n    > .sui-accordion-col-auto {\n\n        > .sui-dropdown {\n\n            [class*=sui-icon-] {\n                margin-right: 0 !important;\n            }\n\n            ul {\n                min-width: 192px;\n            }\n        }\n    }\n}\n"])));
@@ -1892,13 +2070,13 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         fill: "#286EFA",
         fillRule: "nonzero"
       }));
-      var title = this.props["default"] ? /*#__PURE__*/React.createElement(React.Fragment, null, this.props.title, icon) : this.props.title;
+      var name = this.props["default"] ? /*#__PURE__*/React.createElement(React.Fragment, null, this.props.name, icon) : this.props.name;
       return /*#__PURE__*/React.createElement("div", {
         className: clazz
       }, /*#__PURE__*/React.createElement(AccordionItemHeaderAlt, {
         className: "sui-accordion-item-header",
         state: open ? 'true' : 'false',
-        title: title,
+        title: name,
         image: this.props.image,
         onClick: function onClick(e) {
           return _this2.toggle(e);
@@ -1935,7 +2113,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         }
       }))), /*#__PURE__*/React.createElement(AccordionItemBody, null, /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxBody, null, /*#__PURE__*/React.createElement(Header$1, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Label, {
         className: "sui-label"
-      }, this.props.title), /*#__PURE__*/React.createElement(Description, {
+      }, this.props.name), /*#__PURE__*/React.createElement(Description, {
         className: "sui-description"
       }, this.props.description)), /*#__PURE__*/React.createElement("div", {
         className: "sui-tooltip",
@@ -1996,15 +2174,17 @@ var PresetsWidget = /*#__PURE__*/function (_Component) {
       var items = Children.map(this.props.children, function (item) {
         return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
           "default": item.props["default"] || false,
-          title: item.props.title,
+          name: item.props.name,
           description: item.props.description,
           image: item.props.image,
           applyLabel: item.props.applyLabel,
           applyAction: item.props.applyAction,
           downloadLabel: item.props.downloadLabel,
+          downloadAction: item.props.downloadAction,
           editLabel: item.props.editLabel,
           editAction: item.props.editAction,
-          deleteLabel: item.props.deleteLabel
+          deleteLabel: item.props.deleteLabel,
+          deleteAction: item.props.deleteAction
         }, item.props.children);
       });
       return /*#__PURE__*/React.createElement(Box, null, !empty && /*#__PURE__*/React.createElement(BoxHeader, {
@@ -2023,12 +2203,14 @@ var PresetsWidget = /*#__PURE__*/function (_Component) {
         }
       }, items), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button, {
         icon: "save",
-        label: "Save Config",
-        color: "blue"
+        label: this.props.saveLabel,
+        color: "blue",
+        onClick: this.props.saveNewConfig
       }), /*#__PURE__*/React.createElement(Button, {
         icon: "wrench-tool",
-        label: "Manage Configs",
-        design: "ghost"
+        label: this.props.manageLabel,
+        design: "ghost",
+        href: this.props.manageConfigsUrl
       })));
     }
   }]);
@@ -2090,7 +2272,7 @@ var PresetsPage = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
           id: item.props.id,
           "default": item.props["default"] || false,
-          title: item.props.title,
+          name: item.props.name,
           description: item.props.description,
           image: item.props.image,
           showApplyButton: true,
