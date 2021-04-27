@@ -25,8 +25,6 @@ export const primary = Template.bind({});
 primary.storyName = "Default"
 primary.args = {
     title: 'Preset Configs',
-	loading: false,
-	loadingLabel: 'Updating the config list...',
     message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
 	saveLabel: 'Save Configs',
 	manageLabel: 'Manage Configs',

@@ -10,7 +10,6 @@ export class PresetsWidget extends Component {
 
         this.state = {
             empty: false,
-			loading: true,
         }
     }
 
@@ -22,14 +21,10 @@ export class PresetsWidget extends Component {
                 empty: true
             });
         }
-
-		this.setState({
-			loading: this.props.loading
-		});
     }
 
     render() {
-        const { empty, loading } = this.state;
+        const { empty } = this.state;
 
         const items = Children.map( this.props.children, item => {
             return (
@@ -55,7 +50,7 @@ export class PresetsWidget extends Component {
         return (
             <Box>
 
-                { ! loading && ! empty && (
+                { ! empty && (
                     <BoxHeader
                         titleIcon="wrench-tool"
                         title={ this.props.title }
@@ -74,22 +69,13 @@ export class PresetsWidget extends Component {
 
                     <p>{ this.props.message }</p>
 
-                    { ! loading && empty && (
+                    { empty && (
                         <Notifications type="info">
                             <p>{ this.props.notice }</p>
                         </Notifications>
                     )}
 
                 </BoxBody>
-
-				{ loading && (
-					<div>
-						<span>
-							<span className="sui-icon-loader" aria-hidden="true"></span>
-							{ this.props.loadingLabel }
-						</span>
-					</div>
-				) }
 
                 { !empty && (
                     <div
