@@ -1,6 +1,23 @@
 # Changelog
 
-## Unreleased (2021-04-24)
+## Unreleased (2021-04-27)
+
+#### New Features
+* `shared-presets`
+  * [#44](https://github.com/wpmudev/shared-modules/pull/44) ✨ new(shared-presets): Add `loading` state. ([@a-danae](https://github.com/a-danae))
+
+#### Improvements
+* `shared-presets`
+  * [#46](https://github.com/wpmudev/shared-modules/pull/46) 🐛 fix(shared-presets): Updadate presets' property names to be more descriptive ([@a-danae](https://github.com/a-danae))
+  * [#45](https://github.com/wpmudev/shared-modules/pull/45) 🐛 fix(shared-presets): Remove unused state and convert to functional component ([@a-danae](https://github.com/a-danae))
+  * [#41](https://github.com/wpmudev/shared-modules/pull/41) 🐛 fix(shared-presets): Set red color for `delete` option. ([@iamleigh](https://github.com/iamleigh))
+  * [#43](https://github.com/wpmudev/shared-modules/pull/43) 🐛 fix(shared-presets): Update the `free` property. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
+## Released (2021-04-24)
 
 #### Improvements
 * `shared-notifications-discount`
