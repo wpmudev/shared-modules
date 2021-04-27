@@ -44,7 +44,6 @@ export class PresetsPage extends Component {
         super( props );
 
         this.state = {
-            free: false,
             empty: false,
             loading: true
         }
@@ -52,18 +51,6 @@ export class PresetsPage extends Component {
 
     componentDidMount() {
         const items = this.props.children;
-        const freez = this.props.free || {};
-
-        let isFree = false;
-
-        // Check if free state exists.
-        if ( freez.state && 'undefined' !== typeof freez.state ) {
-
-            // Check if free state is boolean.
-            if ( 'boolean' && typeof freez.state ) {
-                isFree = freez.state;
-            }
-        }
 
 		if ( ! items || 0 === items.length ) {
             this.setState({
@@ -74,15 +61,11 @@ export class PresetsPage extends Component {
 		this.setState({
 			loading: this.props.loading
 		});
-
-        this.setState({
-            free: isFree
-        });
     }
 
     render() {
-        const { free, empty, loading } = this.state;
-        const freez = this.props.free || {};
+        const { empty, loading } = this.state;
+        const { freeData } = this.props;
 
 		const items = Children.map( this.props.children, item => (
 			<PresetsAccordionItem
@@ -123,17 +106,17 @@ export class PresetsPage extends Component {
         const Footer = (
             <React.Fragment>
 
-                { free && freez.message && '' !== freez.message && (
+                { freeData && (
                     <BoxFooter
                         display="block"
                     >
                         <Notifications type="upsell">
-                            <p>{ freez.message }</p>
+                            <p>{ freeData.message }</p>
                             <p>
                                 <Button
-                                    label={ freez.button || 'Try The Hub' }
+                                    label={ freeData.button || 'Try The Hub' }
                                     color="purple"
-                                    href={ freez.buttonHref || 'https://wpmudev.com/hub-welcome/' }
+                                    href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
                                     target="_blank"
                                 />
                             </p>
@@ -141,7 +124,7 @@ export class PresetsPage extends Component {
                     </BoxFooter>
                 )}
 
-                { !free && this.props.update && '' !== this.props.update && (
+                { !freeData && this.props.update && '' !== this.props.update && (
                     <BoxFooter
                         display="block"
                         alignment="center"
