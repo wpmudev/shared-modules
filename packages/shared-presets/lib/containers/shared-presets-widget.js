@@ -4,21 +4,23 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
-export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) => {
+export const PresetsWidget = ( { children: configsList, ...props } ) => {
 	const isEmpty = ! configsList || 0 === configsList.length;
 
 	const items = Children.map( configsList, item => (
 		<PresetsAccordionItem
 			default={ item.props.default || false }
-			title={ item.props.title }
+			name={ item.props.name }
 			description={ item.props.description }
 			image={ item.props.image }
 			applyLabel={ item.props.applyLabel }
 			applyAction={ item.props.applyAction }
 			downloadLabel={ item.props.downloadLabel }
+			downloadAction={ item.props.downloadAction }
 			editLabel={ item.props.editLabel }
 			editAction={ item.props.editAction }
 			deleteLabel={ item.props.deleteLabel }
+			deleteAction={ item.props.deleteAction }
 		>
 			{ item.props.children }
 		</PresetsAccordionItem>
@@ -27,7 +29,7 @@ export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) 
 	return (
 		<Box>
 
-			{ ! isLoading && ! isEmpty && (
+			{ ! isEmpty && (
 				<BoxHeader
 					titleIcon="wrench-tool"
 					title={ props.title }
@@ -46,7 +48,7 @@ export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) 
 
 				<p>{ props.message }</p>
 
-				{ ! isLoading && isEmpty && (
+				{ isEmpty && (
 					<Notifications type="info">
 						<p>{ props.notice }</p>
 					</Notifications>
@@ -54,16 +56,7 @@ export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) 
 
 			</BoxBody>
 
-			{ isLoading && (
-				<div>
-					<span>
-						<span className="sui-icon-loader" aria-hidden="true"></span>
-						{ props.loadingLabel }
-					</span>
-				</div>
-			) }
-
-			{ ! isEmpty && (
+			{ !isEmpty && (
 				<div
 					className="sui-accordion sui-accordion-flushed"
 					style={ { borderBottom: 0 } }
@@ -75,13 +68,15 @@ export const PresetsWidget = ( { isLoading, children: configsList, ...props } ) 
 			<BoxFooter>
 				<Button
 					icon="save"
-					label="Save Config"
+					label={ props.saveLabel }
 					color="blue"
+					onClick={ props.saveNewConfig }
 				/>
 				<Button
 					icon="wrench-tool"
-					label="Manage Configs"
+					label={ props.manageLabel }
 					design="ghost"
+					href={ props.manageConfigsUrl }
 				/>
 			</BoxFooter>
 

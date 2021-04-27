@@ -25,14 +25,16 @@ export const primary = Template.bind({});
 primary.storyName = "Default"
 primary.args = {
     title: 'Preset Configs',
-	isLoading: false,
-	loadingLabel: 'Updating the config list...',
     message: 'Configs bundle your Smush settings and make them available to download and apply on your other sites.',
+	saveLabel: 'Save Configs',
+	manageLabel: 'Manage Configs',
     notice: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
-    presets: [
+    saveNewConfig: () => console.log( 'Saving new config' ),
+	manageConfigsUrl: '#',
+	presets: [
         {
 			id: 1,
-            title: 'Basic Config',
+            name: 'Basic Config',
             description: 'Recommended performance config for every site.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 			editAction: () => console.log( 'Editing config' ),
@@ -42,7 +44,7 @@ primary.args = {
         },
         {
 			id: 2,
-            title: 'Config Name',
+            name: 'Config Name',
             description: 'Donec ullamcorper nulla non metus auctor fringilla.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 			editAction: () => console.log( 'Editing config' ),
