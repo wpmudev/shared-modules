@@ -8,7 +8,7 @@ export default {
 const Template = ({ presets, settings, ...args }) => {
     return (
         <PresetsWidget {...args}>
-            { presets.map( ( preset, index ) => (
+            { presets && presets.map( ( preset, index ) => (
                 <div key={ index } { ...preset }>
                     <div name="Lazy Load" status="Active" />
                     <div name="CDN" status="Active" />
@@ -54,7 +54,6 @@ primary.args = {
         }
     ],
 };
-primary.argTypes = {};
 
 export const secondary = Template.bind({});
 secondary.storyName = "Empty"

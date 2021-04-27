@@ -55,6 +55,28 @@ primary.argTypes = {
             type: 'text'
         }
     },
+	loading: {
+        type: {
+            name: 'boolean',
+            required: false
+        },
+        description: 'Whether the configurations list is being loaded',
+        defaultValue: false,
+        control: {
+            type: 'boolean'
+        }
+	},
+    loadingLabel: {
+        type: {
+            name: 'string',
+            required: true
+        },
+        description: 'The text to be displayed when "loading" is set to "true".',
+        defaultValue: 'Updating the config list...',
+        control: {
+            type: 'text'
+        }
+    },
     empty: {
         type: {
             name: 'string',

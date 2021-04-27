@@ -9,14 +9,14 @@ export class PresetsWidget extends Component {
         super( props );
 
         this.state = {
-            empty: false
+            empty: false,
         }
     }
 
     componentDidMount() {
         const items = this.props.children;
 
-        if ( 0 === items.length ) {
+        if ( ! items || 0 === items.length ) {
             this.setState({
                 empty: true
             });
@@ -50,7 +50,7 @@ export class PresetsWidget extends Component {
         return (
             <Box>
 
-                { !empty && (
+                { ! empty && (
                     <BoxHeader
                         titleIcon="wrench-tool"
                         title={ this.props.title }
