@@ -107,6 +107,42 @@ function _isNativeReflectConstruct() {
   }
 }
 
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -172,7 +208,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
+function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -187,10 +223,10 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var target = _objectWithoutPropertiesLoose$1(source, excluded);
 
   var key, i;
 
@@ -270,7 +306,7 @@ var device = {
 var Box = function Box(_ref) {
   var children = _ref.children,
       className = _ref.className,
-      props = _objectWithoutProperties(_ref, ["children", "className"]);
+      props = _objectWithoutProperties$1(_ref, ["children", "className"]);
 
   return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: 'undefined' !== typeof className && '' !== className ? "sui-box ".concat(className) : 'sui-box'
@@ -285,7 +321,7 @@ var BoxTitle = function BoxTitle(_ref2) {
       tagDesign = _ref2.tagDesign,
       className = _ref2.className,
       children = _ref2.children,
-      props = _objectWithoutProperties(_ref2, ["icon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
+      props = _objectWithoutProperties$1(_ref2, ["icon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
 
   var tagClass = 'sui-tag';
 
@@ -370,7 +406,7 @@ var BoxHeader = function BoxHeader(_ref3) {
       tagDesign = _ref3.tagDesign;
       _ref3.className;
       var children = _ref3.children,
-      props = _objectWithoutProperties(_ref3, ["title", "titleIcon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
+      props = _objectWithoutProperties$1(_ref3, ["title", "titleIcon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
 
   return /*#__PURE__*/React__default['default'].createElement(Header, props, title && '' !== title && /*#__PURE__*/React__default['default'].createElement(BoxTitle, {
     icon: titleIcon,
@@ -412,7 +448,7 @@ var Body = styled__default['default'].div.attrs(function (props) {
 var BoxBody = function BoxBody(_ref4) {
   var className = _ref4.className,
       children = _ref4.children,
-      props = _objectWithoutProperties(_ref4, ["className", "children"]);
+      props = _objectWithoutProperties$1(_ref4, ["className", "children"]);
 
   return /*#__PURE__*/React__default['default'].createElement(Body, _extends({
     className: className
@@ -458,7 +494,7 @@ var Footer = styled__default['default'].div.attrs(function (props) {
 var BoxFooter = function BoxFooter(_ref5) {
   var className = _ref5.className,
       children = _ref5.children,
-      props = _objectWithoutProperties(_ref5, ["className", "children"]);
+      props = _objectWithoutProperties$1(_ref5, ["className", "children"]);
 
   return /*#__PURE__*/React__default['default'].createElement(Footer, _extends({
     className: className
@@ -630,7 +666,7 @@ function _objectSpread2(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$1(source, excluded) {
+function _objectWithoutPropertiesLoose$2(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -645,10 +681,10 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$1(source, excluded) {
+function _objectWithoutProperties$2(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+  var target = _objectWithoutPropertiesLoose$2(source, excluded);
 
   var key, i;
 
@@ -675,7 +711,7 @@ var ButtonIcon = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$1(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$2(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React__default['default'].createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -867,7 +903,7 @@ function _objectSpread2$1(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$2(source, excluded) {
+function _objectWithoutPropertiesLoose$3(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -882,10 +918,10 @@ function _objectWithoutPropertiesLoose$2(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$2(source, excluded) {
+function _objectWithoutProperties$3(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$2(source, excluded);
+  var target = _objectWithoutPropertiesLoose$3(source, excluded);
 
   var key, i;
 
@@ -911,7 +947,7 @@ var Button = function Button(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$2(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$3(_ref, ["label", "icon", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React__default['default'].createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1168,7 +1204,7 @@ function _objectSpread2$2(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$3(source, excluded) {
+function _objectWithoutPropertiesLoose$4(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1183,10 +1219,10 @@ function _objectWithoutPropertiesLoose$3(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$3(source, excluded) {
+function _objectWithoutProperties$4(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$3(source, excluded);
+  var target = _objectWithoutPropertiesLoose$4(source, excluded);
 
   var key, i;
 
@@ -1213,7 +1249,7 @@ var ButtonIcon$1 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$3(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$4(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React__default['default'].createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1413,7 +1449,7 @@ function _objectSpread2$3(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$4(source, excluded) {
+function _objectWithoutPropertiesLoose$5(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1428,10 +1464,10 @@ function _objectWithoutPropertiesLoose$4(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$4(source, excluded) {
+function _objectWithoutProperties$5(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$4(source, excluded);
+  var target = _objectWithoutPropertiesLoose$5(source, excluded);
 
   var key, i;
 
@@ -1458,7 +1494,7 @@ var ButtonIcon$2 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$4(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$5(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React__default['default'].createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1697,7 +1733,7 @@ function _objectSpread2$4(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$5(source, excluded) {
+function _objectWithoutPropertiesLoose$6(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1712,10 +1748,10 @@ function _objectWithoutPropertiesLoose$5(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$5(source, excluded) {
+function _objectWithoutProperties$6(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$5(source, excluded);
+  var target = _objectWithoutPropertiesLoose$6(source, excluded);
 
   var key, i;
 
@@ -1742,7 +1778,7 @@ var ButtonIcon$3 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$5(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$6(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React__default['default'].createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -2117,6 +2153,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/React__default['default'].createElement("div", {
         name: this.props.deleteLabel || 'Delete',
         icon: "trash",
+        color: "red",
         onClick: function onClick() {
           return deleteAction(_this2.props.id);
         }
@@ -2148,203 +2185,141 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
   return PresetsAccordionItem;
 }(React.Component);
 
-var PresetsWidget = /*#__PURE__*/function (_Component) {
-  _inherits(PresetsWidget, _Component);
+var PresetsWidget = function PresetsWidget(_ref) {
+  var configsList = _ref.children,
+      props = _objectWithoutProperties(_ref, ["children"]);
 
-  var _super = _createSuper(PresetsWidget);
-
-  function PresetsWidget(props) {
-    var _this;
-
-    _classCallCheck(this, PresetsWidget);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      empty: false
-    };
-    return _this;
-  }
-
-  _createClass(PresetsWidget, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var items = this.props.children;
-
-      if (0 === items.length) {
-        this.setState({
-          empty: true
-        });
-      }
+  var isEmpty = !configsList || 0 === configsList.length;
+  var items = React.Children.map(configsList, function (item) {
+    return /*#__PURE__*/React__default['default'].createElement(PresetsAccordionItem, {
+      "default": item.props["default"] || false,
+      name: item.props.name,
+      description: item.props.description,
+      image: item.props.image,
+      applyLabel: item.props.applyLabel,
+      applyAction: item.props.applyAction,
+      downloadLabel: item.props.downloadLabel,
+      downloadAction: item.props.downloadAction,
+      editLabel: item.props.editLabel,
+      editAction: item.props.editAction,
+      deleteLabel: item.props.deleteLabel,
+      deleteAction: item.props.deleteAction
+    }, item.props.children);
+  });
+  return /*#__PURE__*/React__default['default'].createElement(Box, null, !isEmpty && /*#__PURE__*/React__default['default'].createElement(BoxHeader, {
+    titleIcon: "wrench-tool",
+    title: props.title,
+    tagLabel: configsList.length
+  }), isEmpty && /*#__PURE__*/React__default['default'].createElement(BoxHeader, {
+    titleIcon: "wrench-tool",
+    title: props.title
+  }), /*#__PURE__*/React__default['default'].createElement(BoxBody, null, /*#__PURE__*/React__default['default'].createElement("p", null, props.description), isEmpty && /*#__PURE__*/React__default['default'].createElement(Notifications, {
+    type: "info"
+  }, /*#__PURE__*/React__default['default'].createElement("p", null, props.emptyNotice))), !isEmpty && /*#__PURE__*/React__default['default'].createElement("div", {
+    className: "sui-accordion sui-accordion-flushed",
+    style: {
+      borderBottom: 0
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var empty = this.state.empty;
-      var items = React.Children.map(this.props.children, function (item) {
-        return /*#__PURE__*/React__default['default'].createElement(PresetsAccordionItem, {
-          "default": item.props["default"] || false,
-          name: item.props.name,
-          description: item.props.description,
-          image: item.props.image,
-          applyLabel: item.props.applyLabel,
-          applyAction: item.props.applyAction,
-          downloadLabel: item.props.downloadLabel,
-          downloadAction: item.props.downloadAction,
-          editLabel: item.props.editLabel,
-          editAction: item.props.editAction,
-          deleteLabel: item.props.deleteLabel,
-          deleteAction: item.props.deleteAction
-        }, item.props.children);
-      });
-      return /*#__PURE__*/React__default['default'].createElement(Box, null, !empty && /*#__PURE__*/React__default['default'].createElement(BoxHeader, {
-        titleIcon: "wrench-tool",
-        title: this.props.title,
-        tagLabel: this.props.children.length
-      }), empty && /*#__PURE__*/React__default['default'].createElement(BoxHeader, {
-        titleIcon: "wrench-tool",
-        title: this.props.title
-      }), /*#__PURE__*/React__default['default'].createElement(BoxBody, null, /*#__PURE__*/React__default['default'].createElement("p", null, this.props.message), empty && /*#__PURE__*/React__default['default'].createElement(Notifications, {
-        type: "info"
-      }, /*#__PURE__*/React__default['default'].createElement("p", null, this.props.notice))), !empty && /*#__PURE__*/React__default['default'].createElement("div", {
-        className: "sui-accordion sui-accordion-flushed",
-        style: {
-          borderBottom: 0
-        }
-      }, items), /*#__PURE__*/React__default['default'].createElement(BoxFooter, null, /*#__PURE__*/React__default['default'].createElement(Button, {
-        icon: "save",
-        label: this.props.saveLabel,
-        color: "blue",
-        onClick: this.props.saveNewConfig
-      }), /*#__PURE__*/React__default['default'].createElement(Button, {
-        icon: "wrench-tool",
-        label: this.props.manageLabel,
-        design: "ghost",
-        href: this.props.manageConfigsUrl
-      })));
+  }, items), /*#__PURE__*/React__default['default'].createElement(BoxFooter, null, /*#__PURE__*/React__default['default'].createElement(Button, {
+    icon: "save",
+    label: props.saveLabel,
+    color: "blue",
+    onClick: props.saveNewConfig
+  }), /*#__PURE__*/React__default['default'].createElement(Button, {
+    icon: "wrench-tool",
+    label: props.manageLabel,
+    design: "ghost",
+    href: props.manageConfigsUrl
+  })));
+};
+
+var _templateObject$5, _templateObject2$3, _templateObject3$2;
+var LoadingContent = styled__default['default'].div(_templateObject$5 || (_templateObject$5 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    position: relative;\n    z-index: 2;\n}\n"])));
+var LoadingWrap = styled__default['default'].div(_templateObject2$3 || (_templateObject2$3 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    pointer-events: none;\n}"])));
+var LoadingMask = styled__default['default'].div(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-flow: row wrap;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background-color: rgba(255,255,255,0.95);\n    border-radius: 0 0 4px 4px;\n\n    > p {\n\n    }\n}\n"])));
+var PresetsPage = function PresetsPage(_ref) {
+  var freeData = _ref.freeData,
+      isLoading = _ref.isLoading,
+      configsList = _ref.children,
+      props = _objectWithoutProperties(_ref, ["freeData", "isLoading", "children"]);
+
+  var isEmpty = !configsList || 0 === configsList.length;
+  var items = React.Children.map(configsList, function (item) {
+    return /*#__PURE__*/React__default['default'].createElement(PresetsAccordionItem, {
+      id: item.props.id,
+      "default": item.props["default"] || false,
+      name: item.props.name,
+      description: item.props.description,
+      image: item.props.image,
+      showApplyButton: true,
+      applyLabel: item.props.applyLabel,
+      applyAction: item.props.applyAction,
+      downloadLabel: item.props.downloadLabel,
+      downloadAction: item.props.downloadAction,
+      editLabel: item.props.editLabel,
+      editAction: item.props.editAction,
+      deleteLabel: item.props.deleteLabel,
+      deleteAction: item.props.deleteAction
+    }, item.props.children);
+  });
+  var Table = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, !isEmpty && /*#__PURE__*/React__default['default'].createElement("div", {
+    className: "sui-accordion sui-accordion-flushed",
+    style: {
+      borderBottomWidth: 0
     }
-  }]);
-
-  return PresetsWidget;
-}(React.Component);
-
-var PresetsPage = /*#__PURE__*/function (_Component) {
-  _inherits(PresetsPage, _Component);
-
-  var _super = _createSuper(PresetsPage);
-
-  function PresetsPage(props) {
-    var _this;
-
-    _classCallCheck(this, PresetsPage);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      free: false,
-      empty: false,
-      loading: false
-    };
-    return _this;
-  }
-
-  _createClass(PresetsPage, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var items = this.props.children;
-      var freez = this.props.free || {};
-      var isFree = false; // Check if free state exists.
-
-      if (freez.state && 'undefined' !== typeof freez.state) {
-        // Check if free state is boolean.
-        if (_typeof(freez.state)) {
-          isFree = freez.state;
-        }
-      }
-
-      if (0 === items.length) {
-        this.setState({
-          empty: true
-        });
-      }
-
-      this.setState({
-        free: isFree
-      });
+  }, items));
+  var Footer = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, freeData && /*#__PURE__*/React__default['default'].createElement(BoxFooter, {
+    display: "block"
+  }, /*#__PURE__*/React__default['default'].createElement(Notifications, {
+    type: "upsell"
+  }, /*#__PURE__*/React__default['default'].createElement("p", null, freeData.message), /*#__PURE__*/React__default['default'].createElement("p", null, /*#__PURE__*/React__default['default'].createElement(Button, {
+    label: freeData.button || 'Try The Hub',
+    color: "purple",
+    href: freeData.buttonHref || 'https://wpmudev.com/hub-welcome/',
+    target: "_blank"
+  })))), !freeData && props.update && '' !== props.update && /*#__PURE__*/React__default['default'].createElement(BoxFooter, {
+    display: "block",
+    alignment: "center",
+    paddingTop: isEmpty ? 0 : 30,
+    border: isEmpty ? 0 : 1
+  }, /*#__PURE__*/React__default['default'].createElement("p", {
+    className: "sui-description"
+  }, props.update)));
+  return /*#__PURE__*/React__default['default'].createElement(Box, null, /*#__PURE__*/React__default['default'].createElement(BoxHeader, {
+    title: props.title
+  }, /*#__PURE__*/React__default['default'].createElement("div", null, /*#__PURE__*/React__default['default'].createElement(Button, {
+    icon: "upload-cloud",
+    label: props.uploadLabel || 'Upload',
+    design: "ghost",
+    htmlFor: "sui-upload-configs-input"
+  }), /*#__PURE__*/React__default['default'].createElement("input", {
+    id: "sui-upload-configs-input",
+    type: "file",
+    name: "config_file",
+    className: "sui-hidden",
+    value: "",
+    readOnly: "readonly",
+    onChange: props.uploadConfig,
+    accept: ".json"
+  }), /*#__PURE__*/React__default['default'].createElement(Button, {
+    icon: "save",
+    label: props.saveLabel || 'Save Config',
+    color: "blue",
+    onClick: props.saveNewConfig
+  }))), /*#__PURE__*/React__default['default'].createElement(BoxBody, null, props.description && /*#__PURE__*/React__default['default'].createElement("p", null, props.description), !isLoading && isEmpty && /*#__PURE__*/React__default['default'].createElement(Notifications, {
+    type: "info"
+  }, /*#__PURE__*/React__default['default'].createElement("p", null, props.emptyNotice))), isLoading && /*#__PURE__*/React__default['default'].createElement(LoadingContent, null, /*#__PURE__*/React__default['default'].createElement(LoadingWrap, {
+    "aria-hidden": "true"
+  }, Table, Footer), /*#__PURE__*/React__default['default'].createElement(LoadingMask, null, /*#__PURE__*/React__default['default'].createElement("p", {
+    className: "sui-description"
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    "aria-hidden": "true",
+    style: {
+      marginRight: 10
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$state = this.state,
-          free = _this$state.free,
-          empty = _this$state.empty;
-      var freez = this.props.free || {};
-      var items = React.Children.map(this.props.children, function (item) {
-        return /*#__PURE__*/React__default['default'].createElement(PresetsAccordionItem, {
-          id: item.props.id,
-          "default": item.props["default"] || false,
-          name: item.props.name,
-          description: item.props.description,
-          image: item.props.image,
-          showApplyButton: true,
-          applyLabel: item.props.applyLabel,
-          applyAction: item.props.applyAction,
-          downloadLabel: item.props.downloadLabel,
-          downloadAction: item.props.downloadAction,
-          editLabel: item.props.editLabel,
-          editAction: item.props.editAction,
-          deleteLabel: item.props.deleteLabel,
-          deleteAction: item.props.deleteAction
-        }, item.props.children);
-      });
-      return /*#__PURE__*/React__default['default'].createElement(Box, null, /*#__PURE__*/React__default['default'].createElement(BoxHeader, {
-        title: this.props.title
-      }, /*#__PURE__*/React__default['default'].createElement("div", null, /*#__PURE__*/React__default['default'].createElement(Button, {
-        icon: "upload-cloud",
-        label: this.props.uploadLabel || 'Upload',
-        design: "ghost",
-        htmlFor: "sui-upload-configs-input"
-      }), /*#__PURE__*/React__default['default'].createElement("input", {
-        id: "sui-upload-configs-input",
-        type: "file",
-        name: "config_file",
-        className: "sui-hidden",
-        value: "",
-        readOnly: "readonly",
-        onChange: this.props.uploadConfig,
-        accept: ".json"
-      }), /*#__PURE__*/React__default['default'].createElement(Button, {
-        icon: "save",
-        label: this.props.saveLabel || 'Save Config',
-        color: "blue",
-        onClick: this.props.saveNewConfig
-      }))), /*#__PURE__*/React__default['default'].createElement(BoxBody, null, this.props.description && /*#__PURE__*/React__default['default'].createElement("p", null, this.props.description), empty && /*#__PURE__*/React__default['default'].createElement(Notifications, {
-        type: "info"
-      }, /*#__PURE__*/React__default['default'].createElement("p", null, this.props.empty))), !empty && /*#__PURE__*/React__default['default'].createElement("div", {
-        className: "sui-accordion sui-accordion-flushed",
-        style: {
-          borderBottomWidth: 0
-        }
-      }, items), free && freez.message && '' !== freez.message && /*#__PURE__*/React__default['default'].createElement(BoxFooter, {
-        display: "block"
-      }, /*#__PURE__*/React__default['default'].createElement(Notifications, {
-        type: "upsell"
-      }, /*#__PURE__*/React__default['default'].createElement("p", null, freez.message), /*#__PURE__*/React__default['default'].createElement("p", null, /*#__PURE__*/React__default['default'].createElement(Button, {
-        label: freez.button || 'Try The Hub',
-        color: "purple",
-        href: freez.buttonHref || 'https://wpmudev.com/hub-welcome/',
-        target: "_blank"
-      })))), !free && this.props.update && '' !== this.props.update && /*#__PURE__*/React__default['default'].createElement(BoxFooter, {
-        display: "block",
-        alignment: "center",
-        paddingTop: empty ? 0 : 30,
-        border: empty ? 0 : 1
-      }, /*#__PURE__*/React__default['default'].createElement("p", {
-        className: "sui-description"
-      }, this.props.update)));
-    }
-  }]);
-
-  return PresetsPage;
-}(React.Component);
+  }), props.loadingText))), !isLoading && /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, Table, Footer));
+};
 
 exports.PresetsPage = PresetsPage;
 exports.PresetsWidget = PresetsWidget;
