@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Children } from 'react';
 import { device, utils } from '../components/utils';
 import styled from 'styled-components';
 
@@ -39,176 +39,150 @@ const LoadingMask = styled.div`
 }
 `;
 
-export class PresetsPage extends Component {
-    constructor( props ) {
-        super( props );
+export const PresetsPage = ( { freeData, isLoading, children: configsList, ...props } ) => {
+	const isEmpty = ! configsList || 0 === configsList.length;
 
-        this.state = {
-            empty: false,
-            loading: true
-        }
-    }
+	const items = Children.map( configsList, item => (
+		<PresetsAccordionItem
+			id={ item.props.id }
+			default={ item.props.default || false }
+			name={ item.props.name }
+			description={ item.props.description }
+			image={ item.props.image }
+			showApplyButton={true}
+			applyLabel={ item.props.applyLabel }
+			applyAction={ item.props.applyAction }
+			downloadLabel={ item.props.downloadLabel }
+			downloadAction={ item.props.downloadAction }
+			editLabel={ item.props.editLabel }
+			editAction={ item.props.editAction }
+			deleteLabel={ item.props.deleteLabel }
+			deleteAction={ item.props.deleteAction }
+		>
+			{ item.props.children }
+		</PresetsAccordionItem>
+	) );
 
-    componentDidMount() {
-        const items = this.props.children;
+	const Table = (
+		<React.Fragment>
+			{ !isEmpty && (
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={ {
+						borderBottomWidth: 0
+					} }
+				>
+					{ items }
+				</div>
+			)}
+		</React.Fragment>
+	);
 
-		if ( ! items || 0 === items.length ) {
-            this.setState({
-                empty: true
-            });
-        }
+	const Footer = (
+		<React.Fragment>
 
-		this.setState({
-			loading: this.props.loading
-		});
-    }
+			{ freeData && (
+				<BoxFooter
+					display="block"
+				>
+					<Notifications type="upsell">
+						<p>{ freeData.message }</p>
+						<p>
+							<Button
+								label={ freeData.button || 'Try The Hub' }
+								color="purple"
+								href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
+								target="_blank"
+							/>
+						</p>
+					</Notifications>
+				</BoxFooter>
+			)}
 
-    render() {
-        const { empty, loading } = this.state;
-        const { freeData } = this.props;
+			{ !freeData && props.update && '' !== props.update && (
+				<BoxFooter
+					display="block"
+					alignment="center"
+					paddingTop={ isEmpty ? 0 : 30 }
+					border={ isEmpty ? 0 : 1 }
+				>
+					<p className="sui-description">{ props.update }</p>
+				</BoxFooter>
+			)}
 
-		const items = Children.map( this.props.children, item => (
-			<PresetsAccordionItem
-				id={ item.props.id }
-				default={ item.props.default || false }
-				name={ item.props.name }
-				description={ item.props.description }
-				image={ item.props.image }
-				showApplyButton={true}
-				applyLabel={ item.props.applyLabel }
-				applyAction={ item.props.applyAction }
-				downloadLabel={ item.props.downloadLabel }
-				downloadAction={ item.props.downloadAction }
-				editLabel={ item.props.editLabel }
-				editAction={ item.props.editAction }
-				deleteLabel={ item.props.deleteLabel }
-				deleteAction={ item.props.deleteAction }
-			>
-				{ item.props.children }
-			</PresetsAccordionItem>
-		) );
+		</React.Fragment>
+	);
 
-        const Table = (
-            <React.Fragment>
-                { !empty && (
-                    <div
-                        className="sui-accordion sui-accordion-flushed"
-                        style={ {
-                            borderBottomWidth: 0
-                        } }
-                    >
-                        { items }
-                    </div>
-                )}
-            </React.Fragment>
-        );
+	return (
+		<Box>
 
-        const Footer = (
-            <React.Fragment>
+			<BoxHeader title={ props.title }>
+				<div>
+					<Button
+						icon="upload-cloud"
+						label={ props.uploadLabel || 'Upload' }
+						design="ghost"
+						htmlFor="sui-upload-configs-input"
+					/>
+					<input
+						id="sui-upload-configs-input"
+						type="file"
+						name="config_file"
+						className="sui-hidden"
+						value=""
+						readOnly="readonly"
+						onChange={ props.uploadConfig }
+						accept=".json"
+					/>
+					<Button
+						icon="save"
+						label={ props.saveLabel || 'Save Config' }
+						color="blue"
+						onClick={ props.saveNewConfig }
+					/>
+				</div>
+			</BoxHeader>
 
-                { freeData && (
-                    <BoxFooter
-                        display="block"
-                    >
-                        <Notifications type="upsell">
-                            <p>{ freeData.message }</p>
-                            <p>
-                                <Button
-                                    label={ freeData.button || 'Try The Hub' }
-                                    color="purple"
-                                    href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
-                                    target="_blank"
-                                />
-                            </p>
-                        </Notifications>
-                    </BoxFooter>
-                )}
+			<BoxBody>
 
-                { !freeData && this.props.update && '' !== this.props.update && (
-                    <BoxFooter
-                        display="block"
-                        alignment="center"
-                        paddingTop={ empty ? 0 : 30 }
-                        border={ empty ? 0 : 1 }
-                    >
-                        <p className="sui-description">{ this.props.update }</p>
-                    </BoxFooter>
-                )}
+				{ props.description && (
+					<p>{ props.description }</p>
+				)}
 
-            </React.Fragment>
-        );
+				{ !isLoading && isEmpty && (
+					<Notifications type="info">
+						<p>{ props.empty }</p>
+					</Notifications>
+				)}
 
-        return (
-            <Box>
+			</BoxBody>
 
-                <BoxHeader title={ this.props.title }>
-                    <div>
-                        <Button
-                            icon="upload-cloud"
-                            label={ this.props.uploadLabel || 'Upload' }
-                            design="ghost"
-							htmlFor="sui-upload-configs-input"
-                        />
-						<input
-							id="sui-upload-configs-input"
-							type="file"
-							name="config_file"
-							className="sui-hidden"
-							value=""
-							readOnly="readonly"
-							onChange={ this.props.uploadConfig }
-							accept=".json"
-						/>
-                        <Button
-                            icon="save"
-                            label={ this.props.saveLabel || 'Save Config' }
-                            color="blue"
-							onClick={ this.props.saveNewConfig }
-                        />
-                    </div>
-                </BoxHeader>
+			{ isLoading && (
+				<LoadingContent>
+					<LoadingWrap aria-hidden="true">
+						{ Table }
+						{ Footer }
+					</LoadingWrap>
+					<LoadingMask>
+						<p className="sui-description">
+							<span
+								className="sui-icon-loader sui-loading"
+								aria-hidden="true"
+								style={ { marginRight: 10 } }
+							/>
+							{ props.loadingLabel }
+						</p>
+					</LoadingMask>
+				</LoadingContent>
+			)}
 
-                <BoxBody>
+			{ !isLoading && (
+				<React.Fragment>
+					{ Table }
+					{ Footer }
+				</React.Fragment>
+			)}
 
-                    { this.props.description && (
-                        <p>{ this.props.description }</p>
-                    )}
-
-                    { !loading && empty && (
-                        <Notifications type="info">
-                            <p>{ this.props.empty }</p>
-                        </Notifications>
-                    )}
-
-                </BoxBody>
-
-                { loading && (
-                    <LoadingContent>
-                        <LoadingWrap aria-hidden="true">
-                            { Table }
-                            { Footer }
-                        </LoadingWrap>
-                        <LoadingMask>
-                            <p className="sui-description">
-                                <span
-                                    className="sui-icon-loader sui-loading"
-                                    aria-hidden="true"
-                                    style={ { marginRight: 10 } }
-                                />
-                                { this.props.loadingLabel }
-                            </p>
-                        </LoadingMask>
-                    </LoadingContent>
-                )}
-
-                { !loading && (
-                    <React.Fragment>
-                        { Table }
-                        { Footer }
-                    </React.Fragment>
-                )}
-
-            </Box>
-        );
-    }
+		</Box>
+	);
 }

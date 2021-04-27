@@ -1,107 +1,85 @@
-import React, { Component, Children } from 'react';
+import React, { Children } from 'react';
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
-export class PresetsWidget extends Component {
-    constructor( props ) {
-        super( props );
+export const PresetsWidget = ( { children: configsList, ...props } ) => {
+	const isEmpty = ! configsList || 0 === configsList.length;
 
-        this.state = {
-            empty: false,
-        }
-    }
+	const items = Children.map( configsList, item => (
+		<PresetsAccordionItem
+			default={ item.props.default || false }
+			name={ item.props.name }
+			description={ item.props.description }
+			image={ item.props.image }
+			applyLabel={ item.props.applyLabel }
+			applyAction={ item.props.applyAction }
+			downloadLabel={ item.props.downloadLabel }
+			downloadAction={ item.props.downloadAction }
+			editLabel={ item.props.editLabel }
+			editAction={ item.props.editAction }
+			deleteLabel={ item.props.deleteLabel }
+			deleteAction={ item.props.deleteAction }
+		>
+			{ item.props.children }
+		</PresetsAccordionItem>
+	) );
 
-    componentDidMount() {
-        const items = this.props.children;
+	return (
+		<Box>
 
-        if ( ! items || 0 === items.length ) {
-            this.setState({
-                empty: true
-            });
-        }
-    }
+			{ ! isEmpty && (
+				<BoxHeader
+					titleIcon="wrench-tool"
+					title={ props.title }
+					tagLabel={ configsList.length }
+				/>
+			)}
 
-    render() {
-        const { empty } = this.state;
+			{ isEmpty && (
+				<BoxHeader
+					titleIcon="wrench-tool"
+					title={ props.title }
+				/>
+			)}
 
-        const items = Children.map( this.props.children, item => {
-            return (
-                <PresetsAccordionItem
-                    default={ item.props.default || false }
-                    name={ item.props.name }
-                    description={ item.props.description }
-                    image={ item.props.image }
-                    applyLabel={ item.props.applyLabel }
-                    applyAction={ item.props.applyAction }
-                    downloadLabel={ item.props.downloadLabel }
-                    downloadAction={ item.props.downloadAction }
-                    editLabel={ item.props.editLabel }
-                    editAction={ item.props.editAction }
-                    deleteLabel={ item.props.deleteLabel }
-                    deleteAction={ item.props.deleteAction }
-                >
-                    { item.props.children }
-                </PresetsAccordionItem>
-            );
-        });
+			<BoxBody>
 
-        return (
-            <Box>
+				<p>{ props.message }</p>
 
-                { ! empty && (
-                    <BoxHeader
-                        titleIcon="wrench-tool"
-                        title={ this.props.title }
-                        tagLabel={ this.props.children.length }
-                    />
-                )}
+				{ isEmpty && (
+					<Notifications type="info">
+						<p>{ props.notice }</p>
+					</Notifications>
+				)}
 
-                { empty && (
-                    <BoxHeader
-                        titleIcon="wrench-tool"
-                        title={ this.props.title }
-                    />
-                )}
+			</BoxBody>
 
-                <BoxBody>
+			{ !isEmpty && (
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={ { borderBottom: 0 } }
+				>
+					{ items }
+				</div>
+			)}
 
-                    <p>{ this.props.message }</p>
+			<BoxFooter>
+				<Button
+					icon="save"
+					label={ props.saveLabel }
+					color="blue"
+					onClick={ props.saveNewConfig }
+				/>
+				<Button
+					icon="wrench-tool"
+					label={ props.manageLabel }
+					design="ghost"
+					href={ props.manageConfigsUrl }
+				/>
+			</BoxFooter>
 
-                    { empty && (
-                        <Notifications type="info">
-                            <p>{ this.props.notice }</p>
-                        </Notifications>
-                    )}
-
-                </BoxBody>
-
-                { !empty && (
-                    <div
-                        className="sui-accordion sui-accordion-flushed"
-                        style={ { borderBottom: 0 } }
-                    >
-                        { items }
-                    </div>
-                )}
-
-                <BoxFooter>
-                    <Button
-                        icon="save"
-                        label={ this.props.saveLabel }
-                        color="blue"
-						onClick={ this.props.saveNewConfig }
-                    />
-                    <Button
-                        icon="wrench-tool"
-                        label={ this.props.manageLabel }
-                        design="ghost"
-						href={ this.props.manageConfigsUrl }
-                    />
-                </BoxFooter>
-
-            </Box>
-        );
-    }
+		</Box>
+	);
 }
