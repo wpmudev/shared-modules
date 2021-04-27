@@ -151,7 +151,7 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 
 				{ !isLoading && isEmpty && (
 					<Notifications type="info">
-						<p>{ props.empty }</p>
+						<p>{ props.emptyNotice }</p>
 					</Notifications>
 				)}
 
@@ -170,7 +170,7 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 								aria-hidden="true"
 								style={ { marginRight: 10 } }
 							/>
-							{ props.loadingLabel }
+							{ props.loadingText }
 						</p>
 					</LoadingMask>
 				</LoadingContent>

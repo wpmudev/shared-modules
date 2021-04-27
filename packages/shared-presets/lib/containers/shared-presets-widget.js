@@ -46,11 +46,11 @@ export const PresetsWidget = ( { children: configsList, ...props } ) => {
 
 			<BoxBody>
 
-				<p>{ props.message }</p>
+				<p>{ props.description }</p>
 
 				{ isEmpty && (
 					<Notifications type="info">
-						<p>{ props.notice }</p>
+						<p>{ props.emptyNotice }</p>
 					</Notifications>
 				)}
 
