@@ -221,6 +221,15 @@ export class TutorialsList extends Component {
 					{this.props.title && (
 						<div className="sui-box-header">
 							<h3 className="sui-box-title">{this.props.title}</h3>
+							{ this.props.viewAllUrl &&
+								<div className="sui-actions-right">
+									<p className="sui-description">
+										<a href={this.props.viewAllUrl} target="_blank">
+										<span className="sui-icon-open-new-window sui-sm sui-blue" aria-hidden="true"></span>
+										{ this.props.viewAllText }</a>
+									</p>
+								</div>
+							}
 						</div>
 					)}
 
