@@ -2,11 +2,12 @@ import React, { Component, Children } from 'react';
 import styled from 'styled-components';
 
 const Table = styled.table`
-.sui-wrap && {
+[class*="sui-2-"] .sui-wrap && {
 	width: 100%;
 	margin: 0;
 	border-spacing: 0;
 	border-collapse: collapse;
+	table-layout: fixed;
 
 	tbody {
 
@@ -24,12 +25,22 @@ const Table = styled.table`
 			font: 500 13px/22px "Roboto", sans-serif;
 			letter-spacing: -0.25px;
 
+			div {
+				overflow: hidden;
+				display: -webkit-box;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical
+			}
+
 			&:first-child {
+				width: 45%;
 				padding-left: 20px;
 				color: #333;
 			}
 
 			&:last-child {
+				width: 55%;
 				padding-right: 20px;
 			}
 		}
