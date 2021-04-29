@@ -1,7 +1,3 @@
-import { NoticeDiscount } from "@wpmudev/shared-notifications-offer";
-
-const Notifications = {};
-
-Notifications.Offer = NoticeDiscount;
+import { NoticeDiscount } from "@wpmudev/shared-notifications-discount";
 
 export { NoticeDiscount };
