@@ -1,6 +1,24 @@
 # Changelog
 
-## Unreleased (2021-04-27)
+## Released (2021-04-29)
+
+#### New Features
+* `react-tutorials-list`
+  * [#48](https://github.com/wpmudev/shared-modules/pull/48) ✨ new(react-tutorials-list): Add `viewAll` link in the header. ([@a-danae](https://github.com/a-danae))
+
+#### Improvements
+* `shared-presets`
+  * [#51](https://github.com/wpmudev/shared-modules/pull/51) 🐛 fix(shared-presets): Limit table text length to 2 lines. ([@iamleigh](https://github.com/iamleigh))
+
+#### Bug Fixes
+* `shared-presets`
+  * [#50](https://github.com/wpmudev/shared-modules/pull/50) 🐛 fix(shared-presets): Upgrade `react-dropdown` dependency. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
+## Released (2021-04-27)
 
 #### New Features
 * `shared-presets`
