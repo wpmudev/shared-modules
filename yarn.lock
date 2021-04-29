@@ -3408,10 +3408,10 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-button/-/react-button-1.0.8.tgz#1585948c9fa163207ad746480fd9c89fade498e7"
   integrity sha512-WtDlblxL9/S1jo7IvnBDl6ponQdNl8Kkj6+OIUktpLmLWnIQbycQrQJXZYYUoUKH8fDgaVLK1q+fQ4K1R9xH2A==
 
-"@wpmudev/react-dropdown@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-dropdown/-/react-dropdown-1.1.2.tgz#59b448b20e5b60db581d4217bfee54e28acdefd0"
-  integrity sha512-WYyqb/pqOFgp/7GY663ZmQ3GQ6zwXEKHFcxzMzaZxICldvwldJbw7XanblIG7hGjbMojtoZMc74zEmG6yHFghg==
+"@wpmudev/react-dropdown@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-dropdown/-/react-dropdown-1.1.3.tgz#85f68e1d19631ab91ba0f398a1249549aa97ead0"
+  integrity sha512-91YgVYyAHduTVGv/YLYsiNMUUJm5JvO2o/axnohB6/EulpJUOvP8a+nTA+ld1EkzQ8ccBW+rfAbSMQoRUP0+HA==
   dependencies:
     "@wpmudev/react-button-icon" "^1.1.0"
     styled-components "^5.2.3"
