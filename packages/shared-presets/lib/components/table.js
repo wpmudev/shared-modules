@@ -2,6 +2,7 @@ import React, { Component, Children } from 'react';
 import styled from 'styled-components';
 
 const Table = styled.table`
+.sui-wrap && {
 	width: 100%;
 	margin: 0;
 	border-spacing: 0;
@@ -33,6 +34,7 @@ const Table = styled.table`
 			}
 		}
 	}
+}
 `;
 
 export class PresetsTable extends Component {
