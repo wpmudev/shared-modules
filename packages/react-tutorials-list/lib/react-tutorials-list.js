@@ -78,6 +78,25 @@ const ListItem = styled.li`
 	}
 `;
 
+const Link = styled.a.attrs(props => ({
+	href: props.viewAll,
+	target: "_blank"
+}))`
+	margin-top: 1px;
+	margin-right: 23px;
+	font-size: 13px;
+	line-height: 22px;
+	letter-spacing: -0.2px;
+
+	[class*="sui-icon-"] {
+		margin-right: 5px;
+
+		&:before {
+			color: inherit;
+		}
+	}
+`;
+
 export class TutorialsList extends Component {
 	_isMounted = false;
 
@@ -189,6 +208,9 @@ export class TutorialsList extends Component {
 		const min_read =
 			translate && translate[0].min_read ? translate[0].min_read : "";
 
+		const view_all =
+			translate && translate[0].view_all ? translate[0].view_all : "View all";
+
 		const listPosts = posts.map(post => (
 			<ListItem key={post.id} className="sui-tutorial">
 				<Post
@@ -221,15 +243,17 @@ export class TutorialsList extends Component {
 					{this.props.title && (
 						<div className="sui-box-header">
 							<h3 className="sui-box-title">{this.props.title}</h3>
-							{ this.props.viewAllUrl &&
+							{this.props.viewAll && (
 								<div className="sui-actions-right">
-									<p className="sui-description">
-										<a href={this.props.viewAllUrl} target="_blank">
-										<span className="sui-icon-open-new-window sui-sm sui-blue" aria-hidden="true"></span>
-										{ this.props.viewAllText }</a>
-									</p>
+									<Link {...this.props}>
+										<span
+											className="sui-icon-open-new-window sui-sm"
+											aria-hidden="true"
+										/>
+										{view_all}
+									</Link>
 								</div>
-							}
+							)}
 						</div>
 					)}
 
