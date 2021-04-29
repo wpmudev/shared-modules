@@ -163,22 +163,53 @@ function _taggedTemplateLiteral(strings, raw) {
   }));
 }
 
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
+  }
 
-    return target;
-  };
-
-  return _extends$1.apply(this, arguments);
+  return target;
 }
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -223,7 +254,9 @@ var Button = function Button(_ref) {
       _ref$design = _ref.design,
       design = _ref$design === void 0 ? "solid" : _ref$design,
       color = _ref.color,
-      props = _objectWithoutProperties(_ref, ["label", "icon", "design", "color"]);
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties(_ref, ["label", "icon", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -236,7 +269,7 @@ var Button = function Button(_ref) {
     className: "sui-icon-" + icon,
     "aria-hidden": "true"
   }), label);
-  var className = "sui-button"; // Set button color.
+  className = "sui-button".concat(className ? ' ' + className : ''); // Set button color.
 
   switch (color) {
     case "blue":
@@ -269,21 +302,22 @@ var Button = function Button(_ref) {
   } // Set loading class.
 
 
-  if (props.loading) {
+  if (loading) {
     className += " sui-button-onload";
   }
 
+  var htmlTag = 'button';
+
   if (props.href) {
-    return /*#__PURE__*/React.createElement("a", _extends$1({
-      className: className,
-      disabled: props.disabled || props.loading
-    }, props), props.loading ? loader : content);
+    htmlTag = 'a';
+  } else if (props.htmlFor) {
+    htmlTag = 'label';
   }
 
-  return /*#__PURE__*/React.createElement("button", _extends$1({
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
     className: className,
-    disabled: props.disabled || props.loading
-  }, props), props.loading ? loader : content);
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
 };
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
@@ -313,15 +347,15 @@ var PriceWrapper = styled.div(_templateObject9 || (_templateObject9 = _taggedTem
 var PriceLabel = styled.h3(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n\tcolor: #666 !important;\n\tfont-size: 12px !important;\n\tline-height: 16px !important;\n\tfont-weight: 400 !important;\n\tletter-spacing: -0.23px !important;\n\n\t@media ", " {\n\t\ttext-transform: uppercase;\n\t}\n"])), device.tablet);
 var Price = styled.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n\tfont-size: 15px !important;\n\tline-height: 40px !important;\n\tletter-spacing: -0.27px !important;\n\n\tspan {\n\t\tmargin-right: 6px;\n\t\tcolor: #FF6D6D;\n\t\tfont-size: 18px;\n\t\tfont-weight: bold;\n\t\ttext-decoration: line-through;\n\t\tletter-spacing: -0.32px;\n\t}\n\n\tstrong {\n\t\tfont-size: 28px;\n\t\tfont-weight: bold;\n\t\tletter-spacing: -0.5px;\n\t}\n"])));
 
-var NoticeOffer = /*#__PURE__*/function (_Component) {
-  _inherits(NoticeOffer, _Component);
+var NoticeDiscount = /*#__PURE__*/function (_Component) {
+  _inherits(NoticeDiscount, _Component);
 
-  var _super = _createSuper(NoticeOffer);
+  var _super = _createSuper(NoticeDiscount);
 
-  function NoticeOffer(props) {
+  function NoticeDiscount(props) {
     var _this;
 
-    _classCallCheck(this, NoticeOffer);
+    _classCallCheck(this, NoticeDiscount);
 
     _this = _super.call(this, props); // Call functions.
 
@@ -343,7 +377,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(NoticeOffer, [{
+  _createClass(NoticeDiscount, [{
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -388,7 +422,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
         "aria-hidden": "true"
       }), /*#__PURE__*/React.createElement(Content, null, this.props.children, hasDisclaimer && /*#__PURE__*/React.createElement("p", {
         className: "sui-disclaimer"
-      }, "* ", disclaimer, " *")), /*#__PURE__*/React.createElement(Border, null, /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/React.createElement(PriceWrapper, null, /*#__PURE__*/React.createElement(PriceLabel, null, "Pay Only"), hasDiscount ? /*#__PURE__*/React.createElement(Price, null, /*#__PURE__*/React.createElement("span", null, "$", price), /*#__PURE__*/React.createElement("strong", null, "$", newPrice), "/month") : /*#__PURE__*/React.createElement(Price, null, /*#__PURE__*/React.createElement("strong", null, "$", price), "/month"), hasButton && /*#__PURE__*/React.createElement(Button, {
+      }, "* ", disclaimer)), /*#__PURE__*/React.createElement(Border, null, /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/React.createElement(PriceWrapper, null, 'undefined' !== typeof this.props.priceLabel && '' !== this.props.priceLabel && /*#__PURE__*/React.createElement(PriceLabel, null, this.props.priceLabel), hasDiscount ? /*#__PURE__*/React.createElement(Price, null, /*#__PURE__*/React.createElement("span", null, "$", price), /*#__PURE__*/React.createElement("strong", null, "$", newPrice), "/", this.props.priceTime || 'month') : /*#__PURE__*/React.createElement(Price, null, /*#__PURE__*/React.createElement("strong", null, "$", price), "/", this.props.priceTime || 'month'), hasButton && /*#__PURE__*/React.createElement(Button, {
         label: buttonLabel,
         color: "purple",
         href: buttonLink,
@@ -399,10 +433,7 @@ var NoticeOffer = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return NoticeOffer;
+  return NoticeDiscount;
 }(Component);
 
-var Notifications = {};
-Notifications.Offer = NoticeOffer;
-
-export { Notifications };
+export { NoticeDiscount };
