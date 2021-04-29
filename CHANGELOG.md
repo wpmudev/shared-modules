@@ -7,6 +7,8 @@
   * [#48](https://github.com/wpmudev/shared-modules/pull/48) ✨ new(react-tutorials-list): Add `viewAll` link in the header. ([@a-danae](https://github.com/a-danae))
 
 #### Improvements
+* `react-tutorials-list`
+  * [#52](https://github.com/wpmudev/shared-modules/pull/52) 🐛 fix(shared-tutorials-list): Properly style `viewAll` link. ([@iamleigh](https://github.com/iamleigh))
 * `shared-presets`
   * [#51](https://github.com/wpmudev/shared-modules/pull/51) 🐛 fix(shared-presets): Limit table text length to 2 lines. ([@iamleigh](https://github.com/iamleigh))
 
