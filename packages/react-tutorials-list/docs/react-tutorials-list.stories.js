@@ -37,8 +37,7 @@ primary.storyName = 'List';
 primary.args = {
 	title: 'Tutorials',
 	category: defender,
-	viewAllUrl: 'https://wpmudev.com/blog/tutorials/tutorial-category/defender-pro/',
-	viewAllText: 'View All',
+	viewAll: 'https://premium.wpmudev.org/',
 };
 primary.parameters = {
 	notes: Documentation
