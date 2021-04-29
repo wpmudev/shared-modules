@@ -57,8 +57,8 @@ export class PresetsTable extends Component {
         const rows = Children.map( this.props.children, row => {
 			return (
 				<tr>
-					<td colSpan="2">{ row.props.name }</td>
-					<td colSpan="1">{ row.props.status }</td>
+					<td><div>{ row.props.name }</div></td>
+					<td><div>{ row.props.status }</div></td>
 				</tr>
 			);
 		});
