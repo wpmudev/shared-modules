@@ -779,7 +779,7 @@ var Post = /*#__PURE__*/function (_Component) {
   return Post;
 }(React.Component);
 
-var _templateObject$1, _templateObject2$1;
+var _templateObject$1, _templateObject2$1, _templateObject3$1;
 
 var aria$1 = aria$1 || {};
 aria$1.KeyCode = {
@@ -811,6 +811,12 @@ var device$1 = {
 };
 var ListWrapper = styled__default['default'].ul(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\tmargin: -15px;\n\t}\n"])), device$1.tablet);
 var ListItem = styled__default['default'].li(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\tmargin: 0 0 20px;\n\n\t&:last-child {\n\t\tmargin-bottom: 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 50%;\n\t\tmargin: 0;\n\t\tflex: 0 0 auto;\n\t\tpadding: 15px;\n\t}\n\n\t@media ", " {\n\t\twidth: 33.33%;\n\t}\n\n\t@media ", " {\n\t\twidth: 25%;\n\t}\n\n\t@media (min-width: 1800px) {\n\t\t.sui-tutorials--page li {\n\t\t\twidth: 20%;\n\t\t}\n\t}\n"])), device$1.tablet, device$1.laptop, device$1.desktop);
+var Link = styled__default['default'].a.attrs(function (props) {
+  return {
+    href: props.viewAll,
+    target: "_blank"
+  };
+})(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["\n\tmargin-top: 1px;\n\tmargin-right: 23px;\n\tfont-size: 13px;\n\tline-height: 22px;\n\tletter-spacing: -0.2px;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-right: 5px;\n\n\t\t&:before {\n\t\t\tcolor: inherit;\n\t\t}\n\t}\n"])));
 
 var TutorialsList = /*#__PURE__*/function (_Component) {
   _inherits(TutorialsList, _Component);
@@ -932,6 +938,7 @@ var TutorialsList = /*#__PURE__*/function (_Component) {
       var loading = translate && translate[0].loading ? translate[0].loading : "Loading tutorials...";
       var read_article = translate && translate[0].read_article ? translate[0].read_article : "";
       var min_read = translate && translate[0].min_read ? translate[0].min_read : "";
+      var view_all = translate && translate[0].view_all ? translate[0].view_all : "View all";
       var listPosts = posts.map(function (post) {
         return /*#__PURE__*/React__default['default'].createElement(ListItem, {
           key: post.id,
@@ -974,7 +981,12 @@ var TutorialsList = /*#__PURE__*/function (_Component) {
           className: "sui-box-header"
         }, /*#__PURE__*/React__default['default'].createElement("h3", {
           className: "sui-box-title"
-        }, this.props.title)), /*#__PURE__*/React__default['default'].createElement("div", {
+        }, this.props.title), this.props.viewAll && /*#__PURE__*/React__default['default'].createElement("div", {
+          className: "sui-actions-right"
+        }, /*#__PURE__*/React__default['default'].createElement(Link, this.props, /*#__PURE__*/React__default['default'].createElement("span", {
+          className: "sui-icon-open-new-window sui-sm",
+          "aria-hidden": "true"
+        }), view_all))), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "sui-box-body",
           style: {
             backgroundColor: "#FAFAFA",
@@ -1481,10 +1493,10 @@ function _templateObject4$1() {
   return data;
 }
 
-function _templateObject3$1() {
+function _templateObject3$2() {
   var data = _taggedTemplateLiteral$1$1(["\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tmargin-top: 15px;\n"]);
 
-  _templateObject3$1 = function _templateObject3() {
+  _templateObject3$2 = function _templateObject3() {
     return data;
   };
 
@@ -1566,7 +1578,7 @@ var PostWrapper$1 = styled__default['default'].div.attrs(function (props) {
   return props.banner ? "min-height: 100%;" : "padding: 15px;";
 });
 var PostHeader$1 = styled__default['default'].div(_templateObject2$2());
-var PostFooter$1 = styled__default['default'].div(_templateObject3$1());
+var PostFooter$1 = styled__default['default'].div(_templateObject3$2());
 var FeaturedImage$1 = styled__default['default'].div.attrs(function () {
   return {
     tabIndex: "-1",
@@ -1773,7 +1785,7 @@ var device$1$1 = {
   desktop: "(min-width: ".concat(screen$1$1.desktop, "px)")
 };
 var Box = styled__default['default'].div(_templateObject$1$1 || (_templateObject$1$1 = _taggedTemplateLiteral$2(["\n\tposition: relative;\n\tpadding: 10px;\n\n\t@media ", " {\n\t\tpadding: 15px 25px;\n\t}\n"])), device$1$1.tablet);
-var Link = styled__default['default'].a.attrs(function (props) {
+var Link$1 = styled__default['default'].a.attrs(function (props) {
   return {
     href: props.viewAll,
     target: "_blank"
@@ -2060,7 +2072,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           className: "sui-box-title"
         }, this.props.title), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "sui-actions-right"
-        }, this.props.viewAll && /*#__PURE__*/React__default['default'].createElement(Link, this.props, /*#__PURE__*/React__default['default'].createElement("span", {
+        }, this.props.viewAll && /*#__PURE__*/React__default['default'].createElement(Link$1, this.props, /*#__PURE__*/React__default['default'].createElement("span", {
           className: "sui-icon-open-new-window sui-sm",
           "aria-hidden": "true"
         }), view_all), /*#__PURE__*/React__default['default'].createElement("div", {
