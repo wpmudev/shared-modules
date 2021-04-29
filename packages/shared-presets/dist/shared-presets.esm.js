@@ -1829,7 +1829,7 @@ var ButtonIcon$3 = function ButtonIcon(_ref) {
 };
 
 function _templateObject2$1() {
-  var data = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
+  var data = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    [class*=\"sui-icon-\"]:before {\n        color: inherit !important;\n    }\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
 
   _templateObject2$1 = function _templateObject2() {
     return data;
@@ -1839,7 +1839,7 @@ function _templateObject2$1() {
 }
 
 function _templateObject$2() {
-  var data = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
+  var data = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    [class*=\"sui-icon-\"]:before {\n        color: inherit !important;\n    }\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
 
   _templateObject$2 = function _templateObject() {
     return data;
@@ -2017,7 +2017,7 @@ var Dropdown = /*#__PURE__*/function (_Component) {
 }(Component);
 
 var _templateObject$3;
-var Table = styled.table(_templateObject$3 || (_templateObject$3 = _taggedTemplateLiteral(["\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\t&:first-child {\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\tpadding-right: 20px;\n\t\t\t}\n\t\t}\n\t}\n"])));
+var Table = styled.table(_templateObject$3 || (_templateObject$3 = _taggedTemplateLiteral(["\n[class*=\"sui-2-\"] .sui-wrap && {\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\ttable-layout: fixed;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\tdiv {\n\t\t\t\toverflow: hidden;\n\t\t\t\tdisplay: -webkit-box;\n\t\t\t\ttext-overflow: ellipsis;\n\t\t\t\t-webkit-line-clamp: 2;\n\t\t\t\t-webkit-box-orient: vertical\n\t\t\t}\n\n\t\t\t&:first-child {\n\t\t\t\twidth: 45%;\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\twidth: 55%;\n\t\t\t\tpadding-right: 20px;\n\t\t\t}\n\t\t}\n\t}\n}\n"])));
 var PresetsTable = /*#__PURE__*/function (_Component) {
   _inherits(PresetsTable, _Component);
 
@@ -2033,11 +2033,7 @@ var PresetsTable = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var rows = Children.map(this.props.children, function (row) {
-        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
-          colSpan: "2"
-        }, row.props.name), /*#__PURE__*/React.createElement("td", {
-          colSpan: "1"
-        }, row.props.status));
+        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, row.props.name)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, row.props.status)));
       });
       return /*#__PURE__*/React.createElement(Table, this.props, /*#__PURE__*/React.createElement("tbody", null, rows));
     }
