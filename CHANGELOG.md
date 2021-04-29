@@ -1,6 +1,6 @@
 # Changelog
 
-## Released (2021-04-29)
+## Unreleased (2021-04-29)
 
 #### New Features
 * `react-tutorials-list`
@@ -13,6 +13,8 @@
   * [#51](https://github.com/wpmudev/shared-modules/pull/51) 🐛 fix(shared-presets): Limit table text length to 2 lines. ([@iamleigh](https://github.com/iamleigh))
 
 #### Bug Fixes
+* `shared-notifications`
+  * [#53](https://github.com/wpmudev/shared-modules/pull/53) 🐛 fix(shared-notifications): Importing wrong file. ([@iamleigh](https://github.com/iamleigh))
 * `shared-presets`
   * [#50](https://github.com/wpmudev/shared-modules/pull/50) 🐛 fix(shared-presets): Upgrade `react-dropdown` dependency. ([@iamleigh](https://github.com/iamleigh))
 
