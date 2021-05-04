@@ -1,5 +1,4 @@
-import React, { Children } from 'react';
-import { device, utils } from '../components/utils';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
@@ -39,29 +38,8 @@ const LoadingMask = styled.div`
 }
 `;
 
-export const PresetsPage = ( { freeData, isLoading, children: configsList, ...props } ) => {
+export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) => {
 	const isEmpty = ! configsList || 0 === configsList.length;
-
-	const items = Children.map( configsList, item => (
-		<PresetsAccordionItem
-			id={ item.props.id }
-			default={ item.props.default || false }
-			name={ item.props.name }
-			description={ item.props.description }
-			image={ item.props.image }
-			showApplyButton={true}
-			applyLabel={ item.props.applyLabel }
-			applyAction={ item.props.applyAction }
-			downloadLabel={ item.props.downloadLabel }
-			downloadAction={ item.props.downloadAction }
-			editLabel={ item.props.editLabel }
-			editAction={ item.props.editAction }
-			deleteLabel={ item.props.deleteLabel }
-			deleteAction={ item.props.deleteAction }
-		>
-			{ item.props.children }
-		</PresetsAccordionItem>
-	) );
 
 	const Table = (
 		<React.Fragment>
@@ -72,7 +50,29 @@ export const PresetsPage = ( { freeData, isLoading, children: configsList, ...pr
 						borderBottomWidth: 0
 					} }
 				>
-					{ items }
+					{ configsList.map( item => (
+						<PresetsAccordionItem
+							key={ item.id }
+							id={ item.id }
+							default={ item.default || false }
+							name={ item.name }
+							description={ item.description }
+							image={ item.image }
+							showApplyButton={ true }
+							applyLabel={ item.applyLabel }
+							applyAction={ item.applyAction }
+							downloadLabel={ item.downloadLabel }
+							downloadAction={ item.downloadAction }
+							editLabel={ item.editLabel }
+							editAction={ item.editAction }
+							deleteLabel={ item.deleteLabel }
+							deleteAction={ item.deleteAction }
+						>
+							{ item.config.map( ( item, index ) => (
+								<div key={ index } name={ item.label } status={ item.value } />
+							) ) }
+						</PresetsAccordionItem>
+					) ) }
 				</div>
 			)}
 		</React.Fragment>
