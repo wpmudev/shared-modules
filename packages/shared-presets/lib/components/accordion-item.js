@@ -93,7 +93,7 @@ export class PresetsAccordionItem extends Component {
 
 	accordionHeadApplyClicked = ( e ) => {
 		e.stopPropagation();
-		this.props.applyAction( this.props.id );
+		this.props.applyAction();
 	}
 
     render() {
@@ -137,7 +137,7 @@ export class PresetsAccordionItem extends Component {
                         <div
                             name={ this.props.applyLabel || 'Apply' }
                             icon="check"
-                            onClick={ () => applyAction( this.props.id ) }
+                            onClick={ applyAction }
                         />
                         <div
                             name={ this.props.downloadLabel || 'Download' }

@@ -129,6 +129,16 @@ primary.argTypes = {
 	saveNewConfig: {
 		defaultValue: () => console.log( 'Saving new config' ),
 	},
+	applyModalData: {
+		defaultValue: {
+			action: ( configId, closeModal ) => {
+				console.log( 'Applying config ' + configId );
+				closeModal();
+			},
+			strings: {},
+		},
+
+	},
     configsList: {
         defaultValue: [
             {
@@ -139,7 +149,6 @@ primary.argTypes = {
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 				config: defaultConfig,
 				editAction: () => console.log( 'Editing config' ),
-				applyAction: () => console.log( 'Applying config' ),
 				deleteAction: () => console.log( 'Deleting config' ),
 				downloadAction: () => console.log( 'Downloading config' ),
             },
@@ -150,7 +159,6 @@ primary.argTypes = {
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 				config: defaultConfig,
 				editAction: () => console.log( 'Editing config' ),
-				applyAction: () => console.log( 'Applying config' ),
 				deleteAction: () => console.log( 'Deleting config' ),
 				downloadAction: () => console.log( 'Downloading config' ),
             },

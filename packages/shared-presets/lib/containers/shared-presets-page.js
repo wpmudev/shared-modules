@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
+
+import ApplyModal from '../components/apply-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
 const LoadingContent = styled.div`
@@ -38,8 +40,19 @@ const LoadingMask = styled.div`
 }
 `;
 
-export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) => {
+export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData, ...props } ) => {
+	const [currentConfig, setCurrentConfig] = React.useState(null);
+	const [isApplyOpen, setIsApplyOpen] = React.useState(false);
+
 	const isEmpty = ! configsList || 0 === configsList.length;
+
+	const openModal = (action, config) => {
+		setCurrentConfig(config);
+
+		if ('apply' === action) {
+			setIsApplyOpen(true);
+		}
+	};
 
 	const Table = (
 		<React.Fragment>
@@ -60,7 +73,7 @@ export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) =>
 							image={ item.image }
 							showApplyButton={ true }
 							applyLabel={ item.applyLabel }
-							applyAction={ item.applyAction }
+							applyAction={ () => openModal( 'apply', item ) }
 							downloadLabel={ item.downloadLabel }
 							downloadAction={ item.downloadAction }
 							editLabel={ item.editLabel }
@@ -114,75 +127,85 @@ export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) =>
 	);
 
 	return (
-		<Box>
+		<React.Fragment>
+			<Box>
+				<BoxHeader title={ props.title }>
+					<div>
+						<Button
+							icon="upload-cloud"
+							label={ props.uploadLabel || 'Upload' }
+							design="ghost"
+							htmlFor="sui-upload-configs-input"
+						/>
+						<input
+							id="sui-upload-configs-input"
+							type="file"
+							name="config_file"
+							className="sui-hidden"
+							value=""
+							readOnly="readonly"
+							onChange={ props.uploadConfig }
+							accept=".json"
+						/>
+						<Button
+							icon="save"
+							label={ props.saveLabel || 'Save Config' }
+							color="blue"
+							onClick={ props.saveNewConfig }
+						/>
+					</div>
+				</BoxHeader>
 
-			<BoxHeader title={ props.title }>
-				<div>
-					<Button
-						icon="upload-cloud"
-						label={ props.uploadLabel || 'Upload' }
-						design="ghost"
-						htmlFor="sui-upload-configs-input"
-					/>
-					<input
-						id="sui-upload-configs-input"
-						type="file"
-						name="config_file"
-						className="sui-hidden"
-						value=""
-						readOnly="readonly"
-						onChange={ props.uploadConfig }
-						accept=".json"
-					/>
-					<Button
-						icon="save"
-						label={ props.saveLabel || 'Save Config' }
-						color="blue"
-						onClick={ props.saveNewConfig }
-					/>
-				</div>
-			</BoxHeader>
+				<BoxBody>
 
-			<BoxBody>
+					{ props.description && (
+						<p>{ props.description }</p>
+					)}
 
-				{ props.description && (
-					<p>{ props.description }</p>
+					{ !isLoading && isEmpty && (
+						<Notifications type="info">
+							<p>{ props.emptyNotice }</p>
+						</Notifications>
+					)}
+
+				</BoxBody>
+
+				{ isLoading && (
+					<LoadingContent>
+						<LoadingWrap aria-hidden="true">
+							{ Table }
+							{ Footer }
+						</LoadingWrap>
+						<LoadingMask>
+							<p className="sui-description">
+								<span
+									className="sui-icon-loader sui-loading"
+									aria-hidden="true"
+									style={ { marginRight: 10 } }
+								/>
+								{ props.loadingText }
+							</p>
+						</LoadingMask>
+					</LoadingContent>
 				)}
 
-				{ !isLoading && isEmpty && (
-					<Notifications type="info">
-						<p>{ props.emptyNotice }</p>
-					</Notifications>
-				)}
-
-			</BoxBody>
-
-			{ isLoading && (
-				<LoadingContent>
-					<LoadingWrap aria-hidden="true">
+				{ !isLoading && (
+					<React.Fragment>
 						{ Table }
 						{ Footer }
-					</LoadingWrap>
-					<LoadingMask>
-						<p className="sui-description">
-							<span
-								className="sui-icon-loader sui-loading"
-								aria-hidden="true"
-								style={ { marginRight: 10 } }
-							/>
-							{ props.loadingText }
-						</p>
-					</LoadingMask>
-				</LoadingContent>
-			)}
+					</React.Fragment>
+				)}
 
-			{ !isLoading && (
-				<React.Fragment>
-					{ Table }
-					{ Footer }
-				</React.Fragment>
-			)}
+			</Box>
 
-		</Box>
+			{ isApplyOpen && (
+				<ApplyModal
+					setOpen={setIsApplyOpen}
+					config={currentConfig}
+					save={applyModalData.action}
+					strings={applyModalData.strings}
+				/>
+			) }
+		</React.Fragment>
 	);
 }
