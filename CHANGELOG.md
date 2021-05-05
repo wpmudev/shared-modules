@@ -1,6 +1,20 @@
 # Changelog
 
-## Unreleased (2021-04-29)
+## Unreleased (2021-05-05)
+
+#### New Features
+* `shared-compiler`, `shared-presets`
+  * [#55](https://github.com/wpmudev/shared-modules/pull/55) ✨ new(shared-presets): Handle modals within the component. ([@a-danae](https://github.com/a-danae))
+
+#### Improvements
+* `shared-presets`
+  * [#56](https://github.com/wpmudev/shared-modules/pull/56) 🐛 fix(shared-presets): Allow configs' setting values to break in new lines. ([@a-danae](https://github.com/a-danae))
+  * [#54](https://github.com/wpmudev/shared-modules/pull/54) ✨ new(shared-presets): Get the accordion content from the given `configsList` prop. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 1
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+
+## Released (2021-04-29)
 
 #### New Features
 * `react-tutorials-list`
