@@ -21,13 +21,13 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 
 	const [ isSaving, setIsSaving ] = React.useState( false );
 
-	const requestCallback = () => {
+	const closeModal = () => {
 		setOpen( false );
 	};
 
 	const doAction = () => {
 		setIsSaving( true );
-		save( config, requestCallback );
+		save( config, closeModal );
 	};
 
 	const modalContent = () => (
@@ -40,7 +40,7 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 					className="sui-button-float--right"
 					onClick={ () => setOpen( false ) }
 				/>
-				<h2 id="smush-config-edit-title">
+				<h2 id="sui-config-edit-title">
 					{ title }
 				</h2>
 				<p className="sui-description">
@@ -51,7 +51,7 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 				<Button
 					design="ghost"
 					label={ cancelButton }
-					onClick={ () => setOpen(false) }
+					onClick={ () => setOpen( false ) }
 				/>
 				<Button
 					color="blue"
@@ -67,8 +67,8 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 	return (
 		<Modal
 			mounted={ true }
-			dialogId="smush-configs-apply-modal"
-			titleId="smush-config-apply-title"
+			dialogId="sui-configs-apply-modal"
+			titleId="sui-config-apply-title"
 			size="sm"
 			modalContent={ modalContent }
 		/>
