@@ -19,15 +19,15 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 		actionButton = 'Apply',
 	} = strings;
 
-	const [isSaving, setIsSaving] = React.useState(false);
+	const [ isSaving, setIsSaving ] = React.useState( false );
 
 	const requestCallback = () => {
-		setOpen(false);
+		setOpen( false );
 	};
 
 	const doAction = () => {
-		setIsSaving(true);
-		save(config.id, requestCallback);
+		setIsSaving( true );
+		save( config.id, requestCallback );
 	};
 
 	const modalContent = () => (
@@ -38,7 +38,7 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 					icon="close"
 					iconSize="md"
 					className="sui-button-float--right"
-					onClick={() => setOpen(false)}
+					onClick={ () => setOpen( false ) }
 				/>
 				<h2 id="smush-config-edit-title">
 					{ title }
@@ -51,14 +51,14 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 				<Button
 					design="ghost"
 					label={ cancelButton }
-					onClick={() => setOpen(false)}
+					onClick={ () => setOpen(false) }
 				/>
 				<Button
 					color="blue"
 					icon="check"
 					label={ actionButton }
-					onClick={doAction}
-					loading={isSaving}
+					onClick={ doAction }
+					loading={ isSaving }
 				/>
 			</div>
 		</div>
@@ -66,11 +66,11 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 
 	return (
 		<Modal
-			mounted={true}
+			mounted={ true }
 			dialogId="smush-configs-apply-modal"
 			titleId="smush-config-apply-title"
 			size="sm"
-			modalContent={modalContent}
+			modalContent={ modalContent }
 		/>
 	);
 };
