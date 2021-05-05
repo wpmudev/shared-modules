@@ -14,7 +14,7 @@ const DeleteModal = ( { setOpen, config, save, strings = {} } ) => {
 	const {
 		closeIcon = 'Close this dialog window',
 		title = 'Delete Configuration File',
-		description = 'Are you sure you want to delete the {configName} file? You will no longer be able to apply it to this or other connected sites.',
+		description = 'Are you sure you want to delete {configName}? You will no longer be able to apply it to this or other connected sites.',
 		cancelButton = 'Cancel',
 		actionButton = 'Delete',
 	} = strings;
@@ -44,7 +44,7 @@ const DeleteModal = ( { setOpen, config, save, strings = {} } ) => {
 					{ title }
 				</h2>
 				<p className="sui-description">
-					{ description }
+					{ description.replace( '{configName}', config.name) }
 				</p>
 			</div>
 			<div className="sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60">

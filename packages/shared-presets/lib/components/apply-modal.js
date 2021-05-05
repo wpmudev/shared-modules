@@ -14,7 +14,7 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 	const {
 		closeIcon = 'Close this dialog window',
 		title = 'Apply Config',
-		description = 'Are you sure you want to apply the {configName} settings config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.',
+		description = 'Are you sure you want to apply the {configName} config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.',
 		cancelButton = 'Cancel',
 		actionButton = 'Apply',
 	} = strings;
@@ -44,7 +44,7 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 					{ title }
 				</h2>
 				<p className="sui-description">
-					{ description }
+					{ description.replace( '{configName}', config.name) }
 				</p>
 			</div>
 			<div className="sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60">
