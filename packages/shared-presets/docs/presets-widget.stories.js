@@ -7,19 +7,32 @@ export default {
 
 const Template = ({ presets, settings, ...args }) => {
     return (
-        <PresetsWidget {...args}>
-            { presets && presets.map( ( preset, index ) => (
-                <div key={ index } { ...preset }>
-                    <div name="Lazy Load" status="Active" />
-                    <div name="CDN" status="Active" />
-                    <div name="Super-Smush" status="Active" />
-                    <div name="PNG to JPEG Conversion" status="Active" />
-                    <div name="Image Resizing" status="Active" />
-                </div>
-            ) ) }
-        </PresetsWidget>
+        <PresetsWidget {...args} />
     );
 };
+
+const defaultConfig = [
+	{
+		label: 'Lazy Load',
+		value: 'Active',
+	},
+	{
+		label: 'CDN',
+		value: 'Active',
+	},
+	{
+		label: 'Super-Smush',
+		value: 'Inactive',
+	},
+	{
+		label: 'PNG to JPEG',
+		value: 'Inactive',
+	},
+	{
+		label: 'Image Resizing',
+		value: 'Active',
+	},
+];
 
 export const primary = Template.bind({});
 primary.storyName = "Default"
@@ -31,12 +44,13 @@ primary.args = {
     emptyNotice: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
     saveNewConfig: () => console.log( 'Saving new config' ),
 	manageConfigsUrl: '#',
-	presets: [
+	configsList: [
         {
 			id: 1,
             name: 'Basic Config',
             description: 'Recommended performance config for every site.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+			config: defaultConfig,
 			editAction: () => console.log( 'Editing config' ),
 			applyAction: () => console.log( 'Applying config' ),
 			deleteAction: () => console.log( 'Deleting config' ),
@@ -47,6 +61,7 @@ primary.args = {
             name: 'Config Name',
             description: 'Donec ullamcorper nulla non metus auctor fringilla.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+			config: defaultConfig,
 			editAction: () => console.log( 'Editing config' ),
 			applyAction: () => console.log( 'Applying config' ),
 			deleteAction: () => console.log( 'Deleting config' ),
