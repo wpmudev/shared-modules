@@ -27,7 +27,7 @@ const ApplyModal = ({ setOpen, config, save, strings = {} }) => {
 
 	const doAction = () => {
 		setIsSaving( true );
-		save( config.id, requestCallback );
+		save( config, requestCallback );
 	};
 
 	const modalContent = () => (
