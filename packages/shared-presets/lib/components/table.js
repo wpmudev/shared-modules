@@ -42,6 +42,7 @@ const Table = styled.table`
 			&:last-child {
 				width: 55%;
 				padding-right: 20px;
+				white-space: pre-wrap;
 			}
 		}
 	}
@@ -57,8 +58,8 @@ export class PresetsTable extends Component {
         const rows = Children.map( this.props.children, row => {
 			return (
 				<tr>
-					<td><div>{ row.props.name }</div></td>
-					<td><div>{ row.props.status }</div></td>
+					<td>{ row.props.name }</td>
+					<td>{ row.props.status }</td>
 				</tr>
 			);
 		});
