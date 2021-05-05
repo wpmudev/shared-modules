@@ -131,13 +131,22 @@ primary.argTypes = {
 	},
 	applyModalData: {
 		defaultValue: {
-			action: ( configId, closeModal ) => {
-				console.log( 'Applying config ' + configId );
+			action: ( config, closeModal ) => {
+				console.log( 'Applying config ' + config.name );
 				closeModal();
 			},
 			strings: {},
 		},
 
+	},
+	deleteModalData: {
+		defaultValue: {
+			action: ( config, closeModal ) => {
+				console.log( 'Deleting config ' + config.name );
+				closeModal();
+			},
+			strings: {},
+		},
 	},
     configsList: {
         defaultValue: [
@@ -149,7 +158,6 @@ primary.argTypes = {
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 				config: defaultConfig,
 				editAction: () => console.log( 'Editing config' ),
-				deleteAction: () => console.log( 'Deleting config' ),
 				downloadAction: () => console.log( 'Downloading config' ),
             },
             {
@@ -159,7 +167,6 @@ primary.argTypes = {
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 				config: defaultConfig,
 				editAction: () => console.log( 'Editing config' ),
-				deleteAction: () => console.log( 'Deleting config' ),
 				downloadAction: () => console.log( 'Downloading config' ),
             },
         ]

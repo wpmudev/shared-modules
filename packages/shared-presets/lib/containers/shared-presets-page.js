@@ -6,6 +6,7 @@ import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 
 import ApplyModal from '../components/apply-modal';
+import DeleteModal from '../components/delete-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
 const LoadingContent = styled.div`
@@ -40,17 +41,20 @@ const LoadingMask = styled.div`
 }
 `;
 
-export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData, ...props } ) => {
-	const [currentConfig, setCurrentConfig] = React.useState(null);
-	const [isApplyOpen, setIsApplyOpen] = React.useState(false);
+export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData, deleteModalData, ...props } ) => {
+	const [ currentConfig, setCurrentConfig ] = React.useState( null );
+	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
+	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 
 	const isEmpty = ! configsList || 0 === configsList.length;
 
-	const openModal = (action, config) => {
-		setCurrentConfig(config);
+	const openModal = ( action, config ) => {
+		setCurrentConfig( config );
 
-		if ('apply' === action) {
-			setIsApplyOpen(true);
+		if ( 'apply' === action ) {
+			setIsApplyOpen( true );
+		} else if ( 'delete' === action ) {
+			setIsDeleteOpen( true );
 		}
 	};
 
@@ -79,7 +83,7 @@ export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData,
 							editLabel={ item.editLabel }
 							editAction={ item.editAction }
 							deleteLabel={ item.deleteLabel }
-							deleteAction={ item.deleteAction }
+							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ item.config.map( ( item, index ) => (
 								<div key={ index } name={ item.label } status={ item.value } />
@@ -204,6 +208,14 @@ export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData,
 					config={currentConfig}
 					save={applyModalData.action}
 					strings={applyModalData.strings}
+				/>
+			) }
+			{ isDeleteOpen && (
+				<DeleteModal
+					setOpen={ setIsDeleteOpen }
+					config={ currentConfig }
+					save={ deleteModalData.action }
+					strings={deleteModalData.strings}
 				/>
 			) }
 		</React.Fragment>

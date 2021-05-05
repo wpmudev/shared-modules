@@ -153,7 +153,7 @@ export class PresetsAccordionItem extends Component {
                             name={ this.props.deleteLabel || 'Delete' }
                             icon="trash"
                             color="red"
-                            onClick={ () => deleteAction( this.props.id ) }
+                            onClick={ deleteAction }
                         />
                     </Dropdown>
                 </AccordionItemHeaderAlt>
