@@ -74,6 +74,6 @@ export const secondary = Template.bind({});
 secondary.storyName = "Empty"
 secondary.args = {
     ...primary.args,
-    presets: []
+    configsList: []
 };
 secondary.argTypes = {};
