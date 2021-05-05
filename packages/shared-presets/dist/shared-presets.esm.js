@@ -1,5 +1,6 @@
 import React, { Component, Children, Fragment } from 'react';
 import styled from 'styled-components';
+import AriaModal from '@justfixnyc/react-aria-modal';
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -179,6 +180,62 @@ function _taggedTemplateLiteral(strings, raw) {
       value: Object.freeze(raw)
     }
   }));
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _extends() {
@@ -1002,6 +1059,780 @@ var Button = function Button(_ref) {
   }, props), loading ? loader : content);
 };
 
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
+}
+
+function _extends$1() {
+  _extends$1 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$1.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$4(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$4(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$4(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _slicedToArray$1(arr, i) {
+  return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest$1();
+}
+
+function _arrayWithHoles$1(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit$1(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray$1(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
+}
+
+function _arrayLikeToArray$1(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableRest$1() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var Modal = function Modal(_ref) {
+  var modalContent = _ref.modalContent,
+      triggerContent = _ref.triggerContent,
+      props = _objectWithoutProperties$4(_ref, ["modalContent", "triggerContent"]);
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
+      isOpen = _React$useState2[0],
+      setIsOpen = _React$useState2[1];
+
+  var _React$useState3 = React.useState(false),
+      _React$useState4 = _slicedToArray$1(_React$useState3, 2),
+      isClosing = _React$useState4[0],
+      setIsClosing = _React$useState4[1]; // States for sliders.
+
+
+  var _React$useState5 = React.useState(props.firstSlide),
+      _React$useState6 = _slicedToArray$1(_React$useState5, 2),
+      currentSlide = _React$useState6[0],
+      setCurrentSlide = _React$useState6[1];
+
+  var _React$useState7 = React.useState(null),
+      _React$useState8 = _slicedToArray$1(_React$useState7, 2),
+      slideDirection = _React$useState8[0],
+      setSlideDirection = _React$useState8[1];
+
+  React.useEffect(function () {
+    if (!props.dialogId) {
+      throw new Error('SUI Modal instances should have a `dialogId`');
+    }
+  }, []);
+  var isSlider = 'object' === _typeof$1(modalContent) && null !== modalContent;
+
+  var openModal = function openModal() {
+    return setIsOpen(true);
+  },
+      closeModal = function closeModal() {
+    // Close the modal with the exit animation and reset the slider.
+    setIsClosing(true);
+    setTimeout(function () {
+      setIsOpen(false);
+      setIsClosing(false);
+
+      if (isSlider) {
+        setSlideDirection(null);
+        setCurrentSlide(props.firstSlide);
+      }
+    }, 300);
+  },
+      slideTo = function slideTo(slide) {
+    var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'left';
+    setCurrentSlide(slide);
+    setSlideDirection(direction);
+  };
+
+  var _props$getApplication = props.getApplicationNode,
+      getApplicationNode = _props$getApplication === void 0 ? function () {
+    return document.getElementsByClassName('sui-wrap')[0];
+  } : _props$getApplication;
+  var dialogClass = "sui-modal-content sui-content-".concat(isClosing ? 'fade-out' : 'fade-in', " ").concat(props.dialogClass || "");
+  var renderContent, modalSize, initialFocus;
+
+  if (!isSlider) {
+    // Not a slider, we can just render the content.
+    renderContent = modalContent;
+    modalSize = props.size;
+    initialFocus = props.initialFocus || false;
+  } else {
+    // Render the content from the given slides.
+    renderContent = modalContent[currentSlide].render;
+    initialFocus = modalContent[currentSlide].focus || false;
+    modalSize = modalContent[currentSlide].size; // Add the slide direction class when provided and we're not closing the modal.
+
+    if (slideDirection && !isClosing) {
+      dialogClass += "sui-modal-slide sui-active sui-fadein-".concat(slideDirection);
+    }
+  } // Use 'isOpen' as an alias of 'mounted' if not defined.
+
+
+  if ('undefined' === typeof props.mounted) {
+    props.mounted = isOpen;
+  }
+
+  var AltModal = props.renderToNode ? AriaModal.renderTo(props.renderToNode) : AriaModal;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(AltModal, _extends$1({
+    getApplicationNode: getApplicationNode,
+    dialogClass: dialogClass,
+    underlayClass: "sui-modal sui-active sui-modal-".concat(modalSize || 'md', " sui-wrap ").concat(props.underlayClass || ''),
+    includeDefaultStyles: false,
+    initialFocus: initialFocus
+  }, props), renderContent({
+    closeModal: closeModal,
+    slideTo: slideTo
+  })), triggerContent && triggerContent({
+    openModal: openModal
+  }));
+};
+
+function _defineProperty$3(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$2(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$2(Object(source), true).forEach(function (key) {
+        _defineProperty$3(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$2(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$5(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$5(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$5(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$1 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$5(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$2({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var ApplyModal = function ApplyModal(_ref) {
+  var setOpen = _ref.setOpen,
+      config = _ref.config,
+      save = _ref.save,
+      _ref$strings = _ref.strings,
+      strings = _ref$strings === void 0 ? {} : _ref$strings;
+  var _strings$closeIcon = strings.closeIcon,
+      closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
+      _strings$title = strings.title,
+      title = _strings$title === void 0 ? 'Apply Config' : _strings$title,
+      _strings$description = strings.description,
+      description = _strings$description === void 0 ? 'Are you sure you want to apply the {configName} config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.' : _strings$description,
+      _strings$cancelButton = strings.cancelButton,
+      cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
+      _strings$actionButton = strings.actionButton,
+      actionButton = _strings$actionButton === void 0 ? 'Apply' : _strings$actionButton;
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      isSaving = _React$useState2[0],
+      setIsSaving = _React$useState2[1];
+
+  var closeModal = function closeModal() {
+    setOpen(false);
+  };
+
+  var doAction = function doAction() {
+    setIsSaving(true);
+    save(config, closeModal);
+  };
+
+  var modalContent = function modalContent() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sui-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
+    }, /*#__PURE__*/React.createElement(ButtonIcon$1, {
+      label: closeIcon,
+      icon: "close",
+      iconSize: "md",
+      className: "sui-button-float--right",
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement("h2", {
+      id: "sui-config-edit-title"
+    }, title), /*#__PURE__*/React.createElement("p", {
+      className: "sui-description"
+    }, description.replace('{configName}', config.name))), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60"
+    }, /*#__PURE__*/React.createElement(Button, {
+      design: "ghost",
+      label: cancelButton,
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement(Button, {
+      color: "blue",
+      icon: "check",
+      label: actionButton,
+      onClick: doAction,
+      loading: isSaving
+    })));
+  };
+
+  return /*#__PURE__*/React.createElement(Modal, {
+    mounted: true,
+    dialogId: "sui-configs-apply-modal",
+    titleId: "sui-config-apply-title",
+    size: "sm",
+    modalContent: modalContent
+  });
+};
+
+var DeleteModal = function DeleteModal(_ref) {
+  var setOpen = _ref.setOpen,
+      config = _ref.config,
+      save = _ref.save,
+      _ref$strings = _ref.strings,
+      strings = _ref$strings === void 0 ? {} : _ref$strings;
+  var _strings$closeIcon = strings.closeIcon,
+      closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
+      _strings$title = strings.title,
+      title = _strings$title === void 0 ? 'Delete Configuration File' : _strings$title,
+      _strings$description = strings.description,
+      description = _strings$description === void 0 ? 'Are you sure you want to delete {configName}? You will no longer be able to apply it to this or other connected sites.' : _strings$description,
+      _strings$cancelButton = strings.cancelButton,
+      cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
+      _strings$actionButton = strings.actionButton,
+      actionButton = _strings$actionButton === void 0 ? 'Delete' : _strings$actionButton;
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      isSaving = _React$useState2[0],
+      setIsSaving = _React$useState2[1];
+
+  var closeModal = function closeModal() {
+    setOpen(false);
+  };
+
+  var doAction = function doAction() {
+    setIsSaving(true);
+    save(config, closeModal);
+  };
+
+  var modalContent = function modalContent() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sui-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
+    }, /*#__PURE__*/React.createElement(ButtonIcon$1, {
+      label: closeIcon,
+      icon: "close",
+      iconSize: "md",
+      className: "sui-button-float--right",
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement("h2", {
+      id: "smush-config-delete-title"
+    }, title), /*#__PURE__*/React.createElement("p", {
+      className: "sui-description"
+    }, description.replace('{configName}', config.name))), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60"
+    }, /*#__PURE__*/React.createElement(Button, {
+      design: "ghost",
+      label: cancelButton,
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement(Button, {
+      color: "red",
+      label: actionButton,
+      onClick: doAction,
+      loading: isSaving
+    })));
+  };
+
+  return /*#__PURE__*/React.createElement(Modal, {
+    mounted: true,
+    dialogId: "sui-configs-delete-modal",
+    titleId: "sui-config-delete-title",
+    size: "sm",
+    modalContent: modalContent
+  });
+};
+
+function _extends$2() {
+  _extends$2 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$2.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$6(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$6(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$6(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var Input = function Input(_ref) {
+  var id = _ref.id,
+      size = _ref.size,
+      label = _ref.label,
+      description = _ref.description,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'text' : _ref$type,
+      props = _objectWithoutProperties$6(_ref, ["id", "size", "label", "description", "type"]);
+
+  var uniqueId = id && '' !== id ? id : props.property;
+  var clazz = 'sui-form-control';
+
+  switch (size) {
+    case 'sm':
+    case 'small':
+      clazz += ' sui-input-sm';
+      break;
+
+    case 'md':
+    case 'medium':
+      clazz += ' sui-input-md';
+      break;
+  }
+
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sui-form-field"
+  }, label && /*#__PURE__*/React.createElement("label", {
+    htmlFor: uniqueId,
+    className: "sui-label"
+  }, label), /*#__PURE__*/React.createElement("input", _extends$2({
+    id: uniqueId,
+    type: type,
+    className: clazz
+  }, props)), description && /*#__PURE__*/React.createElement("p", {
+    className: "sui-description"
+  }, description));
+};
+
+var EditModal = function EditModal(_ref) {
+  var setOpen = _ref.setOpen,
+      config = _ref.config,
+      save = _ref.save,
+      _ref$strings = _ref.strings,
+      strings = _ref$strings === void 0 ? {} : _ref$strings;
+  var configName = config ? config.name : '',
+      configDescription = config ? config.description : '';
+
+  var _React$useState = React.useState(configName),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      nameValue = _React$useState2[0],
+      setNameValue = _React$useState2[1];
+
+  var _React$useState3 = React.useState(configDescription),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      descriptionValue = _React$useState4[0],
+      setDescriptionValue = _React$useState4[1];
+
+  var _React$useState5 = React.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      errorMessage = _React$useState6[0],
+      setErrorMessage = _React$useState6[1];
+
+  var _React$useState7 = React.useState(false),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      isSaving = _React$useState8[0],
+      setIsSaving = _React$useState8[1];
+
+  var _strings$closeIcon = strings.closeIcon,
+      closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
+      _strings$nameInput = strings.nameInput,
+      nameInput = _strings$nameInput === void 0 ? 'Config name' : _strings$nameInput,
+      _strings$descriptionI = strings.descriptionInput,
+      descriptionInput = _strings$descriptionI === void 0 ? 'Description' : _strings$descriptionI,
+      _strings$emptyNameErr = strings.emptyNameError,
+      emptyNameError = _strings$emptyNameErr === void 0 ? 'The config name is required' : _strings$emptyNameErr,
+      _strings$actionButton = strings.actionButton,
+      actionButton = _strings$actionButton === void 0 ? 'Save' : _strings$actionButton,
+      _strings$cancelButton = strings.cancelButton,
+      cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
+      _strings$editTitle = strings.editTitle,
+      editTitle = _strings$editTitle === void 0 ? 'Rename Config' : _strings$editTitle,
+      _strings$editDescript = strings.editDescription,
+      editDescription = _strings$editDescript === void 0 ? 'Change your config name to something recognizable.' : _strings$editDescript,
+      _strings$createTitle = strings.createTitle,
+      createTitle = _strings$createTitle === void 0 ? 'Save Config' : _strings$createTitle,
+      _strings$createDescri = strings.createDescription,
+      createDescription = _strings$createDescri === void 0 ? 'Save your current settings configuration. You’ll be able to then download and apply it to your other sites.' : _strings$createDescri;
+
+  var closeModal = function closeModal() {
+    setOpen(false);
+  };
+
+  var displayErrorMessage = function displayErrorMessage(message) {
+    setErrorMessage(message);
+    setIsSaving(false);
+  };
+
+  var doAction = function doAction() {
+    if (!nameValue.trim().length) {
+      setErrorMessage(emptyNameError);
+      return;
+    }
+
+    setErrorMessage(false);
+    setIsSaving(true);
+    var data = new FormData();
+    data.append('name', nameValue);
+    data.append('description', descriptionValue);
+    save(config, data, displayErrorMessage, closeModal);
+  };
+
+  var modalContent = function modalContent() {
+    // If a config is provided, we're editing a config. We're saving a new one otherwise.
+    var title = config ? editTitle : createTitle,
+        description = config ? editDescription : createDescription;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sui-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
+    }, /*#__PURE__*/React.createElement(ButtonIcon$1, {
+      label: closeIcon,
+      icon: "close",
+      iconSize: "md",
+      className: "sui-button-float--right",
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement("h2", {
+      id: "sui-config-edit-title"
+    }, title), /*#__PURE__*/React.createElement("p", {
+      className: "sui-description"
+    }, description)), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      role: "alert",
+      id: "configs-edit-modal-error-message",
+      className: "sui-notice sui-notice-error",
+      "aria-live": "assertive",
+      style: {
+        display: errorMessage ? 'block' : ''
+      }
+    }, errorMessage && /*#__PURE__*/React.createElement("div", {
+      className: "sui-notice-content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-notice-message"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sui-notice-icon sui-icon-info sui-md",
+      "aria-hidden": "true"
+    }), /*#__PURE__*/React.createElement("p", null, errorMessage)))), /*#__PURE__*/React.createElement(Input, {
+      label: nameInput,
+      name: "name",
+      value: nameValue,
+      onChange: function onChange(e) {
+        return setNameValue(e.target.value);
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "sui-form-field"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sui-label",
+      htmlFor: "sui-edit-config-textarea"
+    }, descriptionInput), /*#__PURE__*/React.createElement("textarea", {
+      id: "sui-edit-config-textarea",
+      className: "sui-form-control",
+      name: "description",
+      value: descriptionValue,
+      onChange: function onChange(e) {
+        return setDescriptionValue(e.target.value);
+      }
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-footer sui-content-separated sui-flatten sui-spacing-top--0"
+    }, /*#__PURE__*/React.createElement(Button, {
+      design: "ghost",
+      label: cancelButton,
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement(Button, {
+      color: "blue",
+      icon: "save",
+      label: actionButton,
+      onClick: doAction,
+      loading: isSaving
+    })));
+  };
+
+  return /*#__PURE__*/React.createElement(Modal, {
+    mounted: true,
+    dialogId: "sui-configs-edit-modal",
+    titleId: "sui-config-edit-title",
+    size: "sm",
+    modalContent: modalContent
+  });
+};
+
 var screen$1 = {
   mobile: 480,
   tablet: 783,
@@ -1037,8 +1868,8 @@ function _createClass$2(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+function _extends$3() {
+  _extends$3 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -1052,7 +1883,7 @@ function _extends$1() {
     return target;
   };
 
-  return _extends$1.apply(this, arguments);
+  return _extends$3.apply(this, arguments);
 }
 
 function _inherits$2(subClass, superClass) {
@@ -1161,251 +1992,6 @@ function _defineProperty$1$2(obj, key, value) {
   return obj;
 }
 
-function ownKeys$2(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2$2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys$2(Object(source), true).forEach(function (key) {
-        _defineProperty$1$2(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys$2(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function _objectWithoutPropertiesLoose$4(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-function _objectWithoutProperties$4(source, excluded) {
-  if (source == null) return {};
-
-  var target = _objectWithoutPropertiesLoose$4(source, excluded);
-
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-var ButtonIcon$1 = function ButtonIcon(_ref) {
-  var label = _ref.label,
-      icon = _ref.icon,
-      iconSize = _ref.iconSize,
-      _ref$design = _ref.design,
-      design = _ref$design === void 0 ? "solid" : _ref$design,
-      color = _ref.color,
-      className = _ref.className,
-      loading = _ref.loading,
-      props = _objectWithoutProperties$4(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
-
-  var loader = /*#__PURE__*/React.createElement("span", {
-    className: "sui-icon-loader sui-loading",
-    style: {
-      position: "relative"
-    },
-    "aria-hidden": "true"
-  });
-  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
-    "aria-hidden": "true"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "sui-screen-reader-text"
-  }, label));
-  className = "sui-button-icon ".concat(className || ''); // Set button color.
-
-  switch (color) {
-    case "blue":
-    case "green":
-    case "red":
-    case "orange":
-    case "purple":
-    case "yellow":
-    case "white":
-      className += " sui-button-" + color;
-      break;
-
-    case "gray":
-    default:
-      className += "";
-      break;
-  } // Set button style.
-
-
-  switch (design) {
-    case "ghost":
-    case "outlined":
-      className += " sui-button-" + design;
-      break;
-
-    case "solid":
-    default:
-      className += "";
-      break;
-  } // Set loading class.
-
-
-  if (loading) {
-    className += " sui-button-onload";
-  }
-
-  var htmlTag = props.href ? 'a' : 'button';
-  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$2({
-    className: className,
-    disabled: props.disabled || loading
-  }, props), loading ? loader : content);
-};
-
-function _templateObject$1() {
-  var data = _taggedTemplateLiteral$2(["\n    width: 30px;\n    height: 30px;\n    margin-right: 10px;\n    border-radius: 10px;\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n"]);
-
-  _templateObject$1 = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-var ItemImage = styled.span(_templateObject$1());
-
-var AccordionItemHeader = /*#__PURE__*/function (_Component3) {
-  _inherits$2(AccordionItemHeader, _Component3);
-
-  var _super3 = _createSuper$2(AccordionItemHeader);
-
-  function AccordionItemHeader(props) {
-    var _this3;
-
-    _classCallCheck$2(this, AccordionItemHeader);
-
-    _this3 = _super3.call(this, props);
-    _this3.state = {
-      open: false
-    };
-    return _this3;
-  }
-
-  _createClass$2(AccordionItemHeader, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.setState({
-        open: this.props.state
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var open = this.state.open;
-      var icon = this.props.icon && '' !== this.props.icon ? /*#__PURE__*/React.createElement("span", {
-        className: "sui-icon-".concat(this.props.icon),
-        "aria-hidden": "true"
-      }) : '';
-      var image = this.props.image && '' !== this.props.image ? /*#__PURE__*/React.createElement(ItemImage, {
-        style: {
-          backgroundImage: "url(".concat(this.props.image, ")")
-        }
-      }) : '';
-      var title = /*#__PURE__*/React.createElement("div", {
-        className: "sui-accordion-item-title"
-      }, icon, image, this.props.title);
-      var indicator = /*#__PURE__*/React.createElement(ButtonIcon$1, {
-        icon: "chevron-down",
-        label: open ? 'Close section' : 'Open section',
-        className: "sui-button-icon sui-accordion-open-indicator"
-      });
-      var actions = /*#__PURE__*/React.createElement("div", {
-        className: "sui-accordion-col-auto"
-      }, this.props.children, indicator);
-      return /*#__PURE__*/React.createElement("div", _extends$1({
-        className: "sui-accordion-item-header"
-      }, this.props), title, actions);
-    }
-  }]);
-
-  return AccordionItemHeader;
-}(Component);
-
-var AccordionItemBody = /*#__PURE__*/function (_Component4) {
-  _inherits$2(AccordionItemBody, _Component4);
-
-  var _super4 = _createSuper$2(AccordionItemBody);
-
-  function AccordionItemBody(props) {
-    _classCallCheck$2(this, AccordionItemBody);
-
-    return _super4.call(this, props);
-  }
-
-  _createClass$2(AccordionItemBody, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "sui-accordion-item-body"
-      }, this.props.children);
-    }
-  }]);
-
-  return AccordionItemBody;
-}(Component);
-
-function _defineProperty$3(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
 function ownKeys$3(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -1426,7 +2012,7 @@ function _objectSpread2$3(target) {
 
     if (i % 2) {
       ownKeys$3(Object(source), true).forEach(function (key) {
-        _defineProperty$3(target, key, source[key]);
+        _defineProperty$1$2(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
@@ -1440,7 +2026,7 @@ function _objectSpread2$3(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$5(source, excluded) {
+function _objectWithoutPropertiesLoose$7(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1455,10 +2041,10 @@ function _objectWithoutPropertiesLoose$5(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$5(source, excluded) {
+function _objectWithoutProperties$7(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$5(source, excluded);
+  var target = _objectWithoutPropertiesLoose$7(source, excluded);
 
   var key, i;
 
@@ -1485,7 +2071,7 @@ var ButtonIcon$2 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$5(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$7(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1544,6 +2130,98 @@ var ButtonIcon$2 = function ButtonIcon(_ref) {
   }, props), loading ? loader : content);
 };
 
+function _templateObject$1() {
+  var data = _taggedTemplateLiteral$2(["\n    width: 30px;\n    height: 30px;\n    margin-right: 10px;\n    border-radius: 10px;\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n"]);
+
+  _templateObject$1 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var ItemImage = styled.span(_templateObject$1());
+
+var AccordionItemHeader = /*#__PURE__*/function (_Component3) {
+  _inherits$2(AccordionItemHeader, _Component3);
+
+  var _super3 = _createSuper$2(AccordionItemHeader);
+
+  function AccordionItemHeader(props) {
+    var _this3;
+
+    _classCallCheck$2(this, AccordionItemHeader);
+
+    _this3 = _super3.call(this, props);
+    _this3.state = {
+      open: false
+    };
+    return _this3;
+  }
+
+  _createClass$2(AccordionItemHeader, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        open: this.props.state
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var open = this.state.open;
+      var icon = this.props.icon && '' !== this.props.icon ? /*#__PURE__*/React.createElement("span", {
+        className: "sui-icon-".concat(this.props.icon),
+        "aria-hidden": "true"
+      }) : '';
+      var image = this.props.image && '' !== this.props.image ? /*#__PURE__*/React.createElement(ItemImage, {
+        style: {
+          backgroundImage: "url(".concat(this.props.image, ")")
+        }
+      }) : '';
+      var title = /*#__PURE__*/React.createElement("div", {
+        className: "sui-accordion-item-title"
+      }, icon, image, this.props.title);
+      var indicator = /*#__PURE__*/React.createElement(ButtonIcon$2, {
+        icon: "chevron-down",
+        label: open ? 'Close section' : 'Open section',
+        className: "sui-button-icon sui-accordion-open-indicator"
+      });
+      var actions = /*#__PURE__*/React.createElement("div", {
+        className: "sui-accordion-col-auto"
+      }, this.props.children, indicator);
+      return /*#__PURE__*/React.createElement("div", _extends$3({
+        className: "sui-accordion-item-header"
+      }, this.props), title, actions);
+    }
+  }]);
+
+  return AccordionItemHeader;
+}(Component);
+
+var AccordionItemBody = /*#__PURE__*/function (_Component4) {
+  _inherits$2(AccordionItemBody, _Component4);
+
+  var _super4 = _createSuper$2(AccordionItemBody);
+
+  function AccordionItemBody(props) {
+    _classCallCheck$2(this, AccordionItemBody);
+
+    return _super4.call(this, props);
+  }
+
+  _createClass$2(AccordionItemBody, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "sui-accordion-item-body"
+      }, this.props.children);
+    }
+  }]);
+
+  return AccordionItemBody;
+}(Component);
+
 function _classCallCheck$3(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -1566,8 +2244,8 @@ function _createClass$3(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _extends$2() {
-  _extends$2 = Object.assign || function (target) {
+function _extends$4() {
+  _extends$4 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -1581,7 +2259,7 @@ function _extends$2() {
     return target;
   };
 
-  return _extends$2.apply(this, arguments);
+  return _extends$4.apply(this, arguments);
 }
 
 function _inherits$3(subClass, superClass) {
@@ -1724,7 +2402,7 @@ function _objectSpread2$4(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$6(source, excluded) {
+function _objectWithoutPropertiesLoose$8(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1739,10 +2417,10 @@ function _objectWithoutPropertiesLoose$6(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$6(source, excluded) {
+function _objectWithoutProperties$8(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$6(source, excluded);
+  var target = _objectWithoutPropertiesLoose$8(source, excluded);
 
   var key, i;
 
@@ -1769,7 +2447,7 @@ var ButtonIcon$3 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$6(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$8(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1966,7 +2644,7 @@ var Dropdown = /*#__PURE__*/function (_Component) {
         var label = /*#__PURE__*/React.createElement(Fragment, null, icon, option.props.name, tag);
 
         if (option.props.href) {
-          return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Link, _extends$2({
+          return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Link, _extends$4({
             href: option.props.href
           }, option.props), label));
         }
@@ -2017,7 +2695,7 @@ var Dropdown = /*#__PURE__*/function (_Component) {
 }(Component);
 
 var _templateObject$3;
-var Table = styled.table(_templateObject$3 || (_templateObject$3 = _taggedTemplateLiteral(["\n[class*=\"sui-2-\"] .sui-wrap && {\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\ttable-layout: fixed;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\tdiv {\n\t\t\t\toverflow: hidden;\n\t\t\t\tdisplay: -webkit-box;\n\t\t\t\ttext-overflow: ellipsis;\n\t\t\t\t-webkit-line-clamp: 2;\n\t\t\t\t-webkit-box-orient: vertical\n\t\t\t}\n\n\t\t\t&:first-child {\n\t\t\t\twidth: 45%;\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\twidth: 55%;\n\t\t\t\tpadding-right: 20px;\n\t\t\t}\n\t\t}\n\t}\n}\n"])));
+var Table = styled.table(_templateObject$3 || (_templateObject$3 = _taggedTemplateLiteral(["\n[class*=\"sui-2-\"] .sui-wrap && {\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\ttable-layout: fixed;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\tdiv {\n\t\t\t\toverflow: hidden;\n\t\t\t\tdisplay: -webkit-box;\n\t\t\t\ttext-overflow: ellipsis;\n\t\t\t\t-webkit-line-clamp: 2;\n\t\t\t\t-webkit-box-orient: vertical\n\t\t\t}\n\n\t\t\t&:first-child {\n\t\t\t\twidth: 45%;\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\twidth: 55%;\n\t\t\t\tpadding-right: 20px;\n\t\t\t\twhite-space: pre-wrap;\n\t\t\t}\n\t\t}\n\t}\n}\n"])));
 var PresetsTable = /*#__PURE__*/function (_Component) {
   _inherits(PresetsTable, _Component);
 
@@ -2033,7 +2711,7 @@ var PresetsTable = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var rows = Children.map(this.props.children, function (row) {
-        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, row.props.name)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, row.props.status)));
+        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, row.props.name), /*#__PURE__*/React.createElement("td", null, row.props.status));
       });
       return /*#__PURE__*/React.createElement(Table, this.props, /*#__PURE__*/React.createElement("tbody", null, rows));
     }
@@ -2071,7 +2749,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "accordionHeadApplyClicked", function (e) {
       e.stopPropagation();
 
-      _this.props.applyAction(_this.props.id);
+      _this.props.applyAction();
     });
 
     _this.state = {
@@ -2122,9 +2800,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/React.createElement("div", {
         name: this.props.applyLabel || 'Apply',
         icon: "check",
-        onClick: function onClick() {
-          return applyAction(_this2.props.id);
-        }
+        onClick: applyAction
       }), /*#__PURE__*/React.createElement("div", {
         name: this.props.downloadLabel || 'Download',
         icon: "download",
@@ -2134,16 +2810,12 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/React.createElement("div", {
         name: this.props.editLabel || 'Name and Description',
         icon: "pencil",
-        onClick: function onClick() {
-          return editAction(_this2.props.id);
-        }
+        onClick: editAction
       }), /*#__PURE__*/React.createElement("div", {
         name: this.props.deleteLabel || 'Delete',
         icon: "trash",
         color: "red",
-        onClick: function onClick() {
-          return deleteAction(_this2.props.id);
-        }
+        onClick: deleteAction
       }))), /*#__PURE__*/React.createElement(AccordionItemBody, null, /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxBody, null, /*#__PURE__*/React.createElement(Header$1, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Label, {
         className: "sui-label"
       }, this.props.name), /*#__PURE__*/React.createElement(Description, {
@@ -2151,7 +2823,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
       }, this.props.description)), /*#__PURE__*/React.createElement("div", {
         className: "sui-tooltip",
         "data-tooltip": this.props.editLabel || 'Edit Name and Description'
-      }, /*#__PURE__*/React.createElement(ButtonIcon$2, {
+      }, /*#__PURE__*/React.createElement(ButtonIcon$1, {
         icon: "pencil",
         label: this.props.editLabel,
         design: "outlined",
@@ -2173,27 +2845,47 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
 }(Component);
 
 var PresetsWidget = function PresetsWidget(_ref) {
-  var configsList = _ref.children,
-      props = _objectWithoutProperties(_ref, ["children"]);
+  var configsList = _ref.configsList,
+      applyModalData = _ref.applyModalData,
+      deleteModalData = _ref.deleteModalData,
+      editModalData = _ref.editModalData,
+      props = _objectWithoutProperties(_ref, ["configsList", "applyModalData", "deleteModalData", "editModalData"]);
+
+  var _React$useState = React.useState(null),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      currentConfig = _React$useState2[0],
+      setCurrentConfig = _React$useState2[1];
+
+  var _React$useState3 = React.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      isApplyOpen = _React$useState4[0],
+      setIsApplyOpen = _React$useState4[1];
+
+  var _React$useState5 = React.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      isDeleteOpen = _React$useState6[0],
+      setIsDeleteOpen = _React$useState6[1];
+
+  var _React$useState7 = React.useState(false),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      isEditOpen = _React$useState8[0],
+      setIsEditOpen = _React$useState8[1];
 
   var isEmpty = !configsList || 0 === configsList.length;
-  var items = Children.map(configsList, function (item) {
-    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
-      "default": item.props["default"] || false,
-      name: item.props.name,
-      description: item.props.description,
-      image: item.props.image,
-      applyLabel: item.props.applyLabel,
-      applyAction: item.props.applyAction,
-      downloadLabel: item.props.downloadLabel,
-      downloadAction: item.props.downloadAction,
-      editLabel: item.props.editLabel,
-      editAction: item.props.editAction,
-      deleteLabel: item.props.deleteLabel,
-      deleteAction: item.props.deleteAction
-    }, item.props.children);
-  });
-  return /*#__PURE__*/React.createElement(Box, null, !isEmpty && /*#__PURE__*/React.createElement(BoxHeader, {
+
+  var openModal = function openModal(action, config) {
+    setCurrentConfig(config);
+
+    if ('apply' === action) {
+      setIsApplyOpen(true);
+    } else if ('delete' === action) {
+      setIsDeleteOpen(true);
+    } else {
+      setIsEditOpen(true);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Box, null, !isEmpty && /*#__PURE__*/React.createElement(BoxHeader, {
     titleIcon: "wrench-tool",
     title: props.title,
     tagLabel: configsList.length
@@ -2207,17 +2899,62 @@ var PresetsWidget = function PresetsWidget(_ref) {
     style: {
       borderBottom: 0
     }
-  }, items), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button, {
+  }, configsList.map(function (item) {
+    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
+      key: item.id,
+      "default": item["default"] || false,
+      name: item.name,
+      description: item.description,
+      image: item.image,
+      applyLabel: item.applyLabel,
+      applyAction: function applyAction() {
+        return openModal('apply', item);
+      },
+      downloadLabel: item.downloadLabel,
+      downloadAction: item.downloadAction,
+      editLabel: item.editLabel,
+      editAction: function editAction() {
+        return openModal('edit', item);
+      },
+      deleteLabel: item.deleteLabel,
+      deleteAction: function deleteAction() {
+        return openModal('delete', item);
+      }
+    }, item.config.map(function (item, index) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: index,
+        name: item.label,
+        status: item.value
+      });
+    }));
+  })), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button, {
     icon: "save",
     label: props.saveLabel,
     color: "blue",
-    onClick: props.saveNewConfig
+    onClick: function onClick() {
+      return openModal('edit', null);
+    }
   }), /*#__PURE__*/React.createElement(Button, {
     icon: "wrench-tool",
     label: props.manageLabel,
     design: "ghost",
     href: props.manageConfigsUrl
-  })));
+  }))), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
+    setOpen: setIsApplyOpen,
+    config: currentConfig,
+    save: applyModalData.action,
+    strings: applyModalData.strings
+  }), isDeleteOpen && /*#__PURE__*/React.createElement(DeleteModal, {
+    setOpen: setIsDeleteOpen,
+    config: currentConfig,
+    save: deleteModalData.action,
+    strings: deleteModalData.strings
+  }), isEditOpen && /*#__PURE__*/React.createElement(EditModal, {
+    setOpen: setIsEditOpen,
+    config: currentConfig,
+    save: editModalData.action,
+    strings: editModalData.strings
+  }));
 };
 
 var _templateObject$5, _templateObject2$3, _templateObject3$2;
@@ -2225,36 +2962,84 @@ var LoadingContent = styled.div(_templateObject$5 || (_templateObject$5 = _tagge
 var LoadingWrap = styled.div(_templateObject2$3 || (_templateObject2$3 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    pointer-events: none;\n}"])));
 var LoadingMask = styled.div(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-flow: row wrap;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background-color: rgba(255,255,255,0.95);\n    border-radius: 0 0 4px 4px;\n\n    > p {\n\n    }\n}\n"])));
 var PresetsPage = function PresetsPage(_ref) {
-  var freeData = _ref.freeData,
+  var configsList = _ref.configsList,
+      applyModalData = _ref.applyModalData,
+      deleteModalData = _ref.deleteModalData,
+      editModalData = _ref.editModalData,
+      freeData = _ref.freeData,
       isLoading = _ref.isLoading,
-      configsList = _ref.children,
-      props = _objectWithoutProperties(_ref, ["freeData", "isLoading", "children"]);
+      props = _objectWithoutProperties(_ref, ["configsList", "applyModalData", "deleteModalData", "editModalData", "freeData", "isLoading"]);
+
+  var _React$useState = React.useState(null),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      currentConfig = _React$useState2[0],
+      setCurrentConfig = _React$useState2[1];
+
+  var _React$useState3 = React.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      isApplyOpen = _React$useState4[0],
+      setIsApplyOpen = _React$useState4[1];
+
+  var _React$useState5 = React.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      isDeleteOpen = _React$useState6[0],
+      setIsDeleteOpen = _React$useState6[1];
+
+  var _React$useState7 = React.useState(false),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      isEditOpen = _React$useState8[0],
+      setIsEditOpen = _React$useState8[1];
 
   var isEmpty = !configsList || 0 === configsList.length;
-  var items = Children.map(configsList, function (item) {
-    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
-      id: item.props.id,
-      "default": item.props["default"] || false,
-      name: item.props.name,
-      description: item.props.description,
-      image: item.props.image,
-      showApplyButton: true,
-      applyLabel: item.props.applyLabel,
-      applyAction: item.props.applyAction,
-      downloadLabel: item.props.downloadLabel,
-      downloadAction: item.props.downloadAction,
-      editLabel: item.props.editLabel,
-      editAction: item.props.editAction,
-      deleteLabel: item.props.deleteLabel,
-      deleteAction: item.props.deleteAction
-    }, item.props.children);
-  });
+
+  var openModal = function openModal(action, config) {
+    setCurrentConfig(config);
+
+    if ('apply' === action) {
+      setIsApplyOpen(true);
+    } else if ('delete' === action) {
+      setIsDeleteOpen(true);
+    } else {
+      setIsEditOpen(true);
+    }
+  };
+
   var Table = /*#__PURE__*/React.createElement(React.Fragment, null, !isEmpty && /*#__PURE__*/React.createElement("div", {
     className: "sui-accordion sui-accordion-flushed",
     style: {
       borderBottomWidth: 0
     }
-  }, items));
+  }, configsList.map(function (item) {
+    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
+      key: item.id,
+      id: item.id,
+      "default": item["default"] || false,
+      name: item.name,
+      description: item.description,
+      image: item.image,
+      showApplyButton: true,
+      applyLabel: item.applyLabel,
+      applyAction: function applyAction() {
+        return openModal('apply', item);
+      },
+      downloadLabel: item.downloadLabel,
+      downloadAction: item.downloadAction,
+      editLabel: item.editLabel,
+      editAction: function editAction() {
+        return openModal('edit', item);
+      },
+      deleteLabel: item.deleteLabel,
+      deleteAction: function deleteAction() {
+        return openModal('delete', item);
+      }
+    }, item.config.map(function (item, index) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: index,
+        name: item.label,
+        status: item.value
+      });
+    }));
+  })));
   var Footer = /*#__PURE__*/React.createElement(React.Fragment, null, freeData && /*#__PURE__*/React.createElement(BoxFooter, {
     display: "block"
   }, /*#__PURE__*/React.createElement(Notifications, {
@@ -2272,7 +3057,7 @@ var PresetsPage = function PresetsPage(_ref) {
   }, /*#__PURE__*/React.createElement("p", {
     className: "sui-description"
   }, props.update)));
-  return /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxHeader, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxHeader, {
     title: props.title
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {
     icon: "upload-cloud",
@@ -2292,7 +3077,9 @@ var PresetsPage = function PresetsPage(_ref) {
     icon: "save",
     label: props.saveLabel || 'Save Config',
     color: "blue",
-    onClick: props.saveNewConfig
+    onClick: function onClick() {
+      return openModal('edit', null);
+    }
   }))), /*#__PURE__*/React.createElement(BoxBody, null, props.description && /*#__PURE__*/React.createElement("p", null, props.description), !isLoading && isEmpty && /*#__PURE__*/React.createElement(Notifications, {
     type: "info"
   }, /*#__PURE__*/React.createElement("p", null, props.emptyNotice))), isLoading && /*#__PURE__*/React.createElement(LoadingContent, null, /*#__PURE__*/React.createElement(LoadingWrap, {
@@ -2305,7 +3092,22 @@ var PresetsPage = function PresetsPage(_ref) {
     style: {
       marginRight: 10
     }
-  }), props.loadingText))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, Footer));
+  }), props.loadingText))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, Footer)), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
+    setOpen: setIsApplyOpen,
+    config: currentConfig,
+    save: applyModalData.action,
+    strings: applyModalData.strings
+  }), isDeleteOpen && /*#__PURE__*/React.createElement(DeleteModal, {
+    setOpen: setIsDeleteOpen,
+    config: currentConfig,
+    save: deleteModalData.action,
+    strings: deleteModalData.strings
+  }), isEditOpen && /*#__PURE__*/React.createElement(EditModal, {
+    setOpen: setIsEditOpen,
+    config: currentConfig,
+    save: editModalData.action,
+    strings: editModalData.strings
+  }));
 };
 
 export { PresetsPage, PresetsWidget };
