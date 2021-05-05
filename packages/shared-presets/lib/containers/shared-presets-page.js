@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
+
+import ApplyModal from '../components/apply-modal';
+import DeleteModal from '../components/delete-modal';
+import EditModal from '../components/edit-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
 const LoadingContent = styled.div`
@@ -38,8 +42,33 @@ const LoadingMask = styled.div`
 }
 `;
 
-export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) => {
+export const PresetsPage = ( {
+	configsList,
+	applyModalData,
+	deleteModalData,
+	editModalData,
+	freeData,
+	isLoading,
+	...props
+} ) => {
+	const [ currentConfig, setCurrentConfig ] = React.useState( null );
+	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
+	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
+	const [isEditOpen, setIsEditOpen] = React.useState( false );
+
 	const isEmpty = ! configsList || 0 === configsList.length;
+
+	const openModal = ( action, config ) => {
+		setCurrentConfig( config );
+
+		if ( 'apply' === action ) {
+			setIsApplyOpen( true );
+		} else if ( 'delete' === action ) {
+			setIsDeleteOpen( true );
+		} else {
+			setIsEditOpen( true );
+		}
+	};
 
 	const Table = (
 		<React.Fragment>
@@ -60,13 +89,13 @@ export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) =>
 							image={ item.image }
 							showApplyButton={ true }
 							applyLabel={ item.applyLabel }
-							applyAction={ item.applyAction }
+							applyAction={ () => openModal( 'apply', item ) }
 							downloadLabel={ item.downloadLabel }
 							downloadAction={ item.downloadAction }
 							editLabel={ item.editLabel }
-							editAction={ item.editAction }
+							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ item.deleteLabel }
-							deleteAction={ item.deleteAction }
+							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ item.config.map( ( item, index ) => (
 								<div key={ index } name={ item.label } status={ item.value } />
@@ -114,75 +143,101 @@ export const PresetsPage = ( { freeData, isLoading, configsList, ...props } ) =>
 	);
 
 	return (
-		<Box>
+		<React.Fragment>
+			<Box>
+				<BoxHeader title={ props.title }>
+					<div>
+						<Button
+							icon="upload-cloud"
+							label={ props.uploadLabel || 'Upload' }
+							design="ghost"
+							htmlFor="sui-upload-configs-input"
+						/>
+						<input
+							id="sui-upload-configs-input"
+							type="file"
+							name="config_file"
+							className="sui-hidden"
+							value=""
+							readOnly="readonly"
+							onChange={ props.uploadConfig }
+							accept=".json"
+						/>
+						<Button
+							icon="save"
+							label={ props.saveLabel || 'Save Config' }
+							color="blue"
+							onClick={ () => openModal( 'edit', null ) }
+						/>
+					</div>
+				</BoxHeader>
 
-			<BoxHeader title={ props.title }>
-				<div>
-					<Button
-						icon="upload-cloud"
-						label={ props.uploadLabel || 'Upload' }
-						design="ghost"
-						htmlFor="sui-upload-configs-input"
-					/>
-					<input
-						id="sui-upload-configs-input"
-						type="file"
-						name="config_file"
-						className="sui-hidden"
-						value=""
-						readOnly="readonly"
-						onChange={ props.uploadConfig }
-						accept=".json"
-					/>
-					<Button
-						icon="save"
-						label={ props.saveLabel || 'Save Config' }
-						color="blue"
-						onClick={ props.saveNewConfig }
-					/>
-				</div>
-			</BoxHeader>
+				<BoxBody>
 
-			<BoxBody>
+					{ props.description && (
+						<p>{ props.description }</p>
+					)}
 
-				{ props.description && (
-					<p>{ props.description }</p>
+					{ !isLoading && isEmpty && (
+						<Notifications type="info">
+							<p>{ props.emptyNotice }</p>
+						</Notifications>
+					)}
+
+				</BoxBody>
+
+				{ isLoading && (
+					<LoadingContent>
+						<LoadingWrap aria-hidden="true">
+							{ Table }
+							{ Footer }
+						</LoadingWrap>
+						<LoadingMask>
+							<p className="sui-description">
+								<span
+									className="sui-icon-loader sui-loading"
+									aria-hidden="true"
+									style={ { marginRight: 10 } }
+								/>
+								{ props.loadingText }
+							</p>
+						</LoadingMask>
+					</LoadingContent>
 				)}
 
-				{ !isLoading && isEmpty && (
-					<Notifications type="info">
-						<p>{ props.emptyNotice }</p>
-					</Notifications>
-				)}
-
-			</BoxBody>
-
-			{ isLoading && (
-				<LoadingContent>
-					<LoadingWrap aria-hidden="true">
+				{ !isLoading && (
+					<React.Fragment>
 						{ Table }
 						{ Footer }
-					</LoadingWrap>
-					<LoadingMask>
-						<p className="sui-description">
-							<span
-								className="sui-icon-loader sui-loading"
-								aria-hidden="true"
-								style={ { marginRight: 10 } }
-							/>
-							{ props.loadingText }
-						</p>
-					</LoadingMask>
-				</LoadingContent>
-			)}
+					</React.Fragment>
+				)}
 
-			{ !isLoading && (
-				<React.Fragment>
-					{ Table }
-					{ Footer }
-				</React.Fragment>
-			)}
+			</Box>
 
-		</Box>
+			{ isApplyOpen && (
+				<ApplyModal
+					setOpen={setIsApplyOpen}
+					config={currentConfig}
+					save={applyModalData.action}
+					strings={applyModalData.strings}
+				/>
+			) }
+			{ isDeleteOpen && (
+				<DeleteModal
+					setOpen={ setIsDeleteOpen }
+					config={ currentConfig }
+					save={ deleteModalData.action }
+					strings={deleteModalData.strings}
+				/>
+			) }
+			{ isEditOpen && (
+				<EditModal
+					setOpen={ setIsEditOpen }
+					config={ currentConfig }
+					save={ editModalData.action }
+					strings={editModalData.strings}
+				/>
+			) }
+		</React.Fragment>
 	);
 }
