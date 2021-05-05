@@ -148,6 +148,16 @@ primary.argTypes = {
 			strings: {},
 		},
 	},
+	editModalData: {
+		defaultValue: {
+			action: ( config, formData, setErrorMessage, closeModal ) => {
+				const message = config ? 'Editing config ' + config.name : 'Creating new config';
+				console.log( message );
+				closeModal();
+			},
+			strings: {},
+		},
+	},
     configsList: {
         defaultValue: [
             {
@@ -157,7 +167,6 @@ primary.argTypes = {
                 description: 'Recommended performance config for every site.',
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 				config: defaultConfig,
-				editAction: () => console.log( 'Editing config' ),
 				downloadAction: () => console.log( 'Downloading config' ),
             },
             {
@@ -166,7 +175,6 @@ primary.argTypes = {
                 description: 'Lazy Load, CDN, Super-Smush, PNG to JPEG Conversion, Image Resizing',
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 				config: defaultConfig,
-				editAction: () => console.log( 'Editing config' ),
 				downloadAction: () => console.log( 'Downloading config' ),
             },
         ]

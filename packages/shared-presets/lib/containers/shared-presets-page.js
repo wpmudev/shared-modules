@@ -7,6 +7,7 @@ import { Button } from '@wpmudev/react-button';
 
 import ApplyModal from '../components/apply-modal';
 import DeleteModal from '../components/delete-modal';
+import EditModal from '../components/edit-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
 const LoadingContent = styled.div`
@@ -41,10 +42,19 @@ const LoadingMask = styled.div`
 }
 `;
 
-export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData, deleteModalData, ...props } ) => {
+export const PresetsPage = ( {
+	configsList,
+	applyModalData,
+	deleteModalData,
+	editModalData,
+	freeData,
+	isLoading,
+	...props
+} ) => {
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
+	const [isEditOpen, setIsEditOpen] = React.useState( false );
 
 	const isEmpty = ! configsList || 0 === configsList.length;
 
@@ -55,6 +65,8 @@ export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData,
 			setIsApplyOpen( true );
 		} else if ( 'delete' === action ) {
 			setIsDeleteOpen( true );
+		} else {
+			setIsEditOpen( true );
 		}
 	};
 
@@ -81,7 +93,7 @@ export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData,
 							downloadLabel={ item.downloadLabel }
 							downloadAction={ item.downloadAction }
 							editLabel={ item.editLabel }
-							editAction={ item.editAction }
+							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ item.deleteLabel }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
@@ -155,7 +167,7 @@ export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData,
 							icon="save"
 							label={ props.saveLabel || 'Save Config' }
 							color="blue"
-							onClick={ props.saveNewConfig }
+							onClick={ () => openModal( 'edit', null ) }
 						/>
 					</div>
 				</BoxHeader>
@@ -216,6 +228,14 @@ export const PresetsPage = ( { freeData, isLoading, configsList, applyModalData,
 					config={ currentConfig }
 					save={ deleteModalData.action }
 					strings={deleteModalData.strings}
+				/>
+			) }
+			{ isEditOpen && (
+				<EditModal
+					setOpen={ setIsEditOpen }
+					config={ currentConfig }
+					save={ editModalData.action }
+					strings={editModalData.strings}
 				/>
 			) }
 		</React.Fragment>

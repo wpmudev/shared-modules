@@ -147,7 +147,7 @@ export class PresetsAccordionItem extends Component {
                         <div
                             name={ this.props.editLabel || 'Name and Description' }
                             icon="pencil"
-                            onClick={ () => editAction( this.props.id ) }
+                            onClick={ editAction }
                         />
                         <div
                             name={ this.props.deleteLabel || 'Delete' }
