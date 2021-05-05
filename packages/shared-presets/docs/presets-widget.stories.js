@@ -42,7 +42,6 @@ primary.args = {
 	saveLabel: 'Save Configs',
 	manageLabel: 'Manage Configs',
     emptyNotice: 'You don’t have any available config. Save preset configurations of Smush’s settings, then upload and apply them to your other sites in just a few clicks!',
-    saveNewConfig: () => console.log( 'Saving new config' ),
 	manageConfigsUrl: '#',
 	configsList: [
         {
@@ -51,9 +50,6 @@ primary.args = {
             description: 'Recommended performance config for every site.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 			config: defaultConfig,
-			editAction: () => console.log( 'Editing config' ),
-			applyAction: () => console.log( 'Applying config' ),
-			deleteAction: () => console.log( 'Deleting config' ),
 			downloadAction: () => console.log( 'Downloading config' ),
         },
         {
@@ -62,12 +58,31 @@ primary.args = {
             description: 'Donec ullamcorper nulla non metus auctor fringilla.',
             image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
 			config: defaultConfig,
-			editAction: () => console.log( 'Editing config' ),
-			applyAction: () => console.log( 'Applying config' ),
-			deleteAction: () => console.log( 'Deleting config' ),
 			downloadAction: () => console.log( 'Downloading config' ),
         }
     ],
+	applyModalData: {
+		action: ( config, closeModal ) => {
+			console.log( 'Applying config ' + config.name );
+			closeModal();
+		},
+		strings: {},
+	},
+	deleteModalData: {
+		action: ( config, closeModal ) => {
+			console.log( 'Deleting config ' + config.name );
+			closeModal();
+		},
+		strings: {},
+	},
+	editModalData: {
+		action: ( config, formData, setErrorMessage, closeModal ) => {
+			const message = config ? 'Editing config ' + config.name : 'Creating new config';
+			console.log( message );
+			closeModal();
+		},
+		strings: {},
+	},
 };
 
 export const secondary = Template.bind({});
