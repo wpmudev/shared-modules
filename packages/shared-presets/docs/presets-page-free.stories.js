@@ -8,19 +8,32 @@ export default {
 
 const Template = ({ children, ...args }) => {
     return (
-        <PresetsPage {...args}>
-            { children && children.map( ( child, index ) => (
-                <div key={ index } { ...child }>
-                    <div name="Lazy Load" status="Active" />
-                    <div name="CDN" status="Active" />
-                    <div name="Super-Smush" status="Active" />
-                    <div name="PNG to JPEG Conversion" status="Active" />
-                    <div name="Image Resizing" status="Active" />
-                </div>
-            ) ) }
-        </PresetsPage>
+        <PresetsPage {...args} />
     );
 };
+
+const defaultConfig = [
+	{
+		label: 'Lazy Load',
+		value: 'Active',
+	},
+	{
+		label: 'CDN',
+		value: 'Active',
+	},
+	{
+		label: 'Super-Smush',
+		value: 'Inactive',
+	},
+	{
+		label: 'PNG to JPEG',
+		value: 'Inactive',
+	},
+	{
+		label: 'Image Resizing',
+		value: 'Active',
+	},
+];
 
 export const primary = Template.bind({});
 primary.storyName = "Default"
@@ -116,7 +129,7 @@ primary.argTypes = {
 	saveNewConfig: {
 		defaultValue: () => console.log( 'Saving new config' ),
 	},
-    children: {
+    configsList: {
         defaultValue: [
             {
 				id: 1,
@@ -124,6 +137,7 @@ primary.argTypes = {
                 name: 'Basic Config',
                 description: 'Recommended performance config for every site.',
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+				config: defaultConfig,
 				editAction: () => console.log( 'Editing config' ),
 				applyAction: () => console.log( 'Applying config' ),
 				deleteAction: () => console.log( 'Deleting config' ),
@@ -134,6 +148,7 @@ primary.argTypes = {
                 name: 'designtest.com / JAN / 2021',
                 description: 'Lazy Load, CDN, Super-Smush, PNG to JPEG Conversion, Image Resizing',
                 image: 'https://pbs.twimg.com/profile_images/671394755951984640/GSkxXgDp_400x400.png',
+				config: defaultConfig,
 				editAction: () => console.log( 'Editing config' ),
 				applyAction: () => console.log( 'Applying config' ),
 				deleteAction: () => console.log( 'Deleting config' ),

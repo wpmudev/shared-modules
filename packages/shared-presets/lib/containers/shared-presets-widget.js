@@ -1,30 +1,11 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
-export const PresetsWidget = ( { children: configsList, ...props } ) => {
+export const PresetsWidget = ( { configsList, ...props } ) => {
 	const isEmpty = ! configsList || 0 === configsList.length;
-
-	const items = Children.map( configsList, item => (
-		<PresetsAccordionItem
-			default={ item.props.default || false }
-			name={ item.props.name }
-			description={ item.props.description }
-			image={ item.props.image }
-			applyLabel={ item.props.applyLabel }
-			applyAction={ item.props.applyAction }
-			downloadLabel={ item.props.downloadLabel }
-			downloadAction={ item.props.downloadAction }
-			editLabel={ item.props.editLabel }
-			editAction={ item.props.editAction }
-			deleteLabel={ item.props.deleteLabel }
-			deleteAction={ item.props.deleteAction }
-		>
-			{ item.props.children }
-		</PresetsAccordionItem>
-	) );
 
 	return (
 		<Box>
@@ -61,7 +42,27 @@ export const PresetsWidget = ( { children: configsList, ...props } ) => {
 					className="sui-accordion sui-accordion-flushed"
 					style={ { borderBottom: 0 } }
 				>
-					{ items }
+					{ configsList.map( item => (
+						<PresetsAccordionItem
+							key={ item.id }
+							default={ item.default || false }
+							name={ item.name }
+							description={ item.description }
+							image={ item.image }
+							applyLabel={ item.applyLabel }
+							applyAction={ item.applyAction }
+							downloadLabel={ item.downloadLabel }
+							downloadAction={ item.downloadAction }
+							editLabel={ item.editLabel }
+							editAction={ item.editAction }
+							deleteLabel={ item.deleteLabel }
+							deleteAction={ item.deleteAction }
+						>
+							{ item.config.map( ( item, index ) => (
+								<div key={ index } name={ item.label } status={ item.value } />
+							) ) }
+						</PresetsAccordionItem>
+					) ) }
 				</div>
 			)}
 
