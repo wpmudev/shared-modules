@@ -48,6 +48,8 @@ export const PresetsPage = ( {
 	deleteModalData,
 	editModalData,
 	freeData,
+	isPro,
+	isWhitelabel,
 	isLoading,
 	...props
 } ) => {
@@ -55,6 +57,24 @@ export const PresetsPage = ( {
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 	const [isEditOpen, setIsEditOpen] = React.useState( false );
+
+	const lang = Object.assign(
+		{
+			title: 'Preset configs',
+			upload: 'Upload',
+			save: 'Save config',
+			loading: 'Updating the config list…',
+			emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+			baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+			proDescription: 'You can easily apply configs to multiple sites at once via the Hub', // TODO: add link.
+			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.', // TODO: add button.
+			apply: 'Apply',
+			download: 'Download',
+			edit: 'Name and Description',
+			delete: 'Delete',
+		},
+		props.lang
+	);
 
 	const isEmpty = ! configsList || 0 === configsList.length;
 
@@ -88,13 +108,13 @@ export const PresetsPage = ( {
 							description={ item.description }
 							image={ item.image }
 							showApplyButton={ true }
-							applyLabel={ item.applyLabel }
+							applyLabel={ lang.apply }
 							applyAction={ () => openModal( 'apply', item ) }
-							downloadLabel={ item.downloadLabel }
+							downloadLabel={ lang.download }
 							downloadAction={ item.downloadAction }
-							editLabel={ item.editLabel }
+							editLabel={ lang.edit }
 							editAction={ () => openModal( 'edit', item ) }
-							deleteLabel={ item.deleteLabel }
+							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ item.config.map( ( item, index ) => (
@@ -128,14 +148,14 @@ export const PresetsPage = ( {
 				</BoxFooter>
 			)}
 
-			{ !freeData && props.update && '' !== props.update && (
+			{ isPro && (
 				<BoxFooter
 					display="block"
 					alignment="center"
 					paddingTop={ isEmpty ? 0 : 30 }
 					border={ isEmpty ? 0 : 1 }
 				>
-					<p className="sui-description">{ props.update }</p>
+					<p className="sui-description">{ lang.syncWithHub }</p>
 				</BoxFooter>
 			)}
 
@@ -145,11 +165,11 @@ export const PresetsPage = ( {
 	return (
 		<React.Fragment>
 			<Box>
-				<BoxHeader title={ props.title }>
+				<BoxHeader title={ lang.title }>
 					<div>
 						<Button
 							icon="upload-cloud"
-							label={ props.uploadLabel || 'Upload' }
+							label={ lang.upload }
 							design="ghost"
 							htmlFor="sui-upload-configs-input"
 						/>
@@ -165,7 +185,7 @@ export const PresetsPage = ( {
 						/>
 						<Button
 							icon="save"
-							label={ props.saveLabel || 'Save Config' }
+							label={ lang.save }
 							color="blue"
 							onClick={ () => openModal( 'edit', null ) }
 						/>
@@ -174,13 +194,16 @@ export const PresetsPage = ( {
 
 				<BoxBody>
 
-					{ props.description && (
-						<p>{ props.description }</p>
-					)}
+					<p>
+						{ lang.baseDescription }
+						{ isPro && !isWhitelabel &&
+							lang.proDescription
+						}
+					</p>
 
 					{ !isLoading && isEmpty && (
 						<Notifications type="info">
-							<p>{ props.emptyNotice }</p>
+							<p>{ lang.emptyNotice }</p>
 						</Notifications>
 					)}
 
@@ -199,7 +222,7 @@ export const PresetsPage = ( {
 									aria-hidden="true"
 									style={ { marginRight: 10 } }
 								/>
-								{ props.loadingText }
+								{ lang.loading }
 							</p>
 						</LoadingMask>
 					</LoadingContent>
