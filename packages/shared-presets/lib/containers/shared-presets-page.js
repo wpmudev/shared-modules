@@ -95,12 +95,12 @@ export const PresetsPage = ( {
 
 		// TODO: double check this. Don't forget multisites.
 		const settings = new wp.api.models.Settings();
-		settings.fetch()
-			.then( ( response ) => {
+		settings.fetch().then( ( response ) => {
 				const configs = response[ configsOptionName ] ? Object.values( response[ configsOptionName ] ) : null;
 				setConfigs( configs );
 			} )
-			.finally( () => setIsLoading( false ) );
+			.catch( ( res ) => requestFailureNotice( res ) )
+			.then( () => setIsLoading( false ) );
 	};
 
 	const handleUpload = ( e ) => {
@@ -171,7 +171,28 @@ export const PresetsPage = ( {
 	};
 
 	const doDownload = ( clickedConfig ) => {
-		console.log( clickedConfig );
+		const config = configs.find( ( item ) => clickedConfig.id === item.id );
+		if ( ! config ) {
+			return;
+		}
+
+		// This is unique per site.
+		delete config.hub_id;
+
+		const blob = new Blob( [ JSON.stringify( config, null, 2 ) ], {
+			type: 'application/json',
+		});
+
+		const url = window.URL.createObjectURL(blob),
+			a = document.createElement('a');
+
+		a.style.display = 'none';
+		a.href = url;
+		a.download = 'wp-plugin-config-' + config.name; // TODO: use the plugin's prefix.
+		document.body.appendChild( a );
+		a.click();
+		window.URL.revokeObjectURL( url );
+		a.remove();
 	};
 
 	// Utils to move somewhere else.
