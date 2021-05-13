@@ -89,6 +89,12 @@ export const PresetsPage = ( {
 	}, []);
 
 	const parseAndSetConfigs = ( rawConfigs ) => {
+		// There are no configs or they don't match with their schema.
+		if ( ! rawConfigs ) {
+			setConfigs( null );
+			return;
+		}
+
 		const image = !isWhitelabel ? props.urls.accordionImg : null;
 
 		// Add extra properties required by the Configs component.
