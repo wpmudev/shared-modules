@@ -45,8 +45,6 @@ const LoadingMask = styled.div`
 export const PresetsPage = ( {
 	configsOptionName,
 	actions,
-	applyModalData,
-	deleteModalData,
 	editModalData,
 	freeData,
 	isPro,
@@ -81,6 +79,7 @@ export const PresetsPage = ( {
 			applyAction: {
 				successMessage: '{configName} config has been applied successfully.',
 			},
+			deleteAction: {},
 		},
 		props.lang
 	);
@@ -135,6 +134,19 @@ export const PresetsPage = ( {
 				return;
 			}
 			successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+		})
+		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleDelete = () => {
+		actions.delete( currentConfig ).then( ( res ) => {
+			setIsDeleteOpen( false );
+
+			if ( ! res.success ) {
+				requestFailureNotice( res );
+				return;
+			}
+			retrieveConfigs();
 		})
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
@@ -342,8 +354,8 @@ export const PresetsPage = ( {
 				<DeleteModal
 					setOpen={ setIsDeleteOpen }
 					config={ currentConfig }
-					save={ deleteModalData.action }
-					strings={deleteModalData.strings}
+					save={ handleDelete }
+					strings={ lang.deleteAction }
 				/>
 			) }
 			{ isEditOpen && (

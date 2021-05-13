@@ -21,13 +21,9 @@ const DeleteModal = ( { setOpen, config, save, strings = {} } ) => {
 
 	const [ isSaving, setIsSaving ] = React.useState( false );
 
-	const closeModal = () => {
-		setOpen( false );
-	};
-
 	const doAction = () => {
 		setIsSaving( true );
-		save( config, closeModal );
+		save();
 	};
 
 	const modalContent = () => (
