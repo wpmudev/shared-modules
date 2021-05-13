@@ -43,16 +43,20 @@ const LoadingMask = styled.div`
 `;
 
 export const PresetsPage = ( {
-	configsList,
+	configsOptionName,
+	actions,
 	applyModalData,
 	deleteModalData,
 	editModalData,
 	freeData,
 	isPro,
 	isWhitelabel,
-	isLoading,
 	...props
 } ) => {
+	const [configs, setConfigs] = React.useState(null);
+	const [isLoading, setIsLoading] = React.useState(true);
+
+	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
@@ -72,11 +76,84 @@ export const PresetsPage = ( {
 			download: 'Download',
 			edit: 'Name and Description',
 			delete: 'Delete',
+			notificationDismiss: 'Dismiss notice',
+			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
 		},
 		props.lang
 	);
 
-	const isEmpty = ! configsList || 0 === configsList.length;
+	React.useEffect(() => {
+		retrieveConfigs();
+	}, []);
+
+	const parseAndSetConfigs = ( rawConfigs ) => {
+		const image = !isWhitelabel ? props.urls.accordionImg : null;
+
+		// Add extra properties required by the Configs component.
+		const parsedConfigs = Object.values( rawConfigs ).map( ( item ) => {
+			item.image = image;
+			item.downloadAction = () => console.log( 'downloading' );
+
+			return item;
+		});
+
+		setConfigs( parsedConfigs );
+	};
+
+	const retrieveConfigs = () => {
+		setIsLoading( true );
+
+		// TODO: double check this. Don't forget multisites.
+		const settings = new wp.api.models.Settings();
+		settings.fetch().then( ( response ) => {
+			parseAndSetConfigs( response[ configsOptionName ] );
+			setIsLoading( false );
+		} );
+	};
+
+	const handleConfigUpload = ( e ) => {
+		actions.upload( e ).then( ( res ) => {
+			if ( res.success ) {
+				retrieveConfigs();
+				successNotice( res.data.message );
+			} else {
+				requestFailureNotice( res );
+			}
+		})
+		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	// Utils to move somewhere else.
+	const successNotice = ( message ) => {
+		window.SUI.openNotice('wp-smush-ajax-notice', `<p>${ message }</p>`, {
+			type: 'success',
+			icon: 'check-tick',
+			dismiss: {
+				show: true,
+				label: lang.notificationDismiss,
+			},
+		});
+	};
+
+	const requestFailureNotice = ( res ) => {
+		const message = res.data
+			? res.data.error_msg
+			: lang.defaultRequestError.replace( '{status}', res.status );
+
+		// TODO: this container doesn't exist for every plugin. Fix it.
+		window.SUI.openNotice('wp-smush-ajax-notice', `<p>${ message }</p>`, {
+			type: 'error',
+			icon: 'info',
+			dismiss: {
+				show: true,
+				label: lang.notificationDismiss,
+			},
+		});
+	};
+
+	// End of utils to move somewhere else.
+
+	const isEmpty = ! configs || 0 === configs.length;
 
 	const openModal = ( action, config ) => {
 		setCurrentConfig( config );
@@ -99,7 +176,7 @@ export const PresetsPage = ( {
 						borderBottomWidth: 0
 					} }
 				>
-					{ configsList.map( item => (
+					{ configs.map( item => (
 						<PresetsAccordionItem
 							key={ item.id }
 							id={ item.id }
@@ -117,7 +194,7 @@ export const PresetsPage = ( {
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
-							{ item.config.map( ( item, index ) => (
+							{ item.humanConfig && item.humanConfig.map( ( item, index ) => (
 								<div key={ index } name={ item.label } status={ item.value } />
 							) ) }
 						</PresetsAccordionItem>
@@ -180,7 +257,7 @@ export const PresetsPage = ( {
 							className="sui-hidden"
 							value=""
 							readOnly="readonly"
-							onChange={ props.uploadConfig }
+							onChange={ handleConfigUpload }
 							accept=".json"
 						/>
 						<Button
@@ -197,7 +274,7 @@ export const PresetsPage = ( {
 					<p>
 						{ lang.baseDescription }
 						{ isPro && !isWhitelabel &&
-							lang.proDescription
+							' ' + lang.proDescription
 						}
 					</p>
 
