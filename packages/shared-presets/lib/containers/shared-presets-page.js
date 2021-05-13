@@ -115,12 +115,12 @@ export const PresetsPage = ( {
 
 	const handleUpload = ( e ) => {
 		actions.upload( e ).then( ( res ) => {
-			if ( res.success ) {
-				retrieveConfigs();
-				successNotice( res.data.message );
-			} else {
+			if ( ! res.success ) {
 				requestFailureNotice( res );
+				return;
 			}
+			retrieveConfigs();
+			successNotice( res.data.message );
 		})
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
@@ -344,10 +344,10 @@ export const PresetsPage = ( {
 
 			{ isApplyOpen && (
 				<ApplyModal
-					setOpen={setIsApplyOpen}
-					config={currentConfig}
-					save={handleApply}
-					strings={lang.applyAction}
+					setOpen={ setIsApplyOpen }
+					config={ currentConfig }
+					save={ handleApply }
+					strings={ lang.applyAction }
 				/>
 			) }
 			{ isDeleteOpen && (
