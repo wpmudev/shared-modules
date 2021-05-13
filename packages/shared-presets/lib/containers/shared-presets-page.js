@@ -90,35 +90,17 @@ export const PresetsPage = ( {
 		retrieveConfigs();
 	}, []);
 
-	const parseAndSetConfigs = ( rawConfigs ) => {
-		// There are no configs or they don't match with their schema.
-		if ( ! rawConfigs ) {
-			setConfigs( null );
-			return;
-		}
-
-		const image = !isWhitelabel ? props.urls.accordionImg : null;
-
-		// Add extra properties required by the Configs component.
-		const parsedConfigs = Object.values( rawConfigs ).map( ( item ) => {
-			item.image = image;
-			item.downloadAction = () => console.log( 'downloading' );
-
-			return item;
-		});
-
-		setConfigs( parsedConfigs );
-	};
-
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
 		// TODO: double check this. Don't forget multisites.
 		const settings = new wp.api.models.Settings();
-		settings.fetch().then( ( response ) => {
-			parseAndSetConfigs( response[ configsOptionName ] );
-			setIsLoading( false );
-		} );
+		settings.fetch()
+			.then( ( response ) => {
+				const configs = response[ configsOptionName ] ? Object.values( response[ configsOptionName ] ) : null;
+				setConfigs( configs );
+			} )
+			.finally( () => setIsLoading( false ) );
 	};
 
 	const handleUpload = ( e ) => {
@@ -188,6 +170,10 @@ export const PresetsPage = ( {
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
+	const doDownload = ( clickedConfig ) => {
+		console.log( clickedConfig );
+	};
+
 	// Utils to move somewhere else.
 	const successNotice = ( message ) => {
 		window.SUI.openNotice('wp-smush-ajax-notice', `<p>${ message }</p>`, {
@@ -232,6 +218,7 @@ export const PresetsPage = ( {
 		}
 	};
 
+	const tableImage = !isWhitelabel ? props.urls.accordionImg : null;
 	const Table = (
 		<React.Fragment>
 			{ !isEmpty && (
@@ -245,15 +232,15 @@ export const PresetsPage = ( {
 						<PresetsAccordionItem
 							key={ item.id }
 							id={ item.id }
-							default={ item.default || false }
+							default={ item.default }
 							name={ item.name }
 							description={ item.description }
-							image={ item.image }
+							image={ tableImage }
 							showApplyButton={ true }
 							applyLabel={ lang.apply }
 							applyAction={ () => openModal( 'apply', item ) }
 							downloadLabel={ lang.download }
-							downloadAction={ item.downloadAction }
+							downloadAction={ () => doDownload( item ) }
 							editLabel={ lang.edit }
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
