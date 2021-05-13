@@ -45,7 +45,6 @@ const LoadingMask = styled.div`
 export const PresetsPage = ( {
 	configsOptionName,
 	actions,
-	editModalData,
 	freeData,
 	isPro,
 	isWhitelabel,
@@ -78,6 +77,9 @@ export const PresetsPage = ( {
 			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
 			applyAction: {
 				successMessage: '{configName} config has been applied successfully.',
+			},
+			editAction: {
+				successMessage: '{configName} config created successfully.',
 			},
 			deleteAction: {},
 		},
@@ -129,6 +131,35 @@ export const PresetsPage = ( {
 			successNotice( res.data.message );
 		})
 		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleEdit = ( data, displayErrorMessage ) => {
+		const requestCallback = ( res ) => {
+			if ( ! res.success ) {
+				displayErrorMessage( res.data.error_msg );
+				return;
+			}
+			setIsEditOpen( false );
+			retrieveConfigs();
+
+			// For when editing a config only.
+			if ( currentConfig ) {
+				successNotice( lang.editAction.successMessage.replace( '{configName}', data.get( 'name' ) ) );
+			}
+		};
+
+		// Editing a config.
+		if ( currentConfig ) {
+			actions.edit( currentConfig, data )
+				.then( ( res ) => requestCallback( res ) )
+				.catch( ( res ) => requestFailureNotice( res ) );
+			return;
+		}
+
+		// Creating a new config.
+		actions.create( data )
+			.then( ( res ) => requestCallback( res ) )
+			.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
 	const handleApply = () => {
@@ -368,8 +399,8 @@ export const PresetsPage = ( {
 				<EditModal
 					setOpen={ setIsEditOpen }
 					config={ currentConfig }
-					save={ editModalData.action }
-					strings={editModalData.strings}
+					save={ handleEdit }
+					strings={ lang.editAction }
 				/>
 			) }
 		</React.Fragment>
