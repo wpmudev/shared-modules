@@ -78,6 +78,9 @@ export const PresetsPage = ( {
 			delete: 'Delete',
 			notificationDismiss: 'Dismiss notice',
 			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
+			applyAction: {
+				successMessage: '{configName} config has been applied successfully.',
+			},
 		},
 		props.lang
 	);
@@ -111,7 +114,7 @@ export const PresetsPage = ( {
 		} );
 	};
 
-	const handleConfigUpload = ( e ) => {
+	const handleUpload = ( e ) => {
 		actions.upload( e ).then( ( res ) => {
 			if ( res.success ) {
 				retrieveConfigs();
@@ -119,6 +122,19 @@ export const PresetsPage = ( {
 			} else {
 				requestFailureNotice( res );
 			}
+		})
+		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleApply = () => {
+		actions.apply( currentConfig ).then( ( res ) => {
+			setIsApplyOpen( false );
+
+			if ( ! res.success ) {
+				requestFailureNotice( res );
+				return;
+			}
+			successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
 		})
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
@@ -257,7 +273,7 @@ export const PresetsPage = ( {
 							className="sui-hidden"
 							value=""
 							readOnly="readonly"
-							onChange={ handleConfigUpload }
+							onChange={ handleUpload }
 							accept=".json"
 						/>
 						<Button
@@ -318,8 +334,8 @@ export const PresetsPage = ( {
 				<ApplyModal
 					setOpen={setIsApplyOpen}
 					config={currentConfig}
-					save={applyModalData.action}
-					strings={applyModalData.strings}
+					save={handleApply}
+					strings={lang.applyAction}
 				/>
 			) }
 			{ isDeleteOpen && (
