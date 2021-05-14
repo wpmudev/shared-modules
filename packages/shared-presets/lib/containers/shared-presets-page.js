@@ -48,6 +48,8 @@ export const PresetsPage = ( {
 	freeData,
 	isPro,
 	isWhitelabel,
+	nonce,
+	root,
 	...props
 } ) => {
 	const [configs, setConfigs] = React.useState(null);
@@ -94,8 +96,7 @@ export const PresetsPage = ( {
 		setIsLoading( true );
 
 		// TODO: double check this. Don't forget multisites.
-		const settings = new wp.api.models.Settings();
-		settings.fetch().then( ( response ) => {
+		makeRequest().then( ( response ) => {
 				const configs = response[ configsOptionName ] ? Object.values( response[ configsOptionName ] ) : null;
 				setConfigs( configs );
 			} )
@@ -196,6 +197,36 @@ export const PresetsPage = ( {
 	};
 
 	// Utils to move somewhere else.
+	/**
+	 * Promesify xhr requests.
+	 *
+	 * @param {*} data Request data.
+	 * @param {string} verb Request verb.
+	 * @return {Promise} Promised request.
+	 */
+	const makeRequest = ( data, verb = 'GET' ) => {
+		return new Promise(function (resolve, reject) {
+			const xhr = new XMLHttpRequest();
+			xhr.open( verb, `${root}wp/v2/settings`, true);
+			xhr.setRequestHeader( 'X-WP-Nonce', nonce );
+			xhr.onload = () => {
+				if (xhr.status >= 200 && xhr.status < 300) {
+					resolve(JSON.parse(xhr.response));
+				} else {
+					reject({
+						status: xhr.status,
+					});
+				}
+			};
+			xhr.onerror = () => {
+				reject({
+					status: xhr.status,
+				});
+			};
+			xhr.send(data);
+		});
+	};
+
 	const successNotice = ( message ) => {
 		window.SUI.openNotice('wp-smush-ajax-notice', `<p>${ message }</p>`, {
 			type: 'success',
