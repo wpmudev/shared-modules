@@ -51,14 +51,14 @@ export const PresetsPage = ( {
 	root,
 	...props
 } ) => {
-	const [configs, setConfigs] = React.useState(null);
-	const [isLoading, setIsLoading] = React.useState(true);
+	const [ configs, setConfigs ] = React.useState( null );
+	const [ isLoading, setIsLoading ] = React.useState( true );
 
 	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
-	const [isEditOpen, setIsEditOpen] = React.useState( false );
+	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
 
 	const lang = Object.assign(
 		{
@@ -104,7 +104,6 @@ export const PresetsPage = ( {
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		// TODO: double check this. Don't forget multisites.
 		makeRequest().then( ( response ) => {
 				const configs = response[ configsOptionName ] ? Object.values( response[ configsOptionName ] ) : null;
 				setConfigs( configs );
@@ -237,6 +236,8 @@ export const PresetsPage = ( {
 	const makeRequest = ( data, verb = 'GET' ) => {
 		return new Promise(function (resolve, reject) {
 			const xhr = new XMLHttpRequest();
+
+			// TODO: double check this. Don't forget multisites.
 			xhr.open( verb, `${root}wp/v2/settings`, true);
 			xhr.setRequestHeader( 'X-WP-Nonce', nonce );
 			xhr.setRequestHeader( 'Content-type', 'application/json' );
