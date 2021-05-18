@@ -110,8 +110,8 @@ export const PresetsPage = ( {
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		RequestsHandler.retrieveConfigs()
-			.then( ( configs ) => setConfigs( configs ) )
+		RequestsHandler.getAllLocal()
+			.then( ( newConfigs ) => setConfigs( newConfigs ? Object.values( newConfigs ) : null ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
 	};

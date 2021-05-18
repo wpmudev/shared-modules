@@ -6,60 +6,12 @@ export default class RequestHandler {
 		this.nonce = nonce;
 		this.optionName = optionName;
 
-		this.retrieveConfigs = this.retrieveConfigs.bind( this );
+		this.getAllLocal = this.getAllLocal.bind( this );
 		this.delete = this.delete.bind( this );
 	}
 
-	retrieveConfigs() {
-		return new Promise( ( resolve, reject ) => {
-			let local;
-			this.makeLocalRequest().then( ( response ) => {
-				local = response ? Object.values( response ) : null;
-
-				// We just need the local configs for Free users.
-				if ( ! this.apiKey ) {
-					resolve( local );
-				}
-
-				return this.getAllFromHub();
-			} )
-			.then( ( hubRes ) => resolve( this.syncWithHub( local, hubRes ) ) )
-			.catch( ( res ) => reject( res ) );
-		} );
-	}
-
-	getAllFromHub() {
-		return new Promise( ( resolve, reject ) => {
-			const xhr = new XMLHttpRequest();
-
-			xhr.open(
-				'GET',
-				'https://wpmudev.com/api/hub/v1/package-configs?package_id=' + this.pluginData.id,
-				true
-			);
-			xhr.setRequestHeader( 'Authorization', 'Basic ' + this.apiKey );
-			xhr.onload = () => {
-				if ( xhr.status >= 200 && xhr.status < 300 ) {
-					resolve( JSON.parse( xhr.response ) );
-				} else {
-					reject({
-						status: xhr.status,
-					});
-				}
-			};
-			xhr.onerror = () => {
-				reject({
-					status: xhr.status,
-				});
-			};
-			xhr.send();
-		} );
-	}
-
-	syncWithHub( local, hub ) {
-		console.log( local );
-		console.log( hub );
-		return local;
+	getAllLocal() {
+		return this.makeLocalRequest();
 	}
 
 	delete( configs, configId ) {
@@ -125,4 +77,56 @@ export default class RequestHandler {
 			xhr.send( data );
 		});
 	};
+
+	syncWithHub() {
+		return new Promise( ( resolve, reject ) => {
+			let local;
+			this.makeLocalRequest().then( ( response ) => {
+				local = response;
+
+				// We just need the local configs for Free users.
+				if ( ! this.apiKey ) {
+					resolve( local );
+				}
+
+				return this.getAllFromHub();
+			} )
+			.then( ( hubRes ) => resolve( this.updateLocalAndHub( local, hubRes ) ) )
+			.catch( ( res ) => reject( res ) );
+		} );
+	}
+
+	getAllFromHub() {
+		return new Promise( ( resolve, reject ) => {
+			const xhr = new XMLHttpRequest();
+
+			xhr.open(
+				'GET',
+				'https://wpmudev.com/api/hub/v1/package-configs?package_id=' + this.pluginData.id,
+				true
+			);
+			xhr.setRequestHeader( 'Authorization', 'Basic ' + this.apiKey );
+			xhr.onload = () => {
+				if ( xhr.status >= 200 && xhr.status < 300 ) {
+					resolve( JSON.parse( xhr.response ) );
+				} else {
+					reject({
+						status: xhr.status,
+					});
+				}
+			};
+			xhr.onerror = () => {
+				reject({
+					status: xhr.status,
+				});
+			};
+			xhr.send();
+		} );
+	}
+
+	updateLocalAndHub( local, hub ) {
+		console.log( local );
+		console.log( hub );
+		return local;
+	}
 }
