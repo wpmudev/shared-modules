@@ -45,7 +45,6 @@ const LoadingMask = styled.div`
 export const PresetsPage = ( {
 	configsOptionName,
 	actions,
-	freeData,
 	isPro,
 	isWhitelabel,
 	nonce,
@@ -75,6 +74,8 @@ export const PresetsPage = ( {
 			download: 'Download',
 			edit: 'Name and Description',
 			delete: 'Delete',
+			freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
+			freeButtonLabel: 'Try The Hub',
 			notificationDismiss: 'Dismiss notice',
 			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
 			applyAction: {
@@ -86,6 +87,14 @@ export const PresetsPage = ( {
 			deleteAction: {},
 		},
 		props.lang
+	);
+
+	const urls = Object.assign(
+		{
+			freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
+			accordionImg: '', // TODO: add placeholder?
+		},
+		props.urls
 	);
 
 	React.useEffect(() => {
@@ -291,7 +300,7 @@ export const PresetsPage = ( {
 		}
 	};
 
-	const tableImage = !isWhitelabel ? props.urls.accordionImg : null;
+	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 	const Table = (
 		<React.Fragment>
 			{ !isEmpty && (
@@ -332,17 +341,17 @@ export const PresetsPage = ( {
 	const Footer = (
 		<React.Fragment>
 
-			{ freeData && (
+			{ !isPro && (
 				<BoxFooter
 					display="block"
 				>
 					<Notifications type="upsell">
-						<p>{ freeData.message }</p>
+						<p>{ lang.freeNoticeMessage }</p>
 						<p>
 							<Button
-								label={ freeData.button || 'Try The Hub' }
+								label={ lang.freeButtonLabel }
 								color="purple"
-								href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
+								href={ urls.freeNoticeHub }
 								target="_blank"
 							/>
 						</p>
