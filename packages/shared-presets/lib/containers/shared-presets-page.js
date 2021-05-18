@@ -129,7 +129,7 @@ export const PresetsPage = ( {
 	};
 
 	const handleDelete = () => {
-		RequestsHandler.delete( configs, currentConfig.id )
+		RequestsHandler.delete( configs, currentConfig )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsDeleteOpen( false ) );

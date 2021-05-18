@@ -14,9 +14,13 @@ export default class RequestHandler {
 		return this.makeLocalRequest();
 	}
 
-	delete( configs, configId ) {
-		const configIndex = configs.findIndex( ( element ) => element.id === configId );
+	delete( configs, currentConfig ) {
+		// Delete from the Hub when the config has a Hub ID and we have an API key.
+		if ( this.apiKey && currentConfig.hub_id ) {
+			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'DELETE' );
+		}
 
+		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
 		if ( -1 !== configIndex ) {
 			configs.splice( configIndex, 1 );
 		}
@@ -25,10 +29,22 @@ export default class RequestHandler {
 			[ this.optionName ]: configs,
 		};
 
-		return this.makeLocalRequest( JSON.stringify( send ), 'POST' );
+		return this.makeLocalRequest( 'POST', JSON.stringify( send ) );
 	}
 
 	edit( configs, currentConfig, data ) {
+		// Edit in the Hub when the config has a Hub ID and we have an API key.
+		if ( this.apiKey && currentConfig.hub_id ) {
+			const configData = {
+				name: data.get( 'name' ),
+				description: data.get( 'description' ),
+				package: {
+					id: this.pluginData.id,
+					name: this.pluginData.name,
+				}
+			};
+			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'PATCH', JSON.stringify( configData ) );
+		}
 		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
 
 		if ( -1 !== configIndex ) {
@@ -40,7 +56,7 @@ export default class RequestHandler {
 			[ this.optionName ]: configs,
 		};
 
-		return this.makeLocalRequest( JSON.stringify( send ), 'POST' );
+		return this.makeLocalRequest( 'POST', JSON.stringify( send ) );
 	}
 
 	/**
@@ -50,18 +66,18 @@ export default class RequestHandler {
 	* @param {string} verb Request verb.
 	* @return {Promise} Promised request.
 	*/
-	makeLocalRequest ( data = null, verb = 'GET' ) {
+	makeLocalRequest( verb = 'GET', data = null ) {
 		return new Promise( ( resolve, reject ) => {
 			const xhr = new XMLHttpRequest();
 
 			// TODO: double check this. Don't forget multisites.
-			xhr.open( verb, `${this.root}wp/v2/settings`, true);
+			xhr.open( verb, `${this.root}wp/v2/settings`, true );
 			xhr.setRequestHeader( 'X-WP-Nonce', this.nonce );
 			xhr.setRequestHeader( 'Content-type', 'application/json' );
 			xhr.onload = () => {
 				if ( xhr.status >= 200 && xhr.status < 300 ) {
 					const response = JSON.parse( xhr.response ),
-				resolveValue = response[ this.optionName ] ? response[ this.optionName ] : null;
+						resolveValue = response[ this.optionName ] ? response[ this.optionName ] : null;
 					resolve( resolveValue );
 				} else {
 					reject( {
@@ -81,7 +97,7 @@ export default class RequestHandler {
 	syncWithHub() {
 		return new Promise( ( resolve, reject ) => {
 			let local;
-			this.makeLocalRequest().then( ( response ) => {
+			this.getAllLocal().then( ( response ) => {
 				local = response;
 
 				// We just need the local configs for Free users.
@@ -97,36 +113,35 @@ export default class RequestHandler {
 	}
 
 	getAllFromHub() {
+		return makeHubRequest(  JSON.stringify( { package_id: this.pluginData.id } ) );
+	}
+
+	updateLocalAndHub( local, hub ) {
+		return local;
+	}
+
+	makeHubRequest( path = '', verb = 'GET', data = null ) {
 		return new Promise( ( resolve, reject ) => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open(
-				'GET',
-				'https://wpmudev.com/api/hub/v1/package-configs?package_id=' + this.pluginData.id,
-				true
-			);
+			xhr.open( verb, `https://wpmudev.com/api/hub/v1/package-configs${ path }`, true );
+			xhr.setRequestHeader( 'Content-type', 'application/json' );
 			xhr.setRequestHeader( 'Authorization', 'Basic ' + this.apiKey );
 			xhr.onload = () => {
 				if ( xhr.status >= 200 && xhr.status < 300 ) {
 					resolve( JSON.parse( xhr.response ) );
 				} else {
-					reject({
+					reject( {
 						status: xhr.status,
-					});
+					} );
 				}
 			};
 			xhr.onerror = () => {
-				reject({
+				reject( {
 					status: xhr.status,
-				});
+				} );
 			};
-			xhr.send();
-		} );
-	}
-
-	updateLocalAndHub( local, hub ) {
-		console.log( local );
-		console.log( hub );
-		return local;
-	}
+			xhr.send( data );
+		});
+	};
 }
