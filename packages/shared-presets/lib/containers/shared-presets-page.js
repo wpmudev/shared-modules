@@ -250,7 +250,7 @@ export const PresetsPage = ( {
 	};
 
 	const successNotice = ( message ) => {
-		window.SUI.openNotice('wp-smush-ajax-notice', `<p>${ message }</p>`, {
+		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
 			type: 'success',
 			icon: 'check-tick',
 			dismiss: {
@@ -265,8 +265,7 @@ export const PresetsPage = ( {
 			? res.data.error_msg
 			: lang.defaultRequestError.replace( '{status}', res.status );
 
-		// TODO: this container doesn't exist for every plugin. Fix it.
-		window.SUI.openNotice('wp-smush-ajax-notice', `<p>${ message }</p>`, {
+		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
 			type: 'error',
 			icon: 'info',
 			dismiss: {
@@ -367,6 +366,10 @@ export const PresetsPage = ( {
 
 	return (
 		<React.Fragment>
+			<div className="sui-floating-notices">
+				<div role="alert" id="sui-configs-floating-notice" className="sui-notice" aria-live="assertive"></div>
+			</div>
+
 			<Box>
 				<BoxHeader title={ lang.title }>
 					<div>
