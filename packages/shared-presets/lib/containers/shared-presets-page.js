@@ -10,6 +10,8 @@ import DeleteModal from '../components/delete-modal';
 import EditModal from '../components/edit-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
+import Requester from '../requests-handler';
+
 const LoadingContent = styled.div`
 .sui-wrap && {
     position: relative;
@@ -47,6 +49,7 @@ export const PresetsPage = ( {
 	actions,
 	isPro,
 	isWhitelabel,
+	requestsData,
 	nonce,
 	root,
 	...props
@@ -59,6 +62,8 @@ export const PresetsPage = ( {
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
+
+	let RequestsHandler;
 
 	const lang = Object.assign(
 		{
@@ -98,16 +103,15 @@ export const PresetsPage = ( {
 	);
 
 	React.useEffect(() => {
+		RequestsHandler = new Requester( requestsData );
 		retrieveConfigs();
 	}, []);
 
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		makeRequest().then( ( response ) => {
-				const configs = response[ configsOptionName ] ? Object.values( response[ configsOptionName ] ) : null;
-				setConfigs( configs );
-			} )
+		RequestsHandler.retrieveConfigs()
+			.then( ( configs ) => setConfigs( configs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
 	};
