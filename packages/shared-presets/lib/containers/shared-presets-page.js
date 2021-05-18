@@ -44,6 +44,8 @@ const LoadingMask = styled.div`
 }
 `;
 
+let RequestsHandler;
+
 export const PresetsPage = ( {
 	configsOptionName,
 	actions,
@@ -62,8 +64,6 @@ export const PresetsPage = ( {
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
-
-	let RequestsHandler;
 
 	const lang = Object.assign(
 		{
@@ -128,29 +128,20 @@ export const PresetsPage = ( {
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
+	const handleDelete = () => {
+		RequestsHandler.delete( configs, currentConfig.id )
+			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+			.catch( ( res ) => requestFailureNotice( res ) )
+			.then( () => setIsDeleteOpen( false ) );
+	};
+
 	const handleEdit = ( data, displayErrorMessage ) => {
 		// Editing a config.
 		if ( currentConfig ) {
-			const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
-
-			if ( -1 === configIndex ) {
-				setIsEditOpen( false );
-				return;
-			}
-
-			const newConfigs = [ ...configs ];
-			newConfigs[ configIndex ].name = data.get( 'name' );
-			newConfigs[ configIndex ].description = data.get( 'description' );
-
-			const send = {
-				[ configsOptionName ]: newConfigs,
-			};
-
-			makeRequest( JSON.stringify( send ), 'POST' ).then( ( res ) => {
-				setIsEditOpen( false );
-				setConfigs( res[ configsOptionName ] );
-			})
-			.catch( ( res ) => requestFailureNotice( res ) );
+			RequestsHandler.edit( configs, currentConfig, data )
+				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsEditOpen( false ) );
 
 			return;
 		}
@@ -182,28 +173,6 @@ export const PresetsPage = ( {
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
-	const handleDelete = () => {
-		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
-
-		if ( -1 === configIndex ) {
-			setIsDeleteOpen( false );
-			return;
-		}
-
-		const newConfigs = [ ...configs ];
-		newConfigs.splice( configIndex, 1 );
-
-		const send = {
-			[ configsOptionName ]: newConfigs,
-		};
-
-		makeRequest( JSON.stringify( send ), 'POST' ).then( ( res ) => {
-			setIsDeleteOpen( false );
-			setConfigs( res[ configsOptionName ] );
-		})
-		.catch( ( res ) => requestFailureNotice( res ) );
-	};
-
 	const doDownload = ( clickedConfig ) => {
 		const config = configs.find( ( item ) => clickedConfig.id === item.id );
 		if ( ! config ) {
@@ -230,39 +199,6 @@ export const PresetsPage = ( {
 	};
 
 	// Utils to move somewhere else.
-	/**
-	 * Promesify xhr requests.
-	 *
-	 * @param {*} data Request data.
-	 * @param {string} verb Request verb.
-	 * @return {Promise} Promised request.
-	 */
-	const makeRequest = ( data, verb = 'GET' ) => {
-		return new Promise(function (resolve, reject) {
-			const xhr = new XMLHttpRequest();
-
-			// TODO: double check this. Don't forget multisites.
-			xhr.open( verb, `${root}wp/v2/settings`, true);
-			xhr.setRequestHeader( 'X-WP-Nonce', nonce );
-			xhr.setRequestHeader( 'Content-type', 'application/json' );
-			xhr.onload = () => {
-				if (xhr.status >= 200 && xhr.status < 300) {
-					resolve(JSON.parse(xhr.response));
-				} else {
-					reject({
-						status: xhr.status,
-					});
-				}
-			};
-			xhr.onerror = () => {
-				reject({
-					status: xhr.status,
-				});
-			};
-			xhr.send(data);
-		});
-	};
-
 	const successNotice = ( message ) => {
 		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
 			type: 'success',

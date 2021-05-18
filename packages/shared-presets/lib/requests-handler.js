@@ -7,13 +7,14 @@ export default class RequestHandler {
 		this.optionName = optionName;
 
 		this.retrieveConfigs = this.retrieveConfigs.bind( this );
+		this.delete = this.delete.bind( this );
 	}
 
 	retrieveConfigs() {
 		return new Promise( ( resolve, reject ) => {
 			let local;
-			this.getAllLocal().then( ( response ) => {
-				local = response[ this.optionName ] ? Object.values( response[ this.optionName ] ) : null;
+			this.makeLocalRequest().then( ( response ) => {
+				local = response ? Object.values( response ) : null;
 
 				// We just need the local configs for Free users.
 				if ( ! this.apiKey ) {
@@ -55,35 +56,73 @@ export default class RequestHandler {
 		} );
 	}
 
-	getAllLocal() {
-		return new Promise( ( resolve, reject ) => {
-			const xhr = new XMLHttpRequest();
-
-			// TODO: double check this. Don't forget multisites.
-			xhr.open( 'GET', `${this.root}wp/v2/settings`, true);
-			xhr.setRequestHeader( 'X-WP-Nonce', this.nonce );
-			xhr.setRequestHeader( 'Content-type', 'application/json' );
-			xhr.onload = () => {
-				if ( xhr.status >= 200 && xhr.status < 300 ) {
-					resolve( JSON.parse( xhr.response ) );
-				} else {
-					reject({
-						status: xhr.status,
-					});
-				}
-			};
-			xhr.onerror = () => {
-				reject({
-					status: xhr.status,
-				});
-			};
-			xhr.send();
-		});
-	}
-
 	syncWithHub( local, hub ) {
 		console.log( local );
 		console.log( hub );
 		return local;
 	}
+
+	delete( configs, configId ) {
+		const configIndex = configs.findIndex( ( element ) => element.id === configId );
+
+		if ( -1 !== configIndex ) {
+			configs.splice( configIndex, 1 );
+		}
+
+		const send = {
+			[ this.optionName ]: configs,
+		};
+
+		return this.makeLocalRequest( JSON.stringify( send ), 'POST' );
+	}
+
+	edit( configs, currentConfig, data ) {
+		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
+
+		if ( -1 !== configIndex ) {
+			configs[ configIndex ].name = data.get( 'name' );
+			configs[ configIndex ].description = data.get( 'description' );
+		}
+
+		const send = {
+			[ this.optionName ]: configs,
+		};
+
+		return this.makeLocalRequest( JSON.stringify( send ), 'POST' );
+	}
+
+	/**
+	* Promesify xhr requests.
+	*
+	* @param {*} data Request data.
+	* @param {string} verb Request verb.
+	* @return {Promise} Promised request.
+	*/
+	makeLocalRequest ( data = null, verb = 'GET' ) {
+		return new Promise( ( resolve, reject ) => {
+			const xhr = new XMLHttpRequest();
+
+			// TODO: double check this. Don't forget multisites.
+			xhr.open( verb, `${this.root}wp/v2/settings`, true);
+			xhr.setRequestHeader( 'X-WP-Nonce', this.nonce );
+			xhr.setRequestHeader( 'Content-type', 'application/json' );
+			xhr.onload = () => {
+				if ( xhr.status >= 200 && xhr.status < 300 ) {
+					const response = JSON.parse( xhr.response ),
+				resolveValue = response[ this.optionName ] ? response[ this.optionName ] : null;
+					resolve( resolveValue );
+				} else {
+					reject( {
+						status: xhr.status,
+					} );
+				}
+			};
+			xhr.onerror = () => {
+				reject( {
+					status: xhr.status,
+				} );
+			};
+			xhr.send( data );
+		});
+	};
 }
