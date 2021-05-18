@@ -117,31 +117,43 @@ export const PresetsPage = ( {
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
-		const requestCallback = ( res ) => {
-			if ( ! res.success ) {
-				displayErrorMessage( res.data.error_msg );
-				return;
-			}
-			setIsEditOpen( false );
-			retrieveConfigs();
-
-			// For when editing a config only.
-			if ( currentConfig ) {
-				successNotice( lang.editAction.successMessage.replace( '{configName}', data.get( 'name' ) ) );
-			}
-		};
-
 		// Editing a config.
 		if ( currentConfig ) {
-			actions.edit( currentConfig, data )
-				.then( ( res ) => requestCallback( res ) )
-				.catch( ( res ) => requestFailureNotice( res ) );
+			const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
+
+			if ( -1 === configIndex ) {
+				setIsEditOpen( false );
+				return;
+			}
+
+			const newConfigs = [ ...configs ];
+			newConfigs[ configIndex ].name = data.get( 'name' );
+			newConfigs[ configIndex ].description = data.get( 'description' );
+
+			const send = {
+				[ configsOptionName ]: newConfigs,
+			};
+
+			makeRequest( JSON.stringify( send ), 'POST' ).then( ( res ) => {
+				setIsEditOpen( false );
+				setConfigs( res[ configsOptionName ] );
+			})
+			.catch( ( res ) => requestFailureNotice( res ) );
+
 			return;
 		}
 
 		// Creating a new config.
 		actions.create( data )
-			.then( ( res ) => requestCallback( res ) )
+			.then( ( res ) => {
+				if ( ! res.success ) {
+					displayErrorMessage( res.data.error_msg );
+					return;
+				}
+				setIsEditOpen( false );
+				successNotice( lang.editAction.successMessage.replace( '{configName}', data.get( 'name' ) ) );
+				retrieveConfigs();
+			} )
 			.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
@@ -159,14 +171,23 @@ export const PresetsPage = ( {
 	};
 
 	const handleDelete = () => {
-		actions.delete( currentConfig ).then( ( res ) => {
-			setIsDeleteOpen( false );
+		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
 
-			if ( ! res.success ) {
-				requestFailureNotice( res );
-				return;
-			}
-			retrieveConfigs();
+		if ( -1 === configIndex ) {
+			setIsDeleteOpen( false );
+			return;
+		}
+
+		const newConfigs = [ ...configs ];
+		newConfigs.splice( configIndex, 1 );
+
+		const send = {
+			[ configsOptionName ]: newConfigs,
+		};
+
+		makeRequest( JSON.stringify( send ), 'POST' ).then( ( res ) => {
+			setIsDeleteOpen( false );
+			setConfigs( res[ configsOptionName ] );
 		})
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
@@ -209,6 +230,7 @@ export const PresetsPage = ( {
 			const xhr = new XMLHttpRequest();
 			xhr.open( verb, `${root}wp/v2/settings`, true);
 			xhr.setRequestHeader( 'X-WP-Nonce', nonce );
+			xhr.setRequestHeader( 'Content-type', 'application/json' );
 			xhr.onload = () => {
 				if (xhr.status >= 200 && xhr.status < 300) {
 					resolve(JSON.parse(xhr.response));
