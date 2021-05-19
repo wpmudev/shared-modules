@@ -351,9 +351,9 @@ export const PresetsPage = ( {
 				<BoxBody>
 
 					<p>
-						{ lang.baseDescription }
+						{ lang.baseDescription + ' ' }
 						{ isPro && !isWhitelabel &&
-							' ' + lang.proDescription
+							lang.proDescription
 						}
 					</p>
 
