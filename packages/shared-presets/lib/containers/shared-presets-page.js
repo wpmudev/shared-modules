@@ -74,7 +74,7 @@ export const PresetsPage = ( {
 			emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
 			baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
 			proDescription: 'You can easily apply configs to multiple sites at once via the Hub', // TODO: add link.
-			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.', // TODO: add button.
+			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
 			apply: 'Apply',
 			download: 'Download',
 			edit: 'Name and Description',
@@ -171,6 +171,11 @@ export const PresetsPage = ( {
 			successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
 		})
 		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleSyncWithHub = () => {
+		RequestsHandler.syncWithHub().then( ( res ) => setConfigs( res ) )
+			.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
 	const doDownload = ( clickedConfig ) => {
@@ -307,7 +312,22 @@ export const PresetsPage = ( {
 					paddingTop={ isEmpty ? 0 : 30 }
 					border={ isEmpty ? 0 : 1 }
 				>
-					<p className="sui-description">{ lang.syncWithHub }</p>
+					<button
+						onClick={ handleSyncWithHub }
+						style={ {
+							color: '#17A8E3',
+							fontWeight: '500',
+							backgroundColor: 'transparent',
+							border: 'none',
+							cursor: 'pointer',
+							textDecoration: 'underline',
+							display: 'inline',
+							margin: 0,
+							padding: 0,
+						} }
+					>
+						{ lang.syncWithHub }
+					</button>
 				</BoxFooter>
 			)}
 

@@ -105,15 +105,13 @@ export default class RequestHandler {
 					resolve( local );
 				}
 
-				return this.getAllFromHub();
+				return this.makeHubRequest( `?package_id=${ this.pluginData.id }`, 'GET' );
 			} )
-			.then( ( hubRes ) => resolve( this.updateLocalAndHub( local, hubRes ) ) )
+			.then( ( hubRes ) => {
+				resolve( this.updateLocalAndHub( local, hubRes ) )
+			} )
 			.catch( ( res ) => reject( res ) );
 		} );
-	}
-
-	getAllFromHub() {
-		return makeHubRequest(  JSON.stringify( { package_id: this.pluginData.id } ) );
 	}
 
 	updateLocalAndHub( local, hub ) {
