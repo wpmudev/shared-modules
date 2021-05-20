@@ -114,8 +114,46 @@ export default class RequestHandler {
 		} );
 	}
 
-	updateLocalAndHub( local, hub ) {
-		return local;
+	updateLocalAndHub( localConfigs, hubConfigs ) {
+		for ( const [ i, local ] of localConfigs.entries() ) {
+			// Skip checks for the basic config
+			if ( 1 === local.id ) {
+				continue;
+			}
+
+			// Send to the Hub the configs that haven't been sent.
+			if ( ! local.hub_id ) {
+				const hubId = this.sendConfigToHub( local );
+
+				if ( hubId ) {
+					local.hub_id = hubId;
+					local.id = hubId;
+					localConfigs[ i ] = local;
+				}
+
+				continue;
+			}
+		}
+
+		return localConfigs;
+	}
+
+	sendConfigToHub( config ) {
+		const configData = {
+			name: config.name,
+			description: config.description,
+			package: this.pluginData,
+		}
+
+		configData.config = JSON.stringify( {
+			strings: {
+				something: [ 'something else' ],
+			},
+			configs: config.config,
+		} );
+
+		this.makeHubRequest( '', 'POST', JSON.stringify( configData ) )
+			.then( ( res ) => res.id );
 	}
 
 	makeHubRequest( path = '', verb = 'GET', data = null ) {
