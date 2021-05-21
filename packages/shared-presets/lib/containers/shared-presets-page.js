@@ -315,6 +315,7 @@ export const PresetsPage = ( {
 					border={ isEmpty ? 0 : 1 }
 				>
 					<button
+						className="sui-description"
 						onClick={ handleSyncWithHub }
 						style={ {
 							color: '#17A8E3',
