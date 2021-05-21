@@ -1,3 +1,4 @@
+// TODO: Probably adjust. Looks like we're handling the current configs (the state) by reference.
 export default class RequestHandler {
 	constructor( { apiKey, pluginData, root, nonce, optionName } ) {
 		this.apiKey = apiKey;
@@ -5,9 +6,6 @@ export default class RequestHandler {
 		this.root = root;
 		this.nonce = nonce;
 		this.optionName = optionName;
-
-		this.getAllLocal = this.getAllLocal.bind( this );
-		this.delete = this.delete.bind( this );
 	}
 
 	getAllLocal() {
@@ -26,6 +24,25 @@ export default class RequestHandler {
 		}
 
 		return this.updateLocalConfigsList( configs );
+	}
+
+	addNew( configs, newConfig ) {
+		return new Promise( ( resolve ) => {
+			if ( this.apiKey ) {
+				this.sendConfigToHub( newConfig ).then( ( res ) => {
+					newConfig.id = res.id;
+					newConfig.hub_id = res.id;
+					configs.push( newConfig );
+
+					resolve( this.updateLocalConfigsList( configs ) );
+				} );
+			} else {
+				newConfig.id = getTime();
+				configs.push( newConfig );
+
+				resolve( this.updateLocalConfigsList( configs ) );
+			}
+		} );
 	}
 
 	edit( configs, currentConfig, data ) {
@@ -231,6 +248,9 @@ export default class RequestHandler {
 		return this.makeHubRequest( '', 'POST', JSON.stringify( configData ) );
 	}
 
+	// TODO: handle errors. Actions for deleting or editing a config
+	// return 404 when the config doesn't exist in the Hub.
+	// This happens because the config was removed by the Hub or by another site.
 	makeHubRequest( path = '', verb = 'GET', data = null ) {
 		return new Promise( ( resolve, reject ) => {
 			const xhr = new XMLHttpRequest();

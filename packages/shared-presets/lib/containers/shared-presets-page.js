@@ -149,13 +149,26 @@ export const PresetsPage = ( {
 		// Creating a new config.
 		actions.create( data )
 			.then( ( res ) => {
+				console.log( res );
+				if ( res.data && res.data.config ) {
+					const configToAdd = {
+						name: data.get( 'name' ),
+						description: data.get( 'description' ),
+						config: res.data.config,
+					};
+					return configToAdd;
+				}
+
+				// TODO: test this.
 				if ( ! res.success ) {
 					displayErrorMessage( res.data.error_msg );
-					return;
 				}
+			} )
+			.then( ( newConfig ) => RequestsHandler.addNew( configs, newConfig ) )
+			.then( ( updatedConfigs ) => {
+				setConfigs( updatedConfigs );
 				setIsEditOpen( false );
 				successNotice( lang.editAction.successMessage.replace( '{configName}', data.get( 'name' ) ) );
-				retrieveConfigs();
 			} )
 			.catch( ( res ) => requestFailureNotice( res ) );
 	};
