@@ -25,11 +25,7 @@ export default class RequestHandler {
 			configs.splice( configIndex, 1 );
 		}
 
-		const send = {
-			[ this.optionName ]: configs,
-		};
-
-		return this.makeLocalRequest( 'POST', JSON.stringify( send ) );
+		return this.updateLocalConfigsList( configs );
 	}
 
 	edit( configs, currentConfig, data ) {
@@ -52,11 +48,15 @@ export default class RequestHandler {
 			configs[ configIndex ].description = data.get( 'description' );
 		}
 
-		const send = {
-			[ this.optionName ]: configs,
+		return this.updateLocalConfigsList( configs );
+	}
+
+	updateLocalConfigsList( newConfigs ) {
+		const requestData = {
+			[ this.optionName ]: newConfigs,
 		};
 
-		return this.makeLocalRequest( 'POST', JSON.stringify( send ) );
+		return this.makeLocalRequest( 'POST', JSON.stringify( requestData ) );
 	}
 
 	/**
@@ -96,46 +96,83 @@ export default class RequestHandler {
 
 	syncWithHub() {
 		return new Promise( ( resolve, reject ) => {
-			let local;
-			this.getAllLocal().then( ( response ) => {
-				local = response;
+			let localConfigs, original;
+			this.getAllLocal()
+				.then( ( response ) => {
+					localConfigs = response;
+					original = Object.assign( {}, localConfigs );
 
-				// We just need the local configs for Free users.
-				if ( ! this.apiKey ) {
-					resolve( local );
-				}
+					// Just use the local configs if no API key is provided.
+					if ( ! this.apiKey ) {
+						resolve( local );
+					}
 
-				return this.makeHubRequest( `?package_id=${ this.pluginData.id }`, 'GET' );
-			} )
-			.then( ( hubRes ) => {
-				resolve( this.updateLocalAndHub( local, hubRes ) )
-			} )
-			.catch( ( res ) => reject( res ) );
+					return this.makeHubRequest( `?package_id=${ this.pluginData.id }`, 'GET' );
+				} )
+				.then( ( hubConfigs ) => this.getUpdatedLocalWithHub( localConfigs, hubConfigs ) )
+				.then( ( hubPromises ) => {
+					for ( const res of hubPromises ) {
+						const configData = JSON.parse( res.config );
+
+						localConfigs.push( {
+							id: res.id,
+							hub_id: res.id,
+							name: res.name,
+							description: res.description,
+							config: configData.configs,
+						} );
+					}
+
+					return this.updateLocalConfigsList( original );
+				} )
+				.then ( ( syncRes ) => resolve( syncRes ) )
+				.catch( ( res ) => reject( res ) );
 		} );
 	}
 
-	updateLocalAndHub( localConfigs, hubConfigs ) {
-		for ( const [ i, local ] of localConfigs.entries() ) {
-			// Skip checks for the basic config
-			if ( 1 === local.id ) {
+	/**
+	 * Syncs the locally stored configs with the Hub.
+	 * What this does:
+	 * - Sends to the Hub the local configs that weren't sent already.
+	 * - Removes local configs that don't exist in the Hub.
+	 * - Updates the name and description of the local configs to the ones in the Hub.
+	 * - Retrieves the configs that exist in the Hub but not locally.
+	 *
+	 * @param {array} localConfigs Array with the local configs.
+	 * @param {array} hubConfigs Array with the Hub configs.
+	 * @returns
+	 */
+	getUpdatedLocalWithHub( localConfigs, hubConfigs ) {
+		const hubConfigsIds = hubConfigs.map( ( currentConfig ) => currentConfig.id ),
+			localConfigsIds = {};
+
+		const hubPromises = [];
+
+		for ( const [ index, localOne ] of localConfigs.entries() ) {
+			// Skip checks for the basic config.
+			if ( 1 === localOne.id ) {
 				continue;
 			}
 
 			// Send to the Hub the configs that haven't been sent.
-			if ( ! local.hub_id ) {
-				const hubId = this.sendConfigToHub( local );
+			if ( ! localOne.hub_id ) {
+				hubPromises.push( this.sendConfigToHub( localOne ) );
 
-				if ( hubId ) {
-					local.hub_id = hubId;
-					local.id = hubId;
-					localConfigs[ i ] = local;
-				}
+				// Remove it locally. We'll add it after the promises resolve.
+				// Splice will re-order the indexes. We don't want that.
+				// TODO: handle errors. We don't want to delete them locally if the promises fail.
+				delete localConfigs[ index ];
+				continue;
+			}
 
+			// Find the configs that were removed from the hub and remove them locally.
+			if ( ! hubConfigsIds[ localOne.hub_id ] ) {
+				delete localConfigs[ index ];
 				continue;
 			}
 		}
 
-		return localConfigs;
+		return Promise.all( hubPromises );
 	}
 
 	sendConfigToHub( config ) {
@@ -152,8 +189,7 @@ export default class RequestHandler {
 			configs: config.config,
 		} );
 
-		this.makeHubRequest( '', 'POST', JSON.stringify( configData ) )
-			.then( ( res ) => res.id );
+		return this.makeHubRequest( '', 'POST', JSON.stringify( configData ) );
 	}
 
 	makeHubRequest( path = '', verb = 'GET', data = null ) {
