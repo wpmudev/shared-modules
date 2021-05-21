@@ -123,7 +123,10 @@ export default class RequestHandler {
 						} );
 					}
 
-					return this.updateLocalConfigsList( original );
+					// The array gets some 'null' entries because of how we're handling it.
+					// Remove those here.
+					const filteredConfigs = localConfigs.filter( ( element ) => element );
+					return this.updateLocalConfigsList( filteredConfigs );
 				} )
 				.then ( ( syncRes ) => resolve( syncRes ) )
 				.catch( ( res ) => reject( res ) );
@@ -169,6 +172,42 @@ export default class RequestHandler {
 			if ( ! hubConfigsIds[ localOne.hub_id ] ) {
 				delete localConfigs[ index ];
 				continue;
+			}
+
+			// Keep the IDs and index of the local configs for reference later on.
+			localConfigsIds[ localOne.hub_id ] = index;
+		}
+
+		for ( const hubOne of hubConfigs ) {
+			// Add the configs from the hub that aren't present locally.
+			if ( ! localConfigsIds[ hubOne.id ] ) {
+				const configData = JSON.parse( hubOne.config );
+
+				// TODO: handle errors when the incoming config's settings
+				// doesn't match the schema of the current settings.
+				localConfigs.push( {
+					id: hubOne.id,
+					hub_id: hubOne.id,
+					name: hubOne.name,
+					description: hubOne.description,
+					config: configData.configs,
+				} );
+
+				continue;
+			}
+
+			// Sync the name and description of local configs.
+			const localIndex = localConfigsIds[ hubOne.id ],
+				localConfig = localConfigs[ localIndex ];
+
+			if (
+				localConfig.name !== hubOne.name ||
+				localConfig.description !== hubOne.description
+			) {
+				localConfig.name = hubOne.name;
+				localConfig.description = hubOne.description;
+
+				localConfigs[ localIndex ] = localConfig;
 			}
 		}
 

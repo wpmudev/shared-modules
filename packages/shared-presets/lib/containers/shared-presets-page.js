@@ -174,8 +174,10 @@ export const PresetsPage = ( {
 	};
 
 	const handleSyncWithHub = () => {
+		setIsLoading( true );
 		RequestsHandler.syncWithHub().then( ( res ) => setConfigs( res ) )
-			.catch( ( res ) => requestFailureNotice( res ) );
+			.catch( ( res ) => console.log( res ) )
+			.then( () => setIsLoading( false ) );
 	};
 
 	const doDownload = ( clickedConfig ) => {
