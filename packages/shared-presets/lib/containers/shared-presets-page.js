@@ -83,6 +83,7 @@ export const PresetsPage = ( {
 			freeButtonLabel: 'Try The Hub',
 			notificationDismiss: 'Dismiss notice',
 			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
+			uploadActionSuccessMessage: '{configName} config has been uploaded successfully – you can now apply it to this site.',
 			applyAction: {
 				successMessage: '{configName} config has been applied successfully.',
 			},
@@ -117,14 +118,24 @@ export const PresetsPage = ( {
 	};
 
 	const handleUpload = ( e ) => {
+		let newConfigName;
+
 		actions.upload( e ).then( ( res ) => {
-			if ( ! res.success ) {
-				requestFailureNotice( res );
-				return;
+			if ( res.data && res.data.config ) {
+				newConfigName = res.data.name;
+				return res.data;
 			}
-			retrieveConfigs();
-			successNotice( res.data.message );
+
+			// TODO: test this.
+			if ( ! res.success ) {
+				displayErrorMessage( res.data.error_msg );
+			}
 		})
+		.then( ( newConfig ) => RequestsHandler.addNew( configs, newConfig ) )
+		.then( ( updatedConfigs ) => {
+			setConfigs( updatedConfigs );
+			successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+		} )
 		.catch( ( res ) => requestFailureNotice( res ) );
 	};
 
@@ -149,7 +160,6 @@ export const PresetsPage = ( {
 		// Creating a new config.
 		actions.create( data )
 			.then( ( res ) => {
-				console.log( res );
 				if ( res.data && res.data.config ) {
 					const configToAdd = {
 						name: data.get( 'name' ),
