@@ -1,10 +1,11 @@
 export default class RequestHandler {
-	constructor( { apiKey, pluginData, root, nonce, optionName } ) {
+	constructor( { apiKey, pluginData, root, nonce, optionName, pluginRequests } ) {
 		this.apiKey = apiKey;
 		this.pluginData = pluginData;
 		this.root = root;
 		this.nonce = nonce;
 		this.optionName = optionName;
+		this.pluginRequests = pluginRequests;
 	}
 
 	getAllLocal() {
@@ -239,6 +240,78 @@ export default class RequestHandler {
 				} );
 			};
 			xhr.send( data );
+		});
+	};
+
+	/**
+	 * Retrieves a new config from the uploaded file.
+	 * Triggered on the input's onChange.
+	 *
+	 * @param {Event} e File input.
+	 * @return {Promise} The promised AJAX request.
+	 */
+	 upload( e ) {
+		const data = new FormData(),
+			fileInput = e.currentTarget.files;
+
+		data.append( 'file', fileInput[0] );
+		data.append( '_ajax_nonce', this.pluginRequests.uploadNonce );
+
+		return this.makeRequest( this.pluginRequests.uploadAction, data);
+	}
+
+	/**
+	 * Retrieves a new config from the site's current settings.
+	 *
+	 * @param {FormData} data FormData with the given name and description for the new config.
+	 * @return {Promise} The promised AJAX request.
+	 */
+	create( data ) {
+		data.append( '_ajax_nonce', this.pluginRequests.createNonce );
+		return this.makeRequest( this.pluginRequests.createAction, data );
+	}
+
+	/**
+	 * Applies the given config to the site.
+	 *
+	 * @param {Object} config Config to be applied.
+	 * @return {Promise} The promised AJAX request.
+	 */
+	apply( config ) {
+		const data = new FormData();
+
+		data.append( '_ajax_nonce', this.pluginRequests.applyNonce );
+		data.append( 'id', config.id );
+
+		return this.makeRequest( this.pluginRequests.applyAction, data );
+	}
+
+	/**
+	 * Function to perform ajax requests.
+	 *
+	 * @param {string} action Request action to be received in backend.
+	 * @param {*} data Request data.
+	 * @return {Promise} Promised request.
+	 */
+	makeRequest( action, data ) {
+		return new Promise(function (resolve, reject) {
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', `${ajaxurl}?action=${action}`, true);
+			xhr.onload = () => {
+				if (xhr.status >= 200 && xhr.status < 300) {
+					resolve(JSON.parse(xhr.response));
+				} else {
+					reject({
+						status: xhr.status,
+					});
+				}
+			};
+			xhr.onerror = () => {
+				reject({
+					status: xhr.status,
+				});
+			};
+			xhr.send(data);
 		});
 	};
 }

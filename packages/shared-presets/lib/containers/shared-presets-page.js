@@ -47,7 +47,6 @@ const LoadingMask = styled.div`
 let RequestsHandler;
 
 export const PresetsPage = ( {
-	actions,
 	isPro,
 	isWhitelabel,
 	requestsData,
@@ -131,7 +130,7 @@ export const PresetsPage = ( {
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
-		actions.upload( e ).then( ( res ) => {
+		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
 				newConfigName = res.data.name;
 				return res.data;
@@ -169,7 +168,7 @@ export const PresetsPage = ( {
 		}
 
 		// Creating a new config.
-		actions.create( data )
+		RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
 					const configToAdd = {
@@ -195,7 +194,7 @@ export const PresetsPage = ( {
 	};
 
 	const handleApply = () => {
-		actions.apply( currentConfig ).then( ( res ) => {
+		RequestsHandler.apply( currentConfig ).then( ( res ) => {
 			setIsApplyOpen( false );
 
 			if ( ! res.success ) {
