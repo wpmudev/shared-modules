@@ -70,7 +70,8 @@ export default class RequestHandler {
 
 	updateLocalConfigsList( newConfigs ) {
 		const requestData = {
-			[ this.optionName ]: newConfigs,
+			// This ges 'null' entries because of how we're handling it. Remove those here.
+			[ this.optionName ]: newConfigs.filter( ( element ) => element ),
 		};
 
 		return this.makeLocalRequest( 'POST', JSON.stringify( requestData ) );
@@ -111,27 +112,14 @@ export default class RequestHandler {
 		});
 	};
 
-	syncWithHub() {
+	syncWithHub( localConfigs ) {
 		return new Promise( ( resolve, reject ) => {
-			let localConfigs;
-			this.getAllLocal()
-				.then( ( response ) => {
-					localConfigs = response;
-
-					// Just use the local configs if no API key is provided.
-					if ( ! this.apiKey ) {
-						resolve( localConfigs );
-					}
-
-					return this.makeHubRequest( `?package_id=${ this.pluginData.id }`, 'GET' );
-				} )
+			if ( ! this.apiKey ) {
+				resolve( localConfigs );
+			}
+			this.makeHubRequest( `?package_id=${ this.pluginData.id }`, 'GET' )
 				.then( ( hubConfigs ) => this.getUpdatedLocalWithHub( localConfigs, hubConfigs ) )
-				.then( () => {
-					// The array gets some 'null' entries because of how we're handling it.
-					// Remove those here.
-					const filteredConfigs = localConfigs.filter( ( element ) => element );
-					return this.updateLocalConfigsList( filteredConfigs );
-				} )
+				.then( () => this.updateLocalConfigsList( localConfigs ) )
 				.then ( ( syncRes ) => resolve( syncRes ) )
 				.catch( ( res ) => reject( res ) );
 		} );
