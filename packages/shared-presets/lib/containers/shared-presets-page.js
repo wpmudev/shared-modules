@@ -151,7 +151,7 @@ export const PresetsPage = ( {
 	};
 
 	const handleDelete = () => {
-		RequestsHandler.delete( configs, currentConfig )
+		RequestsHandler.delete( [ ...configs ], currentConfig )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsDeleteOpen( false ) );
@@ -160,7 +160,7 @@ export const PresetsPage = ( {
 	const handleEdit = ( data, displayErrorMessage ) => {
 		// Editing a config.
 		if ( currentConfig ) {
-			RequestsHandler.edit( configs, currentConfig, data )
+			RequestsHandler.edit( [ ...configs ], currentConfig, data )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsEditOpen( false ) );
@@ -185,7 +185,7 @@ export const PresetsPage = ( {
 					displayErrorMessage( res.data.error_msg );
 				}
 			} )
-			.then( ( newConfig ) => RequestsHandler.addNew( configs, newConfig ) )
+			.then( ( newConfig ) => RequestsHandler.addNew( [ ...configs ], newConfig ) )
 			.then( ( updatedConfigs ) => {
 				setConfigs( updatedConfigs );
 				setIsEditOpen( false );
@@ -209,7 +209,7 @@ export const PresetsPage = ( {
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		RequestsHandler.syncWithHub()
+		RequestsHandler.syncWithHub( [ ...configs ] )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );

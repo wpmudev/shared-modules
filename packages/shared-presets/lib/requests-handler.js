@@ -1,4 +1,3 @@
-// TODO: Probably adjust. Looks like we're handling the current configs (the state) by reference.
 export default class RequestHandler {
 	constructor( { apiKey, pluginData, root, nonce, optionName } ) {
 		this.apiKey = apiKey;
@@ -51,18 +50,18 @@ export default class RequestHandler {
 			const configData = {
 				name: data.get( 'name' ),
 				description: data.get( 'description' ),
-				package: {
-					id: this.pluginData.id,
-					name: this.pluginData.name,
-				}
+				package: this.pluginData,
 			};
 			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'PATCH', JSON.stringify( configData ) );
 		}
 		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
 
 		if ( -1 !== configIndex ) {
-			configs[ configIndex ].name = data.get( 'name' );
-			configs[ configIndex ].description = data.get( 'description' );
+			const updatedConfig = Object.assign( {}, currentConfig );
+			updatedConfig.name = data.get( 'name' );
+			updatedConfig.description = data.get( 'description' );
+
+			configs[ configIndex ] = updatedConfig;
 		}
 
 		return this.updateLocalConfigsList( configs );
@@ -70,7 +69,7 @@ export default class RequestHandler {
 
 	updateLocalConfigsList( newConfigs ) {
 		const requestData = {
-			// This ges 'null' entries because of how we're handling it. Remove those here.
+			// This gets 'null' entries because of how we're handling it. Remove those here.
 			[ this.optionName ]: newConfigs.filter( ( element ) => element ),
 		};
 
