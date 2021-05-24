@@ -144,7 +144,7 @@ export default class RequestHandler {
 
 		for ( const [ index, localOne ] of localConfigs.entries() ) {
 			// Skip checks for the basic config.
-			if ( 1 === localOne.id ) {
+			if ( localOne.default ) {
 				continue;
 			}
 
