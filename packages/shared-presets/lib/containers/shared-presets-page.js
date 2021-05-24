@@ -50,7 +50,9 @@ export const PresetsPage = ( {
 	actions,
 	isPro,
 	isWhitelabel,
-	requestsData
+	requestsData,
+	sourceUrls,
+	sourceLang
 } ) => {
 	const [ configs, setConfigs ] = React.useState( null );
 	const [ isLoading, setIsLoading ] = React.useState( true );
@@ -61,6 +63,15 @@ export const PresetsPage = ( {
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
 
+	const urls = Object.assign(
+		{
+			freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
+			hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+			accordionImg: null,
+		},
+		sourceUrls
+	);
+
 	const lang = Object.assign(
 		{
 			title: 'Preset configs',
@@ -69,7 +80,18 @@ export const PresetsPage = ( {
 			loading: 'Updating the config list…',
 			emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
 			baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
-			proDescription: 'You can easily apply configs to multiple sites at once via the Hub', // TODO: add link.
+			proDescription: (
+				<>
+					{'You can easily apply configs to multiple sites at once via '}
+					<a
+						href={urls.hubMyConfigs}
+						target="_blank"
+						rel="noreferrer"
+					>
+					{'the Hub.'}
+					</a>
+				</>
+			),
 			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
 			apply: 'Apply',
 			download: 'Download',
@@ -87,16 +109,9 @@ export const PresetsPage = ( {
 				successMessage: '{configName} config created successfully.',
 			},
 			deleteAction: {},
+			settingsLabels: {},
 		},
-		props.lang
-	);
-
-	const urls = Object.assign(
-		{
-			freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
-			accordionImg: '', // TODO: add placeholder?
-		},
-		props.urls
+		sourceLang
 	);
 
 	React.useEffect(() => {
