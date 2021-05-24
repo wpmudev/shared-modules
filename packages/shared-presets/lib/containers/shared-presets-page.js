@@ -47,14 +47,10 @@ const LoadingMask = styled.div`
 let RequestsHandler;
 
 export const PresetsPage = ( {
-	configsOptionName,
 	actions,
 	isPro,
 	isWhitelabel,
-	requestsData,
-	nonce,
-	root,
-	...props
+	requestsData
 } ) => {
 	const [ configs, setConfigs ] = React.useState( null );
 	const [ isLoading, setIsLoading ] = React.useState( true );
