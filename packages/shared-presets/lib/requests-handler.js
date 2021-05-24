@@ -236,14 +236,8 @@ export default class RequestHandler {
 			name: config.name,
 			description: config.description,
 			package: this.pluginData,
+			config: JSON.stringify( config.config ),
 		}
-
-		configData.config = JSON.stringify( {
-			strings: {
-				something: [ 'something else' ],
-			},
-			configs: config.config,
-		} );
 
 		return this.makeHubRequest( '', 'POST', JSON.stringify( configData ) );
 	}

@@ -299,8 +299,8 @@ export const PresetsPage = ( {
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
-							{ item.humanConfig && item.humanConfig.map( ( item, index ) => (
-								<div key={ index } name={ item.label } status={ item.value } />
+							{ Object.keys( item.config.strings ).map( ( name ) => (
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
