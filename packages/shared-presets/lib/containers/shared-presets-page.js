@@ -228,12 +228,13 @@ export const PresetsPage = ( {
 			type: 'application/json',
 		});
 
-		const url = window.URL.createObjectURL(blob),
+		const pluginName = requestsData.pluginData.name.toLowerCase().replace( ' ', '-' ),
+			url = window.URL.createObjectURL(blob),
 			a = document.createElement('a');
 
 		a.style.display = 'none';
 		a.href = url;
-		a.download = 'wp-plugin-config-' + config.name; // TODO: use the plugin's prefix.
+		a.download = `wp-${ pluginName }-config-${ config.name }`;
 		document.body.appendChild( a );
 		a.click();
 		window.URL.revokeObjectURL( url );
