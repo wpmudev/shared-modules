@@ -123,7 +123,7 @@ export const PresetsPage = ( {
 		setIsLoading( true );
 
 		RequestsHandler.getAllLocal()
-			.then( ( newConfigs ) => setConfigs( newConfigs ? Object.values( newConfigs ) : null ) )
+			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
 	};
@@ -209,8 +209,9 @@ export const PresetsPage = ( {
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		RequestsHandler.syncWithHub().then( ( res ) => setConfigs( res ) )
-			.catch( ( res ) => console.log( res ) )
+		RequestsHandler.syncWithHub()
+			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
 	};
 

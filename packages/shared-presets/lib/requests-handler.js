@@ -113,33 +113,20 @@ export default class RequestHandler {
 
 	syncWithHub() {
 		return new Promise( ( resolve, reject ) => {
-			let localConfigs, original;
+			let localConfigs;
 			this.getAllLocal()
 				.then( ( response ) => {
 					localConfigs = response;
-					original = Object.assign( {}, localConfigs );
 
 					// Just use the local configs if no API key is provided.
 					if ( ! this.apiKey ) {
-						resolve( local );
+						resolve( localConfigs );
 					}
 
 					return this.makeHubRequest( `?package_id=${ this.pluginData.id }`, 'GET' );
 				} )
 				.then( ( hubConfigs ) => this.getUpdatedLocalWithHub( localConfigs, hubConfigs ) )
-				.then( ( hubPromises ) => {
-					for ( const res of hubPromises ) {
-						const configData = JSON.parse( res.config );
-
-						localConfigs.push( {
-							id: res.id,
-							hub_id: res.id,
-							name: res.name,
-							description: res.description,
-							config: configData.configs,
-						} );
-					}
-
+				.then( () => {
 					// The array gets some 'null' entries because of how we're handling it.
 					// Remove those here.
 					const filteredConfigs = localConfigs.filter( ( element ) => element );
@@ -198,8 +185,6 @@ export default class RequestHandler {
 		for ( const hubOne of hubConfigs ) {
 			// Add the configs from the hub that aren't present locally.
 			if ( ! localConfigsIds[ hubOne.id ] ) {
-				const configData = JSON.parse( hubOne.config );
-
 				// TODO: handle errors when the incoming config's settings
 				// doesn't match the schema of the current settings.
 				localConfigs.push( {
@@ -207,7 +192,7 @@ export default class RequestHandler {
 					hub_id: hubOne.id,
 					name: hubOne.name,
 					description: hubOne.description,
-					config: configData.configs,
+					config: JSON.parse( hubOne.config ),
 				} );
 
 				continue;
