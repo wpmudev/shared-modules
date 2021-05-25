@@ -112,6 +112,12 @@ export default class RequestHandler {
 		});
 	};
 
+	/**
+	 * Handles the several requests needed for syncinc with the Hub.
+	 *
+	 * @param {array} localConfigs Local configs list.
+	 * @return {Promise} For when all the requests are handled.
+	 */
 	syncWithHub( localConfigs ) {
 		return new Promise( ( resolve, reject ) => {
 			if ( ! this.apiKey ) {
