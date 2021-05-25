@@ -2,6 +2,15 @@
 
 ## Unreleased (2021-05-25)
 
+#### Improvements
+* `shared-presets`
+  * [#58](https://github.com/wpmudev/shared-modules/pull/58) 🐛 fix(shared-presets): Rename function that makes requests to the plugin. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 1
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+
+## Unreleased (2021-05-25)
+
 #### New Features
 * `shared-presets`
   * [#57](https://github.com/wpmudev/shared-modules/pull/57) ✨ new(shared-presets): Update the list of presets in the site and the Hub from the component. ([@a-danae](https://github.com/a-danae))
