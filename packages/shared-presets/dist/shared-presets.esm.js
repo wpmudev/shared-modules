@@ -186,8 +186,20 @@ function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
@@ -234,8 +246,69 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it;
+
+  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function () {};
+
+      return {
+        s: F,
+        n: function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function (e) {
+          throw e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function () {
+      it = o[Symbol.iterator]();
+    },
+    n: function () {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function (e) {
+      didErr = true;
+      err = e;
+    },
+    f: function () {
+      try {
+        if (!normalCompletion && it.return != null) it.return();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
 }
 
 function _extends() {
@@ -1460,13 +1533,9 @@ var ApplyModal = function ApplyModal(_ref) {
       isSaving = _React$useState2[0],
       setIsSaving = _React$useState2[1];
 
-  var closeModal = function closeModal() {
-    setOpen(false);
-  };
-
   var doAction = function doAction() {
     setIsSaving(true);
-    save(config, closeModal);
+    save();
   };
 
   var modalContent = function modalContent() {
@@ -1534,13 +1603,9 @@ var DeleteModal = function DeleteModal(_ref) {
       isSaving = _React$useState2[0],
       setIsSaving = _React$useState2[1];
 
-  var closeModal = function closeModal() {
-    setOpen(false);
-  };
-
   var doAction = function doAction() {
     setIsSaving(true);
-    save(config, closeModal);
+    save();
   };
 
   var modalContent = function modalContent() {
@@ -1727,10 +1792,6 @@ var EditModal = function EditModal(_ref) {
       _strings$createDescri = strings.createDescription,
       createDescription = _strings$createDescri === void 0 ? 'Save your current settings configuration. You’ll be able to then download and apply it to your other sites.' : _strings$createDescri;
 
-  var closeModal = function closeModal() {
-    setOpen(false);
-  };
-
   var displayErrorMessage = function displayErrorMessage(message) {
     setErrorMessage(message);
     setIsSaving(false);
@@ -1747,7 +1808,7 @@ var EditModal = function EditModal(_ref) {
     var data = new FormData();
     data.append('name', nameValue);
     data.append('description', descriptionValue);
-    save(config, data, displayErrorMessage, closeModal);
+    save(data, displayErrorMessage);
   };
 
   var modalContent = function modalContent() {
@@ -2957,40 +3018,642 @@ var PresetsWidget = function PresetsWidget(_ref) {
   }));
 };
 
+var RequestHandler = /*#__PURE__*/function () {
+  function RequestHandler(_ref) {
+    var apiKey = _ref.apiKey,
+        pluginData = _ref.pluginData,
+        root = _ref.root,
+        nonce = _ref.nonce,
+        optionName = _ref.optionName,
+        pluginRequests = _ref.pluginRequests;
+
+    _classCallCheck(this, RequestHandler);
+
+    this.apiKey = apiKey;
+    this.pluginData = pluginData;
+    this.root = root;
+    this.nonce = nonce;
+    this.optionName = optionName;
+    this.pluginRequests = pluginRequests;
+  }
+
+  _createClass(RequestHandler, [{
+    key: "getAllLocal",
+    value: function getAllLocal() {
+      return this.makeLocalRequest();
+    }
+  }, {
+    key: "delete",
+    value: function _delete(configs, currentConfig) {
+      // Delete from the Hub when the config has a Hub ID and we have an API key.
+      if (this.apiKey && currentConfig.hub_id) {
+        this.makeHubRequest("/".concat(currentConfig.hub_id), 'DELETE');
+      }
+
+      var configIndex = configs.findIndex(function (element) {
+        return element.id === currentConfig.id;
+      });
+
+      if (-1 !== configIndex) {
+        configs.splice(configIndex, 1);
+      }
+
+      return this.updateLocalConfigsList(configs);
+    }
+  }, {
+    key: "addNew",
+    value: function addNew(configs, newConfig) {
+      var _this = this;
+
+      return new Promise(function (resolve) {
+        if (_this.apiKey) {
+          _this.sendConfigToHub(newConfig).then(function (res) {
+            newConfig.id = res.id;
+            newConfig.hub_id = res.id;
+            configs.push(newConfig);
+            resolve(_this.updateLocalConfigsList(configs));
+          });
+        } else {
+          newConfig.id = getTime();
+          configs.push(newConfig);
+          resolve(_this.updateLocalConfigsList(configs));
+        }
+      });
+    }
+  }, {
+    key: "edit",
+    value: function edit(configs, currentConfig, data) {
+      // Edit in the Hub when the config has a Hub ID and we have an API key.
+      if (this.apiKey && currentConfig.hub_id) {
+        var configData = {
+          name: data.get('name'),
+          description: data.get('description'),
+          "package": this.pluginData
+        };
+        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(configData));
+      }
+
+      var configIndex = configs.findIndex(function (element) {
+        return element.id === currentConfig.id;
+      });
+
+      if (-1 !== configIndex) {
+        var updatedConfig = Object.assign({}, currentConfig);
+        updatedConfig.name = data.get('name');
+        updatedConfig.description = data.get('description');
+        configs[configIndex] = updatedConfig;
+      }
+
+      return this.updateLocalConfigsList(configs);
+    }
+  }, {
+    key: "updateLocalConfigsList",
+    value: function updateLocalConfigsList(newConfigs) {
+      var requestData = _defineProperty({}, this.optionName, newConfigs.filter(function (element) {
+        return element;
+      }));
+
+      return this.makeLocalRequest('POST', JSON.stringify(requestData));
+    }
+    /**
+    * Promesify xhr requests.
+    *
+    * @param {*} data Request data.
+    * @param {string} verb Request verb.
+    * @return {Promise} Promised request.
+    */
+
+  }, {
+    key: "makeLocalRequest",
+    value: function makeLocalRequest() {
+      var _this2 = this;
+
+      var verb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'GET';
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest(); // TODO: double check this. Don't forget multisites.
+
+        xhr.open(verb, "".concat(_this2.root, "wp/v2/settings"), true);
+        xhr.setRequestHeader('X-WP-Nonce', _this2.nonce);
+        xhr.setRequestHeader('Content-type', 'application/json');
+
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            var response = JSON.parse(xhr.response),
+                resolveValue = response[_this2.optionName] ? response[_this2.optionName] : null;
+            resolve(resolveValue);
+          } else {
+            reject({
+              status: xhr.status
+            });
+          }
+        };
+
+        xhr.onerror = function () {
+          reject({
+            status: xhr.status
+          });
+        };
+
+        xhr.send(data);
+      });
+    }
+  }, {
+    key: "syncWithHub",
+    value: function syncWithHub(localConfigs) {
+      var _this3 = this;
+
+      return new Promise(function (resolve, reject) {
+        if (!_this3.apiKey) {
+          resolve(localConfigs);
+        }
+
+        _this3.makeHubRequest("?package_id=".concat(_this3.pluginData.id), 'GET').then(function (hubConfigs) {
+          return _this3.getUpdatedLocalWithHub(localConfigs, hubConfigs);
+        }).then(function () {
+          return _this3.updateLocalConfigsList(localConfigs);
+        }).then(function (syncRes) {
+          return resolve(syncRes);
+        })["catch"](function (res) {
+          return reject(res);
+        });
+      });
+    }
+    /**
+     * Syncs the locally stored configs with the Hub.
+     * What this does:
+     * - Sends to the Hub the local configs that weren't sent already.
+     * - Removes local configs that don't exist in the Hub.
+     * - Updates the name and description of the local configs to the ones in the Hub.
+     * - Retrieves the configs that exist in the Hub but not locally.
+     *
+     * @param {array} localConfigs Array with the local configs.
+     * @param {array} hubConfigs Array with the Hub configs.
+     * @returns
+     */
+
+  }, {
+    key: "getUpdatedLocalWithHub",
+    value: function getUpdatedLocalWithHub(localConfigs, hubConfigs) {
+      var hubConfigsIds = hubConfigs.map(function (currentConfig) {
+        return currentConfig.id;
+      }),
+          localConfigsIds = {};
+      var hubPromises = [];
+
+      var _iterator = _createForOfIteratorHelper(localConfigs.entries()),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _step$value = _slicedToArray(_step.value, 2),
+              index = _step$value[0],
+              localOne = _step$value[1];
+
+          // Skip checks for the basic config.
+          if (localOne["default"]) {
+            continue;
+          } // Send to the Hub the configs that haven't been sent.
+
+
+          if (!localOne.hub_id) {
+            hubPromises.push(this.sendConfigToHub(localOne)); // Remove it locally. We'll add it after the promises resolve.
+            // Splice will re-order the indexes. We don't want that.
+            // TODO: handle errors. We don't want to delete them locally if the promises fail.
+
+            delete localConfigs[index];
+            continue;
+          } // Find the configs that were removed from the hub and remove them locally.
+
+
+          if (!hubConfigsIds[localOne.hub_id]) {
+            delete localConfigs[index];
+            continue;
+          } // Keep the IDs and index of the local configs for reference later on.
+
+
+          localConfigsIds[localOne.hub_id] = index;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var _iterator2 = _createForOfIteratorHelper(hubConfigs),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var hubOne = _step2.value;
+
+          // Add the configs from the hub that aren't present locally.
+          if (!localConfigsIds[hubOne.id]) {
+            // TODO: handle errors when the incoming config's settings
+            // doesn't match the schema of the current settings.
+            localConfigs.push({
+              id: hubOne.id,
+              hub_id: hubOne.id,
+              name: hubOne.name,
+              description: hubOne.description,
+              config: JSON.parse(hubOne.config)
+            });
+            continue;
+          } // Sync the name and description of local configs.
+
+
+          var localIndex = localConfigsIds[hubOne.id],
+              localConfig = localConfigs[localIndex];
+
+          if (localConfig.name !== hubOne.name || localConfig.description !== hubOne.description) {
+            localConfig.name = hubOne.name;
+            localConfig.description = hubOne.description;
+            localConfigs[localIndex] = localConfig;
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      return Promise.all(hubPromises);
+    }
+  }, {
+    key: "sendConfigToHub",
+    value: function sendConfigToHub(config) {
+      var configData = {
+        name: config.name,
+        description: config.description,
+        "package": this.pluginData,
+        config: JSON.stringify(config.config)
+      };
+      return this.makeHubRequest('', 'POST', JSON.stringify(configData));
+    } // TODO: handle errors. Actions for deleting or editing a config
+    // return 404 when the config doesn't exist in the Hub.
+    // This happens because the config was removed by the Hub or by another site.
+
+  }, {
+    key: "makeHubRequest",
+    value: function makeHubRequest() {
+      var _this4 = this;
+
+      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(verb, "https://wpmudev.com/api/hub/v1/package-configs".concat(path), true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.setRequestHeader('Authorization', 'Basic ' + _this4.apiKey);
+
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject({
+              status: xhr.status
+            });
+          }
+        };
+
+        xhr.onerror = function () {
+          reject({
+            status: xhr.status
+          });
+        };
+
+        xhr.send(data);
+      });
+    }
+  }, {
+    key: "upload",
+    value:
+    /**
+     * Retrieves a new config from the uploaded file.
+     * Triggered on the input's onChange.
+     *
+     * @param {Event} e File input.
+     * @return {Promise} The promised AJAX request.
+     */
+    function upload(e) {
+      var data = new FormData(),
+          fileInput = e.currentTarget.files;
+      data.append('file', fileInput[0]);
+      data.append('_ajax_nonce', this.pluginRequests.uploadNonce);
+      return this.makeRequest(this.pluginRequests.uploadAction, data);
+    }
+    /**
+     * Retrieves a new config from the site's current settings.
+     *
+     * @param {FormData} data FormData with the given name and description for the new config.
+     * @return {Promise} The promised AJAX request.
+     */
+
+  }, {
+    key: "create",
+    value: function create(data) {
+      data.append('_ajax_nonce', this.pluginRequests.createNonce);
+      return this.makeRequest(this.pluginRequests.createAction, data);
+    }
+    /**
+     * Applies the given config to the site.
+     *
+     * @param {Object} config Config to be applied.
+     * @return {Promise} The promised AJAX request.
+     */
+
+  }, {
+    key: "apply",
+    value: function apply(config) {
+      var data = new FormData();
+      data.append('_ajax_nonce', this.pluginRequests.applyNonce);
+      data.append('id', config.id);
+      return this.makeRequest(this.pluginRequests.applyAction, data);
+    }
+    /**
+     * Function to perform ajax requests.
+     *
+     * @param {string} action Request action to be received in backend.
+     * @param {*} data Request data.
+     * @return {Promise} Promised request.
+     */
+
+  }, {
+    key: "makeRequest",
+    value: function makeRequest(action, data) {
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "".concat(ajaxurl, "?action=").concat(action), true);
+
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject({
+              status: xhr.status
+            });
+          }
+        };
+
+        xhr.onerror = function () {
+          reject({
+            status: xhr.status
+          });
+        };
+
+        xhr.send(data);
+      });
+    }
+  }]);
+
+  return RequestHandler;
+}();
+
 var _templateObject$5, _templateObject2$3, _templateObject3$2;
 var LoadingContent = styled.div(_templateObject$5 || (_templateObject$5 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    position: relative;\n    z-index: 2;\n}\n"])));
 var LoadingWrap = styled.div(_templateObject2$3 || (_templateObject2$3 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    pointer-events: none;\n}"])));
 var LoadingMask = styled.div(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-flow: row wrap;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background-color: rgba(255,255,255,0.95);\n    border-radius: 0 0 4px 4px;\n\n    > p {\n\n    }\n}\n"])));
+var RequestsHandler;
 var PresetsPage = function PresetsPage(_ref) {
-  var configsList = _ref.configsList,
-      applyModalData = _ref.applyModalData,
-      deleteModalData = _ref.deleteModalData,
-      editModalData = _ref.editModalData,
-      freeData = _ref.freeData,
-      isLoading = _ref.isLoading,
-      props = _objectWithoutProperties(_ref, ["configsList", "applyModalData", "deleteModalData", "editModalData", "freeData", "isLoading"]);
+  var isPro = _ref.isPro,
+      isWhitelabel = _ref.isWhitelabel,
+      requestsData = _ref.requestsData,
+      sourceUrls = _ref.sourceUrls,
+      sourceLang = _ref.sourceLang;
 
   var _React$useState = React.useState(null),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      currentConfig = _React$useState2[0],
-      setCurrentConfig = _React$useState2[1];
+      configs = _React$useState2[0],
+      setConfigs = _React$useState2[1];
 
-  var _React$useState3 = React.useState(false),
+  var _React$useState3 = React.useState(true),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
-      isApplyOpen = _React$useState4[0],
-      setIsApplyOpen = _React$useState4[1];
+      isLoading = _React$useState4[0],
+      setIsLoading = _React$useState4[1]; // Modals-related states.
 
-  var _React$useState5 = React.useState(false),
+
+  var _React$useState5 = React.useState(null),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
-      isDeleteOpen = _React$useState6[0],
-      setIsDeleteOpen = _React$useState6[1];
+      currentConfig = _React$useState6[0],
+      setCurrentConfig = _React$useState6[1];
 
   var _React$useState7 = React.useState(false),
       _React$useState8 = _slicedToArray(_React$useState7, 2),
-      isEditOpen = _React$useState8[0],
-      setIsEditOpen = _React$useState8[1];
+      isApplyOpen = _React$useState8[0],
+      setIsApplyOpen = _React$useState8[1];
 
-  var isEmpty = !configsList || 0 === configsList.length;
+  var _React$useState9 = React.useState(false),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      isDeleteOpen = _React$useState10[0],
+      setIsDeleteOpen = _React$useState10[1];
+
+  var _React$useState11 = React.useState(false),
+      _React$useState12 = _slicedToArray(_React$useState11, 2),
+      isEditOpen = _React$useState12[0],
+      setIsEditOpen = _React$useState12[1];
+
+  var urls = Object.assign({
+    freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
+    hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+    accordionImg: null
+  }, sourceUrls);
+  var lang = Object.assign({
+    title: 'Preset configs',
+    upload: 'Upload',
+    save: 'Save config',
+    loading: 'Updating the config list…',
+    emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+    baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+    proDescription: /*#__PURE__*/React.createElement(React.Fragment, null, 'You can easily apply configs to multiple sites at once via ', /*#__PURE__*/React.createElement("a", {
+      href: urls.hubMyConfigs,
+      target: "_blank",
+      rel: "noreferrer"
+    }, 'the Hub.')),
+    syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
+    apply: 'Apply',
+    download: 'Download',
+    edit: 'Name and Description',
+    "delete": 'Delete',
+    freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
+    freeButtonLabel: 'Try The Hub',
+    notificationDismiss: 'Dismiss notice',
+    defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
+    uploadActionSuccessMessage: '{configName} config has been uploaded successfully – you can now apply it to this site.',
+    applyAction: {
+      successMessage: '{configName} config has been applied successfully.'
+    },
+    editAction: {
+      successMessage: '{configName} config created successfully.'
+    },
+    deleteAction: {},
+    settingsLabels: {}
+  }, sourceLang);
+  React.useEffect(function () {
+    RequestsHandler = new RequestHandler(requestsData);
+    retrieveConfigs();
+  }, []);
+
+  var retrieveConfigs = function retrieveConfigs() {
+    setIsLoading(true);
+    RequestsHandler.getAllLocal().then(function (newConfigs) {
+      return setConfigs(newConfigs);
+    })["catch"](function (res) {
+      return requestFailureNotice(res);
+    }).then(function () {
+      return setIsLoading(false);
+    });
+  };
+
+  var handleUpload = function handleUpload(e) {
+    var newConfigName;
+    RequestsHandler.upload(e).then(function (res) {
+      if (res.data && res.data.config) {
+        newConfigName = res.data.name;
+        return res.data;
+      } // TODO: test this.
+
+
+      if (!res.success) {
+        displayErrorMessage(res.data.error_msg);
+      }
+    }).then(function (newConfig) {
+      return RequestsHandler.addNew(configs, newConfig);
+    }).then(function (updatedConfigs) {
+      setConfigs(updatedConfigs);
+      successNotice(lang.uploadActionSuccessMessage.replace('{configName}', newConfigName));
+    })["catch"](function (res) {
+      return requestFailureNotice(res);
+    });
+  };
+
+  var handleDelete = function handleDelete() {
+    RequestsHandler["delete"](_toConsumableArray(configs), currentConfig).then(function (newConfigs) {
+      return setConfigs(newConfigs);
+    })["catch"](function (res) {
+      return requestFailureNotice(res);
+    }).then(function () {
+      return setIsDeleteOpen(false);
+    });
+  };
+
+  var handleEdit = function handleEdit(data, displayErrorMessage) {
+    // Editing a config.
+    if (currentConfig) {
+      RequestsHandler.edit(_toConsumableArray(configs), currentConfig, data).then(function (newConfigs) {
+        return setConfigs(newConfigs);
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      }).then(function () {
+        return setIsEditOpen(false);
+      });
+      return;
+    } // Creating a new config.
+
+
+    RequestsHandler.create(data).then(function (res) {
+      if (res.data && res.data.config) {
+        var configToAdd = {
+          name: data.get('name'),
+          description: data.get('description'),
+          config: res.data.config
+        };
+        return configToAdd;
+      } // TODO: test this.
+
+
+      if (!res.success) {
+        displayErrorMessage(res.data.error_msg);
+      }
+    }).then(function (newConfig) {
+      return RequestsHandler.addNew(_toConsumableArray(configs), newConfig);
+    }).then(function (updatedConfigs) {
+      setConfigs(updatedConfigs);
+      setIsEditOpen(false);
+      successNotice(lang.editAction.successMessage.replace('{configName}', data.get('name')));
+    })["catch"](function (res) {
+      return requestFailureNotice(res);
+    });
+  };
+
+  var handleApply = function handleApply() {
+    RequestsHandler.apply(currentConfig).then(function (res) {
+      setIsApplyOpen(false);
+
+      if (!res.success) {
+        requestFailureNotice(res);
+        return;
+      }
+
+      successNotice(lang.applyAction.successMessage.replace('{configName}', currentConfig.name));
+    })["catch"](function (res) {
+      return requestFailureNotice(res);
+    });
+  };
+
+  var handleSyncWithHub = function handleSyncWithHub() {
+    setIsLoading(true);
+    RequestsHandler.syncWithHub(_toConsumableArray(configs)).then(function (newConfigs) {
+      return setConfigs(newConfigs);
+    })["catch"](function (res) {
+      return requestFailureNotice(res);
+    }).then(function () {
+      return setIsLoading(false);
+    });
+  };
+
+  var doDownload = function doDownload(clickedConfig) {
+    var config = configs.find(function (item) {
+      return clickedConfig.id === item.id;
+    });
+
+    if (!config) {
+      return;
+    } // This is unique per site.
+
+
+    delete config.hub_id;
+    var blob = new Blob([JSON.stringify(config, null, 2)], {
+      type: 'application/json'
+    });
+    var pluginName = requestsData.pluginData.name.toLowerCase().replace(' ', '-'),
+        url = window.URL.createObjectURL(blob),
+        a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = "wp-".concat(pluginName, "-config-").concat(config.name);
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }; // Utils to move somewhere else.
+
+
+  var successNotice = function successNotice(message) {
+    window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
+      type: 'success',
+      icon: 'check-tick',
+      dismiss: {
+        show: true,
+        label: lang.notificationDismiss
+      }
+    });
+  };
+
+  var requestFailureNotice = function requestFailureNotice(res) {
+    var message = res.data ? res.data.error_msg : lang.defaultRequestError.replace('{status}', res.status);
+    window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
+      type: 'error',
+      icon: 'info',
+      dismiss: {
+        show: true,
+        label: lang.notificationDismiss
+      }
+    });
+  }; // End of utils to move somewhere else.
+
+
+  var isEmpty = !configs || 0 === configs.length;
 
   var openModal = function openModal(action, config) {
     setCurrentConfig(config);
@@ -3004,64 +3667,86 @@ var PresetsPage = function PresetsPage(_ref) {
     }
   };
 
+  var tableImage = !isWhitelabel ? urls.accordionImg : null;
   var Table = /*#__PURE__*/React.createElement(React.Fragment, null, !isEmpty && /*#__PURE__*/React.createElement("div", {
     className: "sui-accordion sui-accordion-flushed",
     style: {
       borderBottomWidth: 0
     }
-  }, configsList.map(function (item) {
+  }, configs.map(function (item) {
     return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
       key: item.id,
       id: item.id,
-      "default": item["default"] || false,
+      "default": item["default"],
       name: item.name,
       description: item.description,
-      image: item.image,
+      image: tableImage,
       showApplyButton: true,
-      applyLabel: item.applyLabel,
+      applyLabel: lang.apply,
       applyAction: function applyAction() {
         return openModal('apply', item);
       },
-      downloadLabel: item.downloadLabel,
-      downloadAction: item.downloadAction,
-      editLabel: item.editLabel,
+      downloadLabel: lang.download,
+      downloadAction: function downloadAction() {
+        return doDownload(item);
+      },
+      editLabel: lang.edit,
       editAction: function editAction() {
         return openModal('edit', item);
       },
-      deleteLabel: item.deleteLabel,
+      deleteLabel: lang["delete"],
       deleteAction: function deleteAction() {
         return openModal('delete', item);
       }
-    }, item.config.map(function (item, index) {
+    }, Object.keys(item.config.strings).map(function (name) {
       return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        name: item.label,
-        status: item.value
+        key: name,
+        name: lang.settingsLabels[name],
+        status: item.config.strings[name]
       });
     }));
   })));
-  var Footer = /*#__PURE__*/React.createElement(React.Fragment, null, freeData && /*#__PURE__*/React.createElement(BoxFooter, {
+  var Footer = /*#__PURE__*/React.createElement(React.Fragment, null, !isPro && /*#__PURE__*/React.createElement(BoxFooter, {
     display: "block"
   }, /*#__PURE__*/React.createElement(Notifications, {
     type: "upsell"
-  }, /*#__PURE__*/React.createElement("p", null, freeData.message), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(Button, {
-    label: freeData.button || 'Try The Hub',
+  }, /*#__PURE__*/React.createElement("p", null, lang.freeNoticeMessage), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(Button, {
+    label: lang.freeButtonLabel,
     color: "purple",
-    href: freeData.buttonHref || 'https://wpmudev.com/hub-welcome/',
+    href: urls.freeNoticeHub,
     target: "_blank"
-  })))), !freeData && props.update && '' !== props.update && /*#__PURE__*/React.createElement(BoxFooter, {
+  })))), isPro && /*#__PURE__*/React.createElement(BoxFooter, {
     display: "block",
     alignment: "center",
     paddingTop: isEmpty ? 0 : 30,
     border: isEmpty ? 0 : 1
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sui-description"
-  }, props.update)));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxHeader, {
-    title: props.title
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sui-description",
+    onClick: handleSyncWithHub,
+    style: {
+      color: '#17A8E3',
+      fontWeight: '500',
+      backgroundColor: 'transparent',
+      border: 'none',
+      cursor: 'pointer',
+      textDecoration: 'underline',
+      display: 'inline',
+      margin: 0,
+      padding: 0
+    }
+  }, lang.syncWithHub)));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "sui-floating-notices"
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "alert",
+    id: "sui-configs-floating-notice",
+    className: "sui-notice",
+    "aria-live": "assertive"
+  })), /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxHeader, {
+    title: lang.title
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {
     icon: "upload-cloud",
-    label: props.uploadLabel || 'Upload',
+    label: lang.upload,
     design: "ghost",
     htmlFor: "sui-upload-configs-input"
   }), /*#__PURE__*/React.createElement("input", {
@@ -3071,18 +3756,18 @@ var PresetsPage = function PresetsPage(_ref) {
     className: "sui-hidden",
     value: "",
     readOnly: "readonly",
-    onChange: props.uploadConfig,
+    onChange: handleUpload,
     accept: ".json"
   }), /*#__PURE__*/React.createElement(Button, {
     icon: "save",
-    label: props.saveLabel || 'Save Config',
+    label: lang.save,
     color: "blue",
     onClick: function onClick() {
       return openModal('edit', null);
     }
-  }))), /*#__PURE__*/React.createElement(BoxBody, null, props.description && /*#__PURE__*/React.createElement("p", null, props.description), !isLoading && isEmpty && /*#__PURE__*/React.createElement(Notifications, {
+  }))), /*#__PURE__*/React.createElement(BoxBody, null, /*#__PURE__*/React.createElement("p", null, lang.baseDescription + ' ', isPro && !isWhitelabel && lang.proDescription), !isLoading && isEmpty && /*#__PURE__*/React.createElement(Notifications, {
     type: "info"
-  }, /*#__PURE__*/React.createElement("p", null, props.emptyNotice))), isLoading && /*#__PURE__*/React.createElement(LoadingContent, null, /*#__PURE__*/React.createElement(LoadingWrap, {
+  }, /*#__PURE__*/React.createElement("p", null, lang.emptyNotice))), isLoading && /*#__PURE__*/React.createElement(LoadingContent, null, /*#__PURE__*/React.createElement(LoadingWrap, {
     "aria-hidden": "true"
   }, Table, Footer), /*#__PURE__*/React.createElement(LoadingMask, null, /*#__PURE__*/React.createElement("p", {
     className: "sui-description"
@@ -3092,21 +3777,21 @@ var PresetsPage = function PresetsPage(_ref) {
     style: {
       marginRight: 10
     }
-  }), props.loadingText))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, Footer)), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
+  }), lang.loading))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, Footer)), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
     setOpen: setIsApplyOpen,
     config: currentConfig,
-    save: applyModalData.action,
-    strings: applyModalData.strings
+    save: handleApply,
+    strings: lang.applyAction
   }), isDeleteOpen && /*#__PURE__*/React.createElement(DeleteModal, {
     setOpen: setIsDeleteOpen,
     config: currentConfig,
-    save: deleteModalData.action,
-    strings: deleteModalData.strings
+    save: handleDelete,
+    strings: lang.deleteAction
   }), isEditOpen && /*#__PURE__*/React.createElement(EditModal, {
     setOpen: setIsEditOpen,
     config: currentConfig,
-    save: editModalData.action,
-    strings: editModalData.strings
+    save: handleEdit,
+    strings: lang.editAction
   }));
 };
 
