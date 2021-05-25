@@ -257,7 +257,7 @@ export default class RequestHandler {
 		data.append( 'file', fileInput[0] );
 		data.append( '_ajax_nonce', this.pluginRequests.uploadNonce );
 
-		return this.makeRequest( this.pluginRequests.uploadAction, data);
+		return this.makePluginRequest( this.pluginRequests.uploadAction, data);
 	}
 
 	/**
@@ -268,7 +268,7 @@ export default class RequestHandler {
 	 */
 	create( data ) {
 		data.append( '_ajax_nonce', this.pluginRequests.createNonce );
-		return this.makeRequest( this.pluginRequests.createAction, data );
+		return this.makePluginRequest( this.pluginRequests.createAction, data );
 	}
 
 	/**
@@ -283,7 +283,7 @@ export default class RequestHandler {
 		data.append( '_ajax_nonce', this.pluginRequests.applyNonce );
 		data.append( 'id', config.id );
 
-		return this.makeRequest( this.pluginRequests.applyAction, data );
+		return this.makePluginRequest( this.pluginRequests.applyAction, data );
 	}
 
 	/**
@@ -293,7 +293,7 @@ export default class RequestHandler {
 	 * @param {*} data Request data.
 	 * @return {Promise} Promised request.
 	 */
-	makeRequest( action, data ) {
+	makePluginRequest( action, data ) {
 		return new Promise(function (resolve, reject) {
 			const xhr = new XMLHttpRequest();
 			xhr.open('POST', `${ajaxurl}?action=${action}`, true);
