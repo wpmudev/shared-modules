@@ -3341,7 +3341,7 @@ var RequestHandler = /*#__PURE__*/function () {
           fileInput = e.currentTarget.files;
       data.append('file', fileInput[0]);
       data.append('_ajax_nonce', this.pluginRequests.uploadNonce);
-      return this.makeRequest(this.pluginRequests.uploadAction, data);
+      return this.makePluginRequest(this.pluginRequests.uploadAction, data);
     }
     /**
      * Retrieves a new config from the site's current settings.
@@ -3354,7 +3354,7 @@ var RequestHandler = /*#__PURE__*/function () {
     key: "create",
     value: function create(data) {
       data.append('_ajax_nonce', this.pluginRequests.createNonce);
-      return this.makeRequest(this.pluginRequests.createAction, data);
+      return this.makePluginRequest(this.pluginRequests.createAction, data);
     }
     /**
      * Applies the given config to the site.
@@ -3369,7 +3369,7 @@ var RequestHandler = /*#__PURE__*/function () {
       var data = new FormData();
       data.append('_ajax_nonce', this.pluginRequests.applyNonce);
       data.append('id', config.id);
-      return this.makeRequest(this.pluginRequests.applyAction, data);
+      return this.makePluginRequest(this.pluginRequests.applyAction, data);
     }
     /**
      * Function to perform ajax requests.
@@ -3380,8 +3380,8 @@ var RequestHandler = /*#__PURE__*/function () {
      */
 
   }, {
-    key: "makeRequest",
-    value: function makeRequest(action, data) {
+    key: "makePluginRequest",
+    value: function makePluginRequest(action, data) {
       return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', "".concat(ajaxurl, "?action=").concat(action), true);
