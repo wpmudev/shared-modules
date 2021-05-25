@@ -3160,7 +3160,14 @@ var RequestHandler = /*#__PURE__*/function () {
     }
   }, {
     key: "syncWithHub",
-    value: function syncWithHub(localConfigs) {
+    value:
+    /**
+     * Handles the several requests needed for syncinc with the Hub.
+     *
+     * @param {array} localConfigs Local configs list.
+     * @return {Promise} For when all the requests are handled.
+     */
+    function syncWithHub(localConfigs) {
       var _this3 = this;
 
       return new Promise(function (resolve, reject) {
