@@ -4,6 +4,8 @@
 
 #### Improvements
 * `shared-presets`
+  * [#59](https://github.com/wpmudev/shared-modules/pull/59) 🐛 fix(shared-presets): Add missing inline doc to the function handling the Hub syncing ([@a-danae](https://github.com/a-danae))
+* `shared-presets`
   * [#58](https://github.com/wpmudev/shared-modules/pull/58) 🐛 fix(shared-presets): Rename function that makes requests to the plugin. ([@a-danae](https://github.com/a-danae))
 
 #### Committers: 1
