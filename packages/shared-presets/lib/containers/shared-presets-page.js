@@ -10,6 +10,8 @@ import DeleteModal from '../components/delete-modal';
 import EditModal from '../components/edit-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
 
+import Requester from '../requests-handler';
+
 const LoadingContent = styled.div`
 .sui-wrap && {
     position: relative;
@@ -42,21 +44,232 @@ const LoadingMask = styled.div`
 }
 `;
 
+let RequestsHandler;
+
 export const PresetsPage = ( {
-	configsList,
-	applyModalData,
-	deleteModalData,
-	editModalData,
-	freeData,
-	isLoading,
-	...props
+	isPro,
+	isWhitelabel,
+	requestsData,
+	sourceUrls,
+	sourceLang
 } ) => {
+	const [ configs, setConfigs ] = React.useState( null );
+	const [ isLoading, setIsLoading ] = React.useState( true );
+
+	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
-	const [isEditOpen, setIsEditOpen] = React.useState( false );
+	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
 
-	const isEmpty = ! configsList || 0 === configsList.length;
+	const urls = Object.assign(
+		{
+			freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
+			hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+			accordionImg: null,
+		},
+		sourceUrls
+	);
+
+	const lang = Object.assign(
+		{
+			title: 'Preset configs',
+			upload: 'Upload',
+			save: 'Save config',
+			loading: 'Updating the config list…',
+			emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+			baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+			proDescription: (
+				<>
+					{'You can easily apply configs to multiple sites at once via '}
+					<a
+						href={urls.hubMyConfigs}
+						target="_blank"
+						rel="noreferrer"
+					>
+					{'the Hub.'}
+					</a>
+				</>
+			),
+			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
+			apply: 'Apply',
+			download: 'Download',
+			edit: 'Name and Description',
+			delete: 'Delete',
+			freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
+			freeButtonLabel: 'Try The Hub',
+			notificationDismiss: 'Dismiss notice',
+			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
+			uploadActionSuccessMessage: '{configName} config has been uploaded successfully – you can now apply it to this site.',
+			applyAction: {
+				successMessage: '{configName} config has been applied successfully.',
+			},
+			editAction: {
+				successMessage: '{configName} config created successfully.',
+			},
+			deleteAction: {},
+			settingsLabels: {},
+		},
+		sourceLang
+	);
+
+	React.useEffect(() => {
+		RequestsHandler = new Requester( requestsData );
+		retrieveConfigs();
+	}, []);
+
+	const retrieveConfigs = () => {
+		setIsLoading( true );
+
+		RequestsHandler.getAllLocal()
+			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+			.catch( ( res ) => requestFailureNotice( res ) )
+			.then( () => setIsLoading( false ) );
+	};
+
+	const handleUpload = ( e ) => {
+		let newConfigName;
+
+		RequestsHandler.upload( e ).then( ( res ) => {
+			if ( res.data && res.data.config ) {
+				newConfigName = res.data.name;
+				return res.data;
+			}
+
+			// TODO: test this.
+			if ( ! res.success ) {
+				displayErrorMessage( res.data.error_msg );
+			}
+		})
+		.then( ( newConfig ) => RequestsHandler.addNew( configs, newConfig ) )
+		.then( ( updatedConfigs ) => {
+			setConfigs( updatedConfigs );
+			successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+		} )
+		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleDelete = () => {
+		RequestsHandler.delete( [ ...configs ], currentConfig )
+			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+			.catch( ( res ) => requestFailureNotice( res ) )
+			.then( () => setIsDeleteOpen( false ) );
+	};
+
+	const handleEdit = ( data, displayErrorMessage ) => {
+		// Editing a config.
+		if ( currentConfig ) {
+			RequestsHandler.edit( [ ...configs ], currentConfig, data )
+				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsEditOpen( false ) );
+
+			return;
+		}
+
+		// Creating a new config.
+		RequestsHandler.create( data )
+			.then( ( res ) => {
+				if ( res.data && res.data.config ) {
+					const configToAdd = {
+						name: data.get( 'name' ),
+						description: data.get( 'description' ),
+						config: res.data.config,
+					};
+					return configToAdd;
+				}
+
+				// TODO: test this.
+				if ( ! res.success ) {
+					displayErrorMessage( res.data.error_msg );
+				}
+			} )
+			.then( ( newConfig ) => RequestsHandler.addNew( [ ...configs ], newConfig ) )
+			.then( ( updatedConfigs ) => {
+				setConfigs( updatedConfigs );
+				setIsEditOpen( false );
+				successNotice( lang.editAction.successMessage.replace( '{configName}', data.get( 'name' ) ) );
+			} )
+			.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleApply = () => {
+		RequestsHandler.apply( currentConfig ).then( ( res ) => {
+			setIsApplyOpen( false );
+
+			if ( ! res.success ) {
+				requestFailureNotice( res );
+				return;
+			}
+			successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+		})
+		.catch( ( res ) => requestFailureNotice( res ) );
+	};
+
+	const handleSyncWithHub = () => {
+		setIsLoading( true );
+		RequestsHandler.syncWithHub( [ ...configs ] )
+			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+			.catch( ( res ) => requestFailureNotice( res ) )
+			.then( () => setIsLoading( false ) );
+	};
+
+	const doDownload = ( clickedConfig ) => {
+		const config = configs.find( ( item ) => clickedConfig.id === item.id );
+		if ( ! config ) {
+			return;
+		}
+
+		// This is unique per site.
+		delete config.hub_id;
+
+		const blob = new Blob( [ JSON.stringify( config, null, 2 ) ], {
+			type: 'application/json',
+		});
+
+		const pluginName = requestsData.pluginData.name.toLowerCase().replace( ' ', '-' ),
+			url = window.URL.createObjectURL(blob),
+			a = document.createElement('a');
+
+		a.style.display = 'none';
+		a.href = url;
+		a.download = `wp-${ pluginName }-config-${ config.name }`;
+		document.body.appendChild( a );
+		a.click();
+		window.URL.revokeObjectURL( url );
+		a.remove();
+	};
+
+	// Utils to move somewhere else.
+	const successNotice = ( message ) => {
+		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
+			type: 'success',
+			icon: 'check-tick',
+			dismiss: {
+				show: true,
+				label: lang.notificationDismiss,
+			},
+		});
+	};
+
+	const requestFailureNotice = ( res ) => {
+		const message = res.data
+			? res.data.error_msg
+			: lang.defaultRequestError.replace( '{status}', res.status );
+
+		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
+			type: 'error',
+			icon: 'info',
+			dismiss: {
+				show: true,
+				label: lang.notificationDismiss,
+			},
+		});
+	};
+
+	// End of utils to move somewhere else.
+
+	const isEmpty = ! configs || 0 === configs.length;
 
 	const openModal = ( action, config ) => {
 		setCurrentConfig( config );
@@ -70,6 +283,7 @@ export const PresetsPage = ( {
 		}
 	};
 
+	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 	const Table = (
 		<React.Fragment>
 			{ !isEmpty && (
@@ -79,26 +293,26 @@ export const PresetsPage = ( {
 						borderBottomWidth: 0
 					} }
 				>
-					{ configsList.map( item => (
+					{ configs.map( item => (
 						<PresetsAccordionItem
 							key={ item.id }
 							id={ item.id }
-							default={ item.default || false }
+							default={ item.default }
 							name={ item.name }
 							description={ item.description }
-							image={ item.image }
+							image={ tableImage }
 							showApplyButton={ true }
-							applyLabel={ item.applyLabel }
+							applyLabel={ lang.apply }
 							applyAction={ () => openModal( 'apply', item ) }
-							downloadLabel={ item.downloadLabel }
-							downloadAction={ item.downloadAction }
-							editLabel={ item.editLabel }
+							downloadLabel={ lang.download }
+							downloadAction={ () => doDownload( item ) }
+							editLabel={ lang.edit }
 							editAction={ () => openModal( 'edit', item ) }
-							deleteLabel={ item.deleteLabel }
+							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
-							{ item.config.map( ( item, index ) => (
-								<div key={ index } name={ item.label } status={ item.value } />
+							{ Object.keys( item.config.strings ).map( ( name ) => (
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
@@ -110,17 +324,17 @@ export const PresetsPage = ( {
 	const Footer = (
 		<React.Fragment>
 
-			{ freeData && (
+			{ !isPro && (
 				<BoxFooter
 					display="block"
 				>
 					<Notifications type="upsell">
-						<p>{ freeData.message }</p>
+						<p>{ lang.freeNoticeMessage }</p>
 						<p>
 							<Button
-								label={ freeData.button || 'Try The Hub' }
+								label={ lang.freeButtonLabel }
 								color="purple"
-								href={ freeData.buttonHref || 'https://wpmudev.com/hub-welcome/' }
+								href={ urls.freeNoticeHub }
 								target="_blank"
 							/>
 						</p>
@@ -128,14 +342,30 @@ export const PresetsPage = ( {
 				</BoxFooter>
 			)}
 
-			{ !freeData && props.update && '' !== props.update && (
+			{ isPro && (
 				<BoxFooter
 					display="block"
 					alignment="center"
 					paddingTop={ isEmpty ? 0 : 30 }
 					border={ isEmpty ? 0 : 1 }
 				>
-					<p className="sui-description">{ props.update }</p>
+					<button
+						className="sui-description"
+						onClick={ handleSyncWithHub }
+						style={ {
+							color: '#17A8E3',
+							fontWeight: '500',
+							backgroundColor: 'transparent',
+							border: 'none',
+							cursor: 'pointer',
+							textDecoration: 'underline',
+							display: 'inline',
+							margin: 0,
+							padding: 0,
+						} }
+					>
+						{ lang.syncWithHub }
+					</button>
 				</BoxFooter>
 			)}
 
@@ -144,12 +374,16 @@ export const PresetsPage = ( {
 
 	return (
 		<React.Fragment>
+			<div className="sui-floating-notices">
+				<div role="alert" id="sui-configs-floating-notice" className="sui-notice" aria-live="assertive"></div>
+			</div>
+
 			<Box>
-				<BoxHeader title={ props.title }>
+				<BoxHeader title={ lang.title }>
 					<div>
 						<Button
 							icon="upload-cloud"
-							label={ props.uploadLabel || 'Upload' }
+							label={ lang.upload }
 							design="ghost"
 							htmlFor="sui-upload-configs-input"
 						/>
@@ -160,12 +394,12 @@ export const PresetsPage = ( {
 							className="sui-hidden"
 							value=""
 							readOnly="readonly"
-							onChange={ props.uploadConfig }
+							onChange={ handleUpload }
 							accept=".json"
 						/>
 						<Button
 							icon="save"
-							label={ props.saveLabel || 'Save Config' }
+							label={ lang.save }
 							color="blue"
 							onClick={ () => openModal( 'edit', null ) }
 						/>
@@ -174,13 +408,16 @@ export const PresetsPage = ( {
 
 				<BoxBody>
 
-					{ props.description && (
-						<p>{ props.description }</p>
-					)}
+					<p>
+						{ lang.baseDescription + ' ' }
+						{ isPro && !isWhitelabel &&
+							lang.proDescription
+						}
+					</p>
 
 					{ !isLoading && isEmpty && (
 						<Notifications type="info">
-							<p>{ props.emptyNotice }</p>
+							<p>{ lang.emptyNotice }</p>
 						</Notifications>
 					)}
 
@@ -199,7 +436,7 @@ export const PresetsPage = ( {
 									aria-hidden="true"
 									style={ { marginRight: 10 } }
 								/>
-								{ props.loadingText }
+								{ lang.loading }
 							</p>
 						</LoadingMask>
 					</LoadingContent>
@@ -216,26 +453,26 @@ export const PresetsPage = ( {
 
 			{ isApplyOpen && (
 				<ApplyModal
-					setOpen={setIsApplyOpen}
-					config={currentConfig}
-					save={applyModalData.action}
-					strings={applyModalData.strings}
+					setOpen={ setIsApplyOpen }
+					config={ currentConfig }
+					save={ handleApply }
+					strings={ lang.applyAction }
 				/>
 			) }
 			{ isDeleteOpen && (
 				<DeleteModal
 					setOpen={ setIsDeleteOpen }
 					config={ currentConfig }
-					save={ deleteModalData.action }
-					strings={deleteModalData.strings}
+					save={ handleDelete }
+					strings={ lang.deleteAction }
 				/>
 			) }
 			{ isEditOpen && (
 				<EditModal
 					setOpen={ setIsEditOpen }
 					config={ currentConfig }
-					save={ editModalData.action }
-					strings={editModalData.strings}
+					save={ handleEdit }
+					strings={ lang.editAction }
 				/>
 			) }
 		</React.Fragment>

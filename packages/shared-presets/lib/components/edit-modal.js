@@ -33,10 +33,6 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 		createDescription = 'Save your current settings configuration. You’ll be able to then download and apply it to your other sites.'
 	} = strings;
 
-	const closeModal = () => {
-		setOpen( false );
-	};
-
 	const displayErrorMessage = ( message ) => {
 		setErrorMessage( message );
 		setIsSaving( false );
@@ -55,7 +51,7 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 		data.append( 'name', nameValue );
 		data.append( 'description', descriptionValue );
 
-		save( config, data, displayErrorMessage, closeModal );
+		save( data, displayErrorMessage );
 	};
 
 	const modalContent = () => {
