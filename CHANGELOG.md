@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased (2021-05-05)
+## Unreleased (2021-05-25)
 
 #### New Features
+* `shared-presets`
+  * [#57](https://github.com/wpmudev/shared-modules/pull/57) ✨ new(shared-presets): Update the list of presets in the site and the Hub from the component. ([@a-danae](https://github.com/a-danae))
 * `shared-compiler`, `shared-presets`
   * [#55](https://github.com/wpmudev/shared-modules/pull/55) ✨ new(shared-presets): Handle modals within the component. ([@a-danae](https://github.com/a-danae))
 
