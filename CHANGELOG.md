@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased (2021-05-26)
+
+#### Improvements
+* `shared-presets`
+  * [#59](https://github.com/wpmudev/shared-modules/pull/59) 🐛 fix(shared-presets): Add missing inline doc to the function handling the Hub syncing ([@a-danae](https://github.com/a-danae))
+
+#### Bug Fixes
+* `shared-presets`
+  * [#60](https://github.com/wpmudev/shared-modules/pull/60) 🐛 fix(shared-presets): Add '@justfixyc/react-aria-modal' as a dependency ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 1
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+
 ## Unreleased (2021-05-25)
 
 #### Improvements
