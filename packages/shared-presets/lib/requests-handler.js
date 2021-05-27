@@ -91,10 +91,17 @@ export default class RequestHandler {
 		return this.makeLocalRequest( 'POST', JSON.stringify( requestData ) );
 	}
 
+	/**
+	 * Deletes the given config from the Hub.
+	 * The response is a 404 if the config doesn't exist in the Hub.
+	 *
+	 * @param {int} configId
+	 */
 	deleteFromHub( configId ) {
 		// Try to delete it in the Hub only if we have an API key.
 		if ( this.apiKey ) {
-			this.makeHubRequest( `/${ configId }`, 'DELETE' );
+			this.makeHubRequest( `/${ configId }`, 'DELETE' )
+				.catch( ( res ) => console.log( res ) );
 		}
 	}
 
