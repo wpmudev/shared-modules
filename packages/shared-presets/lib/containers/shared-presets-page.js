@@ -53,7 +53,7 @@ export const PresetsPage = ( {
 	sourceUrls,
 	sourceLang
 } ) => {
-	const [ configs, setConfigs ] = React.useState( null );
+	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
 
 	// Modals-related states.
@@ -122,7 +122,7 @@ export const PresetsPage = ( {
 		setIsLoading( true );
 
 		RequestsHandler.getAllLocal()
-			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
 	};
