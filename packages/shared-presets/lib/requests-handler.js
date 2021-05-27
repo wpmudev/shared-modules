@@ -15,7 +15,7 @@ export default class RequestHandler {
 
 	delete( configs, currentConfig ) {
 		// Delete from the Hub when the config has a Hub ID and we have an API key.
-		if ( this.apiKey && currentConfig.hub_id ) {
+		if ( currentConfig.hub_id ) {
 			this.deleteFromHub( currentConfig.hub_id );
 		}
 
@@ -92,7 +92,10 @@ export default class RequestHandler {
 	}
 
 	deleteFromHub( configId ) {
-		return this.makeHubRequest( `/${ configId }`, 'DELETE' );
+		// Try to delete it in the Hub only if we have an API key.
+		if ( this.apiKey ) {
+			this.makeHubRequest( `/${ configId }`, 'DELETE' );
+		}
 	}
 
 	/**
