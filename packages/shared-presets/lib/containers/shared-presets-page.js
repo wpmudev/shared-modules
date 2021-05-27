@@ -253,9 +253,16 @@ export const PresetsPage = ( {
 	};
 
 	const requestFailureNotice = ( res ) => {
-		const message = res.data
-			? res.data.error_msg
-			: lang.defaultRequestError.replace( '{status}', res.status );
+		let message;
+
+		if ( res.data ) {
+			message = res.data.error_msg;
+		} else if ( res.status ) {
+			message = lang.defaultRequestError.replace( '{status}', res.status );
+		} else {
+			window.console.log( res );
+			message = 'Error. Check out the browser console';
+		}
 
 		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
 			type: 'error',
