@@ -59,6 +59,15 @@ export default class RequestHandler {
 		} );
 	}
 
+	/**
+	 * Edits the given config's name and description locally and in the Hub.
+	 *
+	 * @param {array} configs Current list of local configs.
+	 * @param {Object} currentConfig The config to edit.
+	 * @param {FormData} data The new name and description for the config.
+	 *
+	 * @return {Promise}
+	 */
 	edit( configs, currentConfig, data ) {
 		// Edit in the Hub when the config has a Hub ID and we have an API key.
 		if ( this.apiKey && currentConfig.hub_id ) {
@@ -67,7 +76,10 @@ export default class RequestHandler {
 				description: data.get( 'description' ),
 				package: this.pluginData,
 			};
-			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'PATCH', JSON.stringify( configData ) );
+
+			// This returns a 404 when the config doesn't exist in the Hub anymore.
+			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'PATCH', JSON.stringify( configData ) )
+				.catch( ( res ) => console.log( res ) );
 		}
 		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
 
@@ -95,7 +107,7 @@ export default class RequestHandler {
 	 * Deletes the given config from the Hub.
 	 * The response is a 404 if the config doesn't exist in the Hub.
 	 *
-	 * @param {int} configId
+	 * @param {int} configId The ID of the config to delete.
 	 */
 	deleteFromHub( configId ) {
 		// Try to delete it in the Hub only if we have an API key.
