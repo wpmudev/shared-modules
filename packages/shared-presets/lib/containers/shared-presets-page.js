@@ -121,7 +121,7 @@ export const PresetsPage = ( {
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		RequestsHandler.getAllLocal()
+		RequestsHandler.makeLocalRequest()
 			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
@@ -261,7 +261,7 @@ export const PresetsPage = ( {
 			message = lang.defaultRequestError.replace( '{status}', res.status );
 		} else {
 			window.console.log( res );
-			message = 'Error. Check out the browser console';
+			message = 'Error. Please check the browser console';
 		}
 
 		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {

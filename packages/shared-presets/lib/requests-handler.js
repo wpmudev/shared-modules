@@ -9,10 +9,6 @@ export default class RequestHandler {
 		this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
 	}
 
-	getAllLocal() {
-		return this.makeLocalRequest();
-	}
-
 	delete( configs, currentConfig ) {
 		// Delete from the Hub when the config has a Hub ID and we have an API key.
 		if ( currentConfig.hub_id ) {
