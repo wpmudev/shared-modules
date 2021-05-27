@@ -182,12 +182,13 @@ export default class RequestHandler {
 
 			// Send to the Hub the configs that haven't been sent.
 			if ( ! localOne.hub_id ) {
-				hubPromises.push( this.sendConfigToHub( localOne ) );
+				const sendToHubPromise = this.sendConfigToHub( localOne )
+					.then( ( res ) => {
+						localConfigs[ index ]['id'] = res.id;
+						localConfigs[ index ]['hub_id'] = res.id;
+					} );
+				hubPromises.push( sendToHubPromise );
 
-				// Remove it locally. We'll add it after the promises resolve.
-				// Splice will re-order the indexes. We don't want that.
-				// TODO: handle errors. We don't want to delete them locally if the promises fail.
-				delete localConfigs[ index ];
 				continue;
 			}
 
