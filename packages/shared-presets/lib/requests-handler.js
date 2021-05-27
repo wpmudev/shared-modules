@@ -9,6 +9,13 @@ export default class RequestHandler {
 		this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
 	}
 
+	/**
+	 * Deletes a config locally and from the Hub.
+	 *
+	 * @param {array} configs Current list of local configs.
+	 * @param {Object} currentConfig Config to delete.
+	 * @return {Promise}
+	 */
 	delete( configs, currentConfig ) {
 		// Delete from the Hub when the config has a Hub ID and we have an API key.
 		if ( currentConfig.hub_id ) {
@@ -23,6 +30,13 @@ export default class RequestHandler {
 		return this.updateLocalConfigsList( configs );
 	}
 
+	/**
+	 * Adds a new config locally and to the Hub.
+	 *
+	 * @param {array} configs Current list of local configs.
+	 * @param {Object} newConfig Config data of the newly added config.
+	 * @return {Promise}
+	 */
 	addNew( configs, newConfig ) {
 		return new Promise( ( resolve, reject ) => {
 			if ( this.apiKey ) {
@@ -35,9 +49,7 @@ export default class RequestHandler {
 
 					return this.updateLocalConfigsList( configs );
 				} )
-				.then( ( updatedConfigs ) => {
-					resolve( updatedConfigs );
-				} )
+				.then( ( updatedConfigs ) => resolve( updatedConfigs ) )
 				.catch( ( res ) => {
 					// There was an error saving the configs locally. Probably a schema mismatch.
 					if ( 400 === res.status ) {
@@ -90,6 +102,12 @@ export default class RequestHandler {
 		return this.updateLocalConfigsList( configs );
 	}
 
+	/**
+	 * Updates the locally stored list of configs replacing them with new ones.
+	 *
+	 * @param {array} newConfigs New list of configs to update locally.
+	 * @return {Promise}
+	 */
 	updateLocalConfigsList( newConfigs ) {
 		const requestData = {
 			// This gets 'null' entries because of how we're handling it. Remove those here.
@@ -211,6 +229,12 @@ export default class RequestHandler {
 		return Promise.all( hubPromises );
 	}
 
+	/**
+	 * Sends the given config to the Hub.
+	 *
+	 * @param {Object} config Config to send to the Hub.
+	 * @return {Promise}
+	 */
 	sendConfigToHub( config ) {
 		const configData = {
 			name: config.name,
@@ -266,12 +290,12 @@ export default class RequestHandler {
 	}
 
 	/**
-	* Promesify xhr requests.
-	*
-	* @param {*} data Request data.
-	* @param {string} verb Request verb.
-	* @return {Promise} Promised request.
-	*/
+	 * Triggers requests handled by the WP Rest API.
+	 *
+	 * @param {string} verb HTTP request method.
+	 * @param {*} data Data to send with the request.
+	 * @return {Promise}
+	 */
 	makeLocalRequest( verb = 'GET', data = null ) {
 		const headers = {
 			'Content-type': 'application/json',
@@ -280,9 +304,14 @@ export default class RequestHandler {
 		return this.makeRequest( `${ this.root }wp/v2/settings`, verb, data, headers );
 	}
 
-	// TODO: handle errors. Actions for deleting or editing a config
-	// return 404 when the config doesn't exist in the Hub.
-	// This happens because the config was removed by the Hub or by another site.
+	/**
+	 * Wrapper to make requests to the Hub.
+	 *
+	 * @param {string} path Extra path to append to this.hubBaseURL.
+	 * @param {string} verb HTTP request method.
+	 * @param {*} data Data to send with the request.
+	 * @return {Promise}
+	 */
 	makeHubRequest( path = '', verb = 'GET', data = null ) {
 		const headers = {
 			'Content-type': 'application/json',
@@ -292,7 +321,7 @@ export default class RequestHandler {
 	}
 
 	/**
-	 * Function to perform ajax requests.
+	 * Triggers AJAX requests that are handled by the plugin.
 	 *
 	 * @param {string} action Request action to be received in backend.
 	 * @param {*} data Request data.
@@ -302,6 +331,13 @@ export default class RequestHandler {
 		return this.makeRequest( `${ajaxurl}?action=${action}`, 'POST', data );
 	}
 
+	/**
+	* Initiates and promesifies xhr requests.
+	*
+	* @param {*} data Request data.
+	* @param {string} verb HTTP request method.
+	* @return {Promise} Promised request.
+	*/
 	makeRequest( url, verb = 'GET', data = null, headers = {} ) {
 		return new Promise( ( resolve, reject ) => {
 			const xhr = new XMLHttpRequest();
