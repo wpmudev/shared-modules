@@ -387,7 +387,7 @@ export const PresetsPage = ( {
 
 			<Box>
 				<BoxHeader title={ lang.title }>
-					<div>
+					<div className="sui-actions-right">
 						<Button
 							icon="upload-cloud"
 							label={ lang.upload }
@@ -405,6 +405,7 @@ export const PresetsPage = ( {
 							accept=".json"
 						/>
 						<Button
+							type="button"
 							icon="save"
 							label={ lang.save }
 							color="blue"
