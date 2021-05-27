@@ -90,37 +90,6 @@ export default class RequestHandler {
 		return this.makeLocalRequest( 'POST', JSON.stringify( requestData ) );
 	}
 
-	/**
-	* Promesify xhr requests.
-	*
-	* @param {*} data Request data.
-	* @param {string} verb Request verb.
-	* @return {Promise} Promised request.
-	*/
-	makeLocalRequest( verb = 'GET', data = null ) {
-		return new Promise( ( resolve, reject ) => {
-			const xhr = new XMLHttpRequest();
-
-			// TODO: double check this. Don't forget multisites.
-			xhr.open( verb, `${this.root}wp/v2/settings`, true );
-			xhr.setRequestHeader( 'X-WP-Nonce', this.nonce );
-			xhr.setRequestHeader( 'Content-type', 'application/json' );
-			xhr.onload = () => {
-				if ( xhr.status >= 200 && xhr.status < 300 ) {
-					const response = JSON.parse( xhr.response ),
-						resolveValue = response[ this.optionName ] ? response[ this.optionName ] : null;
-					resolve( resolveValue );
-				} else {
-					reject( xhr );
-				}
-			};
-			xhr.onerror = () => {
-				reject( xhr.status );
-			};
-			xhr.send( data );
-		});
-	};
-
 	deleteFromHub( configId ) {
 		return this.makeHubRequest( `/${ configId }`, 'DELETE' );
 	}
@@ -234,34 +203,6 @@ export default class RequestHandler {
 		return this.makeHubRequest( '', 'POST', JSON.stringify( configData ) );
 	}
 
-	// TODO: handle errors. Actions for deleting or editing a config
-	// return 404 when the config doesn't exist in the Hub.
-	// This happens because the config was removed by the Hub or by another site.
-	makeHubRequest( path = '', verb = 'GET', data = null ) {
-		return new Promise( ( resolve, reject ) => {
-			const xhr = new XMLHttpRequest();
-
-			xhr.open( verb, `https://wpmudev.com/api/hub/v1/package-configs${ path }`, true );
-			xhr.setRequestHeader( 'Content-type', 'application/json' );
-			xhr.setRequestHeader( 'Authorization', 'Basic ' + this.apiKey );
-			xhr.onload = () => {
-				if ( xhr.status >= 200 && xhr.status < 300 ) {
-					resolve( JSON.parse( xhr.response ) );
-				} else {
-					reject( {
-						status: xhr.status,
-					} );
-				}
-			};
-			xhr.onerror = () => {
-				reject( {
-					status: xhr.status,
-				} );
-			};
-			xhr.send( data );
-		});
-	};
-
 	/**
 	 * Retrieves a new config from the uploaded file.
 	 * Triggered on the input's onChange.
@@ -306,6 +247,32 @@ export default class RequestHandler {
 	}
 
 	/**
+	* Promesify xhr requests.
+	*
+	* @param {*} data Request data.
+	* @param {string} verb Request verb.
+	* @return {Promise} Promised request.
+	*/
+	makeLocalRequest( verb = 'GET', data = null ) {
+		const headers = {
+			'Content-type': 'application/json',
+			'X-WP-Nonce': this.nonce,
+		};
+		return this.makeRequest( `${ this.root }wp/v2/settings`, verb, data, headers );
+	}
+
+	// TODO: handle errors. Actions for deleting or editing a config
+	// return 404 when the config doesn't exist in the Hub.
+	// This happens because the config was removed by the Hub or by another site.
+	makeHubRequest( path = '', verb = 'GET', data = null ) {
+		const headers = {
+			'Content-type': 'application/json',
+			Authorization: 'Basic ' + this.apiKey,
+		};
+		return this.makeRequest( `https://wpmudev.com/api/hub/v1/package-configs${ path }`, verb, data, headers );
+	}
+
+	/**
 	 * Function to perform ajax requests.
 	 *
 	 * @param {string} action Request action to be received in backend.
@@ -313,24 +280,31 @@ export default class RequestHandler {
 	 * @return {Promise} Promised request.
 	 */
 	makePluginRequest( action, data ) {
-		return new Promise(function (resolve, reject) {
+		return this.makeRequest( `${ajaxurl}?action=${action}`, 'POST', data );
+	}
+
+	makeRequest( url, verb = 'GET', data = null, headers = {} ) {
+		return new Promise( ( resolve, reject ) => {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', `${ajaxurl}?action=${action}`, true);
+			xhr.open( verb, url, true );
+
+			for ( const header in headers ) {
+				xhr.setRequestHeader( header, headers[ header ] );
+			}
 			xhr.onload = () => {
-				if (xhr.status >= 200 && xhr.status < 300) {
-					resolve(JSON.parse(xhr.response));
+				if ( xhr.status >= 200 && xhr.status < 300 ) {
+					// Ugly workaround for returning the updated configs for WP Rest.
+					let response = JSON.parse( xhr.response );
+					if ( 'undefined' !== typeof response[ this.optionName ] ) {
+						response = response[ this.optionName ] || [];
+					}
+					resolve( response );
 				} else {
-					reject({
-						status: xhr.status,
-					});
+					reject( xhr );
 				}
 			};
-			xhr.onerror = () => {
-				reject({
-					status: xhr.status,
-				});
-			};
-			xhr.send(data);
+			xhr.onerror = () => reject( xhr );
+			xhr.send( data );
 		});
-	};
+	}
 }
