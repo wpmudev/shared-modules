@@ -257,7 +257,7 @@ export const PresetsPage = ( {
 
 		if ( res.data ) {
 			message = res.data.error_msg;
-		} else if ( res.status ) {
+		} else if ( res.status && 403 === res.status ) {
 			message = lang.defaultRequestError.replace( '{status}', res.status );
 		} else {
 			window.console.log( res );

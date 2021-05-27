@@ -15,7 +15,7 @@ export default class RequestHandler {
 	delete( configs, currentConfig ) {
 		// Delete from the Hub when the config has a Hub ID and we have an API key.
 		if ( this.apiKey && currentConfig.hub_id ) {
-			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'DELETE' );
+			this.deleteFromHub( currentConfig.hub_id );
 		}
 
 		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
@@ -27,14 +27,27 @@ export default class RequestHandler {
 	}
 
 	addNew( configs, newConfig ) {
-		return new Promise( ( resolve ) => {
+		return new Promise( ( resolve, reject ) => {
 			if ( this.apiKey ) {
+				let hubId;
 				this.sendConfigToHub( newConfig ).then( ( res ) => {
+					hubId = res.id;
 					newConfig.id = res.id;
 					newConfig.hub_id = res.id;
 					configs.push( newConfig );
 
-					resolve( this.updateLocalConfigsList( configs ) );
+					return this.updateLocalConfigsList( configs );
+				} )
+				.then( ( updatedConfigs ) => {
+					resolve( updatedConfigs );
+				} )
+				.catch( ( res ) => {
+					// There was an error saving the configs locally. Probably a schema mismatch.
+					if ( 400 === res.status ) {
+						// Remove the recently submitted config from the hub.
+						this.deleteFromHub( hubId );
+					}
+					reject( res );
 				} );
 			} else {
 				newConfig.id = getTime();
@@ -98,19 +111,19 @@ export default class RequestHandler {
 						resolveValue = response[ this.optionName ] ? response[ this.optionName ] : null;
 					resolve( resolveValue );
 				} else {
-					reject( {
-						status: xhr.status,
-					} );
+					reject( xhr );
 				}
 			};
 			xhr.onerror = () => {
-				reject( {
-					status: xhr.status,
-				} );
+				reject( xhr.status );
 			};
 			xhr.send( data );
 		});
 	};
+
+	deleteFromHub( configId ) {
+		return this.makeHubRequest( `/${ configId }`, 'DELETE' );
+	}
 
 	/**
 	 * Handles the several requests needed for syncinc with the Hub.
