@@ -39,6 +39,8 @@ export default class RequestHandler {
 	 */
 	addNew( configs, newConfig ) {
 		return new Promise( ( resolve, reject ) => {
+			newConfig.id = Date.now();
+
 			if ( this.apiKey ) {
 				let hubId;
 				this.sendConfigToHub( newConfig ).then( ( res ) => {
@@ -47,6 +49,11 @@ export default class RequestHandler {
 					newConfig.hub_id = res.id;
 					configs.push( newConfig );
 
+					return this.updateLocalConfigsList( configs );
+				} )
+				.catch( () => {
+					// Update the local list even if the Hub request fails.
+					configs.push( newConfig );
 					return this.updateLocalConfigsList( configs );
 				} )
 				.then( ( updatedConfigs ) => resolve( updatedConfigs ) )
@@ -59,7 +66,6 @@ export default class RequestHandler {
 					reject( res );
 				} );
 			} else {
-				newConfig.id = getTime();
 				configs.push( newConfig );
 
 				resolve( this.updateLocalConfigsList( configs ) );
@@ -198,8 +204,6 @@ export default class RequestHandler {
 		for ( const hubOne of hubConfigs ) {
 			// Add the configs from the hub that aren't present locally.
 			if ( ! localConfigsIds[ hubOne.id ] ) {
-				// TODO: handle errors when the incoming config's settings
-				// doesn't match the schema of the current settings.
 				localConfigs.push( {
 					id: hubOne.id,
 					hub_id: hubOne.id,
