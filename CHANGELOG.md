@@ -1,6 +1,15 @@
 # Changelog
 
-## Unreleased (2021-05-26)
+## Released (2021-05-28)
+
+#### Improvements
+* `shared-presets`
+  * [#61](https://github.com/wpmudev/shared-modules/pull/61) 🐛 fix(shared-presets): Enhance the requests handling. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 1
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+
+## Released (2021-05-26)
 
 #### Improvements
 * `shared-presets`
@@ -13,7 +22,7 @@
 #### Committers: 1
 - Danae Millan ([@a-danae](https://github.com/a-danae))
 
-## Unreleased (2021-05-25)
+## Released (2021-05-25)
 
 #### Improvements
 * `shared-presets`
@@ -24,7 +33,7 @@
 #### Committers: 1
 - Danae Millan ([@a-danae](https://github.com/a-danae))
 
-## Unreleased (2021-05-25)
+## Released (2021-05-25)
 
 #### New Features
 * `shared-presets`
