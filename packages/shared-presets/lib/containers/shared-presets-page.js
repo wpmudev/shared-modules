@@ -53,7 +53,7 @@ export const PresetsPage = ( {
 	sourceUrls,
 	sourceLang
 } ) => {
-	const [ configs, setConfigs ] = React.useState( null );
+	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
 
 	// Modals-related states.
@@ -121,8 +121,8 @@ export const PresetsPage = ( {
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		RequestsHandler.getAllLocal()
-			.then( ( newConfigs ) => setConfigs( newConfigs ) )
+		RequestsHandler.makeLocalRequest()
+			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
 	};
@@ -253,9 +253,16 @@ export const PresetsPage = ( {
 	};
 
 	const requestFailureNotice = ( res ) => {
-		const message = res.data
-			? res.data.error_msg
-			: lang.defaultRequestError.replace( '{status}', res.status );
+		let message;
+
+		if ( res.data ) {
+			message = res.data.error_msg;
+		} else if ( res.status && 403 === res.status ) {
+			message = lang.defaultRequestError.replace( '{status}', res.status );
+		} else {
+			window.console.log( res );
+			message = 'Error. Please check the browser console';
+		}
 
 		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
 			type: 'error',
@@ -380,7 +387,7 @@ export const PresetsPage = ( {
 
 			<Box>
 				<BoxHeader title={ lang.title }>
-					<div>
+					<div className="sui-actions-right">
 						<Button
 							icon="upload-cloud"
 							label={ lang.upload }
@@ -398,6 +405,7 @@ export const PresetsPage = ( {
 							accept=".json"
 						/>
 						<Button
+							type="button"
 							icon="save"
 							label={ lang.save }
 							color="blue"
