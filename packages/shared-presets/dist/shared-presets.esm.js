@@ -3025,7 +3025,8 @@ var RequestHandler = /*#__PURE__*/function () {
         root = _ref.root,
         nonce = _ref.nonce,
         optionName = _ref.optionName,
-        pluginRequests = _ref.pluginRequests;
+        pluginRequests = _ref.pluginRequests,
+        hubBaseURL = _ref.hubBaseURL;
 
     _classCallCheck(this, RequestHandler);
 
@@ -3035,19 +3036,23 @@ var RequestHandler = /*#__PURE__*/function () {
     this.nonce = nonce;
     this.optionName = optionName;
     this.pluginRequests = pluginRequests;
+    this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
   }
+  /**
+   * Deletes a config locally and from the Hub.
+   *
+   * @param {array} configs Current list of local configs.
+   * @param {Object} currentConfig Config to delete.
+   * @return {Promise}
+   */
+
 
   _createClass(RequestHandler, [{
-    key: "getAllLocal",
-    value: function getAllLocal() {
-      return this.makeLocalRequest();
-    }
-  }, {
     key: "delete",
     value: function _delete(configs, currentConfig) {
       // Delete from the Hub when the config has a Hub ID and we have an API key.
-      if (this.apiKey && currentConfig.hub_id) {
-        this.makeHubRequest("/".concat(currentConfig.hub_id), 'DELETE');
+      if (currentConfig.hub_id) {
+        this.deleteFromHub(currentConfig.hub_id);
       }
 
       var configIndex = configs.findIndex(function (element) {
@@ -3060,26 +3065,62 @@ var RequestHandler = /*#__PURE__*/function () {
 
       return this.updateLocalConfigsList(configs);
     }
+    /**
+     * Adds a new config locally and to the Hub.
+     *
+     * @param {array} configs Current list of local configs.
+     * @param {Object} newConfig Config data of the newly added config.
+     * @return {Promise}
+     */
+
   }, {
     key: "addNew",
     value: function addNew(configs, newConfig) {
       var _this = this;
 
-      return new Promise(function (resolve) {
+      return new Promise(function (resolve, reject) {
+        newConfig.id = Date.now();
+
         if (_this.apiKey) {
+          var hubId;
+
           _this.sendConfigToHub(newConfig).then(function (res) {
+            hubId = res.id;
             newConfig.id = res.id;
             newConfig.hub_id = res.id;
             configs.push(newConfig);
-            resolve(_this.updateLocalConfigsList(configs));
+            return _this.updateLocalConfigsList(configs);
+          })["catch"](function () {
+            // Update the local list even if the Hub request fails.
+            configs.push(newConfig);
+            return _this.updateLocalConfigsList(configs);
+          }).then(function (updatedConfigs) {
+            return resolve(updatedConfigs);
+          })["catch"](function (res) {
+            // There was an error saving the configs locally. Probably a schema mismatch.
+            if (400 === res.status) {
+              // Remove the recently submitted config from the hub.
+              _this.deleteFromHub(hubId);
+            }
+
+            reject(res);
           });
         } else {
-          newConfig.id = getTime();
           configs.push(newConfig);
           resolve(_this.updateLocalConfigsList(configs));
         }
       });
     }
+    /**
+     * Edits the given config's name and description locally and in the Hub.
+     *
+     * @param {array} configs Current list of local configs.
+     * @param {Object} currentConfig The config to edit.
+     * @param {FormData} data The new name and description for the config.
+     *
+     * @return {Promise}
+     */
+
   }, {
     key: "edit",
     value: function edit(configs, currentConfig, data) {
@@ -3089,8 +3130,11 @@ var RequestHandler = /*#__PURE__*/function () {
           name: data.get('name'),
           description: data.get('description'),
           "package": this.pluginData
-        };
-        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(configData));
+        }; // This returns a 404 when the config doesn't exist in the Hub anymore.
+
+        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(configData))["catch"](function (res) {
+          return console.log(res);
+        });
       }
 
       var configIndex = configs.findIndex(function (element) {
@@ -3106,6 +3150,13 @@ var RequestHandler = /*#__PURE__*/function () {
 
       return this.updateLocalConfigsList(configs);
     }
+    /**
+     * Updates the locally stored list of configs replacing them with new ones.
+     *
+     * @param {array} newConfigs New list of configs to update locally.
+     * @return {Promise}
+     */
+
   }, {
     key: "updateLocalConfigsList",
     value: function updateLocalConfigsList(newConfigs) {
@@ -3116,69 +3167,43 @@ var RequestHandler = /*#__PURE__*/function () {
       return this.makeLocalRequest('POST', JSON.stringify(requestData));
     }
     /**
-    * Promesify xhr requests.
-    *
-    * @param {*} data Request data.
-    * @param {string} verb Request verb.
-    * @return {Promise} Promised request.
-    */
+     * Deletes the given config from the Hub.
+     * The response is a 404 if the config doesn't exist in the Hub.
+     *
+     * @param {int} configId The ID of the config to delete.
+     */
 
   }, {
-    key: "makeLocalRequest",
-    value: function makeLocalRequest() {
-      var _this2 = this;
-
-      var verb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'GET';
-      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest(); // TODO: double check this. Don't forget multisites.
-
-        xhr.open(verb, "".concat(_this2.root, "wp/v2/settings"), true);
-        xhr.setRequestHeader('X-WP-Nonce', _this2.nonce);
-        xhr.setRequestHeader('Content-type', 'application/json');
-
-        xhr.onload = function () {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            var response = JSON.parse(xhr.response),
-                resolveValue = response[_this2.optionName] ? response[_this2.optionName] : null;
-            resolve(resolveValue);
-          } else {
-            reject({
-              status: xhr.status
-            });
-          }
-        };
-
-        xhr.onerror = function () {
-          reject({
-            status: xhr.status
-          });
-        };
-
-        xhr.send(data);
-      });
+    key: "deleteFromHub",
+    value: function deleteFromHub(configId) {
+      // Try to delete it in the Hub only if we have an API key.
+      if (this.apiKey) {
+        this.makeHubRequest("/".concat(configId), 'DELETE')["catch"](function (res) {
+          return console.log(res);
+        });
+      }
     }
-  }, {
-    key: "syncWithHub",
-    value:
     /**
      * Handles the several requests needed for syncinc with the Hub.
      *
      * @param {array} localConfigs Local configs list.
      * @return {Promise} For when all the requests are handled.
      */
-    function syncWithHub(localConfigs) {
-      var _this3 = this;
+
+  }, {
+    key: "syncWithHub",
+    value: function syncWithHub(localConfigs) {
+      var _this2 = this;
 
       return new Promise(function (resolve, reject) {
-        if (!_this3.apiKey) {
+        if (!_this2.apiKey) {
           resolve(localConfigs);
         }
 
-        _this3.makeHubRequest("?package_id=".concat(_this3.pluginData.id), 'GET').then(function (hubConfigs) {
-          return _this3.getUpdatedLocalWithHub(localConfigs, hubConfigs);
+        _this2.makeHubRequest("?package_id=".concat(_this2.pluginData.id), 'GET').then(function (hubConfigs) {
+          return _this2.getUpdatedLocalWithHub(localConfigs, hubConfigs);
         }).then(function () {
-          return _this3.updateLocalConfigsList(localConfigs);
+          return _this2.updateLocalConfigsList(localConfigs);
         }).then(function (syncRes) {
           return resolve(syncRes);
         })["catch"](function (res) {
@@ -3202,6 +3227,8 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "getUpdatedLocalWithHub",
     value: function getUpdatedLocalWithHub(localConfigs, hubConfigs) {
+      var _this3 = this;
+
       var hubConfigsIds = hubConfigs.map(function (currentConfig) {
         return currentConfig.id;
       }),
@@ -3212,34 +3239,41 @@ var RequestHandler = /*#__PURE__*/function () {
           _step;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _loop = function _loop() {
           var _step$value = _slicedToArray(_step.value, 2),
               index = _step$value[0],
               localOne = _step$value[1];
 
           // Skip checks for the basic config.
           if (localOne["default"]) {
-            continue;
+            return "continue";
           } // Send to the Hub the configs that haven't been sent.
 
 
           if (!localOne.hub_id) {
-            hubPromises.push(this.sendConfigToHub(localOne)); // Remove it locally. We'll add it after the promises resolve.
-            // Splice will re-order the indexes. We don't want that.
-            // TODO: handle errors. We don't want to delete them locally if the promises fail.
+            var sendToHubPromise = _this3.sendConfigToHub(localOne).then(function (res) {
+              localConfigs[index]['id'] = res.id;
+              localConfigs[index]['hub_id'] = res.id;
+            });
 
-            delete localConfigs[index];
-            continue;
+            hubPromises.push(sendToHubPromise);
+            return "continue";
           } // Find the configs that were removed from the hub and remove them locally.
 
 
           if (!hubConfigsIds[localOne.hub_id]) {
             delete localConfigs[index];
-            continue;
+            return "continue";
           } // Keep the IDs and index of the local configs for reference later on.
 
 
           localConfigsIds[localOne.hub_id] = index;
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _ret = _loop();
+
+          if (_ret === "continue") continue;
         }
       } catch (err) {
         _iterator.e(err);
@@ -3256,8 +3290,6 @@ var RequestHandler = /*#__PURE__*/function () {
 
           // Add the configs from the hub that aren't present locally.
           if (!localConfigsIds[hubOne.id]) {
-            // TODO: handle errors when the incoming config's settings
-            // doesn't match the schema of the current settings.
             localConfigs.push({
               id: hubOne.id,
               hub_id: hubOne.id,
@@ -3286,6 +3318,13 @@ var RequestHandler = /*#__PURE__*/function () {
 
       return Promise.all(hubPromises);
     }
+    /**
+     * Sends the given config to the Hub.
+     *
+     * @param {Object} config Config to send to the Hub.
+     * @return {Promise}
+     */
+
   }, {
     key: "sendConfigToHub",
     value: function sendConfigToHub(config) {
@@ -3296,46 +3335,7 @@ var RequestHandler = /*#__PURE__*/function () {
         config: JSON.stringify(config.config)
       };
       return this.makeHubRequest('', 'POST', JSON.stringify(configData));
-    } // TODO: handle errors. Actions for deleting or editing a config
-    // return 404 when the config doesn't exist in the Hub.
-    // This happens because the config was removed by the Hub or by another site.
-
-  }, {
-    key: "makeHubRequest",
-    value: function makeHubRequest() {
-      var _this4 = this;
-
-      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
-      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest();
-        xhr.open(verb, "https://wpmudev.com/api/hub/v1/package-configs".concat(path), true);
-        xhr.setRequestHeader('Content-type', 'application/json');
-        xhr.setRequestHeader('Authorization', 'Basic ' + _this4.apiKey);
-
-        xhr.onload = function () {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            resolve(JSON.parse(xhr.response));
-          } else {
-            reject({
-              status: xhr.status
-            });
-          }
-        };
-
-        xhr.onerror = function () {
-          reject({
-            status: xhr.status
-          });
-        };
-
-        xhr.send(data);
-      });
     }
-  }, {
-    key: "upload",
-    value:
     /**
      * Retrieves a new config from the uploaded file.
      * Triggered on the input's onChange.
@@ -3343,7 +3343,10 @@ var RequestHandler = /*#__PURE__*/function () {
      * @param {Event} e File input.
      * @return {Promise} The promised AJAX request.
      */
-    function upload(e) {
+
+  }, {
+    key: "upload",
+    value: function upload(e) {
       var data = new FormData(),
           fileInput = e.currentTarget.files;
       data.append('file', fileInput[0]);
@@ -3379,7 +3382,47 @@ var RequestHandler = /*#__PURE__*/function () {
       return this.makePluginRequest(this.pluginRequests.applyAction, data);
     }
     /**
-     * Function to perform ajax requests.
+     * Triggers requests handled by the WP Rest API.
+     *
+     * @param {string} verb HTTP request method.
+     * @param {*} data Data to send with the request.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "makeLocalRequest",
+    value: function makeLocalRequest() {
+      var verb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'GET';
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var headers = {
+        'Content-type': 'application/json',
+        'X-WP-Nonce': this.nonce
+      };
+      return this.makeRequest("".concat(this.root, "wp/v2/settings"), verb, data, headers);
+    }
+    /**
+     * Wrapper to make requests to the Hub.
+     *
+     * @param {string} path Extra path to append to this.hubBaseURL.
+     * @param {string} verb HTTP request method.
+     * @param {*} data Data to send with the request.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "makeHubRequest",
+    value: function makeHubRequest() {
+      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var headers = {
+        'Content-type': 'application/json',
+        Authorization: 'Basic ' + this.apiKey
+      };
+      return this.makeRequest(this.hubBaseURL + path, verb, data, headers);
+    }
+    /**
+     * Triggers AJAX requests that are handled by the plugin.
      *
      * @param {string} action Request action to be received in backend.
      * @param {*} data Request data.
@@ -3389,24 +3432,49 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "makePluginRequest",
     value: function makePluginRequest(action, data) {
+      return this.makeRequest("".concat(ajaxurl, "?action=").concat(action), 'POST', data);
+    }
+    /**
+    * Initiates and promesifies xhr requests.
+    *
+    * @param {*} data Request data.
+    * @param {string} verb HTTP request method.
+    * @return {Promise} Promised request.
+    */
+
+  }, {
+    key: "makeRequest",
+    value: function makeRequest(url) {
+      var _this4 = this;
+
+      var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
       return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', "".concat(ajaxurl, "?action=").concat(action), true);
+        xhr.open(verb, url, true);
+
+        for (var header in headers) {
+          xhr.setRequestHeader(header, headers[header]);
+        }
 
         xhr.onload = function () {
           if (xhr.status >= 200 && xhr.status < 300) {
-            resolve(JSON.parse(xhr.response));
+            // Ugly workaround for returning the updated configs for WP Rest.
+            var response = JSON.parse(xhr.response);
+
+            if ('undefined' !== typeof response[_this4.optionName]) {
+              response = response[_this4.optionName] || [];
+            }
+
+            resolve(response);
           } else {
-            reject({
-              status: xhr.status
-            });
+            reject(xhr);
           }
         };
 
         xhr.onerror = function () {
-          reject({
-            status: xhr.status
-          });
+          return reject(xhr);
         };
 
         xhr.send(data);
@@ -3429,7 +3497,7 @@ var PresetsPage = function PresetsPage(_ref) {
       sourceUrls = _ref.sourceUrls,
       sourceLang = _ref.sourceLang;
 
-  var _React$useState = React.useState(null),
+  var _React$useState = React.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       configs = _React$useState2[0],
       setConfigs = _React$useState2[1];
@@ -3503,8 +3571,8 @@ var PresetsPage = function PresetsPage(_ref) {
 
   var retrieveConfigs = function retrieveConfigs() {
     setIsLoading(true);
-    RequestsHandler.getAllLocal().then(function (newConfigs) {
-      return setConfigs(newConfigs);
+    RequestsHandler.makeLocalRequest().then(function (newConfigs) {
+      return setConfigs(newConfigs || []);
     })["catch"](function (res) {
       return requestFailureNotice(res);
     }).then(function () {
@@ -3648,7 +3716,17 @@ var PresetsPage = function PresetsPage(_ref) {
   };
 
   var requestFailureNotice = function requestFailureNotice(res) {
-    var message = res.data ? res.data.error_msg : lang.defaultRequestError.replace('{status}', res.status);
+    var message;
+
+    if (res.data) {
+      message = res.data.error_msg;
+    } else if (res.status && 403 === res.status) {
+      message = lang.defaultRequestError.replace('{status}', res.status);
+    } else {
+      window.console.log(res);
+      message = 'Error. Please check the browser console';
+    }
+
     window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
       type: 'error',
       icon: 'info',
@@ -3751,7 +3829,9 @@ var PresetsPage = function PresetsPage(_ref) {
     "aria-live": "assertive"
   })), /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxHeader, {
     title: lang.title
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sui-actions-right"
+  }, /*#__PURE__*/React.createElement(Button, {
     icon: "upload-cloud",
     label: lang.upload,
     design: "ghost",
@@ -3766,6 +3846,7 @@ var PresetsPage = function PresetsPage(_ref) {
     onChange: handleUpload,
     accept: ".json"
   }), /*#__PURE__*/React.createElement(Button, {
+    type: "button",
     icon: "save",
     label: lang.save,
     color: "blue",
