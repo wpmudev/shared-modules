@@ -115,10 +115,7 @@ export default class RequestHandler {
 	 * @return {Promise}
 	 */
 	updateLocalConfigsList( newConfigs ) {
-		const requestData = {
-			// This gets 'null' entries because of how we're handling it. Remove those here.
-			[ this.optionName ]: newConfigs.filter( ( element ) => element ),
-		};
+		const requestData = newConfigs.filter( ( element ) => element );
 
 		return this.makeLocalRequest( 'POST', JSON.stringify( requestData ) );
 	}
@@ -306,7 +303,7 @@ export default class RequestHandler {
 			'Content-type': 'application/json',
 			'X-WP-Nonce': this.nonce,
 		};
-		return this.makeRequest( `${ this.root }wp/v2/settings`, verb, data, headers );
+		return this.makeRequest( this.root, verb, data, headers );
 	}
 
 	/**
@@ -353,12 +350,7 @@ export default class RequestHandler {
 			}
 			xhr.onload = () => {
 				if ( xhr.status >= 200 && xhr.status < 300 ) {
-					// Ugly workaround for returning the updated configs for WP Rest.
-					let response = JSON.parse( xhr.response );
-					if ( 'undefined' !== typeof response[ this.optionName ] ) {
-						response = response[ this.optionName ] || [];
-					}
-					resolve( response );
+					resolve( JSON.parse( xhr.response ) );
 				} else {
 					reject( xhr );
 				}
