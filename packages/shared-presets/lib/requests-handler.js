@@ -1,10 +1,9 @@
 export default class RequestHandler {
-	constructor( { apiKey, pluginData, root, nonce, optionName, pluginRequests, hubBaseURL } ) {
+	constructor( { apiKey, pluginData, root, nonce, pluginRequests, hubBaseURL } ) {
 		this.apiKey = apiKey;
 		this.pluginData = pluginData;
 		this.root = root;
 		this.nonce = nonce;
-		this.optionName = optionName;
 		this.pluginRequests = pluginRequests;
 		this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
 	}
