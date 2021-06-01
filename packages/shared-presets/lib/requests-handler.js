@@ -259,7 +259,7 @@ export default class RequestHandler {
 			fileInput = e.currentTarget.files;
 
 		data.append( 'file', fileInput[0] );
-		data.append( '_ajax_nonce', this.pluginRequests.uploadNonce );
+		data.append( '_ajax_nonce', this.pluginRequests.nonce );
 
 		return this.makePluginRequest( this.pluginRequests.uploadAction, data);
 	}
@@ -271,7 +271,7 @@ export default class RequestHandler {
 	 * @return {Promise} The promised AJAX request.
 	 */
 	create( data ) {
-		data.append( '_ajax_nonce', this.pluginRequests.createNonce );
+		data.append( '_ajax_nonce', this.pluginRequests.nonce );
 		return this.makePluginRequest( this.pluginRequests.createAction, data );
 	}
 
@@ -284,7 +284,7 @@ export default class RequestHandler {
 	apply( config ) {
 		const data = new FormData();
 
-		data.append( '_ajax_nonce', this.pluginRequests.applyNonce );
+		data.append( '_ajax_nonce', this.pluginRequests.nonce );
 		data.append( 'id', config.id );
 
 		return this.makePluginRequest( this.pluginRequests.applyAction, data );
