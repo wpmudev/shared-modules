@@ -133,15 +133,12 @@ export const PresetsPage = ( {
 		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
 				newConfigName = res.data.name;
-				return res.data;
+				return RequestsHandler.addNew( configs, res.data );
 			}
 
-			// TODO: test this.
-			if ( ! res.success ) {
-				displayErrorMessage( res.data.error_msg );
-			}
-		})
-		.then( ( newConfig ) => RequestsHandler.addNew( configs, newConfig ) )
+			// Throw otherwise.
+			throw res;
+		} )
 		.then( ( updatedConfigs ) => {
 			setConfigs( updatedConfigs );
 			successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
@@ -176,15 +173,13 @@ export const PresetsPage = ( {
 						description: data.get( 'description' ),
 						config: res.data.config,
 					};
-					return configToAdd;
+					RequestsHandler.addNew( [ ...configs ], configToAdd )
 				}
 
-				// TODO: test this.
 				if ( ! res.success ) {
 					displayErrorMessage( res.data.error_msg );
 				}
 			} )
-			.then( ( newConfig ) => RequestsHandler.addNew( [ ...configs ], newConfig ) )
 			.then( ( updatedConfigs ) => {
 				setConfigs( updatedConfigs );
 				setIsEditOpen( false );
