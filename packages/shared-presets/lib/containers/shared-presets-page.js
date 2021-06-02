@@ -44,6 +44,20 @@ const LoadingMask = styled.div`
 }
 `;
 
+const StyledSyncButton = styled.button`
+.sui-wrap && {
+	color: #17A8E3;
+	font-weight: 500;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	text-decoration: underline;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+`;
+
 let RequestsHandler;
 
 export const PresetsPage = ( {
@@ -359,22 +373,9 @@ export const PresetsPage = ( {
 				>
 					<p className="sui-description">
 						{ lang.syncWithHubText } {' '}
-						<button
-							onClick={ handleSyncWithHub }
-							style={ {
-								color: '#17A8E3',
-								fontWeight: '500',
-								backgroundColor: 'transparent',
-								border: 'none',
-								cursor: 'pointer',
-								textDecoration: 'underline',
-								display: 'inline',
-								margin: 0,
-								padding: 0,
-							} }
-						>
+						<StyledSyncButton onClick={ handleSyncWithHub }>
 							{ lang.syncWithHubButton }
-						</button>
+						</StyledSyncButton>
 					</p>
 				</BoxFooter>
 			)}
