@@ -91,7 +91,8 @@ export const PresetsPage = ( {
 					</a>
 				</>
 			),
-			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
+			syncWithHubText: 'Created or updated the configs via the Hub?',
+			syncWithHubButton: 'Re-check to get the updated list.',
 			apply: 'Apply',
 			download: 'Download',
 			edit: 'Name and Description',
@@ -356,23 +357,25 @@ export const PresetsPage = ( {
 					paddingTop={ isEmpty ? 0 : 30 }
 					border={ isEmpty ? 0 : 1 }
 				>
-					<button
-						className="sui-description"
-						onClick={ handleSyncWithHub }
-						style={ {
-							color: '#17A8E3',
-							fontWeight: '500',
-							backgroundColor: 'transparent',
-							border: 'none',
-							cursor: 'pointer',
-							textDecoration: 'underline',
-							display: 'inline',
-							margin: 0,
-							padding: 0,
-						} }
-					>
-						{ lang.syncWithHub }
-					</button>
+					<p className="sui-description">
+						{ lang.syncWithHubText } {' '}
+						<button
+							onClick={ handleSyncWithHub }
+							style={ {
+								color: '#17A8E3',
+								fontWeight: '500',
+								backgroundColor: 'transparent',
+								border: 'none',
+								cursor: 'pointer',
+								textDecoration: 'underline',
+								display: 'inline',
+								margin: 0,
+								padding: 0,
+							} }
+						>
+							{ lang.syncWithHubButton }
+						</button>
+					</p>
 				</BoxFooter>
 			)}
 
