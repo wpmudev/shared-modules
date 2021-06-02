@@ -1,10 +1,9 @@
 export default class RequestHandler {
-	constructor( { apiKey, pluginData, root, nonce, optionName, pluginRequests, hubBaseURL } ) {
+	constructor( { apiKey, pluginData, root, nonce, pluginRequests, hubBaseURL } ) {
 		this.apiKey = apiKey;
 		this.pluginData = pluginData;
 		this.root = root;
 		this.nonce = nonce;
-		this.optionName = optionName;
 		this.pluginRequests = pluginRequests;
 		this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
 	}
@@ -115,10 +114,7 @@ export default class RequestHandler {
 	 * @return {Promise}
 	 */
 	updateLocalConfigsList( newConfigs ) {
-		const requestData = {
-			// This gets 'null' entries because of how we're handling it. Remove those here.
-			[ this.optionName ]: newConfigs.filter( ( element ) => element ),
-		};
+		const requestData = newConfigs.filter( ( element ) => element );
 
 		return this.makeLocalRequest( 'POST', JSON.stringify( requestData ) );
 	}
@@ -263,7 +259,7 @@ export default class RequestHandler {
 			fileInput = e.currentTarget.files;
 
 		data.append( 'file', fileInput[0] );
-		data.append( '_ajax_nonce', this.pluginRequests.uploadNonce );
+		data.append( '_ajax_nonce', this.pluginRequests.nonce );
 
 		return this.makePluginRequest( this.pluginRequests.uploadAction, data);
 	}
@@ -275,7 +271,7 @@ export default class RequestHandler {
 	 * @return {Promise} The promised AJAX request.
 	 */
 	create( data ) {
-		data.append( '_ajax_nonce', this.pluginRequests.createNonce );
+		data.append( '_ajax_nonce', this.pluginRequests.nonce );
 		return this.makePluginRequest( this.pluginRequests.createAction, data );
 	}
 
@@ -288,7 +284,7 @@ export default class RequestHandler {
 	apply( config ) {
 		const data = new FormData();
 
-		data.append( '_ajax_nonce', this.pluginRequests.applyNonce );
+		data.append( '_ajax_nonce', this.pluginRequests.nonce );
 		data.append( 'id', config.id );
 
 		return this.makePluginRequest( this.pluginRequests.applyAction, data );
@@ -306,7 +302,7 @@ export default class RequestHandler {
 			'Content-type': 'application/json',
 			'X-WP-Nonce': this.nonce,
 		};
-		return this.makeRequest( `${ this.root }wp/v2/settings`, verb, data, headers );
+		return this.makeRequest( this.root, verb, data, headers );
 	}
 
 	/**
@@ -353,12 +349,7 @@ export default class RequestHandler {
 			}
 			xhr.onload = () => {
 				if ( xhr.status >= 200 && xhr.status < 300 ) {
-					// Ugly workaround for returning the updated configs for WP Rest.
-					let response = JSON.parse( xhr.response );
-					if ( 'undefined' !== typeof response[ this.optionName ] ) {
-						response = response[ this.optionName ] || [];
-					}
-					resolve( response );
+					resolve( JSON.parse( xhr.response ) );
 				} else {
 					reject( xhr );
 				}
