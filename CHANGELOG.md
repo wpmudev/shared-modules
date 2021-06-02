@@ -1,5 +1,14 @@
 # Changelog
 
+## Released (2021-06-02)
+
+#### Improvements
+* `shared-presets`
+  * [#62](https://github.com/wpmudev/shared-modules/pull/62) 🐛 fix(shared-presets): Simplify sending and receiving configs when interacting with the local configs. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 1
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+
 ## Released (2021-05-28)
 
 #### Improvements
