@@ -132,6 +132,7 @@ export const PresetsPage = ( {
 
 		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
+				res.data.name = res.data.name.substring( 0, 199 );
 				newConfigName = res.data.name;
 				return res.data;
 			}
@@ -157,9 +158,14 @@ export const PresetsPage = ( {
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
+		const configData = {
+			name: data.get( 'name' ).substring( 0, 199 ),
+			description: data.get( 'description' ),
+		};
+
 		// Editing a config.
 		if ( currentConfig ) {
-			RequestsHandler.edit( [ ...configs ], currentConfig, data )
+			RequestsHandler.edit( [ ...configs ], currentConfig, configData )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsEditOpen( false ) );
@@ -171,12 +177,8 @@ export const PresetsPage = ( {
 		RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
-					const configToAdd = {
-						name: data.get( 'name' ),
-						description: data.get( 'description' ),
-						config: res.data.config,
-					};
-					return configToAdd;
+					configData.config = res.data.config;
+					return configData;
 				}
 
 				// TODO: test this.
@@ -188,7 +190,7 @@ export const PresetsPage = ( {
 			.then( ( updatedConfigs ) => {
 				setConfigs( updatedConfigs );
 				setIsEditOpen( false );
-				successNotice( lang.editAction.successMessage.replace( '{configName}', data.get( 'name' ) ) );
+				successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
 			} )
 			.catch( ( res ) => requestFailureNotice( res ) );
 	};
