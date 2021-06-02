@@ -3034,7 +3034,6 @@ var RequestHandler = /*#__PURE__*/function () {
         pluginData = _ref.pluginData,
         root = _ref.root,
         nonce = _ref.nonce,
-        optionName = _ref.optionName,
         pluginRequests = _ref.pluginRequests,
         hubBaseURL = _ref.hubBaseURL;
 
@@ -3044,7 +3043,6 @@ var RequestHandler = /*#__PURE__*/function () {
     this.pluginData = pluginData;
     this.root = root;
     this.nonce = nonce;
-    this.optionName = optionName;
     this.pluginRequests = pluginRequests;
     this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
   }
@@ -3170,10 +3168,9 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "updateLocalConfigsList",
     value: function updateLocalConfigsList(newConfigs) {
-      var requestData = _defineProperty({}, this.optionName, newConfigs.filter(function (element) {
+      var requestData = newConfigs.filter(function (element) {
         return element;
-      }));
-
+      });
       return this.makeLocalRequest('POST', JSON.stringify(requestData));
     }
     /**
@@ -3360,7 +3357,7 @@ var RequestHandler = /*#__PURE__*/function () {
       var data = new FormData(),
           fileInput = e.currentTarget.files;
       data.append('file', fileInput[0]);
-      data.append('_ajax_nonce', this.pluginRequests.uploadNonce);
+      data.append('_ajax_nonce', this.pluginRequests.nonce);
       return this.makePluginRequest(this.pluginRequests.uploadAction, data);
     }
     /**
@@ -3373,7 +3370,7 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "create",
     value: function create(data) {
-      data.append('_ajax_nonce', this.pluginRequests.createNonce);
+      data.append('_ajax_nonce', this.pluginRequests.nonce);
       return this.makePluginRequest(this.pluginRequests.createAction, data);
     }
     /**
@@ -3387,7 +3384,7 @@ var RequestHandler = /*#__PURE__*/function () {
     key: "apply",
     value: function apply(config) {
       var data = new FormData();
-      data.append('_ajax_nonce', this.pluginRequests.applyNonce);
+      data.append('_ajax_nonce', this.pluginRequests.nonce);
       data.append('id', config.id);
       return this.makePluginRequest(this.pluginRequests.applyAction, data);
     }
@@ -3408,7 +3405,7 @@ var RequestHandler = /*#__PURE__*/function () {
         'Content-type': 'application/json',
         'X-WP-Nonce': this.nonce
       };
-      return this.makeRequest("".concat(this.root, "wp/v2/settings"), verb, data, headers);
+      return this.makeRequest(this.root, verb, data, headers);
     }
     /**
      * Wrapper to make requests to the Hub.
@@ -3455,8 +3452,6 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "makeRequest",
     value: function makeRequest(url) {
-      var _this4 = this;
-
       var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
@@ -3470,14 +3465,7 @@ var RequestHandler = /*#__PURE__*/function () {
 
         xhr.onload = function () {
           if (xhr.status >= 200 && xhr.status < 300) {
-            // Ugly workaround for returning the updated configs for WP Rest.
-            var response = JSON.parse(xhr.response);
-
-            if ('undefined' !== typeof response[_this4.optionName]) {
-              response = response[_this4.optionName] || [];
-            }
-
-            resolve(response);
+            resolve(JSON.parse(xhr.response));
           } else {
             reject(xhr);
           }
