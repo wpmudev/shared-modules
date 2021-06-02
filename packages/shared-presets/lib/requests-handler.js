@@ -77,31 +77,23 @@ export default class RequestHandler {
 	 *
 	 * @param {array} configs Current list of local configs.
 	 * @param {Object} currentConfig The config to edit.
-	 * @param {FormData} data The new name and description for the config.
+	 * @param {Object} data The new name and description for the config.
 	 *
 	 * @return {Promise}
 	 */
-	edit( configs, currentConfig, data ) {
+	edit( configs, currentConfig, configData ) {
 		// Edit in the Hub when the config has a Hub ID and we have an API key.
 		if ( this.apiKey && currentConfig.hub_id ) {
-			const configData = {
-				name: data.get( 'name' ),
-				description: data.get( 'description' ),
-				package: this.pluginData,
-			};
+			const hubData = Object.assign( { package: this.pluginData }, configData );
 
 			// This returns a 404 when the config doesn't exist in the Hub anymore.
-			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'PATCH', JSON.stringify( configData ) )
+			this.makeHubRequest( `/${ currentConfig.hub_id}`, 'PATCH', JSON.stringify( hubData ) )
 				.catch( ( res ) => console.log( res ) );
 		}
 		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
 
 		if ( -1 !== configIndex ) {
-			const updatedConfig = Object.assign( {}, currentConfig );
-			updatedConfig.name = data.get( 'name' );
-			updatedConfig.description = data.get( 'description' );
-
-			configs[ configIndex ] = updatedConfig;
+			configs[ configIndex ] = Object.assign( {}, currentConfig, configData );
 		}
 
 		return this.updateLocalConfigsList( configs );
