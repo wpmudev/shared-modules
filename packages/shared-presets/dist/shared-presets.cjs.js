@@ -3581,15 +3581,11 @@ var PresetsPage = function PresetsPage(_ref) {
       if (res.data && res.data.config) {
         res.data.name = res.data.name.substring(0, 199);
         newConfigName = res.data.name;
-        return res.data;
-      } // TODO: test this.
+        return RequestsHandler.addNew(configs, res.data);
+      } // Throw otherwise.
 
 
-      if (!res.success) {
-        displayErrorMessage(res.data.error_msg);
-      }
-    }).then(function (newConfig) {
-      return RequestsHandler.addNew(configs, newConfig);
+      throw res;
     }).then(function (updatedConfigs) {
       setConfigs(updatedConfigs);
       successNotice(lang.uploadActionSuccessMessage.replace('{configName}', newConfigName));
@@ -3630,14 +3626,11 @@ var PresetsPage = function PresetsPage(_ref) {
       if (res.data && res.data.config) {
         configData.config = res.data.config;
         return configData;
-      } // TODO: test this.
-
+      }
 
       if (!res.success) {
         displayErrorMessage(res.data.error_msg);
       }
-    }).then(function (newConfig) {
-      return RequestsHandler.addNew(_toConsumableArray(configs), newConfig);
     }).then(function (updatedConfigs) {
       setConfigs(updatedConfigs);
       setIsEditOpen(false);
