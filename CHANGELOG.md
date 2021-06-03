@@ -2,6 +2,15 @@
 
 ## Released (2021-06-03)
 
+#### Bug Fixes
+* `shared-presets`
+  * [#66](https://github.com/wpmudev/shared-modules/pull/66) 🐛 fix(shared-presets): Saving a config not working ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 1
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+
+## Released (2021-06-03)
+
 #### Improvements
 * `shared-presets`
   * [#65](https://github.com/wpmudev/shared-modules/pull/65) 🐛 fix(shared-presets): Separate the text from the actual button for the Hub re-sync functionality. ([@a-danae](https://github.com/a-danae))
