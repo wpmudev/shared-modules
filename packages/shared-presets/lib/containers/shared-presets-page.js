@@ -44,6 +44,20 @@ const LoadingMask = styled.div`
 }
 `;
 
+const StyledSyncButton = styled.button`
+.sui-wrap && {
+	color: #17A8E3;
+	font-weight: 500;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	text-decoration: underline;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+`;
+
 let RequestsHandler;
 
 export const PresetsPage = ( {
@@ -91,7 +105,8 @@ export const PresetsPage = ( {
 					</a>
 				</>
 			),
-			syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
+			syncWithHubText: 'Created or updated the configs via the Hub?',
+			syncWithHubButton: 'Re-check to get the updated list.',
 			apply: 'Apply',
 			download: 'Download',
 			edit: 'Name and Description',
@@ -358,23 +373,12 @@ export const PresetsPage = ( {
 					paddingTop={ isEmpty ? 0 : 30 }
 					border={ isEmpty ? 0 : 1 }
 				>
-					<button
-						className="sui-description"
-						onClick={ handleSyncWithHub }
-						style={ {
-							color: '#17A8E3',
-							fontWeight: '500',
-							backgroundColor: 'transparent',
-							border: 'none',
-							cursor: 'pointer',
-							textDecoration: 'underline',
-							display: 'inline',
-							margin: 0,
-							padding: 0,
-						} }
-					>
-						{ lang.syncWithHub }
-					</button>
+					<p className="sui-description">
+						{ lang.syncWithHubText } {' '}
+						<StyledSyncButton onClick={ handleSyncWithHub }>
+							{ lang.syncWithHubButton }
+						</StyledSyncButton>
+					</p>
 				</BoxFooter>
 			)}
 
