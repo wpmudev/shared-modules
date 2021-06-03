@@ -149,15 +149,12 @@ export const PresetsPage = ( {
 			if ( res.data && res.data.config ) {
 				res.data.name = res.data.name.substring( 0, 199 );
 				newConfigName = res.data.name;
-				return res.data;
+				return RequestsHandler.addNew( configs, res.data );
 			}
 
-			// TODO: test this.
-			if ( ! res.success ) {
-				displayErrorMessage( res.data.error_msg );
-			}
-		})
-		.then( ( newConfig ) => RequestsHandler.addNew( configs, newConfig ) )
+			// Throw otherwise.
+			throw res;
+		} )
 		.then( ( updatedConfigs ) => {
 			setConfigs( updatedConfigs );
 			successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
@@ -192,16 +189,23 @@ export const PresetsPage = ( {
 		RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
+<<<<<<< HEAD
 					configData.config = res.data.config;
 					return configData;
+=======
+					const configToAdd = {
+						name: data.get( 'name' ),
+						description: data.get( 'description' ),
+						config: res.data.config,
+					};
+					RequestsHandler.addNew( [ ...configs ], configToAdd )
+>>>>>>> e1ba6e30078167c5598336112948dd87d1a5042e
 				}
 
-				// TODO: test this.
 				if ( ! res.success ) {
 					displayErrorMessage( res.data.error_msg );
 				}
 			} )
-			.then( ( newConfig ) => RequestsHandler.addNew( [ ...configs ], newConfig ) )
 			.then( ( updatedConfigs ) => {
 				setConfigs( updatedConfigs );
 				setIsEditOpen( false );
