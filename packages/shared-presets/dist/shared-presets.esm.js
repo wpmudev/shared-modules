@@ -3615,7 +3615,7 @@ var PresetsPage = function PresetsPage(_ref) {
     RequestsHandler.create(data).then(function (res) {
       if (res.data && res.data.config) {
         configData.config = res.data.config;
-        return configData;
+        return RequestsHandler.addNew(_toConsumableArray(configs), configData);
       }
 
       if (!res.success) {
