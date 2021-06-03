@@ -189,17 +189,8 @@ export const PresetsPage = ( {
 		RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
-<<<<<<< HEAD
 					configData.config = res.data.config;
 					return configData;
-=======
-					const configToAdd = {
-						name: data.get( 'name' ),
-						description: data.get( 'description' ),
-						config: res.data.config,
-					};
-					RequestsHandler.addNew( [ ...configs ], configToAdd )
->>>>>>> e1ba6e30078167c5598336112948dd87d1a5042e
 				}
 
 				if ( ! res.success ) {
