@@ -227,13 +227,16 @@ export const PresetsPage = ( {
 	};
 
 	const doDownload = ( clickedConfig ) => {
-		const config = configs.find( ( item ) => clickedConfig.id === item.id );
-		if ( ! config ) {
+		const config = Object.assign( {}, configs.find( ( item ) => clickedConfig.id === item.id ) );
+		if ( ! config || ! Object.keys( config ).length ) {
 			return;
 		}
 
 		// This is unique per site.
 		delete config.hub_id;
+
+		// Avoid having multiple defaults on upload.
+		delete config.default;
 
 		const blob = new Blob( [ JSON.stringify( config, null, 2 ) ], {
 			type: 'application/json',
