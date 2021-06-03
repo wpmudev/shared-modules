@@ -3114,23 +3114,21 @@ var RequestHandler = /*#__PURE__*/function () {
      *
      * @param {array} configs Current list of local configs.
      * @param {Object} currentConfig The config to edit.
-     * @param {FormData} data The new name and description for the config.
+     * @param {Object} data The new name and description for the config.
      *
      * @return {Promise}
      */
 
   }, {
     key: "edit",
-    value: function edit(configs, currentConfig, data) {
+    value: function edit(configs, currentConfig, configData) {
       // Edit in the Hub when the config has a Hub ID and we have an API key.
       if (this.apiKey && currentConfig.hub_id) {
-        var configData = {
-          name: data.get('name'),
-          description: data.get('description'),
+        var hubData = Object.assign({
           "package": this.pluginData
-        }; // This returns a 404 when the config doesn't exist in the Hub anymore.
+        }, configData); // This returns a 404 when the config doesn't exist in the Hub anymore.
 
-        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(configData))["catch"](function (res) {
+        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(hubData))["catch"](function (res) {
           return console.log(res);
         });
       }
@@ -3140,10 +3138,7 @@ var RequestHandler = /*#__PURE__*/function () {
       });
 
       if (-1 !== configIndex) {
-        var updatedConfig = Object.assign({}, currentConfig);
-        updatedConfig.name = data.get('name');
-        updatedConfig.description = data.get('description');
-        configs[configIndex] = updatedConfig;
+        configs[configIndex] = Object.assign({}, currentConfig, configData);
       }
 
       return this.updateLocalConfigsList(configs);
@@ -3473,10 +3468,11 @@ var RequestHandler = /*#__PURE__*/function () {
   return RequestHandler;
 }();
 
-var _templateObject$5, _templateObject2$3, _templateObject3$2;
+var _templateObject$5, _templateObject2$3, _templateObject3$2, _templateObject4$1;
 var LoadingContent = styled.div(_templateObject$5 || (_templateObject$5 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    position: relative;\n    z-index: 2;\n}\n"])));
 var LoadingWrap = styled.div(_templateObject2$3 || (_templateObject2$3 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    pointer-events: none;\n}"])));
 var LoadingMask = styled.div(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-flow: row wrap;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background-color: rgba(255,255,255,0.95);\n    border-radius: 0 0 4px 4px;\n\n    > p {\n\n    }\n}\n"])));
+var StyledSyncButton = styled.button(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral(["\n.sui-wrap && {\n\tcolor: #17A8E3;\n\tfont-weight: 500;\n\tbackground-color: transparent;\n\tborder: none;\n\tcursor: pointer;\n\ttext-decoration: underline;\n\tdisplay: inline;\n\tmargin: 0;\n\tpadding: 0;\n}\n"])));
 var RequestsHandler;
 var PresetsPage = function PresetsPage(_ref) {
   var isPro = _ref.isPro,
@@ -3533,7 +3529,8 @@ var PresetsPage = function PresetsPage(_ref) {
       target: "_blank",
       rel: "noreferrer"
     }, 'the Hub.')),
-    syncWithHub: 'Created or updated the configs via the Hub? Re-check to get the updated list.',
+    syncWithHubText: 'Created or updated the configs via the Hub?',
+    syncWithHubButton: 'Re-check to get the updated list.',
     apply: 'Apply',
     download: 'Download',
     edit: 'Name and Description',
@@ -3572,6 +3569,7 @@ var PresetsPage = function PresetsPage(_ref) {
     var newConfigName;
     RequestsHandler.upload(e).then(function (res) {
       if (res.data && res.data.config) {
+        res.data.name = res.data.name.substring(0, 199);
         newConfigName = res.data.name;
         return res.data;
       } // TODO: test this.
@@ -3601,9 +3599,13 @@ var PresetsPage = function PresetsPage(_ref) {
   };
 
   var handleEdit = function handleEdit(data, displayErrorMessage) {
-    // Editing a config.
+    var configData = {
+      name: data.get('name').substring(0, 199),
+      description: data.get('description')
+    }; // Editing a config.
+
     if (currentConfig) {
-      RequestsHandler.edit(_toConsumableArray(configs), currentConfig, data).then(function (newConfigs) {
+      RequestsHandler.edit(_toConsumableArray(configs), currentConfig, configData).then(function (newConfigs) {
         return setConfigs(newConfigs);
       })["catch"](function (res) {
         return requestFailureNotice(res);
@@ -3616,12 +3618,8 @@ var PresetsPage = function PresetsPage(_ref) {
 
     RequestsHandler.create(data).then(function (res) {
       if (res.data && res.data.config) {
-        var configToAdd = {
-          name: data.get('name'),
-          description: data.get('description'),
-          config: res.data.config
-        };
-        return configToAdd;
+        configData.config = res.data.config;
+        return configData;
       } // TODO: test this.
 
 
@@ -3633,7 +3631,7 @@ var PresetsPage = function PresetsPage(_ref) {
     }).then(function (updatedConfigs) {
       setConfigs(updatedConfigs);
       setIsEditOpen(false);
-      successNotice(lang.editAction.successMessage.replace('{configName}', data.get('name')));
+      successNotice(lang.editAction.successMessage.replace('{configName}', configData.name));
     })["catch"](function (res) {
       return requestFailureNotice(res);
     });
@@ -3793,21 +3791,11 @@ var PresetsPage = function PresetsPage(_ref) {
     alignment: "center",
     paddingTop: isEmpty ? 0 : 30,
     border: isEmpty ? 0 : 1
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "sui-description",
-    onClick: handleSyncWithHub,
-    style: {
-      color: '#17A8E3',
-      fontWeight: '500',
-      backgroundColor: 'transparent',
-      border: 'none',
-      cursor: 'pointer',
-      textDecoration: 'underline',
-      display: 'inline',
-      margin: 0,
-      padding: 0
-    }
-  }, lang.syncWithHub)));
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sui-description"
+  }, lang.syncWithHubText, " ", ' ', /*#__PURE__*/React.createElement(StyledSyncButton, {
+    onClick: handleSyncWithHub
+  }, lang.syncWithHubButton))));
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "sui-floating-notices"
   }, /*#__PURE__*/React.createElement("div", {
