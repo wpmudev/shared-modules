@@ -190,7 +190,7 @@ export const PresetsPage = ( {
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
 					configData.config = res.data.config;
-					return configData;
+					return RequestsHandler.addNew( [...configs], configData );
 				}
 
 				if ( ! res.success ) {
