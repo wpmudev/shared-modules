@@ -82,6 +82,7 @@ export const PresetsPage = ( {
 		{
 			freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
 			hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+			configsPage: '#',
 			accordionImg: null,
 		},
 		sourceUrls
@@ -92,6 +93,7 @@ export const PresetsPage = ( {
 			title: 'Preset configs',
 			upload: 'Upload',
 			save: 'Save config',
+			manageConfigs: 'Manage configs',
 			loading: 'Updating the config list…',
 			emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
 			baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
@@ -311,28 +313,28 @@ export const PresetsPage = ( {
 		</React.Fragment>
 	);
 
-	const Footer = (
-		<React.Fragment>
-
-			{ !isPro && (
-				<BoxFooter
-					display="block"
-				>
-					<Notifications type="upsell">
-						<p>{ lang.freeNoticeMessage }</p>
-						<p>
-							<Button
-								label={ lang.freeButtonLabel }
-								color="purple"
-								href={ urls.freeNoticeHub }
-								target="_blank"
-							/>
-						</p>
-					</Notifications>
+	const getFooter = () => {
+		if ( isWidget ) {
+			return (
+				<BoxFooter>
+					<Button
+						icon="save"
+						label={ lang.save }
+						color="blue"
+						onClick={ () => openModal( 'edit', null ) }
+					/>
+					<Button
+						icon="wrench-tool"
+						label={ lang.manageConfigs }
+						design="ghost"
+						href={ urls.configsPage }
+					/>
 				</BoxFooter>
-			)}
+			);
+		}
 
-			{ isPro && (
+		if ( isPro ) {
+			return (
 				<BoxFooter
 					display="block"
 					alignment="center"
@@ -346,10 +348,27 @@ export const PresetsPage = ( {
 						</StyledSyncButton>
 					</p>
 				</BoxFooter>
-			)}
+			);
+		}
 
-		</React.Fragment>
-	);
+		return (
+			<BoxFooter
+				display="block"
+			>
+				<Notifications type="upsell">
+					<p>{ lang.freeNoticeMessage }</p>
+					<p>
+						<Button
+							label={ lang.freeButtonLabel }
+							color="purple"
+							href={ urls.freeNoticeHub }
+							target="_blank"
+						/>
+					</p>
+				</Notifications>
+			</BoxFooter>
+		);
+	}
 
 	const headerArgs = { title: lang.title };
 	if ( isWidget ) {
@@ -421,7 +440,7 @@ export const PresetsPage = ( {
 					<LoadingContent>
 						<LoadingWrap aria-hidden="true">
 							{ Table }
-							{ Footer }
+							{ getFooter() }
 						</LoadingWrap>
 						<LoadingMask>
 							<p className="sui-description">
@@ -439,7 +458,7 @@ export const PresetsPage = ( {
 				{ !isLoading && (
 					<React.Fragment>
 						{ Table }
-						{ Footer }
+						{ getFooter() }
 					</React.Fragment>
 				)}
 
