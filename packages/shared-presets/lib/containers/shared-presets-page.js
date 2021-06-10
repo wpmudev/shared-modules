@@ -293,7 +293,7 @@ export const PresetsPage = ( {
 							name={ item.name }
 							description={ item.description }
 							image={ tableImage }
-							showApplyButton={ true }
+							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
 							applyAction={ () => openModal( 'apply', item ) }
 							downloadLabel={ lang.download }
