@@ -108,6 +108,7 @@ export const Presets = ( {
 					</a>
 				</>
 			),
+			widgetDescription: 'Use configs to save preset configurations of your settings.',
 			syncWithHubText: 'Created or updated the configs via the Hub?',
 			syncWithHubButton: 'Re-check to get the updated list.',
 			apply: 'Apply',
@@ -410,6 +411,17 @@ export const Presets = ( {
 		);
 	}
 
+	const getDescription = () => {
+		if ( isWidget ) {
+			return ( <p>{ lang.widgetDescription }</p> );
+		}
+
+		return ( <p>
+			{ lang.baseDescription + ' ' }
+			{ isPro && !isWhitelabel && lang.proDescription }
+		</p> );
+	};
+
 	const headerArgs = { title: lang.title };
 	if ( isWidget ) {
 		headerArgs.titleIcon = 'wrench-tool';
@@ -461,12 +473,7 @@ export const Presets = ( {
 
 				<BoxBody>
 
-					<p>
-						{ lang.baseDescription + ' ' }
-						{ isPro && !isWhitelabel &&
-							lang.proDescription
-						}
-					</p>
+					{ getDescription() }
 
 					{ !isLoading && isEmpty && (
 						<Notifications type="info">
