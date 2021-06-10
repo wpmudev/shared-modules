@@ -9,6 +9,7 @@ import ApplyModal from '../components/apply-modal';
 import DeleteModal from '../components/delete-modal';
 import EditModal from '../components/edit-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
+import { successNotice, requestFailureNotice } from '../components/notifications';
 
 import Requester from '../requests-handler';
 
@@ -61,6 +62,7 @@ const StyledSyncButton = styled.button`
 let RequestsHandler;
 
 export const PresetsPage = ( {
+	isWidget,
 	isPro,
 	isWhitelabel,
 	requestsData,
@@ -252,42 +254,6 @@ export const PresetsPage = ( {
 		a.remove();
 	};
 
-	// Utils to move somewhere else.
-	const successNotice = ( message ) => {
-		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
-			type: 'success',
-			icon: 'check-tick',
-			dismiss: {
-				show: true,
-				label: lang.notificationDismiss,
-			},
-		});
-	};
-
-	const requestFailureNotice = ( res ) => {
-		let message;
-
-		if ( res.data ) {
-			message = res.data.error_msg;
-		} else if ( res.status && 403 === res.status ) {
-			message = lang.defaultRequestError.replace( '{status}', res.status );
-		} else {
-			window.console.log( res );
-			message = 'Error. Please check the browser console';
-		}
-
-		window.SUI.openNotice('sui-configs-floating-notice', `<p>${ message }</p>`, {
-			type: 'error',
-			icon: 'info',
-			dismiss: {
-				show: true,
-				label: lang.notificationDismiss,
-			},
-		});
-	};
-
-	// End of utils to move somewhere else.
-
 	const isEmpty = ! configs || 0 === configs.length;
 
 	const openModal = ( action, config ) => {
@@ -380,6 +346,46 @@ export const PresetsPage = ( {
 		</React.Fragment>
 	);
 
+	const headerArgs = { title: lang.title };
+	if ( isWidget ) {
+		headerArgs.titleIcon = 'wrench-tool';
+		if ( ! isEmpty ) {
+			headerArgs.tagLabel = configs.length;
+		}
+	}
+
+	const PresetsHeader = (
+		<BoxHeader {...headerArgs}>
+			{ ! isWidget && (
+				<div className="sui-actions-right">
+					<Button
+						icon="upload-cloud"
+						label={ lang.upload }
+						design="ghost"
+						htmlFor="sui-upload-configs-input"
+					/>
+					<input
+						id="sui-upload-configs-input"
+						type="file"
+						name="config_file"
+						className="sui-hidden"
+						value=""
+						readOnly="readonly"
+						onChange={ handleUpload }
+						accept=".json"
+					/>
+					<Button
+						type="button"
+						icon="save"
+						label={ lang.save }
+						color="blue"
+						onClick={ () => openModal( 'edit', null ) }
+					/>
+				</div>
+			) }
+		</BoxHeader>
+	);
+
 	return (
 		<React.Fragment>
 			<div className="sui-floating-notices">
@@ -387,33 +393,7 @@ export const PresetsPage = ( {
 			</div>
 
 			<Box>
-				<BoxHeader title={ lang.title }>
-					<div className="sui-actions-right">
-						<Button
-							icon="upload-cloud"
-							label={ lang.upload }
-							design="ghost"
-							htmlFor="sui-upload-configs-input"
-						/>
-						<input
-							id="sui-upload-configs-input"
-							type="file"
-							name="config_file"
-							className="sui-hidden"
-							value=""
-							readOnly="readonly"
-							onChange={ handleUpload }
-							accept=".json"
-						/>
-						<Button
-							type="button"
-							icon="save"
-							label={ lang.save }
-							color="blue"
-							onClick={ () => openModal( 'edit', null ) }
-						/>
-					</div>
-				</BoxHeader>
+				{ PresetsHeader }
 
 				<BoxBody>
 
