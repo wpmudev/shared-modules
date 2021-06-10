@@ -9,7 +9,6 @@ import ApplyModal from '../components/apply-modal';
 import DeleteModal from '../components/delete-modal';
 import EditModal from '../components/edit-modal';
 import { PresetsAccordionItem } from '../components/accordion-item';
-import { successNotice, requestFailureNotice } from '../components/notifications';
 
 import Requester from '../requests-handler';
 
@@ -274,6 +273,47 @@ export const PresetsPage = ( {
 			setIsEditOpen( true );
 		}
 	};
+
+	// Notifications.
+	const successNotice = ( message ) => {
+		window.SUI.openNotice(
+			'sui-configs-floating-notice', `<p>${ message }</p>`,
+			{
+				type: 'success',
+				icon: 'check-tick',
+				dismiss: {
+					show: true,
+					label: lang.notificationDismiss,
+				},
+			}
+		);
+	};
+
+	const requestFailureNotice = ( res ) => {
+		let message;
+
+		if ( res.data ) {
+			message = res.data.error_msg;
+		} else if ( res.status && 403 === res.status ) {
+			message = lang.defaultRequestError.replace( '{status}', res.status );
+		} else {
+			window.console.log( res );
+			message = 'Error. Please check the browser console';
+		}
+
+		window.SUI.openNotice(
+			'sui-configs-floating-notice', `<p>${ message }</p>`,
+			{
+				type: 'error',
+				icon: 'info',
+				dismiss: {
+					show: true,
+					label: lang.notificationDismiss,
+				},
+			}
+		);
+	};
+	// End of notifications.
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 	const Table = (
