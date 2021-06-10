@@ -243,12 +243,13 @@ export const PresetsPage = ( {
 		});
 
 		const pluginName = requestsData.pluginData.name.toLowerCase().replace( ' ', '-' ),
+			configName = config.name.replace( /[^a-z0-9_-]/gi, '_' ).toLowerCase(),
 			url = window.URL.createObjectURL(blob),
 			a = document.createElement('a');
 
 		a.style.display = 'none';
 		a.href = url;
-		a.download = `wp-${ pluginName }-config-${ config.name }`;
+		a.download = `wp-${ pluginName }-config-${ configName }`;
 		document.body.appendChild( a );
 		a.click();
 		window.URL.revokeObjectURL( url );
