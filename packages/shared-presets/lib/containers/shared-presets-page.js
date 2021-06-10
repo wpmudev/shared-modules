@@ -149,7 +149,8 @@ export const PresetsPage = ( {
 
 		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
-				res.data.name = res.data.name.substring( 0, 199 );
+				res.data.name = res.data.name.substring( 0, 200 );
+				res.data.description = res.data.description.substring( 0, 200 );
 				newConfigName = res.data.name;
 				return RequestsHandler.addNew( configs, res.data );
 			}
@@ -173,8 +174,8 @@ export const PresetsPage = ( {
 
 	const handleEdit = ( data, displayErrorMessage ) => {
 		const configData = {
-			name: data.get( 'name' ).substring( 0, 199 ),
-			description: data.get( 'description' ),
+			name: data.get( 'name' ).substring( 0, 200 ),
+			description: data.get( 'description' ).substring( 0, 200 ),
 		};
 
 		// Editing a config.
@@ -229,25 +230,29 @@ export const PresetsPage = ( {
 	};
 
 	const doDownload = ( clickedConfig ) => {
-		const config = configs.find( ( item ) => clickedConfig.id === item.id );
-		if ( ! config ) {
+		const config = Object.assign( {}, configs.find( ( item ) => clickedConfig.id === item.id ) );
+		if ( ! config || ! Object.keys( config ).length ) {
 			return;
 		}
 
 		// This is unique per site.
 		delete config.hub_id;
 
+		// Avoid having multiple defaults on upload.
+		delete config.default;
+
 		const blob = new Blob( [ JSON.stringify( config, null, 2 ) ], {
 			type: 'application/json',
 		});
 
 		const pluginName = requestsData.pluginData.name.toLowerCase().replace( ' ', '-' ),
+			configName = config.name.replace( /[^a-z0-9_-]/gi, '_' ).toLowerCase(),
 			url = window.URL.createObjectURL(blob),
 			a = document.createElement('a');
 
 		a.style.display = 'none';
 		a.href = url;
-		a.download = `wp-${ pluginName }-config-${ config.name }`;
+		a.download = `wp-${ pluginName }-config-${ configName }`;
 		document.body.appendChild( a );
 		a.click();
 		window.URL.revokeObjectURL( url );
