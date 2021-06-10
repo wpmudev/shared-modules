@@ -147,7 +147,8 @@ export const PresetsPage = ( {
 
 		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
-				res.data.name = res.data.name.substring( 0, 199 );
+				res.data.name = res.data.name.substring( 0, 200 );
+				res.data.description = res.data.description.substring( 0, 200 );
 				newConfigName = res.data.name;
 				return RequestsHandler.addNew( configs, res.data );
 			}
@@ -171,8 +172,8 @@ export const PresetsPage = ( {
 
 	const handleEdit = ( data, displayErrorMessage ) => {
 		const configData = {
-			name: data.get( 'name' ).substring( 0, 199 ),
-			description: data.get( 'description' ),
+			name: data.get( 'name' ).substring( 0, 200 ),
+			description: data.get( 'description' ).substring( 0, 200 ),
 		};
 
 		// Editing a config.

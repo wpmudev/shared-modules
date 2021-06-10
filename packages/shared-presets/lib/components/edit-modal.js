@@ -98,6 +98,7 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 						name="name"
 						value={ nameValue }
 						onChange={ ( e ) => setNameValue( e.target.value ) }
+						maxLength="200"
 					/>
 					<div className="sui-form-field">
 						<label
@@ -112,6 +113,7 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 							name="description"
 							value={ descriptionValue }
 							onChange={ ( e ) => setDescriptionValue( e.target.value ) }
+							maxLength="200"
 						/>
 					</div>
 				</div>
