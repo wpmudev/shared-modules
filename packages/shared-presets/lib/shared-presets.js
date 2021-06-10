@@ -5,12 +5,12 @@ import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 
-import ApplyModal from '../components/apply-modal';
-import DeleteModal from '../components/delete-modal';
-import EditModal from '../components/edit-modal';
-import { PresetsAccordionItem } from '../components/accordion-item';
+import ApplyModal from './components/apply-modal';
+import DeleteModal from './components/delete-modal';
+import EditModal from './components/edit-modal';
+import { PresetsAccordionItem } from './components/accordion-item';
 
-import Requester from '../requests-handler';
+import Requester from './requests-handler';
 
 const LoadingContent = styled.div`
 .sui-wrap && {
