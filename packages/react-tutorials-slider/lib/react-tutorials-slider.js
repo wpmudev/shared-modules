@@ -44,8 +44,8 @@ const Box = styled.div`
 	}
 `;
 
-const Link = styled.a.attrs(props => ({
-	href: props.viewAll,
+const Link = styled.a.attrs( ({ viewAll }) => ({
+	href: viewAll,
 	target: "_blank"
 }))`
 	margin-top: 1px;
@@ -213,6 +213,9 @@ export class TutorialsSlider extends Component {
 
 	closeButtonClicked = e => {
 		this.hideComponent(e);
+		if ( this.props.onCloseClick ) {
+			this.props.onCloseClick(e);
+		}
 	};
 
 	hideComponent = e => {
@@ -482,7 +485,7 @@ export class TutorialsSlider extends Component {
 						)}
 						<div className="sui-actions-right">
 							{this.props.viewAll && (
-								<Link {...this.props}>
+								<Link viewAll={ this.props.viewAll }>
 									<span
 										className="sui-icon-open-new-window sui-sm"
 										aria-hidden="true"
