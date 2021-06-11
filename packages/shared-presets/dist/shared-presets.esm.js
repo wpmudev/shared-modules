@@ -99,42 +99,6 @@ function _isNativeReflectConstruct() {
   }
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -329,7 +293,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose$1(source, excluded) {
+function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -344,10 +308,10 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$1(source, excluded) {
+function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+  var target = _objectWithoutPropertiesLoose(source, excluded);
 
   var key, i;
 
@@ -427,7 +391,7 @@ var device = {
 var Box = function Box(_ref) {
   var children = _ref.children,
       className = _ref.className,
-      props = _objectWithoutProperties$1(_ref, ["children", "className"]);
+      props = _objectWithoutProperties(_ref, ["children", "className"]);
 
   return /*#__PURE__*/React.createElement("div", _extends({
     className: 'undefined' !== typeof className && '' !== className ? "sui-box ".concat(className) : 'sui-box'
@@ -442,7 +406,7 @@ var BoxTitle = function BoxTitle(_ref2) {
       tagDesign = _ref2.tagDesign,
       className = _ref2.className,
       children = _ref2.children,
-      props = _objectWithoutProperties$1(_ref2, ["icon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
+      props = _objectWithoutProperties(_ref2, ["icon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
 
   var tagClass = 'sui-tag';
 
@@ -527,7 +491,7 @@ var BoxHeader = function BoxHeader(_ref3) {
       tagDesign = _ref3.tagDesign;
       _ref3.className;
       var children = _ref3.children,
-      props = _objectWithoutProperties$1(_ref3, ["title", "titleIcon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
+      props = _objectWithoutProperties(_ref3, ["title", "titleIcon", "tagLabel", "tagColor", "tagSize", "tagDesign", "className", "children"]);
 
   return /*#__PURE__*/React.createElement(Header, props, title && '' !== title && /*#__PURE__*/React.createElement(BoxTitle, {
     icon: titleIcon,
@@ -569,7 +533,7 @@ var Body = styled.div.attrs(function (props) {
 var BoxBody = function BoxBody(_ref4) {
   var className = _ref4.className,
       children = _ref4.children,
-      props = _objectWithoutProperties$1(_ref4, ["className", "children"]);
+      props = _objectWithoutProperties(_ref4, ["className", "children"]);
 
   return /*#__PURE__*/React.createElement(Body, _extends({
     className: className
@@ -615,7 +579,7 @@ var Footer = styled.div.attrs(function (props) {
 var BoxFooter = function BoxFooter(_ref5) {
   var className = _ref5.className,
       children = _ref5.children,
-      props = _objectWithoutProperties$1(_ref5, ["className", "children"]);
+      props = _objectWithoutProperties(_ref5, ["className", "children"]);
 
   return /*#__PURE__*/React.createElement(Footer, _extends({
     className: className
@@ -787,7 +751,7 @@ function _objectSpread2(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$2(source, excluded) {
+function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -802,10 +766,10 @@ function _objectWithoutPropertiesLoose$2(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$2(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$2(source, excluded);
+  var target = _objectWithoutPropertiesLoose$1(source, excluded);
 
   var key, i;
 
@@ -832,7 +796,7 @@ var ButtonIcon = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$2(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$1(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1024,7 +988,7 @@ function _objectSpread2$1(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$3(source, excluded) {
+function _objectWithoutPropertiesLoose$2(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1039,10 +1003,10 @@ function _objectWithoutPropertiesLoose$3(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$3(source, excluded) {
+function _objectWithoutProperties$2(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$3(source, excluded);
+  var target = _objectWithoutPropertiesLoose$2(source, excluded);
 
   var key, i;
 
@@ -1068,7 +1032,7 @@ var Button = function Button(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$3(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$2(_ref, ["label", "icon", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1166,7 +1130,7 @@ function _extends$1() {
   return _extends$1.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose$4(source, excluded) {
+function _objectWithoutPropertiesLoose$3(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1181,10 +1145,10 @@ function _objectWithoutPropertiesLoose$4(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$4(source, excluded) {
+function _objectWithoutProperties$3(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$4(source, excluded);
+  var target = _objectWithoutPropertiesLoose$3(source, excluded);
 
   var key, i;
 
@@ -1263,7 +1227,7 @@ function _nonIterableRest$1() {
 var Modal = function Modal(_ref) {
   var modalContent = _ref.modalContent,
       triggerContent = _ref.triggerContent,
-      props = _objectWithoutProperties$4(_ref, ["modalContent", "triggerContent"]);
+      props = _objectWithoutProperties$3(_ref, ["modalContent", "triggerContent"]);
 
   var _React$useState = React.useState(false),
       _React$useState2 = _slicedToArray$1(_React$useState, 2),
@@ -1407,7 +1371,7 @@ function _objectSpread2$2(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$5(source, excluded) {
+function _objectWithoutPropertiesLoose$4(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1422,10 +1386,10 @@ function _objectWithoutPropertiesLoose$5(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$5(source, excluded) {
+function _objectWithoutProperties$4(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$5(source, excluded);
+  var target = _objectWithoutPropertiesLoose$4(source, excluded);
 
   var key, i;
 
@@ -1452,7 +1416,7 @@ var ButtonIcon$1 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$5(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$4(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -1668,7 +1632,7 @@ function _extends$2() {
   return _extends$2.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose$6(source, excluded) {
+function _objectWithoutPropertiesLoose$5(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -1683,10 +1647,10 @@ function _objectWithoutPropertiesLoose$6(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$6(source, excluded) {
+function _objectWithoutProperties$5(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$6(source, excluded);
+  var target = _objectWithoutPropertiesLoose$5(source, excluded);
 
   var key, i;
 
@@ -1711,7 +1675,7 @@ var Input = function Input(_ref) {
       description = _ref.description,
       _ref$type = _ref.type,
       type = _ref$type === void 0 ? 'text' : _ref$type,
-      props = _objectWithoutProperties$6(_ref, ["id", "size", "label", "description", "type"]);
+      props = _objectWithoutProperties$5(_ref, ["id", "size", "label", "description", "type"]);
 
   var uniqueId = id && '' !== id ? id : props.property;
   var clazz = 'sui-form-control';
@@ -1854,7 +1818,8 @@ var EditModal = function EditModal(_ref) {
       value: nameValue,
       onChange: function onChange(e) {
         return setNameValue(e.target.value);
-      }
+      },
+      maxLength: "200"
     }), /*#__PURE__*/React.createElement("div", {
       className: "sui-form-field"
     }, /*#__PURE__*/React.createElement("label", {
@@ -1867,7 +1832,8 @@ var EditModal = function EditModal(_ref) {
       value: descriptionValue,
       onChange: function onChange(e) {
         return setDescriptionValue(e.target.value);
-      }
+      },
+      maxLength: "200"
     }))), /*#__PURE__*/React.createElement("div", {
       className: "sui-box-footer sui-content-separated sui-flatten sui-spacing-top--0"
     }, /*#__PURE__*/React.createElement(Button, {
@@ -2087,7 +2053,7 @@ function _objectSpread2$3(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$7(source, excluded) {
+function _objectWithoutPropertiesLoose$6(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -2102,10 +2068,10 @@ function _objectWithoutPropertiesLoose$7(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$7(source, excluded) {
+function _objectWithoutProperties$6(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$7(source, excluded);
+  var target = _objectWithoutPropertiesLoose$6(source, excluded);
 
   var key, i;
 
@@ -2132,7 +2098,7 @@ var ButtonIcon$2 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$7(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$6(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -2463,7 +2429,7 @@ function _objectSpread2$4(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$8(source, excluded) {
+function _objectWithoutPropertiesLoose$7(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -2478,10 +2444,10 @@ function _objectWithoutPropertiesLoose$8(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$8(source, excluded) {
+function _objectWithoutProperties$7(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$8(source, excluded);
+  var target = _objectWithoutPropertiesLoose$7(source, excluded);
 
   var key, i;
 
@@ -2508,7 +2474,7 @@ var ButtonIcon$3 = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$8(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$7(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -2904,119 +2870,6 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
 
   return PresetsAccordionItem;
 }(Component);
-
-var PresetsWidget = function PresetsWidget(_ref) {
-  var configsList = _ref.configsList,
-      applyModalData = _ref.applyModalData,
-      deleteModalData = _ref.deleteModalData,
-      editModalData = _ref.editModalData,
-      props = _objectWithoutProperties(_ref, ["configsList", "applyModalData", "deleteModalData", "editModalData"]);
-
-  var _React$useState = React.useState(null),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      currentConfig = _React$useState2[0],
-      setCurrentConfig = _React$useState2[1];
-
-  var _React$useState3 = React.useState(false),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      isApplyOpen = _React$useState4[0],
-      setIsApplyOpen = _React$useState4[1];
-
-  var _React$useState5 = React.useState(false),
-      _React$useState6 = _slicedToArray(_React$useState5, 2),
-      isDeleteOpen = _React$useState6[0],
-      setIsDeleteOpen = _React$useState6[1];
-
-  var _React$useState7 = React.useState(false),
-      _React$useState8 = _slicedToArray(_React$useState7, 2),
-      isEditOpen = _React$useState8[0],
-      setIsEditOpen = _React$useState8[1];
-
-  var isEmpty = !configsList || 0 === configsList.length;
-
-  var openModal = function openModal(action, config) {
-    setCurrentConfig(config);
-
-    if ('apply' === action) {
-      setIsApplyOpen(true);
-    } else if ('delete' === action) {
-      setIsDeleteOpen(true);
-    } else {
-      setIsEditOpen(true);
-    }
-  };
-
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Box, null, !isEmpty && /*#__PURE__*/React.createElement(BoxHeader, {
-    titleIcon: "wrench-tool",
-    title: props.title,
-    tagLabel: configsList.length
-  }), isEmpty && /*#__PURE__*/React.createElement(BoxHeader, {
-    titleIcon: "wrench-tool",
-    title: props.title
-  }), /*#__PURE__*/React.createElement(BoxBody, null, /*#__PURE__*/React.createElement("p", null, props.description), isEmpty && /*#__PURE__*/React.createElement(Notifications, {
-    type: "info"
-  }, /*#__PURE__*/React.createElement("p", null, props.emptyNotice))), !isEmpty && /*#__PURE__*/React.createElement("div", {
-    className: "sui-accordion sui-accordion-flushed",
-    style: {
-      borderBottom: 0
-    }
-  }, configsList.map(function (item) {
-    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
-      key: item.id,
-      "default": item["default"] || false,
-      name: item.name,
-      description: item.description,
-      image: item.image,
-      applyLabel: item.applyLabel,
-      applyAction: function applyAction() {
-        return openModal('apply', item);
-      },
-      downloadLabel: item.downloadLabel,
-      downloadAction: item.downloadAction,
-      editLabel: item.editLabel,
-      editAction: function editAction() {
-        return openModal('edit', item);
-      },
-      deleteLabel: item.deleteLabel,
-      deleteAction: function deleteAction() {
-        return openModal('delete', item);
-      }
-    }, item.config.map(function (item, index) {
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        name: item.label,
-        status: item.value
-      });
-    }));
-  })), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button, {
-    icon: "save",
-    label: props.saveLabel,
-    color: "blue",
-    onClick: function onClick() {
-      return openModal('edit', null);
-    }
-  }), /*#__PURE__*/React.createElement(Button, {
-    icon: "wrench-tool",
-    label: props.manageLabel,
-    design: "ghost",
-    href: props.manageConfigsUrl
-  }))), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
-    setOpen: setIsApplyOpen,
-    config: currentConfig,
-    save: applyModalData.action,
-    strings: applyModalData.strings
-  }), isDeleteOpen && /*#__PURE__*/React.createElement(DeleteModal, {
-    setOpen: setIsDeleteOpen,
-    config: currentConfig,
-    save: deleteModalData.action,
-    strings: deleteModalData.strings
-  }), isEditOpen && /*#__PURE__*/React.createElement(EditModal, {
-    setOpen: setIsEditOpen,
-    config: currentConfig,
-    save: editModalData.action,
-    strings: editModalData.strings
-  }));
-};
 
 var RequestHandler = /*#__PURE__*/function () {
   function RequestHandler(_ref) {
@@ -3474,8 +3327,9 @@ var LoadingWrap = styled.div(_templateObject2$3 || (_templateObject2$3 = _tagged
 var LoadingMask = styled.div(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap && {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-flow: row wrap;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background-color: rgba(255,255,255,0.95);\n    border-radius: 0 0 4px 4px;\n\n    > p {\n\n    }\n}\n"])));
 var StyledSyncButton = styled.button(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral(["\n.sui-wrap && {\n\tcolor: #17A8E3;\n\tfont-weight: 500;\n\tbackground-color: transparent;\n\tborder: none;\n\tcursor: pointer;\n\ttext-decoration: underline;\n\tdisplay: inline;\n\tmargin: 0;\n\tpadding: 0;\n}\n"])));
 var RequestsHandler;
-var PresetsPage = function PresetsPage(_ref) {
-  var isPro = _ref.isPro,
+var Presets = function Presets(_ref) {
+  var isWidget = _ref.isWidget,
+      isPro = _ref.isPro,
       isWhitelabel = _ref.isWhitelabel,
       requestsData = _ref.requestsData,
       sourceUrls = _ref.sourceUrls,
@@ -3515,12 +3369,14 @@ var PresetsPage = function PresetsPage(_ref) {
   var urls = Object.assign({
     freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
     hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+    configsPage: '#',
     accordionImg: null
   }, sourceUrls);
   var lang = Object.assign({
     title: 'Preset configs',
     upload: 'Upload',
     save: 'Save config',
+    manageConfigs: 'Manage configs',
     loading: 'Updating the config list…',
     emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
     baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
@@ -3529,6 +3385,7 @@ var PresetsPage = function PresetsPage(_ref) {
       target: "_blank",
       rel: "noreferrer"
     }, 'the Hub.')),
+    widgetDescription: 'Use configs to save preset configurations of your settings.',
     syncWithHubText: 'Created or updated the configs via the Hub?',
     syncWithHubButton: 'Re-check to get the updated list.',
     apply: 'Apply',
@@ -3569,7 +3426,8 @@ var PresetsPage = function PresetsPage(_ref) {
     var newConfigName;
     RequestsHandler.upload(e).then(function (res) {
       if (res.data && res.data.config) {
-        res.data.name = res.data.name.substring(0, 199);
+        res.data.name = res.data.name.substring(0, 200);
+        res.data.description = res.data.description.substring(0, 200);
         newConfigName = res.data.name;
         return RequestsHandler.addNew(configs, res.data);
       } // Throw otherwise.
@@ -3596,8 +3454,8 @@ var PresetsPage = function PresetsPage(_ref) {
 
   var handleEdit = function handleEdit(data, displayErrorMessage) {
     var configData = {
-      name: data.get('name').substring(0, 199),
-      description: data.get('description')
+      name: data.get('name').substring(0, 200),
+      description: data.get('description').substring(0, 200)
     }; // Editing a config.
 
     if (currentConfig) {
@@ -3657,30 +3515,47 @@ var PresetsPage = function PresetsPage(_ref) {
   };
 
   var doDownload = function doDownload(clickedConfig) {
-    var config = configs.find(function (item) {
+    var config = Object.assign({}, configs.find(function (item) {
       return clickedConfig.id === item.id;
-    });
+    }));
 
-    if (!config) {
+    if (!config || !Object.keys(config).length) {
       return;
     } // This is unique per site.
 
 
-    delete config.hub_id;
+    delete config.hub_id; // Avoid having multiple defaults on upload.
+
+    delete config["default"];
     var blob = new Blob([JSON.stringify(config, null, 2)], {
       type: 'application/json'
     });
     var pluginName = requestsData.pluginData.name.toLowerCase().replace(' ', '-'),
+        configName = config.name.replace(/[^a-z0-9_-]/gi, '_').toLowerCase(),
         url = window.URL.createObjectURL(blob),
         a = document.createElement('a');
     a.style.display = 'none';
     a.href = url;
-    a.download = "wp-".concat(pluginName, "-config-").concat(config.name);
+    a.download = "wp-".concat(pluginName, "-config-").concat(configName);
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
-  }; // Utils to move somewhere else.
+  };
+
+  var isEmpty = !configs || 0 === configs.length;
+
+  var openModal = function openModal(action, config) {
+    setCurrentConfig(config);
+
+    if ('apply' === action) {
+      setIsApplyOpen(true);
+    } else if ('delete' === action) {
+      setIsDeleteOpen(true);
+    } else {
+      setIsEditOpen(true);
+    }
+  }; // Notifications.
 
 
   var successNotice = function successNotice(message) {
@@ -3714,22 +3589,8 @@ var PresetsPage = function PresetsPage(_ref) {
         label: lang.notificationDismiss
       }
     });
-  }; // End of utils to move somewhere else.
+  }; // End of notifications.
 
-
-  var isEmpty = !configs || 0 === configs.length;
-
-  var openModal = function openModal(action, config) {
-    setCurrentConfig(config);
-
-    if ('apply' === action) {
-      setIsApplyOpen(true);
-    } else if ('delete' === action) {
-      setIsDeleteOpen(true);
-    } else {
-      setIsEditOpen(true);
-    }
-  };
 
   var tableImage = !isWhitelabel ? urls.accordionImg : null;
   var Table = /*#__PURE__*/React.createElement(React.Fragment, null, !isEmpty && /*#__PURE__*/React.createElement("div", {
@@ -3745,7 +3606,7 @@ var PresetsPage = function PresetsPage(_ref) {
       name: item.name,
       description: item.description,
       image: tableImage,
-      showApplyButton: true,
+      showApplyButton: !isWidget,
       applyLabel: lang.apply,
       applyAction: function applyAction() {
         return openModal('apply', item);
@@ -3770,35 +3631,70 @@ var PresetsPage = function PresetsPage(_ref) {
       });
     }));
   })));
-  var Footer = /*#__PURE__*/React.createElement(React.Fragment, null, !isPro && /*#__PURE__*/React.createElement(BoxFooter, {
-    display: "block"
-  }, /*#__PURE__*/React.createElement(Notifications, {
-    type: "upsell"
-  }, /*#__PURE__*/React.createElement("p", null, lang.freeNoticeMessage), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(Button, {
-    label: lang.freeButtonLabel,
-    color: "purple",
-    href: urls.freeNoticeHub,
-    target: "_blank"
-  })))), isPro && /*#__PURE__*/React.createElement(BoxFooter, {
-    display: "block",
-    alignment: "center",
-    paddingTop: isEmpty ? 0 : 30,
-    border: isEmpty ? 0 : 1
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sui-description"
-  }, lang.syncWithHubText, " ", ' ', /*#__PURE__*/React.createElement(StyledSyncButton, {
-    onClick: handleSyncWithHub
-  }, lang.syncWithHubButton))));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "sui-floating-notices"
-  }, /*#__PURE__*/React.createElement("div", {
-    role: "alert",
-    id: "sui-configs-floating-notice",
-    className: "sui-notice",
-    "aria-live": "assertive"
-  })), /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(BoxHeader, {
+
+  var getFooter = function getFooter() {
+    if (isWidget) {
+      return /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button, {
+        icon: "save",
+        label: lang.save,
+        color: "blue",
+        onClick: function onClick() {
+          return openModal('edit', null);
+        }
+      }), /*#__PURE__*/React.createElement(Button, {
+        icon: "wrench-tool",
+        label: lang.manageConfigs,
+        design: "ghost",
+        href: urls.configsPage
+      }));
+    }
+
+    if (isPro) {
+      return /*#__PURE__*/React.createElement(BoxFooter, {
+        display: "block",
+        alignment: "center",
+        paddingTop: isEmpty ? 0 : 30,
+        border: isEmpty ? 0 : 1
+      }, /*#__PURE__*/React.createElement("p", {
+        className: "sui-description"
+      }, lang.syncWithHubText, " ", ' ', /*#__PURE__*/React.createElement(StyledSyncButton, {
+        onClick: handleSyncWithHub
+      }, lang.syncWithHubButton)));
+    }
+
+    return /*#__PURE__*/React.createElement(BoxFooter, {
+      display: "block"
+    }, /*#__PURE__*/React.createElement(Notifications, {
+      type: "upsell"
+    }, /*#__PURE__*/React.createElement("p", null, lang.freeNoticeMessage), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(Button, {
+      label: lang.freeButtonLabel,
+      color: "purple",
+      href: urls.freeNoticeHub,
+      target: "_blank"
+    }))));
+  };
+
+  var getDescription = function getDescription() {
+    if (isWidget) {
+      return /*#__PURE__*/React.createElement("p", null, lang.widgetDescription);
+    }
+
+    return /*#__PURE__*/React.createElement("p", null, lang.baseDescription + ' ', isPro && !isWhitelabel && lang.proDescription);
+  };
+
+  var headerArgs = {
     title: lang.title
-  }, /*#__PURE__*/React.createElement("div", {
+  };
+
+  if (isWidget) {
+    headerArgs.titleIcon = 'wrench-tool';
+
+    if (!isEmpty) {
+      headerArgs.tagLabel = configs.length;
+    }
+  }
+
+  var PresetsHeader = /*#__PURE__*/React.createElement(BoxHeader, headerArgs, !isWidget && /*#__PURE__*/React.createElement("div", {
     className: "sui-actions-right"
   }, /*#__PURE__*/React.createElement(Button, {
     icon: "upload-cloud",
@@ -3822,11 +3718,19 @@ var PresetsPage = function PresetsPage(_ref) {
     onClick: function onClick() {
       return openModal('edit', null);
     }
-  }))), /*#__PURE__*/React.createElement(BoxBody, null, /*#__PURE__*/React.createElement("p", null, lang.baseDescription + ' ', isPro && !isWhitelabel && lang.proDescription), !isLoading && isEmpty && /*#__PURE__*/React.createElement(Notifications, {
+  })));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "sui-floating-notices"
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "alert",
+    id: "sui-configs-floating-notice",
+    className: "sui-notice",
+    "aria-live": "assertive"
+  })), /*#__PURE__*/React.createElement(Box, null, PresetsHeader, /*#__PURE__*/React.createElement(BoxBody, null, getDescription(), !isLoading && isEmpty && /*#__PURE__*/React.createElement(Notifications, {
     type: "info"
   }, /*#__PURE__*/React.createElement("p", null, lang.emptyNotice))), isLoading && /*#__PURE__*/React.createElement(LoadingContent, null, /*#__PURE__*/React.createElement(LoadingWrap, {
     "aria-hidden": "true"
-  }, Table, Footer), /*#__PURE__*/React.createElement(LoadingMask, null, /*#__PURE__*/React.createElement("p", {
+  }, Table, getFooter()), /*#__PURE__*/React.createElement(LoadingMask, null, /*#__PURE__*/React.createElement("p", {
     className: "sui-description"
   }, /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -3834,7 +3738,7 @@ var PresetsPage = function PresetsPage(_ref) {
     style: {
       marginRight: 10
     }
-  }), lang.loading))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, Footer)), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
+  }), lang.loading))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, getFooter())), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
     setOpen: setIsApplyOpen,
     config: currentConfig,
     save: handleApply,
@@ -3852,4 +3756,4 @@ var PresetsPage = function PresetsPage(_ref) {
   }));
 };
 
-export { PresetsPage, PresetsWidget };
+export { Presets };
