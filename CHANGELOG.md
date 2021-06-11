@@ -1,5 +1,24 @@
 # Changelog
 
+## Released (2021-06-11)
+
+#### Improvements
+* `shared-presets`
+  * [#71](https://github.com/wpmudev/shared-modules/pull/71) ✨ new(shared-presets): Merge both widget and page presets into a single component. ([@a-danae](https://github.com/a-danae))
+
+#### Bug Fixes
+* `shared-presets`
+  * [#72](https://github.com/wpmudev/shared-modules/pull/72) 🔥 trash(shared-presets): Remove package from stories. ([@iamleigh](https://github.com/iamleigh))
+  * [#69](https://github.com/wpmudev/shared-modules/pull/69) 🐛 fix(shared-presets): Limit the config's name and description to 200 characters. ([@a-danae](https://github.com/a-danae))
+  * [#68](https://github.com/wpmudev/shared-modules/pull/68) 🐛 fix(shared-presets): Escape the config name before downloading the file. ([@a-danae](https://github.com/a-danae))
+  * [#67](https://github.com/wpmudev/shared-modules/pull/67) 🐛 fix(shared-presets): Default config property being included on download. ([@a-danae](https://github.com/a-danae))
+* `react-tutorials-slider`
+  * [#70](https://github.com/wpmudev/shared-modules/pull/70) 🐛 fix(shared-tutorials): Fix console error for unknown event handler property. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## Released (2021-06-03)
 
 #### Bug Fixes
