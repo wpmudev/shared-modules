@@ -1,6 +1,6 @@
 {
   "name": "@wpmudev/react-tutorials",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "WPMU DEV Shared Tutorials",
   "keywords": [],
   "author": "WPMU DEV (https://wpmudev.com/)",
@@ -45,7 +45,7 @@
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "dependencies": {
     "@wpmudev/react-tutorials-list": "^1.1.0",
-    "@wpmudev/react-tutorials-slider": "^1.0.15"
+    "@wpmudev/react-tutorials-slider": "^1.0.16"
   },
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.0"
