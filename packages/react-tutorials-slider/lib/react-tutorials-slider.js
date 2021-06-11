@@ -213,7 +213,6 @@ export class TutorialsSlider extends Component {
 
 	closeButtonClicked = e => {
 		this.hideComponent(e);
-		this.props.onCloseClick(e);
 	};
 
 	hideComponent = e => {
