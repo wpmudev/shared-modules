@@ -807,8 +807,6 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "closeButtonClicked", function (e) {
       _this.hideComponent(e);
-
-      _this.props.onCloseClick(e);
     });
 
     _defineProperty(_assertThisInitialized(_this), "hideComponent", function (e) {
