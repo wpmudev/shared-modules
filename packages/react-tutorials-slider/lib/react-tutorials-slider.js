@@ -401,6 +401,11 @@ export class TutorialsSlider extends Component {
 				? translate[0].show_less
 				: "Show less";
 
+		const utm_tags =
+			this.props.utmTags && '' !== this.props.utmTags
+				? true
+				: false;
+
 		const listPosts = posts.map((post, i) => (
 			<ListItem
 				key={post.id}
@@ -410,7 +415,7 @@ export class TutorialsSlider extends Component {
 				ref={1 === i && this.secondTutorial}>
 				<Post
 					role="link"
-					data-href={post.link}
+					data-href={ utm_tags ? `${post.link}?${this.props.utmTags}` : `${post.link}` }
 					title={post.title.rendered}
 					time={post.meta.blog_reading_time}
 					excerpt={post.excerpt.rendered}
