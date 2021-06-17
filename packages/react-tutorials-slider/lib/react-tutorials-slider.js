@@ -401,8 +401,8 @@ export class TutorialsSlider extends Component {
 				? translate[0].show_less
 				: "Show less";
 
-		const utm_tags =
-			this.props.utmTags && '' !== this.props.utmTags
+		const params =
+			this.props.postLinkParams && '' !== this.props.postLinkParams
 				? true
 				: false;
 
@@ -415,7 +415,7 @@ export class TutorialsSlider extends Component {
 				ref={1 === i && this.secondTutorial}>
 				<Post
 					role="link"
-					data-href={ utm_tags ? `${post.link}?${this.props.utmTags}` : `${post.link}` }
+					data-href={ params ? `${post.link}?${this.props.postLinkParams}` : `${post.link}` }
 					title={post.title.rendered}
 					time={post.meta.blog_reading_time}
 					excerpt={post.excerpt.rendered}

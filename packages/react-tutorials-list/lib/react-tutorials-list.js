@@ -211,8 +211,8 @@ export class TutorialsList extends Component {
 		const view_all =
 			translate && translate[0].view_all ? translate[0].view_all : "View all";
 
-		const utm_tags =
-			this.props.utmTags && '' !== this.props.utmTags
+		const params =
+			this.props.postLinkParams && '' !== this.props.postLinkParams
 				? true
 				: false;
 
@@ -221,7 +221,7 @@ export class TutorialsList extends Component {
 				<Post
 					banner
 					role="link"
-					data-href={ utm_tags ? `${post.link}?${this.props.utmTags}` : `${post.link}` }
+					data-href={ params ? `${post.link}?${this.props.postLinkParams}` : `${post.link}` }
 					title={post.title.rendered}
 					time={post.meta.blog_reading_time}
 					excerpt={post.excerpt.rendered}
