@@ -38,6 +38,7 @@ primary.args = {
 	title: 'Tutorials',
 	category: defender,
 	viewAll: 'https://premium.wpmudev.org/',
+	utmTags: ''
 };
 primary.parameters = {
 	notes: Documentation
