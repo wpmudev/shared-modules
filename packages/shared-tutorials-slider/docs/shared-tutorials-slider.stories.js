@@ -1,5 +1,5 @@
 import React from 'react';
-import { TutorialsList } from '../lib/react-tutorials-list';
+import { TutorialsSlider } from '../lib/shared-tutorials-slider';
 
 // Import documentation.
 import Documentation from '../README.md';
@@ -14,8 +14,8 @@ const plugins = {
 };
 
 export default {
-	title: 'Tutorials/List',
-	component: TutorialsList,
+	title: 'Tutorials/Slider',
+	component: TutorialsSlider,
 	argTypes: {
 		category: {
 			type: {
@@ -32,8 +32,8 @@ export default {
 
 const defender = '11231';
 
-export const primary = ( args ) => <TutorialsList { ...args } />;
-primary.storyName = 'List';
+export const primary = ( args ) => <TutorialsSlider { ...args } />;
+primary.storyName = 'Slider';
 primary.args = {
 	title: 'Tutorials',
 	category: defender,

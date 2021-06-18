@@ -1,7 +1,7 @@
 {
-  "name": "@wpmudev/react-tutorials-slider",
-  "version": "1.0.16",
-  "description": "WPMU DEV Shared Tutorials Slider",
+  "name": "@wpmudev/shared-tutorials",
+  "version": "1.1.1",
+  "description": "WPMU DEV Shared Tutorials",
   "keywords": [],
   "author": "WPMU DEV (https://wpmudev.com/)",
   "contributors": [
@@ -16,9 +16,9 @@
     }
   ],
   "license": "GPL-3.0",
-  "main": "dist/react-tutorials-slider.cjs.js",
-  "module": "dist/react-tutorials-slider.esm.js",
-  "src": "lib/react-tutorials-slider.js",
+  "main": "dist/shared-tutorials.cjs.js",
+  "module": "dist/shared-tutorials.esm.js",
+  "src": "lib/shared-tutorials.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -33,7 +33,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wpmudev/shared-modules.git",
-    "directory": "packages/react-tutorials-slider"
+    "directory": "packages/shared-tutorials"
   },
   "scripts": {
     "build": "shared-compiler",
@@ -43,16 +43,11 @@
     "url": "https://github.com/wpmudev/shared-modules/issues"
   },
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
-  "devDependencies": {
-    "@wpmudev/shared-compiler": "^1.0.0",
-    "react": "^17.0.1"
-  },
   "dependencies": {
-    "@wpmudev/react-notifications": "^1.0.1",
-    "@wpmudev/react-post": "^1.1.4",
-    "styled-components": "^5.2.1"
+    "@wpmudev/shared-tutorials-list": "^1.1.0",
+    "@wpmudev/shared-tutorials-slider": "^1.0.16"
   },
-  "resolutions": {
-    "styled-components": "^5"
+  "devDependencies": {
+    "@wpmudev/shared-compiler": "^1.0.0"
   }
 }
