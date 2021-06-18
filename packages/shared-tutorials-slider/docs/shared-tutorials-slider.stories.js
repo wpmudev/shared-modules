@@ -1,5 +1,5 @@
 import React from 'react';
-import { TutorialsSlider } from '../lib/react-tutorials-slider';
+import { TutorialsSlider } from '../lib/shared-tutorials-slider';
 
 // Import documentation.
 import Documentation from '../README.md';
