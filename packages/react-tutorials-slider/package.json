@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@wpmudev/react-notifications": "^1.0.1",
-    "@wpmudev/react-post": "^1.0.7",
+    "@wpmudev/react-post": "^1.1.4",
     "styled-components": "^5.2.1"
   },
   "resolutions": {
