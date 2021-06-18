@@ -1,5 +1,5 @@
 {
-  "name": "@wpmudev/react-tutorials-list",
+  "name": "@wpmudev/shared-tutorials-list",
   "version": "1.1.0",
   "description": "WPMU DEV Shared Tutorials List",
   "keywords": [],
@@ -16,9 +16,9 @@
     }
   ],
   "license": "GPL-3.0",
-  "main": "dist/react-tutorials-list.cjs.js",
-  "module": "dist/react-tutorials-list.esm.js",
-  "src": "lib/react-tutorials-list.js",
+  "main": "dist/shared-tutorials-list.cjs.js",
+  "module": "dist/shared-tutorials-list.esm.js",
+  "src": "lib/shared-tutorials-list.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -33,7 +33,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wpmudev/shared-modules.git",
-    "directory": "packages/react-tutorials-list"
+    "directory": "packages/shared-tutorials-list"
   },
   "scripts": {
     "build": "shared-compiler",
