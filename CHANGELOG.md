@@ -1,5 +1,27 @@
 # Changelog
 
+## Released (2021-06-18)
+
+#### Improvements
+* `react-tutorials`, `shared-tutorials-list`, `shared-tutorials-slider`, `shared-tutorials`
+  * [#78](https://github.com/wpmudev/shared-modules/pull/78) 🐛 fix(shared-tutorials): Rename package. ([@iamleigh](https://github.com/iamleigh))
+* `react-tutorials-list`, `react-tutorials-slider`
+  * [#76](https://github.com/wpmudev/shared-modules/pull/76) 🐛 fix(react-tutorials): Replace `utmTags` prop name with `params`. ([@iamleigh](https://github.com/iamleigh))
+* `react-tutorials-list`
+  * [#75](https://github.com/wpmudev/shared-modules/pull/75) 🐛 fix(tutorials-list): Allow UTM tags on posts’ link. ([@iamleigh](https://github.com/iamleigh))
+* `react-tutorials-slider`
+  * [#74](https://github.com/wpmudev/shared-modules/pull/74) 🐛 fix(tutorials-slider): Allow UTM tags on posts’ link. ([@iamleigh](https://github.com/iamleigh))
+
+#### Bug Fixes
+* `react-tutorials-list`, `react-tutorials-slider`
+  * [#77](https://github.com/wpmudev/shared-modules/pull/77) 🐛 fix(tutorials): Title HTML chars are rendered encoded. ([@iamleigh](https://github.com/iamleigh))
+* `react-tutorials-slider`
+  * [#73](https://github.com/wpmudev/shared-modules/pull/73) 🐛 fix(shared-tutorials-slider): Fix console error for unknown event handler property. ([@a-danae](https://github.com/a-danae))
+
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## Released (2021-06-11)
 
 #### Improvements
