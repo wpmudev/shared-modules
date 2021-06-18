@@ -695,29 +695,39 @@ var Post = /*#__PURE__*/function (_Component) {
       var min_read = translate && translate[0].min_read ? translate[0].min_read : "min read";
       var PostImage = ""; // Empty.
 
-      if (error) {
-        PostImage = error.message;
-      } else if (!isLoaded) {
-        PostImage = /*#__PURE__*/React.createElement("p", {
-          style: {
-            textAlign: 'center'
-          }
-        }, /*#__PURE__*/React.createElement("span", {
-          className: "sui-icon-loader sui-loading",
-          "aria-hidden": "true"
-        }), /*#__PURE__*/React.createElement("span", {
-          className: "sui-screen-reader-text"
-        }, "Image is loading"));
-      } else {
+      if (this.props.image) {
         PostImage = /*#__PURE__*/React.createElement(FeaturedImage, _extends({
-          src: media
+          src: this.props.image,
+          alt: ""
         }, this.props));
+      } else {
+        if (error) {
+          PostImage = error.message;
+        } else if (!isLoaded) {
+          PostImage = /*#__PURE__*/React.createElement("p", {
+            style: {
+              textAlign: 'center'
+            }
+          }, /*#__PURE__*/React.createElement("span", {
+            className: "sui-icon-loader sui-loading",
+            "aria-hidden": "true"
+          }), /*#__PURE__*/React.createElement("span", {
+            className: "sui-screen-reader-text"
+          }, "Image is loading"));
+        } else {
+          PostImage = /*#__PURE__*/React.createElement(FeaturedImage, _extends({
+            src: media
+          }, this.props));
+        }
       }
 
       if (this.props.banner) {
         return /*#__PURE__*/React.createElement(PostWrapper, this.props, PostImage, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle, {
-          banner: true
-        }, this.props.title), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt, {
+          banner: true,
+          dangerouslySetInnerHTML: {
+            __html: this.props.title
+          }
+        }), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt, {
           banner: true,
           dangerouslySetInnerHTML: {
             __html: this.props.excerpt
@@ -743,7 +753,11 @@ var Post = /*#__PURE__*/function (_Component) {
           minWidth: "1px",
           flex: 1
         }
-      }, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle, null, this.props.title), this.props.time && "" !== this.props.time && /*#__PURE__*/React.createElement(PostTime, null, "*", this.props.time, " ", min_read))), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt, {
+      }, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle, {
+        dangerouslySetInnerHTML: {
+          __html: this.props.title
+        }
+      }), this.props.time && "" !== this.props.time && /*#__PURE__*/React.createElement(PostTime, null, "*", this.props.time, " ", min_read))), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt, {
         dangerouslySetInnerHTML: {
           __html: this.props.excerpt
         }
@@ -784,9 +798,10 @@ var device$1 = {
   desktop: "(min-width: ".concat(screen$1.desktop, "px)")
 };
 var Box = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n\tposition: relative;\n\tpadding: 10px;\n\n\t@media ", " {\n\t\tpadding: 15px 25px;\n\t}\n"])), device$1.tablet);
-var Link = styled.a.attrs(function (props) {
+var Link = styled.a.attrs(function (_ref) {
+  var viewAll = _ref.viewAll;
   return {
-    href: props.viewAll,
+    href: viewAll,
     target: "_blank"
   };
 })(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral(["\n\tmargin-top: 1px;\n\tmargin-right: 23px;\n\tfont-size: 13px;\n\tline-height: 22px;\n\tletter-spacing: -0.2px;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-right: 5px;\n\n\t\t&:before {\n\t\t\tcolor: inherit;\n\t\t}\n\t}\n"])));
@@ -807,6 +822,10 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "closeButtonClicked", function (e) {
       _this.hideComponent(e);
+
+      if (_this.props.onCloseClick) {
+        _this.props.onCloseClick(e);
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "hideComponent", function (e) {
@@ -981,6 +1000,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       var close_tutorials = translate && translate[0].close_tutorials ? translate[0].close_tutorials : "Close tutorials";
       var show_more = translate && translate[0].show_more ? translate[0].show_more : "Show more";
       var show_less = translate && translate[0].show_less ? translate[0].show_less : "Show less";
+      var params = this.props.postLinkParams && '' !== this.props.postLinkParams ? true : false;
       var listPosts = posts.map(function (post, i) {
         return /*#__PURE__*/React.createElement(ListItem, {
           key: post.id,
@@ -988,7 +1008,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           ref: 1 === i && _this3.secondTutorial
         }, /*#__PURE__*/React.createElement(Post, {
           role: "link",
-          "data-href": post.link,
+          "data-href": params ? "".concat(post.link, "?").concat(_this3.props.postLinkParams) : "".concat(post.link),
           title: post.title.rendered,
           time: post.meta.blog_reading_time,
           excerpt: post.excerpt.rendered,
@@ -1068,7 +1088,9 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           className: "sui-box-title"
         }, this.props.title), /*#__PURE__*/React.createElement("div", {
           className: "sui-actions-right"
-        }, this.props.viewAll && /*#__PURE__*/React.createElement(Link, this.props, /*#__PURE__*/React.createElement("span", {
+        }, this.props.viewAll && /*#__PURE__*/React.createElement(Link, {
+          viewAll: this.props.viewAll
+        }, /*#__PURE__*/React.createElement("span", {
           className: "sui-icon-open-new-window sui-sm",
           "aria-hidden": "true"
         }), view_all), /*#__PURE__*/React.createElement("div", {
