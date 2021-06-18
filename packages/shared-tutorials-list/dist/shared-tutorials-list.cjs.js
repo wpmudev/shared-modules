@@ -704,29 +704,39 @@ var Post = /*#__PURE__*/function (_Component) {
       var min_read = translate && translate[0].min_read ? translate[0].min_read : "min read";
       var PostImage = ""; // Empty.
 
-      if (error) {
-        PostImage = error.message;
-      } else if (!isLoaded) {
-        PostImage = /*#__PURE__*/React__default['default'].createElement("p", {
-          style: {
-            textAlign: 'center'
-          }
-        }, /*#__PURE__*/React__default['default'].createElement("span", {
-          className: "sui-icon-loader sui-loading",
-          "aria-hidden": "true"
-        }), /*#__PURE__*/React__default['default'].createElement("span", {
-          className: "sui-screen-reader-text"
-        }, "Image is loading"));
-      } else {
+      if (this.props.image) {
         PostImage = /*#__PURE__*/React__default['default'].createElement(FeaturedImage, _extends({
-          src: media
+          src: this.props.image,
+          alt: ""
         }, this.props));
+      } else {
+        if (error) {
+          PostImage = error.message;
+        } else if (!isLoaded) {
+          PostImage = /*#__PURE__*/React__default['default'].createElement("p", {
+            style: {
+              textAlign: 'center'
+            }
+          }, /*#__PURE__*/React__default['default'].createElement("span", {
+            className: "sui-icon-loader sui-loading",
+            "aria-hidden": "true"
+          }), /*#__PURE__*/React__default['default'].createElement("span", {
+            className: "sui-screen-reader-text"
+          }, "Image is loading"));
+        } else {
+          PostImage = /*#__PURE__*/React__default['default'].createElement(FeaturedImage, _extends({
+            src: media
+          }, this.props));
+        }
       }
 
       if (this.props.banner) {
         return /*#__PURE__*/React__default['default'].createElement(PostWrapper, this.props, PostImage, this.props.title && "" !== this.props.title && /*#__PURE__*/React__default['default'].createElement(PostTitle, {
-          banner: true
-        }, this.props.title), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React__default['default'].createElement(Excerpt, {
+          banner: true,
+          dangerouslySetInnerHTML: {
+            __html: this.props.title
+          }
+        }), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React__default['default'].createElement(Excerpt, {
           banner: true,
           dangerouslySetInnerHTML: {
             __html: this.props.excerpt
@@ -752,7 +762,11 @@ var Post = /*#__PURE__*/function (_Component) {
           minWidth: "1px",
           flex: 1
         }
-      }, this.props.title && "" !== this.props.title && /*#__PURE__*/React__default['default'].createElement(PostTitle, null, this.props.title), this.props.time && "" !== this.props.time && /*#__PURE__*/React__default['default'].createElement(PostTime, null, "*", this.props.time, " ", min_read))), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React__default['default'].createElement(Excerpt, {
+      }, this.props.title && "" !== this.props.title && /*#__PURE__*/React__default['default'].createElement(PostTitle, {
+        dangerouslySetInnerHTML: {
+          __html: this.props.title
+        }
+      }), this.props.time && "" !== this.props.time && /*#__PURE__*/React__default['default'].createElement(PostTime, null, "*", this.props.time, " ", min_read))), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React__default['default'].createElement(Excerpt, {
         dangerouslySetInnerHTML: {
           __html: this.props.excerpt
         }
@@ -921,6 +935,7 @@ var TutorialsList = /*#__PURE__*/function (_Component) {
       var read_article = translate && translate[0].read_article ? translate[0].read_article : "";
       var min_read = translate && translate[0].min_read ? translate[0].min_read : "";
       var view_all = translate && translate[0].view_all ? translate[0].view_all : "View all";
+      var params = this.props.postLinkParams && '' !== this.props.postLinkParams ? true : false;
       var listPosts = posts.map(function (post) {
         return /*#__PURE__*/React__default['default'].createElement(ListItem, {
           key: post.id,
@@ -928,7 +943,7 @@ var TutorialsList = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/React__default['default'].createElement(Post, {
           banner: true,
           role: "link",
-          "data-href": post.link,
+          "data-href": params ? "".concat(post.link, "?").concat(_this3.props.postLinkParams) : "".concat(post.link),
           title: post.title.rendered,
           time: post.meta.blog_reading_time,
           excerpt: post.excerpt.rendered,
