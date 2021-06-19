@@ -126,36 +126,38 @@ export class PresetsAccordionItem extends Component {
                     title={ name }
                     image={ this.props.image }
                     onClick={ e => this.toggle(e) }>
-                    { this.props.showApplyButton && (
-                        <Button
-                            label={ this.props.applyLabel || 'Apply' }
-                            design="ghost"
-                            onClick={ this.accordionHeadApplyClicked }
-                        />
-                    )}
-                    <Dropdown position="right">
-                        <div
-                            name={ this.props.applyLabel || 'Apply' }
-                            icon="check"
-                            onClick={ applyAction }
-                        />
-                        <div
-                            name={ this.props.downloadLabel || 'Download' }
-                            icon="download"
-                            onClick={ () => downloadAction( this.props.id ) }
-                        />
-                        <div
-                            name={ this.props.editLabel || 'Name and Description' }
-                            icon="pencil"
-                            onClick={ editAction }
-                        />
-                        <div
-                            name={ this.props.deleteLabel || 'Delete' }
-                            icon="trash"
-                            color="red"
-                            onClick={ deleteAction }
-                        />
-                    </Dropdown>
+					<div>
+						{ this.props.showApplyButton && (
+							<Button
+								label={ this.props.applyLabel || 'Apply' }
+								design="ghost"
+								onClick={ this.accordionHeadApplyClicked }
+							/>
+						)}
+						<Dropdown position="right">
+							<div
+								name={ this.props.applyLabel || 'Apply' }
+								icon="check"
+								onClick={ applyAction }
+							/>
+							<div
+								name={ this.props.downloadLabel || 'Download' }
+								icon="download"
+								onClick={ () => downloadAction( this.props.id ) }
+							/>
+							<div
+								name={ this.props.editLabel || 'Name and Description' }
+								icon="pencil"
+								onClick={ editAction }
+							/>
+							<div
+								name={ this.props.deleteLabel || 'Delete' }
+								icon="trash"
+								color="red"
+								onClick={ deleteAction }
+							/>
+						</Dropdown>
+					</div>
                 </AccordionItemHeaderAlt>
 
                 <AccordionItemBody>
