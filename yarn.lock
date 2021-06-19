@@ -3448,13 +3448,13 @@
     lodash "^4.17.19"
     react-native-url-polyfill "^1.1.2"
 
-"@wpmudev/react-accordion@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-accordion/-/react-accordion-1.0.4.tgz#56dd72c167c153c45a6da617d0e87dc130035213"
-  integrity sha512-5pVQtx7jgyrmTsBinUYnldoeUIjJ07l1qTzcH0rjaZ1c1LOnxplmrW673y8rSwH6RjcY/qzweAv18jGzZ7mDSQ==
+"@wpmudev/react-accordion@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-accordion/-/react-accordion-1.1.0.tgz#0ae664eff501e00b87d0ce02cdf688bb52704f62"
+  integrity sha512-ooGpZQB3dL0VJo+i7xS//rE02CIuAQUJNPwf1AEkisi2OxmvL/7BqH/Un0rF8fKB+8vZVvdcAICRPTG2hq/ATw==
   dependencies:
     "@wpmudev/react-button-icon" "^1.1.0"
-    styled-components "^5.2.3"
+    styled-components "^5.3.0"
 
 "@wpmudev/react-box@^1.2.4":
   version "1.2.4"
