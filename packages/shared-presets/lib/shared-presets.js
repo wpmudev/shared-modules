@@ -237,6 +237,9 @@ export const Presets = ( {
 			return;
 		}
 
+		// Include the ID of the plugin this config belongs to.
+		config.plugin = requestsData.pluginData.id;
+
 		// This is unique per site.
 		delete config.hub_id;
 
