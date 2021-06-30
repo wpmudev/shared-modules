@@ -119,6 +119,7 @@ export const Presets = ( {
 			freeButtonLabel: 'Try The Hub',
 			notificationDismiss: 'Dismiss notice',
 			defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
+			uploadWrongPluginErrorMessage: 'The uploaded file is not a {pluginName} Config. Please make sure the uploaded file is correct.',
 			uploadActionSuccessMessage: '{configName} config has been uploaded successfully – you can now apply it to this site.',
 			applyAction: {
 				successMessage: '{configName} config has been applied successfully.',
@@ -151,6 +152,19 @@ export const Presets = ( {
 
 		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
+				// The downloads from the first version won't have this.
+				if ( res.data.plugin ) {
+					// Bail out if the uploaded config doesn't belong to this plugin.
+					if ( res.data.plugin !== requestsData.pluginData.id ) {
+						throw {
+							data: { error_msg: lang.uploadWrongPluginErrorMessage.replace( '{pluginName}', requestsData.pluginData.name ) },
+						};
+					}
+
+					// We don't need this.
+					delete res.data.plugin;
+				}
+
 				res.data.name = res.data.name.substring( 0, 200 );
 				res.data.description = res.data.description.substring( 0, 200 );
 				newConfigName = res.data.name;
@@ -236,6 +250,9 @@ export const Presets = ( {
 		if ( ! config || ! Object.keys( config ).length ) {
 			return;
 		}
+
+		// Include the ID of the plugin this config belongs to.
+		config.plugin = requestsData.pluginData.id;
 
 		// This is unique per site.
 		delete config.hub_id;
