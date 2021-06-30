@@ -1,5 +1,19 @@
 # Changelog
 
+## Released (2021-06-30)
+
+#### Improvements
+* `shared-presets`
+  * [#80](https://github.com/wpmudev/shared-modules/pull/80) 🐛 fix(shared-presets): Prevent saving an uploaded config when it doesn't belong to the current plugin. ([@a-danae](https://github.com/a-danae))
+
+#### Bug Fixes
+* `shared-presets`
+  * [#79](https://github.com/wpmudev/shared-modules/pull/79) 🐛 fix(shared-presets): Basic Config tool tip displays [object][object]. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 2
+- Danae Millan ([@a-danae](https://github.com/a-danae))
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## Released (2021-06-18)
 
 #### Improvements
