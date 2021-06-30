@@ -117,6 +117,13 @@ export class PresetsAccordionItem extends Component {
             )
             : this.props.name;
 
+		const descstyles = {
+			overflow: 'hidden',
+			display: 'block',
+			whiteSpace: 'nowrap',
+			textOverflow: 'ellipsis'
+		};
+
         return (
             <div className={ clazz }>
 
@@ -126,6 +133,9 @@ export class PresetsAccordionItem extends Component {
                     title={ name }
                     image={ this.props.image }
                     onClick={ e => this.toggle(e) }>
+					<div size="5">
+						<div style={ descstyles }>{ this.props.description }</div>
+					</div>
 					<div>
 						{ this.props.showApplyButton && (
 							<Button
