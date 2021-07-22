@@ -149,6 +149,12 @@ export default {
 				category: 'Body Pricing'
 			}
 		},
+		onCloseClick: {
+			action: 'Close Notice',
+			table: {
+				category: 'Header'
+			}
+		}
 	}
 }
 
