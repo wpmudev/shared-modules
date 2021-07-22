@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased (2021-07-22)
+
+#### New Features
+* `shared-notifications-discount`
+  * [#83](https://github.com/wpmudev/shared-modules/pull/83) ([SUI-220](https://incsub.atlassian.net/browse/SUI-220)) ✨ new(notice-discount): Add `imageAlt` property. ([@iamleigh](https://github.com/iamleigh))
+
+#### Improvements
+* `shared-notifications-discount`
+  * [#82](https://github.com/wpmudev/shared-modules/pull/82) ([SUI-214](https://incsub.atlassian.net/browse/SUI-214)) 🐛 fix(notice-discount): Migrate from class to functional component. ([@iamleigh](https://github.com/iamleigh))
+* `shared-presets`
+  * [#81](https://github.com/wpmudev/shared-modules/pull/81) ([SUI-184](https://incsub.atlassian.net/browse/SUI-184)) 🐛 fix(shared-presets): Add description to accordion item header. ([@iamleigh](https://github.com/iamleigh))
+
+#### Bug Fixes
+* `shared-notifications-discount`
+  * [#82](https://github.com/wpmudev/shared-modules/pull/82) ([SUI-215](https://incsub.atlassian.net/browse/SUI-215)) 🐛 fix(notice-discount): Unknown event handler property `onCloseClick`. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## Released (2021-06-30)
 
 #### Improvements
