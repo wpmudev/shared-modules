@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@wpmudev/react-button";
 
@@ -233,71 +233,62 @@ const Price = styled.p`
 	}
 `;
 
-export class NoticeDiscount extends Component {
-	constructor( props ) {
-		super( props );
-
-		// Call functions.
-		this.closeButtonClicked = this.closeButtonClicked.bind(this);
-		this.hideComponent = this.hideComponent.bind(this);
-	}
-
-	closeButtonClicked = e => {
-		this.hideComponent(e);
-		this.props.onCloseClick(e);
+export const NoticeDiscount = ({
+	title,
+	price,
+	priceTime,
+	discount,
+	image,
+	imageRetina,
+	disclaimer,
+	priceLabel,
+	buttonLabel,
+	buttonLink,
+	closeLabel,
+	onCloseClick,
+	children,
+	...props
+}) => {
+	const [isClose, setIsClose] = useState(false);
+	const closeOnClick = e => {
+		setIsClose(true);
+		onCloseClick(e);
 	};
 
-	hideComponent = e => {
-		const noticeBox = e.currentTarget.closest(".sui-notice-offer"),
-			event = new Event("noticeOfferClosed");
+	const calcPrice = price - ((discount / 100) * price);
+	const newPrice = calcPrice.toFixed(0);
 
-		noticeBox.dispatchEvent(event);
-		noticeBox.remove();
-	};
+	const hasDiscount = (null !== discount && '' !== discount && 0 !== discount) || discount > 0;
 
-	render() {
-		const title = this.props.title;
-		const price = this.props.price;
-		const discount = this.props.discount;
-		const image1x = this.props.image;
-		const image2x = this.props.imageRetina;
-		const disclaimer = this.props.disclaimer;
-		const buttonLabel = this.props.buttonLabel;
-		const buttonLink = this.props.buttonLink;
+	const hasImage1x = null !== image && '' !== image;
+	const hasImage2x = null !== imageRetina && '' !== imageRetina;
 
-		const calcPrice = price - ((discount / 100) * price);
-		const newPrice = calcPrice.toFixed(0);
+	const hasDisclaimer = ( null !== disclaimer && '' !== disclaimer );
 
-		const hasDiscount = (null !== discount && "" !== discount && 0 !== discount) || discount > 0;
+	const hasButtonLabel = null !== buttonLabel && '' !== buttonLabel;
+	const hasButtonLink = null !== buttonLink && '' !== buttonLink;
+	const hasButton = hasButtonLabel && hasButtonLink;
 
-		const hasImage1x = null !== image1x && "" !== image1x;
-		const hasImage2x = null !== image2x && "" !== image2x;
-
-		const hasDisclaimer = ( null !== disclaimer && "" !== disclaimer );
-
-		const hasButtonLabel = null !== buttonLabel && '' !== buttonLabel;
-		const hasButtonLink = null !== buttonLink && '' !== buttonLink;
-		const hasButton = hasButtonLabel && hasButtonLink;
-
-		return (
+	return (
+		!isClose && (
 			<Wrapper
 				className="sui-notice-offer"
-				{ ...this.props }>
+				{ ...props }
+			>
 
 				<Header>
 
-					{ hasDiscount && (
-						<Ribbon>{ discount }% Off</Ribbon>
-					)}
+					{ hasDiscount && <Ribbon>{ discount }% Off</Ribbon> }
 
 					{ null !== title && '' !== title && <Title>{ title }</Title> }
 
 					<button
 						className="sui-button-icon sui-button-white"
-						onClick={e => this.closeButtonClicked(e)}>
+						onClick={ closeOnClick }
+					>
 						<span className="sui-icon-close sui-sm" aria-hidden="true" />
 						<span className="sui-screen-reader-text">
-							Close this offer
+							{ closeLabel || 'Close this offer' }
 						</span>
 					</button>
 
@@ -305,42 +296,41 @@ export class NoticeDiscount extends Component {
 
 				<Body>
 
-					{ hasImage1x && !hasImage2x && (
-						<Image src={ image1x } alt="" aria-hidden="true" />
-					)}
+					{ hasImage1x && !hasImage2x && <Image src={ image } alt="" aria-hidden="true" /> }
 
 					{ hasImage1x && hasImage2x && (
 						<Image
-							src={ image1x }
-							srcSet={ image1x + ' 1x,' + image2x + ' 2x' }
+							src={ image }
+							srcSet={ image + ' 1x,' + imageRetina + ' 2x' }
 							alt=""
 							aria-hidden="true"
 						/>
 					)}
 
 					<Content>
-						{ this.props.children }
+
+						{ children }
+
 						{ hasDisclaimer && (
 							<p className="sui-disclaimer">* { disclaimer }</p>
 						)}
+
 					</Content>
 
 					<Border><span /></Border>
 
 					<PriceWrapper>
 
-						{ 'undefined' !== typeof this.props.priceLabel && '' !== this.props.priceLabel && (
-							<PriceLabel>{ this.props.priceLabel }</PriceLabel>
-						)}
+						<PriceLabel>{ priceLabel || 'Pay Only' }</PriceLabel>
 
 						{ hasDiscount
 							? (
 								<Price>
 									<span>${ price }</span>
-									<strong>${ newPrice }</strong>/{ this.props.priceTime || 'month' }
+									<strong>${ newPrice }</strong>/{ priceTime || 'month' }
 								</Price>
 							)
-							: <Price><strong>${ price }</strong>/{ this.props.priceTime || 'month' }</Price>
+							: <Price><strong>${ price }</strong>/{ priceTime || 'month' }</Price>
 						}
 
 						{ hasButton && (
@@ -352,15 +342,13 @@ export class NoticeDiscount extends Component {
 							/>
 						)}
 
-						{ hasDisclaimer && (
-							<p className="sui-disclaimer">* { disclaimer } *</p>
-						)}
+						{ hasDisclaimer && <p className="sui-disclaimer">* { disclaimer } *</p> }
 
 					</PriceWrapper>
 
 				</Body>
 
 			</Wrapper>
-		);
-	}
+		)
+	);
 }
