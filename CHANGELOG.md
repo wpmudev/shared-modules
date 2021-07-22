@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (2021-07-22)
+## Released (2021-07-22)
 
 #### New Features
 * `shared-notifications-discount`
