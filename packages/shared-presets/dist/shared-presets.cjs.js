@@ -2788,6 +2788,12 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         fillRule: "nonzero"
       }));
       var name = this.props["default"] ? /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, this.props.name, icon) : this.props.name;
+      var descstyles = {
+        overflow: 'hidden',
+        display: 'block',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis'
+      };
       return /*#__PURE__*/React__default['default'].createElement("div", {
         className: clazz
       }, /*#__PURE__*/React__default['default'].createElement(AccordionItemHeaderAlt, {
@@ -2798,7 +2804,11 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         onClick: function onClick(e) {
           return _this2.toggle(e);
         }
-      }, /*#__PURE__*/React__default['default'].createElement("div", null, this.props.showApplyButton && /*#__PURE__*/React__default['default'].createElement(Button, {
+      }, /*#__PURE__*/React__default['default'].createElement("div", {
+        size: "5"
+      }, /*#__PURE__*/React__default['default'].createElement("div", {
+        style: descstyles
+      }, this.props.description)), /*#__PURE__*/React__default['default'].createElement("div", null, this.props.showApplyButton && /*#__PURE__*/React__default['default'].createElement(Button, {
         label: this.props.applyLabel || 'Apply',
         design: "ghost",
         onClick: this.accordionHeadApplyClicked
