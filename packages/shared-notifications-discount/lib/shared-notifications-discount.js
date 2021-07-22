@@ -240,6 +240,7 @@ export const NoticeDiscount = ({
 	discount,
 	image,
 	imageRetina,
+	imageAlt,
 	disclaimer,
 	priceLabel,
 	buttonLabel,
@@ -296,13 +297,13 @@ export const NoticeDiscount = ({
 
 				<Body>
 
-					{ hasImage1x && !hasImage2x && <Image src={ image } alt="" aria-hidden="true" /> }
+					{ hasImage1x && !hasImage2x && <Image src={ image } alt={ imageAlt || 'Plugin image' } aria-hidden="true" /> }
 
 					{ hasImage1x && hasImage2x && (
 						<Image
 							src={ image }
 							srcSet={ image + ' 1x,' + imageRetina + ' 2x' }
-							alt=""
+							alt={ imageAlt || 'Plugin image' }
 							aria-hidden="true"
 						/>
 					)}

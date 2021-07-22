@@ -110,6 +110,19 @@ export default {
 				category: 'Body Content'
 			}
 		},
+		imageAlt: {
+			type: {
+				name: 'string',
+				required: false
+			},
+			description: '',
+			control: {
+				type: 'text'
+			},
+			table: {
+				category: 'Body Content'
+			}
+		},
 		disclaimer: {
 			type: {
 				name: 'string',
