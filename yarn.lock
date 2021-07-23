@@ -2506,7 +2506,7 @@
     global "^4.3.2"
     regenerator-runtime "^0.13.7"
 
-"@storybook/addons@6.3.5":
+"@storybook/addons@6.3.5", "@storybook/addons@^6.3.0":
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-6.3.5.tgz#af7fec11cd780d64d0927840748d18e4df43e5d7"
   integrity sha512-7IKTTzISRZdmdZrV/+CmcOfH3O1y/vWn+apkooWLwFhFkEKJXdmAzJ3A1uRmze4mF0ahdMTGVPm44DGlbGqv4g==
@@ -2585,7 +2585,7 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/api@6.3.5":
+"@storybook/api@6.3.5", "@storybook/api@^6.3.0":
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/api/-/api-6.3.5.tgz#3edaf32029fba018917ba25a307f471ddd165cc0"
   integrity sha512-H5DfvreRbiN7O+VBCbHraM+xNvdzs60ehC7P2jGRAkbzurPjQAmVCMKkPVKzOF9JA5cGOyv/ctkDn/9PFfEl9Q==
@@ -2760,7 +2760,7 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
-"@storybook/components@6.3.5":
+"@storybook/components@6.3.5", "@storybook/components@^6.3.0":
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.3.5.tgz#7e2f2d15c3552de6507727bfa4a13a20facd81e5"
   integrity sha512-EYyUhxuuted3fmPC8055cxG4kMf8tp/sjI6l2wAQ5myRZ3zBpV0mjOxxgOeiDphtBnyDKmOF+4x8EkSUJmu/5w==
@@ -2831,7 +2831,7 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/core-events@6.3.5":
+"@storybook/core-events@6.3.5", "@storybook/core-events@^6.3.0":
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-6.3.5.tgz#40d51b39e086192dc0af11e22da011e5483ee400"
   integrity sha512-1RUaOwD1STqf1EG727fLuy18dS67Nkdf/8pIGGATxAohfwHkHOhOI9tOP+GPx+aE7UioDmVWvwbUxRQ1b4YitA==
@@ -13556,6 +13556,17 @@ store2@^2.12.0, store2@^2.7.1:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
 
+storybook-addon-outline@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/storybook-addon-outline/-/storybook-addon-outline-1.4.1.tgz#0a1b262b9c65df43fc63308a1fdbd4283c3d9458"
+  integrity sha512-Qvv9X86CoONbi+kYY78zQcTGmCgFaewYnOVR6WL7aOFJoW7TrLiIc/O4hH5X9PsEPZFqjfXEPUPENWVUQim6yw==
+  dependencies:
+    "@storybook/addons" "^6.3.0"
+    "@storybook/api" "^6.3.0"
+    "@storybook/components" "^6.3.0"
+    "@storybook/core-events" "^6.3.0"
+    ts-dedent "^2.1.1"
+
 storybook-mobile@^0.1.32:
   version "0.1.32"
   resolved "https://registry.yarnpkg.com/storybook-mobile/-/storybook-mobile-0.1.32.tgz#aa7209ae25095f574f012390ee9fa9d2336aea9b"
@@ -14433,6 +14444,11 @@ ts-dedent@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-2.0.0.tgz#47c5eb23d9096f3237cc413bc82d387d36dbe690"
   integrity sha512-DfxKjSFQfw9+uf7N9Cy8Ebx9fv5fquK4hZ6SD3Rzr+1jKP6AVA6H8+B5457ZpUs0JKsGpGqIevbpZ9DMQJDp1A==
+
+ts-dedent@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-2.1.1.tgz#6dd56870bb5493895171334fa5d7e929107e5bbc"
+  integrity sha512-riHuwnzAUCfdIeTBNUq7+Yj+ANnrMXo/7+Z74dIdudS7ys2k8aSGMzpJRMFDF7CLwUTbtvi1ZZff/Wl+XxmqIA==
 
 ts-essentials@^2.0.3:
   version "2.0.12"
