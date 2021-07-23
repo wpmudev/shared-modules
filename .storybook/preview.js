@@ -72,7 +72,10 @@ const customViewports = {
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
 	backgrounds: {
-		disable: true
+		disable: true,
+		grid: {
+			disable: true
+		}
 	},
 	viewport: {
 		viewports: customViewports
