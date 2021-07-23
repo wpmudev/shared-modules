@@ -8,7 +8,8 @@ module.exports = {
 		"@storybook/addon-essentials",
 		"storybook-addon-outline",
 		"@storybook/addon-a11y",
-		"storybook-mobile"
+		"storybook-mobile",
+		"@geometricpanda/storybook-addon-badges"
 	],
 	// webpackFinal: async ( config ) => {
 	// 	// Change the order of resolution of main fields.

@@ -9,6 +9,7 @@
     "@babel/core": "^7.12.17",
     "@babel/preset-env": "^7.12.17",
     "@babel/preset-react": "^7.12.13",
+    "@geometricpanda/storybook-addon-badges": "^0.0.3",
     "@storybook/addon-a11y": "^6.1.21",
     "@storybook/addon-actions": "^6.3.5",
     "@storybook/addon-console": "^1.2.3",
@@ -35,7 +36,7 @@
   },
   "dependencies": {
     "@octokit/core": "^3.2.5",
-	"@wpmudev/shared-ui": "2.10.11"
+    "@wpmudev/shared-ui": "2.10.11"
   },
   "scripts": {
     "build": "npx lerna run build",
