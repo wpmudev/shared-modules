@@ -72,7 +72,13 @@ const customViewports = {
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
 	backgrounds: {
-		disable: true,
+		default: "WordPress",
+		values: [
+			{
+				name: "WordPress",
+				value: "#f1f1f1"
+			}
+		],
 		grid: {
 			disable: true
 		}
