@@ -1,4 +1,5 @@
 import React from "react";
+import "@storybook/addon-console";
 import "@wpmudev/shared-ui/dist/css/shared-ui.min.css"; // Get SUI styles.
 import "./body-class";
 
