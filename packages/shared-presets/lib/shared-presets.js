@@ -319,17 +319,19 @@ export const Presets = ( {
 			message = 'Error. Please check the browser console';
 		}
 
-		window.SUI.openNotice(
-			'sui-configs-floating-notice', `<p>${ message }</p>`,
-			{
-				type: 'error',
-				icon: 'info',
-				dismiss: {
-					show: true,
-					label: lang.notificationDismiss,
-				},
-			}
-		);
+		if ( undefined !== message ) {
+			window.SUI.openNotice(
+				'sui-configs-floating-notice', `<p>${ message }</p>`,
+				{
+					type: 'error',
+					icon: 'info',
+					dismiss: {
+						show: true,
+						label: lang.notificationDismiss
+					},
+				}
+			)
+		}
 	};
 	// End of notifications.
 
@@ -534,6 +536,7 @@ export const Presets = ( {
 					config={ currentConfig }
 					save={ handleApply }
 					strings={ lang.applyAction }
+					callback={ requestsData.pluginRequests.callback }
 				/>
 			) }
 			{ isDeleteOpen && (
