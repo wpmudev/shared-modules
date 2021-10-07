@@ -336,9 +336,17 @@ export default class RequestHandler {
 			const xhr = new XMLHttpRequest();
 			xhr.open( verb, url, true );
 
+			xhr.addEventListener( 'load', () => {
+				if ( 'ajax_callback' in this.pluginRequests ) {
+					const fn = this.pluginRequests.ajax_callback;
+					window[fn](url, data, xhr);
+				}
+			});
+
 			for ( const header in headers ) {
 				xhr.setRequestHeader( header, headers[ header ] );
 			}
+
 			xhr.onload = () => {
 				if ( xhr.status >= 200 && xhr.status < 300 ) {
 					resolve( JSON.parse( xhr.response ) );

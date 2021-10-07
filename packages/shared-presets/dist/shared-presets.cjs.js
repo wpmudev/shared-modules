@@ -1490,22 +1490,65 @@ var ApplyModal = function ApplyModal(_ref) {
       config = _ref.config,
       save = _ref.save,
       _ref$strings = _ref.strings,
-      strings = _ref$strings === void 0 ? {} : _ref$strings;
+      strings = _ref$strings === void 0 ? {} : _ref$strings,
+      _ref$callback = _ref.callback,
+      callback = _ref$callback === void 0 ? null : _ref$callback;
   var _strings$closeIcon = strings.closeIcon,
       closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
       _strings$title = strings.title,
       title = _strings$title === void 0 ? 'Apply Config' : _strings$title,
       _strings$description = strings.description,
       description = _strings$description === void 0 ? 'Are you sure you want to apply the {configName} config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.' : _strings$description,
+      _strings$notice = strings.notice,
+      notice = _strings$notice === void 0 ? 'The storage region in the selected config doesn\'t match the storage region in your current settings. All existing backups will be deleted after applying this config.' : _strings$notice,
       _strings$cancelButton = strings.cancelButton,
       cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
       _strings$actionButton = strings.actionButton,
       actionButton = _strings$actionButton === void 0 ? 'Apply' : _strings$actionButton;
+  var extraClass = "sui-box";
+  var applyLoader = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    "aria-hidden": "true"
+  }));
 
-  var _React$useState = React__default['default'].useState(false),
+  var _React$useState = React__default['default'].useState(true),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       isSaving = _React$useState2[0],
       setIsSaving = _React$useState2[1];
+
+  var _React$useState3 = React__default['default'].useState(extraClass),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      wrapper = _React$useState4[0],
+      setWrapper = _React$useState4[1];
+
+  var _React$useState5 = React__default['default'].useState(description),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      desc = _React$useState6[0],
+      setDesc = _React$useState6[1];
+
+  React__default['default'].useEffect(function () {
+    if (null !== callback) {
+      var className = extraClass;
+      var result = window[callback](config);
+      result.then(function (data) {
+        className += ' region-loaded ' + data.status;
+        setWrapper(className);
+        setIsSaving(false);
+
+        if ('description' in data) {
+          setDesc(data.description);
+        }
+      }).catch(function (err) {
+        className += ' region-loaded ' + err.status;
+        setWrapper(className);
+        setIsSaving(false);
+
+        if ('description' in err) {
+          setDesc(err.description);
+        }
+      });
+    }
+  }, []);
 
   var doAction = function doAction() {
     setIsSaving(true);
@@ -1514,7 +1557,7 @@ var ApplyModal = function ApplyModal(_ref) {
 
   var modalContent = function modalContent() {
     return /*#__PURE__*/React__default['default'].createElement("div", {
-      className: "sui-box"
+      className: wrapper
     }, /*#__PURE__*/React__default['default'].createElement("div", {
       className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
     }, /*#__PURE__*/React__default['default'].createElement(ButtonIcon$1, {
@@ -1527,9 +1570,23 @@ var ApplyModal = function ApplyModal(_ref) {
       }
     }), /*#__PURE__*/React__default['default'].createElement("h2", {
       id: "sui-config-edit-title"
-    }, title), /*#__PURE__*/React__default['default'].createElement("p", {
-      className: "sui-description"
-    }, description.replace('{configName}', config.name))), /*#__PURE__*/React__default['default'].createElement("div", {
+    }, title), /*#__PURE__*/React__default['default'].createElement("div", {
+      className: "apply-loader"
+    }, applyLoader), /*#__PURE__*/React__default['default'].createElement("div", {
+      className: "region-match"
+    }, desc.replace('{configName}', config.name))), /*#__PURE__*/React__default['default'].createElement("div", {
+      className: "sui-box-body region-mismatch"
+    }, /*#__PURE__*/React__default['default'].createElement("div", {
+      id: "sui-apply-modal-warning",
+      className: "sui-notice sui-active sui-notice-warning"
+    }, /*#__PURE__*/React__default['default'].createElement("div", {
+      className: "sui-notice-content"
+    }, /*#__PURE__*/React__default['default'].createElement("div", {
+      className: "sui-notice-message"
+    }, /*#__PURE__*/React__default['default'].createElement("span", {
+      className: "sui-notice-icon sui-icon-info sui-md",
+      "aria-hidden": "true"
+    }), /*#__PURE__*/React__default['default'].createElement("p", null, notice))))), /*#__PURE__*/React__default['default'].createElement("div", {
       className: "sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60"
     }, /*#__PURE__*/React__default['default'].createElement(Button, {
       design: "ghost",
@@ -1542,7 +1599,8 @@ var ApplyModal = function ApplyModal(_ref) {
       icon: "check",
       label: actionButton,
       onClick: doAction,
-      loading: isSaving
+      loading: isSaving,
+      className: "sui-config-apply"
     })));
   };
 
@@ -2787,7 +2845,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         fill: "#286EFA",
         fillRule: "nonzero"
       }));
-      var name = this.props["default"] ? /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, this.props.name, icon) : this.props.name;
+      var name = this.props.default ? /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, this.props.name, icon) : this.props.name;
       var descstyles = {
         overflow: 'hidden',
         display: 'block',
@@ -2931,13 +2989,13 @@ var RequestHandler = /*#__PURE__*/function () {
             newConfig.hub_id = res.id;
             configs.push(newConfig);
             return _this.updateLocalConfigsList(configs);
-          })["catch"](function () {
+          }).catch(function () {
             // Update the local list even if the Hub request fails.
             configs.push(newConfig);
             return _this.updateLocalConfigsList(configs);
           }).then(function (updatedConfigs) {
             return resolve(updatedConfigs);
-          })["catch"](function (res) {
+          }).catch(function (res) {
             // There was an error saving the configs locally. Probably a schema mismatch.
             if (400 === res.status) {
               // Remove the recently submitted config from the hub.
@@ -2968,10 +3026,10 @@ var RequestHandler = /*#__PURE__*/function () {
       // Edit in the Hub when the config has a Hub ID and we have an API key.
       if (this.apiKey && currentConfig.hub_id) {
         var hubData = Object.assign({
-          "package": this.pluginData
+          package: this.pluginData
         }, configData); // This returns a 404 when the config doesn't exist in the Hub anymore.
 
-        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(hubData))["catch"](function (res) {
+        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(hubData)).catch(function (res) {
           return console.log(res);
         });
       }
@@ -3013,7 +3071,7 @@ var RequestHandler = /*#__PURE__*/function () {
     value: function deleteFromHub(configId) {
       // Try to delete it in the Hub only if we have an API key.
       if (this.apiKey) {
-        this.makeHubRequest("/".concat(configId), 'DELETE')["catch"](function (res) {
+        this.makeHubRequest("/".concat(configId), 'DELETE').catch(function (res) {
           return console.log(res);
         });
       }
@@ -3041,7 +3099,7 @@ var RequestHandler = /*#__PURE__*/function () {
           return _this2.updateLocalConfigsList(localConfigs);
         }).then(function (syncRes) {
           return resolve(syncRes);
-        })["catch"](function (res) {
+        }).catch(function (res) {
           return reject(res);
         });
       });
@@ -3080,7 +3138,7 @@ var RequestHandler = /*#__PURE__*/function () {
               localOne = _step$value[1];
 
           // Skip checks for the basic config.
-          if (localOne["default"]) {
+          if (localOne.default) {
             return "continue";
           } // Send to the Hub the configs that haven't been sent.
 
@@ -3166,7 +3224,7 @@ var RequestHandler = /*#__PURE__*/function () {
       var configData = {
         name: config.name,
         description: config.description,
-        "package": this.pluginData,
+        package: this.pluginData,
         config: JSON.stringify(config.config)
       };
       return this.makeHubRequest('', 'POST', JSON.stringify(configData));
@@ -3280,12 +3338,20 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "makeRequest",
     value: function makeRequest(url) {
+      var _this4 = this;
+
       var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
       return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open(verb, url, true);
+        xhr.addEventListener('load', function () {
+          if ('ajax_callback' in _this4.pluginRequests) {
+            var fn = _this4.pluginRequests.ajax_callback;
+            window[fn](url, data, xhr);
+          }
+        });
 
         for (var header in headers) {
           xhr.setRequestHeader(header, headers[header]);
@@ -3381,7 +3447,7 @@ var Presets = function Presets(_ref) {
     apply: 'Apply',
     download: 'Download',
     edit: 'Name and Description',
-    "delete": 'Delete',
+    delete: 'Delete',
     freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
     freeButtonLabel: 'Try The Hub',
     notificationDismiss: 'Dismiss notice',
@@ -3406,7 +3472,7 @@ var Presets = function Presets(_ref) {
     setIsLoading(true);
     RequestsHandler.makeLocalRequest().then(function (newConfigs) {
       return setConfigs(newConfigs || []);
-    })["catch"](function (res) {
+    }).catch(function (res) {
       return requestFailureNotice(res);
     }).then(function () {
       return setIsLoading(false);
@@ -3443,15 +3509,15 @@ var Presets = function Presets(_ref) {
     }).then(function (updatedConfigs) {
       setConfigs(updatedConfigs);
       successNotice(lang.uploadActionSuccessMessage.replace('{configName}', newConfigName));
-    })["catch"](function (res) {
+    }).catch(function (res) {
       return requestFailureNotice(res);
     });
   };
 
   var handleDelete = function handleDelete() {
-    RequestsHandler["delete"](_toConsumableArray(configs), currentConfig).then(function (newConfigs) {
+    RequestsHandler.delete(_toConsumableArray(configs), currentConfig).then(function (newConfigs) {
       return setConfigs(newConfigs);
-    })["catch"](function (res) {
+    }).catch(function (res) {
       return requestFailureNotice(res);
     }).then(function () {
       return setIsDeleteOpen(false);
@@ -3467,7 +3533,7 @@ var Presets = function Presets(_ref) {
     if (currentConfig) {
       RequestsHandler.edit(_toConsumableArray(configs), currentConfig, configData).then(function (newConfigs) {
         return setConfigs(newConfigs);
-      })["catch"](function (res) {
+      }).catch(function (res) {
         return requestFailureNotice(res);
       }).then(function () {
         return setIsEditOpen(false);
@@ -3489,7 +3555,7 @@ var Presets = function Presets(_ref) {
       setConfigs(updatedConfigs);
       setIsEditOpen(false);
       successNotice(lang.editAction.successMessage.replace('{configName}', configData.name));
-    })["catch"](function (res) {
+    }).catch(function (res) {
       return requestFailureNotice(res);
     });
   };
@@ -3504,7 +3570,7 @@ var Presets = function Presets(_ref) {
       }
 
       successNotice(lang.applyAction.successMessage.replace('{configName}', currentConfig.name));
-    })["catch"](function (res) {
+    }).catch(function (res) {
       return requestFailureNotice(res);
     });
   };
@@ -3513,7 +3579,7 @@ var Presets = function Presets(_ref) {
     setIsLoading(true);
     RequestsHandler.syncWithHub(_toConsumableArray(configs)).then(function (newConfigs) {
       return setConfigs(newConfigs);
-    })["catch"](function (res) {
+    }).catch(function (res) {
       return requestFailureNotice(res);
     }).then(function () {
       return setIsLoading(false);
@@ -3534,7 +3600,7 @@ var Presets = function Presets(_ref) {
 
     delete config.hub_id; // Avoid having multiple defaults on upload.
 
-    delete config["default"];
+    delete config.default;
     var blob = new Blob([JSON.stringify(config, null, 2)], {
       type: 'application/json'
     });
@@ -3589,18 +3655,69 @@ var Presets = function Presets(_ref) {
       message = 'Error. Please check the browser console';
     }
 
-    window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
-      type: 'error',
-      icon: 'info',
-      dismiss: {
-        show: true,
-        label: lang.notificationDismiss
-      }
-    });
+    if (undefined !== message) {
+      window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
+        type: 'error',
+        icon: 'info',
+        dismiss: {
+          show: true,
+          label: lang.notificationDismiss
+        }
+      });
+    }
   }; // End of notifications.
 
 
   var tableImage = !isWhitelabel ? urls.accordionImg : null;
+  var Pagination = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", {
+    className: "sui-pagination-wrap"
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-pagination-results"
+  }, "25 results"), /*#__PURE__*/React__default['default'].createElement("ul", {
+    className: "sui-pagination"
+  }, /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: "",
+    disabled: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-arrow-skip-back",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Go to first page"))), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: "",
+    disabled: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-chevron-left",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Previous page"))), /*#__PURE__*/React__default['default'].createElement("li", {
+    className: "sui-active"
+  }, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "1")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "2")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "3")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "4")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "5")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-chevron-right",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Next page"))), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-arrow-skip-forward",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Go to last page"))))));
   var Table = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, !isEmpty && /*#__PURE__*/React__default['default'].createElement("div", {
     className: "sui-accordion sui-accordion-flushed",
     style: {
@@ -3610,7 +3727,7 @@ var Presets = function Presets(_ref) {
     return /*#__PURE__*/React__default['default'].createElement(PresetsAccordionItem, {
       key: item.id,
       id: item.id,
-      "default": item["default"],
+      default: item.default,
       name: item.name,
       description: item.description,
       image: tableImage,
@@ -3627,7 +3744,7 @@ var Presets = function Presets(_ref) {
       editAction: function editAction() {
         return openModal('edit', item);
       },
-      deleteLabel: lang["delete"],
+      deleteLabel: lang.delete,
       deleteAction: function deleteAction() {
         return openModal('delete', item);
       }
@@ -3638,7 +3755,7 @@ var Presets = function Presets(_ref) {
         status: item.config.strings[name]
       });
     }));
-  })));
+  })), Pagination);
 
   var getFooter = function getFooter() {
     if (isWidget) {
@@ -3750,7 +3867,8 @@ var Presets = function Presets(_ref) {
     setOpen: setIsApplyOpen,
     config: currentConfig,
     save: handleApply,
-    strings: lang.applyAction
+    strings: lang.applyAction,
+    callback: requestsData.pluginRequests.callback
   }), isDeleteOpen && /*#__PURE__*/React__default['default'].createElement(DeleteModal, {
     setOpen: setIsDeleteOpen,
     config: currentConfig,
