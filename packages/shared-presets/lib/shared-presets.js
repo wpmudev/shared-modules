@@ -336,6 +336,55 @@ export const Presets = ( {
 	// End of notifications.
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
+	const Pagination = (
+		<React.Fragment>
+			<div className="sui-pagination-wrap">
+
+				<span className="sui-pagination-results">25 results</span>
+
+				<ul className="sui-pagination">
+
+					<li>
+						<a href="" disabled="">
+							<span className="sui-icon-arrow-skip-back" aria-hidden="true"></span>
+							<span className="sui-screen-reader-text">Go to first page</span>
+						</a>
+					</li>
+
+					<li>
+						<a href="" disabled="">
+						<span className="sui-icon-chevron-left" aria-hidden="true"></span>
+						<span className="sui-screen-reader-text">Previous page</span>
+						</a>
+					</li>
+
+					<li className="sui-active">
+						<a href="">1</a>
+					</li>
+					<li><a href="">2</a></li>
+					<li><a href="">3</a></li>
+					<li><a href="">4</a></li>
+					<li><a href="">5</a></li>
+
+					<li>
+						<a href="">
+							<span className="sui-icon-chevron-right" aria-hidden="true"></span>
+							<span className="sui-screen-reader-text">Next page</span>
+						</a>
+					</li>
+
+					<li>
+						<a href="">
+							<span className="sui-icon-arrow-skip-forward" aria-hidden="true"></span>
+							<span className="sui-screen-reader-text">Go to last page</span>
+						</a>
+					</li>
+
+				</ul>
+
+			</div>
+		</React.Fragment>
+	);
 	const Table = (
 		<React.Fragment>
 			{ !isEmpty && (
@@ -369,7 +418,11 @@ export const Presets = ( {
 						</PresetsAccordionItem>
 					) ) }
 				</div>
+
+
 			)}
+
+			{ Pagination }
 		</React.Fragment>
 	);
 
@@ -506,6 +559,7 @@ export const Presets = ( {
 					<LoadingContent>
 						<LoadingWrap aria-hidden="true">
 							{ Table }
+
 							{ getFooter() }
 						</LoadingWrap>
 						<LoadingMask>

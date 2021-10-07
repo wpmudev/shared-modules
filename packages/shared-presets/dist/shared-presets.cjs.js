@@ -3669,6 +3669,55 @@ var Presets = function Presets(_ref) {
 
 
   var tableImage = !isWhitelabel ? urls.accordionImg : null;
+  var Pagination = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", {
+    className: "sui-pagination-wrap"
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-pagination-results"
+  }, "25 results"), /*#__PURE__*/React__default['default'].createElement("ul", {
+    className: "sui-pagination"
+  }, /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: "",
+    disabled: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-arrow-skip-back",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Go to first page"))), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: "",
+    disabled: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-chevron-left",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Previous page"))), /*#__PURE__*/React__default['default'].createElement("li", {
+    className: "sui-active"
+  }, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "1")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "2")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "3")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "4")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, "5")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-chevron-right",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Next page"))), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("a", {
+    href: ""
+  }, /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-icon-arrow-skip-forward",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default['default'].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, "Go to last page"))))));
   var Table = /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, !isEmpty && /*#__PURE__*/React__default['default'].createElement("div", {
     className: "sui-accordion sui-accordion-flushed",
     style: {
@@ -3706,7 +3755,7 @@ var Presets = function Presets(_ref) {
         status: item.config.strings[name]
       });
     }));
-  })));
+  })), Pagination);
 
   var getFooter = function getFooter() {
     if (isWidget) {
