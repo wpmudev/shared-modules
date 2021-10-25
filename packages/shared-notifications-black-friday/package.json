@@ -1,16 +1,26 @@
 {
   "name": "@wpmudev/shared-notifications-black-friday",
   "version": "1.0.0",
-  "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
+  "description": "WPMU DEV Shared Black Friday Notifications",
   "keywords": [],
-  "author": "Leighton Sapir <2328848+iamleigh@users.noreply.github.com>",
-  "license": "ISC",
-  "main": "lib/shared-notifications-black-friday.js",
+  "author": "WPMU DEV (https://premium.wpmudev.org/)",
+  "contributors": [
+    {
+      "name": "Leighton Sapir",
+      "email": "2328848+iamleigh@users.noreply.github.com",
+      "url": "https://iamleigh.com/"
+    }
+  ],
+  "license": "GPL-3.0",
+  "main": "dist/shared-notifications-black-friday.cjs.js",
+  "module": "dist/shared-notifications-black-friday.esm.js",
+  "src": "lib/shared-notifications-black-friday.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
+	"dist",
     "lib"
   ],
   "publishConfig": {
@@ -18,13 +28,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wpmudev/shared-modules.git"
+    "url": "git+https://github.com/wpmudev/shared-modules.git",
+	"directory": "packages/shared-notifications-black-friday"
   },
   "scripts": {
+	"build": "shared-compiler",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/wpmudev/shared-modules/issues"
   },
-  "homepage": "https://github.com/wpmudev/shared-modules#readme"
+  "homepage": "https://github.com/wpmudev/shared-modules#readme",
+  "devDependencies": {
+    "@wpmudev/shared-compiler": "^1.0.0",
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "@wpmudev/react-button": "^1.0.6",
+    "styled-components": "^5.2.3"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  }
 }
