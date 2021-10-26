@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased (2021-10-26)
+## Released (2021-10-26)
 
 #### New Features
+* `shared-notifications`
+  * [#88](https://github.com/wpmudev/shared-modules/pull/88) ✨ new(notifications): Add `NoticeBlack` component. ([@iamleigh](https://github.com/iamleigh))
 * `shared-notifications-black-friday`
   * [#87](https://github.com/wpmudev/shared-modules/pull/87) ✨ new(notice-black): Create new package. ([@iamleigh](https://github.com/iamleigh))
 
