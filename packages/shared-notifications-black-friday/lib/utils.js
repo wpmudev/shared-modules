@@ -167,6 +167,21 @@ export const Button = styled.a`
 	line-height: 30px;
 	font-weight: bold;
 	text-decoration: none;
+	transition: 0.2s ease;
+
+	&:hover,
+	&:focus {
+		color: #222222 !important;
+	}
+
+	&:hover {
+		opacity: 0.8;
+		outline: none;
+	}
+
+	&:focus {
+		outline: 3px solid rgba(77,253,137,0.5);
+	}
 
 	@media ${minDevice.laptop} {
 		display: block;
