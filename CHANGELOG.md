@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased (2021-10-26)
+
+#### New Features
+* `shared-notifications-black-friday`
+  * [#87](https://github.com/wpmudev/shared-modules/pull/87) ✨ new(notice-black): Create new package. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## Released (2021-07-22)
 
 #### New Features
