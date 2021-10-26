@@ -29,6 +29,8 @@ export const NoticeBlack = ({
 		cta: 'See the deal'
 	}, sourceLang );
 
+	const hasLink = null !== link && '' !== link;
+
 	return (
 		!isClose && (
 			<Container
@@ -52,7 +54,9 @@ export const NoticeBlack = ({
 						{ children }
 					</Content>
 
-					<Button>{ lang.cta }</Button>
+					{ hasLink &&
+						<Link href={ link || '#' } target="_blank">{ lang.cta }</Link>
+					}
 
 				</Body>
 
