@@ -9,10 +9,17 @@ import {
 } from "./utils";
 
 export const NoticeBlack = ({
+	onCloseClick,
 	sourceLang,
 	children,
 	...props
 }) => {
+	const [isClose, setIsClose] = useState(false);
+	const closeOnClick = e => {
+		setIsClose(true);
+		onCloseClick(e);
+	};
+
 	const lang = Object.assign({
 		close: 'Close',
 		off: 'Off',
@@ -20,30 +27,33 @@ export const NoticeBlack = ({
 	}, sourceLang );
 
 	return (
-		<Container
-			className="sui-notice-black-friday"
-			{ ...props }
-		>
+		!isClose && (
+			<Container
+				className="sui-notice-black-friday"
+				{ ...props }
+			>
 
-			<ButtonIcon
-				color="white"
-				icon="close"
-				iconSize="md"
-				label={ lang.close }
-			/>
+				<ButtonIcon
+					color="white"
+					icon="close"
+					iconSize="md"
+					label={ lang.close }
+					onClick={ closeOnClick }
+				/>
 
-			<Ribbon>50% { lang.off }</Ribbon>
+				<Ribbon>50% { lang.off }</Ribbon>
 
-			<Body>
+				<Body>
 
-				<Content>
-					{ children }
-				</Content>
+					<Content>
+						{ children }
+					</Content>
 
-				<Button>{ lang.cta }</Button>
+					<Button>{ lang.cta }</Button>
 
-			</Body>
+				</Body>
 
-		</Container>
+			</Container>
+		)
 	);
 }
