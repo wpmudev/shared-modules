@@ -17,7 +17,9 @@ export const NoticeBlack = ({
 	const [isClose, setIsClose] = useState(false);
 	const closeOnClick = e => {
 		setIsClose(true);
-		onCloseClick(e);
+		if ( 'undefined' !== typeof onCloseClick ) {
+			onCloseClick(e);
+		}
 	};
 
 	const lang = Object.assign({
