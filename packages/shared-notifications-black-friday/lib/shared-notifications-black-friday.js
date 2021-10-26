@@ -5,10 +5,11 @@ import {
 	Ribbon,
 	Body,
 	Content,
-	Button
+	Link
 } from "./utils";
 
 export const NoticeBlack = ({
+	link,
 	onCloseClick,
 	sourceLang,
 	children,

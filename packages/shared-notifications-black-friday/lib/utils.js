@@ -152,7 +152,7 @@ export const Content = styled.div`
 }
 `;
 
-export const Button = styled.a`
+export const Link = styled.a`
 [class*="sui-2-"] .sui-wrap & {
 	cursor: pointer;
 	display: inline-block;
