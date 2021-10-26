@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import wave from './img/banner-wave.png';
+import wave1x from './img/wave.png';
+import wave2x from './img/wave@2x.png';
 
 // UTILS: Set devices size.
 const screen = {
@@ -32,9 +33,15 @@ export const Container = styled.div`
 	padding: 30px 40px;
 	border-radius: 4px;
 	background-color: #07212C;
-	background-image: url(${wave});
+	background-image: image-set(
+		url(${wave1x}) 1x,
+		url(${wave2x}) 2x
+	);
 	background-image:
-		url(${wave}),
+		image-set(
+			url(${wave1x}) 1x,
+			url(${wave2x}) 2x
+		),
 		linear-gradient(270deg, #222222 0.67%, #07212C 100%);
 
 	@media ${maxDevice.tablet} {
