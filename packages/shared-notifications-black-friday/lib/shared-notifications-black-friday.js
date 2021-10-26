@@ -24,9 +24,9 @@ export const NoticeBlack = ({
 	};
 
 	const lang = Object.assign({
-		close: 'Close',
-		off: 'Off',
-		cta: 'See the deal'
+		discount: '50% Off',
+		closeLabel: 'Close',
+		linkLabel: 'See the deal'
 	}, sourceLang );
 
 	const hasLink = null !== link && '' !== link;
@@ -42,11 +42,11 @@ export const NoticeBlack = ({
 					color="white"
 					icon="close"
 					iconSize="md"
-					label={ lang.close }
+					label={ lang.closeLabel }
 					onClick={ closeOnClick }
 				/>
 
-				<Ribbon>50% { lang.off }</Ribbon>
+				<Ribbon>{ lang.discount }</Ribbon>
 
 				<Body>
 
@@ -55,7 +55,7 @@ export const NoticeBlack = ({
 					</Content>
 
 					{ hasLink &&
-						<Link href={ link || '#' } target="_blank">{ lang.cta }</Link>
+						<Link href={ link || '#' } target="_blank">{ lang.linkLabel }</Link>
 					}
 
 				</Body>

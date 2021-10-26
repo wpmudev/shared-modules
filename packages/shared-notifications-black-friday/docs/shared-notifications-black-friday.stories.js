@@ -31,8 +31,8 @@ Translated.storyName = "Translated";
 Translated.args = {
 	...Untranslated.args,
 	sourceLang: {
-		close: 'Cerrar',
-		off: 'Dscto',
-		cta: 'Ir a la oferta'
+		discount: '50% Dscto',
+		closeLabel: 'Cerrar',
+		linkLabel: 'Ir a la oferta'
 	}
 }
