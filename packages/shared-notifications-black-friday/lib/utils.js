@@ -159,7 +159,10 @@ export const Content = styled.div`
 }
 `;
 
-export const Link = styled.a`
+export const Link = styled.a.attrs( ({ ctaLink }) => ({
+	href: ctaLink,
+	target: "_blank"
+}))`
 [class*="sui-2-"] .sui-wrap & {
 	cursor: pointer;
 	display: inline-block;

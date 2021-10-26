@@ -55,7 +55,7 @@ export const NoticeBlack = ({
 					</Content>
 
 					{ hasLink &&
-						<Link href={ link || '#' } target="_blank">{ lang.linkLabel }</Link>
+						<Link ctaLink={ link || '#' }>{ lang.linkLabel }</Link>
 					}
 
 				</Body>
