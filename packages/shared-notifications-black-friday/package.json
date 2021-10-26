@@ -20,7 +20,7 @@
     "test": "__tests__"
   },
   "files": [
-	"dist",
+    "dist",
     "lib"
   ],
   "publishConfig": {
@@ -29,10 +29,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wpmudev/shared-modules.git",
-	"directory": "packages/shared-notifications-black-friday"
+    "directory": "packages/shared-notifications-black-friday"
   },
   "scripts": {
-	"build": "shared-compiler",
+    "build": "shared-compiler",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
@@ -44,7 +44,7 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@wpmudev/react-button": "^1.0.6",
+    "@wpmudev/react-button-icon": "^1.1.0",
     "styled-components": "^5.2.3"
   },
   "resolutions": {
