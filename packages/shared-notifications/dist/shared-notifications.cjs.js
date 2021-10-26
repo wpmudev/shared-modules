@@ -325,14 +325,14 @@ var Link = styled__default['default'].a.attrs(function (_ref) {
     target: "_blank"
   };
 })(_templateObject5$1 || (_templateObject5$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:hover {\n\t\topacity: 0.8;\n\t\toutline: none;\n\t}\n\n\t&:focus {\n\t\toutline: 3px solid rgba(77,253,137,0.5);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
-var _excluded$1 = ["link", "onCloseClick", "sourceLang", "children"];
+var _excluded = ["link", "onCloseClick", "sourceLang", "children"];
 
 var NoticeBlack = function NoticeBlack(_ref) {
   var link = _ref.link,
       onCloseClick = _ref.onCloseClick,
       sourceLang = _ref.sourceLang,
       children = _ref.children,
-      props = _objectWithoutProperties$1$1(_ref, _excluded$1);
+      props = _objectWithoutProperties$1$1(_ref, _excluded);
 
   var _useState = React.useState(false),
       _useState2 = _slicedToArray$1(_useState, 2),
@@ -384,7 +384,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose$1(source, excluded) {
+function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -399,10 +399,10 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$1(source, excluded) {
+function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+  var target = _objectWithoutPropertiesLoose(source, excluded);
 
   var key, i;
 
@@ -441,17 +441,14 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
   var _arr = [];
   var _n = true;
   var _d = false;
-
-  var _s, _e;
+  var _e = undefined;
 
   try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
       _arr.push(_s.value);
 
       if (i && _arr.length === i) break;
@@ -542,7 +539,7 @@ function _objectSpread2(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
+function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -557,10 +554,10 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var target = _objectWithoutPropertiesLoose$1(source, excluded);
 
   var key, i;
 
@@ -586,7 +583,7 @@ var Button = function Button(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties$1(_ref, ["label", "icon", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React__default['default'].createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -650,8 +647,6 @@ var Button = function Button(_ref) {
   }, props), loading ? loader : content);
 };
 
-var _excluded = ["title", "price", "priceTime", "discount", "image", "imageRetina", "imageAlt", "disclaimer", "priceLabel", "buttonLabel", "buttonLink", "closeLabel", "onCloseClick", "children"];
-
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 var screen = {
@@ -694,7 +689,7 @@ var NoticeDiscount = function NoticeDiscount(_ref) {
       closeLabel = _ref.closeLabel,
       onCloseClick = _ref.onCloseClick,
       children = _ref.children,
-      props = _objectWithoutProperties$1(_ref, _excluded);
+      props = _objectWithoutProperties(_ref, ["title", "price", "priceTime", "discount", "image", "imageRetina", "imageAlt", "disclaimer", "priceLabel", "buttonLabel", "buttonLink", "closeLabel", "onCloseClick", "children"]);
 
   var _useState = React.useState(false),
       _useState2 = _slicedToArray(_useState, 2),
