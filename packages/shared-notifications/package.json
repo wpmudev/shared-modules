@@ -45,6 +45,7 @@
     "react": "^17.0.1"
   },
   "dependencies": {
+    "@wpmudev/shared-notifications-black-friday": "^1.0.0",
     "@wpmudev/shared-notifications-offer": "^1.0.0"
   }
 }
