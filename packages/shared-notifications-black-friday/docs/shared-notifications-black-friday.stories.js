@@ -6,7 +6,7 @@ export default {
 	component: NoticeBlack
 }
 
-export const Primary = ( args ) => {
+export const Untranslated = ( args ) => {
 	return (
 		<NoticeBlack { ...args }>
 			<p><strong>Black Friday Offer!</strong> Get Smush Pro for free and much more with 50% OFF WPMU DEV Agency Plan FOREVER</p>
@@ -14,10 +14,12 @@ export const Primary = ( args ) => {
 		</NoticeBlack>
 	);
 };
-Primary.storyName = "Default";
-Primary.args = {}
+Untranslated.storyName = "Default";
+Untranslated.args = {
+	link: 'https://wpmudev.com/'
+}
 
-export const Secondary = ( args ) => {
+export const Translated = ( args ) => {
 	return (
 		<NoticeBlack { ...args }>
 			<p><strong>Oferta de Viernes Negro!</strong> Obtén Smush Pro gratis y mucho más con el 50% DE DESCUENTO en el "Plan de Agencia WPMU DEV" POR SIEMPRE</p>
@@ -25,8 +27,9 @@ export const Secondary = ( args ) => {
 		</NoticeBlack>
 	);
 }
-Secondary.storyName = "Translated";
-Secondary.args = {
+Translated.storyName = "Translated";
+Translated.args = {
+	...Untranslated.args,
 	sourceLang: {
 		close: 'Cerrar',
 		off: 'Dscto',
