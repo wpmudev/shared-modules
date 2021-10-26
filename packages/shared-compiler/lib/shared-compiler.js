@@ -4,6 +4,7 @@ const path = require( 'path' );
 const resolve = require( '@rollup/plugin-node-resolve' ).default;
 const babel = require( '@rollup/plugin-babel' ).default;
 const postcss = require('rollup-plugin-postcss');
+const image = require('@rollup/plugin-image');
 
 const currentWorkingPath = process.cwd();
 const { src, name } = require( path.join( currentWorkingPath, 'package.json' ) );
@@ -24,6 +25,7 @@ const inputOptions = {
 		postcss({
 			modules: true
 		}),
+		image(),
 		babel({
 			presets: [
 				'@babel/preset-env',
