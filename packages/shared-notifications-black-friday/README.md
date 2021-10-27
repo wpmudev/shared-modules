@@ -41,5 +41,9 @@ const MyApp = () => {
 | Prop Name | Type | Description |
 | --------- | ---- | ----------- |
 | link | string | Sets call to action button URL. |
+| marginTop | string | Allows you to add additional space at `top` of the module. |
+| marginRight | string | Allows you to add additional space at `right` of the module. |
+| marginBottom | string | Allows you to add additional space at `bottom` of the module. |
+| marginLeft | string | Allows you to add additional space at `left` of the module. |
 | sourceLang | object | Allows to translate component labels. |
 | onCloseClick | - | Use this property to pass a function when clicking on close button. |

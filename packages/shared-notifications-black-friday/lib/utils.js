@@ -26,10 +26,15 @@ const maxDevice = {
 };
 
 // UTILS: Create elements.
-export const Container = styled.div`
+export const Container = styled.div.attrs( props => ( { props } ) )`
 [class*="sui-2-"] .sui-wrap & {
 	overflow: hidden;
 	position: relative;
+	margin:
+		${ props => props.marginTop || 0 }px
+		${ props => props.marginRight || 0 }px
+		${ props => props.marginBottom || 30 }px
+		${ props => props.marginLeft || 0 }px;
 	padding: 30px 40px;
 	border-radius: 4px;
 	background-color: #07212C;
