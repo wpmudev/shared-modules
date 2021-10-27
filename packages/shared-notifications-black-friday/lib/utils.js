@@ -30,6 +30,7 @@ export const Container = styled.div`
 [class*="sui-2-"] .sui-wrap & {
 	overflow: hidden;
 	position: relative;
+	margin: 0 0 20px;
 	padding: 30px 40px;
 	border-radius: 4px;
 	background-color: #07212C;
@@ -50,6 +51,7 @@ export const Container = styled.div`
 
 	@media ${minDevice.tablet} {
 		display: flex;
+		margin: 0 0 30px;
 		flex-flow: row nowrap;
 		align-items: flex-start;
 		padding-left: 0;
