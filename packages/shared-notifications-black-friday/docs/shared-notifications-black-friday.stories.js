@@ -9,7 +9,7 @@ export default {
 export const Untranslated = ( args ) => {
 	return (
 		<NoticeBlack { ...args }>
-			<p><strong>Black Friday Offer!</strong> Get Smush Pro for free and much more with 50% OFF WPMU DEV Agency Plan FOREVER</p>
+			<p><strong>Black Friday Offer!</strong> Get 11 Pro plugins on unlimited sites and much more with 50% OFF WPMU DEV Agency plan FOREVER</p>
 			<p><small>*Only admin users can see this message</small></p>
 		</NoticeBlack>
 	);
@@ -22,7 +22,7 @@ Untranslated.args = {
 export const Translated = ( args ) => {
 	return (
 		<NoticeBlack { ...args }>
-			<p><strong>Oferta de Viernes Negro!</strong> Obtén Smush Pro gratis y mucho más con el 50% DE DESCUENTO en el "Plan de Agencia WPMU DEV" POR SIEMPRE</p>
+			<p><strong>¡Oferta de Viernes Negro!</strong> Obtén 11 plugins Pro para sitios ilimitados y mucho más por el 50% DE DESCUENTO en el plan WPMU DEV Agency DE POR VIDA</p>
 			<p><small>*Solo los administradores pueden ver este mensaje</small></p>
 		</NoticeBlack>
 	);
