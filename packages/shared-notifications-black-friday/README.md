@@ -28,12 +28,6 @@ const MyApp = () => {
 				closeLabel: "Close",
 				linkLabel: "See the deal"
 			}
-			sourceMargin={
-				top: 0,
-				right: 0,
-				bottom: 30,
-				left: 0
-			}
         >
             <p><strong>Black Friday Offer!</strong> Get a Pro plugin for free and much more with 50% OFF.</p>
 			<p><small>*Only admin users can see this message</small></p>
