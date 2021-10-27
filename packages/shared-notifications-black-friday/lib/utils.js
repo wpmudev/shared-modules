@@ -181,16 +181,12 @@ export const Link = styled.a.attrs( ({ ctaLink }) => ({
 
 	&:hover,
 	&:focus {
+		background: #fff;
 		color: #222222 !important;
 	}
 
-	&:hover {
-		opacity: 0.8;
-		outline: none;
-	}
-
 	&:focus {
-		outline: 3px solid rgba(77,253,137,0.5);
+		box-shadow: 0 0 10px 0 rgba(255,255,255,0.3);
 	}
 
 	@media ${minDevice.laptop} {
