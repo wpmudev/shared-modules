@@ -26,15 +26,11 @@ const maxDevice = {
 };
 
 // UTILS: Create elements.
-export const Container = styled.div.attrs( props => ( { props } ) )`
+export const Container = styled.div`
 [class*="sui-2-"] .sui-wrap & {
 	overflow: hidden;
 	position: relative;
-	margin:
-		${ props => props.marginTop || 0 }px
-		${ props => props.marginRight || 0 }px
-		${ props => props.marginBottom || 30 }px
-		${ props => props.marginLeft || 0 }px;
+	margin: 0 0 20px;
 	padding: 30px 40px;
 	border-radius: 4px;
 	background-color: #07212C;
@@ -55,6 +51,7 @@ export const Container = styled.div.attrs( props => ( { props } ) )`
 
 	@media ${minDevice.tablet} {
 		display: flex;
+		margin: 0 0 30px;
 		flex-flow: row nowrap;
 		align-items: flex-start;
 		padding-left: 0;

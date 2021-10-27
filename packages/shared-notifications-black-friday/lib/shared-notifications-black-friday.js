@@ -10,10 +10,6 @@ import {
 
 export const NoticeBlack = ({
 	link,
-	marginTop = 0,
-	marginRight = 0,
-	marginBottom = 30,
-	marginLeft = 0,
 	onCloseClick,
 	sourceLang,
 	children,
@@ -39,10 +35,6 @@ export const NoticeBlack = ({
 		!isClose && (
 			<Container
 				className="sui-notice-black-friday"
-				marginTop={ marginTop || 0 }
-				marginRight={ marginRight || 0 }
-				marginBottom={ marginBottom || 30 }
-				marginLeft={ marginLeft || 0 }
 				{ ...props }
 			>
 

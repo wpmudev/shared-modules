@@ -28,6 +28,12 @@ const MyApp = () => {
 				closeLabel: "Close",
 				linkLabel: "See the deal"
 			}
+			sourceMargin={
+				top: 0,
+				right: 0,
+				bottom: 30,
+				left: 0
+			}
         >
             <p><strong>Black Friday Offer!</strong> Get a Pro plugin for free and much more with 50% OFF.</p>
 			<p><small>*Only admin users can see this message</small></p>
@@ -41,9 +47,5 @@ const MyApp = () => {
 | Prop Name | Type | Description |
 | --------- | ---- | ----------- |
 | link | string | Sets call to action button URL. |
-| marginTop | string | Allows you to add additional space at `top` of the module. |
-| marginRight | string | Allows you to add additional space at `right` of the module. |
-| marginBottom | string | Allows you to add additional space at `bottom` of the module. |
-| marginLeft | string | Allows you to add additional space at `left` of the module. |
 | sourceLang | object | Allows to translate component labels. |
 | onCloseClick | - | Use this property to pass a function when clicking on close button. |
