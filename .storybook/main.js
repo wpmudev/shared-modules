@@ -18,8 +18,10 @@ module.exports = {
 	// 		'module',
 	// 		'main'
 	// 	];
-
 	// 	// Return the altered config
 	// 	return config;
-	// }
+	// },
+	core: {
+		builder: "webpack5"
+	}
 };
