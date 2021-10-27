@@ -33,10 +33,7 @@ export const NoticeBlack = ({
 
 	return (
 		!isClose && (
-			<Container
-				className="sui-notice-black-friday"
-				{ ...props }
-			>
+			<Container { ...props }>
 
 				<ButtonIcon
 					color="white"
