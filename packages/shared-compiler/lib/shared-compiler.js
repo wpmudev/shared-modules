@@ -26,6 +26,13 @@ const inputOptions = {
 			modules: true
 		}),
 		image(),
+		[
+			'babel-plugin-styled-components',
+			{
+				'ssr': true,
+				'displayName': true
+			}
+		],
 		babel({
 			presets: [
 				'@babel/preset-env',
