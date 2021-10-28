@@ -27,31 +27,42 @@ export const NoticeBlack = ({
 
 	return (
 		!isClose && (
-			<BlackFriday.Container { ...props }>
+			<>
+				<BlackFriday.Global />
+				<div className="sui-module-notice-black-friday__container" { ...props }>
 
-				<ButtonIcon
-					color="white"
-					icon="close"
-					iconSize="md"
-					label={ lang.closeLabel }
-					onClick={ closeOnClick }
-				/>
+					<ButtonIcon
+						color="white"
+						icon="close"
+						iconSize="md"
+						label={ lang.closeLabel }
+						onClick={ closeOnClick }
+					/>
 
-				<BlackFriday.Ribbon>{ lang.discount }</BlackFriday.Ribbon>
+					<div className="sui-module-notice-black-friday__ribbon">
+						{ lang.discount }
+					</div>
 
-				<BlackFriday.Body>
+					<div className="sui-module-notice-black-friday__body">
 
-					<BlackFriday.Content>
-						{ children }
-					</BlackFriday.Content>
+						<div className="sui-module-notice-black-friday__content">
+							{ children }
+						</div>
 
-					{ hasLink &&
-						<BlackFriday.Link ctaLink={ link || '#' }>{ lang.linkLabel }</BlackFriday.Link>
-					}
+						{ hasLink &&
+							<a
+								href={ link || '#' }
+								target="_blank"
+								className="sui-module-notice-black-friday__link"
+							>
+								{ lang.linkLabel }
+							</a>
+						}
 
-				</BlackFriday.Body>
+					</div>
 
-			</BlackFriday.Container>
+				</div>
+			</>
 		)
 	);
 }
