@@ -41,84 +41,95 @@ export const NoticeDiscount = ({
 
 	return (
 		!isClose && (
-			<Wrapper
-				className="sui-notice-offer"
-				{ ...props }
-			>
+			<>
+				<Discount.Global />
+				<div
+					className="sui-module-notice-discount__wrapper"
+					{ ...props }
+				>
 
-				<Header>
+					<div className="sui-module-notice-discount__header">
 
-					{ hasDiscount && <Ribbon>{ discount }% Off</Ribbon> }
+						{ hasDiscount && <div className="sui-module-notice-discount__ribbon">{ discount }% Off</div> }
 
-					{ null !== title && '' !== title && <Title>{ title }</Title> }
+						{ null !== title && '' !== title && <h2 className="sui-module-notice-discount__title">{ title }</h2> }
 
-					<button
-						className="sui-button-icon sui-button-white"
-						onClick={ closeOnClick }
-					>
-						<span className="sui-icon-close sui-sm" aria-hidden="true" />
-						<span className="sui-screen-reader-text">
-							{ closeLabel || 'Close this offer' }
-						</span>
-					</button>
+						<button
+							className="sui-button-icon sui-button-white"
+							onClick={ closeOnClick }
+						>
+							<span className="sui-icon-close sui-sm" aria-hidden="true" />
+							<span className="sui-screen-reader-text">
+								{ closeLabel || 'Close this offer' }
+							</span>
+						</button>
 
-				</Header>
+					</div>
 
-				<Body>
+					<div className="sui-module-notice-discount__body">
 
-					{ hasImage1x && !hasImage2x && <Image src={ image } alt={ imageAlt || 'Plugin image' } aria-hidden="true" /> }
-
-					{ hasImage1x && hasImage2x && (
-						<Image
-							src={ image }
-							srcSet={ image + ' 1x,' + imageRetina + ' 2x' }
-							alt={ imageAlt || 'Plugin image' }
-							aria-hidden="true"
-						/>
-					)}
-
-					<Content>
-
-						{ children }
-
-						{ hasDisclaimer && (
-							<p className="sui-disclaimer">* { disclaimer }</p>
-						)}
-
-					</Content>
-
-					<Border><span /></Border>
-
-					<PriceWrapper>
-
-						<PriceLabel>{ priceLabel || 'Pay Only' }</PriceLabel>
-
-						{ hasDiscount
-							? (
-								<Price>
-									<span>${ price }</span>
-									<strong>${ newPrice }</strong>/{ priceTime || 'month' }
-								</Price>
-							)
-							: <Price><strong>${ price }</strong>/{ priceTime || 'month' }</Price>
+						{ hasImage1x && !hasImage2x &&
+							<img
+								src={ image }
+								alt={ imageAlt || 'Plugin image' }
+								className="sui-module-notice-discount__image"
+								aria-hidden="true"
+							/>
 						}
 
-						{ hasButton && (
-							<Button
-								label={ buttonLabel }
-								color="purple"
-								href={ buttonLink }
-								target="_blank"
+						{ hasImage1x && hasImage2x && (
+							<img
+								src={ image }
+								srcSet={ image + ' 1x,' + imageRetina + ' 2x' }
+								alt={ imageAlt || 'Plugin image' }
+								className="sui-module-notice-discount__image"
+								aria-hidden="true"
 							/>
 						)}
 
-						{ hasDisclaimer && <p className="sui-disclaimer">* { disclaimer } *</p> }
+						<div className="sui-module-notice-discount__content">
 
-					</PriceWrapper>
+							{ children }
 
-				</Body>
+							{ hasDisclaimer && (
+								<p className="sui-disclaimer">* { disclaimer }</p>
+							)}
 
-			</Wrapper>
+						</div>
+
+						<div className="sui-module-notice-discount__border"><span /></div>
+
+						<div className="sui-module-notice-discount__price-wrapper">
+
+							<h3 className="sui-module-notice-discount__price-label">{ priceLabel || 'Pay Only' }</h3>
+
+							{ hasDiscount
+								? (
+									<p className="sui-module-notice-discount__price">
+										<span>${ price }</span>
+										<strong>${ newPrice }</strong>/{ priceTime || 'month' }
+									</p>
+								)
+								: <p className="sui-module-notice-discount__price"><strong>${ price }</strong>/{ priceTime || 'month' }</p>
+							}
+
+							{ hasButton && (
+								<Button
+									label={ buttonLabel }
+									color="purple"
+									href={ buttonLink }
+									target="_blank"
+								/>
+							)}
+
+							{ hasDisclaimer && <p className="sui-disclaimer">* { disclaimer } *</p> }
+
+						</div>
+
+					</div>
+
+				</div>
+			</>
 		)
 	);
 }
