@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@octokit/core": "^3.2.5",
-    "@wpmudev/shared-ui": "2.10.11"
+    "@wpmudev/shared-ui": "2.11.1"
   },
   "scripts": {
     "build": "npx lerna run build",
