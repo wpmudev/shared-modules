@@ -2,6 +2,10 @@
 
 ## Released (2021-10-28)
 
+#### New Features
+* `shared-notifications-black-friday`
+  * [#94](https://github.com/wpmudev/shared-modules/pull/94) 🔊 new(notice-black): Add changelog file. ([@iamleigh](https://github.com/iamleigh))
+
 #### Improvements
 * `shared-notifications-black-friday`
   * [#92](https://github.com/wpmudev/shared-modules/pull/92) 🐛 fix(notice-black): We need spacing between notice and page header. ([@iamleigh](https://github.com/iamleigh))
