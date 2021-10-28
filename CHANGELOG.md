@@ -6,7 +6,7 @@
 * `shared-notifications-black-friday`
   * [#92](https://github.com/wpmudev/shared-modules/pull/92) 🐛 fix(notice-black): We need spacing between notice and page header. ([@iamleigh](https://github.com/iamleigh))
   * [#90](https://github.com/wpmudev/shared-modules/pull/90) 🐛 fix(notice-black): Update CTA button hover and focus states. ([@iamleigh](https://github.com/iamleigh))
-* Other
+* `core`
   * [#89](https://github.com/wpmudev/shared-modules/pull/89) 🐛 fix(core): Upgrade Storybook to latest version with Webpack 5 support. ([@iamleigh](https://github.com/iamleigh))
 
 #### Bug Fixes
