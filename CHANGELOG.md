@@ -1,5 +1,25 @@
 # Changelog
 
+## Released (2021-10-28)
+
+#### Improvements
+* `shared-notifications-black-friday`
+  * [#92](https://github.com/wpmudev/shared-modules/pull/92) 🐛 fix(notice-black): We need spacing between notice and page header. ([@iamleigh](https://github.com/iamleigh))
+  * [#90](https://github.com/wpmudev/shared-modules/pull/90) 🐛 fix(notice-black): Update CTA button hover and focus states. ([@iamleigh](https://github.com/iamleigh))
+* Other
+  * [#89](https://github.com/wpmudev/shared-modules/pull/89) 🐛 fix(core): Upgrade Storybook to latest version with Webpack 5 support. ([@iamleigh](https://github.com/iamleigh))
+
+#### Bug Fixes
+* `shared-notifications-black-friday`
+  * [#93](https://github.com/wpmudev/shared-modules/pull/93) 🐛 fix(notice-black): Class name created with `styled-components` conflicts with `Presets` component. ([@iamleigh](https://github.com/iamleigh))
+
+#### Documentation
+* `shared-notifications-black-friday`
+  * [#91](https://github.com/wpmudev/shared-modules/pull/91) 📝 docs(notice-black): Update copy on demo component. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## Released (2021-10-26)
 
 #### New Features
