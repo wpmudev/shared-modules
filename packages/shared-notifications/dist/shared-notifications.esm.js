@@ -1,24 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends$1.apply(this, arguments);
-}
-
 function _objectWithoutPropertiesLoose$1$1(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -303,27 +285,28 @@ var maxDevice = {
   tablet: "(max-width: ".concat(screen$1.tablet - 1, "px)"),
   laptop: "(max-width: ".concat(screen$1.laptop - 1, "px)"),
   desktop: "(max-width: ".concat(screen$1.desktop - 1, "px)")
-}; // UTILS: Create elements.
+};
+var BlackFriday = {}; // UTILS: Create elements.
 
-var Container = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\toverflow: hidden;\n\tposition: relative;\n\tpadding: 30px 40px;\n\tborder-radius: 4px;\n\tbackground-color: #07212C;\n\tbackground-image: image-set(\n\t\turl(", ") 1x,\n\t\turl(", ") 2x\n\t);\n\tbackground-image:\n\t\timage-set(\n\t\t\turl(", ") 1x,\n\t\t\turl(", ") 2x\n\t\t),\n\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\n\t@media ", " {\n\t\ttext-align: center;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t\talign-items: flex-start;\n\t\tpadding-left: 0;\n\t}\n\n\t@media ", " {\n\t\talign-items: center;\n\t}\n\n\t.sui-button-icon {\n\t\tposition: absolute;\n\t\ttop: 10px;\n\t\tright: 10px;\n\t\tmargin-right: 0 !important;\n\t}\n}\n"])), img$1, img, img$1, img, maxDevice.tablet, minDevice.tablet, minDevice.laptop);
-var Ribbon$1 = styled.div(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tdisplay: inline-block;\n\tpadding: 10px 20px 11px;\n\tbackground-color: #6D53AB;\n\tcolor: #4DFD89;\n\tfont-size: 22px;\n\tline-height: 29px;\n\tfont-weight: bold;\n\tletter-spacing: normal;\n\n\t@media ", " {\n\t\tflex: 0 0 auto;\n\t\tpadding: 15px 20px 16px;\n\t}\n}\n"])), minDevice.tablet);
-var Body$1 = styled.div(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 0 0 30px;\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin: 0 15px;\n\t\tpadding-right: 65px;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t\talign-items: center;\n\t\tpadding-right: 0;\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop);
-var Content$1 = styled.div(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 30px 0;\n\n\t@media ", " {\n\t\tmargin-top: 0;\n\t}\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin-bottom: 0;\n\t}\n\n\th1, h2, h3, h4, h5, h6, p, small {\n\t\tcolor: #fff;\n\t}\n\n\tp {\n\t\tmargin: 0 0 15px;\n\t\tfont-size: 18px;\n\t\tline-height: 25px;\n\n\t\t@media ", " {\n\t\t\tmargin: 0 0 5px;\n\t\t}\n\n\t\t&:last-child {\n\t\t\tmargin: 0;\n\t\t}\n\n\t\tstrong {\n\t\t\tfont-weight: 700;\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tmargin-bottom: 20px;\n\t\t\t\tfont-size: 28px;\n\t\t\t\tline-height: 29px;\n\t\t\t}\n\t\t}\n\n\t\tsmall {\n\t\t\tmargin: 0;\n\t\t\tdisplay: initial;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 300;\n\t\t}\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop, minDevice.tablet, maxDevice.tablet);
-var Link = styled.a.attrs(function (_ref) {
+BlackFriday.Container = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\toverflow: hidden;\n\tposition: relative;\n\tmargin: 0 0 20px;\n\tpadding: 30px 40px;\n\tborder-radius: 4px;\n\tbackground-color: #07212C;\n\tbackground-image: image-set(\n\t\turl(", ") 1x,\n\t\turl(", ") 2x\n\t);\n\tbackground-image:\n\t\timage-set(\n\t\t\turl(", ") 1x,\n\t\t\turl(", ") 2x\n\t\t),\n\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\n\t@media ", " {\n\t\ttext-align: center;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tmargin: 0 0 30px;\n\t\tflex-flow: row nowrap;\n\t\talign-items: flex-start;\n\t\tpadding-left: 0;\n\t}\n\n\t@media ", " {\n\t\talign-items: center;\n\t}\n\n\t.sui-button-icon {\n\t\tposition: absolute;\n\t\ttop: 10px;\n\t\tright: 10px;\n\t\tmargin-right: 0 !important;\n\t}\n}\n"])), img$1, img, img$1, img, maxDevice.tablet, minDevice.tablet, minDevice.laptop);
+BlackFriday.Ribbon = styled.div(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tdisplay: inline-block;\n\tpadding: 10px 20px 11px;\n\tbackground-color: #6D53AB;\n\tcolor: #4DFD89;\n\tfont-size: 22px;\n\tline-height: 29px;\n\tfont-weight: bold;\n\tletter-spacing: normal;\n\n\t@media ", " {\n\t\tflex: 0 0 auto;\n\t\tpadding: 15px 20px 16px;\n\t}\n}\n"])), minDevice.tablet);
+BlackFriday.Body = styled.div(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 0 0 30px;\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin: 0 15px;\n\t\tpadding-right: 65px;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t\talign-items: center;\n\t\tpadding-right: 0;\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop);
+BlackFriday.Content = styled.div(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 30px 0;\n\n\t@media ", " {\n\t\tmargin-top: 0;\n\t}\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin-bottom: 0;\n\t}\n\n\th1, h2, h3, h4, h5, h6, p, small {\n\t\tcolor: #fff;\n\t}\n\n\tp {\n\t\tmargin: 0 0 15px;\n\t\tfont-size: 18px;\n\t\tline-height: 25px;\n\n\t\t@media ", " {\n\t\t\tmargin: 0 0 5px;\n\t\t}\n\n\t\t&:last-child {\n\t\t\tmargin: 0;\n\t\t}\n\n\t\tstrong {\n\t\t\tfont-weight: 700;\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tmargin-bottom: 20px;\n\t\t\t\tfont-size: 28px;\n\t\t\t\tline-height: 29px;\n\t\t\t}\n\t\t}\n\n\t\tsmall {\n\t\t\tmargin: 0;\n\t\t\tdisplay: initial;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 300;\n\t\t}\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop, minDevice.tablet, maxDevice.tablet);
+BlackFriday.Link = styled.a.attrs(function (_ref) {
   var ctaLink = _ref.ctaLink;
   return {
     href: ctaLink,
     target: "_blank"
   };
-})(_templateObject5$1 || (_templateObject5$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:hover {\n\t\topacity: 0.8;\n\t\toutline: none;\n\t}\n\n\t&:focus {\n\t\toutline: 3px solid rgba(77,253,137,0.5);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
-var _excluded = ["link", "onCloseClick", "sourceLang", "children"];
+})(_templateObject5$1 || (_templateObject5$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #fff;\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:focus {\n\t\tbox-shadow: 0 0 10px 0 rgba(255,255,255,0.3);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
+var _excluded$1 = ["link", "onCloseClick", "sourceLang", "children"];
 
 var NoticeBlack = function NoticeBlack(_ref) {
   var link = _ref.link,
       onCloseClick = _ref.onCloseClick,
       sourceLang = _ref.sourceLang,
       children = _ref.children,
-      props = _objectWithoutProperties$1$1(_ref, _excluded);
+      props = _objectWithoutProperties$1$1(_ref, _excluded$1);
 
   var _useState = useState(false),
       _useState2 = _slicedToArray$1(_useState, 2),
@@ -344,15 +327,13 @@ var NoticeBlack = function NoticeBlack(_ref) {
     linkLabel: 'See the deal'
   }, sourceLang);
   var hasLink = null !== link && '' !== link;
-  return !isClose && /*#__PURE__*/React.createElement(Container, _extends$1({
-    className: "sui-notice-black-friday"
-  }, props), /*#__PURE__*/React.createElement(ButtonIcon, {
+  return !isClose && /*#__PURE__*/React.createElement(BlackFriday.Container, props, /*#__PURE__*/React.createElement(ButtonIcon, {
     color: "white",
     icon: "close",
     iconSize: "md",
     label: lang.closeLabel,
     onClick: closeOnClick
-  }), /*#__PURE__*/React.createElement(Ribbon$1, null, lang.discount), /*#__PURE__*/React.createElement(Body$1, null, /*#__PURE__*/React.createElement(Content$1, null, children), hasLink && /*#__PURE__*/React.createElement(Link, {
+  }), /*#__PURE__*/React.createElement(BlackFriday.Ribbon, null, lang.discount), /*#__PURE__*/React.createElement(BlackFriday.Body, null, /*#__PURE__*/React.createElement(BlackFriday.Content, null, children), hasLink && /*#__PURE__*/React.createElement(BlackFriday.Link, {
     ctaLink: link || '#'
   }, lang.linkLabel)));
 };
@@ -375,7 +356,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
+function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -390,10 +371,10 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var target = _objectWithoutPropertiesLoose$1(source, excluded);
 
   var key, i;
 
@@ -432,14 +413,17 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
   var _arr = [];
   var _n = true;
   var _d = false;
-  var _e = undefined;
+
+  var _s, _e;
 
   try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
       _arr.push(_s.value);
 
       if (i && _arr.length === i) break;
@@ -530,7 +514,7 @@ function _objectSpread2(target) {
   return target;
 }
 
-function _objectWithoutPropertiesLoose$1(source, excluded) {
+function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -545,10 +529,10 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$1(source, excluded) {
+function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+  var target = _objectWithoutPropertiesLoose(source, excluded);
 
   var key, i;
 
@@ -574,7 +558,7 @@ var Button = function Button(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$1(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+      props = _objectWithoutProperties(_ref, ["label", "icon", "design", "color", "className", "loading"]);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -638,6 +622,8 @@ var Button = function Button(_ref) {
   }, props), loading ? loader : content);
 };
 
+var _excluded = ["title", "price", "priceTime", "discount", "image", "imageRetina", "imageAlt", "disclaimer", "priceLabel", "buttonLabel", "buttonLink", "closeLabel", "onCloseClick", "children"];
+
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 var screen = {
@@ -680,7 +666,7 @@ var NoticeDiscount = function NoticeDiscount(_ref) {
       closeLabel = _ref.closeLabel,
       onCloseClick = _ref.onCloseClick,
       children = _ref.children,
-      props = _objectWithoutProperties(_ref, ["title", "price", "priceTime", "discount", "image", "imageRetina", "imageAlt", "disclaimer", "priceLabel", "buttonLabel", "buttonLink", "closeLabel", "onCloseClick", "children"]);
+      props = _objectWithoutProperties$1(_ref, _excluded);
 
   var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
