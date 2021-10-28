@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.2 (2021-10-28)
+
+#### Bug Fixes
+* `shared-notifications-discount`
+  * [#98](https://github.com/wpmudev/shared-modules/pull/98) 🐛 fix(notice-discount): Avoid conflicts between React modules using `styled-components`. ([@iamleigh](https://github.com/iamleigh))
+
+#### Documentation
+* `shared-notifications-discount`
+  * [#97](https://github.com/wpmudev/shared-modules/pull/97) 📝 docs(notice-discount): Add `CHANGELOG` file. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## 1.0.1 (2021-07-22)
 
 #### New Features

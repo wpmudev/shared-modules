@@ -2,6 +2,21 @@
 
 ## Released (2021-10-28)
 
+#### Bug Fixes
+* `shared-notifications-discount`
+  * [#98](https://github.com/wpmudev/shared-modules/pull/98) 🐛 fix(notice-discount): Avoid conflicts between React modules using `styled-components`. ([@iamleigh](https://github.com/iamleigh))
+* `shared-notifications-black-friday`
+  * [#96](https://github.com/wpmudev/shared-modules/pull/96) 🐛 fix(notice-black): Class name created with `styled-components` conflicts with `Presets` component. ([@iamleigh](https://github.com/iamleigh))
+
+#### Documentation
+* `shared-notifications-discount`
+  * [#97](https://github.com/wpmudev/shared-modules/pull/97) 📝 docs(notice-discount): Add `CHANGELOG` file. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
+## Released (2021-10-28)
+
 #### New Features
 * `shared-notifications-black-friday`
   * [#94](https://github.com/wpmudev/shared-modules/pull/94) 🔊 new(notice-black): Add changelog file. ([@iamleigh](https://github.com/iamleigh))

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.2 (2021-10-28)
+
+#### Bug Fixes
+* `shared-notifications-black-friday`
+  * [#96](https://github.com/wpmudev/shared-modules/pull/96) 🐛 fix(notice-black): Class name created with `styled-components` conflicts with `Presets` component. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## 1.0.1 (2021-10-28)
 
 #### Improvements
