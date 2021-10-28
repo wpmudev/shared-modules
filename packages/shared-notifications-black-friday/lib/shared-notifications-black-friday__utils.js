@@ -25,8 +25,10 @@ const maxDevice = {
 	desktop: `(max-width: ${screen.desktop - 1}px)`
 };
 
+export const BlackFriday = {};
+
 // UTILS: Create elements.
-export const Container = styled.div`
+BlackFriday.Container = styled.div`
 [class*="sui-2-"] .sui-wrap & {
 	overflow: hidden;
 	position: relative;
@@ -70,7 +72,7 @@ export const Container = styled.div`
 }
 `;
 
-export const Ribbon = styled.div`
+BlackFriday.Ribbon = styled.div`
 [class*="sui-2-"] .sui-wrap & {
 	display: inline-block;
 	padding: 10px 20px 11px;
@@ -88,7 +90,7 @@ export const Ribbon = styled.div`
 }
 `;
 
-export const Body = styled.div`
+BlackFriday.Body = styled.div`
 [class*="sui-2-"] .sui-wrap & {
 	margin: 0 0 30px;
 
@@ -108,7 +110,7 @@ export const Body = styled.div`
 }
 `;
 
-export const Content = styled.div`
+BlackFriday.Content = styled.div`
 [class*="sui-2-"] .sui-wrap & {
 	margin: 30px 0;
 
@@ -161,7 +163,7 @@ export const Content = styled.div`
 }
 `;
 
-export const Link = styled.a.attrs( ({ ctaLink }) => ({
+BlackFriday.Link = styled.a.attrs( ({ ctaLink }) => ({
 	href: ctaLink,
 	target: "_blank"
 }))`
