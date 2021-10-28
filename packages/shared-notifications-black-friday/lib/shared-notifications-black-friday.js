@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
-import {
-	Container,
-	Ribbon,
-	Body,
-	Content,
-	Link
-} from "./utils";
+import { BlackFriday } from "./shared-notifications-black-friday__utils";
 
 export const NoticeBlack = ({
 	link,
@@ -33,7 +27,7 @@ export const NoticeBlack = ({
 
 	return (
 		!isClose && (
-			<Container { ...props }>
+			<BlackFriday.Container { ...props }>
 
 				<ButtonIcon
 					color="white"
@@ -43,21 +37,21 @@ export const NoticeBlack = ({
 					onClick={ closeOnClick }
 				/>
 
-				<Ribbon>{ lang.discount }</Ribbon>
+				<BlackFriday.Ribbon>{ lang.discount }</BlackFriday.Ribbon>
 
-				<Body>
+				<BlackFriday.Body>
 
-					<Content>
+					<BlackFriday.Content>
 						{ children }
-					</Content>
+					</BlackFriday.Content>
 
 					{ hasLink &&
-						<Link ctaLink={ link || '#' }>{ lang.linkLabel }</Link>
+						<BlackFriday.Link ctaLink={ link || '#' }>{ lang.linkLabel }</BlackFriday.Link>
 					}
 
-				</Body>
+				</BlackFriday.Body>
 
-			</Container>
+			</BlackFriday.Container>
 		)
 	);
 }
