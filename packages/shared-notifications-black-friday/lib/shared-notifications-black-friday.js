@@ -2,6 +2,19 @@ import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
 import { BlackFriday } from "./shared-notifications-black-friday__utils";
 
+function checkSuiWrap() {
+	const suiWrap = document.querySelectorAll( '.sui-wrap' );
+
+	for ( let i = 0; i < suiWrap.length; i++ ) {
+
+		if ( suiWrap[i].classList.contains( 'sui-color-accessible' ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 export const NoticeBlack = ({
 	link,
 	onCloseClick,
@@ -9,7 +22,8 @@ export const NoticeBlack = ({
 	children,
 	...props
 }) => {
-	const [isClose, setIsClose] = useState(false);
+	const [isClose, setIsClose] = useState( false );
+	const [isMonochrome, setMonochrome] = useState( false );
 	const closeOnClick = e => {
 		setIsClose(true);
 		if ( 'undefined' !== typeof onCloseClick ) {
@@ -25,10 +39,14 @@ export const NoticeBlack = ({
 
 	const hasLink = null !== link && '' !== link;
 
+	React.useEffect( () => {
+		setMonochrome( checkSuiWrap );
+	});
+
 	return (
 		!isClose && (
 			<>
-				<BlackFriday.Global />
+				<BlackFriday.Global monochrome={ isMonochrome } />
 				<div className="sui-module-notice-black-friday__container" { ...props }>
 
 					<ButtonIcon

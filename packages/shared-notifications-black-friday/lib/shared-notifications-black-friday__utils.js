@@ -28,7 +28,7 @@ export const BlackFriday = {};
 
 // UTILS: Create elements.
 BlackFriday.Global = createGlobalStyle`
-[class*="sui-2-"] .sui-wrap {
+[class*="sui-2-"] .sui-wrap${ props => props.monochrome ? '.sui-color-accessible' : '' } {
 
 	.sui-module-notice-black-friday {
 
@@ -38,17 +38,22 @@ BlackFriday.Global = createGlobalStyle`
 			margin: 0 0 20px;
 			padding: 30px 40px;
 			border-radius: 4px;
-			background-color: #07212C;
-			background-image: image-set(
-				url(${wave1x}) 1x,
-				url(${wave2x}) 2x
-			);
-			background-image:
-				image-set(
+			background-color: ${ props => props.monochrome ? '#ffffff' : '#07212C' };
+			${ props => props.monochrome
+				? 'box-shadow: 0 2px 0 #e6e6e6;'
+				: `
+				background-image: image-set(
 					url(${wave1x}) 1x,
 					url(${wave2x}) 2x
-				),
-				linear-gradient(270deg, #222222 0.67%, #07212C 100%);
+				);
+				background-image:
+					image-set(
+						url(${wave1x}) 1x,
+						url(${wave2x}) 2x
+					),
+					linear-gradient(270deg, #222222 0.67%, #07212C 100%);
+				`
+			}
 
 			@media ${maxDevice.tablet} {
 				text-align: center;
@@ -77,8 +82,8 @@ BlackFriday.Global = createGlobalStyle`
 		&__ribbon {
 			display: inline-block;
 			padding: 10px 20px 11px;
-			background-color: #6D53AB;
-			color: #4DFD89;
+			background-color: ${ props => props.monochrome ? '#000000' : '#6D53AB' };
+			color: ${ props => props.monochrome ? '#ffffff' : '#4DFD89' };
 			font-size: 22px;
 			line-height: 29px;
 			font-weight: bold;
@@ -122,7 +127,7 @@ BlackFriday.Global = createGlobalStyle`
 			}
 
 			h1, h2, h3, h4, h5, h6, p, small {
-				color: #fff;
+				color: ${ props => props.monochrome ? '#000000' : '#ffffff' };
 			}
 
 			p {
@@ -166,9 +171,9 @@ BlackFriday.Global = createGlobalStyle`
 			padding: 5px 30px;
 			border: 0;
 			border-radius: 30px;
-			background: #4DFD89;
+			background: ${ props => props.monochrome ? '#000000' : '#4DFD89' };
 			box-shadow: none;
-			color: #222;
+			color: ${ props => props.monochrome ? '#ffffff !important' : '#222222' };
 			font-size: 13px;
 			line-height: 30px;
 			font-weight: bold;
@@ -177,12 +182,19 @@ BlackFriday.Global = createGlobalStyle`
 
 			&:hover,
 			&:focus {
-				background: #fff;
-				color: #222222 !important;
+				background: #ffffff !important;
+				color: ${ props => props.monochrome ? '#000000' : '#222222' } !important;
+				${ props => props.monochrome
+					? 'box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);'
+					: ''
+				}
 			}
 
 			&:focus {
-				box-shadow: 0 0 10px 0 rgba(255,255,255,0.3);
+				box-shadow: ${ props => props.monochrome
+					? '0 0 10px 0 rgba(0,0,0,0.6)'
+					: '0 0 10px 0 rgba(255,255,255,0.3)'
+				};
 			}
 
 			@media ${minDevice.laptop} {
@@ -332,7 +344,7 @@ BlackFriday.Content = styled.div`
 BlackFriday.Link = styled.a.attrs( ({ ctaLink }) => ({
 	href: ctaLink,
 	target: "_blank"
-}))`
+}) )`
 [class*="sui-2-"] .sui-wrap & {
 	cursor: pointer;
 	display: inline-block;
