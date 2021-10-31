@@ -2,6 +2,18 @@ import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
 import { BlackFriday } from "./shared-notifications-black-friday__utils";
 
+function checkRTL() {
+	const suiBody = document.body;
+	const hasLang = suiBody.hasAttribute( 'dir' );
+	const getLang = suiBody.getAttribute( 'dir' );
+
+	if ( hasLang && 'rtl' === getLang ) {
+		return true;
+	}
+
+	return false;
+}
+
 function checkSuiWrap() {
 	const suiWrap = document.querySelectorAll( '.sui-wrap' );
 
@@ -23,6 +35,7 @@ export const NoticeBlack = ({
 	...props
 }) => {
 	const [isClose, setIsClose] = useState( false );
+	const [isRTL, setRTL] = useState( false );
 	const [isMonochrome, setMonochrome] = useState( false );
 	const closeOnClick = e => {
 		setIsClose(true);
@@ -40,13 +53,14 @@ export const NoticeBlack = ({
 	const hasLink = null !== link && '' !== link;
 
 	React.useEffect( () => {
+		setRTL( checkRTL )
 		setMonochrome( checkSuiWrap );
 	});
 
 	return (
 		!isClose && (
 			<>
-				<BlackFriday.Global monochrome={ isMonochrome } />
+				<BlackFriday.Global rtl={ isRTL } monochrome={ isMonochrome } />
 				<div className="sui-module-notice-black-friday__container" { ...props }>
 
 					<ButtonIcon
