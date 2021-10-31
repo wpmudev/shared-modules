@@ -306,7 +306,39 @@ var maxDevice = {
 };
 var BlackFriday = {}; // UTILS: Create elements.
 
-BlackFriday.Global = createGlobalStyle(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap {\n\n\t.sui-module-notice-black-friday {\n\n\t\t&__container {\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t\tmargin: 0 0 20px;\n\t\t\tpadding: 30px 40px;\n\t\t\tborder-radius: 4px;\n\t\t\tbackground-color: #07212C;\n\t\t\tbackground-image: image-set(\n\t\t\t\turl(", ") 1x,\n\t\t\t\turl(", ") 2x\n\t\t\t);\n\t\t\tbackground-image:\n\t\t\t\timage-set(\n\t\t\t\t\turl(", ") 1x,\n\t\t\t\t\turl(", ") 2x\n\t\t\t\t),\n\t\t\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\n\t\t\t@media ", " {\n\t\t\t\ttext-align: center;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tmargin: 0 0 30px;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: flex-start;\n\t\t\t\tpadding-left: 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\talign-items: center;\n\t\t\t}\n\n\t\t\t.sui-button-icon {\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 10px;\n\t\t\t\tright: 10px;\n\t\t\t\tmargin-right: 0 !important;\n\t\t\t}\n\t\t}\n\n\t\t&__ribbon {\n\t\t\tdisplay: inline-block;\n\t\t\tpadding: 10px 20px 11px;\n\t\t\tbackground-color: #6D53AB;\n\t\t\tcolor: #4DFD89;\n\t\t\tfont-size: 22px;\n\t\t\tline-height: 29px;\n\t\t\tfont-weight: bold;\n\t\t\tletter-spacing: normal;\n\n\t\t\t@media ", " {\n\t\t\t\tflex: 0 0 auto;\n\t\t\t\tpadding: 15px 20px 16px;\n\t\t\t}\n\t\t}\n\n\t\t&__body {\n\t\t\tmargin: 0 0 30px;\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin: 0 15px;\n\t\t\t\tpadding-right: 65px;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: center;\n\t\t\t\tpadding-right: 0;\n\t\t\t}\n\t\t}\n\n\t\t&__content {\n\t\t\tmargin: 30px 0;\n\n\t\t\t@media ", " {\n\t\t\t\tmargin-top: 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin-bottom: 0;\n\t\t\t}\n\n\t\t\th1, h2, h3, h4, h5, h6, p, small {\n\t\t\t\tcolor: #fff;\n\t\t\t}\n\n\t\t\tp {\n\t\t\t\tmargin: 0 0 15px;\n\t\t\t\tfont-size: 18px;\n\t\t\t\tline-height: 25px;\n\n\t\t\t\t@media ", " {\n\t\t\t\t\tmargin: 0 0 5px;\n\t\t\t\t}\n\n\t\t\t\t&:last-child {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t}\n\n\t\t\t\tstrong {\n\t\t\t\t\tfont-weight: 700;\n\n\t\t\t\t\t@media ", " {\n\t\t\t\t\t\tdisplay: block;\n\t\t\t\t\t\tmargin-bottom: 20px;\n\t\t\t\t\t\tfont-size: 28px;\n\t\t\t\t\t\tline-height: 29px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tsmall {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tdisplay: initial;\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tline-height: 22px;\n\t\t\t\t\tfont-weight: 300;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t&__link {\n\t\t\tcursor: pointer;\n\t\t\tdisplay: inline-block;\n\t\t\tmargin: 0;\n\t\t\tpadding: 5px 30px;\n\t\t\tborder: 0;\n\t\t\tborder-radius: 30px;\n\t\t\tbackground: #4DFD89;\n\t\t\tbox-shadow: none;\n\t\t\tcolor: #222;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 30px;\n\t\t\tfont-weight: bold;\n\t\t\ttext-decoration: none;\n\t\t\ttransition: 0.2s ease;\n\n\t\t\t&:hover,\n\t\t\t&:focus {\n\t\t\t\tbackground: #fff;\n\t\t\t\tcolor: #222222 !important;\n\t\t\t}\n\n\t\t\t&:focus {\n\t\t\t\tbox-shadow: 0 0 10px 0 rgba(255,255,255,0.3);\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tflex: 0 0 auto;\n\t\t\t}\n\t\t}\n\t}\n}\n"])), img$1, img, img$1, img, maxDevice.tablet, minDevice.tablet, minDevice.laptop, minDevice.tablet, minDevice.tablet, minDevice.laptop, minDevice.tablet, minDevice.laptop, minDevice.tablet, maxDevice.tablet, minDevice.laptop);
+BlackFriday.Global = createGlobalStyle(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"]", " .sui-wrap", " {\n\n\t.sui-module-notice-black-friday {\n\n\t\t&__container {\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t\tmargin: 0 0 20px;\n\t\t\tpadding: 30px 40px;\n\t\t\tborder-radius: 4px;\n\t\t\tbackground-color: ", ";\n\t\t\t", "\n\n\t\t\t@media ", " {\n\t\t\t\ttext-align: center;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tmargin: 0 0 30px;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: flex-start;\n\t\t\t\tpadding-", ": 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\talign-items: center;\n\t\t\t}\n\n\t\t\t.sui-button-icon {\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 10px;\n\t\t\t\t", ": 10px;\n\t\t\t\tmargin-", ": 0 !important;\n\t\t\t}\n\t\t}\n\n\t\t&__ribbon {\n\t\t\tdisplay: inline-block;\n\t\t\tpadding: 10px 20px 11px;\n\t\t\tbackground-color: ", ";\n\t\t\tcolor: ", ";\n\t\t\tfont-size: 22px;\n\t\t\tline-height: 29px;\n\t\t\tfont-weight: bold;\n\t\t\tletter-spacing: normal;\n\n\t\t\t@media ", " {\n\t\t\t\tflex: 0 0 auto;\n\t\t\t\tpadding: 15px 20px 16px;\n\t\t\t}\n\t\t}\n\n\t\t&__body {\n\t\t\tmargin: 0 0 30px;\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin: 0 15px;\n\t\t\t\tpadding-", ": 65px;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: center;\n\t\t\t\tpadding-right: 0;\n\t\t\t}\n\t\t}\n\n\t\t&__content {\n\t\t\tmargin: 30px 0;\n\n\t\t\t@media ", " {\n\t\t\t\tmargin-top: 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin-bottom: 0;\n\t\t\t}\n\n\t\t\th1, h2, h3, h4, h5, h6, p, small {\n\t\t\t\tcolor: ", ";\n\t\t\t}\n\n\t\t\tp {\n\t\t\t\tmargin: 0 0 15px;\n\t\t\t\tfont-size: 18px;\n\t\t\t\tline-height: 25px;\n\n\t\t\t\t@media ", " {\n\t\t\t\t\tmargin: 0 0 5px;\n\t\t\t\t}\n\n\t\t\t\t&:last-child {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t}\n\n\t\t\t\tstrong {\n\t\t\t\t\tfont-weight: 700;\n\n\t\t\t\t\t@media ", " {\n\t\t\t\t\t\tdisplay: block;\n\t\t\t\t\t\tmargin-bottom: 20px;\n\t\t\t\t\t\tfont-size: 28px;\n\t\t\t\t\t\tline-height: 29px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tsmall {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tdisplay: initial;\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tline-height: 22px;\n\t\t\t\t\tfont-weight: 300;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t&__link {\n\t\t\tcursor: pointer;\n\t\t\tdisplay: inline-block;\n\t\t\tmargin: 0;\n\t\t\tpadding: 5px 30px;\n\t\t\tborder: 0;\n\t\t\tborder-radius: 30px;\n\t\t\tbackground: ", ";\n\t\t\tbox-shadow: none;\n\t\t\tcolor: ", ";\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 30px;\n\t\t\tfont-weight: bold;\n\t\t\ttext-decoration: none;\n\t\t\ttransition: 0.2s ease;\n\n\t\t\t&:hover,\n\t\t\t&:focus {\n\t\t\t\tbackground: #ffffff !important;\n\t\t\t\tcolor: ", " !important;\n\t\t\t\t", "\n\t\t\t}\n\n\t\t\t&:focus {\n\t\t\t\tbox-shadow: ", ";\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tflex: 0 0 auto;\n\t\t\t}\n\t\t}\n\t}\n}\n"])), function (props) {
+  return props.rtl ? '[dir="rtl"]' : '';
+}, function (props) {
+  return props.monochrome ? '.sui-color-accessible' : '';
+}, function (props) {
+  return props.monochrome ? '#ffffff' : '#07212C';
+}, function (props) {
+  return props.monochrome ? 'box-shadow: 0 2px 0 #e6e6e6;' : "\n\t\t\t\tbackground-image: image-set(\n\t\t\t\t\turl(".concat(img$1, ") 1x,\n\t\t\t\t\turl(").concat(img, ") 2x\n\t\t\t\t);\n\t\t\t\tbackground-image:\n\t\t\t\t\timage-set(\n\t\t\t\t\t\turl(").concat(img$1, ") 1x,\n\t\t\t\t\t\turl(").concat(img, ") 2x\n\t\t\t\t\t),\n\t\t\t\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\t\t\t\t");
+}, maxDevice.tablet, minDevice.tablet, function (props) {
+  return props.rtl ? 'right' : 'left';
+}, minDevice.laptop, function (props) {
+  return props.rtl ? 'left' : 'right';
+}, function (props) {
+  return props.rtl ? 'left' : 'right';
+}, function (props) {
+  return props.monochrome ? '#000000' : '#6D53AB';
+}, function (props) {
+  return props.monochrome ? '#ffffff' : '#4DFD89';
+}, minDevice.tablet, minDevice.tablet, function (props) {
+  return props.rtl ? 'left' : 'right';
+}, minDevice.laptop, minDevice.tablet, minDevice.laptop, function (props) {
+  return props.monochrome ? '#000000' : '#ffffff';
+}, minDevice.tablet, maxDevice.tablet, function (props) {
+  return props.monochrome ? '#000000' : '#4DFD89';
+}, function (props) {
+  return props.monochrome ? '#ffffff !important' : '#222222';
+}, function (props) {
+  return props.monochrome ? '#000000' : '#222222';
+}, function (props) {
+  return props.monochrome ? 'box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);' : '';
+}, function (props) {
+  return props.monochrome ? '0 0 10px 0 rgba(0,0,0,0.6)' : '0 0 10px 0 rgba(255,255,255,0.3)';
+}, minDevice.laptop);
 BlackFriday.Container = styled.div(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\toverflow: hidden;\n\tposition: relative;\n\tmargin: 0 0 20px;\n\tpadding: 30px 40px;\n\tborder-radius: 4px;\n\tbackground-color: #07212C;\n\tbackground-image: image-set(\n\t\turl(", ") 1x,\n\t\turl(", ") 2x\n\t);\n\tbackground-image:\n\t\timage-set(\n\t\t\turl(", ") 1x,\n\t\t\turl(", ") 2x\n\t\t),\n\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\n\t@media ", " {\n\t\ttext-align: center;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tmargin: 0 0 30px;\n\t\tflex-flow: row nowrap;\n\t\talign-items: flex-start;\n\t\tpadding-left: 0;\n\t}\n\n\t@media ", " {\n\t\talign-items: center;\n\t}\n\n\t.sui-button-icon {\n\t\tposition: absolute;\n\t\ttop: 10px;\n\t\tright: 10px;\n\t\tmargin-right: 0 !important;\n\t}\n}\n"])), img$1, img, img$1, img, maxDevice.tablet, minDevice.tablet, minDevice.laptop);
 BlackFriday.Ribbon = styled.div(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tdisplay: inline-block;\n\tpadding: 10px 20px 11px;\n\tbackground-color: #6D53AB;\n\tcolor: #4DFD89;\n\tfont-size: 22px;\n\tline-height: 29px;\n\tfont-weight: bold;\n\tletter-spacing: normal;\n\n\t@media ", " {\n\t\tflex: 0 0 auto;\n\t\tpadding: 15px 20px 16px;\n\t}\n}\n"])), minDevice.tablet);
 BlackFriday.Body = styled.div(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 0 0 30px;\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin: 0 15px;\n\t\tpadding-right: 65px;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t\talign-items: center;\n\t\tpadding-right: 0;\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop);
@@ -320,6 +352,30 @@ BlackFriday.Link = styled.a.attrs(function (_ref) {
 })(_templateObject6$1 || (_templateObject6$1 = _taggedTemplateLiteral$1(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #fff;\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:focus {\n\t\tbox-shadow: 0 0 10px 0 rgba(255,255,255,0.3);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
 var _excluded$1 = ["link", "onCloseClick", "sourceLang", "children"];
 
+function checkRTL() {
+  var suiBody = document.body;
+  var hasLang = suiBody.hasAttribute('dir');
+  var getLang = suiBody.getAttribute('dir');
+
+  if (hasLang && 'rtl' === getLang) {
+    return true;
+  }
+
+  return false;
+}
+
+function checkSuiWrap() {
+  var suiWrap = document.querySelectorAll('.sui-wrap');
+
+  for (var i = 0; i < suiWrap.length; i++) {
+    if (suiWrap[i].classList.contains('sui-color-accessible')) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 var NoticeBlack = function NoticeBlack(_ref) {
   var link = _ref.link,
       onCloseClick = _ref.onCloseClick,
@@ -331,6 +387,16 @@ var NoticeBlack = function NoticeBlack(_ref) {
       _useState2 = _slicedToArray$1(_useState, 2),
       isClose = _useState2[0],
       setIsClose = _useState2[1];
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray$1(_useState3, 2),
+      isRTL = _useState4[0],
+      setRTL = _useState4[1];
+
+  var _useState5 = useState(false),
+      _useState6 = _slicedToArray$1(_useState5, 2),
+      isMonochrome = _useState6[0],
+      setMonochrome = _useState6[1];
 
   var closeOnClick = function closeOnClick(e) {
     setIsClose(true);
@@ -346,7 +412,14 @@ var NoticeBlack = function NoticeBlack(_ref) {
     linkLabel: 'See the deal'
   }, sourceLang);
   var hasLink = null !== link && '' !== link;
-  return !isClose && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlackFriday.Global, null), /*#__PURE__*/React.createElement("div", _extends$1({
+  React.useEffect(function () {
+    setRTL(checkRTL);
+    setMonochrome(checkSuiWrap);
+  });
+  return !isClose && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlackFriday.Global, {
+    rtl: isRTL,
+    monochrome: isMonochrome
+  }), /*#__PURE__*/React.createElement("div", _extends$1({
     className: "sui-module-notice-black-friday__container"
   }, props), /*#__PURE__*/React.createElement(ButtonIcon, {
     color: "white",
