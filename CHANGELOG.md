@@ -1,5 +1,14 @@
 # Changelog
 
+## Released (2021-10-31)
+
+#### Improvements
+* `shared-notifications-black-friday`
+  * [#100](https://github.com/wpmudev/shared-modules/pull/100) 🐛 fix(notice-black): Support RTL mode. ([@iamleigh](https://github.com/iamleigh))
+  * [#99](https://github.com/wpmudev/shared-modules/pull/99) 🐛 fix(notice-black): Support monochrome mode. ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+
 ## Released (2021-10-28)
 
 #### Bug Fixes
