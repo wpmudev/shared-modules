@@ -28,7 +28,7 @@ export const BlackFriday = {};
 
 // UTILS: Create elements.
 BlackFriday.Global = createGlobalStyle`
-[class*="sui-2-"] .sui-wrap${ props => props.monochrome ? '.sui-color-accessible' : '' } {
+[class*="sui-2-"]${ props => props.rtl ? '[dir="rtl"]' : '' } .sui-wrap${ props => props.monochrome ? '.sui-color-accessible' : '' } {
 
 	.sui-module-notice-black-friday {
 
@@ -64,7 +64,7 @@ BlackFriday.Global = createGlobalStyle`
 				margin: 0 0 30px;
 				flex-flow: row nowrap;
 				align-items: flex-start;
-				padding-left: 0;
+				padding-${ props => props.rtl ? 'right' : 'left' }: 0;
 			}
 
 			@media ${minDevice.laptop} {
@@ -74,8 +74,8 @@ BlackFriday.Global = createGlobalStyle`
 			.sui-button-icon {
 				position: absolute;
 				top: 10px;
-				right: 10px;
-				margin-right: 0 !important;
+				${ props => props.rtl ? 'left' : 'right' }: 10px;
+				margin-${ props => props.rtl ? 'left' : 'right' }: 0 !important;
 			}
 		}
 
@@ -102,7 +102,7 @@ BlackFriday.Global = createGlobalStyle`
 				min-width: 1px;
 				flex: 1;
 				margin: 0 15px;
-				padding-right: 65px;
+				padding-${ props => props.rtl ? 'left' : 'right' }: 65px;
 			}
 
 			@media ${minDevice.laptop} {
