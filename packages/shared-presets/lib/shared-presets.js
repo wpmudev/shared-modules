@@ -133,6 +133,8 @@ export const Presets = ( {
 		sourceLang
 	);
 
+	console.log(isWidget, isPro, isWhitelabel)
+
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
 		retrieveConfigs();
