@@ -66,7 +66,8 @@ export const Presets = ( {
 	isWhitelabel,
 	requestsData,
 	sourceUrls,
-	sourceLang
+	sourceLang,
+	configContent,
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
@@ -333,66 +334,7 @@ export const Presets = ( {
 	};
 
 	// dummy configuration to show the empty state.
-	const dummyConfig = [
-		{
-			id: "1",
-			default: "basic",
-			name: "Basic Config",
-			description: "Recommended backup config for all site.",
-			image: "https://nullclub.com/wp-content/uploads/2016/10/WPMU-Dev-hustle.png",
-			config: [
-				{
-					id: "schedule",
-					name: "Schedule",
-					content: "Weekly @ 12:00 am on Friday"
-				},
-				{
-					id: "region",
-					name: "Region",
-					content: "US"
-				},
-				{
-					id: "storage-limit",
-					name: "Storage Limit",
-					content: "5"
-				},
-				{
-					id: "notifications",
-					name: "Notifications",
-					content: "Active"
-				},
-				{
-					id: "exclusions",
-					name: "Exclusions",
-					content: "Active"
-				},
-				{
-					id: "data-and-settings",
-					name: "Data & Settings",
-					content: "Weekly @ 12:00 am on Friday"
-				}
-			]
-		},
-		{
-			id: "2",
-			default: "advanced",
-			name: "Advanced Config",
-			description: "Recommended backup advanced config for all site.",
-			image: "https://wpmudev.com/wp-content/uploads/2014/11/Smush_2016_02.png",
-			config: [
-				{
-					id: "schedule",
-					name: "Schedule",
-					content: "Weekly @ 12:00 am on Friday"
-				},
-				{
-					id: "region",
-					name: "Region",
-					content: "US"
-				}
-			]
-		}
-	];
+	const dummyConfig = configContent;
 
 	// set is loading false if there is no configs.
 	const removeLoading = () => {
