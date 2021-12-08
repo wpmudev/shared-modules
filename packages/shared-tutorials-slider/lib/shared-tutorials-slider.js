@@ -499,12 +499,14 @@ export class TutorialsSlider extends Component {
 								</Link>
 							)}
 
-							<div className="sui-tooltip" data-tooltip="Hide Tutorials">
+							<div
+								className="sui-tooltip"
+								data-tooltip="Hide Tutorials"
+								// eslint-disable-next-line prettier/prettier
+								style={ { marginRight: "-9px" } }>
 								<button
 									onClick={e => this.closeButtonClicked(e)}
-									className="sui-button-icon"
-									// eslint-disable-next-line prettier/prettier
-									style={ { marginRight: "-9px" } }>
+									className="sui-button-icon">
 									<span className="sui-icon-close sui-md" aria-hidden="true" />
 									<span className="sui-screen-reader-text">
 										{close_tutorials}
