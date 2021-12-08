@@ -55,11 +55,12 @@
   "changelog": {
     "repo": "wpmudev/shared-modules",
     "labels": {
-      "new": "New Features",
-      "improvement": "Improvements",
-      "accessibility": "Accessibility Changes",
-      "bug": "Bug Fixes",
-      "documentation": "Documentation"
+      "new": "✨ New Features",
+      "improvement": "🚀 Improvements",
+      "bug": "🐛 Bug Fixes",
+      "accessibility": "♿️ Accessibility",
+      "documentation": "📝 Documentation",
+	  "core": "🏠 Internal"
     },
     "cacheDir": ".changelog"
   }
