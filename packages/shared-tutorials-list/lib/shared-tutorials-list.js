@@ -95,6 +95,10 @@ const Link = styled.a.attrs(props => ({
 			color: inherit;
 		}
 	}
+
+	@media (max-width: ${screen.mobile}px) {
+		display: none;
+	}
 `;
 
 export class TutorialsList extends Component {
