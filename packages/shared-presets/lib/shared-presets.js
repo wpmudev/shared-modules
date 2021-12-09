@@ -362,7 +362,7 @@ export const Presets = ( {
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } proTag={ item.config.strings[ name ] } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }

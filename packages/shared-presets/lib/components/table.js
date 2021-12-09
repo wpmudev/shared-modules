@@ -46,19 +46,11 @@ const Table = styled.table`
 				white-space: pre-wrap;
 			}
 
-			.sui-pro-tag{
-				font: 900 8px/8px "Roboto", sans-serif;
-				letter-spacing: -0.25px;
-				color: #fff;
-				border-radius: 9px;
-				background: #8D00B1;
-				padding: 3px 6px;
-				text-transform: uppercase;
+			.sui-tag-pro{
 				margin-left: 6px;
 				position: absolute;
 				top: 50%;
 				transform: translateY(-50%);
-				height: 12px;
 			}
 		}
 	}
@@ -75,7 +67,7 @@ export class PresetsTable extends Component {
 			return (
 				<tr>
 					<td>{ row.props.name }</td>
-					<td>{ row.props.status }{ row.props.isPro ? <span class="sui-tag sui-tag-pro">Pro</span> : '' }</td>
+					<td>{ row.props.status }{ row.props.proTag ? <span className="sui-tag sui-tag-pro">Pro</span> : '' }</td>
 				</tr>
 			);
 		});
