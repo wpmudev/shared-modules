@@ -24,6 +24,7 @@ const Table = styled.table`
 			color: #888;
 			font: 500 13px/22px "Roboto", sans-serif;
 			letter-spacing: -0.25px;
+			position: relative;
 
 			div {
 				overflow: hidden;
@@ -44,6 +45,21 @@ const Table = styled.table`
 				padding-right: 20px;
 				white-space: pre-wrap;
 			}
+
+			.sui-pro-tag{
+				font: 900 8px/8px "Roboto", sans-serif;
+				letter-spacing: -0.25px;
+				color: #fff;
+				border-radius: 9px;
+				background: #8D00B1;
+				padding: 3px 6px;
+				text-transform: uppercase;
+				margin-left: 6px;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				height: 12px;
+			}
 		}
 	}
 }
@@ -59,7 +75,7 @@ export class PresetsTable extends Component {
 			return (
 				<tr>
 					<td>{ row.props.name }</td>
-					<td>{ row.props.status }</td>
+					<td>{ row.props.status }{ row.props.status === 'Inactive' ? <span className="sui-pro-tag">PRO</span> : '' }</td>
 				</tr>
 			);
 		});
