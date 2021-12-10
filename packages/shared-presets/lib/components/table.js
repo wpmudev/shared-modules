@@ -67,7 +67,7 @@ export class PresetsTable extends Component {
 			return (
 				<tr>
 					<td>{ row.props.name }</td>
-					<td>{ row.props.status }{ row.props.proTag ? <span className="sui-tag sui-tag-pro">Pro</span> : '' }</td>
+					<td>{ row.props.status }{ row.props.protag ? <span className="sui-tag sui-tag-pro">Pro</span> : '' }</td>
 				</tr>
 			);
 		});
