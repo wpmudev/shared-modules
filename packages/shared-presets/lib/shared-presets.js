@@ -66,7 +66,8 @@ export const Presets = ( {
 	isWhitelabel,
 	requestsData,
 	sourceUrls,
-	sourceLang
+	sourceLang,
+	configContent,
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
@@ -140,7 +141,7 @@ export const Presets = ( {
 
 	const retrieveConfigs = () => {
 		setIsLoading( true );
-
+		
 		RequestsHandler.makeLocalRequest()
 			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
@@ -331,43 +332,86 @@ export const Presets = ( {
 			}
 		);
 	};
-	// End of notifications.
+
+	// dummy configuration to show the empty state.
+	const dummyConfig = configContent;
+
+	// set is loading false if there is no configs.
+	const removeLoading = () => {
+		if ( isEmpty && isLoading ) {
+			setIsLoading( false );
+		}
+	}
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 	const Table = (
 		<React.Fragment>
-			{ !isEmpty && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={ {
-						borderBottomWidth: 0
-					} }
-				>
-					{ configs.map( item => (
-						<PresetsAccordionItem
-							key={ item.id }
-							id={ item.id }
-							default={ item.default }
-							name={ item.name }
-							description={ item.description }
-							image={ tableImage }
-							showApplyButton={ ! isWidget }
-							applyLabel={ lang.apply }
-							applyAction={ () => openModal( 'apply', item ) }
-							downloadLabel={ lang.download }
-							downloadAction={ () => doDownload( item ) }
-							editLabel={ lang.edit }
-							editAction={ () => openModal( 'edit', item ) }
-							deleteLabel={ lang.delete }
-							deleteAction={ () => openModal( 'delete', item ) }
-						>
-							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
-							) ) }
-						</PresetsAccordionItem>
-					) ) }
-				</div>
-			)}
+			{ !isEmpty ? (
+					<div
+						className="sui-accordion sui-accordion-flushed"
+						style={ {
+							borderBottomWidth: 0
+						} }
+					>
+						{ configs.map( item => (
+							<PresetsAccordionItem
+								key={ item.id }
+								id={ item.id }
+								default={ item.default }
+								name={ item.name }
+								description={ item.description }
+								image={ tableImage }
+								showApplyButton={ ! isWidget }
+								applyLabel={ lang.apply }
+								applyAction={ () => openModal( 'apply', item ) }
+								downloadLabel={ lang.download }
+								downloadAction={ () => doDownload( item ) }
+								editLabel={ lang.edit }
+								editAction={ () => openModal( 'edit', item ) }
+								deleteLabel={ lang.delete }
+								deleteAction={ () => openModal( 'delete', item ) }
+							>
+								{ Object.keys( item.config.strings ).map( ( name ) => (
+									<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
+								) ) }
+							</PresetsAccordionItem>
+						) ) }
+					</div>
+				) : (
+					<div
+						className="sui-accordion sui-accordion-flushed"
+						style={ {
+							borderBottomWidth: 0
+						} }
+					>	
+						{removeLoading()}
+						{ dummyConfig.map( item => (
+							<PresetsAccordionItem
+								key={ item.id }
+								id={ item.id }
+								default={ item.default }
+								name={ item.name }
+								description={ item.description }
+								image={ item.image }
+								showApplyButton={ ! isWidget }
+								applyLabel={ lang.apply }
+								applyAction={ () => openModal( 'apply', item ) }
+								downloadLabel={ lang.download }
+								downloadAction={ () => doDownload( item ) }
+								editLabel={ lang.edit }
+								editAction={ () => openModal( 'edit', item ) }
+								deleteLabel={ lang.delete }
+								deleteAction={ () => openModal( 'delete', item ) }
+							>
+								{ item.config.map( data => (
+									<div key={ data.id } name={ data.name } status={ data.content } />
+								) ) }
+							</PresetsAccordionItem>
+						) ) }
+					</div>
+				)
+			}		
+
 		</React.Fragment>
 	);
 
