@@ -6,56 +6,7 @@ export default {
 	component: Presets
 }
 
-const demoData = {
-	root: '',
-	nonce: '',
-	apiKey: '',
-	hubBaseUrl: '',
-	pluginData: {
-		pluginName: 'Smush Pro'
-	}
-};
-
-const demoContent = [
-	{
-		id: "1",
-		default: "basic",
-		name: "Basic Config",
-		description: "Recommended backup config for all site.",
-		image: "https://nullclub.com/wp-content/uploads/2016/10/WPMU-Dev-hustle.png",
-		config: [
-			{
-				id: "schedule",
-				name: "Schedule",
-				content: "Weekly @ 12:00 am on Friday"
-			},
-			{
-				id: "region",
-				name: "Region",
-				content: "US"
-			},
-			{
-				id: "storage-limit",
-				name: "Storage Limit",
-				content: "5"
-			},
-			{
-				id: "notifications",
-				name: "Notifications",
-				content: "Active"
-			},
-			{
-				id: "exclusions",
-				name: "Exclusions",
-				content: "Active"
-			},
-			{
-				id: "data-and-settings",
-				name: "Data & Settings",
-				content: "Weekly @ 12:00 am on Friday"
-			}
-		]
-	},
+const demoContent = (
 	{
 		id: "2",
 		default: "advanced",
@@ -75,9 +26,9 @@ const demoContent = [
 			}
 		]
 	}
-];
+);
 
-export const Widget = args => {
+const Template = args => {
 	return (
 		<div className="sui-row">
 			<div className="sui-col-md-6">
@@ -86,11 +37,18 @@ export const Widget = args => {
 		</div>
 	);
 };
-Widget.storyName = "Widget";
-Widget.args = {
+
+export const HasData = Template.bind({});
+HasData.storyName = "Default";
+HasData.args = {
 	isWidget: true,
-	requestsData: demoData,
-	sourceUrls: '',
-	sourceLang: '',
-	configContent: demoContent
+	setDemoData: false,
+	srcDemoData: demoContent,
+};
+
+export const NoData = Template.bind({});
+NoData.storyName = "Empty";
+NoData.args = {
+	...HasData.args,
+	srcDemoData: 'empty',
 };

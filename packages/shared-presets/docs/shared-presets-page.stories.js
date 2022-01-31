@@ -6,56 +6,7 @@ export default {
 	component: Presets
 }
 
-const demoData = {
-	root: '',
-	nonce: '',
-	apiKey: '',
-	hubBaseUrl: '',
-	pluginData: {
-		pluginName: 'Smush Pro'
-	}
-};
-
-const demoContent = [
-	{
-		id: "1",
-		default: "basic",
-		name: "Basic Config",
-		description: "Recommended backup config for all site.",
-		image: "https://nullclub.com/wp-content/uploads/2016/10/WPMU-Dev-hustle.png",
-		config: [
-			{
-				id: "schedule",
-				name: "Schedule",
-				content: "Weekly @ 12:00 am on Friday"
-			},
-			{
-				id: "region",
-				name: "Region",
-				content: "US"
-			},
-			{
-				id: "storage-limit",
-				name: "Storage Limit",
-				content: "5"
-			},
-			{
-				id: "notifications",
-				name: "Notifications",
-				content: "Active"
-			},
-			{
-				id: "exclusions",
-				name: "Exclusions",
-				content: "Active"
-			},
-			{
-				id: "data-and-settings",
-				name: "Data & Settings",
-				content: "Weekly @ 12:00 am on Friday"
-			}
-		]
-	},
+const demoContent = (
 	{
 		id: "2",
 		default: "advanced",
@@ -75,22 +26,20 @@ const demoContent = [
 			}
 		]
 	}
-];
+);
 
-export const Free = args => <Presets { ...args } />;
-Free.storyName = "Free";
-Free.args = {
-	requestsData: demoData,
-	sourceUrls: '',
-	sourceLang: '',
-	configContent: demoContent,
-	isWhitelabel: false,
+export const HasData = args => <Presets { ...args } />;
+HasData.storyName = "Default";
+HasData.args = {
 	isPro: false,
+	isWhitelabel: false,
+	setDemoData: false,
+	srcDemoData: demoContent,
 };
 
-export const Pro = args => <Presets { ...args } />;
-Pro.storyName = "Pro";
-Pro.args = {
-	...Free.args,
-	isPro: true
+export const NoData = args => <Presets { ...args } />;
+NoData.storyName = "Empty";
+NoData.args = {
+	...HasData.args,
+	srcDemoData: 'empty'
 };
