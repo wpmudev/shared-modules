@@ -31,7 +31,7 @@ const demoContent = (
 export const HasData = args => <Presets { ...args } />;
 HasData.storyName = "Default";
 HasData.args = {
-	isPro: false,
+	isPro: true,
 	isWhitelabel: false,
 	setDemoData: false,
 	srcDemoData: demoContent,
