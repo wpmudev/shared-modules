@@ -61,14 +61,12 @@ const StyledSyncButton = styled.button`
 let RequestsHandler;
 
 export const Presets = ( {
-	demo,
 	isWidget,
 	isPro,
 	isWhitelabel,
 	requestsData,
 	sourceUrls,
-	sourceLang,
-	configContent,
+	sourceLang
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
@@ -115,7 +113,7 @@ export const Presets = ( {
 			syncWithHubButton: 'Re-check to get the updated list.',
 			apply: 'Apply',
 			download: 'Download',
-			edit: 'Name and Description',
+			edit: 'Edit Name and Description',
 			delete: 'Delete',
 			freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
 			freeButtonLabel: 'Try The Hub',
@@ -142,8 +140,8 @@ export const Presets = ( {
 
 	const retrieveConfigs = () => {
 		setIsLoading( true );
-		
-		!demo && RequestsHandler.makeLocalRequest()
+
+		RequestsHandler.makeLocalRequest()
 			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
@@ -152,7 +150,7 @@ export const Presets = ( {
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
-		!demo && RequestsHandler.upload( e ).then( ( res ) => {
+		RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
 				// The downloads from the first version won't have this.
 				if ( res.data.plugin ) {
@@ -170,7 +168,7 @@ export const Presets = ( {
 				res.data.name = res.data.name.substring( 0, 200 );
 				res.data.description = res.data.description.substring( 0, 200 );
 				newConfigName = res.data.name;
-				return !demo && RequestsHandler.addNew( configs, res.data );
+				return RequestsHandler.addNew( configs, res.data );
 			}
 
 			// Throw otherwise.
@@ -184,7 +182,7 @@ export const Presets = ( {
 	};
 
 	const handleDelete = () => {
-		!demo && RequestsHandler.delete( [ ...configs ], currentConfig )
+		RequestsHandler.delete( [ ...configs ], currentConfig )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsDeleteOpen( false ) );
@@ -198,7 +196,7 @@ export const Presets = ( {
 
 		// Editing a config.
 		if ( currentConfig ) {
-			!demo && RequestsHandler.edit( [ ...configs ], currentConfig, configData )
+			RequestsHandler.edit( [ ...configs ], currentConfig, configData )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsEditOpen( false ) );
@@ -207,11 +205,11 @@ export const Presets = ( {
 		}
 
 		// Creating a new config.
-		!demo && RequestsHandler.create( data )
+		RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
 					configData.config = res.data.config;
-					return !demo && RequestsHandler.addNew( [...configs], configData );
+					return RequestsHandler.addNew( [...configs], configData );
 				}
 
 				if ( ! res.success ) {
@@ -227,7 +225,7 @@ export const Presets = ( {
 	};
 
 	const handleApply = () => {
-		!demo && RequestsHandler.apply( currentConfig ).then( ( res ) => {
+		RequestsHandler.apply( currentConfig ).then( ( res ) => {
 			setIsApplyOpen( false );
 
 			if ( ! res.success ) {
@@ -241,7 +239,7 @@ export const Presets = ( {
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		!demo && RequestsHandler.syncWithHub( [ ...configs ] )
+		RequestsHandler.syncWithHub( [ ...configs ] )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
@@ -333,86 +331,43 @@ export const Presets = ( {
 			}
 		);
 	};
-
-	// dummy configuration to show the empty state.
-	const dummyConfig = configContent;
-
-	// set is loading false if there is no configs.
-	const removeLoading = () => {
-		if ( isEmpty && isLoading ) {
-			setIsLoading( false );
-		}
-	}
+	// End of notifications.
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 	const Table = (
 		<React.Fragment>
-			{ !isEmpty ? (
-					<div
-						className="sui-accordion sui-accordion-flushed"
-						style={ {
-							borderBottomWidth: 0
-						} }
-					>
-						{ configs.map( item => (
-							<PresetsAccordionItem
-								key={ item.id }
-								id={ item.id }
-								default={ item.default }
-								name={ item.name }
-								description={ item.description }
-								image={ tableImage }
-								showApplyButton={ ! isWidget }
-								applyLabel={ lang.apply }
-								applyAction={ () => openModal( 'apply', item ) }
-								downloadLabel={ lang.download }
-								downloadAction={ () => doDownload( item ) }
-								editLabel={ lang.edit }
-								editAction={ () => openModal( 'edit', item ) }
-								deleteLabel={ lang.delete }
-								deleteAction={ () => openModal( 'delete', item ) }
-							>
-								{ Object.keys( item.config.strings ).map( ( name ) => (
-									<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
-								) ) }
-							</PresetsAccordionItem>
-						) ) }
-					</div>
-				) : (
-					<div
-						className="sui-accordion sui-accordion-flushed"
-						style={ {
-							borderBottomWidth: 0
-						} }
-					>	
-						{removeLoading()}
-						{ dummyConfig.map( item => (
-							<PresetsAccordionItem
-								key={ item.id }
-								id={ item.id }
-								default={ item.default }
-								name={ item.name }
-								description={ item.description }
-								image={ item.image }
-								showApplyButton={ ! isWidget }
-								applyLabel={ lang.apply }
-								applyAction={ () => openModal( 'apply', item ) }
-								downloadLabel={ lang.download }
-								downloadAction={ () => doDownload( item ) }
-								editLabel={ lang.edit }
-								editAction={ () => openModal( 'edit', item ) }
-								deleteLabel={ lang.delete }
-								deleteAction={ () => openModal( 'delete', item ) }
-							>
-								{ item.config.map( data => (
-									<div key={ data.id } name={ data.name } status={ data.content } />
-								) ) }
-							</PresetsAccordionItem>
-						) ) }
-					</div>
-				)
-			}		
-
+			{ !isEmpty && (
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={ {
+						borderBottomWidth: 0
+					} }
+				>
+					{ configs.map( item => (
+						<PresetsAccordionItem
+							key={ item.id }
+							id={ item.id }
+							default={ item.default }
+							name={ item.name }
+							description={ item.description }
+							image={ tableImage }
+							showApplyButton={ ! isWidget }
+							applyLabel={ lang.apply }
+							applyAction={ () => openModal( 'apply', item ) }
+							downloadLabel={ lang.download }
+							downloadAction={ () => doDownload( item ) }
+							editLabel={ lang.edit }
+							editAction={ () => openModal( 'edit', item ) }
+							deleteLabel={ lang.delete }
+							deleteAction={ () => openModal( 'delete', item ) }
+						>
+							{ Object.keys( item.config.strings ).map( ( name ) => (
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } protag={ item.config.strings[ name ] } />
+							) ) }
+						</PresetsAccordionItem>
+					) ) }
+				</div>
+			)}
 		</React.Fragment>
 	);
 
