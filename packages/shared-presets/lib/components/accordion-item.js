@@ -52,6 +52,12 @@ const Authentic = styled.svg`
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
 .sui-wrap && {
 
+    @media only screen and (max-width: 768px) {
+        > .sui-accordion-col-5 {
+            display: none !important;
+        }
+    }
+
     > .sui-accordion-col-auto {
 
         > .sui-dropdown {
@@ -64,6 +70,13 @@ const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
                 min-width: 192px;
             }
         }
+
+        @media only screen and (max-width: 768px) {
+            > button.sui-button {
+                display: none !important;
+            }
+        }
+
     }
 }
 `;
