@@ -52,12 +52,6 @@ const Authentic = styled.svg`
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
 .sui-wrap && {
 
-    @media only screen and (max-width: 768px) {
-        > .sui-accordion-col-5 {
-            display: none !important;
-        }
-    }
-
     > .sui-accordion-col-auto {
 
         > .sui-dropdown {
@@ -71,12 +65,17 @@ const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
             }
         }
 
-        @media only screen and (max-width: 768px) {
-            > button.sui-button {
+        > button.sui-button {
+            @media only screen and (max-width: 782px) {
                 display: none !important;
             }
         }
+    }
 
+    > .sui-accordion-col-5 {
+        @media only screen and (max-width: 782px) {
+            display: none !important;
+        }
     }
 }
 `;
