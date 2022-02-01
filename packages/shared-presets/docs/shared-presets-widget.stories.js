@@ -44,6 +44,7 @@ HasData.args = {
 	isWidget: true,
 	setDemoData: false,
 	srcDemoData: demoContent,
+	hasDemoData: true,
 };
 
 export const NoData = Template.bind({});

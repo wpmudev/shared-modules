@@ -35,6 +35,7 @@ HasData.args = {
 	isWhitelabel: false,
 	setDemoData: false,
 	srcDemoData: demoContent,
+	hasDemoData: true,
 };
 
 export const NoData = args => <Presets { ...args } />;
