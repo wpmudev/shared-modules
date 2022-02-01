@@ -6,14 +6,15 @@ export default {
     title: "Component/Presets",
 	component: Presets,
     args: {
+        demo: true,
         isWidget: true,
         isPro: true,
         isWhitelabel: true,
         requestsData: {
-            root: '',
-            nonce: '',
-            apiKey: '',
-            hubBaseUrl: '',
+            root: 'root',
+            nonce: 'nounce',
+            apiKey: 'apiKey',
+            pluginRequests: 'pluginRequests',
             pluginData: {
                 pluginName: 'Smush Pro',
             }
@@ -81,8 +82,6 @@ export default {
             }
         ]
     },
-
-    argTypes: {},
 }
 
 export const primary = (args) => <Presets {...args} />

@@ -61,6 +61,7 @@ const StyledSyncButton = styled.button`
 let RequestsHandler;
 
 export const Presets = ( {
+	demo,
 	isWidget,
 	isPro,
 	isWhitelabel,
@@ -142,7 +143,7 @@ export const Presets = ( {
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 		
-		RequestsHandler.makeLocalRequest()
+		!demo && RequestsHandler.makeLocalRequest()
 			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
@@ -151,7 +152,7 @@ export const Presets = ( {
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
-		RequestsHandler.upload( e ).then( ( res ) => {
+		!demo && RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
 				// The downloads from the first version won't have this.
 				if ( res.data.plugin ) {
@@ -169,7 +170,7 @@ export const Presets = ( {
 				res.data.name = res.data.name.substring( 0, 200 );
 				res.data.description = res.data.description.substring( 0, 200 );
 				newConfigName = res.data.name;
-				return RequestsHandler.addNew( configs, res.data );
+				return !demo && RequestsHandler.addNew( configs, res.data );
 			}
 
 			// Throw otherwise.
@@ -183,7 +184,7 @@ export const Presets = ( {
 	};
 
 	const handleDelete = () => {
-		RequestsHandler.delete( [ ...configs ], currentConfig )
+		!demo && RequestsHandler.delete( [ ...configs ], currentConfig )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsDeleteOpen( false ) );
@@ -197,7 +198,7 @@ export const Presets = ( {
 
 		// Editing a config.
 		if ( currentConfig ) {
-			RequestsHandler.edit( [ ...configs ], currentConfig, configData )
+			!demo && RequestsHandler.edit( [ ...configs ], currentConfig, configData )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsEditOpen( false ) );
@@ -206,11 +207,11 @@ export const Presets = ( {
 		}
 
 		// Creating a new config.
-		RequestsHandler.create( data )
+		!demo && RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
 					configData.config = res.data.config;
-					return RequestsHandler.addNew( [...configs], configData );
+					return !demo && RequestsHandler.addNew( [...configs], configData );
 				}
 
 				if ( ! res.success ) {
@@ -226,7 +227,7 @@ export const Presets = ( {
 	};
 
 	const handleApply = () => {
-		RequestsHandler.apply( currentConfig ).then( ( res ) => {
+		!demo && RequestsHandler.apply( currentConfig ).then( ( res ) => {
 			setIsApplyOpen( false );
 
 			if ( ! res.success ) {
@@ -240,7 +241,7 @@ export const Presets = ( {
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		RequestsHandler.syncWithHub( [ ...configs ] )
+		!demo && RequestsHandler.syncWithHub( [ ...configs ] )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
