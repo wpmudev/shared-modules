@@ -59,8 +59,10 @@ export const HasData = Template.bind({});
 HasData.storyName = "Default";
 HasData.args = {
 	isWidget: true,
+	isWhitelabel: false,
 	requestsData: demoData,
 	sourceUrls: demoUrls,
+	sourceLang: {},
 	// Below all custom props for demo only.
 	setDemoData: true,
 	srcDemoData: demoContent

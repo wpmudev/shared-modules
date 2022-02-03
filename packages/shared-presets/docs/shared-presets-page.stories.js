@@ -52,6 +52,7 @@ HasData.args = {
 	isWhitelabel: false,
 	requestsData: demoData,
 	sourceUrls: demoUrls,
+	sourceLang: {},
 	// Below all custom props for demo only.
 	setDemoData: true,
 	srcDemoData: demoContent
