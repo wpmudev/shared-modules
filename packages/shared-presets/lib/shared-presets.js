@@ -195,8 +195,10 @@ export const Presets = ( {
 		setIsLoading( true );
 
 		if ( setDemoData ) {
-			setConfigs( demoData );
-			setTimeout( () => setIsLoading( false ), 800 );
+			setTimeout( () => {
+				setConfigs( demoData );
+				setIsLoading( false );
+			}, 1000 );
 		} else {
 			RequestsHandler.makeLocalRequest()
 				.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
