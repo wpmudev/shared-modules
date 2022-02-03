@@ -67,9 +67,9 @@ export const Presets = ( {
 	requestsData,
 	sourceUrls,
 	sourceLang,
+	// Below all custom props used on demo only.
 	srcDemoData,
-	setDemoData = false,
-	hasDemoData = false,
+	setDemoData = false
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
@@ -136,38 +136,79 @@ export const Presets = ( {
 		sourceLang
 	);
 
-	if ( false === setDemoData ) {
-		requestsData = {
-			root: '',
-			nonce: '',
-			apiKey: '',
-			hubBaseUrl: '',
-			pluginData: {
-				pluginName: isPro ? 'Plugin Name Pro' : 'Plugin Name'
-			}
-		};
+	// Default demo data.
+	let demoData = [
+		{
+			id: "1",
+			default: "basic",
+			name: "Basic Config",
+			description: "Recommended backup config for all sites.",
+			config: [
+				{
+					id: "schedule",
+					name: "Schedule",
+					content: "Weekly @ 12:00 am on Friday"
+				},
+				{
+					id: "region",
+					name: "Region",
+					content: "US"
+				},
+				{
+					id: "storage-limit",
+					name: "Storage Limit",
+					content: "5"
+				},
+				{
+					id: "notifications",
+					name: "Notifications",
+					content: "Active"
+				},
+				{
+					id: "exclusions",
+					name: "Exclusions",
+					content: "Active"
+				},
+				{
+					id: "data-and-settings",
+					name: "Data & Settings",
+					content: "Weekly @ 12:00 am on Friday"
+				}
+			]
+		}
+	];
+
+	if ( srcDemoData ) {
+		if ( 'empty' === srcDemoData ) {
+			demoData = [];
+		} else {
+			demoData.push( srcDemoData );
+		}
 	}
 
 	React.useEffect(() => {
-		if ( '' === requestsData ) {
-			RequestsHandler = new Requester( requestsData );
-			retrieveConfigs();
-		}
+		RequestsHandler = new Requester( requestsData );
+		retrieveConfigs();
 	}, []);
 
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		!hasDemoData && RequestsHandler.makeLocalRequest()
-			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
-			.catch( ( res ) => requestFailureNotice( res ) )
-			.then( () => setIsLoading( false ) );
+		if ( setDemoData ) {
+			setConfigs( demoData );
+			setTimeout( () => setIsLoading( false ), 800 );
+		} else {
+			RequestsHandler.makeLocalRequest()
+				.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsLoading( false ) );
+		}
 	};
 
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
-		!hasDemoData && RequestsHandler.upload( e ).then( ( res ) => {
+		!setDemoData && RequestsHandler.upload( e ).then( ( res ) => {
 			if ( res.data && res.data.config ) {
 				// The downloads from the first version won't have this.
 				if ( res.data.plugin ) {
@@ -185,7 +226,7 @@ export const Presets = ( {
 				res.data.name = res.data.name.substring( 0, 200 );
 				res.data.description = res.data.description.substring( 0, 200 );
 				newConfigName = res.data.name;
-				return !hasDemoData && RequestsHandler.addNew( configs, res.data );
+				return !setDemoData && RequestsHandler.addNew( configs, res.data );
 			}
 
 			// Throw otherwise.
@@ -199,7 +240,7 @@ export const Presets = ( {
 	};
 
 	const handleDelete = () => {
-		!hasDemoData && RequestsHandler.delete( [ ...configs ], currentConfig )
+		!setDemoData && RequestsHandler.delete( [ ...configs ], currentConfig )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsDeleteOpen( false ) );
@@ -213,7 +254,7 @@ export const Presets = ( {
 
 		// Editing a config.
 		if ( currentConfig ) {
-			!hasDemoData && RequestsHandler.edit( [ ...configs ], currentConfig, configData )
+			!setDemoData && RequestsHandler.edit( [ ...configs ], currentConfig, configData )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsEditOpen( false ) );
@@ -222,11 +263,11 @@ export const Presets = ( {
 		}
 
 		// Creating a new config.
-		!hasDemoData && RequestsHandler.create( data )
+		!setDemoData && RequestsHandler.create( data )
 			.then( ( res ) => {
 				if ( res.data && res.data.config ) {
 					configData.config = res.data.config;
-					return !hasDemoData && RequestsHandler.addNew( [...configs], configData );
+					return !setDemoData && RequestsHandler.addNew( [...configs], configData );
 				}
 
 				if ( ! res.success ) {
@@ -242,7 +283,7 @@ export const Presets = ( {
 	};
 
 	const handleApply = () => {
-		!hasDemoData && RequestsHandler.apply( currentConfig ).then( ( res ) => {
+		!setDemoData && RequestsHandler.apply( currentConfig ).then( ( res ) => {
 			setIsApplyOpen( false );
 
 			if ( ! res.success ) {
@@ -256,7 +297,7 @@ export const Presets = ( {
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		!hasDemoData && RequestsHandler.syncWithHub( [ ...configs ] )
+		!setDemoData && RequestsHandler.syncWithHub( [ ...configs ] )
 			.then( ( newConfigs ) => setConfigs( newConfigs ) )
 			.catch( ( res ) => requestFailureNotice( res ) )
 			.then( () => setIsLoading( false ) );
@@ -349,79 +390,20 @@ export const Presets = ( {
 		);
 	};
 
-	// Set demo data.
-	let demoData = [
-		{
-			id: "1",
-			default: "basic",
-			name: "Basic Config",
-			description: "Recommended backup config for all sites.",
-			image: "https://nullclub.com/wp-content/uploads/2016/10/WPMU-Dev-hustle.png",
-			config: [
-				{
-					id: "schedule",
-					name: "Schedule",
-					content: "Weekly @ 12:00 am on Friday"
-				},
-				{
-					id: "region",
-					name: "Region",
-					content: "US"
-				},
-				{
-					id: "storage-limit",
-					name: "Storage Limit",
-					content: "5"
-				},
-				{
-					id: "notifications",
-					name: "Notifications",
-					content: "Active"
-				},
-				{
-					id: "exclusions",
-					name: "Exclusions",
-					content: "Active"
-				},
-				{
-					id: "data-and-settings",
-					name: "Data & Settings",
-					content: "Weekly @ 12:00 am on Friday"
-				}
-			]
-		}
-	];
-
-	if ( srcDemoData ) {
-		if ( 'empty' === srcDemoData ) {
-			demoData = [];
-		} else {
-			demoData.push( srcDemoData );
-		}
-	}
-
-	// set is loading false if there is no configs.
-	const removeLoading = () => {
-		if ( isEmpty && isLoading ) {
-			setIsLoading( false );
-		}
-	}
-
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
-	const Table = (
-		<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-			{ isEmpty && (
-				<React.Fragment>
-					{ removeLoading() }
 
-					{ demoData.map( item => (
+	const Table = (
+		<>
+			{ ! isEmpty && setDemoData && (
+				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
+					{ configs.map( item => (
 						<PresetsAccordionItem
 							key={ item.id }
 							id={ item.id }
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
-							image={ item.image }
+							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
 							applyAction={ () => openModal( 'apply', item ) }
@@ -432,40 +414,42 @@ export const Presets = ( {
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
-							{ item.config.map( data => (
+							{ item.config.map( ( data ) => (
 								<div key={ data.id } name={ data.name } status={ data.content } />
 							) ) }
 						</PresetsAccordionItem>
-					) )}
-				</React.Fragment>
+					) ) }
+				</div>
 			) }
 
-			{ ! isEmpty && (
-				configs.map( item => (
-					<PresetsAccordionItem
-						key={ item.id }
-						id={ item.id }
-						default={ item.default }
-						name={ item.name }
-						description={ item.description }
-						image={ tableImage }
-						showApplyButton={ ! isWidget }
-						applyLabel={ lang.apply }
-						applyAction={ () => openModal( 'apply', item ) }
-						downloadLabel={ lang.download }
-						downloadAction={ () => doDownload( item ) }
-						editLabel={ lang.edit }
-						editAction={ () => openModal( 'edit', item ) }
-						deleteLabel={ lang.delete }
-						deleteAction={ () => openModal( 'delete', item ) }
-					>
-						{ Object.keys( item.config.strings ).map( ( name ) => (
-							<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
-						) ) }
-					</PresetsAccordionItem>
-				) )
+			{ ! isEmpty && ! setDemoData && (
+				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
+					{ configs.map( item => (
+						<PresetsAccordionItem
+							key={ item.id }
+							id={ item.id }
+							default={ item.default }
+							name={ item.name }
+							description={ item.description }
+							image={ tableImage }
+							showApplyButton={ ! isWidget }
+							applyLabel={ lang.apply }
+							applyAction={ () => openModal( 'apply', item ) }
+							downloadLabel={ lang.download }
+							downloadAction={ () => doDownload( item ) }
+							editLabel={ lang.edit }
+							editAction={ () => openModal( 'edit', item ) }
+							deleteLabel={ lang.delete }
+							deleteAction={ () => openModal( 'delete', item ) }
+						>
+							{ Object.keys( item.config.strings ).map( ( name ) => (
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
+							) ) }
+						</PresetsAccordionItem>
+					) ) }
+				</div>
 			) }
-		</div>
+		</>
 	);
 
 	const getFooter = () => {
