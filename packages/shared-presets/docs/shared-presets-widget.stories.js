@@ -6,6 +6,23 @@ export default {
 	component: Presets
 }
 
+const demoData = {
+	root: '',
+	nonce: '',
+	apiKey: '',
+	hubBaseUrl: '',
+	pluginData: {
+		pluginName: 'Smush Pro'
+	}
+};
+
+const demoUrls = {
+	freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
+	hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+	configsPage: '#',
+	accordionImg: 'https://ps.w.org/wp-smushit/assets/icon-256x256.gif',
+}
+
 const demoContent = (
 	{
 		id: "2",
@@ -24,7 +41,7 @@ const demoContent = (
 				name: "Region",
 				content: "US"
 			}
-		]
+		],
 	}
 );
 
@@ -42,9 +59,11 @@ export const HasData = Template.bind({});
 HasData.storyName = "Default";
 HasData.args = {
 	isWidget: true,
-	setDemoData: false,
-	srcDemoData: demoContent,
-	hasDemoData: true,
+	requestsData: demoData,
+	sourceUrls: demoUrls,
+	// Below all custom props for demo only.
+	setDemoData: true,
+	srcDemoData: demoContent
 };
 
 export const NoData = Template.bind({});
