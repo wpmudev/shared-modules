@@ -1,81 +1,40 @@
 import React from 'react';
 import { Presets } from '../lib/shared-presets';
+import { demoData, demoUrls, demoContent } from './demo-data';
 
 export default {
 	title: "Presets/Page",
-	component: Presets
-}
-
-const demoData = {
-	root: '',
-	nonce: '',
-	apiKey: '',
-	hubBaseUrl: '',
-	pluginData: {
-		pluginName: 'Smush Pro'
-	}
-};
-
-const demoUrls = {
-	freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
-	hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
-	configsPage: '#',
-	accordionImg: 'https://ps.w.org/wp-smushit/assets/icon-256x256.gif',
-}
-
-const demoContent = (
-	{
-		id: "2",
-		default: "advanced",
-		name: "Advanced Config",
-		description: "Recommended backup advanced config for all site.",
-		image: "https://wpmudev.com/wp-content/uploads/2014/11/Smush_2016_02.png",
-		config: [
-			{
-				id: "schedule",
-				name: "Schedule",
-				content: "Weekly @ 12:00 am on Friday"
-			},
-			{
-				id: "region",
-				name: "Region",
-				content: "US"
+	component: Presets,
+	args: {
+		isPro: true,
+		isWhitelabel: false,
+		requestsData: demoData,
+		sourceUrls: demoUrls,
+		sourceLang: {},
+		// Below all custom props for demo only.
+		setDemoData: true,
+		srcDemoData: demoContent
+	},
+	argTypes: {
+		// Hide custom props for demo from the controls table.
+		setDemoData: {
+			table: {
+				disable: true
 			}
-		],
-	}
-);
+		},
+		srcDemoData: {
+			table: {
+				disable: true
+			}
+		}
+	},
+}
 
 export const HasData = args => <Presets { ...args } />;
 HasData.storyName = "Default";
-HasData.args = {
-	isPro: true,
-	isWhitelabel: false,
-	requestsData: demoData,
-	sourceUrls: demoUrls,
-	sourceLang: {},
-	// Below all custom props for demo only.
-	setDemoData: true,
-	srcDemoData: demoContent
-};
-HasData.argTypes = {
-	setDemoData: {
-		table: {
-			disable: true
-		}
-	},
-	srcDemoData: {
-		table: {
-			disable: true
-		}
-	}
-};
 
 export const NoData = args => <Presets { ...args } />;
 NoData.storyName = "Empty";
 NoData.args = {
-	...HasData.args,
 	srcDemoData: 'empty'
-};
-NoData.argTypes = {
-	...HasData.argTypes
 };
