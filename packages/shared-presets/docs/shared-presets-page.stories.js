@@ -57,10 +57,25 @@ HasData.args = {
 	setDemoData: true,
 	srcDemoData: demoContent
 };
+HasData.argTypes = {
+	setDemoData: {
+		table: {
+			disable: true
+		}
+	},
+	srcDemoData: {
+		table: {
+			disable: true
+		}
+	}
+};
 
 export const NoData = args => <Presets { ...args } />;
 NoData.storyName = "Empty";
 NoData.args = {
 	...HasData.args,
 	srcDemoData: 'empty'
+};
+NoData.argTypes = {
+	...HasData.argTypes
 };
