@@ -280,8 +280,22 @@ export const Presets = ( {
 
 	const handleDelete = () => {
 		if ( setDemoData ) {
-			setTimeout( () => setIsDeleteOpen( false ), 500 );
-			console.log( 'An item will be deleted. This is just a prototype but no real action will be performed.' );
+			setTimeout(() => {
+				setIsDeleteOpen( false );
+				setIsLoading( true );
+			}, 500 );
+
+			setTimeout(() => setIsLoading( false ), 1000 );
+
+			console.log(
+				'\n' +
+				'Modal: Delete Configuration File\n' +
+				'Button: Delete\n' +
+				'Action: It removes an item from the table.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
+				'\n'
+			);
 		} else {
 			RequestsHandler.delete( [ ...configs ], currentConfig )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
@@ -296,34 +310,52 @@ export const Presets = ( {
 			description: data.get( 'description' ).substring( 0, 200 ),
 		};
 
-		// Editing a config.
-		if ( currentConfig ) {
-			!setDemoData && RequestsHandler.edit( [ ...configs ], currentConfig, configData )
-				.then( ( newConfigs ) => setConfigs( newConfigs ) )
-				.catch( ( res ) => requestFailureNotice( res ) )
-				.then( () => setIsEditOpen( false ) );
-
-			return;
-		}
-
-		// Creating a new config.
-		!setDemoData && RequestsHandler.create( data )
-			.then( ( res ) => {
-				if ( res.data && res.data.config ) {
-					configData.config = res.data.config;
-					return !setDemoData && RequestsHandler.addNew( [...configs], configData );
-				}
-
-				if ( ! res.success ) {
-					displayErrorMessage( res.data.error_msg );
-				}
-			} )
-			.then( ( updatedConfigs ) => {
-				setConfigs( updatedConfigs );
+		if ( setDemoData ) {
+			setTimeout(() => {
 				setIsEditOpen( false );
-				successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
-			} )
-			.catch( ( res ) => requestFailureNotice( res ) );
+				setIsLoading( true );
+			}, 500 );
+
+			setTimeout(() => setIsLoading( false ), 1000 );
+
+			console.log(
+				'\n' +
+				'Modal: Rename Config\n' +
+				'Button: Save\n' +
+				'Action: Save the changes made on config name and/or description.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
+				'\n'
+			);
+		} else {
+
+			// Editing a config.
+			if ( currentConfig ) {
+				RequestsHandler.edit( [ ...configs ], currentConfig, configData )
+					.then( ( newConfigs ) => setConfigs( newConfigs ) )
+					.catch( ( res ) => requestFailureNotice( res ) )
+					.then( () => setIsEditOpen( false ) );
+			}
+
+			// Creating a new config.
+			RequestsHandler.create( data )
+				.then( ( res ) => {
+					if ( res.data && res.data.config ) {
+						configData.config = res.data.config;
+						return RequestsHandler.addNew( [...configs], configData );
+					}
+
+					if ( ! res.success ) {
+						displayErrorMessage( res.data.error_msg );
+					}
+				} )
+				.then( ( updatedConfigs ) => {
+					setConfigs( updatedConfigs );
+					setIsEditOpen( false );
+					successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
+				} )
+				.catch( ( res ) => requestFailureNotice( res ) );
+		}
 	};
 
 	const handleApply = () => {
