@@ -73,13 +73,15 @@ export const Presets = ( {
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
-	const [ demoKey, setDemoKey ] = React.useState( 100 );
 
 	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
 	const [ isApplyOpen, setIsApplyOpen ] = React.useState( false );
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
+
+	// Demo-related states.
+	const [ demoKey, setDemoKey ] = React.useState( 100 );
 
 	const urls = Object.assign(
 		{
@@ -277,10 +279,14 @@ export const Presets = ( {
 	};
 
 	const handleDelete = () => {
-		!setDemoData && RequestsHandler.delete( [ ...configs ], currentConfig )
-			.then( ( newConfigs ) => setConfigs( newConfigs ) )
-			.catch( ( res ) => requestFailureNotice( res ) )
-			.then( () => setIsDeleteOpen( false ) );
+		if ( setDemoData ) {
+			setTimeout( () => setIsDeleteOpen( false ), 500 );
+		} else {
+			RequestsHandler.delete( [ ...configs ], currentConfig )
+				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsDeleteOpen( false ) );
+		}
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
