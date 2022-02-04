@@ -359,16 +359,35 @@ export const Presets = ( {
 	};
 
 	const handleApply = () => {
-		!setDemoData && RequestsHandler.apply( currentConfig ).then( ( res ) => {
-			setIsApplyOpen( false );
+		if ( setDemoData ) {
+			setTimeout(() => {
+				setIsApplyOpen( false );
+				setIsLoading( true );
+			}, 500 );
 
-			if ( ! res.success ) {
-				requestFailureNotice( res );
-				return;
-			}
-			successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
-		})
-		.catch( ( res ) => requestFailureNotice( res ) );
+			setTimeout(() => setIsLoading( false ), 1000 );
+
+			console.log(
+				'\n' +
+				'Modal: Apply Config\n' +
+				'Button: Apply\n' +
+				'Action: To apply the saved configurations into the plugin.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
+				'\n'
+			);
+		} else {
+			RequestsHandler.apply( currentConfig ).then( ( res ) => {
+				setIsApplyOpen( false );
+
+				if ( ! res.success ) {
+					requestFailureNotice( res );
+					return;
+				}
+				successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+			})
+			.catch( ( res ) => requestFailureNotice( res ) );
+		}
 	};
 
 	const handleSyncWithHub = () => {
