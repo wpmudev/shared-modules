@@ -281,6 +281,7 @@ export const Presets = ( {
 	const handleDelete = () => {
 		if ( setDemoData ) {
 			setTimeout( () => setIsDeleteOpen( false ), 500 );
+			console.log( 'An item will be deleted. This is just a prototype but no real action will be performed.' );
 		} else {
 			RequestsHandler.delete( [ ...configs ], currentConfig )
 				.then( ( newConfigs ) => setConfigs( newConfigs ) )
