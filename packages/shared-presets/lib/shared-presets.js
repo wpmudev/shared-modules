@@ -405,7 +405,12 @@ export const Presets = ( {
 
 	const doDownload = ( clickedConfig ) => {
 		const config = Object.assign( {}, configs.find( ( item ) => clickedConfig.id === item.id ) );
-		if ( ! config || ! Object.keys( config ).length ) {
+
+		if ( setDemoData ) {
+			console.log( 'You clicked on "Download" button.' );
+		}
+
+		if ( ! config || ! Object.keys( config ).length || setDemoData ) {
 			return;
 		}
 
