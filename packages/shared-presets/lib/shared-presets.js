@@ -392,10 +392,15 @@ export const Presets = ( {
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		!setDemoData && RequestsHandler.syncWithHub( [ ...configs ] )
-			.then( ( newConfigs ) => setConfigs( newConfigs ) )
-			.catch( ( res ) => requestFailureNotice( res ) )
-			.then( () => setIsLoading( false ) );
+
+		if ( setDemoData ) {
+			setTimeout( () => setIsLoading( false ), 1000 );
+		} else {
+			RequestsHandler.syncWithHub( [ ...configs ] )
+				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsLoading( false ) );
+		}
 	};
 
 	const doDownload = ( clickedConfig ) => {
