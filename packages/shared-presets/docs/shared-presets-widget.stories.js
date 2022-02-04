@@ -1,6 +1,6 @@
 import React from 'react';
 import { Presets } from '../lib/shared-presets';
-import { demoData, demoUrls, demoContent } from './demo-data';
+import { demoData, demoUrls, demoContent, demoLang } from './demo-data';
 
 export default {
 	title: "Presets/Widget",
@@ -47,4 +47,10 @@ export const NoData = Template.bind({});
 NoData.storyName = "Empty";
 NoData.args = {
 	srcDemoData: 'empty',
+};
+
+export const CanTranslate = Template.bind({});
+CanTranslate.storyName = "Translated";
+CanTranslate.args = {
+	sourceLang: demoLang
 };

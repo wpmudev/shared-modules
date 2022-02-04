@@ -1,6 +1,6 @@
 import React from 'react';
 import { Presets } from '../lib/shared-presets';
-import { demoData, demoUrls, demoContent } from './demo-data';
+import { demoData, demoUrls, demoContent, demoLang } from './demo-data';
 
 export default {
 	title: "Presets/Page",
@@ -37,4 +37,10 @@ export const NoData = args => <Presets { ...args } />;
 NoData.storyName = "Empty";
 NoData.args = {
 	srcDemoData: 'empty'
+};
+
+export const CanTranslate = args => <Presets { ...args } />;
+CanTranslate.storyName = "Translated";
+CanTranslate.args = {
+	sourceLang: demoLang
 };
