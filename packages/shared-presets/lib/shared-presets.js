@@ -73,6 +73,7 @@ export const Presets = ( {
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
+	const [ demoKey, setDemoKey ] = React.useState( 100 );
 
 	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
@@ -210,35 +211,69 @@ export const Presets = ( {
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
-		!setDemoData && RequestsHandler.upload( e ).then( ( res ) => {
-			if ( res.data && res.data.config ) {
-				// The downloads from the first version won't have this.
-				if ( res.data.plugin ) {
-					// Bail out if the uploaded config doesn't belong to this plugin.
-					if ( res.data.plugin !== requestsData.pluginData.id ) {
-						throw {
-							data: { error_msg: lang.uploadWrongPluginErrorMessage.replace( '{pluginName}', requestsData.pluginData.name ) },
-						};
+		if ( setDemoData ) {
+			setIsLoading( true );
+			setDemoKey( demoKey + 1 );
+
+			const newDemoData = (
+				{
+					id: demoKey,
+					default: "new",
+					name: "New Config #" + demoKey,
+					description: "Aenean lacinia bibendum nulla sed consectetur.",
+					config: [
+						{
+							id: "storage-limit",
+							name: "Storage Limit",
+							content: "5"
+						},
+						{
+							id: "exclusions",
+							name: "Exclusions",
+							content: "Active"
+						}
+					]
+				}
+			);
+
+			demoData.push( newDemoData );
+
+			setTimeout( () => {
+				setConfigs( demoData );
+				setIsLoading( false );
+			}, 500 );
+		} else {
+			RequestsHandler.upload( e ).then( ( res ) => {
+				if ( res.data && res.data.config ) {
+					// The downloads from the first version won't have this.
+					if ( res.data.plugin ) {
+						// Bail out if the uploaded config doesn't belong to this plugin.
+						if ( res.data.plugin !== requestsData.pluginData.id ) {
+							throw {
+								data: { error_msg: lang.uploadWrongPluginErrorMessage.replace( '{pluginName}', requestsData.pluginData.name ) },
+							};
+						}
+
+						// We don't need this.
+						delete res.data.plugin;
 					}
 
-					// We don't need this.
-					delete res.data.plugin;
+					res.data.name = res.data.name.substring( 0, 200 );
+					res.data.description = res.data.description.substring( 0, 200 );
+					newConfigName = res.data.name;
+
+					return RequestsHandler.addNew( configs, res.data );
 				}
 
-				res.data.name = res.data.name.substring( 0, 200 );
-				res.data.description = res.data.description.substring( 0, 200 );
-				newConfigName = res.data.name;
-				return !setDemoData && RequestsHandler.addNew( configs, res.data );
-			}
-
-			// Throw otherwise.
-			throw res;
-		} )
-		.then( ( updatedConfigs ) => {
-			setConfigs( updatedConfigs );
-			successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
-		} )
-		.catch( ( res ) => requestFailureNotice( res ) );
+				// Throw otherwise.
+				throw res;
+			} )
+				.then( ( updatedConfigs ) => {
+					setConfigs( updatedConfigs );
+					successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+				} )
+				.catch( ( res ) => requestFailureNotice( res ) );
+		}
 	};
 
 	const handleDelete = () => {
