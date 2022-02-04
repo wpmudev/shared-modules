@@ -322,7 +322,7 @@ export const Presets = ( {
 				'\n' +
 				'Modal: Rename Config\n' +
 				'Button: Save\n' +
-				'Action: Save the changes made on config name and/or description.\n' +
+				'Action: To save the changes made on config name and/or description.\n' +
 				'\n' +
 				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
 				'\n'
