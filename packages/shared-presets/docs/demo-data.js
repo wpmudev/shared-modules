@@ -20,7 +20,6 @@ export const demoUrls = {
 export const demoContent = (
 	{
 		id: "2",
-		default: "advanced",
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
 		image: "https://wpmudev.com/wp-content/uploads/2014/11/Smush_2016_02.png",
