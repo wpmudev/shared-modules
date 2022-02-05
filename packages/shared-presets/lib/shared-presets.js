@@ -80,9 +80,6 @@ export const Presets = ( {
 	const [ isDeleteOpen, setIsDeleteOpen ] = React.useState( false );
 	const [ isEditOpen, setIsEditOpen ] = React.useState( false );
 
-	// Demo-related states.
-	const [ demoKey, setDemoKey ] = React.useState( 100 );
-
 	const urls = Object.assign(
 		{
 			freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
@@ -215,13 +212,11 @@ export const Presets = ( {
 
 		if ( setDemoData ) {
 			setIsLoading( true );
-			setDemoKey( demoKey + 1 );
 
 			const newDemoData = (
 				{
-					id: demoKey,
-					default: "new",
-					name: "New Config #" + demoKey,
+					id: "100",
+					name: "New Demo Config",
 					description: "Aenean lacinia bibendum nulla sed consectetur.",
 					config: [
 						{
@@ -244,6 +239,15 @@ export const Presets = ( {
 				setConfigs( demoData );
 				setIsLoading( false );
 			}, 500 );
+
+			console.log(
+				'\n' +
+				'Button: Upload\n' +
+				'Action: To upload new configurations.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+				'\n'
+			);
 		} else {
 			RequestsHandler.upload( e ).then( ( res ) => {
 				if ( res.data && res.data.config ) {
