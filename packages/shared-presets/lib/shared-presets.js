@@ -139,42 +139,46 @@ export const Presets = ( {
 	// Default demo data.
 	let demoData = [
 		{
-			id: "1",
-			default: "basic",
-			name: "Basic Config",
-			description: "Recommended backup config for all sites.",
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
 			config: [
 				{
-					id: "schedule",
-					name: "Schedule",
-					content: "Weekly @ 12:00 am on Friday"
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
 				},
 				{
-					id: "region",
-					name: "Region",
-					content: "US"
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive"
 				},
 				{
-					id: "storage-limit",
-					name: "Storage Limit",
-					content: "5"
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive"
 				},
 				{
-					id: "notifications",
-					name: "Notifications",
-					content: "Active"
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive"
 				},
 				{
-					id: "exclusions",
-					name: "Exclusions",
-					content: "Active"
+					id: "integrations",
+					name: "Integrations",
+					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
 				},
 				{
-					id: "data-and-settings",
-					name: "Data & Settings",
-					content: "Weekly @ 12:00 am on Friday"
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive"
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
 				}
-			]
+			],
 		}
 	];
 
@@ -215,12 +219,11 @@ export const Presets = ( {
 
 			const newDemoData = (
 				{
-					id: "100",
 					name: "New Demo Config",
 					description: "Aenean lacinia bibendum nulla sed consectetur.",
 					config: [
 						{
-							id: "storage-limit",
+							id: "storage_limit",
 							name: "Storage Limit",
 							content: "5"
 						},
@@ -505,10 +508,10 @@ export const Presets = ( {
 		<>
 			{ ! isEmpty && setDemoData && (
 				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-					{ configs.map( item => (
+					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
-							key={ item.id }
-							id={ item.id }
+							key={ index }
+							id={ index }
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
