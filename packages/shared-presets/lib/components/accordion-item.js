@@ -50,11 +50,11 @@ const Authentic = styled.svg`
 `;
 
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
-.sui-wrap && {
+[class*="sui-2-"] .sui-wrap && {
 
     > .sui-accordion-col-auto {
 
-        > .sui-dropdown {
+		> .sui-dropdown {
 
             [class*=sui-icon-] {
                 margin-right: 0 !important;
@@ -65,6 +65,16 @@ const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
             }
         }
     }
+
+	&:not(:hover):not(:focus) {
+
+		> .sui-accordion-col-auto {
+
+			.sui-presets-item__apply {
+				opacity: 0;
+			}
+		}
+	}
 }
 `;
 
@@ -141,6 +151,7 @@ export class PresetsAccordionItem extends Component {
 							<Button
 								label={ this.props.applyLabel || 'Apply' }
 								design="ghost"
+								className="sui-presets-item__apply"
 								onClick={ this.accordionHeadApplyClicked }
 							/>
 						)}
