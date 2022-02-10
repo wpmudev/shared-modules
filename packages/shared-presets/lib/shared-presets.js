@@ -66,7 +66,10 @@ export const Presets = ( {
 	isWhitelabel,
 	requestsData,
 	sourceUrls,
-	sourceLang
+	sourceLang,
+	// Below all custom props used on demo only.
+	srcDemoData,
+	setDemoData = false
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
@@ -94,10 +97,10 @@ export const Presets = ( {
 			save: 'Save config',
 			manageConfigs: 'Manage configs',
 			loading: 'Updating the config list…',
-			emptyNotice: 'You don’t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+			emptyNotice: 'You don\'t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
 			baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
 			proDescription: (
-				<>
+				<React.Fragment>
 					{'You can easily apply configs to multiple sites at once via '}
 					<a
 						href={urls.hubMyConfigs}
@@ -106,7 +109,7 @@ export const Presets = ( {
 					>
 					{'the Hub.'}
 					</a>
-				</>
+				</React.Fragment>
 			),
 			widgetDescription: 'Use configs to save preset configurations of your settings.',
 			syncWithHubText: 'Created or updated the configs via the Hub?',
@@ -133,6 +136,60 @@ export const Presets = ( {
 		sourceLang
 	);
 
+	// Default demo data.
+	let demoData = [
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive"
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive"
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive"
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive"
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+				}
+			],
+		}
+	];
+
+	if ( srcDemoData ) {
+		if ( 'empty' === srcDemoData ) {
+			demoData = [];
+		} else {
+			demoData.push( srcDemoData );
+		}
+	}
+
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
 		retrieveConfigs();
@@ -141,51 +198,117 @@ export const Presets = ( {
 	const retrieveConfigs = () => {
 		setIsLoading( true );
 
-		RequestsHandler.makeLocalRequest()
-			.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
-			.catch( ( res ) => requestFailureNotice( res ) )
-			.then( () => setIsLoading( false ) );
+		if ( setDemoData ) {
+			setTimeout( () => {
+				setConfigs( demoData );
+				setIsLoading( false );
+			}, 1000 );
+		} else {
+			RequestsHandler.makeLocalRequest()
+				.then( ( newConfigs ) => setConfigs( newConfigs || [] ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsLoading( false ) );
+		}
 	};
 
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
-		RequestsHandler.upload( e ).then( ( res ) => {
-			if ( res.data && res.data.config ) {
-				// The downloads from the first version won't have this.
-				if ( res.data.plugin ) {
-					// Bail out if the uploaded config doesn't belong to this plugin.
-					if ( res.data.plugin !== requestsData.pluginData.id ) {
-						throw {
-							data: { error_msg: lang.uploadWrongPluginErrorMessage.replace( '{pluginName}', requestsData.pluginData.name ) },
-						};
+		if ( setDemoData ) {
+			setIsLoading( true );
+
+			const newDemoData = (
+				{
+					name: "New Demo Config",
+					description: "Aenean lacinia bibendum nulla sed consectetur.",
+					config: [
+						{
+							id: "storage_limit",
+							name: "Storage Limit",
+							content: "5"
+						},
+						{
+							id: "exclusions",
+							name: "Exclusions",
+							content: "Active"
+						}
+					]
+				}
+			);
+
+			demoData.push( newDemoData );
+
+			setTimeout( () => {
+				setConfigs( demoData );
+				setIsLoading( false );
+			}, 500 );
+
+			console.log(
+				'\n' +
+				'Button: Upload\n' +
+				'Action: To upload new configurations.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+				'\n'
+			);
+		} else {
+			RequestsHandler.upload( e ).then( ( res ) => {
+				if ( res.data && res.data.config ) {
+					// The downloads from the first version won't have this.
+					if ( res.data.plugin ) {
+						// Bail out if the uploaded config doesn't belong to this plugin.
+						if ( res.data.plugin !== requestsData.pluginData.id ) {
+							throw {
+								data: { error_msg: lang.uploadWrongPluginErrorMessage.replace( '{pluginName}', requestsData.pluginData.name ) },
+							};
+						}
+
+						// We don't need this.
+						delete res.data.plugin;
 					}
 
-					// We don't need this.
-					delete res.data.plugin;
+					res.data.name = res.data.name.substring( 0, 200 );
+					res.data.description = res.data.description.substring( 0, 200 );
+					newConfigName = res.data.name;
+
+					return RequestsHandler.addNew( configs, res.data );
 				}
 
-				res.data.name = res.data.name.substring( 0, 200 );
-				res.data.description = res.data.description.substring( 0, 200 );
-				newConfigName = res.data.name;
-				return RequestsHandler.addNew( configs, res.data );
-			}
-
-			// Throw otherwise.
-			throw res;
-		} )
-		.then( ( updatedConfigs ) => {
-			setConfigs( updatedConfigs );
-			successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
-		} )
-		.catch( ( res ) => requestFailureNotice( res ) );
+				// Throw otherwise.
+				throw res;
+			} )
+				.then( ( updatedConfigs ) => {
+					setConfigs( updatedConfigs );
+					successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+				} )
+				.catch( ( res ) => requestFailureNotice( res ) );
+		}
 	};
 
 	const handleDelete = () => {
-		RequestsHandler.delete( [ ...configs ], currentConfig )
-			.then( ( newConfigs ) => setConfigs( newConfigs ) )
-			.catch( ( res ) => requestFailureNotice( res ) )
-			.then( () => setIsDeleteOpen( false ) );
+		if ( setDemoData ) {
+			setTimeout(() => {
+				setIsDeleteOpen( false );
+				setIsLoading( true );
+			}, 500 );
+
+			setTimeout(() => setIsLoading( false ), 1000 );
+
+			console.log(
+				'\n' +
+				'Modal: Delete Configuration File\n' +
+				'Button: Delete\n' +
+				'Action: It removes an item from the table.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
+				'\n'
+			);
+		} else {
+			RequestsHandler.delete( [ ...configs ], currentConfig )
+				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsDeleteOpen( false ) );
+		}
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
@@ -194,60 +317,107 @@ export const Presets = ( {
 			description: data.get( 'description' ).substring( 0, 200 ),
 		};
 
-		// Editing a config.
-		if ( currentConfig ) {
-			RequestsHandler.edit( [ ...configs ], currentConfig, configData )
-				.then( ( newConfigs ) => setConfigs( newConfigs ) )
-				.catch( ( res ) => requestFailureNotice( res ) )
-				.then( () => setIsEditOpen( false ) );
-
-			return;
-		}
-
-		// Creating a new config.
-		RequestsHandler.create( data )
-			.then( ( res ) => {
-				if ( res.data && res.data.config ) {
-					configData.config = res.data.config;
-					return RequestsHandler.addNew( [...configs], configData );
-				}
-
-				if ( ! res.success ) {
-					displayErrorMessage( res.data.error_msg );
-				}
-			} )
-			.then( ( updatedConfigs ) => {
-				setConfigs( updatedConfigs );
+		if ( setDemoData ) {
+			setTimeout(() => {
 				setIsEditOpen( false );
-				successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
-			} )
-			.catch( ( res ) => requestFailureNotice( res ) );
+				setIsLoading( true );
+			}, 500 );
+
+			setTimeout(() => setIsLoading( false ), 1000 );
+
+			console.log(
+				'\n' +
+				'Modal: Rename Config\n' +
+				'Button: Save\n' +
+				'Action: To save the changes made on config name and/or description.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
+				'\n'
+			);
+		} else {
+
+			// Editing a config.
+			if ( currentConfig ) {
+				RequestsHandler.edit( [ ...configs ], currentConfig, configData )
+					.then( ( newConfigs ) => setConfigs( newConfigs ) )
+					.catch( ( res ) => requestFailureNotice( res ) )
+					.then( () => setIsEditOpen( false ) );
+			}
+
+			// Creating a new config.
+			RequestsHandler.create( data )
+				.then( ( res ) => {
+					if ( res.data && res.data.config ) {
+						configData.config = res.data.config;
+						return RequestsHandler.addNew( [...configs], configData );
+					}
+
+					if ( ! res.success ) {
+						displayErrorMessage( res.data.error_msg );
+					}
+				} )
+				.then( ( updatedConfigs ) => {
+					setConfigs( updatedConfigs );
+					setIsEditOpen( false );
+					successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
+				} )
+				.catch( ( res ) => requestFailureNotice( res ) );
+		}
 	};
 
 	const handleApply = () => {
-		RequestsHandler.apply( currentConfig ).then( ( res ) => {
-			setIsApplyOpen( false );
+		if ( setDemoData ) {
+			setTimeout(() => {
+				setIsApplyOpen( false );
+				setIsLoading( true );
+			}, 500 );
 
-			if ( ! res.success ) {
-				requestFailureNotice( res );
-				return;
-			}
-			successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
-		})
-		.catch( ( res ) => requestFailureNotice( res ) );
+			setTimeout(() => setIsLoading( false ), 1000 );
+
+			console.log(
+				'\n' +
+				'Modal: Apply Config\n' +
+				'Button: Apply\n' +
+				'Action: To apply the saved configurations into the plugin.\n' +
+				'\n' +
+				'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' +
+				'\n'
+			);
+		} else {
+			RequestsHandler.apply( currentConfig ).then( ( res ) => {
+				setIsApplyOpen( false );
+
+				if ( ! res.success ) {
+					requestFailureNotice( res );
+					return;
+				}
+				successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+			})
+			.catch( ( res ) => requestFailureNotice( res ) );
+		}
 	};
 
 	const handleSyncWithHub = () => {
 		setIsLoading( true );
-		RequestsHandler.syncWithHub( [ ...configs ] )
-			.then( ( newConfigs ) => setConfigs( newConfigs ) )
-			.catch( ( res ) => requestFailureNotice( res ) )
-			.then( () => setIsLoading( false ) );
+
+		if ( setDemoData ) {
+			setTimeout( () => setIsLoading( false ), 1000 );
+		} else {
+			RequestsHandler.syncWithHub( [ ...configs ] )
+				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.catch( ( res ) => requestFailureNotice( res ) )
+				.then( () => setIsLoading( false ) );
+		}
 	};
 
 	const doDownload = ( clickedConfig ) => {
 		const config = Object.assign( {}, configs.find( ( item ) => clickedConfig.id === item.id ) );
-		if ( ! config || ! Object.keys( config ).length ) {
+
+		if ( setDemoData ) {
+			console.log( 'You clicked on "Download" button.' );
+		}
+
+		if ( ! config || ! Object.keys( config ).length || setDemoData ) {
 			return;
 		}
 
@@ -331,18 +501,41 @@ export const Presets = ( {
 			}
 		);
 	};
-	// End of notifications.
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
+
 	const Table = (
-		<React.Fragment>
-			{ !isEmpty && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={ {
-						borderBottomWidth: 0
-					} }
-				>
+		<>
+			{ ! isEmpty && setDemoData && (
+				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
+					{ configs.map( ( item, index ) => (
+						<PresetsAccordionItem
+							key={ index }
+							id={ index }
+							default={ item.default }
+							name={ item.name }
+							description={ item.description }
+							image={ tableImage }
+							showApplyButton={ ! isWidget }
+							applyLabel={ lang.apply }
+							applyAction={ () => openModal( 'apply', item ) }
+							downloadLabel={ lang.download }
+							downloadAction={ () => doDownload( item ) }
+							editLabel={ lang.edit }
+							editAction={ () => openModal( 'edit', item ) }
+							deleteLabel={ lang.delete }
+							deleteAction={ () => openModal( 'delete', item ) }
+						>
+							{ item.config.map( ( data ) => (
+								<div key={ data.id } name={ data.name } status={ data.content } />
+							) ) }
+						</PresetsAccordionItem>
+					) ) }
+				</div>
+			) }
+
+			{ ! isEmpty && ! setDemoData && (
+				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
 					{ configs.map( item => (
 						<PresetsAccordionItem
 							key={ item.id }
@@ -367,8 +560,8 @@ export const Presets = ( {
 						</PresetsAccordionItem>
 					) ) }
 				</div>
-			)}
-		</React.Fragment>
+			) }
+		</>
 	);
 
 	const getFooter = () => {
