@@ -155,7 +155,9 @@ export class PresetsAccordionItem extends Component {
                     className="sui-accordion-item-header"
                     state={ open ? 'true' : 'false' }
                     title={ name }
-                    image={ this.props.image }
+					{ ... null !== this.props.image && '' !== this.props.image && {
+						image: this.props.image
+					} }
                     onClick={ e => this.toggle(e) }>
 					<div size="5">
 						<div style={ descstyles }>{ this.props.description }</div>
