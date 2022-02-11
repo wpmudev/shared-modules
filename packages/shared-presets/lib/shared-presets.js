@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
+import { deviceMax } from './components/utils';
+import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
 
@@ -47,14 +48,31 @@ const LoadingMask = styled.div`
 const StyledSyncButton = styled.button`
 .sui-wrap && {
 	color: #17A8E3;
-	font-weight: 500;
+	font-weight: 600;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
-	text-decoration: underline;
+	text-decoration: none;
 	display: inline;
 	margin: 0;
 	padding: 0;
+}
+`;
+
+const StyledBoxHeader = styled.div`
+[class*="sui-2-"] .sui-wrap && {
+
+	.sui-actions-right {
+
+		@media ${deviceMax.tablet} {
+			justify-content: space-between;
+			margin-top: 9px;
+		}
+	}
+
+	@media ${deviceMax.tablet} {
+		display: block;
+	}
 }
 `;
 
@@ -641,7 +659,17 @@ export const Presets = ( {
 	}
 
 	const PresetsHeader = (
-		<BoxHeader {...headerArgs}>
+		<StyledBoxHeader className="sui-box-header">
+			<h2 className="sui-box-title">
+				{ isWidget && (
+					<span className="sui-icon-wrench-tool" aria-hidden="true" />
+				)}
+				{ lang.title }
+				{ ! isEmpty && isWidget && (
+					<span className="sui-tag" style={ { marginLeft: 10 } }>{ configs.length }</span>
+				)}
+			</h2>
+
 			{ ! isWidget && (
 				<div className="sui-actions-right">
 					<Button
@@ -669,7 +697,7 @@ export const Presets = ( {
 					/>
 				</div>
 			) }
-		</BoxHeader>
+		</StyledBoxHeader>
 	);
 
 	return (

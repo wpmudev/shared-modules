@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import { device } from './utils';
+import { device, deviceMax } from './utils';
 
 import { AccordionItemHeader, AccordionItemBody } from '@wpmudev/react-accordion';
 import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
@@ -52,7 +52,21 @@ const Authentic = styled.svg`
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
 [class*="sui-2-"] .sui-wrap && {
 
+	> .sui-accordion-col-5 {
+
+		@media ${deviceMax.tablet} {
+			display: none !important;
+		}
+	}
+
     > .sui-accordion-col-auto {
+
+		.sui-presets-item__apply {
+
+			@media ${deviceMax.tablet} {
+				display: none;
+			}
+		}
 
 		> .sui-dropdown {
 
