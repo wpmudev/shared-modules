@@ -113,7 +113,7 @@ export const Presets = ( {
 			syncWithHubButton: 'Re-check to get the updated list.',
 			apply: 'Apply',
 			download: 'Download',
-			edit: 'Edit Name and Description',
+			edit: 'Edit Details',
 			delete: 'Delete',
 			freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
 			freeButtonLabel: 'Try The Hub',
