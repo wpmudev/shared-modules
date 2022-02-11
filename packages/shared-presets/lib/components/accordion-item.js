@@ -181,7 +181,7 @@ export class PresetsAccordionItem extends Component {
 								onClick={ () => downloadAction( this.props.id ) }
 							/>
 							<div
-								name={ this.props.editLabel || 'Name and Description' }
+								name={ this.props.editLabel || 'Edit Details' }
 								icon="pencil"
 								onClick={ editAction }
 							/>
@@ -210,7 +210,7 @@ export class PresetsAccordionItem extends Component {
                                 </div>
                                 <div
                                     className="sui-tooltip"
-                                    data-tooltip={ this.props.editLabel || 'Edit Name and Description' }
+                                    data-tooltip={ this.props.editLabel || 'Edit Details' }
                                 >
                                     <ButtonIcon
                                         icon="pencil"
