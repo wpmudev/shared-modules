@@ -45,12 +45,12 @@
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.0",
-    "react": "^17.0.1"
+    "react": "^17.0.2"
   },
   "dependencies": {
-    "@wpmudev/react-notifications": "^1.0.1",
+    "@wpmudev/react-notifications": "^1.0.8",
     "@wpmudev/react-post": "^1.1.5",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.3.3"
   },
   "resolutions": {
     "styled-components": "^5"
