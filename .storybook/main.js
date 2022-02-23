@@ -4,7 +4,7 @@ module.exports = {
 		"@storybook/addon-links",
 		"@storybook/addon-actions",
 		"@storybook/addon-essentials",
-		"storybook-addon-outline",
+		"@storybook/addon-outline",
 		"@storybook/addon-a11y",
 		"storybook-mobile",
 		"@geometricpanda/storybook-addon-badges"
