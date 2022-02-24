@@ -61,7 +61,7 @@
       "bug": "🐛 Bug Fixes",
       "accessibility": "♿️ Accessibility",
       "documentation": "📝 Documentation",
-      "core": "🏠 Internal"
+      "internal": "🏠 Internal"
     },
     "cacheDir": ".changelog"
   }
