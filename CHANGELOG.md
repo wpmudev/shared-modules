@@ -1,4 +1,7 @@
-# Changelog
+# Change Log
+
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
+
 ## Released (2022-02-24)
 
 #### 🚀 Improvements
@@ -43,6 +46,7 @@
   * [#99](https://github.com/wpmudev/shared-modules/pull/99) fix(notice-black): Support monochrome mode. ([@iamleigh](https://github.com/iamleigh))
 
 #### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
 
 ## Released (2021-10-28)
 
