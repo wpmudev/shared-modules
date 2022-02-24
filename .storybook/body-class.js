@@ -1,2 +1,2 @@
 var body = document.body;
-body.classList.add( 'sui-2-10-11' );
+body.classList.add( 'sui-2-12-2' );
