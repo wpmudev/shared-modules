@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file. See [Conven
 ## Released (2022-02-25)
 
 #### 🏠 Internal
-* [#121](https://github.com/wpmudev/shared-modules/pull/121) Bump `nanoid` from 3.1.30 to 3.3.1. ([@iamleigh](https://github.com/iamleigh))
-* [#122](https://github.com/wpmudev/shared-modules/pull/122) Bump `node-fetch` from 2.6.5 to 2.6.7. ([@iamleigh](https://github.com/iamleigh))
-* [#123](https://github.com/wpmudev/shared-modules/pull/123) Create new security workflow `codeql-analysis.yml`. ([@iamleigh](https://github.com/iamleigh))
+* [#85](https://github.com/wpmudev/shared-modules/pull/85) [Snyk] Security upgrade rollup-plugin-postcss from 4.0.0 to 4.0.1. ([@iamleigh](https://github.com/iamleigh))
+* [#121](https://github.com/wpmudev/shared-modules/pull/121) [Dependabot] Bump `nanoid` from 3.1.30 to 3.3.1. ([@iamleigh](https://github.com/iamleigh))
+* [#122](https://github.com/wpmudev/shared-modules/pull/122) [Dependabot] Bump `node-fetch` from 2.6.5 to 2.6.7. ([@iamleigh](https://github.com/iamleigh))
+* [#123](https://github.com/wpmudev/shared-modules/pull/123) [Dependabot] Create new security workflow `codeql-analysis.yml`. ([@iamleigh](https://github.com/iamleigh))
 
 ## Released (2022-02-24)
 
