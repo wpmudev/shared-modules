@@ -3998,10 +3998,10 @@
     "@wpmudev/react-button" "^1.0.0"
     styled-components "^5.2.1"
 
-"@wpmudev/shared-ui@^2.12.2":
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.12.2.tgz#a79204a7dab0553fe04ef73c430fe8c8d1527ac5"
-  integrity sha512-6W0ZL2Bdys7Vc44Tfts1c8NynyL2sHgBWAuO8//HnD/qxSPjOeFk1+/zb/WomHfPBAhavU+Ve6UJ8SNcsLVDmQ==
+"@wpmudev/shared-ui@^2.12.3":
+  version "2.12.3"
+  resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.12.3.tgz#441440a085778545edc4aaf8220fd8cdeb3cd747"
+  integrity sha512-bUPheTTStENAiRqhoM7Wp+lrDyvSXr4qQoXqBtkfcFUSS5ulo3OF9MHvn41B/uvjikVTBB0HjI9ue+t/OwUHBA==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
