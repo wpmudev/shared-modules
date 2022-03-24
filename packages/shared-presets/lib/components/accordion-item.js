@@ -52,7 +52,8 @@ const Authentic = styled.svg`
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
 [class*="sui-2-"] .sui-wrap && {
 
-	> .sui-accordion-col-5 {
+	> .sui-accordion-col-4,
+    > .sui-accordion-col-2 {
 
 		@media ${deviceMax.tablet} {
 			display: none !important;
@@ -159,9 +160,12 @@ export class PresetsAccordionItem extends Component {
 						image: this.props.image
 					} }
                     onClick={ e => this.toggle(e) }>
-					<div size="5">
+					<div size="4">
 						<div style={ descstyles }>{ this.props.description }</div>
 					</div>
+                    <div size="2">
+                        <div>{ this.props.created }</div>
+                    </div>
 					<div>
 						{ this.props.showApplyButton && (
 							<Button
