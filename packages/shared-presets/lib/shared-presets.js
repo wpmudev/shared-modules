@@ -5,6 +5,8 @@ import { deviceMax } from './components/utils';
 import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
+import { ButtonIcon } from '@wpmudev/react-button-icon';
+import { Modal } from '@wpmudev/react-modal';
 
 import ApplyModal from './components/apply-modal';
 import DeleteModal from './components/delete-modal';
@@ -159,7 +161,7 @@ export const Presets = ( {
 		{
 			default: true,
 			name: "Basic config",
-			description: "Recommended performance config for every site.",
+			description: 'Recommended performance config for every site.',
 			config: [
 				{
 					id: "bulk_smush",
@@ -637,7 +639,7 @@ export const Presets = ( {
 				</Notifications>
 			</BoxFooter>
 		);
-	}
+	};
 
 	const getDescription = () => {
 		if ( isWidget ) {
@@ -700,6 +702,56 @@ export const Presets = ( {
 		</StyledBoxHeader>
 	);
 
+	// Delete modal content
+	const deleteModalContent = ({ closeModal, handleDelete }) => {
+		return (
+			<React.Fragment>
+				<div className="sui-box">
+					<div className="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
+						<ButtonIcon
+							icon="close"
+							iconSize="md"
+							label="Close this modal"
+							className="sui-button-float--right"
+							onClick={closeModal}
+						/>
+						<h3 id="sample-modal__title" className="sui-box-title sui-lg">
+							Delete Configuration Files
+						</h3>
+
+						<p className="sui-description">
+							{
+								'Are you sure you want to delete the config files? You will no longer be able to apply them to this or other connected sites.'
+							}
+						</p>
+
+					</div>
+	
+					<BoxBody>
+						<div style={{ textAlign: 'center' }}>
+							<Button label="Cancel" design="ghost" onClick={closeModal} />
+							<Button label="Delete" className="sui-button-red" onClick={handleDelete} />
+						</div>
+					</BoxBody>
+				</div>
+			</React.Fragment>
+		);
+	};
+
+	const triggerContent = ({ openModal }) => {
+		return <Button onClick={openModal} className="sui-button-red" label="Bulk Delete" icon="trash"/>
+		;
+	};
+
+	// Delete modal args
+	const deleteModalArgs = {
+		dialogId: 'delete-modal',
+		titleId: 'delete-modal__title',
+		size: 'sm',
+		modalContent: deleteModalContent,
+		triggerContent
+	};
+
 	return (
 		<React.Fragment>
 			<div className="sui-floating-notices">
@@ -712,6 +764,11 @@ export const Presets = ( {
 				<BoxBody>
 
 					{ getDescription() }
+					{ !isLoading && !isEmpty && (
+						<div>
+							<Modal {...deleteModalArgs} />
+						</div>
+					)}
 
 					{ !isLoading && isEmpty && (
 						<Notifications type="info">
@@ -775,4 +832,4 @@ export const Presets = ( {
 			) }
 		</React.Fragment>
 	);
-}
+};
