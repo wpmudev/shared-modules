@@ -159,7 +159,7 @@ export const Presets = ( {
 		{
 			default: true,
 			name: "Basic config",
-			description: 'Recommended performance config for every site.',
+			description: "Recommended performance config for every site.",
 			config: [
 				{
 					id: "bulk_smush",
