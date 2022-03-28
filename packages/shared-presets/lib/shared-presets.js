@@ -125,7 +125,7 @@ export const Presets = ( {
 						target="_blank"
 						rel="noreferrer"
 					>
-					{'the Hub.'}
+						{'the Hub.'}
 					</a>
 				</React.Fragment>
 			),
@@ -148,7 +148,9 @@ export const Presets = ( {
 			editAction: {
 				successMessage: '{configName} config created successfully.',
 			},
-			deleteAction: {},
+			deleteAction: {
+				successMessage: '{configName} config deleted successfully.',
+			},
 			settingsLabels: {},
 		},
 		sourceLang
@@ -158,43 +160,44 @@ export const Presets = ( {
 	let demoData = [
 		{
 			default: true,
-			name: "Basic config",
-			description: "Recommended performance config for every site.",
+			name: 'Basic config',
+			description: 'Recommended performance config for every site.',
+			selected: false,
 			config: [
 				{
-					id: "bulk_smush",
-					name: "Bulk Smush",
-					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
+					id: 'bulk_smush',
+					name: 'Bulk Smush',
+					content: 'Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active'
 				},
 				{
-					id: "lazy_load",
-					name: "Lazy Load",
-					content: "Inactive"
+					id: 'lazy_load',
+					name: 'Lazy Load',
+					content: 'Inactive'
 				},
 				{
-					id: "cdn",
-					name: "CDN",
-					content: "Inactive"
+					id: 'cdn',
+					name: 'CDN',
+					content: 'Inactive'
 				},
 				{
-					id: "webp_mod",
-					name: "Local WebP",
-					content: "Inactive"
+					id: 'webp_mod',
+					name: 'Local WebP',
+					content: 'Inactive'
 				},
 				{
-					id: "integrations",
-					name: "Integrations",
-					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+					id: 'integrations',
+					name: 'Integrations',
+					content: 'Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive'
 				},
 				{
-					id: "tools",
-					name: "Tools",
-					content: "Image Resize Detection - Inactive"
+					id: 'tools',
+					name: 'Tools',
+					content: 'Image Resize Detection - Inactive'
 				},
 				{
-					id: "settings",
-					name: "Settings",
-					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+					id: 'settings',
+					name: 'Settings',
+					content: 'Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active'
 				}
 			],
 		}
@@ -237,18 +240,18 @@ export const Presets = ( {
 
 			const newDemoData = (
 				{
-					name: "New Demo Config",
-					description: "Aenean lacinia bibendum nulla sed consectetur.",
+					name: 'New Demo Config',
+					description: 'Aenean lacinia bibendum nulla sed consectetur.',
 					config: [
 						{
-							id: "storage_limit",
-							name: "Storage Limit",
-							content: "5"
+							id: 'storage_limit',
+							name: 'Storage Limit',
+							content: '5'
 						},
 						{
-							id: "exclusions",
-							name: "Exclusions",
-							content: "Active"
+							id: 'exclusions',
+							name: 'Exclusions',
+							content: 'Active'
 						}
 					]
 				}
@@ -323,10 +326,14 @@ export const Presets = ( {
 			);
 		} else {
 			RequestsHandler.delete( [ ...configs ], currentConfig )
-				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.then( ( newConfigs ) => { 
+					setConfigs( newConfigs );
+					successNotice( lang.deleteAction.successMessage.replace( '{configName}', currentConfig.name ) );
+				} )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsDeleteOpen( false ) );
 		}
+
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
@@ -411,7 +418,7 @@ export const Presets = ( {
 				}
 				successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
 			})
-			.catch( ( res ) => requestFailureNotice( res ) );
+				.catch( ( res ) => requestFailureNotice( res ) );
 		}
 	};
 
@@ -522,10 +529,28 @@ export const Presets = ( {
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 
+	const selectAll = () => {
+		setConfigs( configs.map( ( config ) => {
+			config.selected = true;
+			return config;
+		} ) );
+	};
+
 	const Table = (
 		<>
 			{ ! isEmpty && setDemoData && (
 				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
+					<div className="sui-accordion-header" style={{ minHeight: '100%' }}>
+						<div className='sui-accordion-item-title'>
+							<label className="sui-checkbox">
+								<input type="checkbox" id="checkbox-default-one" onClick={ selectAll }/>
+								<span aria-hidden="true"></span>
+							</label>
+							<span>Config Name</span>
+						</div>
+						<div className='sui-accordion-col-5'>Description</div>
+						<div className='sui-accordion-col-auto'>Date Created</div>
+					</div>
 					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
 							key={ index }
@@ -543,6 +568,7 @@ export const Presets = ( {
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
+							checkboxSelected= { item.selected }
 						>
 							{ item.config.map( ( data ) => (
 								<div key={ data.id } name={ data.name } status={ data.content } />
@@ -714,7 +740,7 @@ export const Presets = ( {
 					{ getDescription() }
 					{ !isLoading && !isEmpty && (
 						<div>
-							<Button onClick={ () => openModal( 'delete', '') } className="sui-button-red" label="Bulk Delete" icon="trash"/>
+							<Button onClick={ () => openModal( 'delete', '') } className="sui-button-red" label="Bulk Delete" icon="trash" disabled/>
 						</div>
 					)}
 

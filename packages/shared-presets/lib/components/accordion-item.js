@@ -158,10 +158,16 @@ export class PresetsAccordionItem extends Component {
 					{ ... null !== this.props.image && '' !== this.props.image && {
 						image: this.props.image
 					} }
+                    checkbox = "true"
+                    checkboxId = "preset-checkbox"
                     onClick={ e => this.toggle(e) }>
-					<div size="5">
+                    <div>{ this.props.checkboxSelected }</div>
+					<div size="3">
 						<div style={ descstyles }>{ this.props.description }</div>
 					</div>
+                    <div size="2">
+                        March 20, 2021 8:08 am
+                    </div>
 					<div>
 						{ this.props.showApplyButton && (
 							<Button
