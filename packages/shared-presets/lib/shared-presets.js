@@ -339,7 +339,7 @@ export const Presets = ( {
 			}, 500 );
 
 			setTimeout(() => setIsLoading( false ), 1000 );
-
+			
 			console.log(
 				'\n' +
 				'Modal: Delete Configuration File\n' +
@@ -583,6 +583,11 @@ export const Presets = ( {
 		}
 	};
 
+	const bulkDeleteHandler = () => {
+		const selectedConfig = Object.assign( {}, configs.filter( ( item ) => item.selected === true ) );
+		openModal( 'delete', selectedConfig);
+	};
+
 	const Table = (
 		<>
 			{ ! isEmpty && setDemoData && (
@@ -805,7 +810,7 @@ export const Presets = ( {
 					{ getDescription() }
 					{ !isLoading && !isEmpty && (
 						<div>
-							<Button onClick={ () => openModal( 'delete', '') } className="sui-button-red" label="Bulk Delete" icon="trash" disabled={ isDisabled }/>
+							<Button onClick={ bulkDeleteHandler } className="sui-button-red" label="Bulk Delete" icon="trash" disabled={ isDisabled }/>
 						</div>
 					)}
 
