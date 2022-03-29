@@ -76,6 +76,30 @@ const StyledBoxHeader = styled.div`
 }
 `;
 
+const PresetsAccordionHeader = styled.div`
+[class*="sui-2-"] .sui-wrap && {
+
+	> .sui-accordion-col-3,
+    > .sui-accordion-col-2,
+	> .sui-accordion-col-auto {
+
+		@media ${deviceMax.tablet} {
+			display: none !important;
+		}
+	}
+}
+`;
+
+const PresetsAccordion = styled.div`
+[class*="sui-2-"] .sui-wrap && {
+	.sui-checkbox {
+		@media (max-width: 783px) {
+			margin: 0 10px 0 0;
+		}
+	}
+}
+`;
+
 let RequestsHandler;
 
 export const Presets = ( {
@@ -91,6 +115,7 @@ export const Presets = ( {
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
+	const [ isDisabled, setDisabled ] = React.useState( true );
 
 	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
@@ -529,28 +554,51 @@ export const Presets = ( {
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 
-	const selectAll = () => {
+	const selectAll = (checked) => {
 		setConfigs( configs.map( ( config ) => {
-			config.selected = true;
+			config.selected = checked;
 			return config;
 		} ) );
+		deleteButton();
+	};
+
+	const checkboxClickHandler = (clickedConfig, checked) => {
+		setConfigs( configs.map( ( config ) => {
+			if( clickedConfig === config ) {
+				config.selected = checked;
+			}
+			return config;
+		} ) );
+		deleteButton();
+	};
+
+	const deleteButton = () => {
+		for (var i = 0; i < configs.length; i++) {
+			if(configs[i].selected) {
+				setDisabled(false);
+				break;
+			} else {
+				setDisabled(true);
+			}
+		}
 	};
 
 	const Table = (
 		<>
 			{ ! isEmpty && setDemoData && (
-				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-					<div className="sui-accordion-header" style={{ minHeight: '100%' }}>
+				<PresetsAccordion className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0, borderTop: 0 }}>
+					<PresetsAccordionHeader className="sui-accordion-header" style={{ minHeight: '100%' }}>
 						<div className='sui-accordion-item-title'>
 							<label className="sui-checkbox">
-								<input type="checkbox" id="checkbox-default-one" onClick={ selectAll }/>
+								<input type="checkbox" id="checkbox-default-one" onChange={ (e) => selectAll(e.target.checked) }/>
 								<span aria-hidden="true"></span>
 							</label>
 							<span>Config Name</span>
 						</div>
-						<div className='sui-accordion-col-5'>Description</div>
-						<div className='sui-accordion-col-auto'>Date Created</div>
-					</div>
+						<div className="sui-accordion-col-3">Description</div>
+						<div className="sui-accordion-col-2">Date Created</div>
+						<div className="sui-accordion-col-auto" style={{ width: '213px' }}></div>
+					</PresetsAccordionHeader>
 					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
 							key={ index }
@@ -568,18 +616,32 @@ export const Presets = ( {
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
+							checkboxId= { 'demo-checkbox-' + index }
 							checkboxSelected= { item.selected }
+							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
 						>
 							{ item.config.map( ( data ) => (
 								<div key={ data.id } name={ data.name } status={ data.content } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
-				</div>
+				</PresetsAccordion>
 			) }
 
 			{ ! isEmpty && ! setDemoData && (
 				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
+					<PresetsAccordionHeader className="sui-accordion-header" style={{ minHeight: '100%' }}>
+						<div className='sui-accordion-item-title'>
+							<label className="sui-checkbox">
+								<input type="checkbox" id="checkbox-default-one" onChange={ (e) => selectAll(e.target.checked) }/>
+								<span aria-hidden="true"></span>
+							</label>
+							<span>Config Name</span>
+						</div>
+						<div className="sui-accordion-col-3">Description</div>
+						<div className="sui-accordion-col-2">Date Created</div>
+						<div className="sui-accordion-col-auto" style={{ width: '213px' }}></div>
+					</PresetsAccordionHeader>
 					{ configs.map( item => (
 						<PresetsAccordionItem
 							key={ item.id }
@@ -597,6 +659,9 @@ export const Presets = ( {
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
+							checkboxId= { 'accrodion-checkbox-' + item.id }
+							checkboxSelected= { item.selected }
+							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
 						>
 							{ Object.keys( item.config.strings ).map( ( name ) => (
 								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
@@ -740,7 +805,7 @@ export const Presets = ( {
 					{ getDescription() }
 					{ !isLoading && !isEmpty && (
 						<div>
-							<Button onClick={ () => openModal( 'delete', '') } className="sui-button-red" label="Bulk Delete" icon="trash" disabled/>
+							<Button onClick={ () => openModal( 'delete', '') } className="sui-button-red" label="Bulk Delete" icon="trash" disabled={ isDisabled }/>
 						</div>
 					)}
 
