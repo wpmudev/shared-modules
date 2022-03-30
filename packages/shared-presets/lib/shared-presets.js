@@ -5,6 +5,7 @@ import { deviceMax } from './components/utils';
 import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
+import { RadioCheckboxInput } from '@wpmudev/react-radio-checkbox';
 
 import ApplyModal from './components/apply-modal';
 import DeleteModal from './components/delete-modal';
@@ -601,10 +602,12 @@ export const Presets = ( {
 				<PresetsAccordion className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0, borderTop: 0 }}>
 					<PresetsAccordionHeader className="sui-accordion-header" style={{ minHeight: '100%' }}>
 						<div className='sui-accordion-item-title'>
-							<label className="sui-checkbox">
-								<input type="checkbox" id="checkbox-default-one" onChange={ (e) => selectAll(e.target.checked) }/>
-								<span aria-hidden="true"></span>
-							</label>
+							<RadioCheckboxInput
+								id="checkbox-default-one"
+								name="select-all"
+								type="checkbox"
+								onChange={(e) => selectAll(e.target.checked)}
+							/>
 							<span>Config Name</span>
 						</div>
 						<div className="sui-accordion-col-3">Description</div>
