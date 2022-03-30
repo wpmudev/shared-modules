@@ -176,6 +176,9 @@ export const Presets = ( {
 			deleteAction: {
 				successMessage: '{configName} config deleted successfully.',
 			},
+			bulkDeleteAction: {
+				successMessage: 'Config(s) deleted successfully.',
+			},
 			settingsLabels: {},
 		},
 		sourceLang
@@ -339,7 +342,7 @@ export const Presets = ( {
 			}, 500 );
 
 			setTimeout(() => setIsLoading( false ), 1000 );
-			
+
 			console.log(
 				'\n' +
 				'Modal: Delete Configuration File\n' +
@@ -353,7 +356,11 @@ export const Presets = ( {
 			RequestsHandler.delete( [ ...configs ], currentConfig )
 				.then( ( newConfigs ) => { 
 					setConfigs( newConfigs );
-					successNotice( lang.deleteAction.successMessage.replace( '{configName}', currentConfig.name ) );
+					successNotice( 
+						Object.keys(currentConfig).length === 1 ? 
+							lang.deleteAction.successMessage.replace( '{configName}', currentConfig.name ) :
+							lang.bulkDeleteAction.successMessage
+					);
 				} )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsDeleteOpen( false ) );

@@ -101,6 +101,11 @@ export const demoLang = {
 	editAction: {
 		successMessage: 'Las configuraciones de {configName} han sido creadas exitosamente.',
 	},
-	deleteAction: {},
+	deleteAction: {
+		successMessage: '{configName} config deleted successfully.',
+	},
+	bulkDeleteAction: {
+		successMessage: 'Config(s) deleted successfully.',
+	},
 	settingsLabels: {},
 };
