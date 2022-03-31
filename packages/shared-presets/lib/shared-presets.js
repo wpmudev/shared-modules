@@ -613,7 +613,7 @@ export const Presets = ( {
 						</div>
 						<div className="sui-accordion-col-3">Description</div>
 						<div className="sui-accordion-col-2">Date Created</div>
-						<div className="sui-accordion-col-auto" style={{ width: '213px' }}></div>
+						<div className="sui-accordion-col-auto" style={{ flex: '0 1 213px' }}></div>
 					</PresetsAccordionHeader>
 					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
@@ -622,6 +622,7 @@ export const Presets = ( {
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
+							created={ item.created_date }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
@@ -665,6 +666,7 @@ export const Presets = ( {
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
+							created={ item.created_date }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
