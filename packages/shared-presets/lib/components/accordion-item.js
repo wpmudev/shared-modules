@@ -169,7 +169,7 @@ export class PresetsAccordionItem extends Component {
 						<div style={ descstyles }>{ this.props.description }</div>
 					</div>
 					<div size="2">
-						<div style={ descstyles }>March 20, 2021 8:08 am</div>
+						<div style={ descstyles }>{ this.props.created }</div>
 					</div>
 					<div>
 						{ this.props.showApplyButton && (

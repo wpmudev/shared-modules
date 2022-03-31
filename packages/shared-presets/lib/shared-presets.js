@@ -192,6 +192,7 @@ export const Presets = ( {
 			name: 'Basic config',
 			description: 'Recommended performance config for every site.',
 			selected: false,
+			created_date: 'March 22, 2021 10:03 am',
 			config: [
 				{
 					id: 'bulk_smush',

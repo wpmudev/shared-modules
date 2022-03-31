@@ -22,6 +22,7 @@ export const demoContent = (
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
 		selected: false,
+		created_date: "March 22, 2021 10:03 am",
 		config: [
 			{
 				id: "bulk_smush",
@@ -78,7 +79,7 @@ export const demoLang = {
 				target="_blank"
 				rel="noreferrer"
 			>
-			{'el Hub.'}
+				{'el Hub.'}
 			</a>
 		</React.Fragment>
 	),
