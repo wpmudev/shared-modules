@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import { device } from './utils';
+import { device, deviceMax } from './utils';
 
 import { AccordionItemHeader, AccordionItemBody } from '@wpmudev/react-accordion';
 import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
@@ -50,11 +50,25 @@ const Authentic = styled.svg`
 `;
 
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
-.sui-wrap && {
+[class*="sui-2-"] .sui-wrap && {
+
+	> .sui-accordion-col-5 {
+
+		@media ${deviceMax.tablet} {
+			display: none !important;
+		}
+	}
 
     > .sui-accordion-col-auto {
 
-        > .sui-dropdown {
+		.sui-presets-item__apply {
+
+			@media ${deviceMax.tablet} {
+				display: none;
+			}
+		}
+
+		> .sui-dropdown {
 
             [class*=sui-icon-] {
                 margin-right: 0 !important;
@@ -65,6 +79,16 @@ const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
             }
         }
     }
+
+	&:not(:hover):not(:focus) {
+
+		> .sui-accordion-col-auto {
+
+			.sui-presets-item__apply {
+				opacity: 0;
+			}
+		}
+	}
 }
 `;
 
@@ -131,7 +155,9 @@ export class PresetsAccordionItem extends Component {
                     className="sui-accordion-item-header"
                     state={ open ? 'true' : 'false' }
                     title={ name }
-                    image={ this.props.image }
+					{ ... null !== this.props.image && '' !== this.props.image && {
+						image: this.props.image
+					} }
                     onClick={ e => this.toggle(e) }>
 					<div size="5">
 						<div style={ descstyles }>{ this.props.description }</div>
@@ -141,6 +167,7 @@ export class PresetsAccordionItem extends Component {
 							<Button
 								label={ this.props.applyLabel || 'Apply' }
 								design="ghost"
+								className="sui-presets-item__apply"
 								onClick={ this.accordionHeadApplyClicked }
 							/>
 						)}
@@ -156,7 +183,7 @@ export class PresetsAccordionItem extends Component {
 								onClick={ () => downloadAction( this.props.id ) }
 							/>
 							<div
-								name={ this.props.editLabel || 'Name and Description' }
+								name={ this.props.editLabel || 'Edit Details' }
 								icon="pencil"
 								onClick={ editAction }
 							/>
@@ -185,7 +212,7 @@ export class PresetsAccordionItem extends Component {
                                 </div>
                                 <div
                                     className="sui-tooltip"
-                                    data-tooltip={ this.props.editLabel || 'Edit Name and Description' }
+                                    data-tooltip={ this.props.editLabel || 'Edit Details' }
                                 >
                                     <ButtonIcon
                                         icon="pencil"

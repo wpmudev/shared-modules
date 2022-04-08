@@ -12,9 +12,16 @@ const device = {
 	desktop: `(min-width: ${screen.desktop}px)`
 };
 
+const deviceMax = {
+	mobile: `(max-width: ${screen.mobile}px)`,
+	tablet: `(max-width: ${screen.tablet}px)`,
+	laptop: `(max-width: ${screen.laptop}px)`,
+	desktop: `(max-width: ${screen.desktop}px)`
+};
+
 const utils = {
 	gutter: 30,
 	gutter_md: 20
 };
 
-export { screen, device, utils };
+export { screen, device, deviceMax, utils };

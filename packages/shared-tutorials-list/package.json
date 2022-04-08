@@ -1,6 +1,6 @@
 {
   "name": "@wpmudev/shared-tutorials-list",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "WPMU DEV Shared Tutorials List",
   "keywords": [],
   "author": "WPMU DEV (https://wpmudev.com/)",
@@ -45,12 +45,12 @@
   "homepage": "https://github.com/wpmudev/shared-modules#readme",
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.0",
-    "react": "^17.0.1"
+    "react": "^17.0.2"
   },
   "dependencies": {
-    "@wpmudev/react-notifications": "^1.0.1",
-    "@wpmudev/react-post": "^1.1.4",
-    "styled-components": "^5.2.1"
+    "@wpmudev/react-notifications": "^1.0.8",
+    "@wpmudev/react-post": "^1.1.5",
+    "styled-components": "^5.3.3"
   },
   "resolutions": {
     "styled-components": "^5"
