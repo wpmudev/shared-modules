@@ -13,6 +13,13 @@ import { PresetsAccordionItem } from './components/accordion-item';
 
 import Requester from './requests-handler';
 
+// List of special charaters to replace on sanitization.
+const tagsToReplace = {
+	'&': '&amp;',
+	'<': '&lt;',
+	'>': '&gt;'
+};
+
 const LoadingContent = styled.div`
 .sui-wrap && {
     position: relative;
@@ -377,7 +384,14 @@ export const Presets = ( {
 				.then( ( updatedConfigs ) => {
 					setConfigs( updatedConfigs );
 					setIsEditOpen( false );
-					successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
+					successNotice(
+						lang.editAction.successMessage.replace(
+							'{configName}',
+							configData.name.replace( /[&<>]/g, function( tag ) {
+								return tagsToReplace[tag] || tag;
+							} )
+						)
+					);
 				} )
 				.catch( ( res ) => requestFailureNotice( res ) );
 		}
@@ -409,7 +423,14 @@ export const Presets = ( {
 					requestFailureNotice( res );
 					return;
 				}
-				successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+				successNotice(
+					lang.applyAction.successMessage.replace(
+						'{configName}',
+						currentConfig.name.replace( /[&<>]/g, function( tag ) {
+							return tagsToReplace[tag] || tag;
+						} )
+					)
+				);
 			})
 			.catch( ( res ) => requestFailureNotice( res ) );
 		}
