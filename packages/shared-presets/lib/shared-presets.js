@@ -12,6 +12,7 @@ import EditModal from './components/edit-modal';
 import { PresetsAccordionItem } from './components/accordion-item';
 
 import Requester from './requests-handler';
+import { escapeHTML } from '@wordpress/escape-html';
 
 const LoadingContent = styled.div`
 .sui-wrap && {
@@ -287,7 +288,7 @@ export const Presets = ( {
 
 					res.data.name = res.data.name.substring( 0, 200 );
 					res.data.description = res.data.description.substring( 0, 200 );
-					newConfigName = res.data.name;
+					newConfigName = escapeHTML( res.data.name );
 
 					return RequestsHandler.addNew( configs, res.data );
 				}
@@ -297,7 +298,12 @@ export const Presets = ( {
 			} )
 				.then( ( updatedConfigs ) => {
 					setConfigs( updatedConfigs );
-					successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+					successNotice(
+						lang.uploadActionSuccessMessage.replace(
+							'{configName}',
+							newConfigName
+						)
+					);
 				} )
 				.catch( ( res ) => requestFailureNotice( res ) );
 		}
@@ -377,7 +383,12 @@ export const Presets = ( {
 				.then( ( updatedConfigs ) => {
 					setConfigs( updatedConfigs );
 					setIsEditOpen( false );
-					successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
+					successNotice(
+						lang.editAction.successMessage.replace(
+							'{configName}',
+							escapeHTML( configData.name )
+						)
+					);
 				} )
 				.catch( ( res ) => requestFailureNotice( res ) );
 		}
@@ -409,7 +420,12 @@ export const Presets = ( {
 					requestFailureNotice( res );
 					return;
 				}
-				successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+				successNotice(
+					lang.applyAction.successMessage.replace(
+						'{configName}',
+						escapeHTML( currentConfig.name )
+					)
+				);
 			})
 			.catch( ( res ) => requestFailureNotice( res ) );
 		}

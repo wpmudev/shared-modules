@@ -9,6 +9,8 @@ import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { Dropdown } from '@wpmudev/react-dropdown';
 import { PresetsTable } from './table';
 
+import { escapeHTML } from '@wordpress/escape-html';
+
 const Header = styled.div`
 	margin: 0 0 20px;
 
@@ -135,11 +137,11 @@ export class PresetsAccordionItem extends Component {
         const name = this.props.default
             ? (
                 <React.Fragment>
-                    { this.props.name }
+                    { escapeHTML( this.props.name ) }
                     { icon }
                 </React.Fragment>
             )
-            : this.props.name;
+            : escapeHTML( this.props.name );
 
 		const descstyles = {
 			overflow: 'hidden',
@@ -205,7 +207,7 @@ export class PresetsAccordionItem extends Component {
 
                             <Header>
                                 <div>
-                                    <Label className="sui-label">{ this.props.name }</Label>
+                                    <Label className="sui-label">{ escapeHTML( this.props.name ) }</Label>
                                     <Description className="sui-description">
                                         { this.props.description }
                                     </Description>
