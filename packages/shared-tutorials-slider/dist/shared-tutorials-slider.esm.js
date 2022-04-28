@@ -17,13 +17,13 @@ function _typeof(obj) {
   return _typeof(obj);
 }
 
-function _classCallCheck(instance, Constructor) {
+function _classCallCheck$2(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties(target, props) {
+function _defineProperties$2(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -33,13 +33,13 @@ function _defineProperties(target, props) {
   }
 }
 
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
+function _createClass$2(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$2(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$2(Constructor, staticProps);
   return Constructor;
 }
 
-function _defineProperty(obj, key, value) {
+function _defineProperty$2(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -54,7 +54,7 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _inherits(subClass, superClass) {
+function _inherits$2(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -66,39 +66,39 @@ function _inherits(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf(subClass, superClass);
+  if (superClass) _setPrototypeOf$2(subClass, superClass);
 }
 
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$2(o) {
+  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf(o);
+  return _getPrototypeOf$2(o);
 }
 
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$2(o, p) {
+  _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf(o, p);
+  return _setPrototypeOf$2(o, p);
 }
 
-function _isNativeReflectConstruct() {
+function _isNativeReflectConstruct$2() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
 
   try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
   } catch (e) {
     return false;
   }
 }
 
-function _assertThisInitialized(self) {
+function _assertThisInitialized$2(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -106,34 +106,36 @@ function _assertThisInitialized(self) {
   return self;
 }
 
-function _possibleConstructorReturn(self, call) {
+function _possibleConstructorReturn$2(self, call) {
   if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
   }
 
-  return _assertThisInitialized(self);
+  return _assertThisInitialized$2(self);
 }
 
-function _createSuper(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+function _createSuper$2(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$2();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf(Derived),
+    var Super = _getPrototypeOf$2(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      var NewTarget = _getPrototypeOf$2(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn(this, result);
+    return _possibleConstructorReturn$2(this, result);
   };
 }
 
-function _taggedTemplateLiteral(strings, raw) {
+function _taggedTemplateLiteral$1(strings, raw) {
   if (!raw) {
     raw = strings.slice(0);
   }
@@ -165,6 +167,21 @@ function _createClass$1(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties$1(Constructor, staticProps);
   return Constructor;
+}
+
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 function _inherits$1(subClass, superClass) {
@@ -246,20 +263,190 @@ function _createSuper$1(Derived) {
   };
 }
 
+function _defineProperty$1$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty$1$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
 var Notifications = /*#__PURE__*/function (_Component) {
   _inherits$1(Notifications, _Component);
 
   var _super = _createSuper$1(Notifications);
 
   function Notifications(props) {
+    var _this;
+
     _classCallCheck$1(this, Notifications);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty$1(_assertThisInitialized$1(_this), "close", function () {
+      _this.setState({
+        hide: true
+      });
+    });
+
+    _this.state = {
+      hide: false
+    };
+    _this.close = _this.close.bind(_assertThisInitialized$1(_this));
+    return _this;
   }
 
   _createClass$1(Notifications, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var hide = this.state.hide;
       var classMain = "sui-notice";
       var classIcon = "sui-notice-icon sui-md";
 
@@ -270,6 +457,7 @@ var Notifications = /*#__PURE__*/function (_Component) {
         case "error":
         case "upsell":
           classMain += " sui-notice-" + this.props.type;
+          classIcon += " sui-icon-info";
           break;
 
         case "loading":
@@ -281,29 +469,44 @@ var Notifications = /*#__PURE__*/function (_Component) {
           break;
       }
 
-      return /*#__PURE__*/React.createElement("div", {
-        className: classMain
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "sui-notice-content"
-      }, /*#__PURE__*/React.createElement("div", {
+      var message = /*#__PURE__*/React.createElement("div", {
         className: "sui-notice-message"
       }, /*#__PURE__*/React.createElement("span", {
         className: classIcon,
         "aria-hidden": "true"
-      }), /*#__PURE__*/React.createElement("p", null, this.props.message))));
+      }), this.props.children);
+      var actions = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-actions"
+      }, /*#__PURE__*/React.createElement(ButtonIcon, {
+        icon: "check",
+        label: "Hide",
+        onClick: function onClick(e) {
+          return _this2.close(e);
+        }
+      }));
+
+      if (!hide) {
+        return /*#__PURE__*/React.createElement("div", {
+          className: classMain
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "sui-notice-content"
+        }, message, this.props.dismiss && actions));
+      }
+
+      return null;
     }
   }]);
 
   return Notifications;
 }(Component);
 
-function _classCallCheck$2(instance, Constructor) {
+function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$2(target, props) {
+function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -313,13 +516,13 @@ function _defineProperties$2(target, props) {
   }
 }
 
-function _createClass$2(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$2(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$2(Constructor, staticProps);
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
 }
 
-function _defineProperty$1(obj, key, value) {
+function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -352,7 +555,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-function _inherits$2(subClass, superClass) {
+function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -364,26 +567,26 @@ function _inherits$2(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$2(subClass, superClass);
+  if (superClass) _setPrototypeOf(subClass, superClass);
 }
 
-function _getPrototypeOf$2(o) {
-  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$2(o);
+  return _getPrototypeOf(o);
 }
 
-function _setPrototypeOf$2(o, p) {
-  _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$2(o, p);
+  return _setPrototypeOf(o, p);
 }
 
-function _isNativeReflectConstruct$2() {
+function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
@@ -396,7 +599,7 @@ function _isNativeReflectConstruct$2() {
   }
 }
 
-function _assertThisInitialized$2(self) {
+function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -404,34 +607,34 @@ function _assertThisInitialized$2(self) {
   return self;
 }
 
-function _possibleConstructorReturn$2(self, call) {
+function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$2(self);
+  return _assertThisInitialized(self);
 }
 
-function _createSuper$2(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct$2();
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$2(Derived),
+    var Super = _getPrototypeOf(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$2(this).constructor;
+      var NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$2(this, result);
+    return _possibleConstructorReturn(this, result);
   };
 }
 
-function _taggedTemplateLiteral$1(strings, raw) {
+function _taggedTemplateLiteral(strings, raw) {
   if (!raw) {
     raw = strings.slice(0);
   }
@@ -444,7 +647,7 @@ function _taggedTemplateLiteral$1(strings, raw) {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral$1(["\n\tmin-width: 1px;\n\tflex: 1;\n\t", "\n\tcolor: #17A8E3 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px !important;\n"]);
+  var data = _taggedTemplateLiteral(["\n\tmin-width: 1px;\n\tflex: 1;\n\t", "\n\tcolor: #17A8E3 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px !important;\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -454,7 +657,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\t", "\n\n\tp {\n\t\toverflow: hidden;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-box-orient: vertical;\n\t\tmargin: 0 !important;\n\t\tpadding: 0 !important;\n\t\tborder: 0;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\t\tletter-spacing: -0.2px;\n\t\t-webkit-line-clamp: ", ";\n\t}\n"]);
+  var data = _taggedTemplateLiteral(["\n\tdisplay: block;\n\t", "\n\n\tp {\n\t\toverflow: hidden;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-box-orient: vertical;\n\t\tmargin: 0 !important;\n\t\tpadding: 0 !important;\n\t\tborder: 0;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\t\tletter-spacing: -0.2px;\n\t\t-webkit-line-clamp: ", ";\n\t}\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -464,7 +667,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral$1(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
+  var data = _taggedTemplateLiteral(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -473,58 +676,58 @@ function _templateObject6() {
   return data;
 }
 
-function _templateObject5() {
-  var data = _taggedTemplateLiteral$1(["\n\toverflow: hidden;\n\tdisplay: -webkit-box !important;\n\t-webkit-box-orient: vertical;\n\t", "\n\tmargin: ", " !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px;\n\t", "\n\n\t", "\n"]);
+function _templateObject5$1() {
+  var data = _taggedTemplateLiteral(["\n\toverflow: hidden;\n\tdisplay: -webkit-box !important;\n\t-webkit-box-orient: vertical;\n\t", "\n\tmargin: ", " !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px;\n\t", "\n\n\t", "\n"]);
 
-  _templateObject5 = function _templateObject5() {
+  _templateObject5$1 = function _templateObject5() {
     return data;
   };
 
   return data;
 }
 
-function _templateObject4() {
-  var data = _taggedTemplateLiteral$1(["\n\t", "\n\theight: ", ";\n\tmargin: ", ";\n\t", "\n\tdisplay: block;\n\t", "\n\tbackground-color: #FFF;\n\tbackground-image: url(", ");\n\tbackground-size: cover;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n"]);
+function _templateObject4$1() {
+  var data = _taggedTemplateLiteral(["\n\t", "\n\theight: ", ";\n\tmargin: ", ";\n\t", "\n\tdisplay: block;\n\t", "\n\tbackground-color: #FFF;\n\tbackground-image: url(", ");\n\tbackground-size: cover;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n"]);
 
-  _templateObject4 = function _templateObject4() {
+  _templateObject4$1 = function _templateObject4() {
     return data;
   };
 
   return data;
 }
 
-function _templateObject3() {
-  var data = _taggedTemplateLiteral$1(["\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tmargin-top: 15px;\n"]);
+function _templateObject3$1() {
+  var data = _taggedTemplateLiteral(["\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tmargin-top: 15px;\n"]);
 
-  _templateObject3 = function _templateObject3() {
+  _templateObject3$1 = function _templateObject3() {
     return data;
   };
 
   return data;
 }
 
-function _templateObject2() {
-  var data = _taggedTemplateLiteral$1(["\n\tdisplay: flex;\n\tflex-flow: row wrap;\n\n\t+ div {\n\t\tmargin-top: 20px;\n\t}\n"]);
+function _templateObject2$1() {
+  var data = _taggedTemplateLiteral(["\n\tdisplay: flex;\n\tflex-flow: row wrap;\n\n\t+ div {\n\t\tmargin-top: 20px;\n\t}\n"]);
 
-  _templateObject2 = function _templateObject2() {
+  _templateObject2$1 = function _templateObject2() {
     return data;
   };
 
   return data;
 }
 
-function _templateObject() {
-  var data = _taggedTemplateLiteral$1(["\n\t", "\n\tcursor: pointer;\n\t", "\n\t", "\n\tpadding: ", ";\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\t", "\n\ttransition: 0.2s ease all;\n\n\t* {\n\t\tpointer-events: none;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\t", "\n\n\t\t", "\n\t}\n\n\t", "\n\n\t&:focus {\n\t\toutline: none;\n\t\t", "\n\t}\n\n\t@media ", " {\n\t\t", "\n\t}\n"]);
+function _templateObject$1() {
+  var data = _taggedTemplateLiteral(["\n\t", "\n\tcursor: pointer;\n\t", "\n\t", "\n\tpadding: ", ";\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\t", "\n\ttransition: 0.2s ease all;\n\n\t* {\n\t\tpointer-events: none;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\t", "\n\n\t\t", "\n\t}\n\n\t", "\n\n\t&:focus {\n\t\toutline: none;\n\t\t", "\n\t}\n\n\t@media ", " {\n\t\t", "\n\t}\n"]);
 
-  _templateObject = function _templateObject() {
+  _templateObject$1 = function _templateObject() {
     return data;
   };
 
   return data;
 }
 
-var aria = aria || {};
-aria.KeyCode = {
+var aria$1 = aria$1 || {};
+aria$1.KeyCode = {
   TAB: 9,
   RETURN: 13,
   ESC: 27,
@@ -539,24 +742,24 @@ aria.KeyCode = {
   DOWN: 40,
   DELETE: 46
 };
-var screen = {
+var screen$1 = {
   mobile: 480,
   tablet: 783,
   laptop: 1200,
   desktop: 1500
 };
-var device = {
-  mobile: "(min-width: ".concat(screen.mobile, "px)"),
-  tablet: "(min-width: ".concat(screen.tablet, "px)"),
-  laptop: "(min-width: ".concat(screen.laptop, "px)"),
-  desktop: "(min-width: ".concat(screen.desktop, "px)")
+var device$1 = {
+  mobile: "(min-width: ".concat(screen$1.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$1.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$1.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$1.desktop, "px)")
 };
 var PostWrapper = styled.div.attrs(function (props) {
   return {
     tabIndex: 0,
     props: props
   };
-})(_templateObject(), function (props) {
+})(_templateObject$1(), function (props) {
   return props.banner ? "overflow: hidden;" : "";
 }, function (props) {
   return props.banner ? "display: flex;" : "";
@@ -569,22 +772,22 @@ var PostWrapper = styled.div.attrs(function (props) {
 }, function (props) {
   return props.banner ? "transform: scale(1.02);" : "background-color: #FAFAFA;";
 }, function (props) {
-  return props.banner ? "@media ".concat(device.tablet, " {\n\t\t\t\ttransform: scale(1.05);\n\t\t\t}") : "";
+  return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\t\ttransform: scale(1.05);\n\t\t\t}") : "";
 }, function (props) {
-  return props.banner ? "@media ".concat(device.tablet, " {\n\t\t\tbox-shadow: 0 2px 7px 0 rgba(0,0,0,0.05);\n\t\t}") : "";
+  return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\tbox-shadow: 0 2px 7px 0 rgba(0,0,0,0.05);\n\t\t}") : "";
 }, function (props) {
   return props.banner ? "box-shadow: 0 2px 7px 0 rgba(0,0,0,0.05), 0 0 2px 0 #17A8E3;" : "";
-}, device.tablet, function (props) {
+}, device$1.tablet, function (props) {
   return props.banner ? "min-height: 100%;" : "padding: 15px;";
 });
-var PostHeader = styled.div(_templateObject2());
-var PostFooter = styled.div(_templateObject3());
+var PostHeader = styled.div(_templateObject2$1());
+var PostFooter = styled.div(_templateObject3$1());
 var FeaturedImage = styled.div.attrs(function () {
   return {
     tabIndex: "-1",
     "aria-hidden": true
   };
-})(_templateObject4(), function (props) {
+})(_templateObject4$1(), function (props) {
   return props.banner ? "" : "width: 66px;";
 }, function (props) {
   return props.banner ? "140px" : "54px";
@@ -597,14 +800,14 @@ var FeaturedImage = styled.div.attrs(function () {
 }, function (props) {
   return props.src || "none";
 });
-var PostTitle = styled.h3(_templateObject5(), function (props) {
+var PostTitle = styled.h3(_templateObject5$1(), function (props) {
   return props.banner ? "flex: 1 1 auto;" : "";
 }, function (props) {
   return props.banner ? "0 0 10px" : "0";
 }, function (props) {
   return props.banner ? "" : "-webkit-line-clamp: 2;";
 }, function (props) {
-  return props.banner ? "@media ".concat(device.tablet, " {\n\t\t\t-webkit-line-clamp: 2;\n\t\t}") : "";
+  return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\t-webkit-line-clamp: 2;\n\t\t}") : "";
 });
 var PostTime = styled.p(_templateObject6(), function (props) {
   return props.banner ? "flex: 0 0 auto;" : "";
@@ -621,18 +824,18 @@ var ReadMore = styled.p(_templateObject8(), function (props) {
 });
 
 var Post = /*#__PURE__*/function (_Component) {
-  _inherits$2(Post, _Component);
+  _inherits(Post, _Component);
 
-  var _super = _createSuper$2(Post);
+  var _super = _createSuper(Post);
 
   function Post(props) {
     var _this;
 
-    _classCallCheck$2(this, Post);
+    _classCallCheck(this, Post);
 
     _this = _super.call(this, props);
 
-    _defineProperty$1(_assertThisInitialized$2(_this), "openLink", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "openLink", function (e) {
       var ref = e.target !== null ? e.target : e.srcElement;
 
       if (ref) {
@@ -640,11 +843,11 @@ var Post = /*#__PURE__*/function (_Component) {
       }
     });
 
-    _defineProperty$1(_assertThisInitialized$2(_this), "handleKeydown", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "handleKeydown", function (e) {
       var key = e.which || e.keyCode;
 
       switch (key) {
-        case aria.KeyCode.RETURN:
+        case aria$1.KeyCode.RETURN:
           _this.openLink(e);
 
           break;
@@ -656,12 +859,12 @@ var Post = /*#__PURE__*/function (_Component) {
       error: null,
       isLoaded: false
     };
-    _this.openLink = _this.openLink.bind(_assertThisInitialized$2(_this));
-    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized$2(_this));
+    _this.openLink = _this.openLink.bind(_assertThisInitialized(_this));
+    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass$2(Post, [{
+  _createClass(Post, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -768,9 +971,9 @@ var Post = /*#__PURE__*/function (_Component) {
   return Post;
 }(Component);
 
-var _templateObject$1, _templateObject2$1, _templateObject3$1, _templateObject4$1, _templateObject5$1;
-var aria$1 = aria$1 || {};
-aria$1.KeyCode = {
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var aria = aria || {};
+aria.KeyCode = {
   TAB: 9,
   RETURN: 13,
   ESC: 27,
@@ -785,42 +988,42 @@ aria$1.KeyCode = {
   DOWN: 40,
   DELETE: 46
 };
-var screen$1 = {
+var screen = {
   mobile: 480,
   tablet: 783,
   laptop: 1200,
   desktop: 1500
 };
-var device$1 = {
-  mobile: "(min-width: ".concat(screen$1.mobile, "px)"),
-  tablet: "(min-width: ".concat(screen$1.tablet, "px)"),
-  laptop: "(min-width: ".concat(screen$1.laptop, "px)"),
-  desktop: "(min-width: ".concat(screen$1.desktop, "px)")
+var device = {
+  mobile: "(min-width: ".concat(screen.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen.desktop, "px)")
 };
-var Box = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n\tposition: relative;\n\tpadding: 10px;\n\n\t@media ", " {\n\t\tpadding: 15px 25px;\n\t}\n"])), device$1.tablet);
+var Box = styled.div(_templateObject || (_templateObject = _taggedTemplateLiteral$1(["\n\tposition: relative;\n\tpadding: 10px;\n\n\t@media ", " {\n\t\tpadding: 15px 25px;\n\t}\n"])), device.tablet);
 var Link = styled.a.attrs(function (_ref) {
   var viewAll = _ref.viewAll;
   return {
     href: viewAll,
     target: "_blank"
   };
-})(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral(["\n\tmargin-top: 1px;\n\tmargin-right: 23px;\n\tfont-size: 13px;\n\tline-height: 22px;\n\tletter-spacing: -0.2px;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-right: 5px;\n\n\t\t&:before {\n\t\t\tcolor: inherit;\n\t\t}\n\t}\n"])));
-var ListWrapper = styled.ul(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\n\t@media ", " {\n\t\toverflow: hidden;\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t}\n"])), device$1.tablet);
-var ListItem = styled.li(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\tmargin: 0 0 20px;\n\tpadding: 0;\n\tborder: 0;\n\tlist-style: none;\n\n\t&:last-child {\n\t\tmargin-bottom: 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 33.33%;\n\t\tflex: 0 0 auto;\n\t\tmargin: 0 1px 0 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 25%;\n\t}\n"])), device$1.tablet, device$1.desktop);
-var Navigation = styled.div(_templateObject5$1 || (_templateObject5$1 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\n\tbutton[class*=\"sui-button-\"] {\n\t\tdisplay: none !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: block !important;\n\t\t\tpointer-events: initial;\n\t\t}\n\t}\n\n\tbutton:not([class*=\"sui-button-\"]) {\n\t\twidth: 100%;\n\t\tcursor: pointer;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmargin: 20px 0 10px !important;\n\t\tpadding: 10px !important;\n\t\tborder: 0;\n\t\tborder-radius: 4px;\n\t\tbackground-color: #fff;\n\t\tcolor: #17a8e3 !important;\n\t\ttransition: 0.2s ease all;\n\n\t\t* {\n\t\t\tpointer-events: none;\n\t\t}\n\n\t\tstrong {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 0 1 auto;\n\t\t\tcolor: inherit;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 500;\n\t\t}\n\n\t\t[class*=\"sui-icon-\"] {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-left: 5px;\n\t\t\ttransition: 0.2s ease all;\n\n\t\t\t&:before {\n\t\t\t\tcolor: inherit;\n\t\t\t}\n\t\t}\n\n\t\t&:hover,\n\t\t&:focus {\n\t\t\toutline: none;\n\t\t\tbox-shadow: none;\n\t\t}\n\n\t\t&:hover {\n\t\t\tbackground-color: #fafafa;\n\t\t}\n\n\t\t&:focus {\n\t\t\tbackground-color: #e1f6ff;\n\t\t}\n\n\t\t@media ", " {\n\t\t\tdisplay: none !important;\n\t\t}\n\t}\n\n\t.open & {\n\t\tbutton:not([class*=\"sui-button-\"]) {\n\t\t\t[class*=\"sui-icon-\"] {\n\t\t\t\ttransform: rotate(180deg);\n\t\t\t}\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpointer-events: none;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: space-between;\n\t\tposition: absolute;\n\t\ttop: 50%;\n\t\tright: 6px;\n\t\tleft: 6px;\n\t\ttransform: translateY(-50%);\n\t}\n"])), device$1.tablet, device$1.tablet, device$1.tablet);
+})(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral$1(["\n\tmargin-top: 1px;\n\tmargin-right: 23px;\n\tfont-size: 13px;\n\tline-height: 22px;\n\tletter-spacing: -0.2px;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-right: 5px;\n\n\t\t&:before {\n\t\t\tcolor: inherit;\n\t\t}\n\t}\n"])));
+var ListWrapper = styled.ul(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral$1(["\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\n\t@media ", " {\n\t\toverflow: hidden;\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t}\n"])), device.tablet);
+var ListItem = styled.li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\tmargin: 0 0 20px;\n\tpadding: 0;\n\tborder: 0;\n\tlist-style: none;\n\n\t&:last-child {\n\t\tmargin-bottom: 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 33.33%;\n\t\tflex: 0 0 auto;\n\t\tmargin: 0 1px 0 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 25%;\n\t}\n"])), device.tablet, device.desktop);
+var Navigation = styled.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\n\tbutton[class*=\"sui-button-\"] {\n\t\tdisplay: none !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: block !important;\n\t\t\tpointer-events: initial;\n\t\t}\n\t}\n\n\tbutton:not([class*=\"sui-button-\"]) {\n\t\twidth: 100%;\n\t\tcursor: pointer;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmargin: 20px 0 10px !important;\n\t\tpadding: 10px !important;\n\t\tborder: 0;\n\t\tborder-radius: 4px;\n\t\tbackground-color: #fff;\n\t\tcolor: #17a8e3 !important;\n\t\ttransition: 0.2s ease all;\n\n\t\t* {\n\t\t\tpointer-events: none;\n\t\t}\n\n\t\tstrong {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 0 1 auto;\n\t\t\tcolor: inherit;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 500;\n\t\t}\n\n\t\t[class*=\"sui-icon-\"] {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-left: 5px;\n\t\t\ttransition: 0.2s ease all;\n\n\t\t\t&:before {\n\t\t\t\tcolor: inherit;\n\t\t\t}\n\t\t}\n\n\t\t&:hover,\n\t\t&:focus {\n\t\t\toutline: none;\n\t\t\tbox-shadow: none;\n\t\t}\n\n\t\t&:hover {\n\t\t\tbackground-color: #fafafa;\n\t\t}\n\n\t\t&:focus {\n\t\t\tbackground-color: #e1f6ff;\n\t\t}\n\n\t\t@media ", " {\n\t\t\tdisplay: none !important;\n\t\t}\n\t}\n\n\t.open & {\n\t\tbutton:not([class*=\"sui-button-\"]) {\n\t\t\t[class*=\"sui-icon-\"] {\n\t\t\t\ttransform: rotate(180deg);\n\t\t\t}\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpointer-events: none;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: space-between;\n\t\tposition: absolute;\n\t\ttop: 50%;\n\t\tright: 6px;\n\t\tleft: 6px;\n\t\ttransform: translateY(-50%);\n\t}\n"])), device.tablet, device.tablet, device.tablet);
 var TutorialsSlider = /*#__PURE__*/function (_Component) {
-  _inherits(TutorialsSlider, _Component);
+  _inherits$2(TutorialsSlider, _Component);
 
-  var _super = _createSuper(TutorialsSlider);
+  var _super = _createSuper$2(TutorialsSlider);
 
   function TutorialsSlider(props) {
     var _this;
 
-    _classCallCheck(this, TutorialsSlider);
+    _classCallCheck$2(this, TutorialsSlider);
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "closeButtonClicked", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "closeButtonClicked", function (e) {
       _this.hideComponent(e);
 
       if (_this.props.onCloseClick) {
@@ -828,14 +1031,14 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "hideComponent", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "hideComponent", function (e) {
       var sliderBox = e.currentTarget.closest(".sui-tutorials-slider-box"),
           event = new Event("sliderTutorialClosed");
       sliderBox.dispatchEvent(event);
       sliderBox.remove();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "openLink", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "openLink", function (e) {
       var ref = e.target !== null ? e.target : e.srcElement;
 
       if (ref) {
@@ -843,7 +1046,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "keyNavigate", function (direction) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "keyNavigate", function (direction) {
       var focusedPost = document.activeElement.closest("li"); // Abort if the focused element doesn't have a li parent.
 
       if (!focusedPost) {
@@ -869,28 +1072,28 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       newFocusedPost.firstElementChild.focus();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleKeydown", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "handleKeydown", function (e) {
       var key = e.which || e.keyCode;
 
       switch (key) {
-        case aria$1.KeyCode.RETURN:
+        case aria.KeyCode.RETURN:
           _this.openLink(e);
 
           break;
 
-        case aria$1.KeyCode.LEFT:
+        case aria.KeyCode.LEFT:
           _this.keyNavigate("prev");
 
           break;
 
-        case aria$1.KeyCode.RIGHT:
+        case aria.KeyCode.RIGHT:
           _this.keyNavigate("next");
 
           break;
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleScroll", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "handleScroll", function (e) {
       var tutorialsContainer = e.currentTarget;
       var isFirstSlide = false,
           isLastSlide = false; // We're at the first slide.
@@ -912,7 +1115,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "navigationButtonClicked", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "navigationButtonClicked", function (e) {
       var tutorialsContainer = e.currentTarget.parentNode.previousElementSibling; // Scroll to the next or previous "slide".
 
       if (e.currentTarget.classList.contains("next")) {
@@ -929,22 +1132,22 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       isLoaded: false,
       isFirstSlide: true,
       isLastSlide: false,
-      isShowingAll: window.innerWidth > screen$1.tablet
+      isShowingAll: window.innerWidth > screen.tablet
     };
-    _this.closeButtonClicked = _this.closeButtonClicked.bind(_assertThisInitialized(_this));
-    _this.hideComponent = _this.hideComponent.bind(_assertThisInitialized(_this));
-    _this.openLink = _this.openLink.bind(_assertThisInitialized(_this));
-    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized(_this));
-    _this.navigationButtonClicked = _this.navigationButtonClicked.bind(_assertThisInitialized(_this));
-    _this.handleScroll = _this.handleScroll.bind(_assertThisInitialized(_this));
+    _this.closeButtonClicked = _this.closeButtonClicked.bind(_assertThisInitialized$2(_this));
+    _this.hideComponent = _this.hideComponent.bind(_assertThisInitialized$2(_this));
+    _this.openLink = _this.openLink.bind(_assertThisInitialized$2(_this));
+    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized$2(_this));
+    _this.navigationButtonClicked = _this.navigationButtonClicked.bind(_assertThisInitialized$2(_this));
+    _this.handleScroll = _this.handleScroll.bind(_assertThisInitialized$2(_this));
     return _this;
   }
 
-  _createClass(TutorialsSlider, [{
+  _createClass$2(TutorialsSlider, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       // Handle the focused element when clicking on "show more"/"show lesss" on mobile.
-      if (this.state.isShowingAll !== prevState.isShowingAll && window.innerWidth < screen$1.tablet) {
+      if (this.state.isShowingAll !== prevState.isShowingAll && window.innerWidth < screen.tablet) {
         if (this.secondTutorial.current) {
           var tutorialToFocus;
 
@@ -1037,7 +1240,7 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           message: loading
         });
       } else {
-        var navigation = /*#__PURE__*/React.createElement(Navigation, null, (3 < posts.length && window.innerWidth < screen$1.desktop || 4 < posts.length) && [/*#__PURE__*/React.createElement("button", {
+        var navigation = /*#__PURE__*/React.createElement(Navigation, null, (3 < posts.length && window.innerWidth < screen.desktop || 4 < posts.length) && [/*#__PURE__*/React.createElement("button", {
           key: "1",
           className: "sui-button-icon prev",
           onClick: function onClick(e) {
@@ -1095,16 +1298,16 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           "aria-hidden": "true"
         }), view_all), /*#__PURE__*/React.createElement("div", {
           className: "sui-tooltip",
-          "data-tooltip": "Hide Tutorials"
-        }, /*#__PURE__*/React.createElement("button", {
-          onClick: function onClick(e) {
-            return _this3.closeButtonClicked(e);
-          },
-          className: "sui-button-icon" // eslint-disable-next-line prettier/prettier
+          "data-tooltip": "Hide Tutorials" // eslint-disable-next-line prettier/prettier
           ,
           style: {
             marginRight: "-9px"
           }
+        }, /*#__PURE__*/React.createElement("button", {
+          onClick: function onClick(e) {
+            return _this3.closeButtonClicked(e);
+          },
+          className: "sui-button-icon"
         }, /*#__PURE__*/React.createElement("span", {
           className: "sui-icon-close sui-md",
           "aria-hidden": "true"
