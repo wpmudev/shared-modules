@@ -1052,6 +1052,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.16.0":
+  version "7.17.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
+  integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.12.7", "@babel/template@^7.15.4":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.15.4.tgz#51898d35dcf3faa670c4ee6afcfd517ee139f194"
@@ -3901,6 +3908,13 @@
     "@babel/runtime" "^7.13.10"
     "@wordpress/i18n" "^3.20.0"
     "@wordpress/url" "^2.22.2"
+
+"@wordpress/escape-html@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@wordpress/escape-html/-/escape-html-2.7.0.tgz#40f2db2e159c8057158a481e877c1c9d26d12372"
+  integrity sha512-PDTAImkw0yDrW06NSO2qLklm0QXegoykVZWci5xa8qnYSCBrkBrzv9G3cHtCKsGZzfZ43WYYKIpO6srJyM+l0A==
+  dependencies:
+    "@babel/runtime" "^7.16.0"
 
 "@wordpress/hooks@^2.12.3":
   version "2.12.3"
