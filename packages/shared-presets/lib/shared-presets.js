@@ -12,13 +12,7 @@ import EditModal from './components/edit-modal';
 import { PresetsAccordionItem } from './components/accordion-item';
 
 import Requester from './requests-handler';
-
-// List of special charaters to replace on sanitization.
-const tagsToReplace = {
-	'&': '&amp;',
-	'<': '&lt;',
-	'>': '&gt;'
-};
+import { escapeHTML } from '@wordpress/escape-html';
 
 const LoadingContent = styled.div`
 .sui-wrap && {
@@ -294,7 +288,7 @@ export const Presets = ( {
 
 					res.data.name = res.data.name.substring( 0, 200 );
 					res.data.description = res.data.description.substring( 0, 200 );
-					newConfigName = res.data.name;
+					newConfigName = escapeHTML( res.data.name );
 
 					return RequestsHandler.addNew( configs, res.data );
 				}
@@ -304,7 +298,12 @@ export const Presets = ( {
 			} )
 				.then( ( updatedConfigs ) => {
 					setConfigs( updatedConfigs );
-					successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+					successNotice(
+						lang.uploadActionSuccessMessage.replace(
+							'{configName}',
+							newConfigName
+						)
+					);
 				} )
 				.catch( ( res ) => requestFailureNotice( res ) );
 		}
@@ -387,9 +386,7 @@ export const Presets = ( {
 					successNotice(
 						lang.editAction.successMessage.replace(
 							'{configName}',
-							configData.name.replace( /[&<>]/g, function( tag ) {
-								return tagsToReplace[tag] || tag;
-							} )
+							escapeHTML( configData.name )
 						)
 					);
 				} )
@@ -426,9 +423,7 @@ export const Presets = ( {
 				successNotice(
 					lang.applyAction.successMessage.replace(
 						'{configName}',
-						currentConfig.name.replace( /[&<>]/g, function( tag ) {
-							return tagsToReplace[tag] || tag;
-						} )
+						escapeHTML( currentConfig.name )
 					)
 				);
 			})
