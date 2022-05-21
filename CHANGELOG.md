@@ -16,8 +16,8 @@ All notable changes to this project will be documented in this file. See [Conven
 
 #### 🏠 Internal
 
-- Bump node-fetch from 2.6.5 to 2.6.7 [#129](https://github.com/wpmudev/shared-modules/pull/129) ([@dependabot[bot]](https://github.com/apps/dependabot))
-- Bump minimist from 1.2.5 to 1.2.6 [#126](https://github.com/wpmudev/shared-modules/pull/126) ([@dependabot[bot]](https://github.com/apps/dependabot))
+- Bump node-fetch from 2.6.5 to 2.6.7 [#129](https://github.com/wpmudev/shared-modules/pull/129) ([@iamleigh](https://github.com/iamleigh))
+- Bump minimist from 1.2.5 to 1.2.6 [#126](https://github.com/wpmudev/shared-modules/pull/126) ([@iamleigh](https://github.com/iamleigh))
 
 #### Committers: 1
 
