@@ -54,10 +54,14 @@ export class PresetsTable extends Component {
 
 	render() {
 		const rows = Children.map(this.props.children, (row) => {
+			const rowName = row.props.name;
+			const rowStatus = row.props.status;
+			const rowContent = rowStatus[0].replace(/( - )/g, "\n");
+
 			return (
 				<tr>
-					<td>{row.props.name}</td>
-					<td>{row.props.status}</td>
+					<td>{rowName}</td>
+					<td>{rowContent}</td>
 				</tr>
 			);
 		});
