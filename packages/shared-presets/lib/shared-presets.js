@@ -212,6 +212,9 @@ export const Presets = ( {
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
 		retrieveConfigs();
+		return () => {
+			setIsLoading( false );
+		};
 	}, []);
 
 	const retrieveConfigs = () => {
