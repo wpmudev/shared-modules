@@ -65,7 +65,7 @@ export class PresetsTable extends Component {
 			const rowName = row.props.name;
 			const rowStatus = row.props.status;
 			const rowContent = rowStatus[0].replace(/( - )/g, "\n");
-			const rowTag = !row.props.isPro ? <span className="sui-tag sui-tag-pro">Pro</span> : '';
+			const rowTag = row.props.isPro ? <span className="sui-tag sui-tag-pro">Pro</span> : '';
 
 			return (
 				<tr>
