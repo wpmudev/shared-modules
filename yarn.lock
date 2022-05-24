@@ -4014,6 +4014,11 @@
   dependencies:
     "@wpmudev/react-button-icon" "^1.1.0"
 
+"@wpmudev/react-pagination@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-pagination/-/react-pagination-1.1.1.tgz#6c484f827a187da0eebc61cdee5d0662fd8f2ffb"
+  integrity sha512-M+IAyJy3uq89lRTJK1MoeepYkj4jtTJRsHGCxsOdAt4iX4/UYFB2wnWxPatKYMvlnhK+z5V20iQiKlt059ygLg==
+
 "@wpmudev/react-post@^1.1.5":
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-post/-/react-post-1.1.5.tgz#b84d15ca075216579d6b14dd6b2c0e2446c4ade3"

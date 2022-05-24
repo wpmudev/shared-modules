@@ -47,6 +47,7 @@
     "@wpmudev/react-input": "^1.0.4",
     "@wpmudev/react-modal": "^1.0.3",
     "@wpmudev/react-notifications": "^1.0.8",
+    "@wpmudev/react-pagination": "^1.1.1",
     "styled-components": "^5.3.0"
   },
   "resolutions": {
