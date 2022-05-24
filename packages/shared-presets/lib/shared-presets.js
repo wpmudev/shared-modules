@@ -564,7 +564,7 @@ export const Presets = ( {
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ item.config.map( ( data ) => (
-								<div key={ data.id } name={ data.name } status={ data.content } />
+								<div key={ data.id } name={ data.name } status={ data.content } isPro={ data.isPro ? true : false } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
@@ -592,7 +592,7 @@ export const Presets = ( {
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } isPro={ item.config.isPro ? true : false } />
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } isPro={ item.config.strings[ isPro ] ? true : false } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
