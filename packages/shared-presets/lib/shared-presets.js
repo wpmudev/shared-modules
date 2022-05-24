@@ -5,6 +5,11 @@ import { deviceMax } from "./components/utils";
 import { Box, BoxBody, BoxFooter } from "@wpmudev/react-box";
 import { Notifications } from "@wpmudev/react-notifications";
 import { Button } from "@wpmudev/react-button";
+import {
+	Pagination,
+	PaginationResults,
+	PaginationNav,
+} from "@wpmudev/react-pagination";
 
 import ApplyModal from "./components/apply-modal";
 import DeleteModal from "./components/delete-modal";
@@ -543,15 +548,30 @@ export const Presets = ({
 		});
 	};
 
+	// Pagination modified template.
+	const newTemplate = ({ ...props }) => {
+		return (
+			<>
+				{PaginationNav({ ...props })}
+
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={{ borderBottomWidth: 0 }}
+				>
+					{PaginationResults({ ...props })}
+				</div>
+
+				{PaginationNav({ ...props })}
+			</>
+		);
+	};
+
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 
 	const Table = (
 		<>
 			{!isEmpty && setDemoData && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={{ borderBottomWidth: 0 }}
-				>
+				<Pagination limit={10} paginationContent={newTemplate}>
 					{configs.map((item, index) => (
 						<PresetsAccordionItem
 							key={index}
@@ -575,14 +595,11 @@ export const Presets = ({
 							))}
 						</PresetsAccordionItem>
 					))}
-				</div>
+				</Pagination>
 			)}
 
 			{!isEmpty && !setDemoData && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={{ borderBottomWidth: 0 }}
-				>
+				<Pagination limit={10} paginationContent={newTemplate}>
 					{configs.map((item) => (
 						<PresetsAccordionItem
 							key={item.id}
@@ -610,7 +627,7 @@ export const Presets = ({
 							))}
 						</PresetsAccordionItem>
 					))}
-				</div>
+				</Pagination>
 			)}
 		</>
 	);
