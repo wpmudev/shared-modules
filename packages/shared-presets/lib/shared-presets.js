@@ -212,6 +212,9 @@ export const Presets = ( {
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
 		retrieveConfigs();
+		return () => {
+			setIsLoading( false );
+		};
 	}, []);
 
 	const retrieveConfigs = () => {
@@ -366,31 +369,31 @@ export const Presets = ( {
 					.then( ( newConfigs ) => setConfigs( newConfigs ) )
 					.catch( ( res ) => requestFailureNotice( res ) )
 					.then( () => setIsEditOpen( false ) );
+			} else {
+				// Creating a new config.
+				RequestsHandler.create( data )
+					.then( ( res ) => {
+						if ( res.data && res.data.config ) {
+							configData.config = res.data.config;
+							return RequestsHandler.addNew( [...configs], configData );
+						}
+
+						if ( ! res.success ) {
+							displayErrorMessage( res.data.error_msg );
+						}
+					} )
+					.then( ( updatedConfigs ) => {
+						setConfigs( updatedConfigs );
+						setIsEditOpen( false );
+						successNotice(
+							lang.editAction.successMessage.replace(
+								'{configName}',
+								escapeHTML( configData.name )
+							)
+						);
+					} )
+					.catch( ( res ) => requestFailureNotice( res ) );
 			}
-
-			// Creating a new config.
-			RequestsHandler.create( data )
-				.then( ( res ) => {
-					if ( res.data && res.data.config ) {
-						configData.config = res.data.config;
-						return RequestsHandler.addNew( [...configs], configData );
-					}
-
-					if ( ! res.success ) {
-						displayErrorMessage( res.data.error_msg );
-					}
-				} )
-				.then( ( updatedConfigs ) => {
-					setConfigs( updatedConfigs );
-					setIsEditOpen( false );
-					successNotice(
-						lang.editAction.successMessage.replace(
-							'{configName}',
-							escapeHTML( configData.name )
-						)
-					);
-				} )
-				.catch( ( res ) => requestFailureNotice( res ) );
 		}
 	};
 
