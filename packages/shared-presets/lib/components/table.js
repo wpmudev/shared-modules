@@ -22,6 +22,7 @@ const Table = styled.table`
 				color: #888;
 				font: 500 13px/22px "Roboto", sans-serif;
 				letter-spacing: -0.25px;
+				position: relative;
 
 				div {
 					overflow: hidden;
@@ -29,6 +30,13 @@ const Table = styled.table`
 					text-overflow: ellipsis;
 					-webkit-line-clamp: 2;
 					-webkit-box-orient: vertical;
+				}
+
+				.sui-tag-pro{
+					margin-left: 6px;
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
 				}
 
 				&:first-child {
@@ -57,11 +65,12 @@ export class PresetsTable extends Component {
 			const rowName = row.props.name;
 			const rowStatus = row.props.status;
 			const rowContent = rowStatus[0].replace(/( - )/g, "\n");
+			const rowTag = row.props.protag ? <span className="sui-tag sui-tag-pro">Pro</span> : null;
 
 			return (
 				<tr>
 					<td>{rowName}</td>
-					<td>{rowContent}</td>
+					<td>{rowContent}{ rowTag }</td>
 				</tr>
 			);
 		});
