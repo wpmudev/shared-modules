@@ -564,7 +564,7 @@ export const Presets = ( {
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
 							{ item.config.map( ( data ) => (
-								<div key={ data.id } name={ data.name } status={ data.content } isPro={ data.isPro ? true : false } />
+								<div key={ data.id } name={ data.name } status={ data.content } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
