@@ -562,6 +562,7 @@ export const Presets = ( {
 							id={ item.id }
 							default={ item.default }
 							name={ item.name }
+							created={ item.created_date }
 							description={ item.description }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }

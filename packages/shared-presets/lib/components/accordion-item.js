@@ -123,7 +123,7 @@ export class PresetsAccordionItem extends Component {
 
     render() {
         const { open } = this.state;
-        const { editAction, applyAction, deleteAction, downloadAction } = this.props;
+        const { editAction, applyAction, deleteAction, downloadAction, created = '' } = this.props;
 
         let clazz = !open
             ? 'sui-accordion-item'
@@ -160,12 +160,14 @@ export class PresetsAccordionItem extends Component {
 						image: this.props.image
 					} }
                     onClick={ e => this.toggle(e) }>
-					<div size="3">
+					<div size={null !== created && created !== '' ? '3': '5'}>
 						<div style={ descstyles }>{ this.props.description }</div>
 					</div>
-                    <div size="2">
-                        <div style={ descstyles }>{ this.props.created }</div>
-                    </div>
+                    <>
+                        {null !== created && created !== '' && (
+                            <div size="2"><div style={ descstyles }>{ created }</div></div>
+                        )}
+                    </>
 					<div>
 						{ this.props.showApplyButton && (
 							<Button
