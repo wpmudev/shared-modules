@@ -109,12 +109,11 @@ const SkipArticles = styled.a`
 		left: 0;
 		top: 0;
 		line-height: normal;
-		display: block;
-		font-size: 14px;
-		font-weight: 600;
+		font-size: 13px;
+		font-weight: 500;
 		padding: 15px 23px 14px;
 		background: #fff;
-		color: #2271b1;
+		color: #1286b5;
 		outline: none;
 		border-radius: 3px;
 		box-shadow: 0 2px 7px 0 rgb(0 0 0 / 5%), 0 0 2px 0 #17a8e3 !important;
@@ -219,7 +218,7 @@ export class TutorialsList extends Component {
 	render() {
 		const { posts, error, isLoaded } = this.state;
 
-		const { skipLink = '' } = this.props;
+		const { skipTo = '' } = this.props;
 
 		const translate = this.props.translate;
 
@@ -296,7 +295,7 @@ export class TutorialsList extends Component {
 							borderBottomLeftRadius: "4px",
 							position: "relative"
 						}}>
-						<SkipArticles href={skipLink}>Skip articles</SkipArticles>
+						<SkipArticles href={skipTo}>Skip articles</SkipArticles>
 						<ListWrapper>{listPosts}</ListWrapper>
 					</div>
 				</div>

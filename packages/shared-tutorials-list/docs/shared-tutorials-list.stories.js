@@ -39,7 +39,7 @@ primary.args = {
 	category: defender,
 	viewAll: 'https://premium.wpmudev.org/',
 	postLinkParams: '',
-	skipLink: '#storybook-panel-root',
+	skipTo: '#storybook-panel-root',
 };
 primary.parameters = {
 	notes: Documentation
