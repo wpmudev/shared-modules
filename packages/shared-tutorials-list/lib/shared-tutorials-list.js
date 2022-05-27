@@ -101,6 +101,26 @@ const Link = styled.a.attrs(props => ({
 	}
 `;
 
+const SkipArticles = styled.a`
+	position: absolute;
+	top: -1000em;
+	z-index: 1;
+	&:focus {
+		left: 0;
+		top: 0;
+		line-height: normal;
+		display: block;
+		font-size: 14px;
+		font-weight: 600;
+		padding: 15px 23px 14px;
+		background: #fff;
+		color: #2271b1;
+		outline: none;
+		border-radius: 3px;
+		box-shadow: 0 2px 7px 0 rgb(0 0 0 / 5%), 0 0 2px 0 #17a8e3 !important;
+	}
+`;
+
 export class TutorialsList extends Component {
 	_isMounted = false;
 
@@ -199,6 +219,8 @@ export class TutorialsList extends Component {
 	render() {
 		const { posts, error, isLoaded } = this.state;
 
+		const { skipLink = '' } = this.props;
+
 		const translate = this.props.translate;
 
 		const loading =
@@ -271,8 +293,10 @@ export class TutorialsList extends Component {
 						style={{
 							backgroundColor: "#FAFAFA",
 							borderBottomRightRadius: "4px",
-							borderBottomLeftRadius: "4px"
+							borderBottomLeftRadius: "4px",
+							position: "relative"
 						}}>
+						<SkipArticles href={skipLink}>Skip articles</SkipArticles>
 						<ListWrapper>{listPosts}</ListWrapper>
 					</div>
 				</div>
