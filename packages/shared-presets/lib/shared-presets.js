@@ -571,7 +571,7 @@ export const Presets = ({
 	const Table = (
 		<>
 			{!isEmpty && setDemoData && (
-				<Pagination limit={1} paginationContent={newTemplate}>
+				<Pagination limit={10} paginationContent={newTemplate}>
 					{configs.map((item, index) => (
 						<PresetsAccordionItem
 							key={index}
@@ -599,7 +599,7 @@ export const Presets = ({
 			)}
 
 			{!isEmpty && !setDemoData && (
-				<Pagination limit={1} paginationContent={newTemplate}>
+				<Pagination limit={10} paginationContent={newTemplate}>
 					{configs.map((item) => (
 						<PresetsAccordionItem
 							key={item.id}
