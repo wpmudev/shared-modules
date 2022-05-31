@@ -5,6 +5,11 @@ import { deviceMax } from "./components/utils";
 import { Box, BoxBody, BoxFooter } from "@wpmudev/react-box";
 import { Notifications } from "@wpmudev/react-notifications";
 import { Button } from "@wpmudev/react-button";
+import {
+	Pagination,
+	PaginationResults,
+	PaginationNav,
+} from "@wpmudev/react-pagination";
 
 import ApplyModal from "./components/apply-modal";
 import DeleteModal from "./components/delete-modal";
@@ -376,31 +381,31 @@ export const Presets = ({
 					.then((newConfigs) => setConfigs(newConfigs))
 					.catch((res) => requestFailureNotice(res))
 					.then(() => setIsEditOpen(false));
+			} else {
+				// Creating a new config.
+				RequestsHandler.create(data)
+					.then((res) => {
+						if (res.data && res.data.config) {
+							configData.config = res.data.config;
+							return RequestsHandler.addNew([...configs], configData);
+						}
+
+						if (!res.success) {
+							displayErrorMessage(res.data.error_msg);
+						}
+					})
+					.then((updatedConfigs) => {
+						setConfigs(updatedConfigs);
+						setIsEditOpen(false);
+						successNotice(
+							lang.editAction.successMessage.replace(
+								"{configName}",
+								escapeHTML(configData.name)
+							)
+						);
+					})
+					.catch((res) => requestFailureNotice(res));
 			}
-
-			// Creating a new config.
-			RequestsHandler.create(data)
-				.then((res) => {
-					if (res.data && res.data.config) {
-						configData.config = res.data.config;
-						return RequestsHandler.addNew([...configs], configData);
-					}
-
-					if (!res.success) {
-						displayErrorMessage(res.data.error_msg);
-					}
-				})
-				.then((updatedConfigs) => {
-					setConfigs(updatedConfigs);
-					setIsEditOpen(false);
-					successNotice(
-						lang.editAction.successMessage.replace(
-							"{configName}",
-							escapeHTML(configData.name)
-						)
-					);
-				})
-				.catch((res) => requestFailureNotice(res));
 		}
 	};
 
@@ -546,8 +551,13 @@ export const Presets = ({
 		});
 	};
 
-	const tableImage = !isWhitelabel ? urls.accordionImg : null;
+	// Pagination modified template.
+	const newTemplate = ({ ...props }) => {
+		return (
+			<>
+				{PaginationNav({ ...props })}
 
+<<<<<<< HEAD
 	const Table = (
 		<>
 			{!isEmpty && setDemoData && (
@@ -580,10 +590,54 @@ export const Presets = ({
 							</PresetsAccordionItem>
 						))}
 					</div>
+=======
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={{ borderBottomWidth: 0 }}
+				>
+					{PaginationResults({ ...props })}
+				</div>
+
+				{PaginationNav({ ...props })}
+			</>
+		);
+	};
+
+	const tableImage = !isWhitelabel ? urls.accordionImg : null;
+
+	const Table = (
+		<>
+			{!isEmpty && setDemoData && (
+				<Pagination limit={10} paginationContent={newTemplate}>
+					{configs.map((item, index) => (
+						<PresetsAccordionItem
+							key={index}
+							id={index}
+							default={item.default}
+							name={item.name}
+							description={item.description}
+							image={tableImage}
+							showApplyButton={!isWidget}
+							applyLabel={lang.apply}
+							applyAction={() => openModal("apply", item)}
+							downloadLabel={lang.download}
+							downloadAction={() => doDownload(item)}
+							editLabel={lang.edit}
+							editAction={() => openModal("edit", item)}
+							deleteLabel={lang.delete}
+							deleteAction={() => openModal("delete", item)}
+						>
+							{item.config.map((data) => (
+								<div key={data.id} name={data.name} status={data.content} />
+							))}
+						</PresetsAccordionItem>
+					))}
+>>>>>>> 42b3f6a6e59b7903f275c1fe9afa0524af965574
 				</Pagination>
 			)}
 
 			{!isEmpty && !setDemoData && (
+<<<<<<< HEAD
 				<Pagination limit={1}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
@@ -617,6 +671,36 @@ export const Presets = ({
 							</PresetsAccordionItem>
 						))}
 					</div>
+=======
+				<Pagination limit={10} paginationContent={newTemplate}>
+					{configs.map((item) => (
+						<PresetsAccordionItem
+							key={item.id}
+							id={item.id}
+							default={item.default}
+							name={item.name}
+							description={item.description}
+							image={tableImage}
+							showApplyButton={!isWidget}
+							applyLabel={lang.apply}
+							applyAction={() => openModal("apply", item)}
+							downloadLabel={lang.download}
+							downloadAction={() => doDownload(item)}
+							editLabel={lang.edit}
+							editAction={() => openModal("edit", item)}
+							deleteLabel={lang.delete}
+							deleteAction={() => openModal("delete", item)}
+						>
+							{Object.keys(item.config.strings).map((name) => (
+								<div
+									key={name}
+									name={lang.settingsLabels[name]}
+									status={item.config.strings[name]}
+								/>
+							))}
+						</PresetsAccordionItem>
+					))}
+>>>>>>> 42b3f6a6e59b7903f275c1fe9afa0524af965574
 				</Pagination>
 			)}
 		</>
