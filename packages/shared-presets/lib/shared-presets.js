@@ -566,7 +566,7 @@ export const Presets = ({
 	const Table = (
 		<>
 			{!isEmpty && setDemoData && (
-				<Pagination limit={1} paginationContent={newTemplate}>
+				<Pagination limit={10} paginationContent={newTemplate}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
 						style={{ borderBottomWidth: 0 }}
@@ -599,7 +599,7 @@ export const Presets = ({
 			)}
 
 			{!isEmpty && !setDemoData && (
-				<Pagination limit={1} paginationContent={newTemplate}>
+				<Pagination limit={10} paginationContent={newTemplate}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
 						style={{ borderBottomWidth: 0 }}
