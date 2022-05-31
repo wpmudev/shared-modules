@@ -38,8 +38,7 @@ primary.args = {
 	title: 'Tutorials',
 	category: defender,
 	viewAll: 'https://premium.wpmudev.org/',
-	postLinkParams: '',
-	skipTo: '#storybook-panel-root',
+	postLinkParams: ''
 };
 primary.parameters = {
 	notes: Documentation
