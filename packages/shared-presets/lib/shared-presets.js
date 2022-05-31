@@ -150,7 +150,14 @@ export const Presets = ( {
 				successMessage: '{configName} config created successfully.',
 			},
 			deleteAction: {},
-			settingsLabels: {},
+			settingsLabels: {
+				bulk_smush: 'Bulk Smush',
+				lazy_load: 'Lazy Load',
+				cdn: 'CDN',
+				webp_mod: 'WebP Mod',
+				integrations: 'Integrations',
+				settings: 'Settings',
+			},
 		},
 		sourceLang
 	);
@@ -158,46 +165,21 @@ export const Presets = ( {
 	// Default demo data.
 	let demoData = [
 		{
-			default: true,
-			name: "Basic config",
-			description: "Recommended performance config for every site.",
-			config: [
-				{
-					id: "bulk_smush",
-					name: "Bulk Smush",
-					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
-				},
-				{
-					id: "lazy_load",
-					name: "Lazy Load",
-					content: "Inactive"
-				},
-				{
-					id: "cdn",
-					name: "CDN",
-					content: "Inactive"
-				},
-				{
-					id: "webp_mod",
-					name: "Local WebP",
-					content: "Inactive"
-				},
-				{
-					id: "integrations",
-					name: "Integrations",
-					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
-				},
-				{
-					id: "tools",
-					name: "Tools",
-					content: "Image Resize Detection - Inactive"
-				},
-				{
-					id: "settings",
-					name: "Settings",
-					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+			id: 1,
+			hub_id: 1,
+			name: "Basic Config",
+			description: "Recommended backup advanced config for all site.",
+			config: {
+				strings: {
+					bulk_smush: ["Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"],
+					lazy_load: ["Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"],
+					cdn: ["Inactive"],
+					webp_mod: ["Inactive"],
+					integrations: ["Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"],
+					tools: ["Image Resize Detection - Inactive"],
+					settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
 				}
-			],
+			},
 		}
 	];
 
@@ -543,35 +525,7 @@ export const Presets = ( {
 
 	const Table = (
 		<>
-			{ ! isEmpty && setDemoData && (
-				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-					{ configs.map( ( item, index ) => (
-						<PresetsAccordionItem
-							key={ index }
-							id={ index }
-							default={ item.default }
-							name={ item.name }
-							description={ item.description }
-							image={ tableImage }
-							showApplyButton={ ! isWidget }
-							applyLabel={ lang.apply }
-							applyAction={ () => openModal( 'apply', item ) }
-							downloadLabel={ lang.download }
-							downloadAction={ () => doDownload( item ) }
-							editLabel={ lang.edit }
-							editAction={ () => openModal( 'edit', item ) }
-							deleteLabel={ lang.delete }
-							deleteAction={ () => openModal( 'delete', item ) }
-						>
-							{ item.config.map( ( data ) => (
-								<div key={ data.id } name={ data.name } status={ data.content } />
-							) ) }
-						</PresetsAccordionItem>
-					) ) }
-				</div>
-			) }
-
-			{ ! isEmpty && ! setDemoData && (
+			{ ! isEmpty && (
 				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
 					{ configs.map( item => (
 						<PresetsAccordionItem
