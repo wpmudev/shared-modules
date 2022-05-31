@@ -14,6 +14,9 @@ import { PresetsAccordionItem } from "./components/accordion-item";
 import Requester from "./requests-handler";
 import { escapeHTML } from "@wordpress/escape-html";
 
+import { Pagination } from '@wpmudev/react-pagination';
+
+
 const LoadingContent = styled.div`
 	.sui-wrap && {
 		position: relative;
@@ -548,69 +551,73 @@ export const Presets = ({
 	const Table = (
 		<>
 			{!isEmpty && setDemoData && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={{ borderBottomWidth: 0 }}
-				>
-					{configs.map((item, index) => (
-						<PresetsAccordionItem
-							key={index}
-							id={index}
-							default={item.default}
-							name={item.name}
-							description={item.description}
-							image={tableImage}
-							showApplyButton={!isWidget}
-							applyLabel={lang.apply}
-							applyAction={() => openModal("apply", item)}
-							downloadLabel={lang.download}
-							downloadAction={() => doDownload(item)}
-							editLabel={lang.edit}
-							editAction={() => openModal("edit", item)}
-							deleteLabel={lang.delete}
-							deleteAction={() => openModal("delete", item)}
-						>
-							{item.config.map((data) => (
-								<div key={data.id} name={data.name} status={data.content} />
-							))}
-						</PresetsAccordionItem>
-					))}
-				</div>
+				<Pagination limit={1}>
+					<div
+						className="sui-accordion sui-accordion-flushed"
+						style={{ borderBottomWidth: 0 }}
+					>
+						{configs.map((item, index) => (
+							<PresetsAccordionItem
+								key={index}
+								id={index}
+								default={item.default}
+								name={item.name}
+								description={item.description}
+								image={tableImage}
+								showApplyButton={!isWidget}
+								applyLabel={lang.apply}
+								applyAction={() => openModal("apply", item)}
+								downloadLabel={lang.download}
+								downloadAction={() => doDownload(item)}
+								editLabel={lang.edit}
+								editAction={() => openModal("edit", item)}
+								deleteLabel={lang.delete}
+								deleteAction={() => openModal("delete", item)}
+							>
+								{item.config.map((data) => (
+									<div key={data.id} name={data.name} status={data.content} />
+								))}
+							</PresetsAccordionItem>
+						))}
+					</div>
+				</Pagination>
 			)}
 
 			{!isEmpty && !setDemoData && (
-				<div
-					className="sui-accordion sui-accordion-flushed"
-					style={{ borderBottomWidth: 0 }}
-				>
-					{configs.map((item) => (
-						<PresetsAccordionItem
-							key={item.id}
-							id={item.id}
-							default={item.default}
-							name={item.name}
-							description={item.description}
-							image={tableImage}
-							showApplyButton={!isWidget}
-							applyLabel={lang.apply}
-							applyAction={() => openModal("apply", item)}
-							downloadLabel={lang.download}
-							downloadAction={() => doDownload(item)}
-							editLabel={lang.edit}
-							editAction={() => openModal("edit", item)}
-							deleteLabel={lang.delete}
-							deleteAction={() => openModal("delete", item)}
-						>
-							{Object.keys(item.config.strings).map((name) => (
-								<div
-									key={name}
-									name={lang.settingsLabels[name]}
-									status={item.config.strings[name]}
-								/>
-							))}
-						</PresetsAccordionItem>
-					))}
-				</div>
+				<Pagination limit={1}>
+					<div
+						className="sui-accordion sui-accordion-flushed"
+						style={{ borderBottomWidth: 0 }}
+					>
+						{configs.map((item) => (
+							<PresetsAccordionItem
+								key={item.id}
+								id={item.id}
+								default={item.default}
+								name={item.name}
+								description={item.description}
+								image={tableImage}
+								showApplyButton={!isWidget}
+								applyLabel={lang.apply}
+								applyAction={() => openModal("apply", item)}
+								downloadLabel={lang.download}
+								downloadAction={() => doDownload(item)}
+								editLabel={lang.edit}
+								editAction={() => openModal("edit", item)}
+								deleteLabel={lang.delete}
+								deleteAction={() => openModal("delete", item)}
+							>
+								{Object.keys(item.config.strings).map((name) => (
+									<div
+										key={name}
+										name={lang.settingsLabels[name]}
+										status={item.config.strings[name]}
+									/>
+								))}
+							</PresetsAccordionItem>
+						))}
+					</div>
+				</Pagination>
 			)}
 		</>
 	);

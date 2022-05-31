@@ -1,5 +1,6 @@
 import React, { Component, Children } from 'react';
 import { PresetsAccordionItem } from './accordion-item';
+import { Pagination } from '@wpmudev/react-pagination';
 
 export class PresetsAccordion extends Component {
     constructor( props ) {
