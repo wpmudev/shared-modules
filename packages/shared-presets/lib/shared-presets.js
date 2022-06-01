@@ -166,7 +166,6 @@ export const Presets = ( {
 	let demoData = [
 		{
 			id: 1,
-			hub_id: 1,
 			name: "Basic Config",
 			description: "Recommended backup advanced config for all site.",
 			config: {
@@ -180,6 +179,7 @@ export const Presets = ( {
 					settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
 				}
 			},
+			plugin: "912"
 		}
 	];
 
@@ -215,46 +215,58 @@ export const Presets = ( {
 		}
 	};
 
+	const hasSameProperties = (obj1, obj2) => {
+		return Object.keys(obj1).every( function(property) {
+			return obj2.hasOwnProperty(property);
+		});
+	};
+
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
 		if ( setDemoData ) {
-			setIsLoading( true );
 
-			const newDemoData = (
-				{
-					name: "New Demo Config",
-					description: "Aenean lacinia bibendum nulla sed consectetur.",
-					config: [
-						{
-							id: "storage_limit",
-							name: "Storage Limit",
-							content: "5"
-						},
-						{
-							id: "exclusions",
-							name: "Exclusions",
-							content: "Active"
-						}
-					]
+			const configFile = e.target.files[0];
+			const reader = new FileReader();
+			
+			reader.readAsText(configFile);
+
+			reader.onload = function() {
+				setIsLoading( true );
+				try {
+					var fileContent = JSON.parse(reader.result); 
+					if (hasSameProperties(demoData[0], fileContent)) {
+						demoData.push(fileContent);
+						setTimeout( () => {
+							setConfigs( demoData );
+							setIsLoading( false );
+						}, 500 );
+						console.log(
+							'\n' +
+							'Button: Upload\n' +
+							'Action: To upload new configurations.\n' +
+							'Message: Config imported successfully.\n' +
+							'\n' +
+							'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+							'\n'
+						);
+					}
+				} catch (e) {
+					setTimeout( () => {
+						setIsLoading( false );
+					}, 500 );
+					console.log(
+						'\n' +
+						'Button: Upload\n' +
+						'Action: To upload new configurations.\n' +
+						'Message: Invalid JSON structure.\n' +
+						'\n' +
+						'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+						'\n'
+					);
+					return;
 				}
-			);
-
-			demoData.push( newDemoData );
-
-			setTimeout( () => {
-				setConfigs( demoData );
-				setIsLoading( false );
-			}, 500 );
-
-			console.log(
-				'\n' +
-				'Button: Upload\n' +
-				'Action: To upload new configurations.\n' +
-				'\n' +
-				'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
-				'\n'
-			);
+			};
 		} else {
 			RequestsHandler.upload( e ).then( ( res ) => {
 				if ( res.data && res.data.config ) {
@@ -344,7 +356,6 @@ export const Presets = ( {
 				'\n'
 			);
 		} else {
-
 			// Editing a config.
 			if ( currentConfig ) {
 				RequestsHandler.edit( [ ...configs ], currentConfig, configData )

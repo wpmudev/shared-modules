@@ -20,7 +20,6 @@ export const demoUrls = {
 export const demoContent = (
 	{
 		id: 2,
-		hub_id: 2,
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
 		config: {
