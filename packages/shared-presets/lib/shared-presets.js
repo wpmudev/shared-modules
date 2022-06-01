@@ -228,6 +228,24 @@ export const Presets = ( {
 
 			const configFile = e.target.files[0];
 			const reader = new FileReader();
+
+			const defaultStructure = {
+				id: '',
+				name: '',
+				description: '',
+				config: {
+					strings: {
+						bulk_smush: [],
+						lazy_load: [],
+						cdn: [],
+						webp_mod: [],
+						integrations: [],
+						tools: [],
+						settings: []
+					}
+				},
+				plugin: ''
+			};
 			
 			reader.readAsText(configFile);
 
@@ -235,7 +253,7 @@ export const Presets = ( {
 				setIsLoading( true );
 				try {
 					var fileContent = JSON.parse(reader.result); 
-					if (hasSameProperties(demoData[0], fileContent)) {
+					if (hasSameProperties(defaultStructure, fileContent)) {
 						demoData.push(fileContent);
 						setTimeout( () => {
 							setConfigs( demoData );
@@ -306,14 +324,20 @@ export const Presets = ( {
 		}
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (currentConfig) => {
 		if ( setDemoData ) {
 			setTimeout(() => {
 				setIsDeleteOpen( false );
 				setIsLoading( true );
 			}, 500 );
 
-			setTimeout(() => setIsLoading( false ), 1000 );
+			setTimeout(() => {
+				setIsLoading( false );
+				console.log(demoData);
+				demoData.splice( demoData.indexOf( currentConfig ), 1 );
+				setConfigs(demoData);
+				console.log(demoData);
+			}, 1000 );
 
 			console.log(
 				'\n' +
