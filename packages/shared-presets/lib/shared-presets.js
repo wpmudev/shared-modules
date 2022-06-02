@@ -178,8 +178,7 @@ export const Presets = ( {
 					tools: ["Image Resize Detection - Inactive"],
 					settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
 				}
-			},
-			plugin: "912"
+			}
 		}
 	];
 
@@ -243,8 +242,7 @@ export const Presets = ( {
 						tools: [],
 						settings: []
 					}
-				},
-				plugin: ''
+				}
 			};
 			
 			reader.readAsText(configFile);
@@ -330,13 +328,10 @@ export const Presets = ( {
 				setIsDeleteOpen( false );
 				setIsLoading( true );
 			}, 500 );
-
 			setTimeout(() => {
 				setIsLoading( false );
-				console.log(demoData);
-				demoData.splice( demoData.indexOf( currentConfig ), 1 );
+				demoData.splice( demoData.findIndex( ( config ) => config.id === currentConfig.id ), 1 );
 				setConfigs(demoData);
-				console.log(demoData);
 			}, 1000 );
 
 			console.log(
@@ -645,7 +640,7 @@ export const Presets = ( {
 				</Notifications>
 			</BoxFooter>
 		);
-	}
+	};
 
 	const getDescription = () => {
 		if ( isWidget ) {
