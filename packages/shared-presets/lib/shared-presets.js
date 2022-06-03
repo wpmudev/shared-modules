@@ -80,6 +80,39 @@ const StyledBoxHeader = styled.div`
 	}
 `;
 
+const PresetsWrapper = styled.div`
+
+	@media ${deviceMax.tablet} {
+		.sui-accordion {
+			.sui-accordion-item {
+				.sui-accordion-item-header {
+					padding: 15px 0 !important;
+				}
+			}
+		}
+	}
+
+	.presets-nav {
+		margin: 0 30px;
+
+		@media ${deviceMax.tablet} {
+			margin: 0 20px;
+
+			.sui-pagination-wrap {
+				flex-direction: column;
+				align-items: flex-end;
+
+				.sui-pagination-results {
+					margin-bottom: 10px;
+					+ .sui-pagination{
+						margin-left: 0;
+					}
+				}
+			}
+		}
+	}
+`;
+
 let RequestsHandler;
 
 export const Presets = ({
@@ -551,17 +584,17 @@ export const Presets = ({
 	// Pagination modified template.
 	const newTemplate = ({ ...props }) => {
 		return (
-			<>
-				<div style={{ marginRight: '30px' }}>
+			<PresetsWrapper>
+				<div className="presets-nav">
 					{PaginationNav({ ...props })}
 				</div>
 
 				{PaginationResults({ ...props })}
 				
-				<div style={{ marginRight: '30px' }}>
+				<div className="presets-nav">
 					{PaginationNav({ ...props })}
 				</div>
-			</>
+			</PresetsWrapper>
 		);
 	};
 
