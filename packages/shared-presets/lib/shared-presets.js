@@ -602,8 +602,8 @@ export const Presets = ({
 
 	const Table = (
 		<>
-			{!isEmpty && setDemoData && (
-				<Pagination limit={10} paginationContent={newTemplate} results={true}>
+			{!isEmpty && setDemoData && (!isWidget ? (
+				<Pagination limit={10} paginationContent={newTemplate}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
 						style={{ margin: '30px 0' }}
@@ -633,9 +633,38 @@ export const Presets = ({
 						))}
 					</div>
 				</Pagination>
-			)}
+			): (
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={{ margin: '30px 0' }}
+				>
+					{configs.map((item, index) => (
+						<PresetsAccordionItem
+							key={index}
+							id={index}
+							default={item.default}
+							name={item.name}
+							description={item.description}
+							image={tableImage}
+							showApplyButton={!isWidget}
+							applyLabel={lang.apply}
+							applyAction={() => openModal("apply", item)}
+							downloadLabel={lang.download}
+							downloadAction={() => doDownload(item)}
+							editLabel={lang.edit}
+							editAction={() => openModal("edit", item)}
+							deleteLabel={lang.delete}
+							deleteAction={() => openModal("delete", item)}
+						>
+							{item.config.map((data) => (
+								<div key={data.id} name={data.name} status={data.content} />
+							))}
+						</PresetsAccordionItem>
+					))}
+				</div>
+			))}
 
-			{!isEmpty && !setDemoData && (
+			{!isEmpty && !setDemoData && (!isWidget ? (
 				<Pagination limit={10} paginationContent={newTemplate}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
@@ -670,7 +699,40 @@ export const Presets = ({
 						))}
 					</div>
 				</Pagination>
-			)}
+			): (
+				<div
+					className="sui-accordion sui-accordion-flushed"
+					style={{ borderBottomWidth: 0 }}
+				>
+					{configs.map((item) => (
+						<PresetsAccordionItem
+							key={item.id}
+							id={item.id}
+							default={item.default}
+							name={item.name}
+							description={item.description}
+							image={tableImage}
+							showApplyButton={!isWidget}
+							applyLabel={lang.apply}
+							applyAction={() => openModal("apply", item)}
+							downloadLabel={lang.download}
+							downloadAction={() => doDownload(item)}
+							editLabel={lang.edit}
+							editAction={() => openModal("edit", item)}
+							deleteLabel={lang.delete}
+							deleteAction={() => openModal("delete", item)}
+						>
+							{Object.keys(item.config.strings).map((name) => (
+								<div
+									key={name}
+									name={lang.settingsLabels[name]}
+									status={item.config.strings[name]}
+								/>
+							))}
+						</PresetsAccordionItem>
+					))}
+				</div>
+			))}
 		</>
 	);
 
