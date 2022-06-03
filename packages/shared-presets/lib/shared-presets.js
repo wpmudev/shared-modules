@@ -208,6 +208,276 @@ export const Presets = ({
 				},
 			],
 		},
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content:
+						"Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active",
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive",
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive",
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive",
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content:
+						"Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive",
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive",
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content:
+						"Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active",
+				},
+			],
+		},
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content:
+						"Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active",
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive",
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive",
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive",
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content:
+						"Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive",
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive",
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content:
+						"Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active",
+				},
+			],
+		},
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content:
+						"Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active",
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive",
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive",
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive",
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content:
+						"Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive",
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive",
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content:
+						"Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active",
+				},
+			],
+		},
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content:
+						"Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active",
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive",
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive",
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive",
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content:
+						"Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive",
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive",
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content:
+						"Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active",
+				},
+			],
+		},
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content:
+						"Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active",
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive",
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive",
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive",
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content:
+						"Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive",
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive",
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content:
+						"Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active",
+				},
+			],
+		},
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content:
+						"Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active",
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive",
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive",
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive",
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content:
+						"Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive",
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive",
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content:
+						"Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active",
+				},
+			],
+		},
 	];
 
 	if (srcDemoData) {
@@ -552,11 +822,15 @@ export const Presets = ({
 	const newTemplate = ({ ...props }) => {
 		return (
 			<>
-				{PaginationNav({ ...props })}
+				<div style={{ marginRight: '30px' }}>
+					{PaginationNav({ ...props })}
+				</div>
 
 				{PaginationResults({ ...props })}
-
-				{PaginationNav({ ...props })}
+				
+				<div style={{ marginRight: '30px' }}>
+					{PaginationNav({ ...props })}
+				</div>
 			</>
 		);
 	};
@@ -566,10 +840,10 @@ export const Presets = ({
 	const Table = (
 		<>
 			{!isEmpty && setDemoData && (
-				<Pagination limit={10} paginationContent={newTemplate}>
+				<Pagination limit={3} paginationContent={newTemplate} results={true}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
-						style={{ borderBottomWidth: 0 }}
+						style={{ margin: '30px 0' }}
 					>
 						{configs.map((item, index) => (
 							<PresetsAccordionItem
@@ -664,6 +938,7 @@ export const Presets = ({
 					alignment="center"
 					paddingTop={isEmpty ? 0 : 30}
 					border={isEmpty ? 0 : 1}
+					style={{ borderTopWidth: 0 }}
 				>
 					<p className="sui-description">
 						{lang.syncWithHubText}{" "}
@@ -676,7 +951,7 @@ export const Presets = ({
 		}
 
 		return (
-			<BoxFooter display="block">
+			<BoxFooter display="block" style={{ borderTopWidth: 0 }}>
 				<Notifications type="upsell">
 					<p>{lang.freeNoticeMessage}</p>
 					<p>
