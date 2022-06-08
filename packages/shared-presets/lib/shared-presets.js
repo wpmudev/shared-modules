@@ -163,35 +163,21 @@ export const Presets = ( {
 	);
 
 	// Default demo data.
-	let demoData = [
-		{
-			id: 1,
-			name: "Basic Config",
-			description: "Recommended backup advanced config for all site.",
-			config: {
-				strings: {
-					bulk_smush: ["Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"],
-					lazy_load: ["Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"],
-					cdn: ["Inactive"],
-					webp_mod: ["Inactive"],
-					integrations: ["Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"],
-					tools: ["Image Resize Detection - Inactive"],
-					settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
-				}
+	let demoData = [];
+
+	const getDemoData = () => {
+		if ( srcDemoData ) {
+			if ( 'empty' === srcDemoData ) {
+				demoData = [];
+			} else {
+				demoData.push( ...srcDemoData );
 			}
 		}
-	];
-
-	if ( srcDemoData ) {
-		if ( 'empty' === srcDemoData ) {
-			demoData = [];
-		} else {
-			demoData.push( srcDemoData );
-		}
-	}
+	};
 
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
+		getDemoData();
 		retrieveConfigs();
 		return () => {
 			setIsLoading( false );
@@ -323,14 +309,15 @@ export const Presets = ( {
 	};
 
 	const handleDelete = (currentConfig) => {
+		setIsLoading( true );
 		if ( setDemoData ) {
 			setTimeout(() => {
 				setIsDeleteOpen( false );
-				setIsLoading( true );
 			}, 500 );
 			setTimeout(() => {
 				setIsLoading( false );
-				demoData.splice( demoData.findIndex( ( config ) => config.id === currentConfig.id ), 1 );
+				// Remove the config from the demo data.
+				demoData = configs.filter( ( config ) => config.id !== currentConfig.id );
 				setConfigs(demoData);
 			}, 1000 );
 

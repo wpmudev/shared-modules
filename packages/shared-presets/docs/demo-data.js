@@ -15,9 +15,25 @@ export const demoUrls = {
 	hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
 	configsPage: '#',
 	accordionImg: 'https://ps.w.org/wp-smushit/assets/icon-256x256.gif',
-}
+};
 
-export const demoContent = (
+export const demoContent = [
+	{
+		id: 1,
+		name: "Basic Config",
+		description: "Recommended backup advanced config for all site.",
+		config: {
+			strings: {
+				bulk_smush: ["Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"],
+				lazy_load: ["Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"],
+				cdn: ["Inactive"],
+				webp_mod: ["Inactive"],
+				integrations: ["Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"],
+				tools: ["Image Resize Detection - Inactive"],
+				settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
+			}
+		}
+	},
 	{
 		id: 2,
 		name: "Advanced Config",
@@ -34,7 +50,7 @@ export const demoContent = (
 			}
 		},
 	}
-);
+];
 
 export const demoLang = {
 	title: 'Configuraciones Preestablecidas',
