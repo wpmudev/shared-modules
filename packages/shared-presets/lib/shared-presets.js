@@ -309,10 +309,10 @@ export const Presets = ( {
 	};
 
 	const handleDelete = (currentConfig) => {
-		setIsLoading( true );
 		if ( setDemoData ) {
 			setTimeout(() => {
 				setIsDeleteOpen( false );
+				setIsLoading( true );
 			}, 500 );
 			setTimeout(() => {
 				setIsLoading( false );
