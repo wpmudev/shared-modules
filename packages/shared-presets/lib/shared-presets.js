@@ -165,19 +165,16 @@ export const Presets = ( {
 	// Default demo data.
 	let demoData = [];
 
-	const getDemoData = () => {
-		if ( srcDemoData ) {
-			if ( 'empty' === srcDemoData ) {
-				demoData = [];
-			} else {
-				demoData.push( ...srcDemoData );
-			}
+	if ( srcDemoData ) {
+		if ( 'empty' === srcDemoData ) {
+			demoData = [];
+		} else {
+			demoData.push( ...srcDemoData );
 		}
-	};
+	}
 
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
-		getDemoData();
 		retrieveConfigs();
 		return () => {
 			setIsLoading( false );
