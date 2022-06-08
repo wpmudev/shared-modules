@@ -81,17 +81,6 @@ const StyledBoxHeader = styled.div`
 `;
 
 const PresetsWrapper = styled.div`
-
-	@media ${deviceMax.tablet} {
-		.sui-accordion {
-			.sui-accordion-item {
-				.sui-accordion-item-header {
-					padding: 15px 0 !important;
-				}
-			}
-		}
-	}
-
 	.presets-nav {
 		margin: 0 30px;
 
