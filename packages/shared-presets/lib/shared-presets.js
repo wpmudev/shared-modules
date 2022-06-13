@@ -574,15 +574,19 @@ export const Presets = ({
 	const newTemplate = ({ ...props }) => {
 		return (
 			<PresetsWrapper>
-				<div className="presets-nav">
-					{PaginationNav({ ...props })}
-				</div>
-
+				{props.pages > 1 && (
+					<div className="presets-nav" style={{ marginBottom: '30px' }}>
+						{PaginationNav({ ...props })}
+					</div>
+				)}
+				
 				{PaginationResults({ ...props })}
 				
-				<div className="presets-nav">
-					{PaginationNav({ ...props })}
-				</div>
+				{props.pages > 1 && (
+					<div className="presets-nav" style={{ marginTop: '30px' }}>
+						{PaginationNav({ ...props })}
+					</div>
+				)}
 			</PresetsWrapper>
 		);
 	};
@@ -595,7 +599,7 @@ export const Presets = ({
 				<Pagination limit={10} paginationContent={newTemplate}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
-						style={{ margin: '30px 0' }}
+						style={{ borderTop: '1px solid #e6e6e6', borderBottom: '1px solid #e6e6e6' }}
 					>
 						{configs.map((item, index) => (
 							<PresetsAccordionItem
@@ -625,7 +629,7 @@ export const Presets = ({
 			): (
 				<div
 					className="sui-accordion sui-accordion-flushed"
-					style={{ margin: '30px 0' }}
+					style={{ borderBottom: 0 }}
 				>
 					{configs.map((item, index) => (
 						<PresetsAccordionItem
@@ -657,7 +661,7 @@ export const Presets = ({
 				<Pagination limit={10} paginationContent={newTemplate}>
 					<div
 						className="sui-accordion sui-accordion-flushed"
-						style={{ borderBottomWidth: 0 }}
+						style={{ borderTop: '1px solid #e6e6e6', borderBottom: '1px solid #e6e6e6' }}
 					>
 						{configs.map((item) => (
 							<PresetsAccordionItem
@@ -691,7 +695,7 @@ export const Presets = ({
 			): (
 				<div
 					className="sui-accordion sui-accordion-flushed"
-					style={{ borderBottomWidth: 0 }}
+					style={{ borderBottom: 0 }}
 				>
 					{configs.map((item) => (
 						<PresetsAccordionItem
