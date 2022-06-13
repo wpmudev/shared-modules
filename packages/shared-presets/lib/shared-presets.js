@@ -161,6 +161,7 @@ export const Presets = ( {
 			default: true,
 			name: "Basic config",
 			description: "Recommended performance config for every site.",
+			created_date: "March 22, 2021 10:03 am",
 			config: [
 				{
 					id: "bulk_smush",
@@ -552,6 +553,7 @@ export const Presets = ( {
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
+							date={ item.created_date }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
@@ -579,6 +581,7 @@ export const Presets = ( {
 							id={ item.id }
 							default={ item.default }
 							name={ item.name }
+							date={ item.created_date }
 							description={ item.description }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }

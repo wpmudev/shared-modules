@@ -21,6 +21,7 @@ export const demoContent = (
 	{
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
+		created_date: "March 22, 2021 10:03 am",
 		config: [
 			{
 				id: "bulk_smush",
