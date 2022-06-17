@@ -188,6 +188,25 @@ const Navigation = styled.div`
 	}
 `;
 
+const SkipArticles = styled.a`
+	position: absolute;
+	top: -1000em;
+	z-index: 1;
+	&:focus {
+		left: 0;
+		top: 0;
+		line-height: normal;
+		font-size: 13px;
+		font-weight: 500;
+		padding: 15px 23px 14px;
+		background: #fff;
+		color: #1286b5;
+		outline: none;
+		border-radius: 3px;
+		box-shadow: 0 2px 7px 0 rgb(0 0 0 / 5%), 0 0 2px 0 #17a8e3 !important;
+	}
+`;
+
 export class TutorialsSlider extends Component {
 	constructor(props) {
 		super(props);
@@ -360,6 +379,8 @@ export class TutorialsSlider extends Component {
 	render() {
 		const { posts, error, isLoaded, isShowingAll } = this.state;
 
+		const { skipTo = '' } = this.props;
+
 		const translate = this.props.translate;
 
 		const loading =
@@ -517,6 +538,7 @@ export class TutorialsSlider extends Component {
 					</div>
 
 					<Box className={isShowingAll && "open"}>
+						<SkipArticles href={skipTo}>Skip articles</SkipArticles>
 						<ListWrapper onScroll={this.handleScroll}>{listPosts}</ListWrapper>
 						{2 < posts.length && navigation}
 					</Box>
