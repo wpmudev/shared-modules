@@ -189,6 +189,8 @@ const Navigation = styled.div`
 `;
 
 export class TutorialsSlider extends Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 
@@ -334,6 +336,8 @@ export class TutorialsSlider extends Component {
 	}
 
 	componentDidMount() {
+		this._isMounted = true;
+
 		const API_URL =
 			"https://wpmudev.com/blog/wp-json/wp/v2/posts?tutorials_categories=";
 		const QUERY_ID = this.props.category;
@@ -343,18 +347,26 @@ export class TutorialsSlider extends Component {
 			.then(response => response.json())
 			.then(
 				data => {
-					this.setState({
-						isLoaded: true,
-						posts: data
-					});
+					if ( this._isMounted ) {
+						this.setState({
+							isLoaded: true,
+							posts: data
+						});
+					}
 				},
 				error => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
+					if ( this._isMounted ) {
+						this.setState({
+							isLoaded: true,
+							error
+						});
+					}
 				}
 			);
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	render() {

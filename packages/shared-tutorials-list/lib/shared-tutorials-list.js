@@ -174,16 +174,20 @@ export class TutorialsList extends Component {
 			.then(response => response.json())
 			.then(
 				data => {
-					this.setState({
-						isLoaded: true,
-						posts: data
-					});
+					if ( this._isMounted ) {
+						this.setState({
+							isLoaded: true,
+							posts: data
+						});
+					}
 				},
 				error => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
+					if ( this._isMounted ) {
+						this.setState({
+							isLoaded: true,
+							error
+						});
+					}
 				}
 			);
 	}
