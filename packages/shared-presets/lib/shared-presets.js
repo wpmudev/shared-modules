@@ -554,6 +554,7 @@ export const Presets = ( {
 							name={ item.name }
 							description={ item.description }
 							date={ item.created_date }
+							isWidget={ isWidget }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
