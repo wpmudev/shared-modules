@@ -1,0 +1,199 @@
+/** Import required font: Lalezar */
+@import url(https://fonts.bunny.net/css?family=lalezar:400);
+
+[class*="sui-2-"] .sui-wrap .suim-black {
+	position: relative;
+	padding: 0 24px 24px;
+	border-radius: 8px;
+	background-color: #051F19;
+	background-image: linear-gradient(180deg, #1A1A1A 0%, #051F19 100%);
+}
+
+/** Element: Close Button */
+[class*="sui-2-"] .sui-wrap .suim-black .sui-button-icon {
+	position: absolute !important;
+	top: 24px;
+	right: 24px;
+	margin: 0 !important;
+}
+
+/** Element: Ribbon */
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__ribbon {
+	display: inline-block;
+	padding: 24px 16px;
+	border: 0;
+	border-radius: 0 0 16px 16px;
+	background: #F6E8D6;
+	color: #051F19;
+	font: 400 30px/32px 'Lalezar';
+	text-transform: uppercase;
+	text-align: center;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__ribbon span {
+	display: block;
+}
+
+/** Element: Promo Container */
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__promo {
+	margin-top: 24px;
+}
+
+/** Element: Intro */
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__intro {
+	display: block;
+	margin: 0 0 8px;
+	color: #008A0E;
+	font: 400 16px/22px 'Lalezar';
+	letter-spacing: 0.13px;
+	text-transform: uppercase;
+}
+
+/** Element: Title */
+[class*="sui-2-"] .sui-wrap .suim-black h2.suim-black__title {
+	margin: 0 0 8px;
+	color: #F1E3D1;
+	font: 400 28px/30px 'Lalezar';
+	letter-spacing: 0.08px;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black h2.suim-black__title s {
+	color: #D21A1A;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black h2.suim-black__title strong {
+	color: #0AAB41;
+}
+
+/** Element: Description */
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content,
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content p {
+	color: #F1E3D1;
+	font-size: 15px;
+	line-height: 24px;
+	letter-spacing: 0.1px;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content p {
+	margin: 8px 0;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content p:first-child {
+	margin-top: 0;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content p:last-child {
+	margin-bottom: 0;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content p:last-child {
+	margin-bottom: 0;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content p small {
+	margin: 0;
+	opacity: 0.8;
+	color: #F1E3D1;
+	font-size: 12px;
+}
+
+/** Element: CTA Button */
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button {
+	cursor: pointer;
+	width: 100%;
+	display: block;
+	margin: 16px 0 0;
+	padding: 7px 30px 8px;
+	border: 2px solid transparent;
+	border-radius: 15px;
+	background: #008A0E;
+	color: #FFFFFF;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 18px;
+	letter-spacing: -0.4px;
+	text-decoration: none;
+	text-align: center;
+	transition: 0.2s ease;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button,
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button:hover,
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button:active,
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button:hover,
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button:focus {
+	background: #FFFFFF;
+	color: #1A1A1A;
+}
+
+[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button:focus {
+	border-color: #008A0E;
+}
+
+@media (min-width: 783px) {
+	[class*="sui-2-"] .sui-wrap .suim-black {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	/** Element: Ribbon */
+	[class*="sui-2-"] .sui-wrap .suim-black .suim-black__ribbon {
+		flex: 0 0 auto;
+	}
+
+	/** Element: Title */
+	[class*="sui-2-"] .sui-wrap .suim-black h2.suim-black__title {
+		line-height: 22px;
+	}
+
+	/** Element: Promo Container */
+	[class*="sui-2-"] .sui-wrap .suim-black .suim-black__promo {
+		min-width: 1px;
+		flex: 1;
+		margin-top: 0;
+		margin-left: 24px;
+		padding-top: 32px;
+	}
+
+	/** Element: CTA Button */
+	[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button {
+		width: auto;
+		display: inline-block;
+	}
+}
+
+@media (min-width: 1200px) {
+	[class*="sui-2-"] .sui-wrap .suim-black {
+		padding-right: 60px;
+	}
+
+	/** Element: Close Button */
+	[class*="sui-2-"] .sui-wrap .suim-black .sui-button-icon {
+		top: 20px;
+		right: 20px;
+	}
+
+	/** Element: Promo Container */
+	[class*="sui-2-"] .sui-wrap .suim-black .suim-black__promo {
+		display: flex;
+		align-items: center;
+	}
+
+	/** Element: Content */
+	[class*="sui-2-"] .sui-wrap .suim-black .suim-black__content {
+		min-width: 1px;
+		flex: 1;
+	}
+
+	/** Element: CTA Button */
+	[class*="sui-2-"] .sui-wrap .suim-black a.suim-black__button {
+		display: block;
+		flex: 0 0 auto;
+		margin-left: 32px;
+	}
+}

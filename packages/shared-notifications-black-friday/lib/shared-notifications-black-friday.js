@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
 import { BlackFriday } from "./shared-notifications-black-friday__utils";
 
+// Import required elements.
+import { Ribbon } from './elements/ribbon';
+import { Content } from './elements/content';
+
+// Import required styles.
+import './shared-notifications-black-friday.css';
+
 function checkRTL() {
 	const suiBody = document.body;
 	const hasLang = suiBody.hasAttribute( 'dir' );
@@ -28,9 +35,11 @@ function checkSuiWrap() {
 }
 
 export const NoticeBlack = ({
-	link,
+	price,
+	discount,
+	action,
+	content,
 	onCloseClick,
-	sourceLang,
 	children,
 	...props
 }) => {
@@ -44,13 +53,20 @@ export const NoticeBlack = ({
 		}
 	};
 
-	const lang = Object.assign({
-		discount: '50% Off',
-		closeLabel: 'Close',
-		linkLabel: 'See the deal'
-	}, sourceLang );
+	const lang = Object.assign(
+		{
+			off: 'Off',
+			intro: '',
+			title: '',
+			close: 'Close',
+		},
+		content
+	);
 
-	const hasLink = null !== link && '' !== link;
+	const hasIntro = !isUndefined( lang.intro ) ? true : false;
+	const hasTitle = !isUndefined( lang.title ) ? true : false;
+	const hasPrice = !isUndefined( price, 'number' ) ? true : false;
+	const hasDiscount = !isUndefined( discount, 'number' ) ? true : false;
 
 	React.useEffect( () => {
 		setRTL( checkRTL )
@@ -61,40 +77,64 @@ export const NoticeBlack = ({
 		!isClose && (
 			<>
 				<BlackFriday.Global rtl={ isRTL } monochrome={ isMonochrome } />
-				<div className="sui-module-notice-black-friday__container" { ...props }>
-
+				<div className="suim-black" { ...props }>
 					<ButtonIcon
 						color="white"
 						icon="close"
 						iconSize="md"
-						label={ lang.closeLabel }
+						label={ lang.close }
 						onClick={ closeOnClick }
 					/>
 
-					<div className="sui-module-notice-black-friday__ribbon">
-						{ lang.discount }
-					</div>
+					{ hasDiscount && (
+						<Ribbon
+							sourceLang={{
+								off: lang.off
+							}}
+							{ ... ( hasDiscount && { discount: discount } ) } />
+					)}
 
-					<div className="sui-module-notice-black-friday__body">
-
-						<div className="sui-module-notice-black-friday__content">
-							{ children }
-						</div>
-
-						{ hasLink &&
-							<a
-								href={ link || '#' }
-								target="_blank"
-								className="sui-module-notice-black-friday__link"
-							>
-								{ lang.linkLabel }
-							</a>
-						}
-
-					</div>
+					<Content
+						action={ action }
+						{ ... ( hasIntro && { intro: lang.intro } ) }
+						{ ... ( hasTitle && { title: lang.title } ) }
+						{ ... ( hasPrice && { price: price } ) }
+						{ ... ( hasDiscount && { discount: discount } ) }>
+						{ children }
+					</Content>
 
 				</div>
 			</>
 		)
 	);
+}
+
+// Check if element is undefined.
+const isUndefined = (element, type = null) => {
+	const isValid = 'undefined' !== typeof element;
+	const isNotEmpty = '' !== element;
+	const isNumber = 'number' === type;
+	const isBoolean = 'boolean' === type;
+
+	// Check if element exists.
+	if ( element && isValid && isNotEmpty ) {
+
+		if ( isNumber ) {
+			if ( Number.isNaN( element ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ( isBoolean ) {
+			if ( 'boolean' === typeof element ) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	return true;
 }
