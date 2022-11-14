@@ -2,7 +2,8 @@ import React from 'react';
 
 // Build "ribbon" component.
 const Ribbon = ({ discount, sourceLang }) => {
-	const setDiscount = !isUndefined( discount, 'number' ) ? discount : 50;
+	const hasDiscount = !isUndefined( Math.floor( discount ) ) ? true : false;
+	const setDiscount = !isUndefined( Math.floor( discount ) ) ? discount.toString() + '%' : 0;
 	const lang = Object.assign(
 		{
 			off: 'Off'
@@ -11,10 +12,14 @@ const Ribbon = ({ discount, sourceLang }) => {
 	);
 
 	return (
-		<div className="suim-black__ribbon">
-			<span>{ setDiscount }%</span>
-			<span>{ lang.off }</span>
-		</div>
+		<>
+			{( hasDiscount ) && (
+				<div className="suim-black__ribbon">
+					<span>{ setDiscount }</span>
+					<span>{ lang.off }</span>
+				</div>
+			)}
+		</>
 	);
 }
 
