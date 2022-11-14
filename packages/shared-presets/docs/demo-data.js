@@ -22,33 +22,87 @@ export const demoContent = [
 		id: 1,
 		name: "Basic Config",
 		description: "Recommended backup advanced config for all site.",
-		config: {
-			strings: {
-				bulk_smush: ["Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"],
-				lazy_load: ["Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"],
-				cdn: ["Inactive"],
-				webp_mod: ["Inactive"],
-				integrations: ["Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"],
-				tools: ["Image Resize Detection - Inactive"],
-				settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
-			}
-		}
+		created_date: "March 22, 2021 10:03 am",
+		config: [
+			{
+				id: "bulk_smush",
+				name: "Bulk Smush",
+				content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"
+			},
+			{
+				id: "lazy_load",
+				name: "Lazy Load",
+				content: "Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"
+			},
+			{
+				id: "cdn",
+				name: "CDN",
+				content: "Inactive"
+			},
+			{
+				id: "webp_mod",
+				name: "Local WebP",
+				content: "Inactive"
+			},
+			{
+				id: "integrations",
+				name: "Integrations",
+				content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+			},
+			{
+				id: "tools",
+				name: "Tools",
+				content: "Image Resize Detection - Inactive"
+			},
+			{
+				id: "settings",
+				name: "Settings",
+				content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+			},
+		],
 	},
 	{
 		id: 2,
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
-		config: {
-			strings: {
-				bulk_smush: ["Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"],
-				lazy_load: ["Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"],
-				cdn: ["Inactive"],
-				webp_mod: ["Inactive"],
-				integrations: ["Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"],
-				tools: ["Image Resize Detection - Inactive"],
-				settings: ["Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"]
-			}
-		},
+		created_date: "March 22, 2021 10:03 am",
+		config: [
+			{
+				id: "bulk_smush",
+				name: "Bulk Smush",
+				content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"
+			},
+			{
+				id: "lazy_load",
+				name: "Lazy Load",
+				content: "Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"
+			},
+			{
+				id: "cdn",
+				name: "CDN",
+				content: "Inactive"
+			},
+			{
+				id: "webp_mod",
+				name: "Local WebP",
+				content: "Inactive"
+			},
+			{
+				id: "integrations",
+				name: "Integrations",
+				content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+			},
+			{
+				id: "tools",
+				name: "Tools",
+				content: "Image Resize Detection - Inactive"
+			},
+			{
+				id: "settings",
+				name: "Settings",
+				content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+			},
+		],
 	}
 ];
 

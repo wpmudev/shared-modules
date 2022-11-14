@@ -163,7 +163,51 @@ export const Presets = ( {
 	);
 
 	// Default demo data.
-	let demoData = [];
+	let demoData = [
+		{
+			default: true,
+			name: "Basic config",
+			description: "Recommended performance config for every site.",
+			created_date: "March 22, 2021 10:03 am",
+			config: [
+				{
+					id: "bulk_smush",
+					name: "Bulk Smush",
+					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
+				},
+				{
+					id: "lazy_load",
+					name: "Lazy Load",
+					content: "Inactive"
+				},
+				{
+					id: "cdn",
+					name: "CDN",
+					content: "Inactive"
+				},
+				{
+					id: "webp_mod",
+					name: "Local WebP",
+					content: "Inactive"
+				},
+				{
+					id: "integrations",
+					name: "Integrations",
+					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+				},
+				{
+					id: "tools",
+					name: "Tools",
+					content: "Image Resize Detection - Inactive"
+				},
+				{
+					id: "settings",
+					name: "Settings",
+					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+				}
+			],
+		}
+	];
 
 	if ( srcDemoData ) {
 		if ( 'empty' === srcDemoData ) {
@@ -212,20 +256,17 @@ export const Presets = ( {
 			const reader = new FileReader();
 
 			const defaultStructure = {
-				id: '',
+				default: '',
 				name: '',
 				description: '',
-				config: {
-					strings: {
-						bulk_smush: [],
-						lazy_load: [],
-						cdn: [],
-						webp_mod: [],
-						integrations: [],
-						tools: [],
-						settings: []
+				created_date: '',
+				config: [
+					{
+						id: '',
+						name: '',
+						content: ''
 					}
-				}
+				]
 			};
 			
 			reader.readAsText(configFile);
@@ -233,7 +274,7 @@ export const Presets = ( {
 			reader.onload = function() {
 				setIsLoading( true );
 				try {
-					var fileContent = JSON.parse(reader.result); 
+					var fileContent = JSON.parse(reader.result);
 					if (hasSameProperties(defaultStructure, fileContent)) {
 						demoData.push(fileContent);
 						setTimeout( () => {
@@ -541,13 +582,15 @@ export const Presets = ( {
 		<>
 			{ ! isEmpty && (
 				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-					{ configs.map( item => (
+					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
-							key={ item.id }
-							id={ item.id }
+							key={ index }
+							id={ index }
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
+							date={ item.created_date }
+							isWidget={ isWidget }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
@@ -559,8 +602,8 @@ export const Presets = ( {
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
 						>
-							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
+							{ item.config.map( ( data ) => (
+								<div key={ data.id } name={ data.name } status={ data.content } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
