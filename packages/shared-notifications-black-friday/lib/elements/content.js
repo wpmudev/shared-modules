@@ -5,24 +5,6 @@ const Content = ({ intro, title, price, discount, action, children }) => {
 	const hasIntro = !isUndefined( intro ) ? true : false;
 	const hasTitle = !isUndefined( title ) ? true : false;
 
-	const ShowPrice = () => {
-		const hasPrice = !isUndefined( price ) ? true : false;
-		const hasDiscount = !isUndefined( discount ) ? true : false;
-
-		const oldPrice = parseInt( price );
-		const newPrice = (oldPrice - (oldPrice * (parseInt( discount ) / 100)));
-
-		if ( hasPrice && hasDiscount ) {
-			if ( parseInt( discount ) > 0 ) {
-				return (
-					<> <s>${ oldPrice }/m</s> <strong>${ newPrice }/m</strong></>
-				);
-			}
-		}
-
-		return '';
-	}
-
 	const cta = Object.assign(
 		{
 			label: 'Get now',
@@ -40,7 +22,7 @@ const Content = ({ intro, title, price, discount, action, children }) => {
 				{ hasTitle && (
 					<h2 className="suim-black__title">
 						{ title }
-						<ShowPrice />
+						<ShowPrice price={ price } discount={ discount } />
 					</h2>
 				)}
 				{ children }
@@ -59,6 +41,29 @@ const Content = ({ intro, title, price, discount, action, children }) => {
 	);
 }
 
+// Return price.
+const ShowPrice = ({ price, discount }) => {
+	const hasDiscount = !isUndefined( discount, 'number' ) ? true : false;
+	const hasPrice = !isUndefined( price, 'number' ) ? true : false;
+
+	const getDiscount = discount / 100;
+
+	const oldPrice = price;
+	const newPrice = price - (price * getDiscount);
+
+	return (
+		<>
+			{ ( hasPrice && hasDiscount ) && (
+				<> <s>${ oldPrice }</s> <strong>${ newPrice }</strong></>
+			)}
+
+			{ ( hasPrice && !hasDiscount ) && (
+				<> ${ oldPrice }</>
+			)}
+		</>
+	);
+}
+
 // Check if element is undefined.
 const isUndefined = (element, type = null) => {
 	const isValid = 'undefined' !== typeof element;
@@ -70,7 +75,7 @@ const isUndefined = (element, type = null) => {
 	if ( element && isValid && isNotEmpty ) {
 
 		if ( isNumber ) {
-			if ( Number.isNaN( element ) ) {
+			if ( Number.isNaN( Math.floor( element ) ) ) {
 				return true;
 			} else {
 				return false;
