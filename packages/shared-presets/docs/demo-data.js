@@ -20,6 +20,7 @@ export const demoUrls = {
 export const demoContent = [
 	{
 		id: 1,
+		default: true,
 		name: "Basic Config",
 		description: "Recommended backup advanced config for all site.",
 		created_date: "March 22, 2021 10:03 am",
@@ -63,6 +64,7 @@ export const demoContent = [
 	},
 	{
 		id: 2,
+		default: false,
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
 		created_date: "March 22, 2021 10:03 am",

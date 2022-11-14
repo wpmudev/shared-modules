@@ -163,51 +163,7 @@ export const Presets = ( {
 	);
 
 	// Default demo data.
-	let demoData = [
-		{
-			default: true,
-			name: "Basic config",
-			description: "Recommended performance config for every site.",
-			created_date: "March 22, 2021 10:03 am",
-			config: [
-				{
-					id: "bulk_smush",
-					name: "Bulk Smush",
-					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
-				},
-				{
-					id: "lazy_load",
-					name: "Lazy Load",
-					content: "Inactive"
-				},
-				{
-					id: "cdn",
-					name: "CDN",
-					content: "Inactive"
-				},
-				{
-					id: "webp_mod",
-					name: "Local WebP",
-					content: "Inactive"
-				},
-				{
-					id: "integrations",
-					name: "Integrations",
-					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
-				},
-				{
-					id: "tools",
-					name: "Tools",
-					content: "Image Resize Detection - Inactive"
-				},
-				{
-					id: "settings",
-					name: "Settings",
-					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
-				}
-			],
-		}
-	];
+	let demoData = [];
 
 	if ( srcDemoData ) {
 		if ( 'empty' === srcDemoData ) {
@@ -256,6 +212,7 @@ export const Presets = ( {
 			const reader = new FileReader();
 
 			const defaultStructure = {
+				id: '',
 				default: '',
 				name: '',
 				description: '',
