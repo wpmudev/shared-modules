@@ -350,7 +350,154 @@ BlackFriday.Link = styled.a.attrs(function (_ref) {
   };
 })(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #fff;\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:focus {\n\t\tbox-shadow: 0 0 10px 0 rgba(255,255,255,0.3);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
 
-var _excluded = ["link", "onCloseClick", "sourceLang", "children"];
+var Ribbon = function Ribbon(_ref) {
+  var discount = _ref.discount,
+      sourceLang = _ref.sourceLang;
+  var hasDiscount = !isUndefined$2(Math.floor(discount)) ? true : false;
+  var setDiscount = !isUndefined$2(Math.floor(discount)) ? discount.toString() + '%' : 0;
+  var lang = Object.assign({
+    off: 'Off'
+  }, sourceLang);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, hasDiscount && /*#__PURE__*/React.createElement("div", {
+    className: "suim-black__ribbon"
+  }, /*#__PURE__*/React.createElement("span", null, setDiscount), /*#__PURE__*/React.createElement("span", null, lang.off)));
+}; // Check if element is undefined.
+
+
+var isUndefined$2 = function isUndefined(element) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var isValid = 'undefined' !== typeof element;
+  var isNotEmpty = '' !== element;
+  var isNumber = 'number' === type;
+  var isBoolean = 'boolean' === type; // Check if element exists.
+
+  if (element && isValid && isNotEmpty) {
+    if (isNumber) {
+      if (Number.isNaN(element)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (isBoolean) {
+      if ('boolean' === typeof element) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+}; // Publish required component(s).
+
+var Content = function Content(_ref) {
+  var intro = _ref.intro,
+      title = _ref.title,
+      price = _ref.price,
+      discount = _ref.discount,
+      action = _ref.action,
+      children = _ref.children;
+  var hasIntro = !isUndefined$1(intro) ? true : false;
+  var hasTitle = !isUndefined$1(title) ? true : false;
+  var cta = Object.assign({
+    label: 'Get now',
+    link: ''
+  }, action);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "suim-black__promo"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "suim-black__content"
+  }, hasIntro && /*#__PURE__*/React.createElement("span", {
+    className: "suim-black__intro"
+  }, intro), hasTitle && /*#__PURE__*/React.createElement("h2", {
+    className: "suim-black__title"
+  }, title, /*#__PURE__*/React.createElement(ShowPrice, {
+    price: price,
+    discount: discount
+  })), children), '' !== cta.link && /*#__PURE__*/React.createElement("a", {
+    href: cta.link,
+    target: "_blank",
+    rel: "nofollow",
+    className: "suim-black__button"
+  }, cta.label));
+}; // Return price.
+
+
+var ShowPrice = function ShowPrice(_ref2) {
+  var price = _ref2.price,
+      discount = _ref2.discount;
+  var hasDiscount = !isUndefined$1(discount, 'number') ? true : false;
+  var hasPrice = !isUndefined$1(price, 'number') ? true : false;
+  var getDiscount = discount / 100;
+  var oldPrice = price;
+  var newPrice = price - price * getDiscount;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, hasPrice && hasDiscount && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("s", null, "$", oldPrice), " ", /*#__PURE__*/React.createElement("strong", null, "$", newPrice)), hasPrice && !hasDiscount && /*#__PURE__*/React.createElement(React.Fragment, null, " $", oldPrice));
+}; // Check if element is undefined.
+
+
+var isUndefined$1 = function isUndefined(element) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var isValid = 'undefined' !== typeof element;
+  var isNotEmpty = '' !== element;
+  var isNumber = 'number' === type;
+  var isBoolean = 'boolean' === type; // Check if element exists.
+
+  if (element && isValid && isNotEmpty) {
+    if (isNumber) {
+      if (Number.isNaN(Math.floor(element))) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (isBoolean) {
+      if ('boolean' === typeof element) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+}; // Publish required component(s).
+
+function styleInject(css, ref) {
+  if (ref === void 0) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') {
+    return;
+  }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = "/** Import required font: Lalezar */\n@import url(https://fonts.bunny.net/css?family=lalezar:400);\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 {\n\tposition: relative;\n\tpadding: 0 24px 24px;\n\tborder-radius: 8px;\n\tbackground-color: #051F19;\n\tbackground-image: linear-gradient(180deg, #1A1A1A 0%, #051F19 100%);\n}\n\n/** Element: Close Button */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_sui-button-icon__1Rlcp {\n\tposition: absolute !important;\n\ttop: 24px;\n\tright: 24px;\n\tmargin: 0 !important;\n}\n\n/** Element: Ribbon */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__ribbon__1--fG {\n\tdisplay: inline-block;\n\tpadding: 24px 16px;\n\tborder: 0;\n\tborder-radius: 0 0 16px 16px;\n\tbackground: #F6E8D6;\n\tcolor: #051F19;\n\tfont: 400 30px/32px 'Lalezar';\n\ttext-transform: uppercase;\n\ttext-align: center;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__ribbon__1--fG span {\n\tdisplay: block;\n}\n\n/** Element: Promo Container */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__promo__33o2_ {\n\tmargin-top: 24px;\n}\n\n/** Element: Intro */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__intro__2DL2J {\n\tdisplay: block;\n\tmargin: 0 0 8px;\n\tcolor: #008A0E;\n\tfont: 400 16px/22px 'Lalezar';\n\tletter-spacing: 0.13px;\n\ttext-transform: uppercase;\n}\n\n/** Element: Title */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 h2.shared-notifications-black-friday_suim-black__title__-GMUT {\n\tmargin: 0 0 8px;\n\tcolor: #F1E3D1;\n\tfont: 400 28px/30px 'Lalezar';\n\tletter-spacing: 0.08px;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 h2.shared-notifications-black-friday_suim-black__title__-GMUT s {\n\tposition: relative;\n\tcolor: rgba(241, 227, 209, 0.7);\n\ttext-decoration: none;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 h2.shared-notifications-black-friday_suim-black__title__-GMUT s:before {\n\tcontent: \" \";\n\twidth: 105%;\n\theight: 2px;\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 0;\n\tbackground: #F1E3D1;\n\ttransform: rotate(-10deg);\n\ttransform-origin: bottom left;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 h2.shared-notifications-black-friday_suim-black__title__-GMUT strong {\n\tcolor: #F1E3D1;\n}\n\n/** Element: Description */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r,\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r p {\n\tcolor: #F1E3D1;\n\tfont-size: 15px;\n\tline-height: 24px;\n\tletter-spacing: 0.1px;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r p {\n\tmargin: 8px 0;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r p:first-child {\n\tmargin-top: 0;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r p:last-child {\n\tmargin-bottom: 0;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r p:last-child {\n\tmargin-bottom: 0;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r p small {\n\tmargin: 0;\n\topacity: 0.8;\n\tcolor: #F1E3D1;\n\tfont-size: 12px;\n}\n\n/** Element: Link */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__link__36xp5 {\n\tcursor: pointer;\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tbackground: transparent;\n\tcolor: #12AB21;\n\tfont-size: inherit;\n\tline-height: inherit;\n\tfont-weight: 600;\n\ttext-decoration: underline;\n\ttransition: 0.2s ease;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__link__36xp5:hover {\n\tcolor: #15d629;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__link__36xp5:focus {\n\topacity: 0.8;\n}\n\n/** Element: CTA Button */\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V {\n\tcursor: pointer;\n\twidth: 100%;\n\tdisplay: block;\n\tmargin: 16px 0 0;\n\tpadding: 7px 30px 8px;\n\tborder: 2px solid transparent;\n\tborder-radius: 15px;\n\tbackground: #008A0E;\n\tcolor: #FFFFFF;\n\tfont-size: 15px;\n\tfont-weight: 600;\n\tline-height: 18px;\n\tletter-spacing: -0.4px;\n\ttext-decoration: none;\n\ttext-align: center;\n\ttransition: 0.2s ease;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V,\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V:hover,\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V:active,\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V:focus {\n\toutline: none;\n\tbox-shadow: none;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V:hover,\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V:focus {\n\tbackground: #FFFFFF;\n\tcolor: #1A1A1A;\n}\n\n[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V:focus {\n\tborder-color: #008A0E;\n}\n\n@media (min-width: 783px) {\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 {\n\t\tdisplay: flex;\n\t\talign-items: flex-start;\n\t}\n\n\t/** Element: Ribbon */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__ribbon__1--fG {\n\t\tflex: 0 0 auto;\n\t}\n\n\t/** Element: Title */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 h2.shared-notifications-black-friday_suim-black__title__-GMUT {\n\t\tline-height: 22px;\n\t}\n\n\t/** Element: Promo Container */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__promo__33o2_ {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin-top: 0;\n\t\tmargin-left: 24px;\n\t\tpadding-top: 32px;\n\t}\n\n\t/** Element: CTA Button */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V {\n\t\twidth: auto;\n\t\tdisplay: inline-block;\n\t}\n}\n\n@media (min-width: 1200px) {\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 {\n\t\tpadding-right: 60px;\n\t}\n\n\t/** Element: Close Button */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_sui-button-icon__1Rlcp {\n\t\ttop: 20px;\n\t\tright: 20px;\n\t}\n\n\t/** Element: Promo Container */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__promo__33o2_ {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t/** Element: Content */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 .shared-notifications-black-friday_suim-black__content__16F_r {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t}\n\n\t/** Element: CTA Button */\n\t[class*=\"sui-2-\"] .shared-notifications-black-friday_sui-wrap__2CWkF .shared-notifications-black-friday_suim-black__3KmU4 a.shared-notifications-black-friday_suim-black__button__1ex7V {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t\tmargin-left: 32px;\n\t}\n}\n";
+styleInject(css_248z);
+
+var _excluded = ["price", "discount", "action", "content", "onCloseClick", "children"];
 
 function checkRTL() {
   var suiBody = document.body;
@@ -377,9 +524,11 @@ function checkSuiWrap() {
 }
 
 var NoticeBlack = function NoticeBlack(_ref) {
-  var link = _ref.link,
+  var price = _ref.price,
+      discount = _ref.discount,
+      action = _ref.action,
+      content = _ref.content,
       onCloseClick = _ref.onCloseClick,
-      sourceLang = _ref.sourceLang,
       children = _ref.children,
       props = _objectWithoutProperties$1(_ref, _excluded);
 
@@ -407,11 +556,15 @@ var NoticeBlack = function NoticeBlack(_ref) {
   };
 
   var lang = Object.assign({
-    discount: '50% Off',
-    closeLabel: 'Close',
-    linkLabel: 'See the deal'
-  }, sourceLang);
-  var hasLink = null !== link && '' !== link;
+    off: 'Off',
+    intro: '',
+    title: '',
+    close: 'Close'
+  }, content);
+  var hasIntro = !isUndefined(lang.intro) ? true : false;
+  var hasTitle = !isUndefined(lang.title) ? true : false;
+  var hasPrice = !isUndefined(price, 'number') ? true : false;
+  var hasDiscount = !isUndefined(discount, 'number') ? true : false;
   React.useEffect(function () {
     setRTL(checkRTL);
     setMonochrome(checkSuiWrap);
@@ -420,24 +573,58 @@ var NoticeBlack = function NoticeBlack(_ref) {
     rtl: isRTL,
     monochrome: isMonochrome
   }), /*#__PURE__*/React.createElement("div", _extends({
-    className: "sui-module-notice-black-friday__container"
+    className: "suim-black"
   }, props), /*#__PURE__*/React.createElement(ButtonIcon, {
     color: "white",
     icon: "close",
     iconSize: "md",
-    label: lang.closeLabel,
+    label: lang.close,
     onClick: closeOnClick
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "sui-module-notice-black-friday__ribbon"
-  }, lang.discount), /*#__PURE__*/React.createElement("div", {
-    className: "sui-module-notice-black-friday__body"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sui-module-notice-black-friday__content"
-  }, children), hasLink && /*#__PURE__*/React.createElement("a", {
-    href: link || '#',
-    target: "_blank",
-    className: "sui-module-notice-black-friday__link"
-  }, lang.linkLabel))));
+  }), hasDiscount && /*#__PURE__*/React.createElement(Ribbon, _extends({
+    sourceLang: {
+      off: lang.off
+    }
+  }, hasDiscount && {
+    discount: discount
+  })), /*#__PURE__*/React.createElement(Content, _extends({
+    action: action
+  }, hasIntro && {
+    intro: lang.intro
+  }, hasTitle && {
+    title: lang.title
+  }, hasPrice && {
+    price: price
+  }, hasDiscount && {
+    discount: discount
+  }), children)));
+}; // Check if element is undefined.
+
+var isUndefined = function isUndefined(element) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var isValid = 'undefined' !== typeof element;
+  var isNotEmpty = '' !== element;
+  var isNumber = 'number' === type;
+  var isBoolean = 'boolean' === type; // Check if element exists.
+
+  if (element && isValid && isNotEmpty) {
+    if (isNumber) {
+      if (Number.isNaN(element)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (isBoolean) {
+      if ('boolean' === typeof element) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 export { NoticeBlack };
