@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
-import { BlackFriday } from "./shared-notifications-black-friday__utils";
+import { BlackFriday } from "./styles/black-friday__styles";
 
 // Import required elements.
 import { Ribbon } from './elements/ribbon';
 import { Content } from './elements/content';
-
-// Import required styles.
-import './shared-notifications-black-friday.css';
 
 function checkRTL() {
 	const suiBody = document.body;
@@ -76,7 +73,11 @@ export const NoticeBlack = ({
 	return (
 		!isClose && (
 			<>
-				<BlackFriday.Global rtl={ isRTL } monochrome={ isMonochrome } />
+				<BlackFriday.Global
+					rtl={ isRTL }
+					monochrome={ isMonochrome }
+					suiLevel="div" />
+
 				<div className="suim-black" { ...props }>
 					<ButtonIcon
 						color="white"
