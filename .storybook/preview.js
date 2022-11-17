@@ -9,7 +9,7 @@ addParameters({
 		sui: {
 			contrast: '#17A8E3',
 			color: '#FFF',
-			title: 'SUI 2.12.3'
+			title: 'SUI 2.12.13'
 		},
 		beta: {
 			contrast: '#FFF',
