@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
 import { BlackFriday } from "./styles/black-friday__styles";
+import { Modal } from '@wpmudev/react-modal';
 
 // Import required elements.
 import { Ribbon } from './elements/ribbon';
 import { Content } from './elements/content';
+import { ModalContent, ModalTrigger } from './elements/modal';
 
 function checkRTL() {
 	const suiBody = document.body;
@@ -102,6 +104,12 @@ export const NoticeBlack = ({
 						{ ... ( hasPrice && { price: price } ) }
 						{ ... ( hasDiscount && { discount: discount } ) }>
 						{ children }
+						<Modal
+							size="lg"
+							dialogId="suim-black__modal"
+							titleId="suim-black__modal-title"
+							modalContent={ ModalContent }
+							triggerContent={ ModalTrigger } />
 					</Content>
 
 				</div>

@@ -10,7 +10,6 @@ export const Primary = ({ ...args }) => {
 	return (
 		<NoticeBlack { ...args }>
 			<p>From the creators of Smush, WPMU DEV's all-in-one platform gives you all the Pro tools and support you need to run and grow a web development business. Trusted by over 50,000 web developers. Limited deals available.</p>
-			<p><small>Don't want to claim the offer right now? <button className="suim-black__link" onClick={() => { console.log( 'Open Black Friday modal.' ) }}>Sign up for exclusive VIP access to future sales</button>.</small></p>
 		</NoticeBlack>
 	);
 };
