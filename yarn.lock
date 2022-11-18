@@ -4005,11 +4005,6 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-input/-/react-input-1.0.4.tgz#540b95c4cb6603b1b2dfdb241e66d152c239e0d3"
   integrity sha512-CtiHOZ9AUK0OhV4Oyl+KhUtBTAo1L0h9Rh27RiJDuxXvA06K08fCW2ZKi3KhafDcgFD0CqwOXwymgvhCdrnA7w==
 
-"@wpmudev/react-input@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-input/-/react-input-1.2.2.tgz#28478094de56a6813165d73be9b7e66fb2d67f43"
-  integrity sha512-Ixv2uNMC/rxS2YeAKhkhpF3+RzJqphGB6ntjEryJbqFR0Sz+RzAo9BDacWXv9OEn7R2rvDqABFlUxSgglxnyLg==
-
 "@wpmudev/react-modal@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-modal/-/react-modal-1.0.4.tgz#89d8d9bed8f462e849efc0c54f80c746b0b14bb4"
@@ -12093,11 +12088,6 @@ react-helmet-async@^1.0.7:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
-
-react-hook-form@^7.39.4:
-  version "7.39.4"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.39.4.tgz#7d9edf4e778a0cec4383f0119cd0699e3826a14a"
-  integrity sha512-B0e78r9kR9L2M4A4AXGbHoA/vyv34sB/n8QWJAw33TFz8f5t9helBbYAeqnbvcQf1EYzJxKX/bGQQh9K+evCyQ==
 
 react-inspector@^5.1.0:
   version "5.1.1"
