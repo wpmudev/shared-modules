@@ -1,8 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-import LalezarWoff from '../fonts/lalezar.woff';
-import LalezarWoff2 from '../fonts/lalezar.woff2';
-
 // UTILS: Set devices size.
 const screen = {
 	mobile: 480,
@@ -35,14 +32,7 @@ export const BlackFriday = {};
 
 // UTILS: Create elements.
 BlackFriday.Global = createGlobalStyle`
-@font-face {
-	font-family: 'Lalezar';
-	src: local('Lalezar'),
-		url(${LalezarWoff2}) format('woff2'),
-		url(${LalezarWoff}) format('woff');
-	font-weight: 400;
-	font-style: normal;
-}
+@import url(https://fonts.bunny.net/css?family=lalezar:400);
 
 ${ props => props.rtl && props.suiLevel === 'div' ? '.rtl ' : '' } [class*="sui-2-"]${ props => props.rtl && props.suiLevel !== 'div' ? '.rtl' : '' } .sui-wrap${ props => props.monochrome ? '.sui-color-accessible' : '' } {
 
