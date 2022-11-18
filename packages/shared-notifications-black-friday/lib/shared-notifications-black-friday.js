@@ -38,6 +38,8 @@ export const NoticeBlack = ({
 	discount,
 	action,
 	content,
+	formView,
+	successView,
 	onCloseClick,
 	children,
 	...props
@@ -47,6 +49,7 @@ export const NoticeBlack = ({
 	const [isMonochrome, setMonochrome] = useState( false );
 	const closeOnClick = e => {
 		setIsClose(true);
+
 		if ( 'undefined' !== typeof onCloseClick ) {
 			onCloseClick(e);
 		}
@@ -58,6 +61,10 @@ export const NoticeBlack = ({
 			intro: '',
 			title: '',
 			close: 'Close',
+			finePrint: {
+				label: '',
+				action: ''
+			}
 		},
 		content
 	);
@@ -72,6 +79,27 @@ export const NoticeBlack = ({
 		setMonochrome( checkSuiWrap );
 	});
 
+	const BlackModal = ({ formView, successView, closeModal }) => {
+		return (
+			<ModalContent
+				formView={ formView }
+				successView={ successView }
+				closeModal={ closeModal }
+				{ ...props }
+			/>
+		);
+	}
+
+	const BlackTrigger = ({ openModal }) => {
+		return (
+			<ModalTrigger
+				label={ lang.finePrint.label }
+				action={ lang.finePrint.action }
+				openModal={ openModal }
+			/>
+		);
+	}
+
 	return (
 		!isClose && (
 			<>
@@ -80,7 +108,7 @@ export const NoticeBlack = ({
 					monochrome={ isMonochrome }
 					suiLevel="div" />
 
-				<div className="suim-black" { ...props }>
+				<div className="suim-black">
 					<ButtonIcon
 						color="white"
 						icon="close"
@@ -108,8 +136,8 @@ export const NoticeBlack = ({
 							size="lg"
 							dialogId="suim-black__modal"
 							titleId="suim-black__modal-title"
-							modalContent={ ModalContent }
-							triggerContent={ ModalTrigger } />
+							modalContent={ BlackModal }
+							triggerContent={ BlackTrigger } />
 					</Content>
 
 				</div>
