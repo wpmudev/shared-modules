@@ -56,7 +56,7 @@ export class PresetsTable extends Component {
 		const rows = Children.map(this.props.children, (row) => {
 			const rowName = row.props.name;
 			const rowStatus = row.props.status;
-			const rowContent = rowStatus[0].replace(/( - )/g, "\n");
+			const rowContent = rowStatus.replace(/( - )/g, "\n");
 
 			return (
 				<tr>
