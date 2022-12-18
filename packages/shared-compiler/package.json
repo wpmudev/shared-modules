@@ -44,5 +44,8 @@
     "postcss": "^8.4.19",
     "rollup": "^2.39.0",
     "rollup-plugin-postcss": "^4.0.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.1"
   }
 }

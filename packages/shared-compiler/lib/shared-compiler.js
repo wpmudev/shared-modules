@@ -21,9 +21,7 @@ const inputOptions = {
 		'react'
 	],
 	plugins: [
-		resolve({
-			extensions: ['.css']
-		}),
+		resolve(),
 		postcss({
 			modules: true
 		}),
@@ -46,7 +44,7 @@ const inputOptions = {
 				'@babel/plugin-proposal-class-properties',
 				'@babel/plugin-proposal-private-methods'
 			]
-		})
+		}),
 	],
 	external: [
 		'react',
