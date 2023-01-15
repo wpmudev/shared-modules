@@ -1,0 +1,45 @@
+{
+  "name": "@wpmudev/shared-header",
+  "version": "0.0.0",
+  "description": "WPMU DEV Global Header",
+  "keywords": [],
+  "author": "WPMU DEV",
+  "contributors": [
+    {
+      "name": "Leighton Sapir",
+      "email": "2328848+iamleigh@users.noreply.github.com",
+      "url": "https://iamleigh.com/"
+    }
+  ],
+  "license": "GPL-2.0",
+  "main": "dist/shared-header.cjs.js",
+  "module": "dist/shared-header.esm.js",
+  "src": "lib/shared-header.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wpmudev/shared-modules.git",
+    "directory": "packages/shared-header"
+  },
+  "scripts": {
+    "build": "shared-compiler"
+  },
+  "bugs": {
+    "url": "https://github.com/wpmudev/shared-modules/issues"
+  },
+  "homepage": "https://github.com/wpmudev/shared-modules#readme",
+  "devDependencies": {
+    "@wpmudev/shared-compiler": "^1.0.3",
+    "react": "^18.2.0"
+  }
+}
