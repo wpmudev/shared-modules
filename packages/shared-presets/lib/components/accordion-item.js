@@ -54,7 +54,8 @@ const Authentic = styled.svg`
 const AccordionItemHeaderAlt = styled(AccordionItemHeader)`
 [class*="sui-2-"] .sui-wrap && {
 
-	> .sui-accordion-col-5 {
+	> .sui-accordion-col-3,
+    > .sui-accordion-col-2 {
 
 		@media ${deviceMax.tablet} {
 			display: none !important;
@@ -124,7 +125,7 @@ export class PresetsAccordionItem extends Component {
 
     render() {
         const { open } = this.state;
-        const { editAction, applyAction, deleteAction, downloadAction } = this.props;
+        const { editAction, applyAction, deleteAction, downloadAction, date = '', description = '', isWidget = false } = this.props;
 
         let clazz = !open
             ? 'sui-accordion-item'
@@ -161,9 +162,18 @@ export class PresetsAccordionItem extends Component {
 						image: this.props.image
 					} }
                     onClick={ e => this.toggle(e) }>
-					<div size="5">
-						<div style={ descstyles }>{ this.props.description }</div>
-					</div>
+                    <>
+                        { ! isWidget && (
+                            <div size={null !== date && '' !== date ? '3': '5'}>
+                                <div style={ descstyles }>{ description }</div>
+                            </div>
+                        )}
+                    </>
+                    <>
+                        {null !== date && '' !== date && ! isWidget && (
+                            <div size="2"><div style={ descstyles }>{ date }</div></div>
+                        )}
+                    </>
 					<div>
 						{ this.props.showApplyButton && (
 							<Button
@@ -209,7 +219,7 @@ export class PresetsAccordionItem extends Component {
                                 <div>
                                     <Label className="sui-label">{ escapeHTML( this.props.name ) }</Label>
                                     <Description className="sui-description">
-                                        { this.props.description }
+                                        { description }
                                     </Description>
                                 </div>
                                 <div
