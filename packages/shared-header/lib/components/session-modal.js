@@ -20,7 +20,7 @@ const SessionModal = ({ title, subtitle, cbFunc = () => {}, children }) => {
 						alt="Upgrade to WPMU DEV Pro" />
 				</figure>
 
-				<ButtonIcon icon="close" label="Close modal" className="sui-button-float--right" onClick={ cbFunc } />
+				<ButtonIcon icon="close" label="Close modal" color="white" className="sui-button-float--right" onClick={ cbFunc } />
 
 				{ !isUndefined(title) && !isEmpty(title) && (
 					<h3 id="ssm-session__modal-title" className="sui-box-title sui-lg">
