@@ -4,6 +4,7 @@ import { isUndefined, isEmpty } from './components/utils';
 // Import required component(s).
 import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionContent } from './components/session-content';
+import { SessionList as Perks } from './components/session-list';
 
 const Header = ({ title, login, pro, landing, tutorials, sourceUser, sourceModal, sourceUnplug, children }) => {
 	const unplug = Object.assign(
@@ -119,4 +120,4 @@ const Header = ({ title, login, pro, landing, tutorials, sourceUser, sourceModal
 	);
 }
 
-export { Header }
+export { Header, Perks }

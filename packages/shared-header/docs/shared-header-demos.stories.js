@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Header } from '../lib/shared-header';
+import { Header, Perks } from '../lib/shared-header';
 
 export default {
 	title: 'Header/Demos',
@@ -47,41 +47,32 @@ const ExtraFeatures = ({ ...props }) => {
 					<button className="sui-button" onClick={ () => console.log( 'Clear page cache' ) }>Clear Cache</button>
 				</div>
 				<div slot="modal">
-					<p><strong>Unlock other WPMU DEV perks and benefits!</strong></p>
-					<ul>
-						<li>
-							<strong>WPMU DEV Hub</strong><br/>
+					<Perks title="Unlock other WPMU DEV perks and benefits!">
+						<div title="WPMU DEV Hub" icon="logo" suicon={true}>
 							Effortlessly  manage unlimited sites from one dashboard.
-						</li>
-						<li>
-							<strong>Auto Updates</strong><br/>
+						</div>
+						<div title="Auto Updates" icon="logo" suicon={true}>
 							Schedule safe updates for all your plugins and themes.
-						</li>
-						<li>
-							<strong>Uptime Monitor</strong><br/>
+						</div>
+						<div title="Uptime Monitor" icon="logo" suicon={true}>
 							Instant downtime alerts and helpful site analytics.
-						</li>
-						<li>
-							<strong>One Click SSO</strong><br/>
+						</div>
+						<div title="One Click SSO" icon="logo" suicon={true}>
 							Access all your sites from one place with one click.
-						</li>
-						<li>
-							<strong>White Label Reports</strong><br/>
+						</div>
+						<div title="White Label Reports" icon="logo" suicon={true}>
 							Custom website health reports for clients.
-						</li>
-						<li>
-							<strong>Secure Site Backups</strong><br/>
+						</div>
+						<div title="Secure Site Backups" icon="logo" suicon={true}>
 							Including 1GB free WPMU DEV storage.
-						</li>
-						<li>
-							<strong>Client Billing</strong><br/>
+						</div>
+						<div title="Client Billing" icon="logo" suicon={true}>
 							A full payment solution for your business.
-						</li>
-						<li>
-							<strong>Many More Benefits</strong><br/>
+						</div>
+						<div title="Many More Benefits" icon="logo" suicon={true}>
 							Many more membership perks and benefits.
-						</li>
-					</ul>
+						</div>
+					</Perks>
 				</div>
 			</Header>
 			<div className="sui-box" style={{ minHeight: 450 }} />
