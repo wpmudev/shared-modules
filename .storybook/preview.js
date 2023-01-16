@@ -2,6 +2,7 @@ import React from "react";
 import "@storybook/addon-console";
 import { addParameters } from '@storybook/react';
 import "@wpmudev/shared-ui/dist/css/shared-ui.min.css"; // Get SUI styles.
+import "@wpmudev/sui-icons/dist/css/sui-icons.min.css"; // Get SUI Icons styles.
 import "./body-class";
 
 addParameters({
