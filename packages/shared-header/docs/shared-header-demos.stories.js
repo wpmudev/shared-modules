@@ -2,11 +2,41 @@ import React, { Fragment } from 'react';
 import { Header } from '../lib/shared-header';
 
 export default {
-	title: 'Header',
+	title: 'Header/Demos',
 	component: Header
 }
 
-const Primary = ({ ...props }) => {
+const Basic = ({ ...props }) => {
+	return (
+		<Fragment>
+			<Header { ...props } />
+			<div className="sui-box" style={{ minHeight: 450 }} />
+		</Fragment>
+	);
+}
+Basic.storyName = 'Default';
+Basic.args = {
+	title: 'Dashboard',
+	login: false,
+	pro: false,
+	sourceUser: {
+		name: 'John Doe',
+		email: 'johndoe@email.com',
+		avatar: ''
+	},
+	tutorials: {
+		label: 'Tutorials',
+		href: '',
+		target: '_blank',
+		cbFunc: () => console.log( 'Show plugin tutorials' )
+	},
+	sourceUnplug: {
+		label: 'Click to connect',
+		tooltip: "Hummingbird isn't connected to a WPMU DEV account. Connect to unlock additional free features."
+	}
+}
+
+const ExtraFeatures = ({ ...props }) => {
 	return (
 		<Fragment>
 			<Header { ...props }>
@@ -58,27 +88,8 @@ const Primary = ({ ...props }) => {
 		</Fragment>
 	);
 }
-Primary.storyName = 'Header';
-Primary.args = {
-	title: 'Dashboard',
-	login: false,
-	pro: false,
-	sourceUser: {
-		name: 'John Doe',
-		email: 'johndoe@email.com',
-		avatar: ''
-	},
-	tutorials: {
-		label: 'Tutorials',
-		href: '',
-		target: '_blank',
-		cbFunc: () => console.log( 'Show plugin tutorials' )
-	},
-	sourceUnplug: {
-		label: 'Click to connect',
-		tooltip: "Hummingbird isn't connected to a WPMU DEV account. Connect to unlock additional free features."
-	}
+ExtraFeatures.args = {
+	...Basic.args
 }
-Primary.argTypes = {}
 
-export { Primary }
+export { Basic, ExtraFeatures }
