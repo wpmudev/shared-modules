@@ -150,63 +150,26 @@ export const Presets = ( {
 				successMessage: '{configName} config created successfully.',
 			},
 			deleteAction: {},
-			settingsLabels: {},
+			settingsLabels: {
+				bulk_smush: 'Bulk Smush',
+				lazy_load: 'Lazy Load',
+				cdn: 'CDN',
+				webp_mod: 'WebP Mod',
+				integrations: 'Integrations',
+				settings: 'Settings',
+			},
 		},
 		sourceLang
 	);
 
 	// Default demo data.
-	let demoData = [
-		{
-			default: true,
-			name: "Basic config",
-			description: "Recommended performance config for every site.",
-			created_date: "March 22, 2021 10:03 am",
-			config: [
-				{
-					id: "bulk_smush",
-					name: "Bulk Smush",
-					content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
-				},
-				{
-					id: "lazy_load",
-					name: "Lazy Load",
-					content: "Inactive"
-				},
-				{
-					id: "cdn",
-					name: "CDN",
-					content: "Inactive"
-				},
-				{
-					id: "webp_mod",
-					name: "Local WebP",
-					content: "Inactive"
-				},
-				{
-					id: "integrations",
-					name: "Integrations",
-					content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
-				},
-				{
-					id: "tools",
-					name: "Tools",
-					content: "Image Resize Detection - Inactive"
-				},
-				{
-					id: "settings",
-					name: "Settings",
-					content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
-				}
-			],
-		}
-	];
+	let demoData = [];
 
 	if ( srcDemoData ) {
 		if ( 'empty' === srcDemoData ) {
 			demoData = [];
 		} else {
-			demoData.push( srcDemoData );
+			demoData.push( ...srcDemoData );
 		}
 	}
 
@@ -234,46 +197,73 @@ export const Presets = ( {
 		}
 	};
 
+	const hasSameProperties = (obj1, obj2) => {
+		return Object.keys(obj1).every( function(property) {
+			return obj2.hasOwnProperty(property);
+		});
+	};
+
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
 		if ( setDemoData ) {
-			setIsLoading( true );
 
-			const newDemoData = (
-				{
-					name: "New Demo Config",
-					description: "Aenean lacinia bibendum nulla sed consectetur.",
-					config: [
-						{
-							id: "storage_limit",
-							name: "Storage Limit",
-							content: "5"
-						},
-						{
-							id: "exclusions",
-							name: "Exclusions",
-							content: "Active"
-						}
-					]
+			const configFile = e.target.files[0];
+			const reader = new FileReader();
+
+			const defaultStructure = {
+				id: '',
+				default: '',
+				name: '',
+				description: '',
+				created_date: '',
+				config: [
+					{
+						id: '',
+						name: '',
+						content: ''
+					}
+				]
+			};
+			
+			reader.readAsText(configFile);
+
+			reader.onload = function() {
+				setIsLoading( true );
+				try {
+					var fileContent = JSON.parse(reader.result);
+					if (hasSameProperties(defaultStructure, fileContent)) {
+						demoData.push(fileContent);
+						setTimeout( () => {
+							setConfigs( demoData );
+							setIsLoading( false );
+						}, 500 );
+						console.log(
+							'\n' +
+							'Button: Upload\n' +
+							'Action: To upload new configurations.\n' +
+							'Message: Config imported successfully.\n' +
+							'\n' +
+							'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+							'\n'
+						);
+					}
+				} catch (e) {
+					setTimeout( () => {
+						setIsLoading( false );
+					}, 500 );
+					console.log(
+						'\n' +
+						'Button: Upload\n' +
+						'Action: To upload new configurations.\n' +
+						'Message: Invalid JSON structure.\n' +
+						'\n' +
+						'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+						'\n'
+					);
+					return;
 				}
-			);
-
-			demoData.push( newDemoData );
-
-			setTimeout( () => {
-				setConfigs( demoData );
-				setIsLoading( false );
-			}, 500 );
-
-			console.log(
-				'\n' +
-				'Button: Upload\n' +
-				'Action: To upload new configurations.\n' +
-				'\n' +
-				'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
-				'\n'
-			);
+			};
 		} else {
 			RequestsHandler.upload( e ).then( ( res ) => {
 				if ( res.data && res.data.config ) {
@@ -313,14 +303,18 @@ export const Presets = ( {
 		}
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (currentConfig) => {
 		if ( setDemoData ) {
 			setTimeout(() => {
 				setIsDeleteOpen( false );
 				setIsLoading( true );
 			}, 500 );
-
-			setTimeout(() => setIsLoading( false ), 1000 );
+			setTimeout(() => {
+				setIsLoading( false );
+				// Remove the config from the demo data.
+				demoData = configs.filter( ( config ) => config.id !== currentConfig.id );
+				setConfigs(demoData);
+			}, 1000 );
 
 			console.log(
 				'\n' +
@@ -363,7 +357,6 @@ export const Presets = ( {
 				'\n'
 			);
 		} else {
-
 			// Editing a config.
 			if ( currentConfig ) {
 				RequestsHandler.edit( [ ...configs ], currentConfig, configData )
@@ -544,7 +537,7 @@ export const Presets = ( {
 
 	const Table = (
 		<>
-			{ ! isEmpty && setDemoData && (
+			{ ! isEmpty && (
 				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
 					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
@@ -568,35 +561,6 @@ export const Presets = ( {
 						>
 							{ item.config.map( ( data ) => (
 								<div key={ data.id } name={ data.name } status={ data.content } />
-							) ) }
-						</PresetsAccordionItem>
-					) ) }
-				</div>
-			) }
-
-			{ ! isEmpty && ! setDemoData && (
-				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-					{ configs.map( item => (
-						<PresetsAccordionItem
-							key={ item.id }
-							id={ item.id }
-							default={ item.default }
-							name={ item.name }
-							date={ item.created_date }
-							description={ item.description }
-							image={ tableImage }
-							showApplyButton={ ! isWidget }
-							applyLabel={ lang.apply }
-							applyAction={ () => openModal( 'apply', item ) }
-							downloadLabel={ lang.download }
-							downloadAction={ () => doDownload( item ) }
-							editLabel={ lang.edit }
-							editAction={ () => openModal( 'edit', item ) }
-							deleteLabel={ lang.delete }
-							deleteAction={ () => openModal( 'delete', item ) }
-						>
-							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
@@ -660,7 +624,7 @@ export const Presets = ( {
 				</Notifications>
 			</BoxFooter>
 		);
-	}
+	};
 
 	const getDescription = () => {
 		if ( isWidget ) {
