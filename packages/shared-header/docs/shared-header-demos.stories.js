@@ -51,25 +51,25 @@ const ExtraFeatures = ({ ...props }) => {
 						<div title="WPMU DEV Hub" icon="logo" suicon={true}>
 							Effortlessly  manage unlimited sites from one dashboard.
 						</div>
-						<div title="Auto Updates" icon="logo" suicon={true}>
+						<div title="Auto Updates" icon="refresh" suicon={true}>
 							Schedule safe updates for all your plugins and themes.
 						</div>
-						<div title="Uptime Monitor" icon="logo" suicon={true}>
+						<div title="Uptime Monitor" icon="chart" suicon={true}>
 							Instant downtime alerts and helpful site analytics.
 						</div>
-						<div title="One Click SSO" icon="logo" suicon={true}>
+						<div title="One Click SSO" icon="check" suicon={true}>
 							Access all your sites from one place with one click.
 						</div>
-						<div title="White Label Reports" icon="logo" suicon={true}>
+						<div title="White Label Reports" icon="email" suicon={true}>
 							Custom website health reports for clients.
 						</div>
-						<div title="Secure Site Backups" icon="logo" suicon={true}>
+						<div title="Secure Site Backups" icon="shield-check" suicon={true}>
 							Including 1GB free WPMU DEV storage.
 						</div>
-						<div title="Client Billing" icon="logo" suicon={true}>
+						<div title="Client Billing" icon="user-alt" suicon={true}>
 							A full payment solution for your business.
 						</div>
-						<div title="Many More Benefits" icon="logo" suicon={true}>
+						<div title="Many More Benefits" icon="add" suicon={true}>
 							Many more membership perks and benefits.
 						</div>
 					</Perks>
