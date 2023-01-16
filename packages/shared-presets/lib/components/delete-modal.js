@@ -23,7 +23,7 @@ const DeleteModal = ( { setOpen, config, save, strings = {} } ) => {
 
 	const doAction = () => {
 		setIsSaving( true );
-		save();
+		save(config);
 	};
 
 	const modalContent = () => (

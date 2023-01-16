@@ -9,6 +9,8 @@ import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { Dropdown } from '@wpmudev/react-dropdown';
 import { PresetsTable } from './table';
 
+import { escapeHTML } from '@wordpress/escape-html';
+
 const Header = styled.div`
 	margin: 0 0 20px;
 
@@ -123,7 +125,7 @@ export class PresetsAccordionItem extends Component {
 
 	render() {
 		const { open } = this.state;
-		const { editAction, applyAction, deleteAction, downloadAction } = this.props;
+		const { editAction, applyAction, deleteAction, downloadAction, date = '', description = '', isWidget = false } = this.props;
 
 		let clazz = !open
 			? 'sui-accordion-item'
@@ -136,11 +138,11 @@ export class PresetsAccordionItem extends Component {
 		const name = this.props.default
 			? (
 				<React.Fragment>
-					{ this.props.name }
+					{ escapeHTML( this.props.name ) }
 					{ icon }
 				</React.Fragment>
 			)
-			: this.props.name;
+			: escapeHTML( this.props.name );
 
 		const descstyles = {
 			overflow: 'hidden',
@@ -163,14 +165,19 @@ export class PresetsAccordionItem extends Component {
 					{ ... null !== this.props.image && '' !== this.props.image && {
 						image: this.props.image
 					} }
-					onClick={ e => this.toggle(e) }
-				>
-					<div size="3">
-						<div style={ descstyles }>{ this.props.description }</div>
-					</div>
-					<div size="2">
-						<div style={ descstyles }>{ this.props.created }</div>
-					</div>
+					onClick={ e => this.toggle(e) }>
+					<>
+						{ ! isWidget && (
+							<div size={null !== date && '' !== date ? '3': '5'}>
+								<div style={ descstyles }>{ description }</div>
+							</div>
+						)}
+					</>
+					<>
+						{null !== date && '' !== date && ! isWidget && (
+							<div size="2"><div style={ descstyles }>{ date }</div></div>
+						)}
+					</>
 					<div>
 						{ this.props.showApplyButton && (
 							<Button
@@ -214,9 +221,9 @@ export class PresetsAccordionItem extends Component {
 
 							<Header>
 								<div>
-									<Label className="sui-label">{ this.props.name }</Label>
+									<Label className="sui-label">{ escapeHTML( this.props.name ) }</Label>
 									<Description className="sui-description">
-										{ this.props.description }
+										{ description }
 									</Description>
 								</div>
 								<div

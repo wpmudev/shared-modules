@@ -1,0 +1,7320 @@
+import React, { useState, Component, Children, Fragment } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
+import AriaModal from '@justfixnyc/react-aria-modal';
+
+function _extends$8() {
+  _extends$8 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$8.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$1$3(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$1$3(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$1$3(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _taggedTemplateLiteral$6(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _slicedToArray$4(arr, i) {
+  return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$4();
+}
+
+function _arrayWithHoles$4(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit$4(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray$4(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$4(o, minLen);
+}
+
+function _arrayLikeToArray$4(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableRest$4() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _defineProperty$8(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$7(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$7(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$7(Object(source), true).forEach(function (key) {
+        _defineProperty$8(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$7(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$a(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$a(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$a(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$5 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$a(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$7({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var img$1 = "data:image/png;base64,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";
+var img = "data:image/png;base64,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";
+
+var _templateObject$8, _templateObject2$6, _templateObject3$5, _templateObject4$5, _templateObject5$5, _templateObject6$3;
+
+var screen$5 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var minDevice = {
+  mobile: "(min-width: ".concat(screen$5.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$5.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$5.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$5.desktop, "px)")
+};
+var maxDevice = {
+  mobile: "(max-width: ".concat(screen$5.mobile - 1, "px)"),
+  tablet: "(max-width: ".concat(screen$5.tablet - 1, "px)"),
+  laptop: "(max-width: ".concat(screen$5.laptop - 1, "px)"),
+  desktop: "(max-width: ".concat(screen$5.desktop - 1, "px)")
+};
+var BlackFriday = {}; // UTILS: Create elements.
+
+BlackFriday.Global = createGlobalStyle(_templateObject$8 || (_templateObject$8 = _taggedTemplateLiteral$6(["\n[class*=\"sui-2-\"]", " .sui-wrap", " {\n\n\t.sui-module-notice-black-friday {\n\n\t\t&__container {\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t\tmargin: 0 0 20px;\n\t\t\tpadding: 30px 40px;\n\t\t\tborder-radius: 4px;\n\t\t\tbackground-color: ", ";\n\t\t\t", "\n\n\t\t\t@media ", " {\n\t\t\t\ttext-align: center;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tmargin: 0 0 30px;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: flex-start;\n\t\t\t\tpadding-", ": 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\talign-items: center;\n\t\t\t}\n\n\t\t\t.sui-button-icon {\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 10px;\n\t\t\t\t", ": 10px;\n\t\t\t\tmargin-", ": 0 !important;\n\t\t\t}\n\t\t}\n\n\t\t&__ribbon {\n\t\t\tdisplay: inline-block;\n\t\t\tpadding: 10px 20px 11px;\n\t\t\tbackground-color: ", ";\n\t\t\tcolor: ", ";\n\t\t\tfont-size: 22px;\n\t\t\tline-height: 29px;\n\t\t\tfont-weight: bold;\n\t\t\tletter-spacing: normal;\n\n\t\t\t@media ", " {\n\t\t\t\tflex: 0 0 auto;\n\t\t\t\tpadding: 15px 20px 16px;\n\t\t\t}\n\t\t}\n\n\t\t&__body {\n\t\t\tmargin: 0 0 30px;\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin: 0 15px;\n\t\t\t\tpadding-", ": 65px;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: center;\n\t\t\t\tpadding-right: 0;\n\t\t\t}\n\t\t}\n\n\t\t&__content {\n\t\t\tmargin: 30px 0;\n\n\t\t\t@media ", " {\n\t\t\t\tmargin-top: 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin-bottom: 0;\n\t\t\t}\n\n\t\t\th1, h2, h3, h4, h5, h6, p, small {\n\t\t\t\tcolor: ", ";\n\t\t\t}\n\n\t\t\tp {\n\t\t\t\tmargin: 0 0 15px;\n\t\t\t\tfont-size: 18px;\n\t\t\t\tline-height: 25px;\n\n\t\t\t\t@media ", " {\n\t\t\t\t\tmargin: 0 0 5px;\n\t\t\t\t}\n\n\t\t\t\t&:last-child {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t}\n\n\t\t\t\tstrong {\n\t\t\t\t\tfont-weight: 700;\n\n\t\t\t\t\t@media ", " {\n\t\t\t\t\t\tdisplay: block;\n\t\t\t\t\t\tmargin-bottom: 20px;\n\t\t\t\t\t\tfont-size: 28px;\n\t\t\t\t\t\tline-height: 29px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tsmall {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tdisplay: initial;\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tline-height: 22px;\n\t\t\t\t\tfont-weight: 300;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t&__link {\n\t\t\tcursor: pointer;\n\t\t\tdisplay: inline-block;\n\t\t\tmargin: 0;\n\t\t\tpadding: 5px 30px;\n\t\t\tborder: 0;\n\t\t\tborder-radius: 30px;\n\t\t\tbackground: ", ";\n\t\t\tbox-shadow: none;\n\t\t\tcolor: ", ";\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 30px;\n\t\t\tfont-weight: bold;\n\t\t\ttext-decoration: none;\n\t\t\ttransition: 0.2s ease;\n\n\t\t\t&:hover,\n\t\t\t&:focus {\n\t\t\t\tbackground: #ffffff !important;\n\t\t\t\tcolor: ", " !important;\n\t\t\t\t", "\n\t\t\t}\n\n\t\t\t&:focus {\n\t\t\t\tbox-shadow: ", ";\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tflex: 0 0 auto;\n\t\t\t}\n\t\t}\n\t}\n}\n"])), function (props) {
+  return props.rtl ? '[dir="rtl"]' : '';
+}, function (props) {
+  return props.monochrome ? '.sui-color-accessible' : '';
+}, function (props) {
+  return props.monochrome ? '#ffffff' : '#07212C';
+}, function (props) {
+  return props.monochrome ? 'box-shadow: 0 2px 0 #e6e6e6;' : "\n\t\t\t\tbackground-image: image-set(\n\t\t\t\t\turl(".concat(img$1, ") 1x,\n\t\t\t\t\turl(").concat(img, ") 2x\n\t\t\t\t);\n\t\t\t\tbackground-image:\n\t\t\t\t\timage-set(\n\t\t\t\t\t\turl(").concat(img$1, ") 1x,\n\t\t\t\t\t\turl(").concat(img, ") 2x\n\t\t\t\t\t),\n\t\t\t\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\t\t\t\t");
+}, maxDevice.tablet, minDevice.tablet, function (props) {
+  return props.rtl ? 'right' : 'left';
+}, minDevice.laptop, function (props) {
+  return props.rtl ? 'left' : 'right';
+}, function (props) {
+  return props.rtl ? 'left' : 'right';
+}, function (props) {
+  return props.monochrome ? '#000000' : '#6D53AB';
+}, function (props) {
+  return props.monochrome ? '#ffffff' : '#4DFD89';
+}, minDevice.tablet, minDevice.tablet, function (props) {
+  return props.rtl ? 'left' : 'right';
+}, minDevice.laptop, minDevice.tablet, minDevice.laptop, function (props) {
+  return props.monochrome ? '#000000' : '#ffffff';
+}, minDevice.tablet, maxDevice.tablet, function (props) {
+  return props.monochrome ? '#000000' : '#4DFD89';
+}, function (props) {
+  return props.monochrome ? '#ffffff !important' : '#222222';
+}, function (props) {
+  return props.monochrome ? '#000000' : '#222222';
+}, function (props) {
+  return props.monochrome ? 'box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);' : '';
+}, function (props) {
+  return props.monochrome ? '0 0 10px 0 rgba(0,0,0,0.6)' : '0 0 10px 0 rgba(255,255,255,0.3)';
+}, minDevice.laptop);
+BlackFriday.Container = styled.div(_templateObject2$6 || (_templateObject2$6 = _taggedTemplateLiteral$6(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\toverflow: hidden;\n\tposition: relative;\n\tmargin: 0 0 20px;\n\tpadding: 30px 40px;\n\tborder-radius: 4px;\n\tbackground-color: #07212C;\n\tbackground-image: image-set(\n\t\turl(", ") 1x,\n\t\turl(", ") 2x\n\t);\n\tbackground-image:\n\t\timage-set(\n\t\t\turl(", ") 1x,\n\t\t\turl(", ") 2x\n\t\t),\n\t\tlinear-gradient(270deg, #222222 0.67%, #07212C 100%);\n\n\t@media ", " {\n\t\ttext-align: center;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tmargin: 0 0 30px;\n\t\tflex-flow: row nowrap;\n\t\talign-items: flex-start;\n\t\tpadding-left: 0;\n\t}\n\n\t@media ", " {\n\t\talign-items: center;\n\t}\n\n\t.sui-button-icon {\n\t\tposition: absolute;\n\t\ttop: 10px;\n\t\tright: 10px;\n\t\tmargin-right: 0 !important;\n\t}\n}\n"])), img$1, img, img$1, img, maxDevice.tablet, minDevice.tablet, minDevice.laptop);
+BlackFriday.Ribbon = styled.div(_templateObject3$5 || (_templateObject3$5 = _taggedTemplateLiteral$6(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tdisplay: inline-block;\n\tpadding: 10px 20px 11px;\n\tbackground-color: #6D53AB;\n\tcolor: #4DFD89;\n\tfont-size: 22px;\n\tline-height: 29px;\n\tfont-weight: bold;\n\tletter-spacing: normal;\n\n\t@media ", " {\n\t\tflex: 0 0 auto;\n\t\tpadding: 15px 20px 16px;\n\t}\n}\n"])), minDevice.tablet);
+BlackFriday.Body = styled.div(_templateObject4$5 || (_templateObject4$5 = _taggedTemplateLiteral$6(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 0 0 30px;\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin: 0 15px;\n\t\tpadding-right: 65px;\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t\talign-items: center;\n\t\tpadding-right: 0;\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop);
+BlackFriday.Content = styled.div(_templateObject5$5 || (_templateObject5$5 = _taggedTemplateLiteral$6(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tmargin: 30px 0;\n\n\t@media ", " {\n\t\tmargin-top: 0;\n\t}\n\n\t@media ", " {\n\t\tmin-width: 1px;\n\t\tflex: 1;\n\t\tmargin-bottom: 0;\n\t}\n\n\th1, h2, h3, h4, h5, h6, p, small {\n\t\tcolor: #fff;\n\t}\n\n\tp {\n\t\tmargin: 0 0 15px;\n\t\tfont-size: 18px;\n\t\tline-height: 25px;\n\n\t\t@media ", " {\n\t\t\tmargin: 0 0 5px;\n\t\t}\n\n\t\t&:last-child {\n\t\t\tmargin: 0;\n\t\t}\n\n\t\tstrong {\n\t\t\tfont-weight: 700;\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tmargin-bottom: 20px;\n\t\t\t\tfont-size: 28px;\n\t\t\t\tline-height: 29px;\n\t\t\t}\n\t\t}\n\n\t\tsmall {\n\t\t\tmargin: 0;\n\t\t\tdisplay: initial;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 300;\n\t\t}\n\t}\n}\n"])), minDevice.tablet, minDevice.laptop, minDevice.tablet, maxDevice.tablet);
+BlackFriday.Link = styled.a.attrs(function (_ref) {
+  var ctaLink = _ref.ctaLink;
+  return {
+    href: ctaLink,
+    target: "_blank"
+  };
+})(_templateObject6$3 || (_templateObject6$3 = _taggedTemplateLiteral$6(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #fff;\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:focus {\n\t\tbox-shadow: 0 0 10px 0 rgba(255,255,255,0.3);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
+var _excluded$1 = ["link", "onCloseClick", "sourceLang", "children"];
+
+function checkRTL() {
+  var suiBody = document.body;
+  var hasLang = suiBody.hasAttribute('dir');
+  var getLang = suiBody.getAttribute('dir');
+
+  if (hasLang && 'rtl' === getLang) {
+    return true;
+  }
+
+  return false;
+}
+
+function checkSuiWrap() {
+  var suiWrap = document.querySelectorAll('.sui-wrap');
+
+  for (var i = 0; i < suiWrap.length; i++) {
+    if (suiWrap[i].classList.contains('sui-color-accessible')) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+var NoticeBlack = function NoticeBlack(_ref) {
+  var link = _ref.link,
+      onCloseClick = _ref.onCloseClick,
+      sourceLang = _ref.sourceLang,
+      children = _ref.children,
+      props = _objectWithoutProperties$1$3(_ref, _excluded$1);
+
+  var _useState = useState(false),
+      _useState2 = _slicedToArray$4(_useState, 2),
+      isClose = _useState2[0],
+      setIsClose = _useState2[1];
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray$4(_useState3, 2),
+      isRTL = _useState4[0],
+      setRTL = _useState4[1];
+
+  var _useState5 = useState(false),
+      _useState6 = _slicedToArray$4(_useState5, 2),
+      isMonochrome = _useState6[0],
+      setMonochrome = _useState6[1];
+
+  var closeOnClick = function closeOnClick(e) {
+    setIsClose(true);
+
+    if ('undefined' !== typeof onCloseClick) {
+      onCloseClick(e);
+    }
+  };
+
+  var lang = Object.assign({
+    discount: '50% Off',
+    closeLabel: 'Close',
+    linkLabel: 'See the deal'
+  }, sourceLang);
+  var hasLink = null !== link && '' !== link;
+  React.useEffect(function () {
+    setRTL(checkRTL);
+    setMonochrome(checkSuiWrap);
+  });
+  return !isClose && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlackFriday.Global, {
+    rtl: isRTL,
+    monochrome: isMonochrome
+  }), /*#__PURE__*/React.createElement("div", _extends$8({
+    className: "sui-module-notice-black-friday__container"
+  }, props), /*#__PURE__*/React.createElement(ButtonIcon$5, {
+    color: "white",
+    icon: "close",
+    iconSize: "md",
+    label: lang.closeLabel,
+    onClick: closeOnClick
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-black-friday__ribbon"
+  }, lang.discount), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-black-friday__body"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-black-friday__content"
+  }, children), hasLink && /*#__PURE__*/React.createElement("a", {
+    href: link || '#',
+    target: "_blank",
+    className: "sui-module-notice-black-friday__link"
+  }, lang.linkLabel))));
+};
+
+function _extends$7() {
+  _extends$7 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$7.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$1$2(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$1$2(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$1$2(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _taggedTemplateLiteral$5(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _slicedToArray$3(arr, i) {
+  return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$3();
+}
+
+function _arrayWithHoles$3(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit$3(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray$3(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$3(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$3(o, minLen);
+}
+
+function _arrayLikeToArray$3(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableRest$3() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _defineProperty$7(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$6(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$6(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$6(Object(source), true).forEach(function (key) {
+        _defineProperty$7(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$6(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$9(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$9(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$9(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var Button$2 = function Button(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$9(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, icon && "" !== icon && /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-" + icon,
+    "aria-hidden": "true"
+  }), label);
+  className = "sui-button".concat(className ? ' ' + className : ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = 'button';
+
+  if (props.href) {
+    htmlTag = 'a';
+  } else if (props.htmlFor) {
+    htmlTag = 'label';
+  }
+
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$6({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var _templateObject$7, _templateObject2$5, _templateObject3$4, _templateObject4$4, _templateObject5$4, _templateObject6$2, _templateObject7$2, _templateObject8$2, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+
+var screen$4 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device$4 = {
+  mobile: "(min-width: ".concat(screen$4.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$4.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$4.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$4.desktop, "px)")
+};
+var Discount = {}; // UTILS: Create global styles.
+
+Discount.Global = createGlobalStyle(_templateObject$7 || (_templateObject$7 = _taggedTemplateLiteral$5(["\n[class*=\"sui-2-\"] .sui-wrap {\n\n\t.sui-module-notice-discount {\n\n\t\t&__wrapper {\n\t\t\toverflow: hidden;\n\t\t\tdisplay: block;\n\t\t\tborder-radius: 4px;\n\t\t\tbackground-color: #fff;\n\t\t}\n\n\t\t&__header {\n\t\t\tdisplay: flex;\n\t\t\tflex-flow: row wrap;\n\t\t\talign-items: center;\n\t\t\tjustify-content: space-between;\n\t\t\tbackground-color: #8D00B1;\n\n\t\t\t.sui-button-icon {\n\t\t\t\tflex: 0 0 auto;\n\t\t\t\tmargin: 16px 20px !important;\n\n\t\t\t\t&:only-child {\n\t\t\t\t\tmargin-left: auto !important;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t&__ribbon {\n\t\t\tflex: 0 0 auto;\n\t\t\tposition: relative;\n\t\t\tmargin: 12px 0;\n\t\t\tpadding: 10px 23px 10px 15px;\n\t\t\tbackground-color: #FECF2F;\n\t\t\tcolor: #000;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 18px;\n\t\t\tfont-weight: bold;\n\t\t\tletter-spacing: normal;\n\n\t\t\t&:after {\n\t\t\t\tcontent: \" \";\n\t\t\t\tdisplay: block;\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 0;\n\t\t\t\tright: 0;\n\t\t\t\tborder-width: 19px 12px;\n\t\t\t\tborder-style: solid;\n\t\t\t\tborder-color: #FECF2F;\n\t\t\t\tborder-right-color: #8D00B1;\n\t\t\t\tborder-left-width: 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tpadding-right: 25px;\n\t\t\t\tfont-size: 14px;\n\t\t\t}\n\t\t}\n\n\t\t&__title {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 1;\n\t\t\tmargin: 0 20px !important;\n\t\t\tpadding: 11px 0 !important;\n\t\t\tborder: 0 !important;\n\t\t\tcolor: #fff !important;\n\t\t\tfont-size: 13px !important;\n\t\t\tline-height: 21px !important;\n\t\t\tfont-weight: bold !important;\n\t\t\tletter-spacing: normal !important;\n\n\t\t\t& + & .sui-button-icon {\n\t\t\t\tmargin-left: 0 !important;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tpadding: 20px 0 21px !important;\n\t\t\t\tfont-size: 16px !important;\n\t\t\t}\n\t\t}\n\n\t\t&__body {\n\t\t\ttext-align: center;\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-flow: row wrap;\n\t\t\t\talign-items: center;\n\t\t\t}\n\t\t}\n\n\t\t&__image {\n\t\t\tdisplay: none;\n\t\t\tflex: 0 0 auto;\n\t\t\talign-self: flex-end;\n\t\t\tmargin: 0 10px;\n\t\t\tpadding: 0 30px;\n\n\t\t\t+ div {\n\n\t\t\t\t@media ", " {\n\t\t\t\t\tpadding-left: 0 !important;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t}\n\n\t\t&__content {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 1;\n\t\t\tpadding: 20px 20px 10px;\n\n\t\t\tp {\n\t\t\t\tmargin: 12px 0 0 !important;\n\t\t\t\tcolor: #666 !important;\n\t\t\t\tfont-size: 13px !important;\n\t\t\t\tline-height: 22px !important;\n\n\t\t\t\t&:first-child {\n\t\t\t\t\tmargin: 0 !important;\n\t\t\t\t}\n\n\t\t\t\t&.sui-disclaimer {\n\t\t\t\t\tdisplay: none;\n\t\t\t\t\tcolor: #888 !important;\n\n\t\t\t\t\t@media ", " {\n\t\t\t\t\t\tdisplay: block;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tpadding: 30px;\n\t\t\t\ttext-align: left;\n\t\t\t}\n\t\t}\n\n\t\t&__border {\n\t\t\tdisplay: none;\n\t\t\talign-self: stretch;\n\t\t\tpadding: 30px 0;\n\n\t\t\tspan {\n\t\t\t\twidth: 1px;\n\t\t\t\theight: 100%;\n\t\t\t\tdisplay: block;\n\t\t\t\tbackground-color: #DDD;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t}\n\n\t\t&__price {\n\t\t\tmargin: 0 !important;\n\t\t\tcolor: #333 !important;\n\t\t\tfont-size: 15px !important;\n\t\t\tline-height: 40px !important;\n\t\t\tletter-spacing: -0.27px !important;\n\n\t\t\tspan {\n\t\t\t\tmargin-right: 6px;\n\t\t\t\tcolor: #FF6D6D;\n\t\t\t\tfont-size: 18px;\n\t\t\t\tfont-weight: bold;\n\t\t\t\ttext-decoration: line-through;\n\t\t\t\tletter-spacing: -0.32px;\n\t\t\t}\n\n\t\t\tstrong {\n\t\t\t\tfont-size: 28px;\n\t\t\t\tfont-weight: bold;\n\t\t\t\tletter-spacing: -0.5px;\n\t\t\t}\n\n\t\t\t&-wrapper {\n\t\t\t\tdisplay: block;\n\t\t\t\tpadding: 10px 20px 30px;\n\t\t\t\ttext-align: center;\n\n\t\t\t\t.sui-button {\n\t\t\t\t\tmargin-top: 15px !important;\n\t\t\t\t\tmargin-right: 0 !important;\n\t\t\t\t}\n\n\t\t\t\t.sui-disclaimer {\n\t\t\t\t\tmargin: 20px 0 0 !important;\n\t\t\t\t\tcolor: #888 !important;\n\t\t\t\t\tfont-size: 13px !important;\n\t\t\t\t\tline-height: 22px !important;\n\n\t\t\t\t\t@media ", " {\n\t\t\t\t\t\tdisplay: none;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t@media ", " {\n\t\t\t\t\tpadding: 12px 30px 20px;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t&-label {\n\t\t\t\tcolor: #666 !important;\n\t\t\t\tfont-size: 12px !important;\n\t\t\t\tline-height: 16px !important;\n\t\t\t\tfont-weight: 400 !important;\n\t\t\t\tletter-spacing: -0.23px !important;\n\n\t\t\t\t@media ", " {\n\t\t\t\t\ttext-transform: uppercase;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"])), device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet, device$4.tablet); // UTILS: Create styled elements.
+
+Discount.Wrapper = styled.div(_templateObject2$5 || (_templateObject2$5 = _taggedTemplateLiteral$5(["\n\toverflow: hidden;\n\tdisplay: block;\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n"])));
+Discount.Header = styled.div(_templateObject3$4 || (_templateObject3$4 = _taggedTemplateLiteral$5(["\n\tdisplay: flex;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tjustify-content: space-between;\n\tbackground-color: #8D00B1;\n\n\t.sui-button-icon {\n\t\tflex: 0 0 auto;\n\t\tmargin: 16px 20px !important;\n\n\t\t&:only-child {\n\t\t\tmargin-left: auto !important;\n\t\t}\n\t}\n"])));
+Discount.Ribbon = styled.div(_templateObject4$4 || (_templateObject4$4 = _taggedTemplateLiteral$5(["\n\tflex: 0 0 auto;\n\tposition: relative;\n\tmargin: 12px 0;\n\tpadding: 10px 23px 10px 15px;\n\tbackground-color: #FECF2F;\n\tcolor: #000;\n\tfont-size: 13px;\n\tline-height: 18px;\n\tfont-weight: bold;\n\tletter-spacing: normal;\n\n\t&:after {\n\t\tcontent: \" \";\n\t\tdisplay: block;\n\t\tposition: absolute;\n\t\ttop: 0;\n\t\tright: 0;\n\t\tborder-width: 19px 12px;\n\t\tborder-style: solid;\n\t\tborder-color: #FECF2F;\n\t\tborder-right-color: #8D00B1;\n\t\tborder-left-width: 0;\n\t}\n\n\t@media ", " {\n\t\tpadding-right: 25px;\n\t\tfont-size: 14px;\n\t}\n"])), device$4.tablet);
+Discount.Title = styled.h2(_templateObject5$4 || (_templateObject5$4 = _taggedTemplateLiteral$5(["\n\tmin-width: 1px;\n\tflex: 1;\n\tmargin: 0 20px !important;\n\tpadding: 11px 0 !important;\n\tborder: 0 !important;\n\tcolor: #fff !important;\n\tfont-size: 13px !important;\n\tline-height: 21px !important;\n\tfont-weight: bold !important;\n\tletter-spacing: normal !important;\n\n\t& + & .sui-button-icon {\n\t\tmargin-left: 0 !important;\n\t}\n\n\t@media ", " {\n\t\tpadding: 20px 0 21px !important;\n\t\tfont-size: 16px !important;\n\t}\n"])), device$4.tablet);
+Discount.Body = styled.div(_templateObject6$2 || (_templateObject6$2 = _taggedTemplateLiteral$5(["\n\ttext-align: center;\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t}\n"])), device$4.tablet);
+Discount.Image = styled.img(_templateObject7$2 || (_templateObject7$2 = _taggedTemplateLiteral$5(["\n\tdisplay: none;\n\tflex: 0 0 auto;\n\talign-self: flex-end;\n\tmargin: 0 10px;\n\tpadding: 0 30px;\n\n\t+ div {\n\n\t\t@media ", " {\n\t\t\tpadding-left: 0 !important;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t}\n"])), device$4.tablet, device$4.tablet);
+Discount.Content = styled.div(_templateObject8$2 || (_templateObject8$2 = _taggedTemplateLiteral$5(["\n\tmin-width: 1px;\n\tflex: 1;\n\tpadding: 20px 20px 10px;\n\n\tp {\n\t\tmargin: 12px 0 0 !important;\n\t\tcolor: #666 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\n\t\t&:first-child {\n\t\t\tmargin: 0 !important;\n\t\t}\n\n\t\t&.sui-disclaimer {\n\t\t\tdisplay: none;\n\t\t\tcolor: #888 !important;\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpadding: 30px;\n\t\ttext-align: left;\n\t}\n"])), device$4.tablet, device$4.tablet);
+Discount.Border = styled.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral$5(["\n\tdisplay: none;\n\talign-self: stretch;\n\tpadding: 30px 0;\n\n\tspan {\n\t\twidth: 1px;\n\t\theight: 100%;\n\t\tdisplay: block;\n\t\tbackground-color: #DDD;\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t}\n"])), device$4.tablet);
+Discount.PriceWrapper = styled.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral$5(["\n\tdisplay: block;\n\tpadding: 10px 20px 30px;\n\ttext-align: center;\n\n\t.sui-button {\n\t\tmargin-top: 15px !important;\n\t\tmargin-right: 0 !important;\n\t}\n\n\t.sui-disclaimer {\n\t\tmargin: 20px 0 0 !important;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: none;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpadding: 12px 30px 20px;\n\t}\n"])), device$4.tablet, device$4.tablet);
+Discount.PriceLabel = styled.h3(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral$5(["\n\tcolor: #666 !important;\n\tfont-size: 12px !important;\n\tline-height: 16px !important;\n\tfont-weight: 400 !important;\n\tletter-spacing: -0.23px !important;\n\n\t@media ", " {\n\t\ttext-transform: uppercase;\n\t}\n"])), device$4.tablet);
+Discount.Price = styled.p(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral$5(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n\tfont-size: 15px !important;\n\tline-height: 40px !important;\n\tletter-spacing: -0.27px !important;\n\n\tspan {\n\t\tmargin-right: 6px;\n\t\tcolor: #FF6D6D;\n\t\tfont-size: 18px;\n\t\tfont-weight: bold;\n\t\ttext-decoration: line-through;\n\t\tletter-spacing: -0.32px;\n\t}\n\n\tstrong {\n\t\tfont-size: 28px;\n\t\tfont-weight: bold;\n\t\tletter-spacing: -0.5px;\n\t}\n"])));
+var _excluded = ["title", "price", "priceTime", "discount", "image", "imageRetina", "imageAlt", "disclaimer", "priceLabel", "buttonLabel", "buttonLink", "closeLabel", "onCloseClick", "children"];
+
+var NoticeDiscount = function NoticeDiscount(_ref) {
+  var title = _ref.title,
+      price = _ref.price,
+      priceTime = _ref.priceTime,
+      discount = _ref.discount,
+      image = _ref.image,
+      imageRetina = _ref.imageRetina,
+      imageAlt = _ref.imageAlt,
+      disclaimer = _ref.disclaimer,
+      priceLabel = _ref.priceLabel,
+      buttonLabel = _ref.buttonLabel,
+      buttonLink = _ref.buttonLink,
+      closeLabel = _ref.closeLabel,
+      onCloseClick = _ref.onCloseClick,
+      children = _ref.children,
+      props = _objectWithoutProperties$1$2(_ref, _excluded);
+
+  var _useState = useState(false),
+      _useState2 = _slicedToArray$3(_useState, 2),
+      isClose = _useState2[0],
+      setIsClose = _useState2[1];
+
+  var closeOnClick = function closeOnClick(e) {
+    setIsClose(true);
+    onCloseClick(e);
+  };
+
+  var calcPrice = price - discount / 100 * price;
+  var newPrice = calcPrice.toFixed(0);
+  var hasDiscount = null !== discount && '' !== discount && 0 !== discount || discount > 0;
+  var hasImage1x = null !== image && '' !== image;
+  var hasImage2x = null !== imageRetina && '' !== imageRetina;
+  var hasDisclaimer = null !== disclaimer && '' !== disclaimer;
+  var hasButtonLabel = null !== buttonLabel && '' !== buttonLabel;
+  var hasButtonLink = null !== buttonLink && '' !== buttonLink;
+  var hasButton = hasButtonLabel && hasButtonLink;
+  return !isClose && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Discount.Global, null), /*#__PURE__*/React.createElement("div", _extends$7({
+    className: "sui-module-notice-discount__wrapper"
+  }, props), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-discount__header"
+  }, hasDiscount && /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-discount__ribbon"
+  }, discount, "% Off"), null !== title && '' !== title && /*#__PURE__*/React.createElement("h2", {
+    className: "sui-module-notice-discount__title"
+  }, title), /*#__PURE__*/React.createElement("button", {
+    className: "sui-button-icon sui-button-white",
+    onClick: closeOnClick
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-close sui-sm",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, closeLabel || 'Close this offer'))), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-discount__body"
+  }, hasImage1x && !hasImage2x && /*#__PURE__*/React.createElement("img", {
+    src: image,
+    alt: imageAlt || 'Plugin image',
+    className: "sui-module-notice-discount__image",
+    "aria-hidden": "true"
+  }), hasImage1x && hasImage2x && /*#__PURE__*/React.createElement("img", {
+    src: image,
+    srcSet: image + ' 1x,' + imageRetina + ' 2x',
+    alt: imageAlt || 'Plugin image',
+    className: "sui-module-notice-discount__image",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-discount__content"
+  }, children, hasDisclaimer && /*#__PURE__*/React.createElement("p", {
+    className: "sui-disclaimer"
+  }, "* ", disclaimer)), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-discount__border"
+  }, /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/React.createElement("div", {
+    className: "sui-module-notice-discount__price-wrapper"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "sui-module-notice-discount__price-label"
+  }, priceLabel || 'Pay Only'), hasDiscount ? /*#__PURE__*/React.createElement("p", {
+    className: "sui-module-notice-discount__price"
+  }, /*#__PURE__*/React.createElement("span", null, "$", price), /*#__PURE__*/React.createElement("strong", null, "$", newPrice), "/", priceTime || 'month') : /*#__PURE__*/React.createElement("p", {
+    className: "sui-module-notice-discount__price"
+  }, /*#__PURE__*/React.createElement("strong", null, "$", price), "/", priceTime || 'month'), hasButton && /*#__PURE__*/React.createElement(Button$2, {
+    label: buttonLabel,
+    color: "purple",
+    href: buttonLink,
+    target: "_blank"
+  }), hasDisclaimer && /*#__PURE__*/React.createElement("p", {
+    className: "sui-disclaimer"
+  }, "* ", disclaimer, " *")))));
+};
+
+function _typeof$3(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$3 = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$3 = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$3(obj);
+}
+
+function _typeof$1$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1$1 = function _typeof$1(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1$1 = function _typeof$1(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1$1(obj);
+}
+
+function _classCallCheck$2$2(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$2$2(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$2$2(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$2$2(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$2$2(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$5(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _extends$5() {
+  _extends$5 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$5.apply(this, arguments);
+}
+
+function _inherits$2$2(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$2$2(subClass, superClass);
+}
+
+function _getPrototypeOf$2$2(o) {
+  _getPrototypeOf$2$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$2$2(o);
+}
+
+function _setPrototypeOf$2$2(o, p) {
+  _setPrototypeOf$2$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$2$2(o, p);
+}
+
+function _isNativeReflectConstruct$2$2() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$2$2(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$2$2(self, call) {
+  if (call && (_typeof$3(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+
+  return _assertThisInitialized$2$2(self);
+}
+
+function _createSuper$2$2(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$2$2();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$2$2(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$2$2(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$2$2(this, result);
+  };
+}
+
+function _taggedTemplateLiteral$3(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _slicedToArray$2(arr, i) {
+  return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$2();
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
+}
+
+function _arrayWithHoles$2(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+function _iterableToArrayLimit$2(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray$2(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
+}
+
+function _arrayLikeToArray$2(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _nonIterableRest$2() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+
+  if (!it) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray$2(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function F() {};
+
+      return {
+        s: F,
+        n: function n() {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function e(_e2) {
+          throw _e2;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function s() {
+      it = it.call(o);
+    },
+    n: function n() {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function e(_e3) {
+      didErr = true;
+      err = _e3;
+    },
+    f: function f() {
+      try {
+        if (!normalCompletion && it["return"] != null) it["return"]();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
+
+var screen$1$2 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device$1$2 = {
+  mobile: "(min-width: ".concat(screen$1$2.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$1$2.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$1$2.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$1$2.desktop, "px)")
+};
+var deviceMax = {
+  mobile: "(max-width: ".concat(screen$1$2.mobile, "px)"),
+  tablet: "(max-width: ".concat(screen$1$2.tablet, "px)"),
+  laptop: "(max-width: ".concat(screen$1$2.laptop, "px)"),
+  desktop: "(max-width: ".concat(screen$1$2.desktop, "px)")
+};
+
+function _extends$4() {
+  _extends$4 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$4.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$7(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$7(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$7(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _taggedTemplateLiteral$2$1(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _templateObject3$2$1() {
+  var data = _taggedTemplateLiteral$2$1(["\n.sui-wrap && {\n\tdisplay: ", ";\n\t", "\n\t", "\n\tmargin: 0;\n\tpadding-top: ", "px;\n\tpadding-right: ", "px;\n\tpadding-bottom: ", "px;\n\tpadding-left: ", "px;\n\tborder: 0 solid #E6E6E6;\n\tborder-top-width: ", "px;\n\t", "\n\n\t", "\n\t", "\n\n\t@media ", " {\n\t\tpadding-top: ", "px;\n\t\tpadding-right: ", "px;\n\t\tpadding-bottom: ", "px;\n\t\tpadding-left: ", "px;\n\t}\n}\n"]);
+
+  _templateObject3$2$1 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2$3() {
+  var data = _taggedTemplateLiteral$2$1(["\n.sui-wrap && {\n\tmargin: 0;\n\tpadding-top: ", "px;\n\tpadding-right: ", "px;\n\tpadding-bottom: ", "px;\n\tpadding-left: ", "px;\n\tborder: 0 solid #E6E6E6;\n\tborder-top-width: ", "px;\n\tborder-bottom-width: ", "px;\n\ttext-align: ", ";\n\n\t@media ", " {\n\t\tpadding-top: ", "px;\n\t\tpadding-right: ", "px;\n\t\tpadding-bottom: ", "px;\n\t\tpadding-left: ", "px;\n\t}\n}\n"]);
+
+  _templateObject2$3 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject$5() {
+  var data = _taggedTemplateLiteral$2$1(["\n.sui-wrap && {\n\tdisplay: ", ";\n\t", "\n\t", "\n\tmargin: 0;\n\tpadding-top: ", "px;\n\tpadding-right: ", "px;\n\tpadding-bottom: ", "px;\n\tpadding-left: ", "px;\n\tborder: 0 solid #E6E6E6;\n\tborder-bottom-width: ", "px;\n\t", "\n\n\t", "\n\t", "\n\n\t@media ", " {\n\t\tpadding-top: ", "px;\n\t\tpadding-right: ", "px;\n\t\tpadding-bottom: ", "px;\n\t\tpadding-left: ", "px;\n\t}\n}\n"]);
+
+  _templateObject$5 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var utils = {
+  gutter: 30,
+  gutter_md: 20
+};
+var screen$3 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device$3 = {
+  mobile: "(min-width: ".concat(screen$3.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$3.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$3.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$3.desktop, "px)")
+};
+
+var Box$1 = function Box(_ref) {
+  var children = _ref.children,
+      className = _ref.className,
+      props = _objectWithoutProperties$7(_ref, ["children", "className"]);
+
+  return /*#__PURE__*/React.createElement("div", _extends$4({
+    className: 'undefined' !== typeof className && '' !== className ? "sui-box ".concat(className) : 'sui-box'
+  }, props), children);
+};
+
+styled.div.attrs(function (props) {
+  return {
+    props: props
+  };
+})(_templateObject$5(), function (props) {
+  return 'block' !== props.display ? 'flex' : 'block';
+}, function (props) {
+  return 'block' !== props.display && 'flex-flow: row wrap;';
+}, function (props) {
+  return 'block' !== props.display && ('left' === props.alignment || 'right' === props.alignment || 'center' === props.alignment) ? 'left' === props.alignment ? 'justify-content: flex-start;' : 'right' === props.alignment ? 'justify-content: flex-end;' : 'justify-content: center;' : 'justify-content: space-between;';
+}, function (props) {
+  return props.paddingTop || 0 === props.paddingTop ? props.paddingTop > 29 ? props.paddingTop - 10 : props.paddingTop : utils.gutter_md / 2;
+}, function (props) {
+  return props.paddingRight || 0 === props.paddingRight ? props.paddingRight > 29 ? props.paddingRight - 10 : props.paddingRight : utils.gutter_md;
+}, function (props) {
+  return props.paddingBottom || 0 === props.paddingBottom ? props.paddingBottom > 29 ? props.paddingBottom - 10 : props.paddingBottom : utils.gutter_md / 2;
+}, function (props) {
+  return props.paddingLeft || 0 === props.paddingLeft ? props.paddingLeft > 29 ? props.paddingLeft - 10 : props.paddingLeft : utils.gutter_md;
+}, function (props) {
+  return props.border || 0 === props.border ? props.border : 1;
+}, function (props) {
+  return 'block' === props.display && ('right' === props.alignment || 'center' === props.alignment) && 'text-align: ' + props.alignment + ';';
+}, function (props) {
+  return 'block' !== props.display && '> * { max-width: 100%; flex: 0 0 auto; }';
+}, function (props) {
+  return 'block' !== props.display && '> * + * { margin-left: 10px; }';
+}, device$3.tablet, function (props) {
+  return props.paddingTop || 0 === props.paddingTop ? props.paddingTop : utils.gutter / 2;
+}, function (props) {
+  return props.paddingRight || 0 === props.paddingRight ? props.paddingRight : utils.gutter;
+}, function (props) {
+  return props.paddingBottom || 0 === props.paddingBottom ? props.paddingBottom : utils.gutter / 2;
+}, function (props) {
+  return props.paddingLeft || 0 === props.paddingLeft ? props.paddingLeft : utils.gutter;
+});
+var Body = styled.div.attrs(function (props) {
+  return {
+    props: props
+  };
+})(_templateObject2$3(), function (props) {
+  return props.paddingTop || 0 === props.paddingTop ? props.paddingTop > 29 ? props.paddingTop - 10 : props.paddingTop : utils.gutter_md;
+}, function (props) {
+  return props.paddingRight || 0 === props.paddingRight ? props.paddingRight > 29 ? props.paddingRight - 10 : props.paddingRight : utils.gutter_md;
+}, function (props) {
+  return props.paddingBottom || 0 === props.paddingBottom ? props.paddingBottom > 29 ? props.paddingBottom - 10 : props.paddingBottom : utils.gutter_md;
+}, function (props) {
+  return props.paddingLeft || 0 === props.paddingLeft ? props.paddingLeft > 29 ? props.paddingLeft - 10 : props.paddingLeft : utils.gutter_md;
+}, function (props) {
+  return props.borderTop || 0 === props.borderTop ? props.borderTop : 0;
+}, function (props) {
+  return props.borderBottom || 0 === props.borderBottom ? props.borderBottom : 0;
+}, function (props) {
+  return props.alignment || 'left';
+}, device$3.tablet, function (props) {
+  return props.paddingTop || 0 === props.paddingTop ? props.paddingTop : utils.gutter;
+}, function (props) {
+  return props.paddingRight || 0 === props.paddingRight ? props.paddingRight : utils.gutter;
+}, function (props) {
+  return props.paddingBottom || 0 === props.paddingBottom ? props.paddingBottom : utils.gutter;
+}, function (props) {
+  return props.paddingLeft || 0 === props.paddingLeft ? props.paddingLeft : utils.gutter;
+});
+
+var BoxBody = function BoxBody(_ref4) {
+  var className = _ref4.className,
+      children = _ref4.children,
+      props = _objectWithoutProperties$7(_ref4, ["className", "children"]);
+
+  return /*#__PURE__*/React.createElement(Body, _extends$4({
+    className: className
+  }, props), children);
+};
+
+var Footer = styled.div.attrs(function (props) {
+  return {
+    props: props
+  };
+})(_templateObject3$2$1(), function (props) {
+  return 'block' !== props.display ? 'flex' : 'block';
+}, function (props) {
+  return 'block' !== props.display && 'flex-flow: row wrap;';
+}, function (props) {
+  return 'block' !== props.display && ('left' === props.alignment || 'right' === props.alignment || 'center' === props.alignment) ? 'left' === props.alignment ? 'justify-content: flex-start;' : 'right' === props.alignment ? 'justify-content: flex-end;' : 'justify-content: center;' : 'justify-content: space-between;';
+}, function (props) {
+  return props.paddingTop || 0 === props.paddingTop ? props.paddingTop > 29 ? props.paddingTop - 10 : props.paddingTop : utils.gutter_md;
+}, function (props) {
+  return props.paddingRight || 0 === props.paddingRight ? props.paddingRight > 29 ? props.paddingRight - 10 : props.paddingRight : utils.gutter_md;
+}, function (props) {
+  return props.paddingBottom || 0 === props.paddingBottom ? props.paddingBottom > 29 ? props.paddingBottom - 10 : props.paddingBottom : utils.gutter_md;
+}, function (props) {
+  return props.paddingLeft || 0 === props.paddingLeft ? props.paddingLeft > 29 ? props.paddingLeft - 10 : props.paddingLeft : utils.gutter_md;
+}, function (props) {
+  return props.border || 0 === props.border || '' === props.border ? props.border : 1;
+}, function (props) {
+  return 'block' === props.display && ('right' === props.alignment || 'center' === props.alignment) && 'text-align: ' + props.alignment + ';';
+}, function (props) {
+  return 'block' !== props.display && '> * { max-width: 100%; flex: 0 0 auto; }';
+}, function (props) {
+  return 'block' !== props.display && '> * + * { margin-left: 10px; }';
+}, device$3.tablet, function (props) {
+  return props.paddingTop || 0 === props.paddingTop ? props.paddingTop : utils.gutter;
+}, function (props) {
+  return props.paddingRight || 0 === props.paddingRight ? props.paddingRight : utils.gutter;
+}, function (props) {
+  return props.paddingBottom || 0 === props.paddingBottom ? props.paddingBottom : utils.gutter;
+}, function (props) {
+  return props.paddingLeft || 0 === props.paddingLeft ? props.paddingLeft : utils.gutter;
+});
+
+var BoxFooter = function BoxFooter(_ref5) {
+  var className = _ref5.className,
+      children = _ref5.children,
+      props = _objectWithoutProperties$7(_ref5, ["className", "children"]);
+
+  return /*#__PURE__*/React.createElement(Footer, _extends$4({
+    className: className
+  }, props), children);
+};
+
+function _classCallCheck$1$2(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$1$2(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$1$2(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$1$2(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$1$2(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$4(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _inherits$1$2(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$1$2(subClass, superClass);
+}
+
+function _getPrototypeOf$1$2(o) {
+  _getPrototypeOf$1$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$1$2(o);
+}
+
+function _setPrototypeOf$1$2(o, p) {
+  _setPrototypeOf$1$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$1$2(o, p);
+}
+
+function _isNativeReflectConstruct$1$2() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$1$2(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$1$2(self, call) {
+  if (call && (_typeof$1$1(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized$1$2(self);
+}
+
+function _createSuper$1$2(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$1$2();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$1$2(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$1$2(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$1$2(this, result);
+  };
+}
+
+function _defineProperty$1$1$2(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$4(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$4(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$4(Object(source), true).forEach(function (key) {
+        _defineProperty$1$1$2(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$4(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$6(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$6(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$6(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$3 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$6(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$4({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var Notifications$2 = /*#__PURE__*/function (_Component) {
+  _inherits$1$2(Notifications, _Component);
+
+  var _super = _createSuper$1$2(Notifications);
+
+  function Notifications(props) {
+    var _this;
+
+    _classCallCheck$1$2(this, Notifications);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$4(_assertThisInitialized$1$2(_this), "close", function () {
+      _this.setState({
+        hide: true
+      });
+    });
+
+    _this.state = {
+      hide: false
+    };
+    _this.close = _this.close.bind(_assertThisInitialized$1$2(_this));
+    return _this;
+  }
+
+  _createClass$1$2(Notifications, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var hide = this.state.hide;
+      var classMain = "sui-notice";
+      var classIcon = "sui-notice-icon sui-md";
+
+      switch (this.props.type) {
+        case "info":
+        case "success":
+        case "warning":
+        case "error":
+        case "upsell":
+          classMain += " sui-notice-" + this.props.type;
+          classIcon += " sui-icon-info";
+          break;
+
+        case "loading":
+          classIcon += " sui-icon-loader sui-loading";
+          break;
+
+        default:
+          classIcon += " sui-icon-info";
+          break;
+      }
+
+      var message = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-message"
+      }, /*#__PURE__*/React.createElement("span", {
+        className: classIcon,
+        "aria-hidden": "true"
+      }), this.props.children);
+      var actions = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-actions"
+      }, /*#__PURE__*/React.createElement(ButtonIcon$3, {
+        icon: "check",
+        label: "Hide",
+        onClick: function onClick(e) {
+          return _this2.close(e);
+        }
+      }));
+
+      if (!hide) {
+        return /*#__PURE__*/React.createElement("div", {
+          className: classMain
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "sui-notice-content"
+        }, message, this.props.dismiss && actions));
+      }
+
+      return null;
+    }
+  }]);
+
+  return Notifications;
+}(Component);
+
+function _defineProperty$3$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$3(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$3(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$3(Object(source), true).forEach(function (key) {
+        _defineProperty$3$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$3(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$5(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$5(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$5(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var Button$1 = function Button(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$5(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, icon && "" !== icon && /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-" + icon,
+    "aria-hidden": "true"
+  }), label);
+  className = "sui-button".concat(className ? ' ' + className : ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = 'button';
+
+  if (props.href) {
+    htmlTag = 'a';
+  } else if (props.htmlFor) {
+    htmlTag = 'label';
+  }
+
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$3({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+function _typeof$2(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$2 = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$2 = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$2(obj);
+}
+
+function _extends$3() {
+  _extends$3 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$3.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$4(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$4(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$4(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _slicedToArray$1(arr, i) {
+  return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest$1();
+}
+
+function _arrayWithHoles$1(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit$1(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray$1(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
+}
+
+function _arrayLikeToArray$1(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableRest$1() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var Modal = function Modal(_ref) {
+  var modalContent = _ref.modalContent,
+      triggerContent = _ref.triggerContent,
+      props = _objectWithoutProperties$4(_ref, ["modalContent", "triggerContent"]);
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
+      isOpen = _React$useState2[0],
+      setIsOpen = _React$useState2[1];
+
+  var _React$useState3 = React.useState(false),
+      _React$useState4 = _slicedToArray$1(_React$useState3, 2),
+      isClosing = _React$useState4[0],
+      setIsClosing = _React$useState4[1]; // States for sliders.
+
+
+  var _React$useState5 = React.useState(props.firstSlide),
+      _React$useState6 = _slicedToArray$1(_React$useState5, 2),
+      currentSlide = _React$useState6[0],
+      setCurrentSlide = _React$useState6[1];
+
+  var _React$useState7 = React.useState(null),
+      _React$useState8 = _slicedToArray$1(_React$useState7, 2),
+      slideDirection = _React$useState8[0],
+      setSlideDirection = _React$useState8[1];
+
+  React.useEffect(function () {
+    if (!props.dialogId) {
+      throw new Error('SUI Modal instances should have a `dialogId`');
+    }
+  }, []);
+  var isSlider = 'object' === _typeof$2(modalContent) && null !== modalContent;
+
+  var openModal = function openModal() {
+    return setIsOpen(true);
+  },
+      closeModal = function closeModal() {
+    // Close the modal with the exit animation and reset the slider.
+    setIsClosing(true);
+    setTimeout(function () {
+      setIsOpen(false);
+      setIsClosing(false);
+
+      if (isSlider) {
+        setSlideDirection(null);
+        setCurrentSlide(props.firstSlide);
+      }
+    }, 300);
+  },
+      slideTo = function slideTo(slide) {
+    var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'left';
+    setCurrentSlide(slide);
+    setSlideDirection(direction);
+  };
+
+  var _props$getApplication = props.getApplicationNode,
+      getApplicationNode = _props$getApplication === void 0 ? function () {
+    return document.getElementsByClassName('sui-wrap')[0];
+  } : _props$getApplication;
+  var dialogClass = "sui-modal-content sui-content-".concat(isClosing ? 'fade-out' : 'fade-in', " ").concat(props.dialogClass || "");
+  var renderContent, modalSize, initialFocus;
+
+  if (!isSlider) {
+    // Not a slider, we can just render the content.
+    renderContent = modalContent;
+    modalSize = props.size;
+    initialFocus = props.initialFocus || false;
+  } else {
+    // Render the content from the given slides.
+    renderContent = modalContent[currentSlide].render;
+    initialFocus = modalContent[currentSlide].focus || false;
+    modalSize = modalContent[currentSlide].size; // Add the slide direction class when provided and we're not closing the modal.
+
+    if (slideDirection && !isClosing) {
+      dialogClass += "sui-modal-slide sui-active sui-fadein-".concat(slideDirection);
+    }
+  } // Use 'isOpen' as an alias of 'mounted' if not defined.
+
+
+  if ('undefined' === typeof props.mounted) {
+    props.mounted = isOpen;
+  }
+
+  var AltModal = props.renderToNode ? AriaModal.renderTo(props.renderToNode) : AriaModal;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(AltModal, _extends$3({
+    getApplicationNode: getApplicationNode,
+    dialogClass: dialogClass,
+    underlayClass: "sui-modal sui-active sui-modal-".concat(modalSize || 'md', " sui-wrap ").concat(props.underlayClass || ''),
+    includeDefaultStyles: false,
+    initialFocus: initialFocus
+  }, props), renderContent({
+    closeModal: closeModal,
+    slideTo: slideTo
+  })), triggerContent && triggerContent({
+    openModal: openModal
+  }));
+};
+
+function _defineProperty$2$2(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$2(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$2(Object(source), true).forEach(function (key) {
+        _defineProperty$2$2(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$2(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$3(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$3(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$3(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$2 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$3(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$2({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var ApplyModal = function ApplyModal(_ref) {
+  var setOpen = _ref.setOpen,
+      config = _ref.config,
+      save = _ref.save,
+      _ref$strings = _ref.strings,
+      strings = _ref$strings === void 0 ? {} : _ref$strings;
+  var _strings$closeIcon = strings.closeIcon,
+      closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
+      _strings$title = strings.title,
+      title = _strings$title === void 0 ? 'Apply Config' : _strings$title,
+      _strings$description = strings.description,
+      description = _strings$description === void 0 ? 'Are you sure you want to apply the {configName} config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.' : _strings$description,
+      _strings$cancelButton = strings.cancelButton,
+      cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
+      _strings$actionButton = strings.actionButton,
+      actionButton = _strings$actionButton === void 0 ? 'Apply' : _strings$actionButton;
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray$2(_React$useState, 2),
+      isSaving = _React$useState2[0],
+      setIsSaving = _React$useState2[1];
+
+  var doAction = function doAction() {
+    setIsSaving(true);
+    save();
+  };
+
+  var modalContent = function modalContent() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sui-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
+    }, /*#__PURE__*/React.createElement(ButtonIcon$2, {
+      label: closeIcon,
+      icon: "close",
+      iconSize: "md",
+      className: "sui-button-float--right",
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement("h2", {
+      id: "sui-config-edit-title"
+    }, title), /*#__PURE__*/React.createElement("p", {
+      className: "sui-description"
+    }, description.replace('{configName}', config.name))), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60"
+    }, /*#__PURE__*/React.createElement(Button$1, {
+      design: "ghost",
+      label: cancelButton,
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement(Button$1, {
+      color: "blue",
+      icon: "check",
+      label: actionButton,
+      onClick: doAction,
+      loading: isSaving
+    })));
+  };
+
+  return /*#__PURE__*/React.createElement(Modal, {
+    mounted: true,
+    dialogId: "sui-configs-apply-modal",
+    titleId: "sui-config-apply-title",
+    size: "sm",
+    modalContent: modalContent
+  });
+};
+
+var DeleteModal = function DeleteModal(_ref) {
+  var setOpen = _ref.setOpen,
+      config = _ref.config,
+      save = _ref.save,
+      _ref$strings = _ref.strings,
+      strings = _ref$strings === void 0 ? {} : _ref$strings;
+  var _strings$closeIcon = strings.closeIcon,
+      closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
+      _strings$title = strings.title,
+      title = _strings$title === void 0 ? 'Delete Configuration File' : _strings$title,
+      _strings$description = strings.description,
+      description = _strings$description === void 0 ? 'Are you sure you want to delete {configName}? You will no longer be able to apply it to this or other connected sites.' : _strings$description,
+      _strings$cancelButton = strings.cancelButton,
+      cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
+      _strings$actionButton = strings.actionButton,
+      actionButton = _strings$actionButton === void 0 ? 'Delete' : _strings$actionButton;
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray$2(_React$useState, 2),
+      isSaving = _React$useState2[0],
+      setIsSaving = _React$useState2[1];
+
+  var doAction = function doAction() {
+    setIsSaving(true);
+    save();
+  };
+
+  var modalContent = function modalContent() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sui-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
+    }, /*#__PURE__*/React.createElement(ButtonIcon$2, {
+      label: closeIcon,
+      icon: "close",
+      iconSize: "md",
+      className: "sui-button-float--right",
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement("h2", {
+      id: "smush-config-delete-title"
+    }, title), /*#__PURE__*/React.createElement("p", {
+      className: "sui-description"
+    }, description.replace('{configName}', config.name))), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60"
+    }, /*#__PURE__*/React.createElement(Button$1, {
+      design: "ghost",
+      label: cancelButton,
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement(Button$1, {
+      color: "red",
+      label: actionButton,
+      onClick: doAction,
+      loading: isSaving
+    })));
+  };
+
+  return /*#__PURE__*/React.createElement(Modal, {
+    mounted: true,
+    dialogId: "sui-configs-delete-modal",
+    titleId: "sui-config-delete-title",
+    size: "sm",
+    modalContent: modalContent
+  });
+};
+
+function _extends$2() {
+  _extends$2 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$2.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$2(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$2(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$2(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var Input = function Input(_ref) {
+  var id = _ref.id,
+      size = _ref.size,
+      label = _ref.label,
+      description = _ref.description,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'text' : _ref$type,
+      props = _objectWithoutProperties$2(_ref, ["id", "size", "label", "description", "type"]);
+
+  var uniqueId = id && '' !== id ? id : props.property;
+  var clazz = 'sui-form-control';
+
+  switch (size) {
+    case 'sm':
+    case 'small':
+      clazz += ' sui-input-sm';
+      break;
+
+    case 'md':
+    case 'medium':
+      clazz += ' sui-input-md';
+      break;
+  }
+
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sui-form-field"
+  }, label && /*#__PURE__*/React.createElement("label", {
+    htmlFor: uniqueId,
+    className: "sui-label"
+  }, label), /*#__PURE__*/React.createElement("input", _extends$2({
+    id: uniqueId,
+    type: type,
+    className: clazz
+  }, props)), description && /*#__PURE__*/React.createElement("p", {
+    className: "sui-description"
+  }, description));
+};
+
+var EditModal = function EditModal(_ref) {
+  var setOpen = _ref.setOpen,
+      config = _ref.config,
+      save = _ref.save,
+      _ref$strings = _ref.strings,
+      strings = _ref$strings === void 0 ? {} : _ref$strings;
+  var configName = config ? config.name : '',
+      configDescription = config ? config.description : '';
+
+  var _React$useState = React.useState(configName),
+      _React$useState2 = _slicedToArray$2(_React$useState, 2),
+      nameValue = _React$useState2[0],
+      setNameValue = _React$useState2[1];
+
+  var _React$useState3 = React.useState(configDescription),
+      _React$useState4 = _slicedToArray$2(_React$useState3, 2),
+      descriptionValue = _React$useState4[0],
+      setDescriptionValue = _React$useState4[1];
+
+  var _React$useState5 = React.useState(false),
+      _React$useState6 = _slicedToArray$2(_React$useState5, 2),
+      errorMessage = _React$useState6[0],
+      setErrorMessage = _React$useState6[1];
+
+  var _React$useState7 = React.useState(false),
+      _React$useState8 = _slicedToArray$2(_React$useState7, 2),
+      isSaving = _React$useState8[0],
+      setIsSaving = _React$useState8[1];
+
+  var _strings$closeIcon = strings.closeIcon,
+      closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
+      _strings$nameInput = strings.nameInput,
+      nameInput = _strings$nameInput === void 0 ? 'Config name' : _strings$nameInput,
+      _strings$descriptionI = strings.descriptionInput,
+      descriptionInput = _strings$descriptionI === void 0 ? 'Description' : _strings$descriptionI,
+      _strings$emptyNameErr = strings.emptyNameError,
+      emptyNameError = _strings$emptyNameErr === void 0 ? 'The config name is required' : _strings$emptyNameErr,
+      _strings$actionButton = strings.actionButton,
+      actionButton = _strings$actionButton === void 0 ? 'Save' : _strings$actionButton,
+      _strings$cancelButton = strings.cancelButton,
+      cancelButton = _strings$cancelButton === void 0 ? 'Cancel' : _strings$cancelButton,
+      _strings$editTitle = strings.editTitle,
+      editTitle = _strings$editTitle === void 0 ? 'Rename Config' : _strings$editTitle,
+      _strings$editDescript = strings.editDescription,
+      editDescription = _strings$editDescript === void 0 ? 'Change your config name to something recognizable.' : _strings$editDescript,
+      _strings$createTitle = strings.createTitle,
+      createTitle = _strings$createTitle === void 0 ? 'Save Config' : _strings$createTitle,
+      _strings$createDescri = strings.createDescription,
+      createDescription = _strings$createDescri === void 0 ? 'Save your current settings configuration. You’ll be able to then download and apply it to your other sites.' : _strings$createDescri;
+
+  var displayErrorMessage = function displayErrorMessage(message) {
+    setErrorMessage(message);
+    setIsSaving(false);
+  };
+
+  var doAction = function doAction() {
+    if (!nameValue.trim().length) {
+      setErrorMessage(emptyNameError);
+      return;
+    }
+
+    setErrorMessage(false);
+    setIsSaving(true);
+    var data = new FormData();
+    data.append('name', nameValue);
+    data.append('description', descriptionValue);
+    save(data, displayErrorMessage);
+  };
+
+  var modalContent = function modalContent() {
+    // If a config is provided, we're editing a config. We're saving a new one otherwise.
+    var title = config ? editTitle : createTitle,
+        description = config ? editDescription : createDescription;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sui-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
+    }, /*#__PURE__*/React.createElement(ButtonIcon$2, {
+      label: closeIcon,
+      icon: "close",
+      iconSize: "md",
+      className: "sui-button-float--right",
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement("h2", {
+      id: "sui-config-edit-title"
+    }, title), /*#__PURE__*/React.createElement("p", {
+      className: "sui-description"
+    }, description)), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-body"
+    }, /*#__PURE__*/React.createElement("div", {
+      role: "alert",
+      id: "configs-edit-modal-error-message",
+      className: "sui-notice sui-notice-error",
+      "aria-live": "assertive",
+      style: {
+        display: errorMessage ? 'block' : ''
+      }
+    }, errorMessage && /*#__PURE__*/React.createElement("div", {
+      className: "sui-notice-content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sui-notice-message"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sui-notice-icon sui-icon-info sui-md",
+      "aria-hidden": "true"
+    }), /*#__PURE__*/React.createElement("p", null, errorMessage)))), /*#__PURE__*/React.createElement(Input, {
+      label: nameInput,
+      name: "name",
+      value: nameValue,
+      onChange: function onChange(e) {
+        return setNameValue(e.target.value);
+      },
+      maxLength: "200"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "sui-form-field"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sui-label",
+      htmlFor: "sui-edit-config-textarea"
+    }, descriptionInput), /*#__PURE__*/React.createElement("textarea", {
+      id: "sui-edit-config-textarea",
+      className: "sui-form-control",
+      name: "description",
+      value: descriptionValue,
+      onChange: function onChange(e) {
+        return setDescriptionValue(e.target.value);
+      },
+      maxLength: "200"
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "sui-box-footer sui-content-separated sui-flatten sui-spacing-top--0"
+    }, /*#__PURE__*/React.createElement(Button$1, {
+      design: "ghost",
+      label: cancelButton,
+      onClick: function onClick() {
+        return setOpen(false);
+      }
+    }), /*#__PURE__*/React.createElement(Button$1, {
+      color: "blue",
+      icon: "save",
+      label: actionButton,
+      onClick: doAction,
+      loading: isSaving
+    })));
+  };
+
+  return /*#__PURE__*/React.createElement(Modal, {
+    mounted: true,
+    dialogId: "sui-configs-edit-modal",
+    titleId: "sui-config-edit-title",
+    size: "sm",
+    modalContent: modalContent
+  });
+};
+
+function _extends$1$1() {
+  _extends$1$1 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$1$1.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose$1$1(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$1$1(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$1$1(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _taggedTemplateLiteral$1$2(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _defineProperty$1$3(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$1$1(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$1$1(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$1$1(Object(source), true).forEach(function (key) {
+        _defineProperty$1$3(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$1$1(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$1$1$1(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$1$1$1(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$1$1$1(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$1$1 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$1$1$1(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$1$1({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+function _templateObject$4() {
+  var data = _taggedTemplateLiteral$1$2(["\n    width: 30px;\n    height: 30px;\n    margin-right: 10px;\n    border-radius: 10px;\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n"]);
+
+  _templateObject$4 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var ItemImage = styled.span(_templateObject$4());
+
+var AccordionItemHeader = function AccordionItemHeader(_ref3) {
+  var title = _ref3.title,
+      titleSize = _ref3.titleSize,
+      icon = _ref3.icon,
+      image = _ref3.image,
+      children = _ref3.children,
+      props = _objectWithoutProperties$1$1(_ref3, ["title", "titleSize", "icon", "image", "children"]);
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 1),
+      isOpen = _useState4[0];
+
+  var countChildren = React.Children.toArray(children).length;
+  var titleColumnIcon = 'undefined' !== typeof icon && '' !== icon ? /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon),
+    "aria-hidden": "true"
+  }) : '';
+  var titleColumnImage = 'undefined' !== typeof image && '' !== icon ? /*#__PURE__*/React.createElement(ItemImage, {
+    style: {
+      backgroundImage: "url(".concat(image, ")")
+    }
+  }) : '';
+  var titleColumnSize = 'undefined' !== typeof titleSize && '' !== titleSize ? ' sui-accordion-col-' + titleSize : '';
+  var titleColumn = /*#__PURE__*/React.createElement("div", {
+    className: "sui-accordion-item-title".concat(titleColumnSize)
+  }, titleColumnIcon, titleColumnImage, title);
+  var indicator = /*#__PURE__*/React.createElement(ButtonIcon$1$1, {
+    icon: "chevron-down",
+    label: isOpen ? 'Close section' : 'Open section',
+    className: "sui-button-icon sui-accordion-open-indicator"
+  });
+  var columns = React.Children.map(children, function (column, index) {
+    index++;
+    var columnSize = column.props.size;
+    var columnClass = 'undefined' !== typeof columnSize && '' !== columnSize ? 'sui-accordion-col-' + columnSize : 'sui-accordion-col-auto';
+    var columnContent = column.props.children;
+    return /*#__PURE__*/React.createElement("div", {
+      className: columnClass
+    }, columnContent, countChildren === index && indicator);
+  });
+  var actions = /*#__PURE__*/React.createElement("div", {
+    className: "sui-accordion-col-auto"
+  }, indicator);
+  return /*#__PURE__*/React.createElement("div", _extends$1$1({
+    className: "sui-accordion-item-header"
+  }, props), titleColumn, countChildren > 0 ? columns : actions);
+};
+
+var AccordionItemBody = function AccordionItemBody(_ref4) {
+  var children = _ref4.children,
+      props = _objectWithoutProperties$1$1(_ref4, ["children"]);
+
+  return /*#__PURE__*/React.createElement("div", _extends$1$1({
+    className: "sui-accordion-item-body"
+  }, props), children);
+};
+
+function _classCallCheck$4(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$4(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$4(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$4(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$4(Constructor, staticProps);
+  return Constructor;
+}
+
+function _extends$6() {
+  _extends$6 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$6.apply(this, arguments);
+}
+
+function _inherits$4(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$4(subClass, superClass);
+}
+
+function _getPrototypeOf$4(o) {
+  _getPrototypeOf$4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$4(o);
+}
+
+function _setPrototypeOf$4(o, p) {
+  _setPrototypeOf$4 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$4(o, p);
+}
+
+function _isNativeReflectConstruct$4() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$4(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$4(self, call) {
+  if (call && (_typeof$1$1(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized$4(self);
+}
+
+function _createSuper$4(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$4();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$4(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$4(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$4(this, result);
+  };
+}
+
+function _taggedTemplateLiteral$4(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _defineProperty$6(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$5(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$5(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$5(Object(source), true).forEach(function (key) {
+        _defineProperty$6(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$5(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$8(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$8(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$8(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$4 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$8(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$5({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+function _templateObject2$2$1() {
+  var data = _taggedTemplateLiteral$4(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    [class*=\"sui-icon-\"]:before {\n        color: inherit !important;\n    }\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
+
+  _templateObject2$2$1 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject$3() {
+  var data = _taggedTemplateLiteral$4(["\n.sui-wrap && {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n\n    [class*=\"sui-icon-\"]:before {\n        color: inherit !important;\n    }\n\n    &:hover,\n    &:focus {\n        ", "\n        ", "\n        ", "\n        ", "\n        ", "\n    }\n}\n"]);
+
+  _templateObject$3 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var Link$2 = styled.a(_templateObject$3(), function (props) {
+  return 'blue' === props.color ? 'color: #17A8E3 !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'color: #1ABC9C !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'color: #FECF2F !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'color: #FF6D6D !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'color: #8D00B1 !important;' : '';
+}, function (props) {
+  return 'blue' === props.color ? 'background-color: #E1F6FF !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'background-color: #D1F1EA !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'background-color: #FFF5D5 !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'background-color: #FFE5E9 !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'background-color: #F9E1FF !important;' : '';
+});
+var Button = styled.button(_templateObject2$2$1(), function (props) {
+  return 'blue' === props.color ? 'color: #17A8E3 !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'color: #1ABC9C !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'color: #FECF2F !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'color: #FF6D6D !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'color: #8D00B1 !important;' : '';
+}, function (props) {
+  return 'blue' === props.color ? 'background-color: #E1F6FF !important;' : '';
+}, function (props) {
+  return 'green' === props.color ? 'background-color: #D1F1EA !important;' : '';
+}, function (props) {
+  return 'yellow' === props.color ? 'background-color: #FFF5D5 !important;' : '';
+}, function (props) {
+  return 'red' === props.color ? 'background-color: #FFE5E9 !important;' : '';
+}, function (props) {
+  return 'purple' === props.color ? 'background-color: #F9E1FF !important;' : '';
+});
+
+var Dropdown = /*#__PURE__*/function (_Component) {
+  _inherits$4(Dropdown, _Component);
+
+  var _super = _createSuper$4(Dropdown);
+
+  function Dropdown(props) {
+    var _this;
+
+    _classCallCheck$4(this, Dropdown);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      open: false
+    };
+    _this.toggle = _this.toggle.bind(_assertThisInitialized$4(_this));
+    _this.wrapperRef = /*#__PURE__*/React.createRef();
+    _this.setWrapperRef = _this.setWrapperRef.bind(_assertThisInitialized$4(_this));
+    _this.handleClickOutside = _this.handleClickOutside.bind(_assertThisInitialized$4(_this));
+    return _this;
+  }
+
+  _createClass$4(Dropdown, [{
+    key: "toggle",
+    value: function toggle() {
+      this.setState({
+        open: !this.state.open
+      });
+    }
+  }, {
+    key: "setWrapperRef",
+    value: function setWrapperRef(node) {
+      this.wrapperRef = node;
+    }
+  }, {
+    key: "handleClickOutside",
+    value: function handleClickOutside(e) {
+      if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+        this.setState({
+          open: false
+        });
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.addEventListener('mousedown', this.handleClickOutside);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var open = this.state.open;
+      var options = Children.map(this.props.children, function (option) {
+        var icon = option.props.icon && '' !== option.props.icon && /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-".concat(option.props.icon),
+          "aria-hidden": "true"
+        });
+        var tag = option.props.tag && '' !== option.props.tag && /*#__PURE__*/React.createElement("span", {
+          className: "sui-tag sui-tag-beta",
+          style: {
+            pointerEvents: 'none',
+            display: 'inline',
+            marginLeft: 5,
+            lineHeight: 1
+          }
+        }, option.props.tag);
+        var label = /*#__PURE__*/React.createElement(Fragment, null, icon, option.props.name, tag);
+
+        if (option.props.href) {
+          return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Link$2, _extends$6({
+            href: option.props.href
+          }, option.props), label));
+        }
+
+        return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Button, option.props, label));
+      });
+      var clazz = !open ? 'sui-dropdown' : 'sui-dropdown open';
+
+      switch (this.props.position) {
+        case 'left':
+          clazz += ' sui-dropdown-right';
+          break;
+
+        case 'center':
+          clazz += ' sui-dropdown-center';
+          break;
+
+        case 'right':
+          clazz += ' sui-dropdown-left';
+          break;
+
+        default:
+          clazz += ' sui-dropdown-right';
+          break;
+      }
+
+      return /*#__PURE__*/React.createElement("div", {
+        className: clazz,
+        ref: this.setWrapperRef,
+        onClick: function onClick(e) {
+          return e.stopPropagation();
+        }
+      }, /*#__PURE__*/React.createElement(ButtonIcon$4, {
+        icon: "widget-settings-config",
+        label: open ? 'Open menu' : 'Close menu',
+        onClick: this.toggle
+      }), open && /*#__PURE__*/React.createElement("ul", {
+        onClick: function onClick() {
+          return _this2.setState({
+            open: false
+          });
+        }
+      }, options));
+    }
+  }]);
+
+  return Dropdown;
+}(Component);
+
+var _templateObject$2$1;
+
+var Table = styled.table(_templateObject$2$1 || (_templateObject$2$1 = _taggedTemplateLiteral$3(["\n[class*=\"sui-2-\"] .sui-wrap && {\n\twidth: 100%;\n\tmargin: 0;\n\tborder-spacing: 0;\n\tborder-collapse: collapse;\n\ttable-layout: fixed;\n\n\ttbody {\n\n\t\ttr {\n\n\t\t\t&:nth-child(2n+2) {\n\t\t\t\tbackground-color: #f8f8f8;\n\t\t\t}\n\t\t}\n\n\t\ttd {\n\t\t\tpadding: 9px;\n\t\t\tvertical-align: center;\n\t\t\tcolor: #888;\n\t\t\tfont: 500 13px/22px \"Roboto\", sans-serif;\n\t\t\tletter-spacing: -0.25px;\n\n\t\t\tdiv {\n\t\t\t\toverflow: hidden;\n\t\t\t\tdisplay: -webkit-box;\n\t\t\t\ttext-overflow: ellipsis;\n\t\t\t\t-webkit-line-clamp: 2;\n\t\t\t\t-webkit-box-orient: vertical\n\t\t\t}\n\n\t\t\t&:first-child {\n\t\t\t\twidth: 45%;\n\t\t\t\tpadding-left: 20px;\n\t\t\t\tcolor: #333;\n\t\t\t}\n\n\t\t\t&:last-child {\n\t\t\t\twidth: 55%;\n\t\t\t\tpadding-right: 20px;\n\t\t\t\twhite-space: pre-wrap;\n\t\t\t}\n\t\t}\n\t}\n}\n"])));
+
+var PresetsTable = /*#__PURE__*/function (_Component) {
+  _inherits$2$2(PresetsTable, _Component);
+
+  var _super = _createSuper$2$2(PresetsTable);
+
+  function PresetsTable(props) {
+    _classCallCheck$2$2(this, PresetsTable);
+
+    return _super.call(this, props);
+  }
+
+  _createClass$2$2(PresetsTable, [{
+    key: "render",
+    value: function render() {
+      var rows = Children.map(this.props.children, function (row) {
+        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, row.props.name), /*#__PURE__*/React.createElement("td", null, row.props.status));
+      });
+      return /*#__PURE__*/React.createElement(Table, this.props, /*#__PURE__*/React.createElement("tbody", null, rows));
+    }
+  }]);
+
+  return PresetsTable;
+}(Component);
+/**
+ * Internal dependencies
+ */
+
+/**
+ * Returns a string with ampersands escaped. Note that this is an imperfect
+ * implementation, where only ampersands which do not appear as a pattern of
+ * named, decimal, or hexadecimal character references are escaped. Invalid
+ * named references (i.e. ambiguous ampersand) are are still permitted.
+ *
+ * @see https://w3c.github.io/html/syntax.html#character-references
+ * @see https://w3c.github.io/html/syntax.html#ambiguous-ampersand
+ * @see https://w3c.github.io/html/syntax.html#named-character-references
+ *
+ * @param {string} value Original string.
+ *
+ * @return {string} Escaped string.
+ */
+
+
+function escapeAmpersand(value) {
+  return value.replace(/&(?!([a-z0-9]+|#[0-9]+|#x[a-f0-9]+);)/gi, '&amp;');
+}
+/**
+ * Returns a string with less-than sign replaced.
+ *
+ * @param {string} value Original string.
+ *
+ * @return {string} Escaped string.
+ */
+
+
+function escapeLessThan(value) {
+  return value.replace(/</g, '&lt;');
+}
+/**
+ * Returns an escaped HTML element value.
+ *
+ * @see https://w3c.github.io/html/syntax.html#writing-html-documents-elements
+ *
+ * "the text must not contain the character U+003C LESS-THAN SIGN (<) or an
+ * ambiguous ampersand."
+ *
+ * @param {string} value Element value.
+ *
+ * @return {string} Escaped HTML element value.
+ */
+
+
+function escapeHTML(value) {
+  return escapeLessThan(escapeAmpersand(value));
+}
+
+var _templateObject$1$2, _templateObject2$1$2, _templateObject3$1$2, _templateObject4$1$1, _templateObject5$1$1;
+
+var Header = styled.div(_templateObject$1$2 || (_templateObject$1$2 = _taggedTemplateLiteral$3(["\n\tmargin: 0 0 20px;\n\n\t> div:not(.sui-tooltip) {\n\n\t\t@media ", " {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 1;\n\t\t}\n\t}\n\n\t> div.sui-tooltip {\n\t\tmargin: 10px 0 0 !important;\n\n\t\t@media ", " {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-top: 0 !important;\n\t\t\tmargin-left: 10px !important;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n"])), device$1$2.tablet, device$1$2.tablet, device$1$2.tablet);
+var Label = styled.p(_templateObject2$1$2 || (_templateObject2$1$2 = _taggedTemplateLiteral$3(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n"])));
+var Description = styled.p(_templateObject3$1$2 || (_templateObject3$1$2 = _taggedTemplateLiteral$3(["\n\tmargin: 3px 0 0 !important;\n"])));
+var Authentic = styled.svg(_templateObject4$1$1 || (_templateObject4$1$1 = _taggedTemplateLiteral$3(["\n    margin-left: 10px;\n"])));
+var AccordionItemHeaderAlt = styled(AccordionItemHeader)(_templateObject5$1$1 || (_templateObject5$1$1 = _taggedTemplateLiteral$3(["\n[class*=\"sui-2-\"] .sui-wrap && {\n\n\t> .sui-accordion-col-5 {\n\n\t\t@media ", " {\n\t\t\tdisplay: none !important;\n\t\t}\n\t}\n\n    > .sui-accordion-col-auto {\n\n\t\t.sui-presets-item__apply {\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: none;\n\t\t\t}\n\t\t}\n\n\t\t> .sui-dropdown {\n\n            [class*=sui-icon-] {\n                margin-right: 0 !important;\n            }\n\n            ul {\n                min-width: 192px;\n            }\n        }\n    }\n\n\t&:not(:hover):not(:focus) {\n\n\t\t> .sui-accordion-col-auto {\n\n\t\t\t.sui-presets-item__apply {\n\t\t\t\topacity: 0;\n\t\t\t}\n\t\t}\n\t}\n}\n"])), deviceMax.tablet, deviceMax.tablet);
+
+var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
+  _inherits$2$2(PresetsAccordionItem, _Component);
+
+  var _super = _createSuper$2$2(PresetsAccordionItem);
+
+  function PresetsAccordionItem(props) {
+    var _this;
+
+    _classCallCheck$2$2(this, PresetsAccordionItem);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$5(_assertThisInitialized$2$2(_this), "toggle", function (e) {
+      if ('sui-dropdown' !== e.target.className || 'sui-button-icon undefined' !== e.target.className || 'sui-icon-widget-settings-config' !== e.target.className) {
+        _this.setState({
+          open: !_this.state.open
+        });
+      }
+    });
+
+    _defineProperty$5(_assertThisInitialized$2$2(_this), "accordionHeadApplyClicked", function (e) {
+      e.stopPropagation();
+
+      _this.props.applyAction();
+    });
+
+    _this.state = {
+      open: false
+    };
+    _this.toggle = _this.toggle.bind(_assertThisInitialized$2$2(_this));
+    return _this;
+  }
+
+  _createClass$2$2(PresetsAccordionItem, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var open = this.state.open;
+      var _this$props = this.props,
+          editAction = _this$props.editAction,
+          applyAction = _this$props.applyAction,
+          deleteAction = _this$props.deleteAction,
+          downloadAction = _this$props.downloadAction;
+      var clazz = !open ? 'sui-accordion-item' : 'sui-accordion-item sui-accordion-item--open';
+      var icon = /*#__PURE__*/React.createElement(Authentic, {
+        width: "16",
+        height: "16",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M15.86 8.914l-.839-.69a1.6 1.6 0 01-.579-1.235c0-.334.102-.644.276-.9l-.003.005.616-.911a.428.428 0 00-.307-.655h-.003l-1.075-.123a1.595 1.595 0 01-1.407-1.637v.002l.032-1.092v-.017a.422.422 0 00-.613-.376h.002l-.97.468a1.583 1.583 0 01-2.058-.603l-.004-.007-.557-.935a.423.423 0 00-.726-.002l-.001.002-.558.935a1.585 1.585 0 01-2.074.606l.01.004-.97-.482a.425.425 0 00-.616.395v-.001l.031 1.092v.047c0 .82-.61 1.494-1.399 1.587h-.007l-1.07.137a.428.428 0 00-.301.67l-.001-.002.61.898a1.6 1.6 0 01-.301 2.142l-.843.678a.427.427 0 00.106.723l.002.001 1 .424a1.601 1.601 0 01.89 1.979l.003-.011-.338 1.038a.427.427 0 00.481.553l-.003.001 1.058-.19a1.589 1.589 0 011.806 1.16l.002.013.264 1.065c.049.185.214.32.41.32a.42.42 0 00.288-.115l.793-.738a1.573 1.573 0 012.15.001h-.001l.793.737a.424.424 0 00.713-.213v-.003l.265-1.065a1.591 1.591 0 011.818-1.17l-.01-.002 1.057.19a.427.427 0 00.475-.557l.001.002-.336-1.038a1.598 1.598 0 01.88-1.964l.011-.004 1-.424a.427.427 0 00.127-.713zm-8.803 2.2L4.266 8.401l1.1-1.15 1.67 1.622 3.997-4.024 1.126 1.129-5.102 5.134z",
+        fill: "#286EFA",
+        fillRule: "nonzero"
+      }));
+      var name = this.props["default"] ? /*#__PURE__*/React.createElement(React.Fragment, null, escapeHTML(this.props.name), icon) : escapeHTML(this.props.name);
+      var descstyles = {
+        overflow: 'hidden',
+        display: 'block',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis'
+      };
+      return /*#__PURE__*/React.createElement("div", {
+        className: clazz
+      }, /*#__PURE__*/React.createElement(AccordionItemHeaderAlt, _extends$5({
+        className: "sui-accordion-item-header",
+        state: open ? 'true' : 'false',
+        title: name
+      }, null !== this.props.image && '' !== this.props.image && {
+        image: this.props.image
+      }, {
+        onClick: function onClick(e) {
+          return _this2.toggle(e);
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        size: "5"
+      }, /*#__PURE__*/React.createElement("div", {
+        style: descstyles
+      }, this.props.description)), /*#__PURE__*/React.createElement("div", null, this.props.showApplyButton && /*#__PURE__*/React.createElement(Button$1, {
+        label: this.props.applyLabel || 'Apply',
+        design: "ghost",
+        className: "sui-presets-item__apply",
+        onClick: this.accordionHeadApplyClicked
+      }), /*#__PURE__*/React.createElement(Dropdown, {
+        position: "right"
+      }, /*#__PURE__*/React.createElement("div", {
+        name: this.props.applyLabel || 'Apply',
+        icon: "check",
+        onClick: applyAction
+      }), /*#__PURE__*/React.createElement("div", {
+        name: this.props.downloadLabel || 'Download',
+        icon: "download",
+        onClick: function onClick() {
+          return downloadAction(_this2.props.id);
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        name: this.props.editLabel || 'Edit Details',
+        icon: "pencil",
+        onClick: editAction
+      }), /*#__PURE__*/React.createElement("div", {
+        name: this.props.deleteLabel || 'Delete',
+        icon: "trash",
+        color: "red",
+        onClick: deleteAction
+      })))), /*#__PURE__*/React.createElement(AccordionItemBody, null, /*#__PURE__*/React.createElement(Box$1, null, /*#__PURE__*/React.createElement(BoxBody, null, /*#__PURE__*/React.createElement(Header, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Label, {
+        className: "sui-label"
+      }, escapeHTML(this.props.name)), /*#__PURE__*/React.createElement(Description, {
+        className: "sui-description"
+      }, this.props.description)), /*#__PURE__*/React.createElement("div", {
+        className: "sui-tooltip",
+        "data-tooltip": this.props.editLabel || 'Edit Details'
+      }, /*#__PURE__*/React.createElement(ButtonIcon$2, {
+        icon: "pencil",
+        label: this.props.editLabel,
+        design: "outlined",
+        onClick: function onClick() {
+          return editAction(_this2.props.id);
+        }
+      }))), /*#__PURE__*/React.createElement(PresetsTable, null, this.props.children)), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button$1, {
+        label: this.props.applyLabel || 'Apply',
+        icon: "check",
+        design: "ghost",
+        onClick: function onClick() {
+          return applyAction(_this2.props.id);
+        }
+      })))));
+    }
+  }]);
+
+  return PresetsAccordionItem;
+}(Component);
+
+var RequestHandler = /*#__PURE__*/function () {
+  function RequestHandler(_ref) {
+    var apiKey = _ref.apiKey,
+        pluginData = _ref.pluginData,
+        root = _ref.root,
+        nonce = _ref.nonce,
+        pluginRequests = _ref.pluginRequests,
+        hubBaseURL = _ref.hubBaseURL;
+
+    _classCallCheck$2$2(this, RequestHandler);
+
+    this.apiKey = apiKey;
+    this.pluginData = pluginData;
+    this.root = root;
+    this.nonce = nonce;
+    this.pluginRequests = pluginRequests;
+    this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
+  }
+  /**
+   * Deletes a config locally and from the Hub.
+   *
+   * @param {array} configs Current list of local configs.
+   * @param {Object} currentConfig Config to delete.
+   * @return {Promise}
+   */
+
+
+  _createClass$2$2(RequestHandler, [{
+    key: "delete",
+    value: function _delete(configs, currentConfig) {
+      // Delete from the Hub when the config has a Hub ID and we have an API key.
+      if (currentConfig.hub_id) {
+        this.deleteFromHub(currentConfig.hub_id);
+      }
+
+      var configIndex = configs.findIndex(function (element) {
+        return element.id === currentConfig.id;
+      });
+
+      if (-1 !== configIndex) {
+        configs.splice(configIndex, 1);
+      }
+
+      return this.updateLocalConfigsList(configs);
+    }
+    /**
+     * Adds a new config locally and to the Hub.
+     *
+     * @param {array} configs Current list of local configs.
+     * @param {Object} newConfig Config data of the newly added config.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "addNew",
+    value: function addNew(configs, newConfig) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        newConfig.id = Date.now();
+
+        if (_this.apiKey) {
+          var hubId;
+
+          _this.sendConfigToHub(newConfig).then(function (res) {
+            hubId = res.id;
+            newConfig.id = res.id;
+            newConfig.hub_id = res.id;
+            configs.push(newConfig);
+            return _this.updateLocalConfigsList(configs);
+          })["catch"](function () {
+            // Update the local list even if the Hub request fails.
+            configs.push(newConfig);
+            return _this.updateLocalConfigsList(configs);
+          }).then(function (updatedConfigs) {
+            return resolve(updatedConfigs);
+          })["catch"](function (res) {
+            // There was an error saving the configs locally. Probably a schema mismatch.
+            if (400 === res.status) {
+              // Remove the recently submitted config from the hub.
+              _this.deleteFromHub(hubId);
+            }
+
+            reject(res);
+          });
+        } else {
+          configs.push(newConfig);
+          resolve(_this.updateLocalConfigsList(configs));
+        }
+      });
+    }
+    /**
+     * Edits the given config's name and description locally and in the Hub.
+     *
+     * @param {array} configs Current list of local configs.
+     * @param {Object} currentConfig The config to edit.
+     * @param {Object} data The new name and description for the config.
+     *
+     * @return {Promise}
+     */
+
+  }, {
+    key: "edit",
+    value: function edit(configs, currentConfig, configData) {
+      // Edit in the Hub when the config has a Hub ID and we have an API key.
+      if (this.apiKey && currentConfig.hub_id) {
+        var hubData = Object.assign({
+          "package": this.pluginData
+        }, configData); // This returns a 404 when the config doesn't exist in the Hub anymore.
+
+        this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(hubData))["catch"](function (res) {
+          return console.log(res);
+        });
+      }
+
+      var configIndex = configs.findIndex(function (element) {
+        return element.id === currentConfig.id;
+      });
+
+      if (-1 !== configIndex) {
+        configs[configIndex] = Object.assign({}, currentConfig, configData);
+      }
+
+      return this.updateLocalConfigsList(configs);
+    }
+    /**
+     * Updates the locally stored list of configs replacing them with new ones.
+     *
+     * @param {array} newConfigs New list of configs to update locally.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "updateLocalConfigsList",
+    value: function updateLocalConfigsList(newConfigs) {
+      var requestData = newConfigs.filter(function (element) {
+        return element;
+      });
+      return this.makeLocalRequest('POST', JSON.stringify(requestData));
+    }
+    /**
+     * Deletes the given config from the Hub.
+     * The response is a 404 if the config doesn't exist in the Hub.
+     *
+     * @param {int} configId The ID of the config to delete.
+     */
+
+  }, {
+    key: "deleteFromHub",
+    value: function deleteFromHub(configId) {
+      // Try to delete it in the Hub only if we have an API key.
+      if (this.apiKey) {
+        this.makeHubRequest("/".concat(configId), 'DELETE')["catch"](function (res) {
+          return console.log(res);
+        });
+      }
+    }
+    /**
+     * Handles the several requests needed for syncinc with the Hub.
+     *
+     * @param {array} localConfigs Local configs list.
+     * @return {Promise} For when all the requests are handled.
+     */
+
+  }, {
+    key: "syncWithHub",
+    value: function syncWithHub(localConfigs) {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        if (!_this2.apiKey) {
+          resolve(localConfigs);
+        }
+
+        _this2.makeHubRequest("?package_id=".concat(_this2.pluginData.id), 'GET').then(function (hubConfigs) {
+          return _this2.getUpdatedLocalWithHub(localConfigs, hubConfigs);
+        }).then(function () {
+          return _this2.updateLocalConfigsList(localConfigs);
+        }).then(function (syncRes) {
+          return resolve(syncRes);
+        })["catch"](function (res) {
+          return reject(res);
+        });
+      });
+    }
+    /**
+     * Syncs the locally stored configs with the Hub.
+     * What this does:
+     * - Sends to the Hub the local configs that weren't sent already.
+     * - Removes local configs that don't exist in the Hub.
+     * - Updates the name and description of the local configs to the ones in the Hub.
+     * - Retrieves the configs that exist in the Hub but not locally.
+     *
+     * @param {array} localConfigs Array with the local configs.
+     * @param {array} hubConfigs Array with the Hub configs.
+     * @returns
+     */
+
+  }, {
+    key: "getUpdatedLocalWithHub",
+    value: function getUpdatedLocalWithHub(localConfigs, hubConfigs) {
+      var _this3 = this;
+
+      var hubConfigsIds = hubConfigs.map(function (currentConfig) {
+        return currentConfig.id;
+      }),
+          localConfigsIds = {};
+      var hubPromises = [];
+
+      var _iterator = _createForOfIteratorHelper(localConfigs.entries()),
+          _step;
+
+      try {
+        var _loop = function _loop() {
+          var _step$value = _slicedToArray$2(_step.value, 2),
+              index = _step$value[0],
+              localOne = _step$value[1]; // Skip checks for the basic config.
+
+
+          if (localOne["default"]) {
+            return "continue";
+          } // Send to the Hub the configs that haven't been sent.
+
+
+          if (!localOne.hub_id) {
+            var sendToHubPromise = _this3.sendConfigToHub(localOne).then(function (res) {
+              localConfigs[index]['id'] = res.id;
+              localConfigs[index]['hub_id'] = res.id;
+            });
+
+            hubPromises.push(sendToHubPromise);
+            return "continue";
+          } // Find the configs that were removed from the hub and remove them locally.
+
+
+          if (!hubConfigsIds[localOne.hub_id]) {
+            delete localConfigs[index];
+            return "continue";
+          } // Keep the IDs and index of the local configs for reference later on.
+
+
+          localConfigsIds[localOne.hub_id] = index;
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _ret = _loop();
+
+          if (_ret === "continue") continue;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var _iterator2 = _createForOfIteratorHelper(hubConfigs),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var hubOne = _step2.value; // Add the configs from the hub that aren't present locally.
+
+          if (!localConfigsIds[hubOne.id]) {
+            localConfigs.push({
+              id: hubOne.id,
+              hub_id: hubOne.id,
+              name: hubOne.name,
+              description: hubOne.description,
+              config: JSON.parse(hubOne.config)
+            });
+            continue;
+          } // Sync the name and description of local configs.
+
+
+          var localIndex = localConfigsIds[hubOne.id],
+              localConfig = localConfigs[localIndex];
+
+          if (localConfig.name !== hubOne.name || localConfig.description !== hubOne.description) {
+            localConfig.name = hubOne.name;
+            localConfig.description = hubOne.description;
+            localConfigs[localIndex] = localConfig;
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      return Promise.all(hubPromises);
+    }
+    /**
+     * Sends the given config to the Hub.
+     *
+     * @param {Object} config Config to send to the Hub.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "sendConfigToHub",
+    value: function sendConfigToHub(config) {
+      var configData = {
+        name: config.name,
+        description: config.description,
+        "package": this.pluginData,
+        config: JSON.stringify(config.config)
+      };
+      return this.makeHubRequest('', 'POST', JSON.stringify(configData));
+    }
+    /**
+     * Retrieves a new config from the uploaded file.
+     * Triggered on the input's onChange.
+     *
+     * @param {Event} e File input.
+     * @return {Promise} The promised AJAX request.
+     */
+
+  }, {
+    key: "upload",
+    value: function upload(e) {
+      var data = new FormData(),
+          fileInput = e.currentTarget.files;
+      data.append('file', fileInput[0]);
+      data.append('_ajax_nonce', this.pluginRequests.nonce);
+      return this.makePluginRequest(this.pluginRequests.uploadAction, data);
+    }
+    /**
+     * Retrieves a new config from the site's current settings.
+     *
+     * @param {FormData} data FormData with the given name and description for the new config.
+     * @return {Promise} The promised AJAX request.
+     */
+
+  }, {
+    key: "create",
+    value: function create(data) {
+      data.append('_ajax_nonce', this.pluginRequests.nonce);
+      return this.makePluginRequest(this.pluginRequests.createAction, data);
+    }
+    /**
+     * Applies the given config to the site.
+     *
+     * @param {Object} config Config to be applied.
+     * @return {Promise} The promised AJAX request.
+     */
+
+  }, {
+    key: "apply",
+    value: function apply(config) {
+      var data = new FormData();
+      data.append('_ajax_nonce', this.pluginRequests.nonce);
+      data.append('id', config.id);
+      return this.makePluginRequest(this.pluginRequests.applyAction, data);
+    }
+    /**
+     * Triggers requests handled by the WP Rest API.
+     *
+     * @param {string} verb HTTP request method.
+     * @param {*} data Data to send with the request.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "makeLocalRequest",
+    value: function makeLocalRequest() {
+      var verb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'GET';
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var headers = {
+        'Content-type': 'application/json',
+        'X-WP-Nonce': this.nonce
+      };
+      return this.makeRequest(this.root, verb, data, headers);
+    }
+    /**
+     * Wrapper to make requests to the Hub.
+     *
+     * @param {string} path Extra path to append to this.hubBaseURL.
+     * @param {string} verb HTTP request method.
+     * @param {*} data Data to send with the request.
+     * @return {Promise}
+     */
+
+  }, {
+    key: "makeHubRequest",
+    value: function makeHubRequest() {
+      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var headers = {
+        'Content-type': 'application/json',
+        Authorization: 'Basic ' + this.apiKey
+      };
+      return this.makeRequest(this.hubBaseURL + path, verb, data, headers);
+    }
+    /**
+     * Triggers AJAX requests that are handled by the plugin.
+     *
+     * @param {string} action Request action to be received in backend.
+     * @param {*} data Request data.
+     * @return {Promise} Promised request.
+     */
+
+  }, {
+    key: "makePluginRequest",
+    value: function makePluginRequest(action, data) {
+      return this.makeRequest("".concat(ajaxurl, "?action=").concat(action), 'POST', data);
+    }
+    /**
+    * Initiates and promesifies xhr requests.
+    *
+    * @param {*} data Request data.
+    * @param {string} verb HTTP request method.
+    * @return {Promise} Promised request.
+    */
+
+  }, {
+    key: "makeRequest",
+    value: function makeRequest(url) {
+      var verb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(verb, url, true);
+
+        for (var header in headers) {
+          xhr.setRequestHeader(header, headers[header]);
+        }
+
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject(xhr);
+          }
+        };
+
+        xhr.onerror = function () {
+          return reject(xhr);
+        };
+
+        xhr.send(data);
+      });
+    }
+  }]);
+
+  return RequestHandler;
+}();
+
+var _templateObject$6, _templateObject2$4, _templateObject3$3, _templateObject4$3, _templateObject5$3;
+
+var LoadingContent = styled.div(_templateObject$6 || (_templateObject$6 = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    position: relative;\n    z-index: 2;\n}\n"])));
+var LoadingWrap = styled.div(_templateObject2$4 || (_templateObject2$4 = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    pointer-events: none;\n}"])));
+var LoadingMask = styled.div(_templateObject3$3 || (_templateObject3$3 = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-flow: row wrap;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background-color: rgba(255,255,255,0.95);\n    border-radius: 0 0 4px 4px;\n\n    > p {\n\n    }\n}\n"])));
+var StyledSyncButton = styled.button(_templateObject4$3 || (_templateObject4$3 = _taggedTemplateLiteral$3(["\n.sui-wrap && {\n\tcolor: #17A8E3;\n\tfont-weight: 600;\n\tbackground-color: transparent;\n\tborder: none;\n\tcursor: pointer;\n\ttext-decoration: none;\n\tdisplay: inline;\n\tmargin: 0;\n\tpadding: 0;\n}\n"])));
+var StyledBoxHeader = styled.div(_templateObject5$3 || (_templateObject5$3 = _taggedTemplateLiteral$3(["\n[class*=\"sui-2-\"] .sui-wrap && {\n\n\t.sui-actions-right {\n\n\t\t@media ", " {\n\t\t\tjustify-content: space-between;\n\t\t\tmargin-top: 9px;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t}\n}\n"])), deviceMax.tablet, deviceMax.tablet);
+var RequestsHandler;
+
+var Presets = function Presets(_ref) {
+  var isWidget = _ref.isWidget,
+      isPro = _ref.isPro,
+      isWhitelabel = _ref.isWhitelabel,
+      requestsData = _ref.requestsData,
+      sourceUrls = _ref.sourceUrls,
+      sourceLang = _ref.sourceLang,
+      srcDemoData = _ref.srcDemoData,
+      _ref$setDemoData = _ref.setDemoData,
+      setDemoData = _ref$setDemoData === void 0 ? false : _ref$setDemoData;
+
+  var _React$useState = React.useState([]),
+      _React$useState2 = _slicedToArray$2(_React$useState, 2),
+      configs = _React$useState2[0],
+      setConfigs = _React$useState2[1];
+
+  var _React$useState3 = React.useState(true),
+      _React$useState4 = _slicedToArray$2(_React$useState3, 2),
+      isLoading = _React$useState4[0],
+      setIsLoading = _React$useState4[1]; // Modals-related states.
+
+
+  var _React$useState5 = React.useState(null),
+      _React$useState6 = _slicedToArray$2(_React$useState5, 2),
+      currentConfig = _React$useState6[0],
+      setCurrentConfig = _React$useState6[1];
+
+  var _React$useState7 = React.useState(false),
+      _React$useState8 = _slicedToArray$2(_React$useState7, 2),
+      isApplyOpen = _React$useState8[0],
+      setIsApplyOpen = _React$useState8[1];
+
+  var _React$useState9 = React.useState(false),
+      _React$useState10 = _slicedToArray$2(_React$useState9, 2),
+      isDeleteOpen = _React$useState10[0],
+      setIsDeleteOpen = _React$useState10[1];
+
+  var _React$useState11 = React.useState(false),
+      _React$useState12 = _slicedToArray$2(_React$useState11, 2),
+      isEditOpen = _React$useState12[0],
+      setIsEditOpen = _React$useState12[1];
+
+  var urls = Object.assign({
+    freeNoticeHub: 'https://wpmudev.com/hub-welcome/',
+    hubMyConfigs: 'https://wpmudev.com/hub2/configs/my-configs',
+    configsPage: '#',
+    accordionImg: null
+  }, sourceUrls);
+  var lang = Object.assign({
+    title: 'Preset configs',
+    upload: 'Upload',
+    save: 'Save config',
+    manageConfigs: 'Manage configs',
+    loading: 'Updating the config list…',
+    emptyNotice: 'You don\'t have any available config. Save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+    baseDescription: 'Use configs to save preset configurations of your settings, then upload and apply them to your other sites in just a few clicks!',
+    proDescription: /*#__PURE__*/React.createElement(React.Fragment, null, 'You can easily apply configs to multiple sites at once via ', /*#__PURE__*/React.createElement("a", {
+      href: urls.hubMyConfigs,
+      target: "_blank",
+      rel: "noreferrer"
+    }, 'the Hub.')),
+    widgetDescription: 'Use configs to save preset configurations of your settings.',
+    syncWithHubText: 'Created or updated the configs via the Hub?',
+    syncWithHubButton: 'Re-check to get the updated list.',
+    apply: 'Apply',
+    download: 'Download',
+    edit: 'Edit Details',
+    "delete": 'Delete',
+    freeNoticeMessage: 'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Try it free today!',
+    freeButtonLabel: 'Try The Hub',
+    notificationDismiss: 'Dismiss notice',
+    defaultRequestError: 'Request failed. Status: {status}. Please reload the page and try again.',
+    uploadWrongPluginErrorMessage: 'The uploaded file is not a {pluginName} Config. Please make sure the uploaded file is correct.',
+    uploadActionSuccessMessage: '{configName} config has been uploaded successfully – you can now apply it to this site.',
+    applyAction: {
+      successMessage: '{configName} config has been applied successfully.'
+    },
+    editAction: {
+      successMessage: '{configName} config created successfully.'
+    },
+    deleteAction: {},
+    settingsLabels: {}
+  }, sourceLang); // Default demo data.
+
+  var demoData = [{
+    "default": true,
+    name: "Basic config",
+    description: "Recommended performance config for every site.",
+    config: [{
+      id: "bulk_smush",
+      name: "Bulk Smush",
+      content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active"
+    }, {
+      id: "lazy_load",
+      name: "Lazy Load",
+      content: "Inactive"
+    }, {
+      id: "cdn",
+      name: "CDN",
+      content: "Inactive"
+    }, {
+      id: "webp_mod",
+      name: "Local WebP",
+      content: "Inactive"
+    }, {
+      id: "integrations",
+      name: "Integrations",
+      content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+    }, {
+      id: "tools",
+      name: "Tools",
+      content: "Image Resize Detection - Inactive"
+    }, {
+      id: "settings",
+      name: "Settings",
+      content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
+    }]
+  }];
+
+  if (srcDemoData) {
+    if ('empty' === srcDemoData) {
+      demoData = [];
+    } else {
+      demoData.push(srcDemoData);
+    }
+  }
+
+  React.useEffect(function () {
+    RequestsHandler = new RequestHandler(requestsData);
+    retrieveConfigs();
+  }, []);
+
+  var retrieveConfigs = function retrieveConfigs() {
+    setIsLoading(true);
+
+    if (setDemoData) {
+      setTimeout(function () {
+        setConfigs(demoData);
+        setIsLoading(false);
+      }, 1000);
+    } else {
+      RequestsHandler.makeLocalRequest().then(function (newConfigs) {
+        return setConfigs(newConfigs || []);
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      }).then(function () {
+        return setIsLoading(false);
+      });
+    }
+  };
+
+  var handleUpload = function handleUpload(e) {
+    var newConfigName;
+
+    if (setDemoData) {
+      setIsLoading(true);
+      var newDemoData = {
+        name: "New Demo Config",
+        description: "Aenean lacinia bibendum nulla sed consectetur.",
+        config: [{
+          id: "storage_limit",
+          name: "Storage Limit",
+          content: "5"
+        }, {
+          id: "exclusions",
+          name: "Exclusions",
+          content: "Active"
+        }]
+      };
+      demoData.push(newDemoData);
+      setTimeout(function () {
+        setConfigs(demoData);
+        setIsLoading(false);
+      }, 500);
+      console.log('\n' + 'Button: Upload\n' + 'Action: To upload new configurations.\n' + '\n' + 'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' + '\n');
+    } else {
+      RequestsHandler.upload(e).then(function (res) {
+        if (res.data && res.data.config) {
+          // The downloads from the first version won't have this.
+          if (res.data.plugin) {
+            // Bail out if the uploaded config doesn't belong to this plugin.
+            if (res.data.plugin !== requestsData.pluginData.id) {
+              throw {
+                data: {
+                  error_msg: lang.uploadWrongPluginErrorMessage.replace('{pluginName}', requestsData.pluginData.name)
+                }
+              };
+            } // We don't need this.
+
+
+            delete res.data.plugin;
+          }
+
+          res.data.name = res.data.name.substring(0, 200);
+          res.data.description = res.data.description.substring(0, 200);
+          newConfigName = escapeHTML(res.data.name);
+          return RequestsHandler.addNew(configs, res.data);
+        } // Throw otherwise.
+
+
+        throw res;
+      }).then(function (updatedConfigs) {
+        setConfigs(updatedConfigs);
+        successNotice(lang.uploadActionSuccessMessage.replace('{configName}', newConfigName));
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      });
+    }
+  };
+
+  var handleDelete = function handleDelete() {
+    if (setDemoData) {
+      setTimeout(function () {
+        setIsDeleteOpen(false);
+        setIsLoading(true);
+      }, 500);
+      setTimeout(function () {
+        return setIsLoading(false);
+      }, 1000);
+      console.log('\n' + 'Modal: Delete Configuration File\n' + 'Button: Delete\n' + 'Action: It removes an item from the table.\n' + '\n' + 'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' + '\n');
+    } else {
+      RequestsHandler["delete"](_toConsumableArray(configs), currentConfig).then(function (newConfigs) {
+        return setConfigs(newConfigs);
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      }).then(function () {
+        return setIsDeleteOpen(false);
+      });
+    }
+  };
+
+  var handleEdit = function handleEdit(data, displayErrorMessage) {
+    var configData = {
+      name: data.get('name').substring(0, 200),
+      description: data.get('description').substring(0, 200)
+    };
+
+    if (setDemoData) {
+      setTimeout(function () {
+        setIsEditOpen(false);
+        setIsLoading(true);
+      }, 500);
+      setTimeout(function () {
+        return setIsLoading(false);
+      }, 1000);
+      console.log('\n' + 'Modal: Rename Config\n' + 'Button: Save\n' + 'Action: To save the changes made on config name and/or description.\n' + '\n' + 'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' + '\n');
+    } else {
+      // Editing a config.
+      if (currentConfig) {
+        RequestsHandler.edit(_toConsumableArray(configs), currentConfig, configData).then(function (newConfigs) {
+          return setConfigs(newConfigs);
+        })["catch"](function (res) {
+          return requestFailureNotice(res);
+        }).then(function () {
+          return setIsEditOpen(false);
+        });
+      } // Creating a new config.
+
+
+      RequestsHandler.create(data).then(function (res) {
+        if (res.data && res.data.config) {
+          configData.config = res.data.config;
+          return RequestsHandler.addNew(_toConsumableArray(configs), configData);
+        }
+
+        if (!res.success) {
+          displayErrorMessage(res.data.error_msg);
+        }
+      }).then(function (updatedConfigs) {
+        setConfigs(updatedConfigs);
+        setIsEditOpen(false);
+        successNotice(lang.editAction.successMessage.replace('{configName}', escapeHTML(configData.name)));
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      });
+    }
+  };
+
+  var handleApply = function handleApply() {
+    if (setDemoData) {
+      setTimeout(function () {
+        setIsApplyOpen(false);
+        setIsLoading(true);
+      }, 500);
+      setTimeout(function () {
+        return setIsLoading(false);
+      }, 1000);
+      console.log('\n' + 'Modal: Apply Config\n' + 'Button: Apply\n' + 'Action: To apply the saved configurations into the plugin.\n' + '\n' + 'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' + '\n');
+    } else {
+      RequestsHandler.apply(currentConfig).then(function (res) {
+        setIsApplyOpen(false);
+
+        if (!res.success) {
+          requestFailureNotice(res);
+          return;
+        }
+
+        successNotice(lang.applyAction.successMessage.replace('{configName}', escapeHTML(currentConfig.name)));
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      });
+    }
+  };
+
+  var handleSyncWithHub = function handleSyncWithHub() {
+    setIsLoading(true);
+
+    if (setDemoData) {
+      setTimeout(function () {
+        return setIsLoading(false);
+      }, 1000);
+    } else {
+      RequestsHandler.syncWithHub(_toConsumableArray(configs)).then(function (newConfigs) {
+        return setConfigs(newConfigs);
+      })["catch"](function (res) {
+        return requestFailureNotice(res);
+      }).then(function () {
+        return setIsLoading(false);
+      });
+    }
+  };
+
+  var doDownload = function doDownload(clickedConfig) {
+    var config = Object.assign({}, configs.find(function (item) {
+      return clickedConfig.id === item.id;
+    }));
+
+    if (setDemoData) {
+      console.log('You clicked on "Download" button.');
+    }
+
+    if (!config || !Object.keys(config).length || setDemoData) {
+      return;
+    } // Include the ID of the plugin this config belongs to.
+
+
+    config.plugin = requestsData.pluginData.id; // This is unique per site.
+
+    delete config.hub_id; // Avoid having multiple defaults on upload.
+
+    delete config["default"];
+    var blob = new Blob([JSON.stringify(config, null, 2)], {
+      type: 'application/json'
+    });
+    var pluginName = requestsData.pluginData.name.toLowerCase().replace(' ', '-'),
+        configName = config.name.replace(/[^a-z0-9_-]/gi, '_').toLowerCase(),
+        url = window.URL.createObjectURL(blob),
+        a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = "wp-".concat(pluginName, "-config-").concat(configName);
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  };
+
+  var isEmpty = !configs || 0 === configs.length;
+
+  var openModal = function openModal(action, config) {
+    setCurrentConfig(config);
+
+    if ('apply' === action) {
+      setIsApplyOpen(true);
+    } else if ('delete' === action) {
+      setIsDeleteOpen(true);
+    } else {
+      setIsEditOpen(true);
+    }
+  }; // Notifications.
+
+
+  var successNotice = function successNotice(message) {
+    window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
+      type: 'success',
+      icon: 'check-tick',
+      dismiss: {
+        show: true,
+        label: lang.notificationDismiss
+      }
+    });
+  };
+
+  var requestFailureNotice = function requestFailureNotice(res) {
+    var message;
+
+    if (res.data) {
+      message = res.data.error_msg;
+    } else if (res.status && 403 === res.status) {
+      message = lang.defaultRequestError.replace('{status}', res.status);
+    } else {
+      window.console.log(res);
+      message = 'Error. Please check the browser console';
+    }
+
+    window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
+      type: 'error',
+      icon: 'info',
+      dismiss: {
+        show: true,
+        label: lang.notificationDismiss
+      }
+    });
+  };
+
+  var tableImage = !isWhitelabel ? urls.accordionImg : null;
+  var Table = /*#__PURE__*/React.createElement(React.Fragment, null, !isEmpty && setDemoData && /*#__PURE__*/React.createElement("div", {
+    className: "sui-accordion sui-accordion-flushed",
+    style: {
+      borderBottomWidth: 0
+    }
+  }, configs.map(function (item, index) {
+    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
+      key: index,
+      id: index,
+      "default": item["default"],
+      name: item.name,
+      description: item.description,
+      image: tableImage,
+      showApplyButton: !isWidget,
+      applyLabel: lang.apply,
+      applyAction: function applyAction() {
+        return openModal('apply', item);
+      },
+      downloadLabel: lang.download,
+      downloadAction: function downloadAction() {
+        return doDownload(item);
+      },
+      editLabel: lang.edit,
+      editAction: function editAction() {
+        return openModal('edit', item);
+      },
+      deleteLabel: lang["delete"],
+      deleteAction: function deleteAction() {
+        return openModal('delete', item);
+      }
+    }, item.config.map(function (data) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: data.id,
+        name: data.name,
+        status: data.content
+      });
+    }));
+  })), !isEmpty && !setDemoData && /*#__PURE__*/React.createElement("div", {
+    className: "sui-accordion sui-accordion-flushed",
+    style: {
+      borderBottomWidth: 0
+    }
+  }, configs.map(function (item) {
+    return /*#__PURE__*/React.createElement(PresetsAccordionItem, {
+      key: item.id,
+      id: item.id,
+      "default": item["default"],
+      name: item.name,
+      description: item.description,
+      image: tableImage,
+      showApplyButton: !isWidget,
+      applyLabel: lang.apply,
+      applyAction: function applyAction() {
+        return openModal('apply', item);
+      },
+      downloadLabel: lang.download,
+      downloadAction: function downloadAction() {
+        return doDownload(item);
+      },
+      editLabel: lang.edit,
+      editAction: function editAction() {
+        return openModal('edit', item);
+      },
+      deleteLabel: lang["delete"],
+      deleteAction: function deleteAction() {
+        return openModal('delete', item);
+      }
+    }, Object.keys(item.config.strings).map(function (name) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: name,
+        name: lang.settingsLabels[name],
+        status: item.config.strings[name]
+      });
+    }));
+  })));
+
+  var getFooter = function getFooter() {
+    if (isWidget) {
+      return /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button$1, {
+        icon: "save",
+        label: lang.save,
+        color: "blue",
+        onClick: function onClick() {
+          return openModal('edit', null);
+        }
+      }), /*#__PURE__*/React.createElement(Button$1, {
+        icon: "wrench-tool",
+        label: lang.manageConfigs,
+        design: "ghost",
+        href: urls.configsPage
+      }));
+    }
+
+    if (isPro) {
+      return /*#__PURE__*/React.createElement(BoxFooter, {
+        display: "block",
+        alignment: "center",
+        paddingTop: isEmpty ? 0 : 30,
+        border: isEmpty ? 0 : 1
+      }, /*#__PURE__*/React.createElement("p", {
+        className: "sui-description"
+      }, lang.syncWithHubText, " ", ' ', /*#__PURE__*/React.createElement(StyledSyncButton, {
+        onClick: handleSyncWithHub
+      }, lang.syncWithHubButton)));
+    }
+
+    return /*#__PURE__*/React.createElement(BoxFooter, {
+      display: "block"
+    }, /*#__PURE__*/React.createElement(Notifications$2, {
+      type: "upsell"
+    }, /*#__PURE__*/React.createElement("p", null, lang.freeNoticeMessage), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement(Button$1, {
+      label: lang.freeButtonLabel,
+      color: "purple",
+      href: urls.freeNoticeHub,
+      target: "_blank"
+    }))));
+  };
+
+  var getDescription = function getDescription() {
+    if (isWidget) {
+      return /*#__PURE__*/React.createElement("p", null, lang.widgetDescription);
+    }
+
+    return /*#__PURE__*/React.createElement("p", null, lang.baseDescription + ' ', isPro && !isWhitelabel && lang.proDescription);
+  };
+
+  ({
+    title: lang.title
+  });
+  var PresetsHeader = /*#__PURE__*/React.createElement(StyledBoxHeader, {
+    className: "sui-box-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "sui-box-title"
+  }, isWidget && /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-wrench-tool",
+    "aria-hidden": "true"
+  }), lang.title, !isEmpty && isWidget && /*#__PURE__*/React.createElement("span", {
+    className: "sui-tag",
+    style: {
+      marginLeft: 10
+    }
+  }, configs.length)), !isWidget && /*#__PURE__*/React.createElement("div", {
+    className: "sui-actions-right"
+  }, /*#__PURE__*/React.createElement(Button$1, {
+    icon: "upload-cloud",
+    label: lang.upload,
+    design: "ghost",
+    htmlFor: "sui-upload-configs-input"
+  }), /*#__PURE__*/React.createElement("input", {
+    id: "sui-upload-configs-input",
+    type: "file",
+    name: "config_file",
+    className: "sui-hidden",
+    value: "",
+    readOnly: "readonly",
+    onChange: handleUpload,
+    accept: ".json"
+  }), /*#__PURE__*/React.createElement(Button$1, {
+    type: "button",
+    icon: "save",
+    label: lang.save,
+    color: "blue",
+    onClick: function onClick() {
+      return openModal('edit', null);
+    }
+  })));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "sui-floating-notices"
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "alert",
+    id: "sui-configs-floating-notice",
+    className: "sui-notice",
+    "aria-live": "assertive"
+  })), /*#__PURE__*/React.createElement(Box$1, null, PresetsHeader, /*#__PURE__*/React.createElement(BoxBody, null, getDescription(), !isLoading && isEmpty && /*#__PURE__*/React.createElement(Notifications$2, {
+    type: "info"
+  }, /*#__PURE__*/React.createElement("p", null, lang.emptyNotice))), isLoading && /*#__PURE__*/React.createElement(LoadingContent, null, /*#__PURE__*/React.createElement(LoadingWrap, {
+    "aria-hidden": "true"
+  }, Table, getFooter()), /*#__PURE__*/React.createElement(LoadingMask, null, /*#__PURE__*/React.createElement("p", {
+    className: "sui-description"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    "aria-hidden": "true",
+    style: {
+      marginRight: 10
+    }
+  }), lang.loading))), !isLoading && /*#__PURE__*/React.createElement(React.Fragment, null, Table, getFooter())), isApplyOpen && /*#__PURE__*/React.createElement(ApplyModal, {
+    setOpen: setIsApplyOpen,
+    config: currentConfig,
+    save: handleApply,
+    strings: lang.applyAction
+  }), isDeleteOpen && /*#__PURE__*/React.createElement(DeleteModal, {
+    setOpen: setIsDeleteOpen,
+    config: currentConfig,
+    save: handleDelete,
+    strings: lang.deleteAction
+  }), isEditOpen && /*#__PURE__*/React.createElement(EditModal, {
+    setOpen: setIsEditOpen,
+    config: currentConfig,
+    save: handleEdit,
+    strings: lang.editAction
+  }));
+};
+
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
+}
+
+function _classCallCheck$2$1(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$2$1(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$2$1(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$2$1(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$2$1(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$2$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _inherits$2$1(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$2$1(subClass, superClass);
+}
+
+function _getPrototypeOf$2$1(o) {
+  _getPrototypeOf$2$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$2$1(o);
+}
+
+function _setPrototypeOf$2$1(o, p) {
+  _setPrototypeOf$2$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$2$1(o, p);
+}
+
+function _isNativeReflectConstruct$2$1() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$2$1(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$2$1(self, call) {
+  if (call && (_typeof$3(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+
+  return _assertThisInitialized$2$1(self);
+}
+
+function _createSuper$2$1(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$2$1();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$2$1(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$2$1(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$2$1(this, result);
+  };
+}
+
+function _taggedTemplateLiteral$1$1(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _classCallCheck$1$1(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$1$1(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$1$1(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$1$1(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$1$1(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$1$2(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _inherits$1$1(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$1$1(subClass, superClass);
+}
+
+function _getPrototypeOf$1$1(o) {
+  _getPrototypeOf$1$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$1$1(o);
+}
+
+function _setPrototypeOf$1$1(o, p) {
+  _setPrototypeOf$1$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$1$1(o, p);
+}
+
+function _isNativeReflectConstruct$1$1() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$1$1(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$1$1(self, call) {
+  if (call && (_typeof$1(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized$1$1(self);
+}
+
+function _createSuper$1$1(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$1$1();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$1$1(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$1$1(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$1$1(this, result);
+  };
+}
+
+function _defineProperty$1$1$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$1(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2$1(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$1(Object(source), true).forEach(function (key) {
+        _defineProperty$1$1$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$1(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose$1(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$1(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon$1 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties$1(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$1({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var Notifications$1 = /*#__PURE__*/function (_Component) {
+  _inherits$1$1(Notifications, _Component);
+
+  var _super = _createSuper$1$1(Notifications);
+
+  function Notifications(props) {
+    var _this;
+
+    _classCallCheck$1$1(this, Notifications);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$1$2(_assertThisInitialized$1$1(_this), "close", function () {
+      _this.setState({
+        hide: true
+      });
+    });
+
+    _this.state = {
+      hide: false
+    };
+    _this.close = _this.close.bind(_assertThisInitialized$1$1(_this));
+    return _this;
+  }
+
+  _createClass$1$1(Notifications, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var hide = this.state.hide;
+      var classMain = "sui-notice";
+      var classIcon = "sui-notice-icon sui-md";
+
+      switch (this.props.type) {
+        case "info":
+        case "success":
+        case "warning":
+        case "error":
+        case "upsell":
+          classMain += " sui-notice-" + this.props.type;
+          classIcon += " sui-icon-info";
+          break;
+
+        case "loading":
+          classIcon += " sui-icon-loader sui-loading";
+          break;
+
+        default:
+          classIcon += " sui-icon-info";
+          break;
+      }
+
+      var message = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-message"
+      }, /*#__PURE__*/React.createElement("span", {
+        className: classIcon,
+        "aria-hidden": "true"
+      }), this.props.children);
+      var actions = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-actions"
+      }, /*#__PURE__*/React.createElement(ButtonIcon$1, {
+        icon: "check",
+        label: "Hide",
+        onClick: function onClick(e) {
+          return _this2.close(e);
+        }
+      }));
+
+      if (!hide) {
+        return /*#__PURE__*/React.createElement("div", {
+          className: classMain
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "sui-notice-content"
+        }, message, this.props.dismiss && actions));
+      }
+
+      return null;
+    }
+  }]);
+
+  return Notifications;
+}(Component);
+
+function _classCallCheck$3(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$3(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$3(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$3(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$3(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$3(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _extends$1() {
+  _extends$1 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$1.apply(this, arguments);
+}
+
+function _inherits$3(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$3(subClass, superClass);
+}
+
+function _getPrototypeOf$3(o) {
+  _getPrototypeOf$3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$3(o);
+}
+
+function _setPrototypeOf$3(o, p) {
+  _setPrototypeOf$3 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$3(o, p);
+}
+
+function _isNativeReflectConstruct$3() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$3(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$3(self, call) {
+  if (call && (_typeof$1(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized$3(self);
+}
+
+function _createSuper$3(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$3();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$3(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$3(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$3(this, result);
+  };
+}
+
+function _taggedTemplateLiteral$2(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _templateObject8$1() {
+  var data = _taggedTemplateLiteral$2(["\n\tmin-width: 1px;\n\tflex: 1;\n\t", "\n\tcolor: #17A8E3 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px !important;\n"]);
+
+  _templateObject8$1 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7$1() {
+  var data = _taggedTemplateLiteral$2(["\n\tdisplay: block;\n\t", "\n\n\tp {\n\t\toverflow: hidden;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-box-orient: vertical;\n\t\tmargin: 0 !important;\n\t\tpadding: 0 !important;\n\t\tborder: 0;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\t\tletter-spacing: -0.2px;\n\t\t-webkit-line-clamp: ", ";\n\t}\n"]);
+
+  _templateObject7$1 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6$1() {
+  var data = _taggedTemplateLiteral$2(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
+
+  _templateObject6$1 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5$2() {
+  var data = _taggedTemplateLiteral$2(["\n\toverflow: hidden;\n\tdisplay: -webkit-box !important;\n\t-webkit-box-orient: vertical;\n\t", "\n\tmargin: ", " !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px;\n\t", "\n\n\t", "\n"]);
+
+  _templateObject5$2 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4$2() {
+  var data = _taggedTemplateLiteral$2(["\n\t", "\n\theight: ", ";\n\tmargin: ", ";\n\t", "\n\tdisplay: block;\n\t", "\n\tbackground-color: #FFF;\n\tbackground-image: url(", ");\n\tbackground-size: cover;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n"]);
+
+  _templateObject4$2 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3$1$1() {
+  var data = _taggedTemplateLiteral$2(["\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tmargin-top: 15px;\n"]);
+
+  _templateObject3$1$1 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2$1$1() {
+  var data = _taggedTemplateLiteral$2(["\n\tdisplay: flex;\n\tflex-flow: row wrap;\n\n\t+ div {\n\t\tmargin-top: 20px;\n\t}\n"]);
+
+  _templateObject2$1$1 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject$1$1() {
+  var data = _taggedTemplateLiteral$2(["\n\t", "\n\tcursor: pointer;\n\t", "\n\t", "\n\tpadding: ", ";\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\t", "\n\ttransition: 0.2s ease all;\n\n\t* {\n\t\tpointer-events: none;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\t", "\n\n\t\t", "\n\t}\n\n\t", "\n\n\t&:focus {\n\t\toutline: none;\n\t\t", "\n\t}\n\n\t@media ", " {\n\t\t", "\n\t}\n"]);
+
+  _templateObject$1$1 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var aria$1$1 = aria$1$1 || {};
+aria$1$1.KeyCode = {
+  TAB: 9,
+  RETURN: 13,
+  ESC: 27,
+  SPACE: 32,
+  PAGE_UP: 33,
+  PAGE_DOWN: 34,
+  END: 35,
+  HOME: 36,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  DELETE: 46
+};
+var screen$1$1 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device$1$1 = {
+  mobile: "(min-width: ".concat(screen$1$1.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$1$1.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$1$1.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$1$1.desktop, "px)")
+};
+var PostWrapper$1 = styled.div.attrs(function (props) {
+  return {
+    tabIndex: 0,
+    props: props
+  };
+})(_templateObject$1$1(), function (props) {
+  return props.banner ? "overflow: hidden;" : "";
+}, function (props) {
+  return props.banner ? "display: flex;" : "";
+}, function (props) {
+  return props.banner ? "flex-flow: column nowrap;" : "";
+}, function (props) {
+  return props.banner ? "20px 20px 30px" : "10px";
+}, function (props) {
+  return props.banner ? "box-shadow: 0 0 0 1px #E6E6E6;" : "";
+}, function (props) {
+  return props.banner ? "transform: scale(1.02);" : "background-color: #FAFAFA;";
+}, function (props) {
+  return props.banner ? "@media ".concat(device$1$1.tablet, " {\n\t\t\t\ttransform: scale(1.05);\n\t\t\t}") : "";
+}, function (props) {
+  return props.banner ? "@media ".concat(device$1$1.tablet, " {\n\t\t\tbox-shadow: 0 2px 7px 0 rgba(0,0,0,0.05);\n\t\t}") : "";
+}, function (props) {
+  return props.banner ? "box-shadow: 0 2px 7px 0 rgba(0,0,0,0.05), 0 0 2px 0 #17A8E3;" : "";
+}, device$1$1.tablet, function (props) {
+  return props.banner ? "min-height: 100%;" : "padding: 15px;";
+});
+var PostHeader$1 = styled.div(_templateObject2$1$1());
+var PostFooter$1 = styled.div(_templateObject3$1$1());
+var FeaturedImage$1 = styled.div.attrs(function () {
+  return {
+    tabIndex: "-1",
+    "aria-hidden": true
+  };
+})(_templateObject4$2(), function (props) {
+  return props.banner ? "" : "width: 66px;";
+}, function (props) {
+  return props.banner ? "140px" : "54px";
+}, function (props) {
+  return props.banner ? "-20px -20px 20px" : "0 10px 0 0";
+}, function (props) {
+  return props.banner ? "" : "border-radius: 4px;";
+}, function (props) {
+  return props.banner ? "flex: 0 0 auto;" : "";
+}, function (props) {
+  return props.src || "none";
+});
+var PostTitle$1 = styled.h3(_templateObject5$2(), function (props) {
+  return props.banner ? "flex: 1 1 auto;" : "";
+}, function (props) {
+  return props.banner ? "0 0 10px" : "0";
+}, function (props) {
+  return props.banner ? "" : "-webkit-line-clamp: 2;";
+}, function (props) {
+  return props.banner ? "@media ".concat(device$1$1.tablet, " {\n\t\t\t-webkit-line-clamp: 2;\n\t\t}") : "";
+});
+var PostTime$1 = styled.p(_templateObject6$1(), function (props) {
+  return props.banner ? "flex: 0 0 auto;" : "";
+}, function (props) {
+  return props.banner ? "* + & {\n\t\t\tmargin-left: 5px !important;\n\t\t}" : "";
+});
+var Excerpt$1 = styled.div(_templateObject7$1(), function (props) {
+  return props.banner ? "flex: 1 1 auto;" : "";
+}, function (props) {
+  return props.banner ? "3" : "2";
+});
+var ReadMore$1 = styled.p(_templateObject8$1(), function (props) {
+  return props.banner ? "" : "margin: 4px 0 0;";
+});
+
+var Post$1 = /*#__PURE__*/function (_Component) {
+  _inherits$3(Post, _Component);
+
+  var _super = _createSuper$3(Post);
+
+  function Post(props) {
+    var _this;
+
+    _classCallCheck$3(this, Post);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$3(_assertThisInitialized$3(_this), "openLink", function (e) {
+      var ref = e.target !== null ? e.target : e.srcElement;
+
+      if (ref) {
+        window.open(ref.getAttribute("data-href"), "_blank");
+      }
+    });
+
+    _defineProperty$3(_assertThisInitialized$3(_this), "handleKeydown", function (e) {
+      var key = e.which || e.keyCode;
+
+      switch (key) {
+        case aria$1$1.KeyCode.RETURN:
+          _this.openLink(e);
+
+          break;
+      }
+    });
+
+    _this.state = {
+      media: [],
+      error: null,
+      isLoaded: false
+    };
+    _this.openLink = _this.openLink.bind(_assertThisInitialized$3(_this));
+    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized$3(_this));
+    return _this;
+  }
+
+  _createClass$3(Post, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var API_URL = "https://wpmudev.com/blog/wp-json/wp/v2/media/";
+      var QUERY_ID = this.props.media; // GET media using fetch.
+
+      fetch(API_URL + QUERY_ID).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          isLoaded: true,
+          media: data.guid.rendered
+        });
+      }, function (error) {
+        _this2.setState({
+          isLoaded: true,
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          media = _this$state.media,
+          error = _this$state.error,
+          isLoaded = _this$state.isLoaded;
+      var translate = this.props.translate;
+      var read_article = translate && translate[0].read_article ? translate[0].read_article : "Read article";
+      var min_read = translate && translate[0].min_read ? translate[0].min_read : "min read";
+      var PostImage = ""; // Empty.
+
+      if (this.props.image) {
+        PostImage = /*#__PURE__*/React.createElement(FeaturedImage$1, _extends$1({
+          src: this.props.image,
+          alt: ""
+        }, this.props));
+      } else {
+        if (error) {
+          PostImage = error.message;
+        } else if (!isLoaded) {
+          PostImage = /*#__PURE__*/React.createElement("p", {
+            style: {
+              textAlign: 'center'
+            }
+          }, /*#__PURE__*/React.createElement("span", {
+            className: "sui-icon-loader sui-loading",
+            "aria-hidden": "true"
+          }), /*#__PURE__*/React.createElement("span", {
+            className: "sui-screen-reader-text"
+          }, "Image is loading"));
+        } else {
+          PostImage = /*#__PURE__*/React.createElement(FeaturedImage$1, _extends$1({
+            src: media
+          }, this.props));
+        }
+      }
+
+      if (this.props.banner) {
+        return /*#__PURE__*/React.createElement(PostWrapper$1, this.props, PostImage, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle$1, {
+          banner: true,
+          dangerouslySetInnerHTML: {
+            __html: this.props.title
+          }
+        }), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt$1, {
+          banner: true,
+          dangerouslySetInnerHTML: {
+            __html: this.props.excerpt
+          }
+        }), /*#__PURE__*/React.createElement(PostFooter$1, {
+          banner: true
+        }, /*#__PURE__*/React.createElement(ReadMore$1, {
+          banner: true
+        }, read_article), this.props.time && "" !== this.props.time && /*#__PURE__*/React.createElement(PostTime$1, {
+          banner: true
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-clock sui-sm",
+          style: {
+            verticalAlign: "middle",
+            marginRight: 5
+          },
+          "aria-hidden": "true"
+        }), this.props.time, " ", min_read)));
+      }
+
+      return /*#__PURE__*/React.createElement(PostWrapper$1, this.props, /*#__PURE__*/React.createElement(PostHeader$1, null, PostImage, /*#__PURE__*/React.createElement("div", {
+        style: {
+          minWidth: "1px",
+          flex: 1
+        }
+      }, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle$1, {
+        dangerouslySetInnerHTML: {
+          __html: this.props.title
+        }
+      }), this.props.time && "" !== this.props.time && /*#__PURE__*/React.createElement(PostTime$1, null, "*", this.props.time, " ", min_read))), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt$1, {
+        dangerouslySetInnerHTML: {
+          __html: this.props.excerpt
+        }
+      }), /*#__PURE__*/React.createElement(ReadMore$1, null, read_article));
+    }
+  }]);
+
+  return Post;
+}(Component);
+
+var _templateObject$2, _templateObject2$2, _templateObject3$2;
+
+var aria$2 = aria$2 || {};
+aria$2.KeyCode = {
+  TAB: 9,
+  RETURN: 13,
+  ESC: 27,
+  SPACE: 32,
+  PAGE_UP: 33,
+  PAGE_DOWN: 34,
+  END: 35,
+  HOME: 36,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  DELETE: 46
+};
+var screen$2 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device$2 = {
+  mobile: "(min-width: ".concat(screen$2.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$2.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$2.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$2.desktop, "px)")
+};
+var ListWrapper$1 = styled.ul(_templateObject$2 || (_templateObject$2 = _taggedTemplateLiteral$1$1(["\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\n\t@media ", " {\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\tmargin: -15px;\n\t}\n"])), device$2.tablet);
+var ListItem$1 = styled.li(_templateObject2$2 || (_templateObject2$2 = _taggedTemplateLiteral$1$1(["\n\tdisplay: block;\n\tmargin: 0 0 20px;\n\n\t&:last-child {\n\t\tmargin-bottom: 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 50%;\n\t\tmargin: 0;\n\t\tflex: 0 0 auto;\n\t\tpadding: 15px;\n\t}\n\n\t@media ", " {\n\t\twidth: 33.33%;\n\t}\n\n\t@media ", " {\n\t\twidth: 25%;\n\t}\n\n\t@media (min-width: 1800px) {\n\t\t.sui-tutorials--page li {\n\t\t\twidth: 20%;\n\t\t}\n\t}\n"])), device$2.tablet, device$2.laptop, device$2.desktop);
+var Link$1 = styled.a.attrs(function (props) {
+  return {
+    href: props.viewAll,
+    target: "_blank"
+  };
+})(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral$1$1(["\n\tmargin-top: 1px;\n\tmargin-right: 23px;\n\tfont-size: 13px;\n\tline-height: 22px;\n\tletter-spacing: -0.2px;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-right: 5px;\n\n\t\t&:before {\n\t\t\tcolor: inherit;\n\t\t}\n\t}\n\n\t@media (max-width: ", "px) {\n\t\tdisplay: none;\n\t}\n"])), screen$2.mobile);
+
+var TutorialsList = /*#__PURE__*/function (_Component) {
+  _inherits$2$1(TutorialsList, _Component);
+
+  var _super = _createSuper$2$1(TutorialsList);
+
+  function TutorialsList(props) {
+    var _this;
+
+    _classCallCheck$2$1(this, TutorialsList);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$2$1(_assertThisInitialized$2$1(_this), "_isMounted", false);
+
+    _defineProperty$2$1(_assertThisInitialized$2$1(_this), "openLink", function (e) {
+      var ref = e.target !== null ? e.target : e.srcElement;
+
+      if (ref) {
+        window.open(ref.getAttribute("data-href"), "_blank");
+      }
+    });
+
+    _defineProperty$2$1(_assertThisInitialized$2$1(_this), "keyNavigate", function (direction) {
+      var focusedPost = document.activeElement.closest(".sui-tutorial"); // Abort if the focused element doesn't have a .sui-tutorial parent.
+
+      if (!focusedPost) {
+        return;
+      }
+
+      var newFocusedPost;
+
+      if ("prev" === direction) {
+        newFocusedPost = focusedPost.previousElementSibling; // We reached the start of the list.
+
+        if (!newFocusedPost) {
+          newFocusedPost = focusedPost.closest("ul").lastElementChild;
+        }
+      } else {
+        newFocusedPost = focusedPost.nextElementSibling; // We reached the end of the list.
+
+        if (!newFocusedPost) {
+          newFocusedPost = focusedPost.closest("ul").firstElementChild;
+        }
+      }
+
+      newFocusedPost.firstElementChild.focus();
+    });
+
+    _defineProperty$2$1(_assertThisInitialized$2$1(_this), "handleKeydown", function (e) {
+      var key = e.which || e.keyCode;
+
+      switch (key) {
+        case aria$2.KeyCode.RETURN:
+          _this.openLink(e);
+
+          break;
+
+        case aria$2.KeyCode.LEFT:
+          _this.keyNavigate("prev");
+
+          break;
+
+        case aria$2.KeyCode.RIGHT:
+          _this.keyNavigate("next");
+
+          break;
+      }
+    });
+
+    _this.state = {
+      posts: [],
+      error: null,
+      isLoaded: false
+    };
+    _this.openLink = _this.openLink.bind(_assertThisInitialized$2$1(_this));
+    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized$2$1(_this));
+    return _this;
+  }
+
+  _createClass$2$1(TutorialsList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this._isMounted = true;
+      var API_URL = "https://wpmudev.com/blog/wp-json/wp/v2/posts?tutorials_categories=";
+      var QUERY_ID = this.props.category; // GET posts using fetch.
+
+      fetch(API_URL + QUERY_ID).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          isLoaded: true,
+          posts: data
+        });
+      }, function (error) {
+        _this2.setState({
+          isLoaded: true,
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._isMounted = false;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$state = this.state,
+          posts = _this$state.posts,
+          error = _this$state.error,
+          isLoaded = _this$state.isLoaded;
+      var translate = this.props.translate;
+      var loading = translate && translate[0].loading ? translate[0].loading : "Loading tutorials...";
+      var read_article = translate && translate[0].read_article ? translate[0].read_article : "";
+      var min_read = translate && translate[0].min_read ? translate[0].min_read : "";
+      var view_all = translate && translate[0].view_all ? translate[0].view_all : "View all";
+      var params = this.props.postLinkParams && '' !== this.props.postLinkParams ? true : false;
+      var listPosts = posts.map(function (post) {
+        return /*#__PURE__*/React.createElement(ListItem$1, {
+          key: post.id,
+          className: "sui-tutorial"
+        }, /*#__PURE__*/React.createElement(Post$1, {
+          banner: true,
+          role: "link",
+          "data-href": params ? "".concat(post.link, "?").concat(_this3.props.postLinkParams) : "".concat(post.link),
+          title: post.title.rendered,
+          time: post.meta.blog_reading_time,
+          excerpt: post.excerpt.rendered,
+          media: post.featured_media,
+          translate: [{
+            read_article: read_article,
+            min_read: min_read
+          }],
+          onClick: function onClick(e) {
+            return _this3.openLink(e);
+          },
+          onKeyDown: function onKeyDown(e) {
+            return _this3.handleKeydown(e);
+          }
+        }));
+      });
+
+      if (error) {
+        return /*#__PURE__*/React.createElement(Notifications$1, {
+          type: "error",
+          message: error.message
+        });
+      } else if (!isLoaded) {
+        return /*#__PURE__*/React.createElement(Notifications$1, {
+          type: "loading",
+          message: loading
+        });
+      } else {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "sui-box"
+        }, this.props.title && /*#__PURE__*/React.createElement("div", {
+          className: "sui-box-header"
+        }, /*#__PURE__*/React.createElement("h3", {
+          className: "sui-box-title"
+        }, this.props.title), this.props.viewAll && /*#__PURE__*/React.createElement("div", {
+          className: "sui-actions-right"
+        }, /*#__PURE__*/React.createElement(Link$1, this.props, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-open-new-window sui-sm",
+          "aria-hidden": "true"
+        }), view_all))), /*#__PURE__*/React.createElement("div", {
+          className: "sui-box-body",
+          style: {
+            backgroundColor: "#FAFAFA",
+            borderBottomRightRadius: "4px",
+            borderBottomLeftRadius: "4px"
+          }
+        }, /*#__PURE__*/React.createElement(ListWrapper$1, null, listPosts)));
+      }
+    }
+  }]);
+
+  return TutorialsList;
+}(Component);
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _classCallCheck$2(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$2(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$2(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$2(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$2(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$2(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _inherits$2(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$2(subClass, superClass);
+}
+
+function _getPrototypeOf$2(o) {
+  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$2(o);
+}
+
+function _setPrototypeOf$2(o, p) {
+  _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$2(o, p);
+}
+
+function _isNativeReflectConstruct$2() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$2(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$2(self, call) {
+  if (call && (_typeof$3(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+
+  return _assertThisInitialized$2(self);
+}
+
+function _createSuper$2(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$2();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$2(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$2(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$2(this, result);
+  };
+}
+
+function _taggedTemplateLiteral$1(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _classCallCheck$1(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$1(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$1(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$1(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _inherits$1(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$1(subClass, superClass);
+}
+
+function _getPrototypeOf$1(o) {
+  _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$1(o);
+}
+
+function _setPrototypeOf$1(o, p) {
+  _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$1(o, p);
+}
+
+function _isNativeReflectConstruct$1() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized$1(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$1(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized$1(self);
+}
+
+function _createSuper$1(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct$1();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf$1(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf$1(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn$1(this, result);
+  };
+}
+
+function _defineProperty$1$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty$1$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var ButtonIcon = function ButtonIcon(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconSize = _ref.iconSize,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? "solid" : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: "relative"
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case "blue":
+    case "green":
+    case "red":
+    case "orange":
+    case "purple":
+    case "yellow":
+    case "white":
+      className += " sui-button-" + color;
+      break;
+
+    case "gray":
+    default:
+      className += "";
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case "ghost":
+    case "outlined":
+      className += " sui-button-" + design;
+      break;
+
+    case "solid":
+    default:
+      className += "";
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += " sui-button-onload";
+  }
+
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var Notifications = /*#__PURE__*/function (_Component) {
+  _inherits$1(Notifications, _Component);
+
+  var _super = _createSuper$1(Notifications);
+
+  function Notifications(props) {
+    var _this;
+
+    _classCallCheck$1(this, Notifications);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$1(_assertThisInitialized$1(_this), "close", function () {
+      _this.setState({
+        hide: true
+      });
+    });
+
+    _this.state = {
+      hide: false
+    };
+    _this.close = _this.close.bind(_assertThisInitialized$1(_this));
+    return _this;
+  }
+
+  _createClass$1(Notifications, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var hide = this.state.hide;
+      var classMain = "sui-notice";
+      var classIcon = "sui-notice-icon sui-md";
+
+      switch (this.props.type) {
+        case "info":
+        case "success":
+        case "warning":
+        case "error":
+        case "upsell":
+          classMain += " sui-notice-" + this.props.type;
+          classIcon += " sui-icon-info";
+          break;
+
+        case "loading":
+          classIcon += " sui-icon-loader sui-loading";
+          break;
+
+        default:
+          classIcon += " sui-icon-info";
+          break;
+      }
+
+      var message = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-message"
+      }, /*#__PURE__*/React.createElement("span", {
+        className: classIcon,
+        "aria-hidden": "true"
+      }), this.props.children);
+      var actions = /*#__PURE__*/React.createElement("div", {
+        className: "sui-notice-actions"
+      }, /*#__PURE__*/React.createElement(ButtonIcon, {
+        icon: "check",
+        label: "Hide",
+        onClick: function onClick(e) {
+          return _this2.close(e);
+        }
+      }));
+
+      if (!hide) {
+        return /*#__PURE__*/React.createElement("div", {
+          className: classMain
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "sui-notice-content"
+        }, message, this.props.dismiss && actions));
+      }
+
+      return null;
+    }
+  }]);
+
+  return Notifications;
+}(Component);
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n\tmin-width: 1px;\n\tflex: 1;\n\t", "\n\tcolor: #17A8E3 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px !important;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n\tdisplay: block;\n\t", "\n\n\tp {\n\t\toverflow: hidden;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-box-orient: vertical;\n\t\tmargin: 0 !important;\n\t\tpadding: 0 !important;\n\t\tborder: 0;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\t\tletter-spacing: -0.2px;\n\t\t-webkit-line-clamp: ", ";\n\t}\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5$1() {
+  var data = _taggedTemplateLiteral(["\n\toverflow: hidden;\n\tdisplay: -webkit-box !important;\n\t-webkit-box-orient: vertical;\n\t", "\n\tmargin: ", " !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px;\n\t", "\n\n\t", "\n"]);
+
+  _templateObject5$1 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4$1() {
+  var data = _taggedTemplateLiteral(["\n\t", "\n\theight: ", ";\n\tmargin: ", ";\n\t", "\n\tdisplay: block;\n\t", "\n\tbackground-color: #FFF;\n\tbackground-image: url(", ");\n\tbackground-size: cover;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n"]);
+
+  _templateObject4$1 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3$1() {
+  var data = _taggedTemplateLiteral(["\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tmargin-top: 15px;\n"]);
+
+  _templateObject3$1 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2$1() {
+  var data = _taggedTemplateLiteral(["\n\tdisplay: flex;\n\tflex-flow: row wrap;\n\n\t+ div {\n\t\tmargin-top: 20px;\n\t}\n"]);
+
+  _templateObject2$1 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject$1() {
+  var data = _taggedTemplateLiteral(["\n\t", "\n\tcursor: pointer;\n\t", "\n\t", "\n\tpadding: ", ";\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\t", "\n\ttransition: 0.2s ease all;\n\n\t* {\n\t\tpointer-events: none;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\t", "\n\n\t\t", "\n\t}\n\n\t", "\n\n\t&:focus {\n\t\toutline: none;\n\t\t", "\n\t}\n\n\t@media ", " {\n\t\t", "\n\t}\n"]);
+
+  _templateObject$1 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var aria$1 = aria$1 || {};
+aria$1.KeyCode = {
+  TAB: 9,
+  RETURN: 13,
+  ESC: 27,
+  SPACE: 32,
+  PAGE_UP: 33,
+  PAGE_DOWN: 34,
+  END: 35,
+  HOME: 36,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  DELETE: 46
+};
+var screen$1 = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device$1 = {
+  mobile: "(min-width: ".concat(screen$1.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen$1.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen$1.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen$1.desktop, "px)")
+};
+var PostWrapper = styled.div.attrs(function (props) {
+  return {
+    tabIndex: 0,
+    props: props
+  };
+})(_templateObject$1(), function (props) {
+  return props.banner ? "overflow: hidden;" : "";
+}, function (props) {
+  return props.banner ? "display: flex;" : "";
+}, function (props) {
+  return props.banner ? "flex-flow: column nowrap;" : "";
+}, function (props) {
+  return props.banner ? "20px 20px 30px" : "10px";
+}, function (props) {
+  return props.banner ? "box-shadow: 0 0 0 1px #E6E6E6;" : "";
+}, function (props) {
+  return props.banner ? "transform: scale(1.02);" : "background-color: #FAFAFA;";
+}, function (props) {
+  return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\t\ttransform: scale(1.05);\n\t\t\t}") : "";
+}, function (props) {
+  return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\tbox-shadow: 0 2px 7px 0 rgba(0,0,0,0.05);\n\t\t}") : "";
+}, function (props) {
+  return props.banner ? "box-shadow: 0 2px 7px 0 rgba(0,0,0,0.05), 0 0 2px 0 #17A8E3;" : "";
+}, device$1.tablet, function (props) {
+  return props.banner ? "min-height: 100%;" : "padding: 15px;";
+});
+var PostHeader = styled.div(_templateObject2$1());
+var PostFooter = styled.div(_templateObject3$1());
+var FeaturedImage = styled.div.attrs(function () {
+  return {
+    tabIndex: "-1",
+    "aria-hidden": true
+  };
+})(_templateObject4$1(), function (props) {
+  return props.banner ? "" : "width: 66px;";
+}, function (props) {
+  return props.banner ? "140px" : "54px";
+}, function (props) {
+  return props.banner ? "-20px -20px 20px" : "0 10px 0 0";
+}, function (props) {
+  return props.banner ? "" : "border-radius: 4px;";
+}, function (props) {
+  return props.banner ? "flex: 0 0 auto;" : "";
+}, function (props) {
+  return props.src || "none";
+});
+var PostTitle = styled.h3(_templateObject5$1(), function (props) {
+  return props.banner ? "flex: 1 1 auto;" : "";
+}, function (props) {
+  return props.banner ? "0 0 10px" : "0";
+}, function (props) {
+  return props.banner ? "" : "-webkit-line-clamp: 2;";
+}, function (props) {
+  return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\t-webkit-line-clamp: 2;\n\t\t}") : "";
+});
+var PostTime = styled.p(_templateObject6(), function (props) {
+  return props.banner ? "flex: 0 0 auto;" : "";
+}, function (props) {
+  return props.banner ? "* + & {\n\t\t\tmargin-left: 5px !important;\n\t\t}" : "";
+});
+var Excerpt = styled.div(_templateObject7(), function (props) {
+  return props.banner ? "flex: 1 1 auto;" : "";
+}, function (props) {
+  return props.banner ? "3" : "2";
+});
+var ReadMore = styled.p(_templateObject8(), function (props) {
+  return props.banner ? "" : "margin: 4px 0 0;";
+});
+
+var Post = /*#__PURE__*/function (_Component) {
+  _inherits(Post, _Component);
+
+  var _super = _createSuper(Post);
+
+  function Post(props) {
+    var _this;
+
+    _classCallCheck(this, Post);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "openLink", function (e) {
+      var ref = e.target !== null ? e.target : e.srcElement;
+
+      if (ref) {
+        window.open(ref.getAttribute("data-href"), "_blank");
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleKeydown", function (e) {
+      var key = e.which || e.keyCode;
+
+      switch (key) {
+        case aria$1.KeyCode.RETURN:
+          _this.openLink(e);
+
+          break;
+      }
+    });
+
+    _this.state = {
+      media: [],
+      error: null,
+      isLoaded: false
+    };
+    _this.openLink = _this.openLink.bind(_assertThisInitialized(_this));
+    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Post, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var API_URL = "https://wpmudev.com/blog/wp-json/wp/v2/media/";
+      var QUERY_ID = this.props.media; // GET media using fetch.
+
+      fetch(API_URL + QUERY_ID).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          isLoaded: true,
+          media: data.guid.rendered
+        });
+      }, function (error) {
+        _this2.setState({
+          isLoaded: true,
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          media = _this$state.media,
+          error = _this$state.error,
+          isLoaded = _this$state.isLoaded;
+      var translate = this.props.translate;
+      var read_article = translate && translate[0].read_article ? translate[0].read_article : "Read article";
+      var min_read = translate && translate[0].min_read ? translate[0].min_read : "min read";
+      var PostImage = ""; // Empty.
+
+      if (this.props.image) {
+        PostImage = /*#__PURE__*/React.createElement(FeaturedImage, _extends({
+          src: this.props.image,
+          alt: ""
+        }, this.props));
+      } else {
+        if (error) {
+          PostImage = error.message;
+        } else if (!isLoaded) {
+          PostImage = /*#__PURE__*/React.createElement("p", {
+            style: {
+              textAlign: 'center'
+            }
+          }, /*#__PURE__*/React.createElement("span", {
+            className: "sui-icon-loader sui-loading",
+            "aria-hidden": "true"
+          }), /*#__PURE__*/React.createElement("span", {
+            className: "sui-screen-reader-text"
+          }, "Image is loading"));
+        } else {
+          PostImage = /*#__PURE__*/React.createElement(FeaturedImage, _extends({
+            src: media
+          }, this.props));
+        }
+      }
+
+      if (this.props.banner) {
+        return /*#__PURE__*/React.createElement(PostWrapper, this.props, PostImage, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle, {
+          banner: true,
+          dangerouslySetInnerHTML: {
+            __html: this.props.title
+          }
+        }), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt, {
+          banner: true,
+          dangerouslySetInnerHTML: {
+            __html: this.props.excerpt
+          }
+        }), /*#__PURE__*/React.createElement(PostFooter, {
+          banner: true
+        }, /*#__PURE__*/React.createElement(ReadMore, {
+          banner: true
+        }, read_article), this.props.time && "" !== this.props.time && /*#__PURE__*/React.createElement(PostTime, {
+          banner: true
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-clock sui-sm",
+          style: {
+            verticalAlign: "middle",
+            marginRight: 5
+          },
+          "aria-hidden": "true"
+        }), this.props.time, " ", min_read)));
+      }
+
+      return /*#__PURE__*/React.createElement(PostWrapper, this.props, /*#__PURE__*/React.createElement(PostHeader, null, PostImage, /*#__PURE__*/React.createElement("div", {
+        style: {
+          minWidth: "1px",
+          flex: 1
+        }
+      }, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle, {
+        dangerouslySetInnerHTML: {
+          __html: this.props.title
+        }
+      }), this.props.time && "" !== this.props.time && /*#__PURE__*/React.createElement(PostTime, null, "*", this.props.time, " ", min_read))), this.props.excerpt && "" !== this.props.excerpt && /*#__PURE__*/React.createElement(Excerpt, {
+        dangerouslySetInnerHTML: {
+          __html: this.props.excerpt
+        }
+      }), /*#__PURE__*/React.createElement(ReadMore, null, read_article));
+    }
+  }]);
+
+  return Post;
+}(Component);
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+
+var aria = aria || {};
+aria.KeyCode = {
+  TAB: 9,
+  RETURN: 13,
+  ESC: 27,
+  SPACE: 32,
+  PAGE_UP: 33,
+  PAGE_DOWN: 34,
+  END: 35,
+  HOME: 36,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  DELETE: 46
+};
+var screen = {
+  mobile: 480,
+  tablet: 783,
+  laptop: 1200,
+  desktop: 1500
+};
+var device = {
+  mobile: "(min-width: ".concat(screen.mobile, "px)"),
+  tablet: "(min-width: ".concat(screen.tablet, "px)"),
+  laptop: "(min-width: ".concat(screen.laptop, "px)"),
+  desktop: "(min-width: ".concat(screen.desktop, "px)")
+};
+var Box = styled.div(_templateObject || (_templateObject = _taggedTemplateLiteral$1(["\n\tposition: relative;\n\tpadding: 10px;\n\n\t@media ", " {\n\t\tpadding: 15px 25px;\n\t}\n"])), device.tablet);
+var Link = styled.a.attrs(function (_ref) {
+  var viewAll = _ref.viewAll;
+  return {
+    href: viewAll,
+    target: "_blank"
+  };
+})(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral$1(["\n\tmargin-top: 1px;\n\tmargin-right: 23px;\n\tfont-size: 13px;\n\tline-height: 22px;\n\tletter-spacing: -0.2px;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-right: 5px;\n\n\t\t&:before {\n\t\t\tcolor: inherit;\n\t\t}\n\t}\n"])));
+var ListWrapper = styled.ul(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral$1(["\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\n\t@media ", " {\n\t\toverflow: hidden;\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t}\n"])), device.tablet);
+var ListItem = styled.li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\tmargin: 0 0 20px;\n\tpadding: 0;\n\tborder: 0;\n\tlist-style: none;\n\n\t&:last-child {\n\t\tmargin-bottom: 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 33.33%;\n\t\tflex: 0 0 auto;\n\t\tmargin: 0 1px 0 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 25%;\n\t}\n"])), device.tablet, device.desktop);
+var Navigation = styled.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\n\tbutton[class*=\"sui-button-\"] {\n\t\tdisplay: none !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: block !important;\n\t\t\tpointer-events: initial;\n\t\t}\n\t}\n\n\tbutton:not([class*=\"sui-button-\"]) {\n\t\twidth: 100%;\n\t\tcursor: pointer;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmargin: 20px 0 10px !important;\n\t\tpadding: 10px !important;\n\t\tborder: 0;\n\t\tborder-radius: 4px;\n\t\tbackground-color: #fff;\n\t\tcolor: #17a8e3 !important;\n\t\ttransition: 0.2s ease all;\n\n\t\t* {\n\t\t\tpointer-events: none;\n\t\t}\n\n\t\tstrong {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 0 1 auto;\n\t\t\tcolor: inherit;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 500;\n\t\t}\n\n\t\t[class*=\"sui-icon-\"] {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-left: 5px;\n\t\t\ttransition: 0.2s ease all;\n\n\t\t\t&:before {\n\t\t\t\tcolor: inherit;\n\t\t\t}\n\t\t}\n\n\t\t&:hover,\n\t\t&:focus {\n\t\t\toutline: none;\n\t\t\tbox-shadow: none;\n\t\t}\n\n\t\t&:hover {\n\t\t\tbackground-color: #fafafa;\n\t\t}\n\n\t\t&:focus {\n\t\t\tbackground-color: #e1f6ff;\n\t\t}\n\n\t\t@media ", " {\n\t\t\tdisplay: none !important;\n\t\t}\n\t}\n\n\t.open & {\n\t\tbutton:not([class*=\"sui-button-\"]) {\n\t\t\t[class*=\"sui-icon-\"] {\n\t\t\t\ttransform: rotate(180deg);\n\t\t\t}\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpointer-events: none;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: space-between;\n\t\tposition: absolute;\n\t\ttop: 50%;\n\t\tright: 6px;\n\t\tleft: 6px;\n\t\ttransform: translateY(-50%);\n\t}\n"])), device.tablet, device.tablet, device.tablet);
+
+var TutorialsSlider = /*#__PURE__*/function (_Component) {
+  _inherits$2(TutorialsSlider, _Component);
+
+  var _super = _createSuper$2(TutorialsSlider);
+
+  function TutorialsSlider(props) {
+    var _this;
+
+    _classCallCheck$2(this, TutorialsSlider);
+
+    _this = _super.call(this, props);
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "closeButtonClicked", function (e) {
+      _this.hideComponent(e);
+
+      if (_this.props.onCloseClick) {
+        _this.props.onCloseClick(e);
+      }
+    });
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "hideComponent", function (e) {
+      var sliderBox = e.currentTarget.closest(".sui-tutorials-slider-box"),
+          event = new Event("sliderTutorialClosed");
+      sliderBox.dispatchEvent(event);
+      sliderBox.remove();
+    });
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "openLink", function (e) {
+      var ref = e.target !== null ? e.target : e.srcElement;
+
+      if (ref) {
+        window.open(ref.getAttribute("data-href"), "_blank");
+      }
+    });
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "keyNavigate", function (direction) {
+      var focusedPost = document.activeElement.closest("li"); // Abort if the focused element doesn't have a li parent.
+
+      if (!focusedPost) {
+        return;
+      }
+
+      var newFocusedPost;
+
+      if ("prev" === direction) {
+        newFocusedPost = focusedPost.previousElementSibling; // We reached the start of the list.
+
+        if (!newFocusedPost) {
+          newFocusedPost = focusedPost.closest("ul").lastElementChild;
+        }
+      } else {
+        newFocusedPost = focusedPost.nextElementSibling; // We reached the end of the list.
+
+        if (!newFocusedPost) {
+          newFocusedPost = focusedPost.closest("ul").firstElementChild;
+        }
+      }
+
+      newFocusedPost.firstElementChild.focus();
+    });
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "handleKeydown", function (e) {
+      var key = e.which || e.keyCode;
+
+      switch (key) {
+        case aria.KeyCode.RETURN:
+          _this.openLink(e);
+
+          break;
+
+        case aria.KeyCode.LEFT:
+          _this.keyNavigate("prev");
+
+          break;
+
+        case aria.KeyCode.RIGHT:
+          _this.keyNavigate("next");
+
+          break;
+      }
+    });
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "handleScroll", function (e) {
+      var tutorialsContainer = e.currentTarget;
+      var isFirstSlide = false,
+          isLastSlide = false; // We're at the first slide.
+
+      if (0 === tutorialsContainer.scrollLeft) {
+        isFirstSlide = true;
+      } // We're at the last slide.
+
+
+      var getSum = tutorialsContainer.scrollLeft + tutorialsContainer.offsetWidth;
+
+      if (tutorialsContainer.scrollWidth === getSum) {
+        isLastSlide = true;
+      }
+
+      _this.setState({
+        isFirstSlide: isFirstSlide,
+        isLastSlide: isLastSlide
+      });
+    });
+
+    _defineProperty$2(_assertThisInitialized$2(_this), "navigationButtonClicked", function (e) {
+      var tutorialsContainer = e.currentTarget.parentNode.previousElementSibling; // Scroll to the next or previous "slide".
+
+      if (e.currentTarget.classList.contains("next")) {
+        tutorialsContainer.scrollLeft += tutorialsContainer.offsetWidth;
+      } else {
+        tutorialsContainer.scrollLeft -= tutorialsContainer.offsetWidth;
+      }
+    });
+
+    _this.secondTutorial = /*#__PURE__*/React.createRef();
+    _this.state = {
+      posts: [],
+      error: null,
+      isLoaded: false,
+      isFirstSlide: true,
+      isLastSlide: false,
+      isShowingAll: window.innerWidth > screen.tablet
+    };
+    _this.closeButtonClicked = _this.closeButtonClicked.bind(_assertThisInitialized$2(_this));
+    _this.hideComponent = _this.hideComponent.bind(_assertThisInitialized$2(_this));
+    _this.openLink = _this.openLink.bind(_assertThisInitialized$2(_this));
+    _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized$2(_this));
+    _this.navigationButtonClicked = _this.navigationButtonClicked.bind(_assertThisInitialized$2(_this));
+    _this.handleScroll = _this.handleScroll.bind(_assertThisInitialized$2(_this));
+    return _this;
+  }
+
+  _createClass$2(TutorialsSlider, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      // Handle the focused element when clicking on "show more"/"show lesss" on mobile.
+      if (this.state.isShowingAll !== prevState.isShowingAll && window.innerWidth < screen.tablet) {
+        if (this.secondTutorial.current) {
+          var tutorialToFocus;
+
+          if (this.state.isShowingAll) {
+            tutorialToFocus = this.secondTutorial.current.nextElementSibling;
+          } else {
+            tutorialToFocus = this.secondTutorial.current;
+          }
+
+          tutorialToFocus.firstElementChild.focus();
+        }
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var API_URL = "https://wpmudev.com/blog/wp-json/wp/v2/posts?tutorials_categories=";
+      var QUERY_ID = this.props.category; // GET posts using fetch.
+
+      fetch(API_URL + QUERY_ID).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          isLoaded: true,
+          posts: data
+        });
+      }, function (error) {
+        _this2.setState({
+          isLoaded: true,
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$state = this.state,
+          posts = _this$state.posts,
+          error = _this$state.error,
+          isLoaded = _this$state.isLoaded,
+          isShowingAll = _this$state.isShowingAll;
+      var translate = this.props.translate;
+      var loading = translate && translate[0].loading ? translate[0].loading : "Loading tutorials...";
+      var read_article = translate && translate[0].read_article ? translate[0].read_article : "";
+      var min_read = translate && translate[0].min_read ? translate[0].min_read : "";
+      var prev_post = translate && translate[0].prev_post ? translate[0].prev_post : "Previous post";
+      var next_post = translate && translate[0].next_post ? translate[0].next_post : "Next post";
+      var view_all = translate && translate[0].view_all ? translate[0].view_all : "View all";
+      var close_tutorials = translate && translate[0].close_tutorials ? translate[0].close_tutorials : "Close tutorials";
+      var show_more = translate && translate[0].show_more ? translate[0].show_more : "Show more";
+      var show_less = translate && translate[0].show_less ? translate[0].show_less : "Show less";
+      var params = this.props.postLinkParams && '' !== this.props.postLinkParams ? true : false;
+      var listPosts = posts.map(function (post, i) {
+        return /*#__PURE__*/React.createElement(ListItem, {
+          key: post.id,
+          className: "sui-tutorial" + (1 < i && !_this3.state.isShowingAll && " sui-hidden"),
+          ref: 1 === i && _this3.secondTutorial
+        }, /*#__PURE__*/React.createElement(Post, {
+          role: "link",
+          "data-href": params ? "".concat(post.link, "?").concat(_this3.props.postLinkParams) : "".concat(post.link),
+          title: post.title.rendered,
+          time: post.meta.blog_reading_time,
+          excerpt: post.excerpt.rendered,
+          media: post.featured_media,
+          translate: [{
+            min_read: min_read,
+            read_article: read_article
+          }],
+          onClick: function onClick(e) {
+            return _this3.openLink(e);
+          },
+          onKeyDown: function onKeyDown(e) {
+            return _this3.handleKeydown(e);
+          }
+        }));
+      });
+
+      if (error) {
+        return /*#__PURE__*/React.createElement(Notifications, {
+          type: "error",
+          message: error.message
+        });
+      } else if (!isLoaded) {
+        return /*#__PURE__*/React.createElement(Notifications, {
+          type: "loading",
+          message: loading
+        });
+      } else {
+        var navigation = /*#__PURE__*/React.createElement(Navigation, null, (3 < posts.length && window.innerWidth < screen.desktop || 4 < posts.length) && [/*#__PURE__*/React.createElement("button", {
+          key: "1",
+          className: "sui-button-icon prev",
+          onClick: function onClick(e) {
+            return _this3.navigationButtonClicked(e);
+          } // eslint-disable-next-line prettier/prettier
+          ,
+          style: {
+            visibility: this.state.isFirstSlide ? "hidden" : "visible" // eslint-disable-next-line prettier/prettier
+
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-chevron-left sui-sm",
+          "aria-hidden": "true"
+        }), /*#__PURE__*/React.createElement("span", {
+          className: "sui-screen-reader-text"
+        }, prev_post)), /*#__PURE__*/React.createElement("button", {
+          key: "2",
+          className: "sui-button-icon next",
+          onClick: function onClick(e) {
+            return _this3.navigationButtonClicked(e);
+          } // eslint-disable-next-line prettier/prettier
+          ,
+          style: {
+            visibility: this.state.isLastSlide ? "hidden" : "visible" // eslint-disable-next-line prettier/prettier
+
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-chevron-right sui-sm",
+          "aria-hidden": "true"
+        }), /*#__PURE__*/React.createElement("span", {
+          className: "sui-screen-reader-text"
+        }, next_post))], /*#__PURE__*/React.createElement("button", {
+          className: "sui-label",
+          onClick: function onClick() {
+            return _this3.setState({
+              isShowingAll: !isShowingAll
+            });
+          }
+        }, /*#__PURE__*/React.createElement("strong", null, isShowingAll ? show_less : show_more), /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-chevron-down sui-sm",
+          "aria-hidden": "true"
+        })));
+        return /*#__PURE__*/React.createElement("div", {
+          className: "sui-box sui-tutorials-slider-box"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "sui-box-header"
+        }, this.props.title && /*#__PURE__*/React.createElement("h3", {
+          className: "sui-box-title"
+        }, this.props.title), /*#__PURE__*/React.createElement("div", {
+          className: "sui-actions-right"
+        }, this.props.viewAll && /*#__PURE__*/React.createElement(Link, {
+          viewAll: this.props.viewAll
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-open-new-window sui-sm",
+          "aria-hidden": "true"
+        }), view_all), /*#__PURE__*/React.createElement("div", {
+          className: "sui-tooltip",
+          "data-tooltip": "Hide Tutorials" // eslint-disable-next-line prettier/prettier
+          ,
+          style: {
+            marginRight: "-9px"
+          }
+        }, /*#__PURE__*/React.createElement("button", {
+          onClick: function onClick(e) {
+            return _this3.closeButtonClicked(e);
+          },
+          className: "sui-button-icon"
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "sui-icon-close sui-md",
+          "aria-hidden": "true"
+        }), /*#__PURE__*/React.createElement("span", {
+          className: "sui-screen-reader-text"
+        }, close_tutorials))))), /*#__PURE__*/React.createElement(Box, {
+          className: isShowingAll && "open"
+        }, /*#__PURE__*/React.createElement(ListWrapper, {
+          onScroll: this.handleScroll
+        }, listPosts), 2 < posts.length && navigation));
+      }
+    }
+  }]);
+
+  return TutorialsSlider;
+}(Component);
+
+export { NoticeBlack, NoticeDiscount, Presets, TutorialsList, TutorialsSlider };

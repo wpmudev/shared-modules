@@ -13,6 +13,7 @@ import EditModal from './components/edit-modal';
 import { PresetsAccordionItem } from './components/accordion-item';
 
 import Requester from './requests-handler';
+import { escapeHTML } from '@wordpress/escape-html';
 
 const LoadingContent = styled.div`
 .sui-wrap && {
@@ -180,70 +181,35 @@ export const Presets = ( {
 			bulkDeleteAction: {
 				successMessage: 'Config(s) deleted successfully.',
 			},
-			settingsLabels: {},
+			settingsLabels: {
+				bulk_smush: 'Bulk Smush',
+				lazy_load: 'Lazy Load',
+				cdn: 'CDN',
+				webp_mod: 'WebP Mod',
+				integrations: 'Integrations',
+				settings: 'Settings',
+			},
 		},
 		sourceLang
 	);
 
 	// Default demo data.
-	let demoData = [
-		{
-			default: true,
-			name: 'Basic config',
-			description: 'Recommended performance config for every site.',
-			selected: false,
-			created_date: 'March 22, 2021 10:03 am',
-			config: [
-				{
-					id: 'bulk_smush',
-					name: 'Bulk Smush',
-					content: 'Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Active\nBackup Original Images - Active\nPNG to JPEG Conversion - Active'
-				},
-				{
-					id: 'lazy_load',
-					name: 'Lazy Load',
-					content: 'Inactive'
-				},
-				{
-					id: 'cdn',
-					name: 'CDN',
-					content: 'Inactive'
-				},
-				{
-					id: 'webp_mod',
-					name: 'Local WebP',
-					content: 'Inactive'
-				},
-				{
-					id: 'integrations',
-					name: 'Integrations',
-					content: 'Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive'
-				},
-				{
-					id: 'tools',
-					name: 'Tools',
-					content: 'Image Resize Detection - Inactive'
-				},
-				{
-					id: 'settings',
-					name: 'Settings',
-					content: 'Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active'
-				}
-			],
-		}
-	];
+	let demoData = [];
 
 	if ( srcDemoData ) {
 		if ( 'empty' === srcDemoData ) {
 			demoData = [];
 		} else {
-			demoData.push( srcDemoData );
+			demoData.push( ...srcDemoData );
 		}
 	}
 
 	React.useEffect(() => {
 		RequestsHandler = new Requester( requestsData );
 		retrieveConfigs();
+		return () => {
+			setIsLoading( false );
+		};
 	}, []);
 
 	const retrieveConfigs = () => {
@@ -262,46 +228,73 @@ export const Presets = ( {
 		}
 	};
 
+	const hasSameProperties = (obj1, obj2) => {
+		return Object.keys(obj1).every( function(property) {
+			return obj2.hasOwnProperty(property);
+		});
+	};
+
 	const handleUpload = ( e ) => {
 		let newConfigName;
 
 		if ( setDemoData ) {
-			setIsLoading( true );
 
-			const newDemoData = (
-				{
-					name: 'New Demo Config',
-					description: 'Aenean lacinia bibendum nulla sed consectetur.',
-					config: [
-						{
-							id: 'storage_limit',
-							name: 'Storage Limit',
-							content: '5'
-						},
-						{
-							id: 'exclusions',
-							name: 'Exclusions',
-							content: 'Active'
-						}
-					]
+			const configFile = e.target.files[0];
+			const reader = new FileReader();
+
+			const defaultStructure = {
+				id: '',
+				default: '',
+				name: '',
+				description: '',
+				created_date: '',
+				config: [
+					{
+						id: '',
+						name: '',
+						content: ''
+					}
+				]
+			};
+			
+			reader.readAsText(configFile);
+
+			reader.onload = function() {
+				setIsLoading( true );
+				try {
+					var fileContent = JSON.parse(reader.result);
+					if (hasSameProperties(defaultStructure, fileContent)) {
+						demoData.push(fileContent);
+						setTimeout( () => {
+							setConfigs( demoData );
+							setIsLoading( false );
+						}, 500 );
+						console.log(
+							'\n' +
+							'Button: Upload\n' +
+							'Action: To upload new configurations.\n' +
+							'Message: Config imported successfully.\n' +
+							'\n' +
+							'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+							'\n'
+						);
+					}
+				} catch (e) {
+					setTimeout( () => {
+						setIsLoading( false );
+					}, 500 );
+					console.log(
+						'\n' +
+						'Button: Upload\n' +
+						'Action: To upload new configurations.\n' +
+						'Message: Invalid JSON structure.\n' +
+						'\n' +
+						'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
+						'\n'
+					);
+					return;
 				}
-			);
-
-			demoData.push( newDemoData );
-
-			setTimeout( () => {
-				setConfigs( demoData );
-				setIsLoading( false );
-			}, 500 );
-
-			console.log(
-				'\n' +
-				'Button: Upload\n' +
-				'Action: To upload new configurations.\n' +
-				'\n' +
-				'REMEMBER, THIS IS JUST A PROTOTYPE. THE DEMO FILE WILL BE UPLOADED ONCE ONLY.' +
-				'\n'
-			);
+			};
 		} else {
 			RequestsHandler.upload( e ).then( ( res ) => {
 				if ( res.data && res.data.config ) {
@@ -320,7 +313,7 @@ export const Presets = ( {
 
 					res.data.name = res.data.name.substring( 0, 200 );
 					res.data.description = res.data.description.substring( 0, 200 );
-					newConfigName = res.data.name;
+					newConfigName = escapeHTML( res.data.name );
 
 					return RequestsHandler.addNew( configs, res.data );
 				}
@@ -330,20 +323,29 @@ export const Presets = ( {
 			} )
 				.then( ( updatedConfigs ) => {
 					setConfigs( updatedConfigs );
-					successNotice( lang.uploadActionSuccessMessage.replace( '{configName}', newConfigName ) );
+					successNotice(
+						lang.uploadActionSuccessMessage.replace(
+							'{configName}',
+							newConfigName
+						)
+					);
 				} )
 				.catch( ( res ) => requestFailureNotice( res ) );
 		}
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (currentConfig) => {
 		if ( setDemoData ) {
 			setTimeout(() => {
 				setIsDeleteOpen( false );
 				setIsLoading( true );
 			}, 500 );
-
-			setTimeout(() => setIsLoading( false ), 1000 );
+			setTimeout(() => {
+				setIsLoading( false );
+				// Remove the config from the demo data.
+				demoData = configs.filter( ( config ) => config.id !== currentConfig.id );
+				setConfigs(demoData);
+			}, 1000 );
 
 			console.log(
 				'\n' +
@@ -394,33 +396,37 @@ export const Presets = ( {
 				'\n'
 			);
 		} else {
-
 			// Editing a config.
 			if ( currentConfig ) {
 				RequestsHandler.edit( [ ...configs ], currentConfig, configData )
 					.then( ( newConfigs ) => setConfigs( newConfigs ) )
 					.catch( ( res ) => requestFailureNotice( res ) )
 					.then( () => setIsEditOpen( false ) );
+			} else {
+				// Creating a new config.
+				RequestsHandler.create( data )
+					.then( ( res ) => {
+						if ( res.data && res.data.config ) {
+							configData.config = res.data.config;
+							return RequestsHandler.addNew( [...configs], configData );
+						}
+
+						if ( ! res.success ) {
+							displayErrorMessage( res.data.error_msg );
+						}
+					} )
+					.then( ( updatedConfigs ) => {
+						setConfigs( updatedConfigs );
+						setIsEditOpen( false );
+						successNotice(
+							lang.editAction.successMessage.replace(
+								'{configName}',
+								escapeHTML( configData.name )
+							)
+						);
+					} )
+					.catch( ( res ) => requestFailureNotice( res ) );
 			}
-
-			// Creating a new config.
-			RequestsHandler.create( data )
-				.then( ( res ) => {
-					if ( res.data && res.data.config ) {
-						configData.config = res.data.config;
-						return RequestsHandler.addNew( [...configs], configData );
-					}
-
-					if ( ! res.success ) {
-						displayErrorMessage( res.data.error_msg );
-					}
-				} )
-				.then( ( updatedConfigs ) => {
-					setConfigs( updatedConfigs );
-					setIsEditOpen( false );
-					successNotice( lang.editAction.successMessage.replace( '{configName}', configData.name ) );
-				} )
-				.catch( ( res ) => requestFailureNotice( res ) );
 		}
 	};
 
@@ -450,7 +456,12 @@ export const Presets = ( {
 					requestFailureNotice( res );
 					return;
 				}
-				successNotice( lang.applyAction.successMessage.replace( '{configName}', currentConfig.name ) );
+				successNotice(
+					lang.applyAction.successMessage.replace(
+						'{configName}',
+						escapeHTML( currentConfig.name )
+					)
+				);
 			})
 				.catch( ( res ) => requestFailureNotice( res ) );
 		}
@@ -599,7 +610,7 @@ export const Presets = ( {
 
 	const Table = (
 		<>
-			{ ! isEmpty && setDemoData && (
+			{ ! isEmpty && (
 				<PresetsAccordion className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0, borderTop: 0 }}>
 					<PresetsAccordionHeader className="sui-accordion-header" style={{ minHeight: '100%' }}>
 						<div className='sui-accordion-item-title'>
@@ -622,7 +633,8 @@ export const Presets = ( {
 							default={ item.default }
 							name={ item.name }
 							description={ item.description }
-							created={ item.created_date }
+							date={ item.created_date }
+							isWidget={ isWidget }
 							image={ tableImage }
 							showApplyButton={ ! isWidget }
 							applyLabel={ lang.apply }
@@ -643,50 +655,6 @@ export const Presets = ( {
 						</PresetsAccordionItem>
 					) ) }
 				</PresetsAccordion>
-			) }
-
-			{ ! isEmpty && ! setDemoData && (
-				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
-					<PresetsAccordionHeader className="sui-accordion-header" style={{ minHeight: '100%' }}>
-						<div className='sui-accordion-item-title'>
-							<label className="sui-checkbox">
-								<input type="checkbox" id="checkbox-default-one" onChange={ (e) => selectAll(e.target.checked) }/>
-								<span aria-hidden="true"></span>
-							</label>
-							<span>Config Name</span>
-						</div>
-						<div className="sui-accordion-col-3">Description</div>
-						<div className="sui-accordion-col-2">Date Created</div>
-						<div className="sui-accordion-col-auto" style={{ width: '213px' }}></div>
-					</PresetsAccordionHeader>
-					{ configs.map( item => (
-						<PresetsAccordionItem
-							key={ item.id }
-							id={ item.id }
-							default={ item.default }
-							name={ item.name }
-							description={ item.description }
-							created={ item.created_date }
-							image={ tableImage }
-							showApplyButton={ ! isWidget }
-							applyLabel={ lang.apply }
-							applyAction={ () => openModal( 'apply', item ) }
-							downloadLabel={ lang.download }
-							downloadAction={ () => doDownload( item ) }
-							editLabel={ lang.edit }
-							editAction={ () => openModal( 'edit', item ) }
-							deleteLabel={ lang.delete }
-							deleteAction={ () => openModal( 'delete', item ) }
-							checkboxId= { 'accrodion-checkbox-' + item.id }
-							checkboxSelected= { item.selected }
-							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
-						>
-							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
-							) ) }
-						</PresetsAccordionItem>
-					) ) }
-				</div>
 			) }
 		</>
 	);

@@ -2,6 +2,7 @@ import React from "react";
 import "@storybook/addon-console";
 import { addParameters } from '@storybook/react';
 import "@wpmudev/shared-ui/dist/css/shared-ui.min.css"; // Get SUI styles.
+import "@wpmudev/sui-icons/dist/css/sui-icons.min.css"; // Get SUI Icons styles.
 import "./body-class";
 
 addParameters({
@@ -9,7 +10,7 @@ addParameters({
 		sui: {
 			contrast: '#17A8E3',
 			color: '#FFF',
-			title: 'SUI 2.12.2'
+			title: 'SUI 2.12.3'
 		},
 		beta: {
 			contrast: '#FFF',
