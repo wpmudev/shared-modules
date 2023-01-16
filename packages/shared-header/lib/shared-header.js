@@ -5,13 +5,22 @@ import { isUndefined, isEmpty } from './components/utils';
 import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionContent } from './components/session-content';
 
-const Header = ({ title, login, pro, user = {}, tutorials, sourceUnplug, children }) => {
+const Header = ({ title, login, pro, landing, tutorials, sourceUser, sourceModal, sourceUnplug, children }) => {
 	const unplug = Object.assign(
 		{
 			label: 'Click to connect',
 			tooltip: ''
 		},
 		sourceUnplug
+	);
+
+	const user = Object.assign(
+		{
+			name: '',
+			email: '',
+			avatar: ''
+		},
+		sourceUser
 	);
 
 	const tuts = Object.assign(
@@ -60,6 +69,27 @@ const Header = ({ title, login, pro, user = {}, tutorials, sourceUnplug, childre
 		return '';
 	});
 
+	const contentModal = Children.map( children, ( child, index ) => {
+		if ( 'modal' === child.props.slot ) {
+			return (
+				<Fragment key={index}>
+					{child.props.children}
+				</Fragment>
+			);
+		}
+
+		return '';
+	});
+
+	const modal = Object.assign(
+		{
+			title: 'Connect to your WPMU DEV account',
+			subtitle: 'Connect to WPMU DEV to unlock features for free.',
+			content: contentModal
+		},
+		sourceModal
+	);
+
 	return (
 		<div className="sui-header">
 			{(!isUndefined(title) && !isEmpty(title)) && (
@@ -74,7 +104,9 @@ const Header = ({ title, login, pro, user = {}, tutorials, sourceUnplug, childre
 				<SessionContent
 					login={login}
 					pro={pro}
+					landing={landing}
 					user={user}
+					modal={modal}
 					lang={{
 						plug: {},
 						unplug: {

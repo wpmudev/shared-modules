@@ -4017,6 +4017,11 @@
   dependencies:
     "@justfixnyc/react-aria-modal" "^5.1.3-alpha.0"
 
+"@wpmudev/react-modal@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-modal/-/react-modal-1.1.3.tgz#1264a634f324e3fe37cefb08939782850c992226"
+  integrity sha512-4VAOIXPOcdgSvZwRJkOxPzpValmkEqz8UStOgTCWom4NctpUN3Ajk6bfjhQ635NGQEj54qT9XjzMpteDlS6V8Q==
+
 "@wpmudev/react-notifications@^1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.8.tgz#a4ccd31a2ecb0faca3909bc5dafc2fd1581b9e14"

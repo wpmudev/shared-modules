@@ -6,15 +6,15 @@ import { SessionOn } from './session-on';
 import { SessionOff } from './session-off';
 
 // Build "Session Content" component.
-const SessionContent = ({ login, pro, user = {}, lang = {} }) => {
+const SessionContent = ({ login, pro, landing, user = {}, modal = {}, lang = {} }) => {
 	// Check if user is connected.
 	const connected = isBoolean(login) && login ? true : false;
 
 	return (
 		<Fragment>
-			{ connected && <SessionOn name={user.name} email={user.email} pro={pro} /> }
+			{ connected && <SessionOn name={user.name} email={user.email} landing={landing} pro={pro} /> }
 
-			{ !connected && <SessionOff label={ lang.unplug.label } tooltip={ lang.unplug.tooltip } /> }
+			{ !connected && <SessionOff label={ lang.unplug.label } tooltip={ lang.unplug.tooltip } modal={ modal } /> }
 		</Fragment>
 	);
 }

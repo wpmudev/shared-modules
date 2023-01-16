@@ -110,6 +110,7 @@ class SessionMenu extends Component {
 		const name = this.props.name;
 		const email = this.props.email;
 		const pro = this.props.pro;
+		const landing = this.props.landing;
 
 		const hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
 		const hasEmail = !isUndefined(email) && !isEmpty(email) ? true : false;
@@ -125,10 +126,18 @@ class SessionMenu extends Component {
 					{ (hasName || hasEmail) && (
 						<StyledInfo>{name}<br/>{email}</StyledInfo>
 					)}
-					<MenuButton icon="logo" href="https://wpmudev.com/hub2/">The Hub</MenuButton>
-					<MenuButton icon="lifesaver" href="https://wpmudev.com/roadmap/">Product Roadmap</MenuButton>
-					{ isPro && <MenuButton icon="lifesaver" href="https://wpmudev.com/hub2/support">Support</MenuButton> }
-					{ !isPro && <MenuButton icon="plugin-hummingbird" className="ssm-session--purple">Unlock Pro Features</MenuButton> }
+					<MenuButton icon="logo" href="https://wpmudev.com/hub2/" rel="nofollow">The Hub</MenuButton>
+					<MenuButton icon="lifesaver" href="https://wpmudev.com/roadmap/" rel="nofollow">Product Roadmap</MenuButton>
+					{ isPro && <MenuButton icon="lifesaver" href="https://wpmudev.com/hub2/support" rel="nofollow">Support</MenuButton> }
+					{ !isPro && (
+						<MenuButton
+							icon="plugin-hummingbird"
+							className="ssm-session--purple"
+							{ ... ( !isUndefined(landing) && { href: landing } ) }
+							{ ... ( !isUndefined(landing) && { target: '_self' } ) }>
+							Unlock Pro Features
+						</MenuButton>
+					)}
 				</ul>
 			</div>
 		);
