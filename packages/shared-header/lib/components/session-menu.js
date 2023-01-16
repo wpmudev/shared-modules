@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import styled from "styled-components";
 import { isEmpty, isUndefined, isBoolean } from './utils';
 
@@ -64,37 +64,75 @@ const StyledInfo = styled.li`
 }
 `;
 
-// Build "Connected Session" component.
-const SessionMenu = ({ name, email, pro }) => {
-	const [isOpen, setIsOpen] = useState(false);
+// Build "Session Menu" component.
+class SessionMenu extends Component {
+	constructor(props) {
+		super(props);
 
-	const hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
-	const hasEmail = !isUndefined(email) && !isEmpty(email) ? true : false;
-	const isPro = isBoolean(pro) && pro ? true : false;
+		this.state = {
+			open: false,
+		};
 
-	return (
-		<div className={`sui-dropdown${ isOpen ? ' open' : '' }`}>
-			<SessionButton
-				login={true}
-				aria-expanded={ isOpen ? true : false }
-				onClick={ () => {
-					if ( isOpen ) {
-						setIsOpen(false);
-					} else {
-						setIsOpen(true);
-					}
-				} } />
-			<ul>
-				{ (hasName || hasEmail) && (
-					<StyledInfo>{name}<br/>{email}</StyledInfo>
-				)}
-				<MenuButton icon="logo" href="https://wpmudev.com/hub2/">The Hub</MenuButton>
-				<MenuButton icon="lifesaver" href="https://wpmudev.com/roadmap/">Product Roadmap</MenuButton>
-				{ isPro && <MenuButton icon="lifesaver" href="https://wpmudev.com/hub2/support">Support</MenuButton> }
-				{ !isPro && <MenuButton icon="plugin-hummingbird" className="ssm-session--purple">Unlock Pro Features</MenuButton> }
-			</ul>
-		</div>
-	);
+		this.toggle = this.toggle.bind(this);
+
+		this.wrapperRef = React.createRef();
+		this.setWrapperRef = this.setWrapperRef.bind(this);
+		this.handleClickOutside = this.handleClickOutside.bind(this);
+	}
+
+	toggle() {
+		this.setState((state) => ({
+			open: !state.open,
+		}));
+	}
+
+	setWrapperRef(node) {
+		this.wrapperRef = node;
+	}
+
+	handleClickOutside(e) {
+		if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+			this.setState({ open: false });
+		}
+	}
+
+	componentDidMount() {
+		document.addEventListener('mousedown', this.handleClickOutside);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('mousedown', this.handleClickOutside);
+	}
+
+	render() {
+		const { open } = this.state;
+
+		const name = this.props.name;
+		const email = this.props.email;
+		const pro = this.props.pro;
+
+		const hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
+		const hasEmail = !isUndefined(email) && !isEmpty(email) ? true : false;
+		const isPro = isBoolean(pro) && pro ? true : false;
+
+		return (
+			<div ref={this.setWrapperRef} className={`sui-dropdown${ open ? ' open' : '' }`} onClick={(e) => e.stopPropagation()}>
+				<SessionButton
+					login={true}
+					aria-expanded={open ? true : false}
+					onClick={this.toggle} />
+				<ul onClick={() => this.setState({ open: false })}>
+					{ (hasName || hasEmail) && (
+						<StyledInfo>{name}<br/>{email}</StyledInfo>
+					)}
+					<MenuButton icon="logo" href="https://wpmudev.com/hub2/">The Hub</MenuButton>
+					<MenuButton icon="lifesaver" href="https://wpmudev.com/roadmap/">Product Roadmap</MenuButton>
+					{ isPro && <MenuButton icon="lifesaver" href="https://wpmudev.com/hub2/support">Support</MenuButton> }
+					{ !isPro && <MenuButton icon="plugin-hummingbird" className="ssm-session--purple">Unlock Pro Features</MenuButton> }
+				</ul>
+			</div>
+		);
+	}
 }
 
 const MenuIcon = ({ name }) => {
