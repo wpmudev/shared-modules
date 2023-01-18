@@ -1381,11 +1381,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@justfixnyc/react-aria-modal@^5.1.3-alpha.0":
-  version "5.1.3-alpha.0"
-  resolved "https://registry.yarnpkg.com/@justfixnyc/react-aria-modal/-/react-aria-modal-5.1.3-alpha.0.tgz#f580d621323e59297e5ec0088849ff0f73b38555"
-  integrity sha512-IUFj6XofPYMjH54GsTwqAh7EmFGO4qHSOR2ZnTL4HkiR6yBlJ0VxMyJ8x2ayt0UY++bsaKyjRqoP1kATZeo1TA==
-
 "@lerna/add@3.21.0":
   version "3.21.0"
   resolved "https://registry.yarnpkg.com/@lerna/add/-/add-3.21.0.tgz#27007bde71cc7b0a2969ab3c2f0ae41578b4577b"
@@ -3962,12 +3957,13 @@
     lodash "^4.17.19"
     react-native-url-polyfill "^1.1.2"
 
-"@wpmudev/react-accordion@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-accordion/-/react-accordion-1.1.0.tgz#0ae664eff501e00b87d0ce02cdf688bb52704f62"
-  integrity sha512-ooGpZQB3dL0VJo+i7xS//rE02CIuAQUJNPwf1AEkisi2OxmvL/7BqH/Un0rF8fKB+8vZVvdcAICRPTG2hq/ATw==
+"@wpmudev/react-accordion@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-accordion/-/react-accordion-1.2.1.tgz#4c9dad287696dc9fd0d216b63fa5bf724e189d12"
+  integrity sha512-nwIBLzQAaqhUeZuAesF8P1Cdfhtt3TUvdhEneN7AFjYLJNd2pz/9sMPmi0lVFsXcrjkWUSWB47G+lxeBGPEFtg==
   dependencies:
-    "@wpmudev/react-button-icon" "^1.1.0"
+    "@wpmudev/react-button-icon" "^1.1.2"
+    "@wpmudev/react-radio-checkbox" "^1.0.1"
     styled-components "^5.3.0"
 
 "@wpmudev/react-box@^1.2.4":
@@ -4010,14 +4006,7 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-input/-/react-input-1.0.4.tgz#540b95c4cb6603b1b2dfdb241e66d152c239e0d3"
   integrity sha512-CtiHOZ9AUK0OhV4Oyl+KhUtBTAo1L0h9Rh27RiJDuxXvA06K08fCW2ZKi3KhafDcgFD0CqwOXwymgvhCdrnA7w==
 
-"@wpmudev/react-modal@^1.0.3":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@wpmudev/react-modal/-/react-modal-1.0.4.tgz#89d8d9bed8f462e849efc0c54f80c746b0b14bb4"
-  integrity sha512-YqXFfli24zRUOhwk0W2p+KplsaD4JKJI7hlmB3GJSElrsxclwyIEbzCcAWfCX2HXsmtI+DjW+NAwRss0q3vxGQ==
-  dependencies:
-    "@justfixnyc/react-aria-modal" "^5.1.3-alpha.0"
-
-"@wpmudev/react-modal@^1.1.3":
+"@wpmudev/react-modal@^1.0.4", "@wpmudev/react-modal@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-modal/-/react-modal-1.1.3.tgz#1264a634f324e3fe37cefb08939782850c992226"
   integrity sha512-4VAOIXPOcdgSvZwRJkOxPzpValmkEqz8UStOgTCWom4NctpUN3Ajk6bfjhQ635NGQEj54qT9XjzMpteDlS6V8Q==
@@ -4035,6 +4024,11 @@
   integrity sha512-ezrc+MaZ/YEuEZRRoOum3Rv4BSf5JVRTglee0wCsko9S200N6DFc+KLvAn/7F/VDnfZlLY50Ya6YuGfQuGwzcA==
   dependencies:
     styled-components "^5.3.0"
+
+"@wpmudev/react-radio-checkbox@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-radio-checkbox/-/react-radio-checkbox-1.0.1.tgz#82457a29ba271d6e934bb359af493797c9e7ca6c"
+  integrity sha512-l3JCyZSoKVVJsx10FLwJ/COoBqh6pzrVEkPOw6Ntqfi9ELwx21xjmsqJLIxPv9BDlzM9IkYqjuNuIkmwIBeweA==
 
 "@wpmudev/shared-notifications-offer@^1.0.0":
   version "1.0.0"
