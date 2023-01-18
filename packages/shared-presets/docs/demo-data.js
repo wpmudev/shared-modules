@@ -23,6 +23,7 @@ export const demoContent = [
 		default: true,
 		name: "Basic Config",
 		description: "Recommended backup advanced config for all site.",
+		selected: false,
 		created_date: "March 22, 2021 10:03 am",
 		config: [
 			{
@@ -67,6 +68,7 @@ export const demoContent = [
 		default: false,
 		name: "Advanced Config",
 		description: "Recommended backup advanced config for all site.",
+		selected: false,
 		created_date: "March 22, 2021 10:03 am",
 		config: [
 			{
@@ -124,7 +126,7 @@ export const demoLang = {
 				target="_blank"
 				rel="noreferrer"
 			>
-			{'el Hub.'}
+				{'el Hub.'}
 			</a>
 		</React.Fragment>
 	),
@@ -147,7 +149,12 @@ export const demoLang = {
 	editAction: {
 		successMessage: 'Las configuraciones de {configName} han sido creadas exitosamente.',
 	},
-	deleteAction: {},
+	deleteAction: {
+		successMessage: '{configName} config deleted successfully.',
+	},
+	bulkDeleteAction: {
+		successMessage: 'Config(s) deleted successfully.',
+	},
 	settingsLabels: {
 		bulk_smush: 'Bulk Smush',
 		lazy_load: 'Lazy Load',

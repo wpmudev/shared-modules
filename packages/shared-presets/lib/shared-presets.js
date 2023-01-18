@@ -5,6 +5,7 @@ import { deviceMax } from './components/utils';
 import { Box, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Notifications } from '@wpmudev/react-notifications';
 import { Button } from '@wpmudev/react-button';
+import { RadioCheckboxInput } from '@wpmudev/react-radio-checkbox';
 
 import ApplyModal from './components/apply-modal';
 import DeleteModal from './components/delete-modal';
@@ -77,6 +78,30 @@ const StyledBoxHeader = styled.div`
 }
 `;
 
+const PresetsAccordionHeader = styled.div`
+[class*="sui-2-"] .sui-wrap && {
+
+	> .sui-accordion-col-3,
+    > .sui-accordion-col-2,
+	> .sui-accordion-col-auto {
+
+		@media ${deviceMax.tablet} {
+			display: none !important;
+		}
+	}
+}
+`;
+
+const PresetsAccordion = styled.div`
+[class*="sui-2-"] .sui-wrap && {
+	.sui-checkbox {
+		@media (max-width: 783px) {
+			margin: 0 10px 0 0;
+		}
+	}
+}
+`;
+
 let RequestsHandler;
 
 export const Presets = ( {
@@ -92,6 +117,7 @@ export const Presets = ( {
 } ) => {
 	const [ configs, setConfigs ] = React.useState( [] );
 	const [ isLoading, setIsLoading ] = React.useState( true );
+	const [ isDisabled, setDisabled ] = React.useState( true );
 
 	// Modals-related states.
 	const [ currentConfig, setCurrentConfig ] = React.useState( null );
@@ -126,7 +152,7 @@ export const Presets = ( {
 						target="_blank"
 						rel="noreferrer"
 					>
-					{'the Hub.'}
+						{'the Hub.'}
 					</a>
 				</React.Fragment>
 			),
@@ -149,7 +175,12 @@ export const Presets = ( {
 			editAction: {
 				successMessage: '{configName} config created successfully.',
 			},
-			deleteAction: {},
+			deleteAction: {
+				successMessage: '{configName} config deleted successfully.',
+			},
+			bulkDeleteAction: {
+				successMessage: 'Config(s) deleted successfully.',
+			},
 			settingsLabels: {
 				bulk_smush: 'Bulk Smush',
 				lazy_load: 'Lazy Load',
@@ -327,10 +358,18 @@ export const Presets = ( {
 			);
 		} else {
 			RequestsHandler.delete( [ ...configs ], currentConfig )
-				.then( ( newConfigs ) => setConfigs( newConfigs ) )
+				.then( ( newConfigs ) => { 
+					setConfigs( newConfigs );
+					successNotice( 
+						Object.keys(currentConfig).length === 1 ? 
+							lang.deleteAction.successMessage.replace( '{configName}', currentConfig.name ) :
+							lang.bulkDeleteAction.successMessage
+					);
+				} )
 				.catch( ( res ) => requestFailureNotice( res ) )
 				.then( () => setIsDeleteOpen( false ) );
 		}
+
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
@@ -424,7 +463,7 @@ export const Presets = ( {
 					)
 				);
 			})
-			.catch( ( res ) => requestFailureNotice( res ) );
+				.catch( ( res ) => requestFailureNotice( res ) );
 		}
 	};
 
@@ -535,10 +574,58 @@ export const Presets = ( {
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 
+	const selectAll = (checked) => {
+		setConfigs( configs.map( ( config ) => {
+			config.selected = checked;
+			return config;
+		} ) );
+		deleteButton();
+	};
+
+	const checkboxClickHandler = (clickedConfig, checked) => {
+		setConfigs( configs.map( ( config ) => {
+			if( clickedConfig === config ) {
+				config.selected = checked;
+			}
+			return config;
+		} ) );
+		deleteButton();
+	};
+
+	const deleteButton = () => {
+		for (var i = 0; i < configs.length; i++) {
+			if(configs[i].selected) {
+				setDisabled(false);
+				break;
+			} else {
+				setDisabled(true);
+			}
+		}
+	};
+
+	const bulkDeleteHandler = () => {
+		const selectedConfig = Object.assign( {}, configs.filter( ( item ) => item.selected === true ) );
+		openModal( 'delete', selectedConfig);
+	};
+
 	const Table = (
 		<>
 			{ ! isEmpty && (
-				<div className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0 }}>
+				<PresetsAccordion className="sui-accordion sui-accordion-flushed" style={{ borderBottomWidth: 0, borderTop: 0 }}>
+					<PresetsAccordionHeader className="sui-accordion-header" style={{ minHeight: '100%' }}>
+						<div className='sui-accordion-item-title'>
+							<RadioCheckboxInput
+								id="checkbox-default-one"
+								name="select-all"
+								type="checkbox"
+								onChange={(e) => selectAll(e.target.checked)}
+							/>
+							<span>Config Name</span>
+						</div>
+						<div className="sui-accordion-col-3">Description</div>
+						<div className="sui-accordion-col-2">Date Created</div>
+						<div className="sui-accordion-col-auto" style={{ flex: '0 1 213px' }}></div>
+					</PresetsAccordionHeader>
 					{ configs.map( ( item, index ) => (
 						<PresetsAccordionItem
 							key={ index }
@@ -558,13 +645,16 @@ export const Presets = ( {
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
 							deleteAction={ () => openModal( 'delete', item ) }
+							checkboxId= { 'demo-checkbox-' + index }
+							checkboxSelected= { item.selected }
+							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
 						>
 							{ item.config.map( ( data ) => (
 								<div key={ data.id } name={ data.name } status={ data.content } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }
-				</div>
+				</PresetsAccordion>
 			) }
 		</>
 	);
@@ -699,6 +789,11 @@ export const Presets = ( {
 				<BoxBody>
 
 					{ getDescription() }
+					{ !isLoading && !isEmpty && (
+						<div>
+							<Button onClick={ bulkDeleteHandler } className="sui-button-red" label="Bulk Delete" icon="trash" disabled={ isDisabled }/>
+						</div>
+					)}
 
 					{ !isLoading && isEmpty && (
 						<Notifications type="info">
@@ -762,4 +857,4 @@ export const Presets = ( {
 			) }
 		</React.Fragment>
 	);
-}
+};
