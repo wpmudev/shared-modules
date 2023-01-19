@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { ButtonIcon } from "@wpmudev/react-button-icon";
-import { BlackFriday } from "./shared-notifications-black-friday__utils";
+import { BlackFriday } from "./styles/black-friday__styles";
+import { Modal } from '@wpmudev/react-modal';
+
+// Import required elements.
+import { Ribbon } from './elements/ribbon';
+import { Content } from './elements/content';
+import { ModalContent, ModalTrigger } from './elements/modal';
 
 function checkRTL() {
 	const suiBody = document.body;
@@ -28,9 +34,13 @@ function checkSuiWrap() {
 }
 
 export const NoticeBlack = ({
-	link,
+	price,
+	discount,
+	action,
+	content,
+	formView,
+	successView,
 	onCloseClick,
-	sourceLang,
 	children,
 	...props
 }) => {
@@ -39,62 +49,129 @@ export const NoticeBlack = ({
 	const [isMonochrome, setMonochrome] = useState( false );
 	const closeOnClick = e => {
 		setIsClose(true);
+
 		if ( 'undefined' !== typeof onCloseClick ) {
 			onCloseClick(e);
 		}
 	};
 
-	const lang = Object.assign({
-		discount: '50% Off',
-		closeLabel: 'Close',
-		linkLabel: 'See the deal'
-	}, sourceLang );
+	const lang = Object.assign(
+		{
+			off: 'Off',
+			intro: '',
+			title: '',
+			close: 'Close',
+			finePrint: {
+				label: '',
+				action: ''
+			}
+		},
+		content
+	);
 
-	const hasLink = null !== link && '' !== link;
+	const hasIntro = !isUndefined( lang.intro ) ? true : false;
+	const hasTitle = !isUndefined( lang.title ) ? true : false;
+	const hasPrice = !isUndefined( price, 'number' ) ? true : false;
+	const hasDiscount = !isUndefined( discount, 'number' ) ? true : false;
 
 	React.useEffect( () => {
 		setRTL( checkRTL )
 		setMonochrome( checkSuiWrap );
 	});
 
+	const BlackModal = ({ formView, successView, closeModal }) => {
+		return (
+			<ModalContent
+				formView={ formView }
+				successView={ successView }
+				closeModal={ closeModal }
+				{ ...props }
+			/>
+		);
+	}
+
+	const BlackTrigger = ({ openModal }) => {
+		return (
+			<ModalTrigger
+				label={ lang.finePrint.label }
+				action={ lang.finePrint.action }
+				openModal={ openModal }
+			/>
+		);
+	}
+
 	return (
 		!isClose && (
 			<>
-				<BlackFriday.Global rtl={ isRTL } monochrome={ isMonochrome } />
-				<div className="sui-module-notice-black-friday__container" { ...props }>
+				<BlackFriday.Global
+					rtl={ isRTL }
+					monochrome={ isMonochrome }
+					suiLevel="div" />
 
+				<div className="suim-black">
 					<ButtonIcon
 						color="white"
 						icon="close"
 						iconSize="md"
-						label={ lang.closeLabel }
+						label={ lang.close }
 						onClick={ closeOnClick }
 					/>
 
-					<div className="sui-module-notice-black-friday__ribbon">
-						{ lang.discount }
-					</div>
+					{ hasDiscount && (
+						<Ribbon
+							sourceLang={{
+								off: lang.off
+							}}
+							{ ... ( hasDiscount && { discount: discount } ) } />
+					)}
 
-					<div className="sui-module-notice-black-friday__body">
-
-						<div className="sui-module-notice-black-friday__content">
-							{ children }
-						</div>
-
-						{ hasLink &&
-							<a
-								href={ link || '#' }
-								target="_blank"
-								className="sui-module-notice-black-friday__link"
-							>
-								{ lang.linkLabel }
-							</a>
-						}
-
-					</div>
+					<Content
+						action={ action }
+						{ ... ( hasIntro && { intro: lang.intro } ) }
+						{ ... ( hasTitle && { title: lang.title } ) }
+						{ ... ( hasPrice && { price: price } ) }
+						{ ... ( hasDiscount && { discount: discount } ) }>
+						{ children }
+						<Modal
+							size="lg"
+							dialogId="suim-black__modal"
+							titleId="suim-black__modal-title"
+							modalContent={ BlackModal }
+							triggerContent={ BlackTrigger } />
+					</Content>
 
 				</div>
 			</>
 		)
 	);
+}
+
+// Check if element is undefined.
+const isUndefined = (element, type = null) => {
+	const isValid = 'undefined' !== typeof element;
+	const isNotEmpty = '' !== element;
+	const isNumber = 'number' === type;
+	const isBoolean = 'boolean' === type;
+
+	// Check if element exists.
+	if ( element && isValid && isNotEmpty ) {
+
+		if ( isNumber ) {
+			if ( Number.isNaN( element ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if ( isBoolean ) {
+			if ( 'boolean' === typeof element ) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	return true;
 }

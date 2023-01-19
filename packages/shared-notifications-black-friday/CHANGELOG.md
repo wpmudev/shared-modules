@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 (2022-11-14)
+
+#### Improvements
+* `shared-notifications-black-friday`
+  * [#148](https://github.com/wpmudev/shared-modules/pull/148) 🐛 fix(notice-black): Update banner with 2022 design. ([@iamleigh](https://github.com/iamleigh))
+
 ## 1.0.3 (2021-10-31)
 
 #### Improvements

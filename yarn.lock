@@ -4011,6 +4011,11 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-modal/-/react-modal-1.1.3.tgz#1264a634f324e3fe37cefb08939782850c992226"
   integrity sha512-4VAOIXPOcdgSvZwRJkOxPzpValmkEqz8UStOgTCWom4NctpUN3Ajk6bfjhQ635NGQEj54qT9XjzMpteDlS6V8Q==
 
+"@wpmudev/react-modal@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@wpmudev/react-modal/-/react-modal-1.1.3.tgz#1264a634f324e3fe37cefb08939782850c992226"
+  integrity sha512-4VAOIXPOcdgSvZwRJkOxPzpValmkEqz8UStOgTCWom4NctpUN3Ajk6bfjhQ635NGQEj54qT9XjzMpteDlS6V8Q==
+
 "@wpmudev/react-notifications@^1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@wpmudev/react-notifications/-/react-notifications-1.0.8.tgz#a4ccd31a2ecb0faca3909bc5dafc2fd1581b9e14"
@@ -4038,10 +4043,10 @@
     "@wpmudev/react-button" "^1.0.0"
     styled-components "^5.2.1"
 
-"@wpmudev/shared-ui@^2.12.3":
-  version "2.12.3"
-  resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.12.3.tgz#441440a085778545edc4aaf8220fd8cdeb3cd747"
-  integrity sha512-bUPheTTStENAiRqhoM7Wp+lrDyvSXr4qQoXqBtkfcFUSS5ulo3OF9MHvn41B/uvjikVTBB0HjI9ue+t/OwUHBA==
+"@wpmudev/shared-ui@^2.12.13":
+  version "2.12.13"
+  resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.12.13.tgz#334f350b44e6c3ab19e3b6d5ae32d659bc4ab7ac"
+  integrity sha512-kuMZE8g43P2X8Wkr96s3M8dLncpjLU/KcoBMi1eCW3NUtF3/jtlRiLfShoiRlELlXRs+AWaOzNxHWwfkYidOGg==
 
 "@wpmudev/sui-icons@^1.0.0":
   version "1.0.0"
@@ -10317,6 +10322,11 @@ nanoid@^3.1.23, nanoid@^3.1.30:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.3.tgz#fd8e8b7aa761fe807dba2d1b98fb7241bb724a25"
   integrity sha512-p1sjXuopFs0xg+fPASzQ28agW1oHD7xDsd9Xkf3T15H3c/cifrFHVwrh74PdoklAPi+i7MdRsE47vm2r6JoB+w==
 
+nanoid@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
+  integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -11685,6 +11695,15 @@ postcss@^8.2.15:
     nanoid "^3.1.30"
     picocolors "^1.0.0"
     source-map-js "^0.6.2"
+
+postcss@^8.4.19:
+  version "8.4.19"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.19.tgz#61178e2add236b17351897c8bcc0b4c8ecab56fc"
+  integrity sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==
+  dependencies:
+    nanoid "^3.3.4"
+    picocolors "^1.0.0"
+    source-map-js "^1.0.2"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -13102,6 +13121,11 @@ source-map-js@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
   integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
+
+source-map-js@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
+  integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
 source-map-resolve@^0.5.0:
   version "0.5.3"
