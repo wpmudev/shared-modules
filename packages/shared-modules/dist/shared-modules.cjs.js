@@ -5,6 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var React = require('react');
 var styled = require('styled-components');
 var AriaModal = require('@justfixnyc/react-aria-modal');
+var sharedHeader = require('@wpmudev/shared-header');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -7332,6 +7333,14 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
   return TutorialsSlider;
 }(React.Component);
 
+Object.defineProperty(exports, 'Header', {
+  enumerable: true,
+  get: function () { return sharedHeader.Header; }
+});
+Object.defineProperty(exports, 'Perks', {
+  enumerable: true,
+  get: function () { return sharedHeader.Perks; }
+});
 exports.NoticeBlack = NoticeBlack;
 exports.NoticeDiscount = NoticeDiscount;
 exports.Presets = Presets;

@@ -1,6 +1,7 @@
 import React, { useState, Component, Children, Fragment } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import AriaModal from '@justfixnyc/react-aria-modal';
+export { Header, Perks } from '@wpmudev/shared-header';
 
 function _extends$8() {
   _extends$8 = Object.assign || function (target) {
