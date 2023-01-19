@@ -1,11 +1,11 @@
-# `@wpmudev/shared-tutorials`
+# `@wpmudev/shared-upsells`
 
 > TODO: description
 
 ## Usage
 
 ```
-const sharedTutorials = require('@wpmudev/shared-tutorials');
+const sharedUpsell = require('@wpmudev/shared-upsells');
 
 // TODO: DEMONSTRATE API
 ```
