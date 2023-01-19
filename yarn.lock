@@ -4030,6 +4030,14 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/react-radio-checkbox/-/react-radio-checkbox-1.0.1.tgz#82457a29ba271d6e934bb359af493797c9e7ca6c"
   integrity sha512-l3JCyZSoKVVJsx10FLwJ/COoBqh6pzrVEkPOw6Ntqfi9ELwx21xjmsqJLIxPv9BDlzM9IkYqjuNuIkmwIBeweA==
 
+"@wpmudev/shared-notifications-black-friday@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@wpmudev/shared-notifications-black-friday/-/shared-notifications-black-friday-1.1.0.tgz#eee60b39b5dd84cf09cd81de9f69ec52a955c73b"
+  integrity sha512-OkUyWBjtvngCorv0N0YPajcFAzf9FgjWrt2Iv2JuuwwstV9DaPV2CVJiBgpt4kWrreSMW8augjz5xH8A+y7wlw==
+  dependencies:
+    "@wpmudev/react-button-icon" "^1.1.0"
+    styled-components "^5.2.3"
+
 "@wpmudev/shared-notifications-offer@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@wpmudev/shared-notifications-offer/-/shared-notifications-offer-1.0.0.tgz#440b1aa9e054d52baa2a9ada21160936d98df5ac"

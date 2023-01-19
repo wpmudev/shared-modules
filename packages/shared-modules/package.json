@@ -38,6 +38,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
+    "@wpmudev/shared-header": "^1.0.0",
     "@wpmudev/shared-notifications-black-friday": "^2.0.0",
     "@wpmudev/shared-notifications-discount": "^1.0.3",
     "@wpmudev/shared-presets": "^1.4.0",
