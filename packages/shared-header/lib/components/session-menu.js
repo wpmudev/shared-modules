@@ -7,7 +7,7 @@ import { SessionButton } from './session-button';
 
 // Create element(s) with Styled Components.
 const StyledIcon = styled.span`
-.sui-wrap &&.ssm-session__ddmenu-icon {
+.sui-wrap &&.ssm-session__ddmenu-icon.suicons {
 	width: 24px;
 	position: relative;
 	top: 2px;
@@ -126,12 +126,12 @@ class SessionMenu extends Component {
 					{ (hasName || hasEmail) && (
 						<StyledInfo>{name}<br/>{email}</StyledInfo>
 					)}
-					<MenuButton icon="logo" href="https://wpmudev.com/hub2/" rel="nofollow">The Hub</MenuButton>
-					<MenuButton icon="lifesaver" href="https://wpmudev.com/roadmap/" rel="nofollow">Product Roadmap</MenuButton>
-					{ isPro && <MenuButton icon="lifesaver" href="https://wpmudev.com/hub2/support" rel="nofollow">Support</MenuButton> }
+					<MenuButton suicon="logo" href="https://wpmudev.com/hub2/" rel="nofollow">The Hub</MenuButton>
+					<MenuButton icon="target" href="https://wpmudev.com/roadmap/" rel="nofollow">Product Roadmap</MenuButton>
+					{ isPro && <MenuButton suicon="lifesaver" href="https://wpmudev.com/hub2/support" rel="nofollow">Support</MenuButton> }
 					{ !isPro && (
 						<MenuButton
-							icon="plugin-hummingbird"
+							suicon="plugin-hummingbird"
 							className="ssm-session--purple"
 							{ ... ( !isUndefined(landing) && { href: landing } ) }
 							{ ... ( !isUndefined(landing) && { target: '_self' } ) }>
@@ -144,27 +144,36 @@ class SessionMenu extends Component {
 	}
 }
 
-const MenuIcon = ({ name }) => {
-	return <StyledIcon className={`suicons suicons--${name} ssm-session__ddmenu-icon`} aria-hidden="true" />;
+const MenuIcon = ({ icon, suicon }) => {
+	const hasSuicon = !isUndefined(suicon) && !isEmpty(suicon) ? true : false;
+	let style = 'ssm-session__ddmenu-icon';
+
+	if (hasSuicon) {
+		style += ` suicons suicons--${suicon}`;
+	} else {
+		style += ` sui-icon-${icon} sui-sm`;
+	}
+
+	return <StyledIcon className={style} aria-hidden="true" />;
 }
 
-const MenuButton = ({ icon, href, target, children, ...props }) => {
+const MenuButton = ({ icon, suicon, href, target, children, ...props }) => {
 	const isButton = isUndefined(href) ? true : false;
-	const hasIcon = !isUndefined(icon) && !isEmpty(icon) ? true : false;
+	const hasIcon = ((!isUndefined(icon) && !isEmpty(icon)) || (!isUndefined(suicon) && !isEmpty(suicon))) ? true : false;
 	const hasTarget = !isUndefined(target) && !isEmpty(target) ? true : false;
 
 	return (
 		<li>
 			{ isButton && (
 				<StyledButton { ...props }>
-					{hasIcon && <MenuIcon name={icon} />}
+					{hasIcon && <MenuIcon icon={icon} suicon={suicon} />}
 					{ children }
 				</StyledButton>
 			)}
 
 			{ !isButton && (
 				<StyledLink href={href} target={hasTarget ? target : '_blank'} { ...props }>
-					{hasIcon && <MenuIcon name={icon} />}
+					{hasIcon && <MenuIcon icon={icon} suicon={suicon} />}
 					{ children }
 				</StyledLink>
 			)}
