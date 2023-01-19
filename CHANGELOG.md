@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.2.0](https://github.com/wpmudev/shared-modules/compare/v1.1.0...v1.2.0) (2023-01-19)
+
+#### 🚀 Improvements
+* `shared-header`
+  * [#157](https://github.com/wpmudev/shared-modules/pull/157) fix(header): Update modal banner ([@iamleigh](https://github.com/iamleigh))
+  * [#156](https://github.com/wpmudev/shared-modules/pull/156) fix(header): Use target icon for "Product Roadmap" link ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## [1.1.0](https://github.com/wpmudev/shared-modules/compare/v1.0.0...v1.1.0) (2023-01-19)
 
 #### ✨ New Features
