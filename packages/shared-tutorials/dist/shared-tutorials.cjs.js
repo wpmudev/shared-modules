@@ -691,10 +691,10 @@ function _templateObject7$1() {
   return data;
 }
 
-function _templateObject6$1() {
+function _templateObject6$2() {
   var data = _taggedTemplateLiteral$2(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
 
-  _templateObject6$1 = function _templateObject6() {
+  _templateObject6$2 = function _templateObject6() {
     return data;
   };
 
@@ -834,7 +834,7 @@ var PostTitle$1 = styled__default["default"].h3(_templateObject5$2(), function (
 }, function (props) {
   return props.banner ? "@media ".concat(device$1$1.tablet, " {\n\t\t\t-webkit-line-clamp: 2;\n\t\t}") : "";
 });
-var PostTime$1 = styled__default["default"].p(_templateObject6$1(), function (props) {
+var PostTime$1 = styled__default["default"].p(_templateObject6$2(), function (props) {
   return props.banner ? "flex: 0 0 auto;" : "";
 }, function (props) {
   return props.banner ? "* + & {\n\t\t\tmargin-left: 5px !important;\n\t\t}" : "";
@@ -1884,10 +1884,10 @@ function _templateObject7() {
   return data;
 }
 
-function _templateObject6() {
+function _templateObject6$1() {
   var data = _taggedTemplateLiteral(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
 
-  _templateObject6 = function _templateObject6() {
+  _templateObject6$1 = function _templateObject6() {
     return data;
   };
 
@@ -2027,7 +2027,7 @@ var PostTitle = styled__default["default"].h3(_templateObject5$1(), function (pr
 }, function (props) {
   return props.banner ? "@media ".concat(device$1.tablet, " {\n\t\t\t-webkit-line-clamp: 2;\n\t\t}") : "";
 });
-var PostTime = styled__default["default"].p(_templateObject6(), function (props) {
+var PostTime = styled__default["default"].p(_templateObject6$1(), function (props) {
   return props.banner ? "flex: 0 0 auto;" : "";
 }, function (props) {
   return props.banner ? "* + & {\n\t\t\tmargin-left: 5px !important;\n\t\t}" : "";
@@ -2189,7 +2189,7 @@ var Post = /*#__PURE__*/function (_Component) {
   return Post;
 }(React.Component);
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 var aria = aria || {};
 aria.KeyCode = {
@@ -2230,6 +2230,7 @@ var Link = styled__default["default"].a.attrs(function (_ref) {
 var ListWrapper = styled__default["default"].ul(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral$1(["\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\n\t@media ", " {\n\t\toverflow: hidden;\n\t\tdisplay: flex;\n\t\tflex-flow: row nowrap;\n\t}\n"])), device.tablet);
 var ListItem = styled__default["default"].li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\tmargin: 0 0 20px;\n\tpadding: 0;\n\tborder: 0;\n\tlist-style: none;\n\n\t&:last-child {\n\t\tmargin-bottom: 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 33.33%;\n\t\tflex: 0 0 auto;\n\t\tmargin: 0 1px 0 0;\n\t}\n\n\t@media ", " {\n\t\twidth: 25%;\n\t}\n"])), device.tablet, device.desktop);
 var Navigation = styled__default["default"].div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral$1(["\n\tdisplay: block;\n\n\tbutton[class*=\"sui-button-\"] {\n\t\tdisplay: none !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: block !important;\n\t\t\tpointer-events: initial;\n\t\t}\n\t}\n\n\tbutton:not([class*=\"sui-button-\"]) {\n\t\twidth: 100%;\n\t\tcursor: pointer;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmargin: 20px 0 10px !important;\n\t\tpadding: 10px !important;\n\t\tborder: 0;\n\t\tborder-radius: 4px;\n\t\tbackground-color: #fff;\n\t\tcolor: #17a8e3 !important;\n\t\ttransition: 0.2s ease all;\n\n\t\t* {\n\t\t\tpointer-events: none;\n\t\t}\n\n\t\tstrong {\n\t\t\tmin-width: 1px;\n\t\t\tflex: 0 1 auto;\n\t\t\tcolor: inherit;\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 22px;\n\t\t\tfont-weight: 500;\n\t\t}\n\n\t\t[class*=\"sui-icon-\"] {\n\t\t\tflex: 0 0 auto;\n\t\t\tmargin-left: 5px;\n\t\t\ttransition: 0.2s ease all;\n\n\t\t\t&:before {\n\t\t\t\tcolor: inherit;\n\t\t\t}\n\t\t}\n\n\t\t&:hover,\n\t\t&:focus {\n\t\t\toutline: none;\n\t\t\tbox-shadow: none;\n\t\t}\n\n\t\t&:hover {\n\t\t\tbackground-color: #fafafa;\n\t\t}\n\n\t\t&:focus {\n\t\t\tbackground-color: #e1f6ff;\n\t\t}\n\n\t\t@media ", " {\n\t\t\tdisplay: none !important;\n\t\t}\n\t}\n\n\t.open & {\n\t\tbutton:not([class*=\"sui-button-\"]) {\n\t\t\t[class*=\"sui-icon-\"] {\n\t\t\t\ttransform: rotate(180deg);\n\t\t\t}\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpointer-events: none;\n\t\tdisplay: flex;\n\t\tflex-flow: row wrap;\n\t\talign-items: center;\n\t\tjustify-content: space-between;\n\t\tposition: absolute;\n\t\ttop: 50%;\n\t\tright: 6px;\n\t\tleft: 6px;\n\t\ttransform: translateY(-50%);\n\t}\n"])), device.tablet, device.tablet, device.tablet);
+var SkipArticles = styled__default["default"].a(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral$1(["\n\tposition: absolute;\n\ttop: -1000em;\n\tz-index: 1;\n\t&:focus {\n\t\tleft: 0;\n\t\ttop: 0;\n\t\tline-height: normal;\n\t\tfont-size: 13px;\n\t\tfont-weight: 500;\n\t\tpadding: 15px 23px 14px;\n\t\tbackground: #fff;\n\t\tcolor: #1286b5;\n\t\toutline: none;\n\t\tborder-radius: 3px;\n\t\tbox-shadow: 0 2px 7px 0 rgb(0 0 0 / 5%), 0 0 2px 0 #17a8e3 !important;\n\t}\n"])));
 
 var TutorialsSlider = /*#__PURE__*/function (_Component) {
   _inherits$2(TutorialsSlider, _Component);
@@ -2413,6 +2414,8 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           error = _this$state.error,
           isLoaded = _this$state.isLoaded,
           isShowingAll = _this$state.isShowingAll;
+      var _this$props$skipTo = this.props.skipTo,
+          skipTo = _this$props$skipTo === void 0 ? '' : _this$props$skipTo;
       var translate = this.props.translate;
       var loading = translate && translate[0].loading ? translate[0].loading : "Loading tutorials...";
       var read_article = translate && translate[0].read_article ? translate[0].read_article : "";
@@ -2535,7 +2538,9 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           className: "sui-screen-reader-text"
         }, close_tutorials))))), /*#__PURE__*/React__default["default"].createElement(Box, {
           className: isShowingAll && "open"
-        }, /*#__PURE__*/React__default["default"].createElement(ListWrapper, {
+        }, /*#__PURE__*/React__default["default"].createElement(SkipArticles, {
+          href: skipTo
+        }, "Skip articles"), /*#__PURE__*/React__default["default"].createElement(ListWrapper, {
           onScroll: this.handleScroll
         }, listPosts), 2 < posts.length && navigation));
       }
