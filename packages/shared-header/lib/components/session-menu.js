@@ -127,7 +127,7 @@ class SessionMenu extends Component {
 						<StyledInfo>{name}<br/>{email}</StyledInfo>
 					)}
 					<MenuButton suicon="logo" href="https://wpmudev.com/hub2/" rel="nofollow">The Hub</MenuButton>
-					<MenuButton icon="target" href="https://wpmudev.com/roadmap/" rel="nofollow">Product Roadmap</MenuButton>
+					<MenuButton suicon="roadmap" href="https://wpmudev.com/roadmap/" rel="nofollow">Product Roadmap</MenuButton>
 					{ isPro && <MenuButton suicon="lifesaver" href="https://wpmudev.com/hub2/support" rel="nofollow">Support</MenuButton> }
 					{ !isPro && (
 						<MenuButton
