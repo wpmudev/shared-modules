@@ -4051,10 +4051,10 @@
   resolved "https://registry.yarnpkg.com/@wpmudev/shared-ui/-/shared-ui-2.12.3.tgz#441440a085778545edc4aaf8220fd8cdeb3cd747"
   integrity sha512-bUPheTTStENAiRqhoM7Wp+lrDyvSXr4qQoXqBtkfcFUSS5ulo3OF9MHvn41B/uvjikVTBB0HjI9ue+t/OwUHBA==
 
-"@wpmudev/sui-icons@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@wpmudev/sui-icons/-/sui-icons-1.0.0.tgz#2220b920f6f452c2463244f8d14d62cdce772134"
-  integrity sha512-+CjukPDpFh8Mkoxu/uPdf30LPWdf9n9/fTM2YopGMD7gmdUuho5Up2Wh5VRDt4nSUv79QkBHmRij3ozEYnX+rg==
+"@wpmudev/sui-icons@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@wpmudev/sui-icons/-/sui-icons-1.1.0.tgz#04e8ee151cbee2176eab4b7131869abf6466b8bb"
+  integrity sha512-VnWlI2lz0rXAXevYmkuMU8qJJI8JIAQYIanVg3j6KcRB/mP92oc9RqoCAWbn9dnaAl46BNKz8ydEM2UyAukZew==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
