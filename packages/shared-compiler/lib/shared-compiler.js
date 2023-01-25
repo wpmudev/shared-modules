@@ -48,6 +48,7 @@ const inputOptions = {
 	],
 	external: [
 		'react',
+		'react-dom',
 		'styled-components',
 	]
 };
