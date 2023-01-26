@@ -18,6 +18,10 @@ const isEmpty = el => {
 	return true;
 }
 
+const isFunction = el => {
+	return el && {}.toString.call(el) === '[object Function]';
+}
+
 const screen = {
 	mobile: 480,
 	tablet: 783,
@@ -39,4 +43,4 @@ const maxDevice = {
 	desktop: `(max-width: ${screen.desktop - 1}px)`
 };
 
-export { isUndefined, isBoolean, isEmpty, screen, minDevice, maxDevice }
+export { isUndefined, isBoolean, isEmpty, isFunction, screen, minDevice, maxDevice }
