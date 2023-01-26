@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from "styled-components";
-import { isEmpty, isUndefined, isBoolean } from './utils';
+import { isEmpty, isUndefined, isBoolean, isFunction } from './utils';
 
 // Import required component(s).
 import { SessionButton } from './session-button';
@@ -43,7 +43,8 @@ const StyledLink = styled.a`
 
 	&,
 	&:hover,
-	&:focus {
+	&:focus,
+	&:visited {
 		color: #8D00B1;
 	}
 
@@ -110,11 +111,85 @@ class SessionMenu extends Component {
 		const name = this.props.name;
 		const email = this.props.email;
 		const pro = this.props.pro;
-		const landing = this.props.landing;
 
 		const hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
 		const hasEmail = !isUndefined(email) && !isEmpty(email) ? true : false;
 		const isPro = isBoolean(pro) && pro ? true : false;
+
+		const menu = Object.assign(
+			{
+				'hub': {
+					label: 'The Hub',
+					icon: 'logo',
+					href: 'https://wpmudev.com/hub2/',
+					target: '_blank',
+					cbFunc: ''
+				},
+				'roadmap': {
+					label: 'Product Roadmap',
+					icon: 'roadmap',
+					href: 'https://wpmudev.com/roadmap/',
+					target: '_blank',
+					cbFunc: ''
+				},
+				'support': {
+					label: 'Support',
+					icon: 'lifesaver',
+					href: 'https://wpmudev.com/hub2/support',
+					target: '_blank',
+					cbFunc: '',
+					falsy: isPro ? false : true
+				},
+				'upsell': {
+					label: 'Unlock Pro Features',
+					icon: 'plugin-hummingbird',
+					href: '',
+					target: '',
+					cbFunc: '',
+					falsy: isPro ? true : false,
+					highlight: true
+				}
+			},
+			this.props.menu
+		);
+
+		const showMenu = Object.keys(menu).map( ( item, index ) => {
+			const itemId = item;
+			const itemInfo = menu[item];
+
+			const label = itemInfo.label;
+			const icon = itemInfo.icon;
+			const link = itemInfo.href;
+			const target = itemInfo.target;
+			const cbFunc = itemInfo.cbFunc;
+			const falsy = itemInfo.falsy;
+			const purple = itemInfo.highlight;
+
+			const hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
+			const hasIcon = !isUndefined(icon) && !isEmpty(icon) ? true : false;
+			const hasLink = !isUndefined(link) && !isEmpty(link) ? true : false;
+			const hasTarget = !isUndefined(target) && !isEmpty(target) ? true : false;
+			const hasFunc = isFunction(cbFunc) ? true : false;
+
+			return (
+				<Fragment key={`${itemId}-${index}`}>
+					{ hasLabel && (
+						<Fragment>
+							{ !falsy && (
+								<MenuButton
+									{ ... ( hasIcon && { suicon: icon } ) }
+									{ ... ( hasLink && { href: link } ) }
+									{ ... ( (hasLink && hasTarget) && { target: target } ) }
+									{ ... ( !hasLink && hasFunc && { onClick: cbFunc } ) }
+									{ ... ( purple && { className: 'ssm-session--purple' } ) }>
+									{ label }
+								</MenuButton>
+							)}
+						</Fragment>
+					)}
+				</Fragment>
+			);
+		});
 
 		return (
 			<div ref={this.setWrapperRef} className={`sui-dropdown${ open ? ' open' : '' }`} onClick={(e) => e.stopPropagation()}>
@@ -126,18 +201,7 @@ class SessionMenu extends Component {
 					{ (hasName || hasEmail) && (
 						<StyledInfo>{name}<br/>{email}</StyledInfo>
 					)}
-					<MenuButton suicon="logo" href="https://wpmudev.com/hub2/" rel="nofollow">The Hub</MenuButton>
-					<MenuButton suicon="roadmap" href="https://wpmudev.com/roadmap/" rel="nofollow">Product Roadmap</MenuButton>
-					{ isPro && <MenuButton suicon="lifesaver" href="https://wpmudev.com/hub2/support" rel="nofollow">Support</MenuButton> }
-					{ !isPro && (
-						<MenuButton
-							suicon="plugin-hummingbird"
-							className="ssm-session--purple"
-							{ ... ( !isUndefined(landing) && { href: landing } ) }
-							{ ... ( !isUndefined(landing) && { target: '_self' } ) }>
-							Unlock Pro Features
-						</MenuButton>
-					)}
+					{ showMenu }
 				</ul>
 			</div>
 		);
@@ -172,7 +236,11 @@ const MenuButton = ({ icon, suicon, href, target, children, ...props }) => {
 			)}
 
 			{ !isButton && (
-				<StyledLink href={href} target={hasTarget ? target : '_blank'} { ...props }>
+				<StyledLink
+					href={href}
+					target={hasTarget ? target : '_blank'}
+					rel="nofollow"
+					{ ...props }>
 					{hasIcon && <MenuIcon icon={icon} suicon={suicon} />}
 					{ children }
 				</StyledLink>
