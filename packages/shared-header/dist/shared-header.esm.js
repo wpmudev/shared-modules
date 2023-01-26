@@ -1,4 +1,4 @@
-import React, { Component, Fragment, Children } from 'react';
+import React, { Fragment, Component, Children } from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 
@@ -20,6 +20,10 @@ var isEmpty = function isEmpty(el) {
   }
 
   return true;
+};
+
+var isFunction = function isFunction(el) {
+  return el && {}.toString.call(el) === '[object Function]';
 };
 
 var screen = {
@@ -410,7 +414,7 @@ var _templateObject$1, _templateObject2$1, _templateObject3$1, _templateObject4$
 
 var StyledIcon$1 = styled.span(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__ddmenu-icon.suicons {\n\twidth: 24px;\n\tposition: relative;\n\ttop: 2px;\n\tdisplay: inline-block;\n\tmargin-right: 10px;\n\tfont-size: 16px;\n\ttext-align: center;\n\n\t&:before {\n\t\tdisplay: block;\n\t}\n}\n"])));
 var StyledButton = styled.button(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session--purple {\n\n\t&,\n\t&:hover,\n\t&:focus {\n\t\tcolor: #8D00B1;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\tbackground-color: #F9E1FF;\n\t}\n}\n"])));
-var StyledLink = styled.a(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session--purple {\n\n\t&,\n\t&:hover,\n\t&:focus {\n\t\tcolor: #8D00B1;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\tbackground-color: #F9E1FF;\n\t}\n}\n"])));
+var StyledLink = styled.a(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session--purple {\n\n\t&,\n\t&:hover,\n\t&:focus,\n\t&:visited {\n\t\tcolor: #8D00B1;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\tbackground-color: #F9E1FF;\n\t}\n}\n"])));
 var StyledInfo = styled.li(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral(["\n.sui-wrap && {\n\tpadding: 0 15px 10px;\n\tfont-size: 13px;\n\tfont-weight: 500;\n\tline-height: 20px;\n\tletter-spacing: -0.25px;\n}\n"]))); // Build "Session Menu" component.
 
 var SessionMenu = /*#__PURE__*/function (_Component) {
@@ -476,10 +480,71 @@ var SessionMenu = /*#__PURE__*/function (_Component) {
       var name = this.props.name;
       var email = this.props.email;
       var pro = this.props.pro;
-      var landing = this.props.landing;
       var hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
       var hasEmail = !isUndefined(email) && !isEmpty(email) ? true : false;
       var isPro = isBoolean(pro) && pro ? true : false;
+      var menu = Object.assign({
+        'hub': {
+          label: 'The Hub',
+          icon: 'logo',
+          href: 'https://wpmudev.com/hub2/',
+          target: '_blank',
+          cbFunc: ''
+        },
+        'roadmap': {
+          label: 'Product Roadmap',
+          icon: 'roadmap',
+          href: 'https://wpmudev.com/roadmap/',
+          target: '_blank',
+          cbFunc: ''
+        },
+        'support': {
+          label: 'Support',
+          icon: 'lifesaver',
+          href: 'https://wpmudev.com/hub2/support',
+          target: '_blank',
+          cbFunc: '',
+          falsy: isPro ? false : true
+        },
+        'upsell': {
+          label: 'Unlock Pro Features',
+          icon: 'plugin-hummingbird',
+          href: '',
+          target: '',
+          cbFunc: '',
+          falsy: isPro ? true : false,
+          highlight: true
+        }
+      }, this.props.menu);
+      var showMenu = Object.keys(menu).map(function (item, index) {
+        var itemId = item;
+        var itemInfo = menu[item];
+        var label = itemInfo.label;
+        var icon = itemInfo.icon;
+        var link = itemInfo.href;
+        var target = itemInfo.target;
+        var cbFunc = itemInfo.cbFunc;
+        var falsy = itemInfo.falsy;
+        var purple = itemInfo.highlight;
+        var hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
+        var hasIcon = !isUndefined(icon) && !isEmpty(icon) ? true : false;
+        var hasLink = !isUndefined(link) && !isEmpty(link) ? true : false;
+        var hasTarget = !isUndefined(target) && !isEmpty(target) ? true : false;
+        var hasFunc = isFunction(cbFunc) ? true : false;
+        return /*#__PURE__*/React.createElement(Fragment, {
+          key: "".concat(itemId, "-").concat(index)
+        }, hasLabel && /*#__PURE__*/React.createElement(Fragment, null, !falsy && /*#__PURE__*/React.createElement(MenuButton, _extends$1({}, hasIcon && {
+          suicon: icon
+        }, hasLink && {
+          href: link
+        }, hasLink && hasTarget && {
+          target: target
+        }, !hasLink && hasFunc && {
+          onClick: cbFunc
+        }, purple && {
+          className: 'ssm-session--purple'
+        }), label)));
+      });
       return /*#__PURE__*/React.createElement("div", {
         ref: this.setWrapperRef,
         className: "sui-dropdown".concat(open ? ' open' : ''),
@@ -496,26 +561,7 @@ var SessionMenu = /*#__PURE__*/function (_Component) {
             open: false
           });
         }
-      }, (hasName || hasEmail) && /*#__PURE__*/React.createElement(StyledInfo, null, name, /*#__PURE__*/React.createElement("br", null), email), /*#__PURE__*/React.createElement(MenuButton, {
-        suicon: "logo",
-        href: "https://wpmudev.com/hub2/",
-        rel: "nofollow"
-      }, "The Hub"), /*#__PURE__*/React.createElement(MenuButton, {
-        icon: "target",
-        href: "https://wpmudev.com/roadmap/",
-        rel: "nofollow"
-      }, "Product Roadmap"), isPro && /*#__PURE__*/React.createElement(MenuButton, {
-        suicon: "lifesaver",
-        href: "https://wpmudev.com/hub2/support",
-        rel: "nofollow"
-      }, "Support"), !isPro && /*#__PURE__*/React.createElement(MenuButton, _extends$1({
-        suicon: "plugin-hummingbird",
-        className: "ssm-session--purple"
-      }, !isUndefined(landing) && {
-        href: landing
-      }, !isUndefined(landing) && {
-        target: '_self'
-      }), "Unlock Pro Features")));
+      }, (hasName || hasEmail) && /*#__PURE__*/React.createElement(StyledInfo, null, name, /*#__PURE__*/React.createElement("br", null), email), showMenu));
     }
   }]);
 
@@ -556,7 +602,8 @@ var MenuButton = function MenuButton(_ref2) {
     suicon: suicon
   }), children), !isButton && /*#__PURE__*/React.createElement(StyledLink, _extends$1({
     href: href,
-    target: hasTarget ? target : '_blank'
+    target: hasTarget ? target : '_blank',
+    rel: "nofollow"
   }, props), hasIcon && /*#__PURE__*/React.createElement(MenuIcon, {
     icon: icon,
     suicon: suicon
@@ -566,13 +613,13 @@ var MenuButton = function MenuButton(_ref2) {
 var SessionOn = function SessionOn(_ref) {
   var name = _ref.name,
       email = _ref.email,
-      landing = _ref.landing,
+      menu = _ref.menu,
       pro = _ref.pro;
   return /*#__PURE__*/React.createElement(SessionMenu, {
     name: name,
     email: email,
-    pro: pro,
-    landing: landing
+    menu: menu,
+    pro: pro
   });
 }; // Publish required component(s).
 
@@ -2161,7 +2208,8 @@ var SessionOff = function SessionOff(_ref) {
 var SessionContent = function SessionContent(_ref) {
   var login = _ref.login,
       pro = _ref.pro,
-      landing = _ref.landing,
+      _ref$menu = _ref.menu,
+      menu = _ref$menu === void 0 ? {} : _ref$menu,
       _ref$user = _ref.user,
       user = _ref$user === void 0 ? {} : _ref$user,
       _ref$modal = _ref.modal,
@@ -2173,7 +2221,7 @@ var SessionContent = function SessionContent(_ref) {
   return /*#__PURE__*/React.createElement(Fragment, null, connected && /*#__PURE__*/React.createElement(SessionOn, {
     name: user.name,
     email: user.email,
-    landing: landing,
+    menu: menu,
     pro: pro
   }), !connected && /*#__PURE__*/React.createElement(SessionOff, {
     label: lang.unplug.label,
@@ -2222,11 +2270,11 @@ var Header = function Header(_ref) {
   var title = _ref.title,
       login = _ref.login,
       pro = _ref.pro,
-      landing = _ref.landing,
       tutorials = _ref.tutorials,
       sourceUser = _ref.sourceUser,
       sourceModal = _ref.sourceModal,
       sourceUnplug = _ref.sourceUnplug,
+      sourceMenu = _ref.sourceMenu,
       children = _ref.children;
   var unplug = Object.assign({
     label: 'Click to connect',
@@ -2295,9 +2343,9 @@ var Header = function Header(_ref) {
   }, contentRight, contentTuts, /*#__PURE__*/React.createElement(SessionContent, {
     login: login,
     pro: pro,
-    landing: landing,
     user: user,
     modal: modal,
+    menu: sourceMenu,
     lang: {
       plug: {},
       unplug: {
