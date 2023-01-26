@@ -115,8 +115,6 @@ const Header = ({
 				<SessionContent
 					login={login}
 					pro={pro}
-					plugin={plugin}
-					landing={landing}
 					user={user}
 					modal={modal}
 					menu={sourceMenu}
