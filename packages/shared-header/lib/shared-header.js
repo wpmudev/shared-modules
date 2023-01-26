@@ -10,8 +10,6 @@ const Header = ({
 	title,
 	login,
 	pro,
-	plugin,
-	landing,
 	tutorials,
 	sourceUser,
 	sourceModal,
