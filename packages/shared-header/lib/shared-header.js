@@ -6,7 +6,19 @@ import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionContent } from './components/session-content';
 import { SessionList as Perks } from './components/session-list';
 
-const Header = ({ title, login, pro, landing, tutorials, sourceUser, sourceModal, sourceUnplug, children }) => {
+const Header = ({
+	title,
+	login,
+	pro,
+	plugin,
+	landing,
+	tutorials,
+	sourceUser,
+	sourceModal,
+	sourceUnplug,
+	sourceMenu,
+	children
+}) => {
 	const unplug = Object.assign(
 		{
 			label: 'Click to connect',
@@ -105,9 +117,11 @@ const Header = ({ title, login, pro, landing, tutorials, sourceUser, sourceModal
 				<SessionContent
 					login={login}
 					pro={pro}
+					plugin={plugin}
 					landing={landing}
 					user={user}
 					modal={modal}
+					menu={sourceMenu}
 					lang={{
 						plug: {},
 						unplug: {

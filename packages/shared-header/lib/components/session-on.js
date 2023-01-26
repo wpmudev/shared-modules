@@ -4,13 +4,13 @@ import React, { Fragment } from 'react';
 import { SessionMenu } from './session-menu';
 
 // Build "Connected Session" component.
-const SessionOn = ({ name, email, landing, pro }) => {
+const SessionOn = ({ name, email, menu, pro }) => {
 	return (
 		<SessionMenu
 			name={name}
 			email={email}
-			pro={pro}
-			landing={landing}>
+			menu={menu}
+			pro={pro}>
 		</SessionMenu>
 	);
 }
