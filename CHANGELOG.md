@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.2.1](https://github.com/wpmudev/shared-modules/compare/v1.2.0...v1.2.1) (2023-01-26)
+
+#### 🚀 Improvements
+* `shared-header`
+  * [#159](https://github.com/wpmudev/shared-modules/pull/159) fix(header): Update roadmap icon ([@iamleigh](https://github.com/iamleigh))
+
+#### 🐛 Bug Fixes
+* `shared-header`
+  * [#160](https://github.com/wpmudev/shared-modules/pull/160) fix(header): Upsell menu link icon and label not editable ([@iamleigh](https://github.com/iamleigh))
+* `shared-compiler`, `shared-header`, `shared-modules`, `shared-presets`
+  * [#158](https://github.com/wpmudev/shared-modules/pull/158) fix(header): CSJ and ESM files are missing during built ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## [1.2.0](https://github.com/wpmudev/shared-modules/compare/v1.1.0...v1.2.0) (2023-01-19)
 
 #### 🚀 Improvements
