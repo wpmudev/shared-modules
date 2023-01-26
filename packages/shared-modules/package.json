@@ -1,6 +1,6 @@
 {
   "name": "@wpmudev/shared-modules",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "WPMU DEV Shared Modules",
   "author": "WPMU DEV",
   "contributors": [
@@ -38,12 +38,12 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@wpmudev/shared-header": "^1.1.0",
-    "@wpmudev/shared-notifications-black-friday": "^2.0.0",
-    "@wpmudev/shared-notifications-discount": "^1.0.3",
-    "@wpmudev/shared-presets": "^1.4.0",
-    "@wpmudev/shared-tutorials-list": "^1.2.2",
-    "@wpmudev/shared-tutorials-slider": "^1.1.2"
+    "@wpmudev/shared-header": "^1.1.1",
+    "@wpmudev/shared-notifications-black-friday": "^2.0.1",
+    "@wpmudev/shared-notifications-discount": "^1.0.4",
+    "@wpmudev/shared-presets": "^1.4.1",
+    "@wpmudev/shared-tutorials-list": "^1.2.3",
+    "@wpmudev/shared-tutorials-slider": "^1.1.3"
   },
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.3"
