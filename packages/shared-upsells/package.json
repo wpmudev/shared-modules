@@ -1,6 +1,6 @@
 {
   "name": "@wpmudev/shared-upsells",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "WPMU DEV Shared Upsells",
   "keywords": [],
   "author": "WPMU DEV (https://wpmudev.com/)",
@@ -17,8 +17,6 @@
     }
   ],
   "license": "GPL-3.0",
-  "main": "dist/shared-upsells.cjs.js",
-  "module": "dist/shared-upsells.esm.js",
   "src": "lib/shared-upsells.js",
   "directories": {
     "lib": "lib",
@@ -37,8 +35,7 @@
     "directory": "packages/shared-upsells"
   },
   "scripts": {
-    "build": "shared-compiler",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "shared-compiler"
   },
   "bugs": {
     "url": "https://github.com/wpmudev/shared-modules/issues"

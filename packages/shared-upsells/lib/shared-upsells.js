@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, BoxHeader, BoxBody, BoxFooter } from '@wpmudev/react-box';
 import { Button } from '@wpmudev/react-button';
 
 const Upsells = ({
@@ -18,8 +17,8 @@ const Upsells = ({
 	);
 
 	return (
-		<Box>
-			<BoxHeader>
+		<div className="sui-box">
+			<div className="sui-box-header">
 				<h2 className="sui-box-title">
 					{ titleIcon ? 
 						<span className={ `sui-icon-${ titleIcon }` } aria-hidden="true"></span> :
@@ -28,8 +27,8 @@ const Upsells = ({
 					{ title } 
 					<span className="sui-tag sui-tag-pro">Pro</span>
 				</h2>
-			</BoxHeader>
-			<BoxBody>
+			</div>
+			<div className="sui-box-body">
 				{ description ?
 					<p>{ description }</p>:
 					''
@@ -38,14 +37,14 @@ const Upsells = ({
 					<ol className="sui-upsell-list">{ list }</ol>:
 					''
 				}
-			</BoxBody>
-			<BoxFooter style={{ borderTop: 0, paddingTop: 0 }}>
+			</div>
+			<div className="sui-box-footer" style={{ borderTop: 0, paddingTop: 0 }}>
 				{ ( buttonLabel && buttonUrl ) ? 
 					<Button className="sui-button-purple" label={ buttonLabel } href={ buttonUrl } />:
 					''
 				}
-			</BoxFooter>
-		</Box>
+			</div>
+		</div>
 	);
 };
 
