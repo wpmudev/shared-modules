@@ -5,6 +5,7 @@ import { isUndefined, isEmpty } from './components/utils';
 import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionContent } from './components/session-content';
 import { SessionList as Perks } from './components/session-list';
+import { SessionExternal as Button } from './components/session-external';
 
 const Header = ({
 	title,
@@ -130,4 +131,4 @@ const Header = ({
 	);
 }
 
-export { Header, Perks }
+export { Header, Button, Perks }
