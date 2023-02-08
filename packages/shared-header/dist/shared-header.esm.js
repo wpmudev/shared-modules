@@ -39,7 +39,7 @@ var minDevice = {
   desktop: "(min-width: ".concat(screen.desktop, "px)")
 };
 
-function ownKeys$1(object, enumerableOnly) {
+function ownKeys$2(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -52,12 +52,12 @@ function ownKeys$1(object, enumerableOnly) {
   return keys;
 }
 
-function _objectSpread2$1(target) {
+function _objectSpread2$2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) {
-      _defineProperty$1(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) {
+    i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) {
+      _defineProperty$2(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
@@ -65,7 +65,7 @@ function _objectSpread2$1(target) {
   return target;
 }
 
-function _defineProperty$1(obj, key, value) {
+function _defineProperty$2(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -80,7 +80,7 @@ function _defineProperty$1(obj, key, value) {
   return obj;
 }
 
-function _objectWithoutPropertiesLoose$2(source, excluded) {
+function _objectWithoutPropertiesLoose$3(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -95,10 +95,10 @@ function _objectWithoutPropertiesLoose$2(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$2(source, excluded) {
+function _objectWithoutProperties$3(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$2(source, excluded);
+  var target = _objectWithoutPropertiesLoose$3(source, excluded);
 
   var key, i;
 
@@ -116,7 +116,7 @@ function _objectWithoutProperties$2(source, excluded) {
   return target;
 }
 
-var _excluded$3 = ["label", "icon", "iconSize", "design", "color", "className", "loading"];
+var _excluded$5 = ["label", "icon", "iconSize", "design", "color", "className", "loading"];
 
 var ButtonIcon = function ButtonIcon(_ref) {
   var label = _ref.label,
@@ -127,7 +127,7 @@ var ButtonIcon = function ButtonIcon(_ref) {
       color = _ref.color,
       className = _ref.className,
       loading = _ref.loading,
-      props = _objectWithoutProperties$2(_ref, _excluded$3);
+      props = _objectWithoutProperties$3(_ref, _excluded$5);
 
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
@@ -180,7 +180,7 @@ var ButtonIcon = function ButtonIcon(_ref) {
   }
 
   var htmlTag = props.href ? 'a' : 'button';
-  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$1({
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2$2({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -286,7 +286,7 @@ function _isNativeReflectConstruct$1() {
   }
 }
 
-function _objectWithoutPropertiesLoose$1(source, excluded) {
+function _objectWithoutPropertiesLoose$2(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -301,10 +301,10 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$1(source, excluded) {
+function _objectWithoutProperties$2(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+  var target = _objectWithoutPropertiesLoose$2(source, excluded);
 
   var key, i;
 
@@ -371,30 +371,44 @@ function _taggedTemplateLiteral(strings, raw) {
   }));
 }
 
-var _excluded$2 = ["login", "label"];
+var _excluded$4 = ["login", "avatar", "label"];
 
-var _templateObject$2, _templateObject2$2, _templateObject3$2;
+var _templateObject$2, _templateObject2$2, _templateObject3$2, _templateObject4$2;
 
 var Wrapper = styled.div(_templateObject$2 || (_templateObject$2 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__wrapper {\n\tposition: relative;\n}\n"])));
-var Button = styled.button(_templateObject2$2 || (_templateObject2$2 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__button {\n\tmargin: 0 !important;\n\tborder-radius: 50%;\n\tbackground: #E6E6E6;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #E6E6E6;\n\t}\n\n\t.suicons {\n\t\tfont-size: 16px;\n\t}\n}\n"])));
-var Flag = styled.span(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__flag {\n\tpointer-events: none;\n\twidth: 12px;\n\theight: 12px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tposition: absolute;\n\tright: 1px;\n\tbottom: -4px;\n\tborder: 1px solid #FFF;\n\tborder-radius: 50%;\n\tbackground: ", ";\n\ttext-align: center;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-top: 1px;\n\t\tfont-size: 6px;\n\n\t\t&:before {\n\t\t\tcolor: #FFF;\n\t\t}\n\t}\n}\n"])), function (props) {
+var Button$1 = styled.button(_templateObject2$2 || (_templateObject2$2 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__button {\n\tmargin: 0 !important;\n\t", "\n\tborder-radius: 50%;\n\tbackground: #E6E6E6;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #E6E6E6;\n\t}\n\n\t.suicons {\n\t\tfont-size: 16px;\n\t}\n}\n"])), function (props) {
+  return props.hasAvatar ? 'padding: 0 !important;' : '';
+});
+var Image = styled.span(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__avatar {\n\twidth: 26px;\n\theight: 26px;\n\tdisplay: block;\n\tborder-radius: 50%;\n\tbackground-repeat: no-repeat;\n\tbackground-size: cover;\n}\n"])));
+var Flag = styled.span(_templateObject4$2 || (_templateObject4$2 = _taggedTemplateLiteral(["\n.sui-wrap &&.ssm-session__flag {\n\tpointer-events: none;\n\twidth: 12px;\n\theight: 12px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tposition: absolute;\n\tright: 1px;\n\tbottom: -4px;\n\tborder: 1px solid #FFF;\n\tborder-radius: 50%;\n\tbackground: ", ";\n\ttext-align: center;\n\n\t[class*=\"sui-icon-\"] {\n\t\tmargin-top: 1px;\n\t\tfont-size: 6px;\n\n\t\t&:before {\n\t\t\tcolor: #FFF;\n\t\t}\n\t}\n}\n"])), function (props) {
   return props.login ? '#18BB4B' : '#FF6D6D';
 }); // Build "Session Button" component.
 
 var SessionButton = function SessionButton(_ref) {
   var login = _ref.login,
+      avatar = _ref.avatar,
       _ref$label = _ref.label,
       label = _ref$label === void 0 ? {} : _ref$label,
-      props = _objectWithoutProperties$1(_ref, _excluded$2);
+      props = _objectWithoutProperties$2(_ref, _excluded$4);
 
   var connected = isBoolean(login) && login ? true : false;
   var loginLabel = !isUndefined(label.login) && !isEmpty(label.login) ? label.login : 'Connected';
   var logoutLabel = !isUndefined(label.logout) && !isEmpty(label.logout) ? label.logout : 'Not Connected';
+  var hasImage = !isUndefined(avatar) && !isEmpty(avatar) ? true : false;
+  var showImage = connected && hasImage ? true : false;
+  console.log(avatar);
   return /*#__PURE__*/React.createElement(Wrapper, {
     className: "ssm-session__wrapper"
-  }, /*#__PURE__*/React.createElement(Button, _extends$1({
+  }, /*#__PURE__*/React.createElement(Button$1, _extends$1({
+    hasAvatar: showImage,
     className: "sui-button-icon ssm-session__button"
-  }, props), /*#__PURE__*/React.createElement("span", {
+  }, props), showImage && /*#__PURE__*/React.createElement(Image, {
+    className: "ssm-session__avatar",
+    style: {
+      backgroundImage: "url(".concat(avatar, ")")
+    },
+    "aria-hidden": "true"
+  }), !showImage && /*#__PURE__*/React.createElement("span", {
     className: "suicons suicons--".concat(connected ? 'user-alt' : 'logo'),
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
@@ -408,7 +422,7 @@ var SessionButton = function SessionButton(_ref) {
   })));
 }; // Publish required component(s).
 
-var _excluded$1 = ["icon", "suicon", "href", "target", "children"];
+var _excluded$3 = ["icon", "suicon", "href", "target", "children"];
 
 var _templateObject$1, _templateObject2$1, _templateObject3$1, _templateObject4$1;
 
@@ -479,6 +493,7 @@ var SessionMenu = /*#__PURE__*/function (_Component) {
       var open = this.state.open;
       var name = this.props.name;
       var email = this.props.email;
+      var avatar = this.props.avatar;
       var pro = this.props.pro;
       var hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
       var hasEmail = !isUndefined(email) && !isEmpty(email) ? true : false;
@@ -553,6 +568,7 @@ var SessionMenu = /*#__PURE__*/function (_Component) {
         }
       }, /*#__PURE__*/React.createElement(SessionButton, {
         login: true,
+        avatar: avatar,
         "aria-expanded": open ? true : false,
         onClick: this.toggle
       }), /*#__PURE__*/React.createElement("ul", {
@@ -592,7 +608,7 @@ var MenuButton = function MenuButton(_ref2) {
       href = _ref2.href,
       target = _ref2.target,
       children = _ref2.children,
-      props = _objectWithoutProperties$1(_ref2, _excluded$1);
+      props = _objectWithoutProperties$2(_ref2, _excluded$3);
 
   var isButton = isUndefined(href) ? true : false;
   var hasIcon = !isUndefined(icon) && !isEmpty(icon) || !isUndefined(suicon) && !isEmpty(suicon) ? true : false;
@@ -613,17 +629,19 @@ var MenuButton = function MenuButton(_ref2) {
 var SessionOn = function SessionOn(_ref) {
   var name = _ref.name,
       email = _ref.email,
+      avatar = _ref.avatar,
       menu = _ref.menu,
       pro = _ref.pro;
   return /*#__PURE__*/React.createElement(SessionMenu, {
     name: name,
     email: email,
+    avatar: avatar,
     menu: menu,
     pro: pro
   });
 }; // Publish required component(s).
 
-function ownKeys(object, enumerableOnly) {
+function ownKeys$1(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -636,12 +654,12 @@ function ownKeys(object, enumerableOnly) {
   return keys;
 }
 
-function _objectSpread2(target) {
+function _objectSpread2$1(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+    i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) {
+      _defineProperty$1(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
@@ -684,7 +702,7 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _defineProperty(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -764,7 +782,7 @@ function _isNativeReflectConstruct() {
   }
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
+function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -779,10 +797,10 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var target = _objectWithoutPropertiesLoose$1(source, excluded);
 
   var key, i;
 
@@ -1254,7 +1272,7 @@ function createFocusTrap(element, userOptions) {
   var doc = document;
   var container = typeof element === 'string' ? getHTMLElement(doc, element) : element;
 
-  var config = _objectSpread2({
+  var config = _objectSpread2$1({
     returnFocusOnDeactivate: true,
     escapeDeactivates: true
   }, userOptions);
@@ -1752,7 +1770,7 @@ var Modal$1 = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "clearTimer", function () {
+    _defineProperty$1(_assertThisInitialized(_this), "clearTimer", function () {
       var _this$timeout;
 
       (_this$timeout = _this.timeout) === null || _this$timeout === void 0 ? void 0 : _this$timeout.forEach(function (timer) {
@@ -1972,7 +1990,7 @@ var Modal$1 = /*#__PURE__*/function (_React$Component) {
         }
       }
 
-      var childrenArray = [/*#__PURE__*/React.createElement('div', _objectSpread2({}, dialogProps), props.children)];
+      var childrenArray = [/*#__PURE__*/React.createElement('div', _objectSpread2$1({}, dialogProps), props.children)];
 
       if (props.verticallyCenter) {
         childrenArray.unshift( /*#__PURE__*/React.createElement('div', {
@@ -1991,7 +2009,7 @@ var Modal$1 = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/React.createElement(ReactFocusTrap, {
         focusTrapOptions: focusTrapOptions,
         paused: props.focusTrapPaused
-      }, /*#__PURE__*/React.createElement('div', _objectSpread2({}, underlayProps), childrenArray));
+      }, /*#__PURE__*/React.createElement('div', _objectSpread2$1({}, underlayProps), childrenArray));
     }
   }]);
 
@@ -2018,12 +2036,12 @@ AriaModal.renderTo = function (input) {
   });
 };
 
-var _excluded = ["modalContent", "triggerContent"];
+var _excluded$2 = ["modalContent", "triggerContent"];
 
 var Modal = function Modal(_ref) {
   var modalContent = _ref.modalContent,
       triggerContent = _ref.triggerContent,
-      props = _objectWithoutProperties(_ref, _excluded);
+      props = _objectWithoutProperties$1(_ref, _excluded$2);
 
   var _React$useState = React.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -2221,6 +2239,7 @@ var SessionContent = function SessionContent(_ref) {
   return /*#__PURE__*/React.createElement(Fragment, null, connected && /*#__PURE__*/React.createElement(SessionOn, {
     name: user.name,
     email: user.email,
+    avatar: user.avatar,
     menu: menu,
     pro: pro
   }), !connected && /*#__PURE__*/React.createElement(SessionOff, {
@@ -2264,6 +2283,203 @@ var SessionList = function SessionList(_ref) {
   }, title), /*#__PURE__*/React.createElement(StyledList, {
     className: "ssm-perks"
   }, items));
+}; // Publish required component(s).
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var _excluded$1 = ["label", "icon", "iconRight", "design", "color", "className", "loading"];
+
+var Button = function Button(_ref) {
+  var label = _ref.label,
+      icon = _ref.icon,
+      iconRight = _ref.iconRight,
+      _ref$design = _ref.design,
+      design = _ref$design === void 0 ? 'solid' : _ref$design,
+      color = _ref.color,
+      className = _ref.className,
+      loading = _ref.loading,
+      props = _objectWithoutProperties(_ref, _excluded$1);
+
+  var loader = /*#__PURE__*/React.createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: 'relative'
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React.createElement(React.Fragment, null, icon && !iconRight && '' !== icon && /*#__PURE__*/React.createElement("span", {
+    className: 'sui-icon-' + icon,
+    "aria-hidden": "true"
+  }), label, icon && iconRight && '' !== icon && /*#__PURE__*/React.createElement("span", {
+    className: 'sui-icon-' + icon,
+    "aria-hidden": "true"
+  }));
+  className = "sui-button".concat(iconRight ? ' sui-button-icon-right' : '').concat(className ? ' ' + className : ''); // Set button color.
+
+  switch (color) {
+    case 'blue':
+    case 'green':
+    case 'red':
+    case 'orange':
+    case 'purple':
+    case 'yellow':
+    case 'white':
+      className += ' sui-button-' + color;
+      break;
+
+    case 'gray':
+    default:
+      className += '';
+      break;
+  } // Set button style.
+
+
+  switch (design) {
+    case 'ghost':
+    case 'outlined':
+      className += ' sui-button-' + design;
+      break;
+
+    case 'solid':
+    default:
+      className += '';
+      break;
+  } // Set loading class.
+
+
+  if (loading) {
+    className += ' sui-button-onload';
+  }
+
+  var htmlTag = 'button';
+
+  if (props.href) {
+    htmlTag = 'a';
+  } else if (props.htmlFor) {
+    htmlTag = 'label';
+  }
+
+  return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+
+var _excluded = ["login", "label", "sourceModal", "children"];
+
+var SessionExternal = function SessionExternal(_ref) {
+  var login = _ref.login,
+      label = _ref.label,
+      sourceModal = _ref.sourceModal,
+      children = _ref.children,
+      props = _objectWithoutProperties$2(_ref, _excluded);
+
+  var connected = isBoolean(login) && login ? true : false;
+  var hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
+  var editModal = Object.assign({
+    title: 'Connect to your WPMU DEV account',
+    subtitle: 'Connect to WPMU DEV to unlock features for free.'
+  }, sourceModal);
+
+  var contentModal = function contentModal(_ref2) {
+    var closeModal = _ref2.closeModal;
+    return /*#__PURE__*/React.createElement(SessionModal, {
+      title: editModal.title,
+      subtitle: editModal.subtitle,
+      cbFunc: closeModal
+    }, children);
+  };
+
+  var triggerModal = function triggerModal(_ref3) {
+    var openModal = _ref3.openModal;
+    return /*#__PURE__*/React.createElement(Button, _extends$1({
+      label: hasLabel ? label : 'Click Here',
+      onClick: openModal
+    }, props));
+  };
+
+  return /*#__PURE__*/React.createElement(Fragment, null, !connected && /*#__PURE__*/React.createElement(Modal, {
+    dialogId: "ssm-session__modal",
+    titleId: "ssm-session__modal-title",
+    size: "lg",
+    modalContent: contentModal,
+    triggerContent: triggerModal
+  }));
 }; // Publish required component(s).
 
 var Header = function Header(_ref) {
@@ -2356,4 +2572,4 @@ var Header = function Header(_ref) {
   })));
 };
 
-export { Header, SessionList as Perks };
+export { SessionExternal as Button, Header, SessionList as Perks };
