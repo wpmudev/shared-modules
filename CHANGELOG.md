@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.3.0](https://github.com/wpmudev/shared-modules/compare/v1.2.1...v1.3.0) (2023-02-08)
+
+#### ✨ New Features
+* `shared-header`
+  * [#161](https://github.com/wpmudev/shared-modules/pull/161) feat(header): External session component ([@iamleigh](https://github.com/iamleigh))
+
+#### 🐛 Bug Fixes
+* `shared-header`
+  * [#162](https://github.com/wpmudev/shared-modules/pull/162) fix(header): Avatar not showing up ([@iamleigh](https://github.com/iamleigh))
+
+#### Committers: 1
+- Leighton Sapir ([@iamleigh](https://github.com/iamleigh))
+
 ## [1.2.1](https://github.com/wpmudev/shared-modules/compare/v1.2.0...v1.2.1) (2023-01-26)
 
 #### 🚀 Improvements
