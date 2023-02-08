@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Header } from '../lib/shared-header';
+import { Header, Button } from '../lib/shared-header';
 
 export default {
 	title: 'Header/States',
@@ -10,7 +10,9 @@ const Disconnected = ({ ...props }) => {
 	return (
 		<Fragment>
 			<Header { ...props } />
-			<div className="sui-box" style={{ minHeight: 450 }} />
+			<div className="sui-box" style={{ minHeight: 450, padding: 30 }}>
+				<Button label="Try Now" />
+			</div>
 		</Fragment>
 	);
 }
