@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const Button = styled.button`
 .sui-wrap &&.ssm-session__button {
 	margin: 0 !important;
+	${ props => props.hasAvatar ? 'padding: 0 !important;' : '' }
 	border-radius: 50%;
 	background: #E6E6E6;
 
@@ -23,6 +24,17 @@ const Button = styled.button`
 	.suicons {
 		font-size: 16px;
 	}
+}
+`;
+
+const Image = styled.span`
+.sui-wrap &&.ssm-session__avatar {
+	width: 26px;
+	height: 26px;
+	display: block;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 `;
 
@@ -54,15 +66,24 @@ const Flag = styled.span`
 `;
 
 // Build "Session Button" component.
-const SessionButton = ({ login, label = {}, ...props }) => {
+const SessionButton = ({ login, avatar, label = {}, ...props }) => {
 	const connected = isBoolean(login) && login ? true : false;
 	const loginLabel = !isUndefined(label.login) && !isEmpty(label.login) ? label.login : 'Connected';
 	const logoutLabel = !isUndefined(label.logout) && !isEmpty(label.logout) ? label.logout : 'Not Connected';
+	const hasImage = !isUndefined(avatar) && !isEmpty(avatar) ? true : false;
+	const showImage = connected && hasImage ? true : false;
+
+	console.log( avatar );
 
 	return (
 		<Wrapper className="ssm-session__wrapper">
-			<Button className="sui-button-icon ssm-session__button" { ...props }>
-				<span className={`suicons suicons--${ connected ? 'user-alt' : 'logo' }`} aria-hidden="true" />
+			<Button hasAvatar={ showImage } className="sui-button-icon ssm-session__button" { ...props }>
+				{ showImage && (
+					<Image className="ssm-session__avatar" style={{ backgroundImage: `url(${avatar})` }} aria-hidden="true" />
+				)}
+				{ !showImage && (
+					<span className={`suicons suicons--${ connected ? 'user-alt' : 'logo' }`} aria-hidden="true" />
+				)}
 				<span className="sui-screen-reader-text">
 					{ connected ? loginLabel : logoutLabel }
 				</span>
