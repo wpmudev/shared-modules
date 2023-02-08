@@ -12,7 +12,7 @@ const SessionContent = ({ login, pro, menu = {}, user = {}, modal = {}, lang = {
 
 	return (
 		<Fragment>
-			{ connected && <SessionOn name={user.name} email={user.email} menu={menu} pro={pro} /> }
+			{ connected && <SessionOn name={user.name} email={user.email} avatar={user.avatar} menu={menu} pro={pro} /> }
 
 			{ !connected && <SessionOff label={ lang.unplug.label } tooltip={ lang.unplug.tooltip } modal={ modal } /> }
 		</Fragment>

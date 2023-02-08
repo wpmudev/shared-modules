@@ -110,6 +110,7 @@ class SessionMenu extends Component {
 
 		const name = this.props.name;
 		const email = this.props.email;
+		const avatar = this.props.avatar;
 		const pro = this.props.pro;
 
 		const hasName = !isUndefined(name) && !isEmpty(name) ? true : false;
@@ -195,6 +196,7 @@ class SessionMenu extends Component {
 			<div ref={this.setWrapperRef} className={`sui-dropdown${ open ? ' open' : '' }`} onClick={(e) => e.stopPropagation()}>
 				<SessionButton
 					login={true}
+					avatar={avatar}
 					aria-expanded={open ? true : false}
 					onClick={this.toggle} />
 				<ul onClick={() => this.setState({ open: false })}>
