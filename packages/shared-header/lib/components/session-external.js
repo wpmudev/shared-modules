@@ -36,9 +36,9 @@ const SessionExternal = ({ login, label, icon, toggle, sourceModal, children, ..
 
 	const triggerModal = ({ openModal }) => {
 		if ( hasToggle ) {
-			return <Toggle label={label} id={ props.id } onClick={ openModal } { ...props } />;
+			return <Toggle label={ label } id={ props.id } onClick={ openModal } { ...props } />;
 		} else if ( hasIcon ) {
-			return <ButtonIcon icon={icon} label={label} onClick={ openModal } { ...props } />;
+			return <ButtonIcon icon={ icon } color={ props.color } label={ label } onClick={ openModal } { ...props } />;
 		} else {
 			return <Button label={ hasLabel ? label : 'Click Here' } onClick={ openModal } { ...props } />;
 		}
