@@ -80,9 +80,17 @@ const ExtraFeatures = ({ ...props }) => {
 				</div>
 			</Header>
 			<div className="sui-box" style={{ minHeight: 450, padding: 30 }}>
-				<Button label="Try Now" login={ props.login }>
-					{ modalContent }
-				</Button>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Button id="login-toggle" login={ props.login }>
+						{ modalContent }
+					</Button>
+					<Button icon="plus" label="Try Now" login={ props.login }>
+						{ modalContent }
+					</Button>
+					<Button toggle="true" login={ props.login }>
+						{ modalContent }
+					</Button>
+				</div>
 			</div>
 		</Fragment>
 	);
