@@ -8,7 +8,7 @@ import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionModal } from './session-modal';
 
 // Build "External Session" component.
-const SessionExternal = ({ login, label, icon, toggle, sourceModal, children, ...props }) => {
+const SessionExternal = ({ login, label, icon, sourceModal, children, ...props }) => {
 	const connected = isBoolean(login) && login ? true : false;
 	const hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
 	const hasIcon = !isUndefined(icon) && !isEmpty(icon) ? true : false;
