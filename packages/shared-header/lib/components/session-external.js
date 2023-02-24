@@ -8,10 +8,10 @@ import { Toggle } from '@wpmudev/react-toggle';
 import { SessionModal } from './session-modal';
 
 // Build "External Session" component.
-const SessionExternal = ({ login, label, toggle, sourceModal, children, ...props }) => {
+const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 	const connected = isBoolean(login) && login ? true : false;
 	const hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
-	const hasToggle = !isUndefined(toggle) && !isEmpty(toggle) ? true : false;
+	const hasToggle = !isUndefined(props.toggle) && !isEmpty(props.toggle) ? true : false;
 
 	const editModal = Object.assign(
 		{
@@ -34,7 +34,7 @@ const SessionExternal = ({ login, label, toggle, sourceModal, children, ...props
 
 	const triggerModal = ({ openModal }) => {
 		if ( hasToggle ) {
-			return <Toggle label={ label } id={ props.id } onClick={ openModal } { ...props } />;
+			return <Toggle label={ hasLabel ? label : '' } id={ props.id } onClick={ openModal } { ...props } />;
 		}
 		return <Button label={ hasLabel ? label : 'Click Here' } onClick={ openModal } { ...props } />;
 	}
