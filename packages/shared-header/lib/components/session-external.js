@@ -35,7 +35,7 @@ const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 
 	const triggerModal = ({ openModal }) => {
 		if ( hasIcon && 'icon' === type ) {
-			return <ButtonIcon label={ label } onClick={ openModal } { ...props } />;
+			return <ButtonIcon label={ hasLabel ? label : '' } onClick={ openModal } { ...props } />;
 		}
 		return <Button label={ hasLabel ? label : 'Click Here' } onClick={ openModal } { ...props } />;
 	}
