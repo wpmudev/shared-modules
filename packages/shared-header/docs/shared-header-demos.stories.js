@@ -87,9 +87,6 @@ const ExtraFeatures = ({ ...props }) => {
 					<Button icon="plus" color="blue" login={ props.login }>
 						{ modalContent }
 					</Button>
-					<Button toggle="true" login={ props.login }>
-						{ modalContent }
-					</Button>
 				</div>
 			</div>
 		</Fragment>
