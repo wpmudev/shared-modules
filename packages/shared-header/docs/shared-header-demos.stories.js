@@ -84,7 +84,10 @@ const ExtraFeatures = ({ ...props }) => {
 					<Button label="Try Now" login={ props.login }>
 						{ modalContent }
 					</Button>
-					<Button icon="plus" color="blue" login={ props.login }>
+					<Button label="Try Now" icon="plus" color="blue" login={ props.login }>
+						{ modalContent }
+					</Button>
+					<Button label="Try Now" icon="plus" type="icon" color="blue" login={ props.login }>
 						{ modalContent }
 					</Button>
 				</div>

@@ -8,10 +8,11 @@ import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionModal } from './session-modal';
 
 // Build "External Session" component.
-const SessionExternal = ({ login, label, icon, sourceModal, children, ...props }) => {
+const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 	const connected = isBoolean(login) && login ? true : false;
 	const hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
-	const hasIcon = !isUndefined(icon) && !isEmpty(icon) ? true : false;
+	const hasIcon = !isUndefined(props.icon) && !isEmpty(props.icon) ? true : false;
+	const type = !isUndefined(props.type) && !isEmpty(props.type) ? props.type : '';
 
 	const editModal = Object.assign(
 		{
@@ -33,8 +34,8 @@ const SessionExternal = ({ login, label, icon, sourceModal, children, ...props }
 	}
 
 	const triggerModal = ({ openModal }) => {
-		if ( hasIcon ) {
-			return <ButtonIcon icon={ icon } color={ props.color } label={ label } onClick={ openModal } { ...props } />;
+		if ( hasIcon && 'icon' === type ) {
+			return <ButtonIcon label={ label } onClick={ openModal } { ...props } />;
 		}
 		return <Button label={ hasLabel ? label : 'Click Here' } onClick={ openModal } { ...props } />;
 	}
