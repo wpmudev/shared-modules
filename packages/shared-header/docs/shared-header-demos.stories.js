@@ -81,19 +81,38 @@ const ExtraFeatures = ({ ...props }) => {
 			</Header>
 			<div className="sui-box" style={{ minHeight: 450, padding: 30 }}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Button label="Try Now" login={ props.login }>
-						{ modalContent }
-					</Button>
-					<Button toggle="true" login={ props.login }>
-						{ modalContent }
-					</Button>
+					{'button' === props.variations && (
+						<Button label="Try Now" login={ props.login }>
+							{ modalContent }
+						</Button>
+					)}
+
+					{'toggle' === props.variations && (
+						<Button toggle="true" login={ props.login }>
+							{ modalContent }
+						</Button>
+					)}
 				</div>
 			</div>
 		</Fragment>
 	);
 }
 ExtraFeatures.args = {
-	...Basic.args
+	...Basic.args,
+	variations: 'button'
+}
+
+ExtraFeatures.argTypes = {
+	variations: {
+		name: 'Button Variations',
+		control : {
+			type: 'select',
+			options: {
+				'Button with label': 'button',
+				'Toggle button': 'toggle',
+			}
+		}
+	}
 }
 
 export { Basic, ExtraFeatures }
