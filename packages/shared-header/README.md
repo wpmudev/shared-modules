@@ -213,8 +213,6 @@ The "Button" component from the **SUI Shared Header** package allows you to trig
 
 **Button with label**
 
-Use this when we need button with label only.
-
 **Sample code:**
 ```js
 <Button login={ false } label="Click Here">
@@ -224,8 +222,6 @@ Use this when we need button with label only.
 
 **Button with icon only**
 
-Use this when we need button with icon only.
-
 **Sample code:**
 ```js
 <Button login={ false } icon={ icon } type="icon" label="Click Here">
@@ -234,8 +230,6 @@ Use this when we need button with icon only.
 ```
 
 **Button with label and icon**
-
-Use this when we need button with label and icon.
 
 **Sample code:**
 ```js
