@@ -211,7 +211,7 @@ When users are not connected to their account, a module displays when clicking o
 
 The "Button" component from the **SUI Shared Header** package allows you to trigger the modal for logged out users from outside the "Header" component as seen on **[Storybook](https://wpmudev.github.io/shared-modules/?path=/story/header-demos--extra-features)**.
 
-**Button with label**
+### Standard Button
 
 **Sample code:**
 ```js
@@ -220,7 +220,7 @@ The "Button" component from the **SUI Shared Header** package allows you to trig
 </Button>
 ```
 
-**Button with icon only**
+### Icon Button
 
 **Sample code:**
 ```js
@@ -240,16 +240,16 @@ The "Button" component from the **SUI Shared Header** package allows you to trig
 
 >To change button default styles like (color, style, icon, etc.) refer to **[SUI React Button](https://wpmudev.github.io/shared-ui-react/?path=/story/components-button--demo)** component.
 
-### login
+#### login
 Type: `boolean`
 
 Use this property to let module know if the user is logged in (`true`) or not (`false`). When is set to `true` it will stop displaying the button for users.
 
-### label
+#### label
 Type: `string`
 
 Use this property to modify the button label.
 
-### children
+#### children
 
 When use the `Header` component normally adds content to the modal through the `modal` slot, but for this component that won't be necessary since there are no other slots enabled.
