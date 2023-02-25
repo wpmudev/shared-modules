@@ -73,8 +73,6 @@ const SessionButton = ({ login, avatar, label = {}, ...props }) => {
 	const hasImage = !isUndefined(avatar) && !isEmpty(avatar) ? true : false;
 	const showImage = connected && hasImage ? true : false;
 
-	console.log( avatar );
-
 	return (
 		<Wrapper className="ssm-session__wrapper">
 			<Button hasAvatar={ showImage } className="sui-button-icon ssm-session__button" { ...props }>
