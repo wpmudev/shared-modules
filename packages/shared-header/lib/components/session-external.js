@@ -4,7 +4,6 @@ import { isBoolean, isEmpty, isUndefined } from './utils';
 // Import required component(s).
 import { Modal } from '@wpmudev/react-modal';
 import { Button } from '@wpmudev/react-button';
-import { Toggle } from '@wpmudev/react-toggle';
 import { SessionModal } from './session-modal';
 
 // Build "External Session" component.
@@ -34,7 +33,11 @@ const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 
 	const triggerModal = ({ openModal }) => {
 		if ( hasToggle ) {
-			return <Toggle label={ hasLabel ? label : '' } onClick={ openModal } { ...props } />;
+			return (
+				<button className="sui-toggle" style={{ padding: 0, border: 'none', background: 'transparent' }} onClick={ openModal } { ...props } >
+					<span className="sui-toggle-slider" aria-hidden="true"></span>
+				</button>
+			);
 		}
 		return <Button label={ hasLabel ? label : 'Click Here' } onClick={ openModal } { ...props } />;
 	}

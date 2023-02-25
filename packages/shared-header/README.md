@@ -211,9 +211,20 @@ When users are not connected to their account, a module displays when clicking o
 
 The "Button" component from the **SUI Shared Header** package allows you to trigger the modal for logged out users from outside the "Header" component as seen on **[Storybook](https://wpmudev.github.io/shared-modules/?path=/story/header-demos--extra-features)**.
 
+**Button with label**
+
 **Sample code:**
 ```js
 <Button login={ false } label="Click Here">
+	{ /** Display modal content here */ }
+</Button>
+```
+
+**Toggle Button**
+
+**Sample code:**
+```js
+<Button login={ false } toggle="true">
 	{ /** Display modal content here */ }
 </Button>
 ```
