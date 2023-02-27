@@ -4,13 +4,16 @@ import { isBoolean, isEmpty, isUndefined } from './utils';
 // Import required component(s).
 import { Modal } from '@wpmudev/react-modal';
 import { Button } from '@wpmudev/react-button';
+import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { SessionModal } from './session-modal';
 
 // Build "External Session" component.
 const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 	const connected = isBoolean(login) && login ? true : false;
 	const hasLabel = !isUndefined(label) && !isEmpty(label) ? true : false;
-	const hasToggle = !isUndefined(props.toggle) && !isEmpty(props.toggle) ? true : false;
+	const hasToggle = !isUndefined(props.toggle) && !isEmpty(props.toggle) ? props.toggle : false;
+	const hasIcon = !isUndefined(props.icon) && !isEmpty(props.icon) ? true : false;
+	const type = !isUndefined(props.type) && !isEmpty(props.type) ? props.type : '';
 
 	const editModal = Object.assign(
 		{
@@ -38,6 +41,9 @@ const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 					<span className="sui-toggle-slider" aria-hidden="true"></span>
 				</button>
 			);
+		}
+		if ( hasIcon && 'icon' === type ) {
+			return <ButtonIcon label={ hasLabel ? label : '' } onClick={ openModal } { ...props } />;
 		}
 		return <Button label={ hasLabel ? label : 'Click Here' } onClick={ openModal } { ...props } />;
 	}

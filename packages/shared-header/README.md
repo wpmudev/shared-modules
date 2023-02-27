@@ -211,36 +211,67 @@ When users are not connected to their account, a module displays when clicking o
 
 The "Button" component from the **SUI Shared Header** package allows you to trigger the modal for logged out users from outside the "Header" component as seen on **[Storybook](https://wpmudev.github.io/shared-modules/?path=/story/header-demos--extra-features)**.
 
-**Button with label**
+### Properties
+
+#### type
+Type: `string`
+
+Use this option to differentiate the type of the button you'd like to display. Set the value to `icon` and display the **icon button** element or else leave it empty to show the default button.
+
+#### login
+Type: `boolean`
+
+Use this property to let module know if the user is logged in (`true`) or not (`false`). When is set to `true` it will stop displaying the button for users.
+
+#### label
+Type: `string`
+
+Use this property to modify the button label.
+
+#### toggle
+Type: `boolean`
+
+Use this option to show toggle button. When is set to `true` it will show the toggle button.
+
+#### children
+Type: `object`
+
+When use the `Header` component normally adds content to the modal through the `modal` slot, but for this component that won't be necessary since there are no other slots enabled.
+
+### Examples
+
+#### Standard Button
+
+This is a regular button with visible label. If use the `icon` property, you can easily include an icon next to the label.
 
 **Sample code:**
 ```js
+// Label only
 <Button login={ false } label="Click Here">
 	{ /** Display modal content here */ }
 </Button>
-```
 
-**Toggle Button**
+// Label and icon
+<Button login={ false } label="Click Here" icon="chevron-down">
+	{ /** Display modal content here */ }
+</Button>
 
-**Sample code:**
-```js
-<Button login={ false } toggle="true">
+// Toggle only
+<Button login={ false } toggle={ true }>
 	{ /** Display modal content here */ }
 </Button>
 ```
 
 >To change button default styles like (color, style, icon, etc.) refer to **[SUI React Button](https://wpmudev.github.io/shared-ui-react/?path=/story/components-button--demo)** component.
 
-### login
-Type: `boolean`
+#### Icon Button
 
-Use this property to let module know if the user is logged in (`true`) or not (`false`). When is set to `true` it will stop displaying the button for users.
+**Sample code:**
+```js
+<Button login={ false } type="icon" label="Click Here" icon={ icon }>
+	{ /** Display modal content here */ }
+</Button>
+```
 
-### label
-Type: `string`
+>To change icon button default styles like (color, style, icon, etc.) refer to **[SUI React Icon Button](https://wpmudev.github.io/shared-ui-react/?path=/story/components-button-icon--demo)** component.
 
-Use this property to modify the button label.
-
-### children
-
-When use the `Header` component normally adds content to the modal through the `modal` slot, but for this component that won't be necessary since there are no other slots enabled.

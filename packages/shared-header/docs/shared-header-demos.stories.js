@@ -80,19 +80,29 @@ const ExtraFeatures = ({ ...props }) => {
 				</div>
 			</Header>
 			<div className="sui-box" style={{ minHeight: 450, padding: 30 }}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					{'button' === props.variations && (
-						<Button label="Try Now" login={ props.login }>
-							{ modalContent }
-						</Button>
-					)}
+				{'button' === props.variations && (
+					<Button label="Try Now" login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
 
-					{'toggle' === props.variations && (
-						<Button toggle="true" login={ props.login }>
-							{ modalContent }
-						</Button>
-					)}
-				</div>
+				{'button-icon-label' === props.variations && (
+					<Button label="Try Now" icon="plus" color="blue" login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
+
+				{'button-icon' === props.variations && (
+					<Button label="Try Now" icon="plus" type="icon" color="blue" login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
+
+				{'toggle' === props.variations && (
+					<Button toggle={ true } login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
 			</div>
 		</Fragment>
 	);
@@ -110,6 +120,8 @@ ExtraFeatures.argTypes = {
 			options: {
 				'Button with label': 'button',
 				'Toggle button': 'toggle',
+				'Button with icon only': 'button-icon',
+				'Button with icon and label': 'button-icon-label'
 			}
 		}
 	}
