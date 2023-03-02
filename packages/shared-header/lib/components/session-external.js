@@ -14,6 +14,8 @@ const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 	const hasToggle = !isUndefined(props.toggle) && !isEmpty(props.toggle) ? props.toggle : false;
 	const hasIcon = !isUndefined(props.icon) && !isEmpty(props.icon) ? true : false;
 	const type = !isUndefined(props.type) && !isEmpty(props.type) ? props.type : '';
+	const desc = !isUndefined(props.description) && !isEmpty(props.description) ? props.description : '';
+
 
 	const editModal = Object.assign(
 		{
@@ -37,8 +39,10 @@ const SessionExternal = ({ login, label, sourceModal, children, ...props }) => {
 	const triggerModal = ({ openModal }) => {
 		if ( hasToggle ) {
 			return (
-				<button className="sui-toggle" style={{ padding: 0, border: 'none', background: 'transparent' }} onClick={ openModal } { ...props } >
+				<button className="sui-toggle" style={{ padding: 0, border: 'none', background: 'transparent', textAlign: 'left', color: '#666' }} onClick={ openModal } { ...props } >
 					<span className="sui-toggle-slider" aria-hidden="true"></span>
+					{ hasLabel && (<span className="sui-toggle-label">{ label }</span>)}
+					{ '' !== desc && (<span className="sui-description">{ desc }</span>)}
 				</button>
 			);
 		}
