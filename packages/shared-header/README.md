@@ -228,6 +228,16 @@ Type: `string`
 
 Use this property to modify the button label.
 
+#### toggle
+Type: `boolean`
+
+Use this option to show toggle button. When is set to `true` it will show the toggle button.
+
+#### description
+Type: `boolean`
+
+Use this property to modify the button description.
+
 #### children
 Type: `object`
 
@@ -248,6 +258,33 @@ This is a regular button with visible label. If use the `icon` property, you can
 
 // Label and icon
 <Button login={ false } label="Click Here" icon="chevron-down">
+	{ /** Display modal content here */ }
+</Button>
+
+// Toggle only
+<Button login={ false } toggle={ true }>
+	{ /** Display modal content here */ }
+</Button>
+```
+
+#### Toggle Button
+
+This is a button which looks like a toggle. If use the `description` property, you can easily add the description next to the label.
+
+**Sample code:**
+```js
+// Toggle only
+<Button toggle={ true } login={ false }>
+	{ /** Display modal content here */ }
+</Button>
+
+// Label only
+<Button toggle={ true } login={ false } label="Click Here" >
+	{ /** Display modal content here */ }
+</Button>
+
+// Label and description
+<Button toggle={ true } login={ false } label="Click Here" description="This is a description.">
 	{ /** Display modal content here */ }
 </Button>
 ```

@@ -97,6 +97,24 @@ const ExtraFeatures = ({ ...props }) => {
 						{ modalContent }
 					</Button>
 				)}
+
+				{'toggle' === props.variations && (
+					<Button toggle={ true } login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
+
+				{'toggle-label' === props.variations && (
+					<Button toggle={ true } label="Label" login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
+
+				{'toggle-label-description' === props.variations && (
+					<Button toggle={ true } label="Label" description="This is a description." login={ props.login }>
+						{ modalContent }
+					</Button>
+				)}
 			</div>
 		</Fragment>
 	);
@@ -114,7 +132,10 @@ ExtraFeatures.argTypes = {
 			options: {
 				'Button with label': 'button',
 				'Button with icon only': 'button-icon',
-				'Button with icon and label': 'button-icon-label'
+				'Button with icon and label': 'button-icon-label',
+				'Toggle': 'toggle',
+				'Toggle with label': 'toggle-label',
+				'Toggle with label and description': 'toggle-label-description'
 			}
 		}
 	}
