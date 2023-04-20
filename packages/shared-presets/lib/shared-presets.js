@@ -336,7 +336,7 @@ export const Presets = ( {
 		}
 	};
 
-	const handleDelete = (currentConfigs) => {
+	const handleDelete = (currentConfig) => {
 		if (setDemoData) {
 			setTimeout(() => {
 				setIsDeleteOpen(false);
@@ -345,7 +345,7 @@ export const Presets = ( {
 			setTimeout(() => {
 				setIsLoading(false);
 				// Remove the configs from the demo data.
-				let demoData = configs.filter(config => !currentConfigs.includes(config));
+				let demoData = configs.filter(config => !currentConfig.includes(config));
 				setConfigs(demoData);
 			}, 1000);
 
@@ -360,10 +360,10 @@ export const Presets = ( {
 			);
 		} else {
 			let newConfigs = [...configs];
-			currentConfigs.forEach(config => {
+			currentConfig.forEach(config => {
 				newConfigs = newConfigs.filter(c => c.id !== config.id);
 			});
-			RequestsHandler.delete(newConfigs, currentConfigs)
+			RequestsHandler.delete(newConfigs, currentConfig)
 				.then(() => {
 					setConfigs(newConfigs);
 					successNotice(lang.bulkDeleteAction.successMessage);
