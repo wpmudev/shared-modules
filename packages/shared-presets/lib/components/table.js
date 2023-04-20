@@ -64,10 +64,10 @@ export class PresetsTable extends Component {
 					<td>{rowName}</td>
 					<td>
 						{
-							rowContent.map((item) => {
+							rowContent.map((item, index) => {
 								if(item.includes('Inactive')) {
 									return (
-										<>{item}{rowTag}{'\n'}</>
+										<span key={item + '-' + index}>{item}{rowTag}{'\n'}</span>
 									);	
 								}
 								return item + '\n';
