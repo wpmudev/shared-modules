@@ -627,8 +627,10 @@ export const Presets = ( {
 						</div>
 						{!isWidget && (
 							<>
-								<div className="sui-accordion-col-3">Description</div>
-								<div className="sui-accordion-col-2">Date Created</div>
+								<div className={setDemoData ? 'sui-accordion-col-3' : 'sui-accordion-col-5'}>Description</div>
+								{setDemoData && (
+									<div className="sui-accordion-col-2">Date Created</div>
+								)}
 							</>	
 						)}
 						<div className="sui-accordion-col-auto" style={{ flex: '0 1 213px' }}></div>
