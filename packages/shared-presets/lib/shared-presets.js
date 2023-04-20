@@ -182,14 +182,14 @@ export const Presets = ( {
 				successMessage: 'Config(s) deleted successfully.',
 			},
 			settingsLabels: {
-				uptime: "Uptime",
-				database: "Database",
-				gravatar: "Gravatar Caching",
-				page_cache: "Page Caching",
-				advanced: "Advanced Tools",
-				rss: "RSS Caching",
-				settings: "Settings",
-				performance: "Performance Test"
+				uptime: 'Uptime',
+				database: 'Database',
+				gravatar: 'Gravatar Caching',
+				page_cache: 'Page Caching',
+				advanced: 'Advanced Tools',
+				rss: 'RSS Caching',
+				settings: 'Settings',
+				performance: 'Performance Test'
 			},
 		},
 		sourceLang
@@ -336,18 +336,18 @@ export const Presets = ( {
 		}
 	};
 
-	const handleDelete = (currentConfig) => {
-		if ( setDemoData ) {
+	const handleDelete = (currentConfigs) => {
+		if (setDemoData) {
 			setTimeout(() => {
-				setIsDeleteOpen( false );
-				setIsLoading( true );
-			}, 500 );
+				setIsDeleteOpen(false);
+				setIsLoading(true);
+			}, 500);
 			setTimeout(() => {
-				setIsLoading( false );
-				// Remove the config from the demo data.
-				demoData = configs.filter( ( config ) => config.id !== currentConfig.id );
+				setIsLoading(false);
+				// Remove the configs from the demo data.
+				let demoData = configs.filter(config => !currentConfigs.includes(config));
 				setConfigs(demoData);
-			}, 1000 );
+			}, 1000);
 
 			console.log(
 				'\n' +
@@ -359,19 +359,18 @@ export const Presets = ( {
 				'\n'
 			);
 		} else {
-			RequestsHandler.delete( [ ...configs ], currentConfig )
-				.then( ( newConfigs ) => { 
-					setConfigs( newConfigs );
-					successNotice( 
-						Object.keys(currentConfig).length === 1 ? 
-							lang.deleteAction.successMessage.replace( '{configName}', currentConfig.name ) :
-							lang.bulkDeleteAction.successMessage
-					);
-				} )
-				.catch( ( res ) => requestFailureNotice( res ) )
-				.then( () => setIsDeleteOpen( false ) );
+			let newConfigs = [...configs];
+			currentConfigs.forEach(config => {
+				newConfigs = newConfigs.filter(c => c.id !== config.id);
+			});
+			RequestsHandler.delete(newConfigs, currentConfigs)
+				.then(() => {
+					setConfigs(newConfigs);
+					successNotice(lang.bulkDeleteAction.successMessage);
+				})
+				.catch(res => requestFailureNotice(res))
+				.then(() => setIsDeleteOpen(false));
 		}
-
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
@@ -606,7 +605,7 @@ export const Presets = ( {
 	};
 
 	const bulkDeleteHandler = () => {
-		const selectedConfig = Object.assign( {}, configs.filter( ( item ) => item.selected === true ) );
+		const selectedConfig = configs.filter( ( item ) => item.selected === true );
 		openModal( 'delete', selectedConfig);
 	};
 
@@ -646,8 +645,8 @@ export const Presets = ( {
 							editLabel={ lang.edit }
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
-							deleteAction={ () => openModal( 'delete', item ) }
-							checkboxId= { 'demo-checkbox-' + index }
+							deleteAction={ () => openModal( 'delete', [item] ) }
+							checkboxId= { 'config-checkbox-' + index }
 							checkboxSelected= { item.selected }
 							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
 						>
