@@ -610,10 +610,6 @@ export const Presets = ( {
 		openModal( 'delete', selectedConfig);
 	};
 
-	console.log( 'This is a text.' );
-	console.log( configs );
-	console.log( lang.settingsLabels );
-
 	const Table = (
 		<>
 			{ ! isEmpty && (
