@@ -182,14 +182,12 @@ export const Presets = ( {
 				successMessage: 'Config(s) deleted successfully.',
 			},
 			settingsLabels: {
-				uptime: "Uptime",
-				database: "Database",
-				gravatar: "Gravatar Caching",
-				page_cache: "Page Caching",
-				advanced: "Advanced Tools",
-				rss: "RSS Caching",
-				settings: "Settings",
-				performance: "Performance Test"
+				bulk_smush: 'Bulk Smush',
+				lazy_load: 'Lazy Load',
+				cdn: 'CDN',
+				webp_mod: 'WebP Mod',
+				integrations: 'Integrations',
+				settings: 'Settings',
 			},
 		},
 		sourceLang
@@ -610,10 +608,6 @@ export const Presets = ( {
 		openModal( 'delete', selectedConfig);
 	};
 
-	console.log( 'This is a text.' );
-	console.log( configs );
-	console.log( lang.settingsLabels );
-
 	const Table = (
 		<>
 			{ ! isEmpty && (
@@ -655,8 +649,8 @@ export const Presets = ( {
 							checkboxSelected= { item.selected }
 							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
 						>
-							{ Object.keys( item.config.strings ).map( ( name ) => (
-								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
+							{ item.config.map( ( data ) => (
+								<div key={ data.id } name={ data.name } status={ data.content } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }

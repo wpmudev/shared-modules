@@ -54,12 +54,12 @@ export class PresetsTable extends Component {
 
 	render() {
 		const rows = Children.map(this.props.children, (row) => {
-			const rowName = row.props.name;
+			const rowName = row.props.name ? row.props.name : '';
 			const rowStatus = row.props.status;
-			const rowContent = rowStatus.replace(/( - )/g, '\n').split('\n');
+			const rowContent = rowStatus[0].replace(/( - )/g, '\n').split('\n').filter(item => item);
 			const rowTag = <span className="sui-tag sui-tag-pro" style={{ marginLeft: '6px'}}>Pro</span>;
 
-			return (
+			return ( '' !== rowName || rowContent.length ) ? (
 				<tr>
 					<td>{rowName}</td>
 					<td>
@@ -75,7 +75,7 @@ export class PresetsTable extends Component {
 						}
 					</td>
 				</tr>
-			);
+			) : '';
 		});
 
 		return (
