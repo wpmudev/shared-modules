@@ -166,18 +166,14 @@ export class PresetsAccordionItem extends Component {
 						image: this.props.image
 					} }
 					onClick={ e => this.toggle(e) }>
-					<>
-						{ ! isWidget && (
-							<div size={null !== date && '' !== date ? '3': '5'}>
-								<div style={ descstyles }>{ description }</div>
-							</div>
-						)}
-					</>
-					<>
-						{null !== date && '' !== date && ! isWidget && (
-							<div size="2"><div style={ descstyles }>{ date }</div></div>
-						)}
-					</>
+					{ ! isWidget && (
+						<div size={ '' !== date ? '3': '5'}>
+							<div style={ descstyles }>{ description }</div>
+						</div>
+					)}
+					{ '' !== date && ! isWidget && (
+						<div size="2"><div style={ descstyles }>{ date }</div></div>
+					)}
 					<div>
 						{ this.props.showApplyButton && (
 							<Button

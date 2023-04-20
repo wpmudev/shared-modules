@@ -347,6 +347,7 @@ export const Presets = ( {
 				// Remove the configs from the demo data.
 				let demoData = configs.filter(config => !currentConfig.includes(config));
 				setConfigs(demoData);
+				setDisabled(true);
 			}, 1000);
 
 			console.log(
@@ -366,6 +367,7 @@ export const Presets = ( {
 			RequestsHandler.delete(newConfigs, currentConfig)
 				.then(() => {
 					setConfigs(newConfigs);
+					setDisabled(true);
 					successNotice(lang.bulkDeleteAction.successMessage);
 				})
 				.catch(res => requestFailureNotice(res))
@@ -623,8 +625,12 @@ export const Presets = ( {
 							/>
 							<span>Config Name</span>
 						</div>
-						<div className="sui-accordion-col-3">Description</div>
-						<div className="sui-accordion-col-2">Date Created</div>
+						{!isWidget && (
+							<>
+								<div className="sui-accordion-col-3">Description</div>
+								<div className="sui-accordion-col-2">Date Created</div>
+							</>	
+						)}
 						<div className="sui-accordion-col-auto" style={{ flex: '0 1 213px' }}></div>
 					</PresetsAccordionHeader>
 					{ configs.map( ( item, index ) => (
