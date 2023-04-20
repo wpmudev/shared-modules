@@ -20,6 +20,7 @@ const DeleteModal = ( { setOpen, config, save, strings = {} } ) => {
 	} = strings;
 
 	const [ isSaving, setIsSaving ] = React.useState( false );
+	const configNames = config.map(config => config.name);
 
 	const doAction = () => {
 		setIsSaving( true );
@@ -40,7 +41,7 @@ const DeleteModal = ( { setOpen, config, save, strings = {} } ) => {
 					{ title }
 				</h2>
 				<p className="sui-description">
-					{ description.replace( '{configName}', config.name) }
+					{ description.replace('{configName}', configNames.join(', ')) }
 				</p>
 			</div>
 			<div className="sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60">
