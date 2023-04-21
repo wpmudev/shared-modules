@@ -9,16 +9,18 @@ import React from 'react';
 import { Modal } from '@wpmudev/react-modal';
 import { ButtonIcon } from '@wpmudev/react-button-icon';
 import { Button } from '@wpmudev/react-button';
-import { Input } from '@wpmudev/react-input';
+import { InputWithRef } from '@wpmudev/react-input';
 
 const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 	const configName = config ? config.name : '',
 		configDescription = config ? config.description : '';
 
-	const [ nameValue, setNameValue ] = React.useState( configName );
-	const [ descriptionValue, setDescriptionValue ] = React.useState( configDescription );
 	const [ errorMessage, setErrorMessage ] = React.useState( false );
 	const [ isSaving, setIsSaving ] = React.useState( false );
+
+	const nameValue = React.useRef( configName );
+	const descriptionValue = React.useRef( configDescription );
+
 
 	const {
 		closeIcon = 'Close this dialog window',
@@ -39,7 +41,7 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 	};
 
 	const doAction = () => {
-		if ( ! nameValue.trim().length ) {
+		if ( ! nameValue.current.trim().length ) {
 			setErrorMessage( emptyNameError );
 			return;
 		}
@@ -48,8 +50,8 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 		setIsSaving( true );
 
 		const data = new FormData();
-		data.append( 'name', nameValue );
-		data.append( 'description', descriptionValue );
+		data.append( 'name', nameValue.current );
+		data.append( 'description', descriptionValue.current );
 
 		save( data, displayErrorMessage );
 	};
@@ -93,11 +95,11 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 						) }
 					</div>
 
-					<Input
+					<InputWithRef
 						label={ nameInput }
 						name="name"
-						value={ nameValue }
-						onChange={ ( e ) => setNameValue( e.target.value ) }
+						defaultValue={ nameValue.current }
+						onChange={ ( e ) => nameValue.current = e.target.value }
 						maxLength="200"
 					/>
 					<div className="sui-form-field">
@@ -111,8 +113,8 @@ const EditModal = ( { setOpen, config, save, strings = {} } ) => {
 							id="sui-edit-config-textarea"
 							className="sui-form-control"
 							name="description"
-							value={ descriptionValue }
-							onChange={ ( e ) => setDescriptionValue( e.target.value ) }
+							defaultValue={ descriptionValue.current }
+							onChange={ ( e ) => descriptionValue.current = e.target.value }
 							maxLength="200"
 						/>
 					</div>
