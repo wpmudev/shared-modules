@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.4.1](https://github.com/wpmudev/shared-modules/compare/release/1.4.0...release/1.4.1) (2023-05-30)
+
+#### ✨ New Features
+* `shared-notifications-banner`
+  * [#167](https://github.com/wpmudev/shared-modules/pull/167) new(banner): created a banner component ([@creador-dev](https://github.com/creador-dev))
+
+#### 🚀 Improvements
+* `shared-notifications-banner`
+  * [#168](https://github.com/wpmudev/shared-modules/pull/168) fix(banner): improved styles of banner component. ([@creador-dev](https://github.com/creador-dev))
+
+#### 🏠 Internal
+ * Addition of README.md file
+
 ## [1.4.0](https://github.com/wpmudev/shared-modules/compare/v1.3.0...v1.4.0) (2023-03-06)
 
 #### ✨ New Features
