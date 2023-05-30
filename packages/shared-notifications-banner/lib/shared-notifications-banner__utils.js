@@ -123,7 +123,7 @@ Banner.Global = createGlobalStyle`
 			flex: 1;
 
 			p {
-				margin: 12px 0 0 !important;
+				margin: 4px 0 0 !important;
 				color: #666 !important;
 				font-size: 13px !important;
 				line-height: 22px !important;
