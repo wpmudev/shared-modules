@@ -142,7 +142,7 @@ Banner.Global = createGlobalStyle`
 
 			p {
 				margin: 4px 0 0;
-				color: #333;
+				color: #666;
 
 				&:first-child {
 					margin: 0;
