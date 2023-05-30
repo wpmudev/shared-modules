@@ -35,7 +35,11 @@ Banner.Global = createGlobalStyle`
 			font-size: 21px;
 			line-height: 32px;
 			letter-spacing: -0.5px;
-			margin: 0 0 4px;
+			margin: 0 0 8px;
+
+			@media ${device.tablet} {
+				margin: 0 0 4px;
+			}
 		}
 
 		&__wrapper {
