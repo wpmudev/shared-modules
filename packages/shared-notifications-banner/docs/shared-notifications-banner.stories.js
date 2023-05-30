@@ -117,7 +117,7 @@ export default {
 export const Banner = ( args ) => {
 	return (
 		<NoticeBanner { ...args }>
-			<p>Unleash the Full Power of Your Site with WPMU DEV Hosting! Lightning-Fast Speed, Robust Security, 24/7 Expert Support, and Effortless Ease of Use. Take Your Sites to the Next Level Today with 50% off the First Month!</p>
+			<p>Unleash the Full Power of Your Site with WPMU DEV Hosting! Lightning-Fast Speed, Robust Security, 24/7 Expert Support, and Effortless Ease of Use. Take Your Sites to the Next Level Today <strong>with 50% off the First Month!</strong></p>
 		</NoticeBanner>
 	);
 };
