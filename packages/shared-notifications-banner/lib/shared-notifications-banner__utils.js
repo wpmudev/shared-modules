@@ -27,7 +27,7 @@ Banner.Global = createGlobalStyle`
 			position: relative;
 			overflow: hidden;
 			display: block;
-			border-radius: 4px;
+			border-radius: 8px;
 			background-color: #fff;
 		}
 
