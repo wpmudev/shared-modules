@@ -12,6 +12,7 @@ export const NoticeBanner = ({
 	buttonLink,
 	closeLabel,
 	onCloseClick,
+	onRemindLaterClick,
 	children,
 	...props
 }) => {
@@ -19,6 +20,11 @@ export const NoticeBanner = ({
 	const closeOnClick = e => {
 		setIsClose(true);
 		onCloseClick(e);
+	};
+
+	const remindlaterOnClick = e => {
+		setIsClose(true);
+		onRemindLaterClick(e);
 	};
 
 	const hasImage1x = null !== image && '' !== image;
@@ -89,7 +95,7 @@ export const NoticeBanner = ({
 									<Button
 										label="Remind me later"
 										design="ghost"
-										onClick={ closeOnClick }
+										onClick={ remindlaterOnClick }
 									/>
 								)}
 							</div>

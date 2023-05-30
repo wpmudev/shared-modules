@@ -110,6 +110,12 @@ export default {
 			table: {
 				category: 'Header'
 			}
+		},
+		onRemindLaterClick: {
+			action: 'Remind me later notice',
+			table: {
+				category: 'Header'
+			}
 		}
 	}
 }
