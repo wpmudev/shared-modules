@@ -74,24 +74,26 @@ export const NoticeBanner = ({
 						</div>
 
 						<div className="sui-module-notice-banner__cta">
+							
+							<div className="sui-module-notice-banner__cta-action">
+								{ hasButton && (
+									<Button
+										label={ buttonLabel }
+										color="purple"
+										href={ buttonLink }
+										target="_blank"
+									/>
+								)}
 
-							{ hasButton && (
-								<Button
-									label={ buttonLabel }
-									color="purple"
-									href={ buttonLink }
-									target="_blank"
-								/>
-							)}
-
-							{ hasButton && (
-								<Button
-									label="Remind me later"
-									design="ghost"
-									onClick={ closeOnClick }
-								/>
-							)}
-
+								{ hasButton && (
+									<Button
+										label="Remind me later"
+										design="ghost"
+										onClick={ closeOnClick }
+									/>
+								)}
+							</div>
+							
 							{ hasDisclaimer && <p className="sui-disclaimer">* { disclaimer }</p> }
 
 						</div>

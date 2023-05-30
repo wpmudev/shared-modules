@@ -74,7 +74,11 @@ Banner.Global = createGlobalStyle`
 		}
 
 		&__cta {
-			padding-top: 12px;
+			padding-top: 0;
+
+			@media ${device.tablet} {
+				padding-top: 12px;
+			}
 
 			.sui-disclaimer {
 				display: block;
@@ -87,12 +91,29 @@ Banner.Global = createGlobalStyle`
 
 			.sui-button {
 				margin-right: 0;
-				margin-bottom: 14px;
 
 				@media ${device.mobile} {
 					margin-right: 10px;
-					margin-bottom: 0;
 				}
+			}
+		}
+
+		&__cta-action {
+			display: flex;
+			flex-direction: column;
+
+			.sui-button {
+				margin-right: 0 !important;
+				margin-top: 12px;
+				
+				@media ${device.tablet} {
+					margin-right: 10px !important;
+					margin-top: 0;
+				}
+			}
+
+			@media ${device.tablet} {
+				flex-direction: row;
 			}
 		}
 
@@ -117,6 +138,7 @@ Banner.Global = createGlobalStyle`
 		&__body {
 			min-width: 1px;
 			flex: 1;
+			margin-top: 16px;
 
 			p {
 				margin: 4px 0 0;
@@ -130,7 +152,7 @@ Banner.Global = createGlobalStyle`
 			.sui-disclaimer {
 				font-size: 13px;
 				line-height: 22px;
-				margin-top: 2px;
+				margin-top: 16px;
 
 				@media ${device.tablet} {
 					margin-top: 4px;
@@ -139,6 +161,7 @@ Banner.Global = createGlobalStyle`
 
 			@media ${device.tablet} {
 				text-align: left;
+				margin-top: 0;
 			}
 		}
 	}
