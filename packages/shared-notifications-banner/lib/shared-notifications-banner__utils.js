@@ -61,7 +61,7 @@ Banner.Global = createGlobalStyle`
 
 			.sui-disclaimer {
 				display: none;
-				color: #888 !important;
+				color: #888;
 
 				@media ${device.tablet} {
 					display: block;
@@ -86,7 +86,7 @@ Banner.Global = createGlobalStyle`
 
 			.sui-disclaimer {
 				display: block;
-				color: #888 !important;
+				color: #888;
 
 				@media ${device.tablet} {
 					display: none;
@@ -111,7 +111,7 @@ Banner.Global = createGlobalStyle`
 				margin-top: 12px;
 				
 				@media ${device.tablet} {
-					margin-right: 10px !important;
+					margin-right: 12px !important;
 					margin-top: 0;
 				}
 			}
