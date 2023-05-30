@@ -4,6 +4,7 @@ import { Presets } from '@wpmudev/shared-presets';
 import { TutorialsList } from '@wpmudev/shared-tutorials-list';
 import { TutorialsSlider } from '@wpmudev/shared-tutorials-slider';
 import { Header, Perks } from '@wpmudev/shared-header';
+import { NoticeBanner} from '@wpmudev/shared-notifications-banner';
 
 export {
 	NoticeBlack,
@@ -12,5 +13,6 @@ export {
 	TutorialsList,
 	TutorialsSlider,
 	Header,
-	Perks
+	Perks,
+	NoticeBanner
 };

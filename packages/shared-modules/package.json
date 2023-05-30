@@ -1,6 +1,6 @@
 {
   "name": "@wpmudev/shared-modules",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "WPMU DEV Shared Modules",
   "author": "WPMU DEV",
   "contributors": [
@@ -43,7 +43,8 @@
     "@wpmudev/shared-notifications-discount": "^1.0.4",
     "@wpmudev/shared-presets": "^1.4.1",
     "@wpmudev/shared-tutorials-list": "^1.2.3",
-    "@wpmudev/shared-tutorials-slider": "^1.1.3"
+    "@wpmudev/shared-tutorials-slider": "^1.1.3",
+    "@wpmudev/shared-notifications-banner": "1.0.0"
   },
   "devDependencies": {
     "@wpmudev/shared-compiler": "^1.0.3"
