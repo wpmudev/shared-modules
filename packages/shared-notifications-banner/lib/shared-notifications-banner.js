@@ -80,7 +80,7 @@ export const NoticeBanner = ({
 						</div>
 
 						<div className="sui-module-notice-banner__cta">
-							
+
 							<div className="sui-module-notice-banner__cta-action">
 								{ hasButton && (
 									<Button
@@ -99,7 +99,7 @@ export const NoticeBanner = ({
 									/>
 								)}
 							</div>
-							
+
 							{ hasDisclaimer && <p className="sui-disclaimer">* { disclaimer }</p> }
 
 						</div>
