@@ -577,14 +577,6 @@ export const Presets = ( {
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 
-	const selectAll = (checked) => {
-		setConfigs( configs.map( ( config ) => {
-			config.selected = checked;
-			return config;
-		} ) );
-		deleteButton();
-	};
-
 	const checkboxClickHandler = (clickedConfig, checked) => {
 		setConfigs( configs.map( ( config ) => {
 			if( clickedConfig === config ) {
@@ -611,6 +603,17 @@ export const Presets = ( {
 		openModal( 'delete', selectedConfig);
 	};
 
+	// Check if every item has isSelected set to true
+	const allSelected = configs.every(item => item.selected === true);
+
+	const selectAll = () => {
+		setConfigs( configs.map( ( config ) => {
+			config.selected = !allSelected;
+			return config;
+		} ) );
+		deleteButton();
+	};
+
 	const Table = (
 		<>
 			{ ! isEmpty && (
@@ -621,7 +624,8 @@ export const Presets = ( {
 								id="checkbox-default-one"
 								name="select-all"
 								type="checkbox"
-								onChange={(e) => selectAll(e.target.checked)}
+								defaultChecked={allSelected}
+								onChange={selectAll}
 							/>
 							<span>Config Name</span>
 						</div>
