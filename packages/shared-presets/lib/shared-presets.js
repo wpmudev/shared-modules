@@ -182,12 +182,14 @@ export const Presets = ( {
 				successMessage: 'Config(s) deleted successfully.',
 			},
 			settingsLabels: {
-				bulk_smush: 'Bulk Smush',
-				lazy_load: 'Lazy Load',
-				cdn: 'CDN',
-				webp_mod: 'WebP Mod',
-				integrations: 'Integrations',
+				uptime: 'Uptime',
+				database: 'Database',
+				gravatar: 'Gravatar Caching',
+				page_cache: 'Page Caching',
+				advanced: 'Advanced Tools',
+				rss: 'RSS Caching',
 				settings: 'Settings',
+				performance: 'Performance Test'
 			},
 		},
 		sourceLang
@@ -335,17 +337,18 @@ export const Presets = ( {
 	};
 
 	const handleDelete = (currentConfig) => {
-		if ( setDemoData ) {
+		if (setDemoData) {
 			setTimeout(() => {
-				setIsDeleteOpen( false );
-				setIsLoading( true );
-			}, 500 );
+				setIsDeleteOpen(false);
+				setIsLoading(true);
+			}, 500);
 			setTimeout(() => {
-				setIsLoading( false );
-				// Remove the config from the demo data.
-				demoData = configs.filter( ( config ) => config.id !== currentConfig.id );
+				setIsLoading(false);
+				// Remove the configs from the demo data.
+				let demoData = configs.filter(config => !currentConfig.includes(config));
 				setConfigs(demoData);
-			}, 1000 );
+				setDisabled(true);
+			}, 1000);
 
 			console.log(
 				'\n' +
@@ -357,19 +360,19 @@ export const Presets = ( {
 				'\n'
 			);
 		} else {
-			RequestsHandler.delete( [ ...configs ], currentConfig )
-				.then( ( newConfigs ) => { 
-					setConfigs( newConfigs );
-					successNotice( 
-						Object.keys(currentConfig).length === 1 ? 
-							lang.deleteAction.successMessage.replace( '{configName}', currentConfig.name ) :
-							lang.bulkDeleteAction.successMessage
-					);
-				} )
-				.catch( ( res ) => requestFailureNotice( res ) )
-				.then( () => setIsDeleteOpen( false ) );
+			let newConfigs = [...configs];
+			currentConfig.forEach(config => {
+				newConfigs = newConfigs.filter(c => c.id !== config.id);
+			});
+			RequestsHandler.delete(newConfigs, currentConfig)
+				.then(() => {
+					setConfigs(newConfigs);
+					setDisabled(true);
+					successNotice(lang.bulkDeleteAction.successMessage);
+				})
+				.catch(res => requestFailureNotice(res))
+				.then(() => setIsDeleteOpen(false));
 		}
-
 	};
 
 	const handleEdit = ( data, displayErrorMessage ) => {
@@ -574,14 +577,6 @@ export const Presets = ( {
 
 	const tableImage = !isWhitelabel ? urls.accordionImg : null;
 
-	const selectAll = (checked) => {
-		setConfigs( configs.map( ( config ) => {
-			config.selected = checked;
-			return config;
-		} ) );
-		deleteButton();
-	};
-
 	const checkboxClickHandler = (clickedConfig, checked) => {
 		setConfigs( configs.map( ( config ) => {
 			if( clickedConfig === config ) {
@@ -604,8 +599,19 @@ export const Presets = ( {
 	};
 
 	const bulkDeleteHandler = () => {
-		const selectedConfig = Object.assign( {}, configs.filter( ( item ) => item.selected === true ) );
+		const selectedConfig = configs.filter( ( item ) => item.selected === true );
 		openModal( 'delete', selectedConfig);
+	};
+
+	// Check if every item has isSelected set to true
+	const allSelected = configs.every(item => item.selected === true);
+
+	const selectAll = () => {
+		setConfigs( configs.map( ( config ) => {
+			config.selected = !allSelected;
+			return config;
+		} ) );
+		deleteButton();
 	};
 
 	const Table = (
@@ -618,12 +624,19 @@ export const Presets = ( {
 								id="checkbox-default-one"
 								name="select-all"
 								type="checkbox"
-								onChange={(e) => selectAll(e.target.checked)}
+								defaultChecked={allSelected}
+								onChange={selectAll}
 							/>
 							<span>Config Name</span>
 						</div>
-						<div className="sui-accordion-col-3">Description</div>
-						<div className="sui-accordion-col-2">Date Created</div>
+						{!isWidget && (
+							<>
+								<div className={setDemoData ? 'sui-accordion-col-3' : 'sui-accordion-col-5'}>Description</div>
+								{setDemoData && (
+									<div className="sui-accordion-col-2">Date Created</div>
+								)}
+							</>	
+						)}
 						<div className="sui-accordion-col-auto" style={{ flex: '0 1 213px' }}></div>
 					</PresetsAccordionHeader>
 					{ configs.map( ( item, index ) => (
@@ -644,13 +657,13 @@ export const Presets = ( {
 							editLabel={ lang.edit }
 							editAction={ () => openModal( 'edit', item ) }
 							deleteLabel={ lang.delete }
-							deleteAction={ () => openModal( 'delete', item ) }
-							checkboxId= { 'demo-checkbox-' + index }
+							deleteAction={ () => openModal( 'delete', [item] ) }
+							checkboxId= { 'config-checkbox-' + index }
 							checkboxSelected= { item.selected }
 							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
 						>
-							{ item.config.map( ( data ) => (
-								<div key={ data.id } name={ data.name } status={ data.content } />
+							{ Object.keys( item.config.strings ).map( ( name ) => (
+								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />
 							) ) }
 						</PresetsAccordionItem>
 					) ) }

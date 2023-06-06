@@ -25,43 +25,74 @@ export const demoContent = [
 		description: "Recommended backup advanced config for all site.",
 		selected: false,
 		created_date: "March 22, 2021 10:03 am",
-		config: [
-			{
-				id: "bulk_smush",
-				name: "Bulk Smush",
-				content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"
+		config: {
+			configs: {
+				settings: {
+					advanced: {
+						query_string: false,
+						emoji: false,
+						cart_fragments: false,
+						lazy_load: {
+							enabled: false
+						}
+					},
+					database: {
+						reports: {
+							enabled: false
+						}
+					},
+					gravatar: {
+						enabled: true
+					},
+					page_cache: {
+						enabled: true,
+						detection: "auto",
+						integrations: {
+							varnish: false,
+							opcache: false
+						},
+						preload: false
+					},
+					performance: [],
+					rss: {
+						enabled: true,
+						duration: 3600
+					},
+					settings: {
+						accessible_colors: false,
+						remove_settings: false,
+						remove_data: false,
+						control: true
+					},
+					uptime: {
+						enabled: false
+					}
+				}
 			},
-			{
-				id: "lazy_load",
-				name: "Lazy Load",
-				content: "Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"
-			},
-			{
-				id: "cdn",
-				name: "CDN",
-				content: "Inactive"
-			},
-			{
-				id: "webp_mod",
-				name: "Local WebP",
-				content: "Inactive"
-			},
-			{
-				id: "integrations",
-				name: "Integrations",
-				content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
-			},
-			{
-				id: "tools",
-				name: "Tools",
-				content: "Image Resize Detection - Inactive"
-			},
-			{
-				id: "settings",
-				name: "Settings",
-				content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
-			},
-		],
+			strings: {
+				advanced: [
+					"Remove query strings from assets - Inactive\nRemove Emoji JS & CSS files - Inactive\nDisable WooCommerce cart fragments - Inactive\nComments lazy loading - Inactive\n"
+				],
+				database: [
+					"Database - Inactive\n"				
+				],
+				gravatar: [
+					"Gravatar cache - Active\n"
+				],
+				page_cache: [
+					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
+				],
+				rss: [
+					"RSS caching - Active\n"
+				],
+				settings: [
+					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
+				],
+				uptime: [
+					"Uptime - Inactive\n"
+				]
+			}
+		}
 	},
 	{
 		id: 2,
@@ -70,43 +101,74 @@ export const demoContent = [
 		description: "Recommended backup advanced config for all site.",
 		selected: false,
 		created_date: "March 22, 2021 10:03 am",
-		config: [
-			{
-				id: "bulk_smush",
-				name: "Bulk Smush",
-				content: "Automatic compression - Active\nSuper-Smush - Active\nMetadata - Active\nImage Resizing - Inactive\nOriginal Images - Inactive\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Inactive"
+		config: {
+			configs: {
+				settings: {
+					advanced: {
+						query_string: false,
+						emoji: false,
+						cart_fragments: false,
+						lazy_load: {
+							enabled: false
+						}
+					},
+					database: {
+						reports: {
+							enabled: false
+						}
+					},
+					gravatar: {
+						enabled: true
+					},
+					page_cache: {
+						enabled: true,
+						detection: "auto",
+						integrations: {
+							varnish: false,
+							opcache: false
+						},
+						preload: false
+					},
+					performance: [],
+					rss: {
+						enabled: true,
+						duration: 3600
+					},
+					settings: {
+						accessible_colors: false,
+						remove_settings: false,
+						remove_data: false,
+						control: true
+					},
+					uptime: {
+						enabled: false
+					}
+				}
 			},
-			{
-				id: "lazy_load",
-				name: "Lazy Load",
-				content: "Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg, iframe\nOutput Locations - content, widgets, thumbnails, gravatars\nDisplay And Animation - Selected: fadein. Fade in duration: 400. Fade in delay: 0\nIncluded Post Types - frontpage, home, page, single, archive, category, tag\nLoad Scripts In Footer - Yes\nNative Lazy Load Enabled - No\nDisable Noscript - No"
-			},
-			{
-				id: "cdn",
-				name: "CDN",
-				content: "Inactive"
-			},
-			{
-				id: "webp_mod",
-				name: "Local WebP",
-				content: "Inactive"
-			},
-			{
-				id: "integrations",
-				name: "Integrations",
-				content: "Gutenberg Support - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
-			},
-			{
-				id: "tools",
-				name: "Tools",
-				content: "Image Resize Detection - Inactive"
-			},
-			{
-				id: "settings",
-				name: "Settings",
-				content: "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active"
-			},
-		],
+			strings: {
+				advanced: [
+					"Remove query strings from assets - Inactive\nRemove Emoji JS & CSS files - Inactive\nDisable WooCommerce cart fragments - Inactive\nComments lazy loading - Inactive\n"
+				],
+				database: [
+					""				
+				],
+				gravatar: [
+					"Gravatar cache - Active\n"
+				],
+				page_cache: [
+					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
+				],
+				rss: [
+					"RSS caching - Active\n"
+				],
+				settings: [
+					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
+				],
+				uptime: [
+					"Uptime - Inactive\n"
+				]
+			}
+		}
 	}
 ];
 
