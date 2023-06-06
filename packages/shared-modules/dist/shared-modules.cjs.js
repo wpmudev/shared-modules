@@ -63,13 +63,13 @@ function _taggedTemplateLiteral$6(strings, raw) {
     }
   }));
 }
-function _slicedToArray$5(arr, i) {
-  return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$5(arr, i) || _nonIterableRest$5();
+function _slicedToArray$6(arr, i) {
+  return _arrayWithHoles$6(arr) || _iterableToArrayLimit$6(arr, i) || _unsupportedIterableToArray$6(arr, i) || _nonIterableRest$6();
 }
-function _arrayWithHoles$5(arr) {
+function _arrayWithHoles$6(arr) {
   if (Array.isArray(arr)) return arr;
 }
-function _iterableToArrayLimit$5(arr, i) {
+function _iterableToArrayLimit$6(arr, i) {
   var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
   if (_i == null) return;
   var _arr = [];
@@ -93,25 +93,25 @@ function _iterableToArrayLimit$5(arr, i) {
   }
   return _arr;
 }
-function _unsupportedIterableToArray$5(o, minLen) {
+function _unsupportedIterableToArray$6(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$6(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$5(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$6(o, minLen);
 }
-function _arrayLikeToArray$5(arr, len) {
+function _arrayLikeToArray$6(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
   }
   return arr2;
 }
-function _nonIterableRest$5() {
+function _nonIterableRest$6() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _defineProperty$9(obj, key, value) {
+function _defineProperty$a(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -124,7 +124,7 @@ function _defineProperty$9(obj, key, value) {
   }
   return obj;
 }
-function ownKeys$8(object, enumerableOnly) {
+function ownKeys$9(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -135,17 +135,17 @@ function ownKeys$8(object, enumerableOnly) {
   }
   return keys;
 }
-function _objectSpread2$8(target) {
+function _objectSpread2$9(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
     if (i % 2) {
-      ownKeys$8(Object(source), true).forEach(function (key) {
-        _defineProperty$9(target, key, source[key]);
+      ownKeys$9(Object(source), true).forEach(function (key) {
+        _defineProperty$a(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$8(Object(source)).forEach(function (key) {
+      ownKeys$9(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -179,7 +179,7 @@ function _objectWithoutProperties$d(source, excluded) {
   }
   return target;
 }
-var ButtonIcon$5 = function ButtonIcon(_ref) {
+var ButtonIcon$6 = function ButtonIcon(_ref) {
   var label = _ref.label,
     icon = _ref.icon,
     iconSize = _ref.iconSize,
@@ -235,7 +235,7 @@ var ButtonIcon$5 = function ButtonIcon(_ref) {
     className += " sui-button-onload";
   }
   var htmlTag = props.href ? 'a' : 'button';
-  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$8({
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$9({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -333,15 +333,15 @@ var NoticeBlack = function NoticeBlack(_ref) {
     children = _ref.children,
     props = _objectWithoutProperties$1$4(_ref, _excluded$8);
   var _useState = React.useState(false),
-    _useState2 = _slicedToArray$5(_useState, 2),
+    _useState2 = _slicedToArray$6(_useState, 2),
     isClose = _useState2[0],
     setIsClose = _useState2[1];
   var _useState3 = React.useState(false),
-    _useState4 = _slicedToArray$5(_useState3, 2),
+    _useState4 = _slicedToArray$6(_useState3, 2),
     isRTL = _useState4[0],
     setRTL = _useState4[1];
   var _useState5 = React.useState(false),
-    _useState6 = _slicedToArray$5(_useState5, 2),
+    _useState6 = _slicedToArray$6(_useState5, 2),
     isMonochrome = _useState6[0],
     setMonochrome = _useState6[1];
   var closeOnClick = function closeOnClick(e) {
@@ -365,7 +365,7 @@ var NoticeBlack = function NoticeBlack(_ref) {
     monochrome: isMonochrome
   }), /*#__PURE__*/React__default["default"].createElement("div", _extends$a({
     className: "sui-module-notice-black-friday__container"
-  }, props), /*#__PURE__*/React__default["default"].createElement(ButtonIcon$5, {
+  }, props), /*#__PURE__*/React__default["default"].createElement(ButtonIcon$6, {
     color: "white",
     icon: "close",
     iconSize: "md",
@@ -435,13 +435,13 @@ function _taggedTemplateLiteral$5(strings, raw) {
     }
   }));
 }
-function _slicedToArray$4(arr, i) {
-  return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$4();
+function _slicedToArray$5(arr, i) {
+  return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$5(arr, i) || _nonIterableRest$5();
 }
-function _arrayWithHoles$4(arr) {
+function _arrayWithHoles$5(arr) {
   if (Array.isArray(arr)) return arr;
 }
-function _iterableToArrayLimit$4(arr, i) {
+function _iterableToArrayLimit$5(arr, i) {
   var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
   if (_i == null) return;
   var _arr = [];
@@ -465,25 +465,25 @@ function _iterableToArrayLimit$4(arr, i) {
   }
   return _arr;
 }
-function _unsupportedIterableToArray$4(o, minLen) {
+function _unsupportedIterableToArray$5(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$4(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$5(o, minLen);
 }
-function _arrayLikeToArray$4(arr, len) {
+function _arrayLikeToArray$5(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
   }
   return arr2;
 }
-function _nonIterableRest$4() {
+function _nonIterableRest$5() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _defineProperty$8(obj, key, value) {
+function _defineProperty$9(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -496,7 +496,7 @@ function _defineProperty$8(obj, key, value) {
   }
   return obj;
 }
-function ownKeys$7(object, enumerableOnly) {
+function ownKeys$8(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -507,17 +507,17 @@ function ownKeys$7(object, enumerableOnly) {
   }
   return keys;
 }
-function _objectSpread2$7(target) {
+function _objectSpread2$8(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
     if (i % 2) {
-      ownKeys$7(Object(source), true).forEach(function (key) {
-        _defineProperty$8(target, key, source[key]);
+      ownKeys$8(Object(source), true).forEach(function (key) {
+        _defineProperty$9(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$7(Object(source)).forEach(function (key) {
+      ownKeys$8(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -609,7 +609,7 @@ var Button$3 = function Button(_ref) {
   } else if (props.htmlFor) {
     htmlTag = 'label';
   }
-  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$7({
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$8({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -660,7 +660,7 @@ var NoticeDiscount = function NoticeDiscount(_ref) {
     children = _ref.children,
     props = _objectWithoutProperties$1$3(_ref, _excluded$7);
   var _useState = React.useState(false),
-    _useState2 = _slicedToArray$4(_useState, 2),
+    _useState2 = _slicedToArray$5(_useState, 2),
     isClose = _useState2[0],
     setIsClose = _useState2[1];
   var closeOnClick = function closeOnClick(e) {
@@ -739,19 +739,43 @@ function _typeof$5(obj) {
   }, _typeof$5(obj);
 }
 
+function _iterableToArrayLimit$3(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
+        ;
+      }
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
 function _typeof$1$1(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof$1$1 = function _typeof$1(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof$1$1 = function _typeof$1(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-  return _typeof$1$1(obj);
+  return _typeof$1$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof$1$1(obj);
 }
 function _classCallCheck$3$1(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -764,15 +788,19 @@ function _defineProperties$3$1(target, props) {
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
+    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
   }
 }
 function _createClass$3$1(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties$3$1(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties$3$1(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
   return Constructor;
 }
-function _defineProperty$6(obj, key, value) {
+function _defineProperty$7(obj, key, value) {
+  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -786,7 +814,7 @@ function _defineProperty$6(obj, key, value) {
   return obj;
 }
 function _extends$7() {
-  _extends$7 = Object.assign || function (target) {
+  _extends$7 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -810,16 +838,19 @@ function _inherits$3$1(subClass, superClass) {
       configurable: true
     }
   });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
+  });
   if (superClass) _setPrototypeOf$3$1(subClass, superClass);
 }
 function _getPrototypeOf$3$1(o) {
-  _getPrototypeOf$3$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+  _getPrototypeOf$3$1 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf$3$1(o);
 }
 function _setPrototypeOf$3$1(o, p) {
-  _setPrototypeOf$3$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+  _setPrototypeOf$3$1 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
@@ -874,54 +905,30 @@ function _taggedTemplateLiteral$3$1(strings, raw) {
     }
   }));
 }
-function _slicedToArray$2(arr, i) {
-  return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$2();
+function _slicedToArray$3(arr, i) {
+  return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$3();
 }
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$3(arr) || _nonIterableSpread();
 }
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
+  if (Array.isArray(arr)) return _arrayLikeToArray$3(arr);
 }
-function _arrayWithHoles$2(arr) {
+function _arrayWithHoles$3(arr) {
   if (Array.isArray(arr)) return arr;
 }
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _iterableToArrayLimit$2(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _s, _e;
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-  return _arr;
-}
-function _unsupportedIterableToArray$2(o, minLen) {
+function _unsupportedIterableToArray$3(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$3(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$3(o, minLen);
 }
-function _arrayLikeToArray$2(arr, len) {
+function _arrayLikeToArray$3(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
@@ -931,13 +938,13 @@ function _arrayLikeToArray$2(arr, len) {
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _nonIterableRest$2() {
+function _nonIterableRest$3() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 function _createForOfIteratorHelper$1(o, allowArrayLike) {
   var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray$2(o)) || allowArrayLike && o && typeof o.length === "number") {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray$3(o)) || allowArrayLike && o && typeof o.length === "number") {
       if (it) o = it;
       var i = 0;
       var F = function F() {};
@@ -984,6 +991,20 @@ function _createForOfIteratorHelper$1(o, allowArrayLike) {
       }
     }
   };
+}
+function _toPrimitive(input, hint) {
+  if (_typeof$5(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof$5(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return _typeof$5(key) === "symbol" ? key : String(key);
 }
 var screen$1$3 = {
   mobile: 480,
@@ -1231,7 +1252,7 @@ function _createClass$2$2(Constructor, protoProps, staticProps) {
   if (staticProps) _defineProperties$2$2(Constructor, staticProps);
   return Constructor;
 }
-function _defineProperty$5(obj, key, value) {
+function _defineProperty$6(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -1320,7 +1341,7 @@ function _defineProperty$1$1$3(obj, key, value) {
   }
   return obj;
 }
-function ownKeys$5(object, enumerableOnly) {
+function ownKeys$6(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -1331,17 +1352,17 @@ function ownKeys$5(object, enumerableOnly) {
   }
   return keys;
 }
-function _objectSpread2$5(target) {
+function _objectSpread2$6(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
     if (i % 2) {
-      ownKeys$5(Object(source), true).forEach(function (key) {
+      ownKeys$6(Object(source), true).forEach(function (key) {
         _defineProperty$1$1$3(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$5(Object(source)).forEach(function (key) {
+      ownKeys$6(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -1375,7 +1396,7 @@ function _objectWithoutProperties$9(source, excluded) {
   }
   return target;
 }
-var ButtonIcon$3 = function ButtonIcon(_ref) {
+var ButtonIcon$4 = function ButtonIcon(_ref) {
   var label = _ref.label,
     icon = _ref.icon,
     iconSize = _ref.iconSize,
@@ -1431,7 +1452,7 @@ var ButtonIcon$3 = function ButtonIcon(_ref) {
     className += " sui-button-onload";
   }
   var htmlTag = props.href ? 'a' : 'button';
-  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$5({
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$6({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -1443,7 +1464,7 @@ var Notifications$2 = /*#__PURE__*/function (_Component) {
     var _this;
     _classCallCheck$2$2(this, Notifications);
     _this = _super.call(this, props);
-    _defineProperty$5(_assertThisInitialized$2$2(_this), "close", function () {
+    _defineProperty$6(_assertThisInitialized$2$2(_this), "close", function () {
       _this.setState({
         hide: true
       });
@@ -1485,7 +1506,7 @@ var Notifications$2 = /*#__PURE__*/function (_Component) {
       }), this.props.children);
       var actions = /*#__PURE__*/React__default["default"].createElement("div", {
         className: "sui-notice-actions"
-      }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$3, {
+      }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$4, {
         icon: "check",
         label: "Hide",
         onClick: function onClick(e) {
@@ -1504,7 +1525,28 @@ var Notifications$2 = /*#__PURE__*/function (_Component) {
   }]);
   return Notifications;
 }(React.Component);
-function _defineProperty$4$1(obj, key, value) {
+function ownKeys$5(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2$5(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) {
+      _defineProperty$5(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
+function _defineProperty$5(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -1516,34 +1558,6 @@ function _defineProperty$4$1(obj, key, value) {
     obj[key] = value;
   }
   return obj;
-}
-function ownKeys$4$1(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-function _objectSpread2$4$1(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys$4$1(Object(source), true).forEach(function (key) {
-        _defineProperty$4$1(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys$4$1(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
 }
 function _objectWithoutPropertiesLoose$8(source, excluded) {
   if (source == null) return {};
@@ -1572,57 +1586,62 @@ function _objectWithoutProperties$8(source, excluded) {
   }
   return target;
 }
+var _excluded$5$1 = ["label", "icon", "iconRight", "design", "color", "className", "loading"];
 var Button$1$1 = function Button(_ref) {
   var label = _ref.label,
     icon = _ref.icon,
+    iconRight = _ref.iconRight,
     _ref$design = _ref.design,
-    design = _ref$design === void 0 ? "solid" : _ref$design,
+    design = _ref$design === void 0 ? 'solid' : _ref$design,
     color = _ref.color,
     className = _ref.className,
     loading = _ref.loading,
-    props = _objectWithoutProperties$8(_ref, ["label", "icon", "design", "color", "className", "loading"]);
+    props = _objectWithoutProperties$8(_ref, _excluded$5$1);
   var loader = /*#__PURE__*/React__default["default"].createElement("span", {
     className: "sui-icon-loader sui-loading",
     style: {
-      position: "relative"
+      position: 'relative'
     },
     "aria-hidden": "true"
   });
-  var content = /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, icon && "" !== icon && /*#__PURE__*/React__default["default"].createElement("span", {
-    className: "sui-icon-" + icon,
+  var content = /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, icon && !iconRight && '' !== icon && /*#__PURE__*/React__default["default"].createElement("span", {
+    className: 'sui-icon-' + icon,
     "aria-hidden": "true"
-  }), label);
-  className = "sui-button".concat(className ? ' ' + className : ''); // Set button color.
+  }), label, icon && iconRight && '' !== icon && /*#__PURE__*/React__default["default"].createElement("span", {
+    className: 'sui-icon-' + icon,
+    "aria-hidden": "true"
+  }));
+  className = "sui-button".concat(iconRight ? ' sui-button-icon-right' : '').concat(className ? ' ' + className : ''); // Set button color.
 
   switch (color) {
-    case "blue":
-    case "green":
-    case "red":
-    case "orange":
-    case "purple":
-    case "yellow":
-    case "white":
-      className += " sui-button-" + color;
+    case 'blue':
+    case 'green':
+    case 'red':
+    case 'orange':
+    case 'purple':
+    case 'yellow':
+    case 'white':
+      className += ' sui-button-' + color;
       break;
-    case "gray":
+    case 'gray':
     default:
-      className += "";
+      className += '';
       break;
   } // Set button style.
 
   switch (design) {
-    case "ghost":
-    case "outlined":
-      className += " sui-button-" + design;
+    case 'ghost':
+    case 'outlined':
+      className += ' sui-button-' + design;
       break;
-    case "solid":
+    case 'solid':
     default:
-      className += "";
+      className += '';
       break;
   } // Set loading class.
 
   if (loading) {
-    className += " sui-button-onload";
+    className += ' sui-button-onload';
   }
   var htmlTag = 'button';
   if (props.href) {
@@ -1630,7 +1649,7 @@ var Button$1$1 = function Button(_ref) {
   } else if (props.htmlFor) {
     htmlTag = 'label';
   }
-  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$4$1({
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$5({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -1676,7 +1695,7 @@ function _objectWithoutProperties$7(source, excluded) {
   }
   return target;
 }
-var _excluded$3$1 = ["type", "label", "labelId", "id", "name", "image", "defaultChecked", "disabled"];
+var _excluded$4$1 = ["type", "label", "labelId", "id", "name", "image", "defaultChecked", "disabled"];
 var RadioCheckboxInput$1 = function RadioCheckboxInput(_ref) {
   var type = _ref.type,
     label = _ref.label,
@@ -1686,7 +1705,7 @@ var RadioCheckboxInput$1 = function RadioCheckboxInput(_ref) {
     image = _ref.image,
     defaultChecked = _ref.defaultChecked,
     disabled = _ref.disabled,
-    props = _objectWithoutProperties$7(_ref, _excluded$3$1);
+    props = _objectWithoutProperties$7(_ref, _excluded$4$1);
   var mainClasses = ["sui-".concat(type)];
   if (props.size === 'small') {
     mainClasses.push("sui-".concat(type, "-sm"));
@@ -1730,7 +1749,7 @@ var RadioCheckboxInput$1 = function RadioCheckboxInput(_ref) {
     id: labelId
   }, label));
 };
-function ownKeys$3$1(object, enumerableOnly) {
+function ownKeys$4$1(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -1740,12 +1759,12 @@ function ownKeys$3$1(object, enumerableOnly) {
   }
   return keys;
 }
-function _objectSpread2$3$1(target) {
+function _objectSpread2$4$1(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys$3$1(Object(source), !0).forEach(function (key) {
-      _defineProperty$3$1(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3$1(Object(source)).forEach(function (key) {
+    i % 2 ? ownKeys$4$1(Object(source), !0).forEach(function (key) {
+      _defineProperty$4$1(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4$1(Object(source)).forEach(function (key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
@@ -1782,7 +1801,7 @@ function _createClass$1$3(Constructor, protoProps, staticProps) {
   });
   return Constructor;
 }
-function _defineProperty$3$1(obj, key, value) {
+function _defineProperty$4$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -1904,13 +1923,13 @@ function _createSuper$1$3(Derived) {
     return _possibleConstructorReturn$1$3(this, result);
   };
 }
-function _slicedToArray$1$1(arr, i) {
-  return _arrayWithHoles$1$1(arr) || _iterableToArrayLimit$1$1(arr, i) || _unsupportedIterableToArray$1$1(arr, i) || _nonIterableRest$1$1();
+function _slicedToArray$2(arr, i) {
+  return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$2();
 }
-function _arrayWithHoles$1$1(arr) {
+function _arrayWithHoles$2(arr) {
   if (Array.isArray(arr)) return arr;
 }
-function _iterableToArrayLimit$1$1(arr, i) {
+function _iterableToArrayLimit$2(arr, i) {
   var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
   if (_i == null) return;
   var _arr = [];
@@ -1934,28 +1953,28 @@ function _iterableToArrayLimit$1$1(arr, i) {
   }
   return _arr;
 }
-function _unsupportedIterableToArray$1$1(o, minLen) {
+function _unsupportedIterableToArray$2(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$1$1(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1$1(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
 }
-function _arrayLikeToArray$1$1(arr, len) {
+function _arrayLikeToArray$2(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
   }
   return arr2;
 }
-function _nonIterableRest$1$1() {
+function _nonIterableRest$2() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 function _createForOfIteratorHelper$2(o, allowArrayLike) {
   var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray$1$1(o)) || allowArrayLike && o && typeof o.length === "number") {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray$2(o)) || allowArrayLike && o && typeof o.length === "number") {
       if (it) o = it;
       var i = 0;
       var F = function F() {};
@@ -2002,8 +2021,9 @@ function _createForOfIteratorHelper$2(o, allowArrayLike) {
       }
     }
   };
-} // https://github.com/davidtheclark/no-scroll/blob/master/index.js
+}
 
+// https://github.com/davidtheclark/no-scroll/blob/master/index.js
 var isOn$1 = false;
 var scrollbarSize$1;
 var scrollTop$1;
@@ -2045,8 +2065,9 @@ function off$1() {
     window.scroll(0, scrollTop$1);
   }
   isOn$1 = false;
-} // https://github.com/davidtheclark/tabbable/blob/master/src/index.js
+}
 
+// https://github.com/davidtheclark/tabbable/blob/master/src/index.js
 var candidateSelectors$1 = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])'];
 var candidateSelector$1 = candidateSelectors$1.join(',');
 var matches$1 = typeof Element === 'undefined' ? function () {
@@ -2239,7 +2260,7 @@ function getHTMLElement$1(doc, selector) {
 function createFocusTrap$1(element, userOptions) {
   var doc = document;
   var container = typeof element === 'string' ? getHTMLElement$1(doc, element) : element;
-  var config = _objectSpread2$3$1({
+  var config = _objectSpread2$4$1({
     returnFocusOnDeactivate: true,
     escapeDeactivates: true
   }, userOptions);
@@ -2642,7 +2663,7 @@ var Modal$1$1 = /*#__PURE__*/function (_React$Component) {
     var _this;
     _classCallCheck$1$3(this, Modal);
     _this = _super.call(this, props);
-    _defineProperty$3$1(_assertThisInitialized$1$3(_this), "clearTimer", function () {
+    _defineProperty$4$1(_assertThisInitialized$1$3(_this), "clearTimer", function () {
       var _this$timeout;
       (_this$timeout = _this.timeout) === null || _this$timeout === void 0 ? void 0 : _this$timeout.forEach(function (timer) {
         clearTimeout(timer);
@@ -2835,7 +2856,7 @@ var Modal$1$1 = /*#__PURE__*/function (_React$Component) {
           dialogProps[_key2] = props[_key2];
         }
       }
-      var childrenArray = [/*#__PURE__*/React__default["default"].createElement('div', _objectSpread2$3$1({}, dialogProps), props.children)];
+      var childrenArray = [/*#__PURE__*/React__default["default"].createElement('div', _objectSpread2$4$1({}, dialogProps), props.children)];
       if (props.verticallyCenter) {
         childrenArray.unshift( /*#__PURE__*/React__default["default"].createElement('div', {
           key: 'a',
@@ -2850,7 +2871,7 @@ var Modal$1$1 = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/React__default["default"].createElement(ReactFocusTrap$1, {
         focusTrapOptions: focusTrapOptions,
         paused: props.focusTrapPaused
-      }, /*#__PURE__*/React__default["default"].createElement('div', _objectSpread2$3$1({}, underlayProps), childrenArray));
+      }, /*#__PURE__*/React__default["default"].createElement('div', _objectSpread2$4$1({}, underlayProps), childrenArray));
     }
   }]);
   return Modal;
@@ -2873,26 +2894,26 @@ AriaModal$1.renderTo = function (input) {
     renderTo: input
   });
 };
-var _excluded$6 = ["modalContent", "triggerContent"];
+var _excluded$3$1 = ["modalContent", "triggerContent"];
 var Modal$2 = function Modal(_ref) {
   var modalContent = _ref.modalContent,
     triggerContent = _ref.triggerContent,
-    props = _objectWithoutProperties$6(_ref, _excluded$6);
+    props = _objectWithoutProperties$6(_ref, _excluded$3$1);
   var _React$useState = React__default["default"].useState(false),
-    _React$useState2 = _slicedToArray$1$1(_React$useState, 2),
+    _React$useState2 = _slicedToArray$2(_React$useState, 2),
     isOpen = _React$useState2[0],
     setIsOpen = _React$useState2[1];
   var _React$useState3 = React__default["default"].useState(false),
-    _React$useState4 = _slicedToArray$1$1(_React$useState3, 2),
+    _React$useState4 = _slicedToArray$2(_React$useState3, 2),
     isClosing = _React$useState4[0],
     setIsClosing = _React$useState4[1]; // States for sliders.
 
   var _React$useState5 = React__default["default"].useState(props.firstSlide),
-    _React$useState6 = _slicedToArray$1$1(_React$useState5, 2),
+    _React$useState6 = _slicedToArray$2(_React$useState5, 2),
     currentSlide = _React$useState6[0],
     setCurrentSlide = _React$useState6[1];
   var _React$useState7 = React__default["default"].useState(null),
-    _React$useState8 = _slicedToArray$1$1(_React$useState7, 2),
+    _React$useState8 = _slicedToArray$2(_React$useState7, 2),
     slideDirection = _React$useState8[0],
     setSlideDirection = _React$useState8[1];
   React__default["default"].useEffect(function () {
@@ -2961,7 +2982,28 @@ var Modal$2 = function Modal(_ref) {
     openModal: openModal
   }));
 };
-function _defineProperty$2$3(obj, key, value) {
+function ownKeys$3$1(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2$3$1(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys$3$1(Object(source), !0).forEach(function (key) {
+      _defineProperty$3$1(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3$1(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
+function _defineProperty$3$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -2973,34 +3015,6 @@ function _defineProperty$2$3(obj, key, value) {
     obj[key] = value;
   }
   return obj;
-}
-function ownKeys$2$1(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-function _objectSpread2$2$1(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys$2$1(Object(source), true).forEach(function (key) {
-        _defineProperty$2$3(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys$2$1(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
 }
 function _objectWithoutPropertiesLoose$5$1(source, excluded) {
   if (source == null) return {};
@@ -3029,20 +3043,21 @@ function _objectWithoutProperties$5$1(source, excluded) {
   }
   return target;
 }
-var ButtonIcon$2$1 = function ButtonIcon(_ref) {
+var _excluded$6 = ["label", "icon", "iconSize", "design", "color", "className", "loading"];
+var ButtonIcon$3 = function ButtonIcon(_ref) {
   var label = _ref.label,
     icon = _ref.icon,
     iconSize = _ref.iconSize,
     _ref$design = _ref.design,
-    design = _ref$design === void 0 ? "solid" : _ref$design,
+    design = _ref$design === void 0 ? 'solid' : _ref$design,
     color = _ref.color,
     className = _ref.className,
     loading = _ref.loading,
-    props = _objectWithoutProperties$5$1(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
+    props = _objectWithoutProperties$5$1(_ref, _excluded$6);
   var loader = /*#__PURE__*/React__default["default"].createElement("span", {
     className: "sui-icon-loader sui-loading",
     style: {
-      position: "relative"
+      position: 'relative'
     },
     "aria-hidden": "true"
   });
@@ -3055,37 +3070,37 @@ var ButtonIcon$2$1 = function ButtonIcon(_ref) {
   className = "sui-button-icon ".concat(className || ''); // Set button color.
 
   switch (color) {
-    case "blue":
-    case "green":
-    case "red":
-    case "orange":
-    case "purple":
-    case "yellow":
-    case "white":
-      className += " sui-button-" + color;
+    case 'blue':
+    case 'green':
+    case 'red':
+    case 'orange':
+    case 'purple':
+    case 'yellow':
+    case 'white':
+      className += ' sui-button-' + color;
       break;
-    case "gray":
+    case 'gray':
     default:
-      className += "";
+      className += '';
       break;
   } // Set button style.
 
   switch (design) {
-    case "ghost":
-    case "outlined":
-      className += " sui-button-" + design;
+    case 'ghost':
+    case 'outlined':
+      className += ' sui-button-' + design;
       break;
-    case "solid":
+    case 'solid':
     default:
-      className += "";
+      className += '';
       break;
   } // Set loading class.
 
   if (loading) {
-    className += " sui-button-onload";
+    className += ' sui-button-onload';
   }
   var htmlTag = props.href ? 'a' : 'button';
-  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$2$1({
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$3$1({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -3107,7 +3122,7 @@ var ApplyModal = function ApplyModal(_ref) {
     _strings$actionButton = strings.actionButton,
     actionButton = _strings$actionButton === void 0 ? 'Apply' : _strings$actionButton;
   var _React$useState = React__default["default"].useState(false),
-    _React$useState2 = _slicedToArray$2(_React$useState, 2),
+    _React$useState2 = _slicedToArray$3(_React$useState, 2),
     isSaving = _React$useState2[0],
     setIsSaving = _React$useState2[1];
   var doAction = function doAction() {
@@ -3119,7 +3134,7 @@ var ApplyModal = function ApplyModal(_ref) {
       className: "sui-box"
     }, /*#__PURE__*/React__default["default"].createElement("div", {
       className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
-    }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$2$1, {
+    }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$3, {
       label: closeIcon,
       icon: "close",
       iconSize: "md",
@@ -3172,9 +3187,12 @@ var DeleteModal = function DeleteModal(_ref) {
     _strings$actionButton = strings.actionButton,
     actionButton = _strings$actionButton === void 0 ? 'Delete' : _strings$actionButton;
   var _React$useState = React__default["default"].useState(false),
-    _React$useState2 = _slicedToArray$2(_React$useState, 2),
+    _React$useState2 = _slicedToArray$3(_React$useState, 2),
     isSaving = _React$useState2[0],
     setIsSaving = _React$useState2[1];
+  var configNames = config.map(function (config) {
+    return config.name;
+  });
   var doAction = function doAction() {
     setIsSaving(true);
     save(config);
@@ -3184,7 +3202,7 @@ var DeleteModal = function DeleteModal(_ref) {
       className: "sui-box"
     }, /*#__PURE__*/React__default["default"].createElement("div", {
       className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
-    }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$2$1, {
+    }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$3, {
       label: closeIcon,
       icon: "close",
       iconSize: "md",
@@ -3196,7 +3214,7 @@ var DeleteModal = function DeleteModal(_ref) {
       id: "smush-config-delete-title"
     }, title), /*#__PURE__*/React__default["default"].createElement("p", {
       className: "sui-description"
-    }, description.replace('{configName}', config.name))), /*#__PURE__*/React__default["default"].createElement("div", {
+    }, description.replace('{configName}', configNames.join(', ')))), /*#__PURE__*/React__default["default"].createElement("div", {
       className: "sui-box-footer sui-content-center sui-flatten sui-spacing-top--0 sui-spacing-bottom--60"
     }, /*#__PURE__*/React__default["default"].createElement(Button$1$1, {
       design: "ghost",
@@ -3233,6 +3251,115 @@ function _extends$3$1() {
   };
   return _extends$3$1.apply(this, arguments);
 }
+function _objectWithoutPropertiesLoose$1$1$1(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+function _objectWithoutProperties$1$1$1(source, excluded) {
+  if (source == null) return {};
+  var target = _objectWithoutPropertiesLoose$1$1$1(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _slicedToArray$1$1(arr, i) {
+  return _arrayWithHoles$1$1(arr) || _iterableToArrayLimit$1$1(arr, i) || _unsupportedIterableToArray$1$1(arr, i) || _nonIterableRest$1$1();
+}
+function _arrayWithHoles$1$1(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _iterableToArrayLimit$1$1(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _s, _e;
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
+function _unsupportedIterableToArray$1$1(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$1$1(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1$1(o, minLen);
+}
+function _arrayLikeToArray$1$1(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+function _nonIterableRest$1$1() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function ownKeys$2$1(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2$2$1(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys$2$1(Object(source), !0).forEach(function (key) {
+      _defineProperty$2$3(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2$1(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
+function _defineProperty$2$3(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
 function _objectWithoutPropertiesLoose$4$1(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -3260,39 +3387,147 @@ function _objectWithoutProperties$4$1(source, excluded) {
   }
   return target;
 }
-var Input = function Input(_ref) {
-  var id = _ref.id,
-    size = _ref.size,
-    label = _ref.label,
-    description = _ref.description,
-    _ref$type = _ref.type,
-    type = _ref$type === void 0 ? 'text' : _ref$type,
-    props = _objectWithoutProperties$4$1(_ref, ["id", "size", "label", "description", "type"]);
+var _excluded$1$1 = ["label", "icon", "iconSize", "design", "color", "className", "loading"];
+var ButtonIcon$2$1 = function ButtonIcon(_ref) {
+  var label = _ref.label,
+    icon = _ref.icon,
+    iconSize = _ref.iconSize,
+    _ref$design = _ref.design,
+    design = _ref$design === void 0 ? 'solid' : _ref$design,
+    color = _ref.color,
+    className = _ref.className,
+    loading = _ref.loading,
+    props = _objectWithoutProperties$4$1(_ref, _excluded$1$1);
+  var loader = /*#__PURE__*/React__default["default"].createElement("span", {
+    className: "sui-icon-loader sui-loading",
+    style: {
+      position: 'relative'
+    },
+    "aria-hidden": "true"
+  });
+  var content = /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("span", {
+    className: "sui-icon-".concat(icon).concat(iconSize ? ' sui-' + iconSize : ''),
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React__default["default"].createElement("span", {
+    className: "sui-screen-reader-text"
+  }, label));
+  className = "sui-button-icon ".concat(className || ''); // Set button color.
+
+  switch (color) {
+    case 'blue':
+    case 'green':
+    case 'red':
+    case 'orange':
+    case 'purple':
+    case 'yellow':
+    case 'white':
+      className += ' sui-button-' + color;
+      break;
+    case 'gray':
+    default:
+      className += '';
+      break;
+  } // Set button style.
+
+  switch (design) {
+    case 'ghost':
+    case 'outlined':
+      className += ' sui-button-' + design;
+      break;
+    case 'solid':
+    default:
+      className += '';
+      break;
+  } // Set loading class.
+
+  if (loading) {
+    className += ' sui-button-onload';
+  }
+  var htmlTag = props.href ? 'a' : 'button';
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$2$1({
+    className: className,
+    disabled: props.disabled || loading
+  }, props), loading ? loader : content);
+};
+var _excluded2 = ["id", "label", "description", "type", "errorStatus", "errorDescription", "size", "fieldSize", "suffix", "prefix"];
+var InputWithRef = /*#__PURE__*/React__default["default"].forwardRef(function (_ref2, ref) {
+  var id = _ref2.id,
+    label = _ref2.label,
+    description = _ref2.description,
+    _ref2$type = _ref2.type,
+    type = _ref2$type === void 0 ? 'text' : _ref2$type,
+    errorStatus = _ref2.errorStatus,
+    errorDescription = _ref2.errorDescription,
+    size = _ref2.size,
+    fieldSize = _ref2.fieldSize,
+    suffix = _ref2.suffix,
+    prefix = _ref2.prefix,
+    props = _objectWithoutProperties$1$1$1(_ref2, _excluded2);
   var uniqueId = id && '' !== id ? id : props.property;
-  var clazz = 'sui-form-control';
-  switch (size) {
+  var _useState3 = React.useState(true),
+    _useState4 = _slicedToArray$1$1(_useState3, 2),
+    showIcon = _useState4[0],
+    setShowIcon = _useState4[1];
+  var fieldClasses = 'sui-form-field';
+  switch (fieldSize) {
     case 'sm':
     case 'small':
-      clazz += ' sui-input-sm';
+      fieldClasses += ' sui-input-sm';
       break;
     case 'md':
     case 'medium':
-      clazz += ' sui-input-md';
+      fieldClasses += ' sui-input-md';
+      break;
+  }
+  if (errorStatus) {
+    fieldClasses += ' sui-form-field-error';
+  }
+  var inputClasses = 'sui-form-control';
+  suffix && (inputClasses += ' sui-field-has-suffix');
+  prefix && (inputClasses += ' sui-field-has-prefix');
+  switch (size) {
+    case 'sm':
+    case 'small':
+      inputClasses += ' sui-input-sm';
+      break;
+    case 'md':
+    case 'medium':
+      inputClasses += ' sui-input-md';
       break;
   }
   return /*#__PURE__*/React__default["default"].createElement("div", {
-    className: "sui-form-field"
+    className: fieldClasses
   }, label && /*#__PURE__*/React__default["default"].createElement("label", {
     htmlFor: uniqueId,
     className: "sui-label"
-  }, label), /*#__PURE__*/React__default["default"].createElement("input", _extends$3$1({
+  }, label), prefix && /*#__PURE__*/React__default["default"].createElement("span", {
+    "class": "sui-field-prefix"
+  }, prefix), type === 'password' ? /*#__PURE__*/React__default["default"].createElement("div", {
+    className: "sui-with-button sui-with-button-icon"
+  }, /*#__PURE__*/React__default["default"].createElement("input", _extends$3$1({
+    id: uniqueId,
+    type: showIcon ? type : 'text',
+    className: inputClasses,
+    ref: ref
+  }, props)), /*#__PURE__*/React__default["default"].createElement(ButtonIcon$2$1, {
+    icon: showIcon ? "eye" : "eye-hide",
+    label: showIcon ? "Show password" : "Hide password",
+    onClick: function onClick() {
+      setShowIcon(!showIcon);
+    }
+  })) : /*#__PURE__*/React__default["default"].createElement("input", _extends$3$1({
     id: uniqueId,
     type: type,
-    className: clazz
-  }, props)), description && /*#__PURE__*/React__default["default"].createElement("p", {
+    className: inputClasses,
+    ref: ref
+  }, props)), suffix && /*#__PURE__*/React__default["default"].createElement("span", {
+    "class": "sui-field-suffix"
+  }, suffix), errorStatus && errorDescription && /*#__PURE__*/React__default["default"].createElement("div", {
+    className: "sui-error-message"
+  }, errorDescription), description && /*#__PURE__*/React__default["default"].createElement("p", {
     className: "sui-description"
   }, description));
-};
+});
 var EditModal = function EditModal(_ref) {
   var setOpen = _ref.setOpen,
     config = _ref.config,
@@ -3301,22 +3536,16 @@ var EditModal = function EditModal(_ref) {
     strings = _ref$strings === void 0 ? {} : _ref$strings;
   var configName = config ? config.name : '',
     configDescription = config ? config.description : '';
-  var _React$useState = React__default["default"].useState(configName),
-    _React$useState2 = _slicedToArray$2(_React$useState, 2),
-    nameValue = _React$useState2[0],
-    setNameValue = _React$useState2[1];
-  var _React$useState3 = React__default["default"].useState(configDescription),
-    _React$useState4 = _slicedToArray$2(_React$useState3, 2),
-    descriptionValue = _React$useState4[0],
-    setDescriptionValue = _React$useState4[1];
-  var _React$useState5 = React__default["default"].useState(false),
-    _React$useState6 = _slicedToArray$2(_React$useState5, 2),
-    errorMessage = _React$useState6[0],
-    setErrorMessage = _React$useState6[1];
-  var _React$useState7 = React__default["default"].useState(false),
-    _React$useState8 = _slicedToArray$2(_React$useState7, 2),
-    isSaving = _React$useState8[0],
-    setIsSaving = _React$useState8[1];
+  var _React$useState = React__default["default"].useState(false),
+    _React$useState2 = _slicedToArray$3(_React$useState, 2),
+    errorMessage = _React$useState2[0],
+    setErrorMessage = _React$useState2[1];
+  var _React$useState3 = React__default["default"].useState(false),
+    _React$useState4 = _slicedToArray$3(_React$useState3, 2),
+    isSaving = _React$useState4[0],
+    setIsSaving = _React$useState4[1];
+  var nameValue = React__default["default"].useRef(configName);
+  var descriptionValue = React__default["default"].useRef(configDescription);
   var _strings$closeIcon = strings.closeIcon,
     closeIcon = _strings$closeIcon === void 0 ? 'Close this dialog window' : _strings$closeIcon,
     _strings$nameInput = strings.nameInput,
@@ -3342,15 +3571,15 @@ var EditModal = function EditModal(_ref) {
     setIsSaving(false);
   };
   var doAction = function doAction() {
-    if (!nameValue.trim().length) {
+    if (!nameValue.current.trim().length) {
       setErrorMessage(emptyNameError);
       return;
     }
     setErrorMessage(false);
     setIsSaving(true);
     var data = new FormData();
-    data.append('name', nameValue);
-    data.append('description', descriptionValue);
+    data.append('name', nameValue.current);
+    data.append('description', descriptionValue.current);
     save(data, displayErrorMessage);
   };
   var modalContent = function modalContent() {
@@ -3361,7 +3590,7 @@ var EditModal = function EditModal(_ref) {
       className: "sui-box"
     }, /*#__PURE__*/React__default["default"].createElement("div", {
       className: "sui-box-header sui-flatten sui-content-center sui-spacing-top--60"
-    }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$2$1, {
+    }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$3, {
       label: closeIcon,
       icon: "close",
       iconSize: "md",
@@ -3390,12 +3619,12 @@ var EditModal = function EditModal(_ref) {
     }, /*#__PURE__*/React__default["default"].createElement("span", {
       className: "sui-notice-icon sui-icon-info sui-md",
       "aria-hidden": "true"
-    }), /*#__PURE__*/React__default["default"].createElement("p", null, errorMessage)))), /*#__PURE__*/React__default["default"].createElement(Input, {
+    }), /*#__PURE__*/React__default["default"].createElement("p", null, errorMessage)))), /*#__PURE__*/React__default["default"].createElement(InputWithRef, {
       label: nameInput,
       name: "name",
-      value: nameValue,
+      defaultValue: nameValue.current,
       onChange: function onChange(e) {
-        return setNameValue(e.target.value);
+        return nameValue.current = e.target.value;
       },
       maxLength: "200"
     }), /*#__PURE__*/React__default["default"].createElement("div", {
@@ -3407,9 +3636,9 @@ var EditModal = function EditModal(_ref) {
       id: "sui-edit-config-textarea",
       className: "sui-form-control",
       name: "description",
-      value: descriptionValue,
+      defaultValue: descriptionValue.current,
       onChange: function onChange(e) {
-        return setDescriptionValue(e.target.value);
+        return descriptionValue.current = e.target.value;
       },
       maxLength: "200"
     }))), /*#__PURE__*/React__default["default"].createElement("div", {
@@ -3487,13 +3716,13 @@ function _taggedTemplateLiteral$1$3(strings, raw) {
     }
   }));
 }
-function _slicedToArray$3(arr, i) {
-  return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$3();
+function _slicedToArray$4(arr, i) {
+  return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$4();
 }
-function _arrayWithHoles$3(arr) {
+function _arrayWithHoles$4(arr) {
   if (Array.isArray(arr)) return arr;
 }
-function _iterableToArrayLimit$3(arr, i) {
+function _iterableToArrayLimit$4(arr, i) {
   var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
   if (_i == null) return;
   var _arr = [];
@@ -3517,22 +3746,22 @@ function _iterableToArrayLimit$3(arr, i) {
   }
   return _arr;
 }
-function _unsupportedIterableToArray$3(o, minLen) {
+function _unsupportedIterableToArray$4(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$3(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$3(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$4(o, minLen);
 }
-function _arrayLikeToArray$3(arr, len) {
+function _arrayLikeToArray$4(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
   }
   return arr2;
 }
-function _nonIterableRest$3() {
+function _nonIterableRest$4() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 function ownKeys$1$1(object, enumerableOnly) {
@@ -3699,7 +3928,7 @@ function _objectWithoutProperties$3$1(source, excluded) {
   }
   return target;
 }
-var _excluded$1$1 = ["type", "label", "labelId", "id", "name", "image", "defaultChecked", "disabled"];
+var _excluded$1$2 = ["type", "label", "labelId", "id", "name", "image", "defaultChecked", "disabled"];
 var RadioCheckboxInput = function RadioCheckboxInput(_ref) {
   var type = _ref.type,
     label = _ref.label,
@@ -3709,7 +3938,7 @@ var RadioCheckboxInput = function RadioCheckboxInput(_ref) {
     image = _ref.image,
     defaultChecked = _ref.defaultChecked,
     disabled = _ref.disabled,
-    props = _objectWithoutProperties$3$1(_ref, _excluded$1$1);
+    props = _objectWithoutProperties$3$1(_ref, _excluded$1$2);
   var mainClasses = ["sui-".concat(type)];
   if (props.size === 'small') {
     mainClasses.push("sui-".concat(type, "-sm"));
@@ -3771,9 +4000,12 @@ var AccordionItemHeader = function AccordionItemHeader(_ref3) {
     checkboxClickHandler = _ref3.checkboxClickHandler,
     props = _objectWithoutProperties$2$1(_ref3, _excluded3);
   var _useState3 = React.useState(false),
-    _useState4 = _slicedToArray$3(_useState3, 1),
+    _useState4 = _slicedToArray$4(_useState3, 1),
     isOpen = _useState4[0];
-  var countChildren = React__default["default"].Children.toArray(children).length;
+  var childrenData = Array.isArray(children) ? children.filter(function (child) {
+    return 'boolean' !== typeof child && null != child && '' !== child;
+  }) : 'boolean' === typeof children || '' === children ? [] : children;
+  var countChildren = React__default["default"].Children.toArray(childrenData).length;
   var titleColumnIcon = 'undefined' !== typeof icon && '' !== icon ? /*#__PURE__*/React__default["default"].createElement("span", {
     className: "sui-icon-".concat(icon),
     "aria-hidden": "true"
@@ -3800,7 +4032,7 @@ var AccordionItemHeader = function AccordionItemHeader(_ref3) {
     label: isOpen ? 'Close section' : 'Open section',
     className: "sui-button-icon sui-accordion-open-indicator"
   });
-  var columns = React__default["default"].Children.map(children, function (column, index) {
+  var columns = React__default["default"].Children.map(childrenData, function (column, index) {
     index++;
     var columnSize = column.props.size;
     var columnClass = 'undefined' !== typeof columnSize && '' !== columnSize ? 'sui-accordion-col-' + columnSize : 'sui-accordion-col-auto';
@@ -3929,7 +4161,7 @@ function _taggedTemplateLiteral$4(strings, raw) {
     }
   }));
 }
-function _defineProperty$7(obj, key, value) {
+function _defineProperty$8(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -3942,7 +4174,7 @@ function _defineProperty$7(obj, key, value) {
   }
   return obj;
 }
-function ownKeys$6(object, enumerableOnly) {
+function ownKeys$7(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -3953,17 +4185,17 @@ function ownKeys$6(object, enumerableOnly) {
   }
   return keys;
 }
-function _objectSpread2$6(target) {
+function _objectSpread2$7(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
     if (i % 2) {
-      ownKeys$6(Object(source), true).forEach(function (key) {
-        _defineProperty$7(target, key, source[key]);
+      ownKeys$7(Object(source), true).forEach(function (key) {
+        _defineProperty$8(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$6(Object(source)).forEach(function (key) {
+      ownKeys$7(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -3997,7 +4229,7 @@ function _objectWithoutProperties$b(source, excluded) {
   }
   return target;
 }
-var ButtonIcon$4 = function ButtonIcon(_ref) {
+var ButtonIcon$5 = function ButtonIcon(_ref) {
   var label = _ref.label,
     icon = _ref.icon,
     iconSize = _ref.iconSize,
@@ -4053,7 +4285,7 @@ var ButtonIcon$4 = function ButtonIcon(_ref) {
     className += " sui-button-onload";
   }
   var htmlTag = props.href ? 'a' : 'button';
-  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$6({
+  return /*#__PURE__*/React__default["default"].createElement(htmlTag, _objectSpread2$7({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
@@ -4209,7 +4441,7 @@ var Dropdown = /*#__PURE__*/function (_Component) {
         onClick: function onClick(e) {
           return e.stopPropagation();
         }
-      }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$4, {
+      }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$5, {
         icon: "widget-settings-config",
         label: open ? 'Open menu' : 'Close menu',
         onClick: this.toggle
@@ -4237,21 +4469,25 @@ var PresetsTable = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var rows = React.Children.map(this.props.children, function (row) {
-        var rowName = row.props.name;
+        var rowName = row.props.name ? row.props.name : '';
         var rowStatus = row.props.status;
-        var rowContent = rowStatus.replace(/( - )/g, '\n').split('\n');
+        var rowContent = rowStatus[0].replace(/( - )/g, '\n').split('\n').filter(function (item) {
+          return item;
+        });
         var rowTag = /*#__PURE__*/React__default["default"].createElement("span", {
           className: "sui-tag sui-tag-pro",
           style: {
             marginLeft: '6px'
           }
         }, "Pro");
-        return /*#__PURE__*/React__default["default"].createElement("tr", null, /*#__PURE__*/React__default["default"].createElement("td", null, rowName), /*#__PURE__*/React__default["default"].createElement("td", null, rowContent.map(function (item) {
+        return '' !== rowName || rowContent.length ? /*#__PURE__*/React__default["default"].createElement("tr", null, /*#__PURE__*/React__default["default"].createElement("td", null, rowName), /*#__PURE__*/React__default["default"].createElement("td", null, rowContent.map(function (item, index) {
           if (item.includes('Inactive')) {
-            return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, item, rowTag, '\n');
+            return /*#__PURE__*/React__default["default"].createElement("span", {
+              key: item + '-' + index
+            }, item, rowTag, '\n');
           }
           return item + '\n';
-        })));
+        }))) : '';
       });
       return /*#__PURE__*/React__default["default"].createElement(Table, this.props, /*#__PURE__*/React__default["default"].createElement("tbody", null, rows));
     }
@@ -4320,14 +4556,14 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
     var _this;
     _classCallCheck$3$1(this, PresetsAccordionItem);
     _this = _super.call(this, props);
-    _defineProperty$6(_assertThisInitialized$3$1(_this), "toggle", function (e) {
+    _defineProperty$7(_assertThisInitialized$3$1(_this), "toggle", function (e) {
       if ('sui-dropdown' !== e.target.className || 'sui-button-icon undefined' !== e.target.className || 'sui-icon-widget-settings-config' !== e.target.className) {
         _this.setState({
           open: !_this.state.open
         });
       }
     });
-    _defineProperty$6(_assertThisInitialized$3$1(_this), "accordionHeadApplyClicked", function (e) {
+    _defineProperty$7(_assertThisInitialized$3$1(_this), "accordionHeadApplyClicked", function (e) {
       e.stopPropagation();
       _this.props.applyAction();
     });
@@ -4386,15 +4622,15 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         onClick: function onClick(e) {
           return _this2.toggle(e);
         }
-      }), /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, !isWidget && /*#__PURE__*/React__default["default"].createElement("div", {
-        size: null !== date && '' !== date ? '3' : '5'
+      }), !isWidget && /*#__PURE__*/React__default["default"].createElement("div", {
+        size: '' !== date ? '3' : '5'
       }, /*#__PURE__*/React__default["default"].createElement("div", {
         style: descstyles
-      }, description))), /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, null !== date && '' !== date && !isWidget && /*#__PURE__*/React__default["default"].createElement("div", {
+      }, description)), '' !== date && !isWidget && /*#__PURE__*/React__default["default"].createElement("div", {
         size: "2"
       }, /*#__PURE__*/React__default["default"].createElement("div", {
         style: descstyles
-      }, date))), /*#__PURE__*/React__default["default"].createElement("div", null, this.props.showApplyButton && /*#__PURE__*/React__default["default"].createElement(Button$1$1, {
+      }, date)), /*#__PURE__*/React__default["default"].createElement("div", null, this.props.showApplyButton && /*#__PURE__*/React__default["default"].createElement(Button$1$1, {
         label: this.props.applyLabel || 'Apply',
         design: "ghost",
         className: "sui-presets-item__apply",
@@ -4427,7 +4663,7 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
       }, description)), /*#__PURE__*/React__default["default"].createElement("div", {
         className: "sui-tooltip",
         "data-tooltip": this.props.editLabel || 'Edit Details'
-      }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$2$1, {
+      }, /*#__PURE__*/React__default["default"].createElement(ButtonIcon$3, {
         icon: "pencil",
         label: this.props.editLabel,
         design: "outlined",
@@ -4462,6 +4698,7 @@ var RequestHandler = /*#__PURE__*/function () {
     this.pluginRequests = pluginRequests;
     this.hubBaseURL = hubBaseURL || 'https://wpmudev.com/api/hub/v1/package-configs';
   }
+
   /**
    * Deletes a config locally and from the Hub.
    *
@@ -4469,7 +4706,6 @@ var RequestHandler = /*#__PURE__*/function () {
    * @param {Object} currentConfig Config to delete.
    * @return {Promise}
    */
-
   _createClass$3$1(RequestHandler, [{
     key: "delete",
     value: function _delete(configs, currentConfig) {
@@ -4485,6 +4721,7 @@ var RequestHandler = /*#__PURE__*/function () {
       }
       return this.updateLocalConfigsList(configs);
     }
+
     /**
      * Adds a new config locally and to the Hub.
      *
@@ -4526,6 +4763,7 @@ var RequestHandler = /*#__PURE__*/function () {
         }
       });
     }
+
     /**
      * Edits the given config's name and description locally and in the Hub.
      *
@@ -4542,8 +4780,9 @@ var RequestHandler = /*#__PURE__*/function () {
       if (this.apiKey && currentConfig.hub_id) {
         var hubData = Object.assign({
           "package": this.pluginData
-        }, configData); // This returns a 404 when the config doesn't exist in the Hub anymore.
+        }, configData);
 
+        // This returns a 404 when the config doesn't exist in the Hub anymore.
         this.makeHubRequest("/".concat(currentConfig.hub_id), 'PATCH', JSON.stringify(hubData))["catch"](function (res) {
           return console.log(res);
         });
@@ -4556,6 +4795,7 @@ var RequestHandler = /*#__PURE__*/function () {
       }
       return this.updateLocalConfigsList(configs);
     }
+
     /**
      * Updates the locally stored list of configs replacing them with new ones.
      *
@@ -4570,6 +4810,7 @@ var RequestHandler = /*#__PURE__*/function () {
       });
       return this.makeLocalRequest('POST', JSON.stringify(requestData));
     }
+
     /**
      * Deletes the given config from the Hub.
      * The response is a 404 if the config doesn't exist in the Hub.
@@ -4586,6 +4827,7 @@ var RequestHandler = /*#__PURE__*/function () {
         });
       }
     }
+
     /**
      * Handles the several requests needed for syncinc with the Hub.
      *
@@ -4611,6 +4853,7 @@ var RequestHandler = /*#__PURE__*/function () {
         });
       });
     }
+
     /**
      * Syncs the locally stored configs with the Hub.
      * What this does:
@@ -4636,15 +4879,15 @@ var RequestHandler = /*#__PURE__*/function () {
         _step;
       try {
         var _loop = function _loop() {
-          var _step$value = _slicedToArray$2(_step.value, 2),
+          var _step$value = _slicedToArray$3(_step.value, 2),
             index = _step$value[0],
             localOne = _step$value[1];
-
           // Skip checks for the basic config.
           if (localOne["default"]) {
             return "continue";
-          } // Send to the Hub the configs that haven't been sent.
+          }
 
+          // Send to the Hub the configs that haven't been sent.
           if (!localOne.hub_id) {
             var sendToHubPromise = _this3.sendConfigToHub(localOne).then(function (res) {
               localConfigs[index]['id'] = res.id;
@@ -4652,13 +4895,15 @@ var RequestHandler = /*#__PURE__*/function () {
             });
             hubPromises.push(sendToHubPromise);
             return "continue";
-          } // Find the configs that were removed from the hub and remove them locally.
+          }
 
+          // Find the configs that were removed from the hub and remove them locally.
           if (!hubConfigsIds[localOne.hub_id]) {
             delete localConfigs[index];
             return "continue";
-          } // Keep the IDs and index of the local configs for reference later on.
+          }
 
+          // Keep the IDs and index of the local configs for reference later on.
           localConfigsIds[localOne.hub_id] = index;
         };
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -4675,7 +4920,6 @@ var RequestHandler = /*#__PURE__*/function () {
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var hubOne = _step2.value;
-
           // Add the configs from the hub that aren't present locally.
           if (!localConfigsIds[hubOne.id]) {
             localConfigs.push({
@@ -4686,8 +4930,9 @@ var RequestHandler = /*#__PURE__*/function () {
               config: JSON.parse(hubOne.config)
             });
             continue;
-          } // Sync the name and description of local configs.
+          }
 
+          // Sync the name and description of local configs.
           var localIndex = localConfigsIds[hubOne.id],
             localConfig = localConfigs[localIndex];
           if (localConfig.name !== hubOne.name || localConfig.description !== hubOne.description) {
@@ -4703,6 +4948,7 @@ var RequestHandler = /*#__PURE__*/function () {
       }
       return Promise.all(hubPromises);
     }
+
     /**
      * Sends the given config to the Hub.
      *
@@ -4720,6 +4966,7 @@ var RequestHandler = /*#__PURE__*/function () {
       };
       return this.makeHubRequest('', 'POST', JSON.stringify(configData));
     }
+
     /**
      * Retrieves a new config from the uploaded file.
      * Triggered on the input's onChange.
@@ -4736,6 +4983,7 @@ var RequestHandler = /*#__PURE__*/function () {
       data.append('_ajax_nonce', this.pluginRequests.nonce);
       return this.makePluginRequest(this.pluginRequests.uploadAction, data);
     }
+
     /**
      * Retrieves a new config from the site's current settings.
      *
@@ -4748,6 +4996,7 @@ var RequestHandler = /*#__PURE__*/function () {
       data.append('_ajax_nonce', this.pluginRequests.nonce);
       return this.makePluginRequest(this.pluginRequests.createAction, data);
     }
+
     /**
      * Applies the given config to the site.
      *
@@ -4762,6 +5011,7 @@ var RequestHandler = /*#__PURE__*/function () {
       data.append('id', config.id);
       return this.makePluginRequest(this.pluginRequests.applyAction, data);
     }
+
     /**
      * Triggers requests handled by the WP Rest API.
      *
@@ -4780,6 +5030,7 @@ var RequestHandler = /*#__PURE__*/function () {
       };
       return this.makeRequest(this.root, verb, data, headers);
     }
+
     /**
      * Wrapper to make requests to the Hub.
      *
@@ -4800,6 +5051,7 @@ var RequestHandler = /*#__PURE__*/function () {
       };
       return this.makeRequest(this.hubBaseURL + path, verb, data, headers);
     }
+
     /**
      * Triggers AJAX requests that are handled by the plugin.
      *
@@ -4812,6 +5064,7 @@ var RequestHandler = /*#__PURE__*/function () {
     value: function makePluginRequest(action, data) {
       return this.makeRequest("".concat(ajaxurl, "?action=").concat(action), 'POST', data);
     }
+
     /**
     * Initiates and promesifies xhr requests.
     *
@@ -4867,32 +5120,33 @@ var Presets = function Presets(_ref) {
     _ref$setDemoData = _ref.setDemoData,
     setDemoData = _ref$setDemoData === void 0 ? false : _ref$setDemoData;
   var _React$useState = React__default["default"].useState([]),
-    _React$useState2 = _slicedToArray$2(_React$useState, 2),
+    _React$useState2 = _slicedToArray$3(_React$useState, 2),
     configs = _React$useState2[0],
     setConfigs = _React$useState2[1];
   var _React$useState3 = React__default["default"].useState(true),
-    _React$useState4 = _slicedToArray$2(_React$useState3, 2),
+    _React$useState4 = _slicedToArray$3(_React$useState3, 2),
     isLoading = _React$useState4[0],
     setIsLoading = _React$useState4[1];
   var _React$useState5 = React__default["default"].useState(true),
-    _React$useState6 = _slicedToArray$2(_React$useState5, 2),
+    _React$useState6 = _slicedToArray$3(_React$useState5, 2),
     isDisabled = _React$useState6[0],
-    setDisabled = _React$useState6[1]; // Modals-related states.
+    setDisabled = _React$useState6[1];
 
+  // Modals-related states.
   var _React$useState7 = React__default["default"].useState(null),
-    _React$useState8 = _slicedToArray$2(_React$useState7, 2),
+    _React$useState8 = _slicedToArray$3(_React$useState7, 2),
     currentConfig = _React$useState8[0],
     setCurrentConfig = _React$useState8[1];
   var _React$useState9 = React__default["default"].useState(false),
-    _React$useState10 = _slicedToArray$2(_React$useState9, 2),
+    _React$useState10 = _slicedToArray$3(_React$useState9, 2),
     isApplyOpen = _React$useState10[0],
     setIsApplyOpen = _React$useState10[1];
   var _React$useState11 = React__default["default"].useState(false),
-    _React$useState12 = _slicedToArray$2(_React$useState11, 2),
+    _React$useState12 = _slicedToArray$3(_React$useState11, 2),
     isDeleteOpen = _React$useState12[0],
     setIsDeleteOpen = _React$useState12[1];
   var _React$useState13 = React__default["default"].useState(false),
-    _React$useState14 = _slicedToArray$2(_React$useState13, 2),
+    _React$useState14 = _slicedToArray$3(_React$useState13, 2),
     isEditOpen = _React$useState14[0],
     setIsEditOpen = _React$useState14[1];
   var urls = Object.assign({
@@ -4940,15 +5194,18 @@ var Presets = function Presets(_ref) {
       successMessage: 'Config(s) deleted successfully.'
     },
     settingsLabels: {
-      bulk_smush: 'Bulk Smush',
-      lazy_load: 'Lazy Load',
-      cdn: 'CDN',
-      webp_mod: 'WebP Mod',
-      integrations: 'Integrations',
-      settings: 'Settings'
+      uptime: 'Uptime',
+      database: 'Database',
+      gravatar: 'Gravatar Caching',
+      page_cache: 'Page Caching',
+      advanced: 'Advanced Tools',
+      rss: 'RSS Caching',
+      settings: 'Settings',
+      performance: 'Performance Test'
     }
-  }, sourceLang); // Default demo data.
+  }, sourceLang);
 
+  // Default demo data.
   var demoData = [];
   if (srcDemoData) {
     if ('empty' === srcDemoData) {
@@ -5037,16 +5294,18 @@ var Presets = function Presets(_ref) {
                   error_msg: lang.uploadWrongPluginErrorMessage.replace('{pluginName}', requestsData.pluginData.name)
                 }
               };
-            } // We don't need this.
+            }
 
+            // We don't need this.
             delete res.data.plugin;
           }
           res.data.name = res.data.name.substring(0, 200);
           res.data.description = res.data.description.substring(0, 200);
           newConfigName = escapeHTML(res.data.name);
           return RequestsHandler.addNew(configs, res.data);
-        } // Throw otherwise.
+        }
 
+        // Throw otherwise.
         throw res;
       }).then(function (updatedConfigs) {
         setConfigs(updatedConfigs);
@@ -5063,18 +5322,26 @@ var Presets = function Presets(_ref) {
         setIsLoading(true);
       }, 500);
       setTimeout(function () {
-        setIsLoading(false); // Remove the config from the demo data.
-
-        demoData = configs.filter(function (config) {
-          return config.id !== currentConfig.id;
+        setIsLoading(false);
+        // Remove the configs from the demo data.
+        var demoData = configs.filter(function (config) {
+          return !currentConfig.includes(config);
         });
         setConfigs(demoData);
+        setDisabled(true);
       }, 1000);
       console.log('\n' + 'Modal: Delete Configuration File\n' + 'Button: Delete\n' + 'Action: It removes an item from the table.\n' + '\n' + 'REMEMBER, THIS IS JUST A PROTOTYPE AND NO REAL ACTION WILL BE PERFORMED.' + '\n');
     } else {
-      RequestsHandler["delete"](_toConsumableArray(configs), currentConfig).then(function (newConfigs) {
+      var newConfigs = _toConsumableArray(configs);
+      currentConfig.forEach(function (config) {
+        newConfigs = newConfigs.filter(function (c) {
+          return c.id !== config.id;
+        });
+      });
+      RequestsHandler["delete"](newConfigs, currentConfig).then(function () {
         setConfigs(newConfigs);
-        successNotice(Object.keys(currentConfig).length === 1 ? lang.deleteAction.successMessage.replace('{configName}', currentConfig.name) : lang.bulkDeleteAction.successMessage);
+        setDisabled(true);
+        successNotice(lang.bulkDeleteAction.successMessage);
       })["catch"](function (res) {
         return requestFailureNotice(res);
       }).then(function () {
@@ -5174,12 +5441,15 @@ var Presets = function Presets(_ref) {
     }
     if (!config || !Object.keys(config).length || setDemoData) {
       return;
-    } // Include the ID of the plugin this config belongs to.
+    }
 
-    config.plugin = requestsData.pluginData.id; // This is unique per site.
+    // Include the ID of the plugin this config belongs to.
+    config.plugin = requestsData.pluginData.id;
 
-    delete config.hub_id; // Avoid having multiple defaults on upload.
+    // This is unique per site.
+    delete config.hub_id;
 
+    // Avoid having multiple defaults on upload.
     delete config["default"];
     var blob = new Blob([JSON.stringify(config, null, 2)], {
       type: 'application/json'
@@ -5206,8 +5476,9 @@ var Presets = function Presets(_ref) {
     } else {
       setIsEditOpen(true);
     }
-  }; // Notifications.
+  };
 
+  // Notifications.
   var successNotice = function successNotice(message) {
     window.SUI.openNotice('sui-configs-floating-notice', "<p>".concat(message, "</p>"), {
       type: 'success',
@@ -5238,13 +5509,6 @@ var Presets = function Presets(_ref) {
     });
   };
   var tableImage = !isWhitelabel ? urls.accordionImg : null;
-  var selectAll = function selectAll(checked) {
-    setConfigs(configs.map(function (config) {
-      config.selected = checked;
-      return config;
-    }));
-    deleteButton();
-  };
   var _checkboxClickHandler = function checkboxClickHandler(clickedConfig, checked) {
     setConfigs(configs.map(function (config) {
       if (clickedConfig === config) {
@@ -5265,10 +5529,22 @@ var Presets = function Presets(_ref) {
     }
   };
   var bulkDeleteHandler = function bulkDeleteHandler() {
-    var selectedConfig = Object.assign({}, configs.filter(function (item) {
+    var selectedConfig = configs.filter(function (item) {
       return item.selected === true;
-    }));
+    });
     openModal('delete', selectedConfig);
+  };
+
+  // Check if every item has isSelected set to true
+  var allSelected = configs.every(function (item) {
+    return item.selected === true;
+  });
+  var selectAll = function selectAll() {
+    setConfigs(configs.map(function (config) {
+      config.selected = !allSelected;
+      return config;
+    }));
+    deleteButton();
   };
   var Table = /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, !isEmpty && /*#__PURE__*/React__default["default"].createElement(PresetsAccordion, {
     className: "sui-accordion sui-accordion-flushed",
@@ -5287,14 +5563,13 @@ var Presets = function Presets(_ref) {
     id: "checkbox-default-one",
     name: "select-all",
     type: "checkbox",
-    onChange: function onChange(e) {
-      return selectAll(e.target.checked);
-    }
-  }), /*#__PURE__*/React__default["default"].createElement("span", null, "Config Name")), /*#__PURE__*/React__default["default"].createElement("div", {
-    className: "sui-accordion-col-3"
-  }, "Description"), /*#__PURE__*/React__default["default"].createElement("div", {
+    defaultChecked: allSelected,
+    onChange: selectAll
+  }), /*#__PURE__*/React__default["default"].createElement("span", null, "Config Name")), !isWidget && /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("div", {
+    className: setDemoData ? 'sui-accordion-col-3' : 'sui-accordion-col-5'
+  }, "Description"), setDemoData && /*#__PURE__*/React__default["default"].createElement("div", {
     className: "sui-accordion-col-2"
-  }, "Date Created"), /*#__PURE__*/React__default["default"].createElement("div", {
+  }, "Date Created")), /*#__PURE__*/React__default["default"].createElement("div", {
     className: "sui-accordion-col-auto",
     style: {
       flex: '0 1 213px'
@@ -5324,18 +5599,18 @@ var Presets = function Presets(_ref) {
       },
       deleteLabel: lang["delete"],
       deleteAction: function deleteAction() {
-        return openModal('delete', item);
+        return openModal('delete', [item]);
       },
-      checkboxId: 'demo-checkbox-' + index,
+      checkboxId: 'config-checkbox-' + index,
       checkboxSelected: item.selected,
       checkboxClickHandler: function checkboxClickHandler(e) {
         return _checkboxClickHandler(item, e.target.checked);
       }
-    }, item.config.map(function (data) {
+    }, Object.keys(item.config.strings).map(function (name) {
       return /*#__PURE__*/React__default["default"].createElement("div", {
-        key: data.id,
-        name: data.name,
-        status: data.content
+        key: name,
+        name: lang.settingsLabels[name],
+        status: item.config.strings[name]
       });
     }));
   })));
@@ -5387,6 +5662,11 @@ var Presets = function Presets(_ref) {
   ({
     title: lang.title
   });
+  if (isWidget) {
+    if (!isEmpty) {
+      configs.length;
+    }
+  }
   var PresetsHeader = /*#__PURE__*/React__default["default"].createElement(StyledBoxHeader, {
     className: "sui-box-header"
   }, /*#__PURE__*/React__default["default"].createElement("h2", {
