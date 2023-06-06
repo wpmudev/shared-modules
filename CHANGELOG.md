@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.4.2](https://github.com/wpmudev/shared-modules/compare/release/1.4.1...release/1.4.2) (2023-06-06)
+
+#### 🚀 Improvements
+* `shared-presets`
+  * [#166](https://github.com/wpmudev/shared-modules/pull/166) 🐛 fix(presets): improved presets for plugins. ([@creador-dev](https://github.com/creador-dev))
+
+#### Committers: 2
+- Govind ([@emgk](https://github.com/emgk))
+- Pawan Kumar ([@creador-dev](https://github.com/creador-dev))
+
 ## [1.4.1](https://github.com/wpmudev/shared-modules/compare/release/1.4.0...release/1.4.1) (2023-05-30)
 
 #### ✨ New Features
