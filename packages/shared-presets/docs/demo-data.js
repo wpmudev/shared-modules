@@ -21,10 +21,10 @@ export const demoContent = [
 	{
 		id: 1,
 		default: true,
-		name: "Basic Config",
-		description: "Recommended backup advanced config for all site.",
+		name: 'Basic Config',
+		description: 'Recommended backup advanced config for all site.',
 		selected: false,
-		created_date: "March 22, 2021 10:03 am",
+		created_date: 'March 22, 2021 10:03 am',
 		config: {
 			configs: {
 				settings: {
@@ -46,7 +46,7 @@ export const demoContent = [
 					},
 					page_cache: {
 						enabled: true,
-						detection: "auto",
+						detection: 'auto',
 						integrations: {
 							varnish: false,
 							opcache: false
@@ -71,25 +71,86 @@ export const demoContent = [
 			},
 			strings: {
 				advanced: [
-					"Remove query strings from assets - Inactive\nRemove Emoji JS & CSS files - Inactive\nDisable WooCommerce cart fragments - Inactive\nComments lazy loading - Inactive\n"
+					{
+						name: 'Remove query strings from assets - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Remove Emoji JS & CSS files - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Disable WooCommerce cart fragments - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Comments lazy loading - Inactive',
+						isPro: true
+					}
 				],
 				database: [
-					"Database - Inactive\n"				
+					{
+						name: 'Database - Inactive',
+						isPro: false
+					}	
 				],
 				gravatar: [
-					"Gravatar cache - Active\n"
+					{
+						name: 'Gravatar cache - Active',
+						isPro: true
+					}
 				],
 				page_cache: [
-					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
+					{
+						name: 'Page cache - Active',
+						isPro: true
+					},
+					{
+						name: 'File change detection - Auto',
+						isPro: false
+					},
+					{
+						name: 'Purge Varnish cache - Inactive',
+						isPro: false
+					},
+					{
+						name: 'Purge OpCache - Inactive',
+						isPro: false
+					},
+					{
+						name: 'Cache preloading - Inactive',
+						isPro: false
+					}
 				],
 				rss: [
-					"RSS caching - Active\n"
+					{
+						name: 'RSS caching - Active',
+						isPro: false
+					}
 				],
 				settings: [
-					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
+					{
+						name: 'High contrast mode - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Remove settings on uninstall - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Remove data on uninstall - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Cache control in admin bar - Active',
+						isPro: false
+					}
 				],
 				uptime: [
-					"Uptime - Inactive\n"
+					{
+						name: 'Uptime - Inactive',
+						isPro: true
+					}
 				]
 			}
 		}
@@ -97,10 +158,10 @@ export const demoContent = [
 	{
 		id: 2,
 		default: false,
-		name: "Advanced Config",
-		description: "Recommended backup advanced config for all site.",
+		name: 'Advanced Config',
+		description: 'Recommended backup advanced config for all site.',
 		selected: false,
-		created_date: "March 22, 2021 10:03 am",
+		created_date: 'March 22, 2021 10:03 am',
 		config: {
 			configs: {
 				settings: {
@@ -122,7 +183,7 @@ export const demoContent = [
 					},
 					page_cache: {
 						enabled: true,
-						detection: "auto",
+						detection: 'auto',
 						integrations: {
 							varnish: false,
 							opcache: false
@@ -147,25 +208,81 @@ export const demoContent = [
 			},
 			strings: {
 				advanced: [
-					"Remove query strings from assets - Inactive\nRemove Emoji JS & CSS files - Inactive\nDisable WooCommerce cart fragments - Inactive\nComments lazy loading - Inactive\n"
+					{
+						name: 'Remove query strings from assets - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Remove Emoji JS & CSS files - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Disable WooCommerce cart fragments - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Comments lazy loading - Inactive',
+						isPro: true
+					}
 				],
-				database: [
-					""				
-				],
+				database: [],
 				gravatar: [
-					"Gravatar cache - Active\n"
+					{
+						name: 'Gravatar cache - Active',
+						isPro: true
+					}
 				],
 				page_cache: [
-					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
+					{
+						name: 'Page cache - Active',
+						isPro: true
+					},
+					{
+						name: 'File change detection - Auto',
+						isPro: false
+					},
+					{
+						name: 'Purge Varnish cache - Inactive',
+						isPro: false
+					},
+					{
+						name: 'Purge OpCache - Inactive',
+						isPro: false
+					},
+					{
+						name: 'Cache preloading - Inactive',
+						isPro: false
+					}
 				],
 				rss: [
-					"RSS caching - Active\n"
+					{
+						name: 'RSS caching - Active',
+						isPro: false
+					}
 				],
 				settings: [
-					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
+					{
+						name: 'High contrast mode - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Remove settings on uninstall - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Remove data on uninstall - Inactive',
+						isPro: true
+					},
+					{
+						name: 'Cache control in admin bar - Active',
+						isPro: false
+					}
 				],
 				uptime: [
-					"Uptime - Inactive\n"
+					{
+						name: 'Uptime - Inactive',
+						isPro: true
+					}
 				]
 			}
 		}

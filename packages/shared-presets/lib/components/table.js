@@ -1,5 +1,5 @@
-import React, { Component, Children } from "react";
-import styled from "styled-components";
+import React, { Component, Children } from 'react';
+import styled from 'styled-components';
 
 const Table = styled.table`
 	[class*="sui-2-"] .sui-wrap && {
@@ -53,29 +53,32 @@ export class PresetsTable extends Component {
 	}
 
 	render() {
+
 		const rows = Children.map(this.props.children, (row) => {
 			const rowName = row.props.name ? row.props.name : '';
 			const rowStatus = row.props.status;
-			const rowContent = rowStatus[0].replace(/( - )/g, '\n').split('\n').filter(item => item);
-			const rowTag = <span className="sui-tag sui-tag-pro" style={{ marginLeft: '6px'}}>Pro</span>;
+			const rowContent = rowStatus.map((statusItem) => {
+				const itemName = statusItem.name.replace(/( - )/g, '\n').split('\n').filter(item => item);
+				const isPro = statusItem.isPro;
+				const rowTag = isPro ? (
+					<span className="sui-tag sui-tag-pro" style={{ marginLeft: '6px' }}>Pro</span>
+				) : null;
+				return (
+					<>
+						{itemName.map((item) => item).join('\n')}
+						{rowTag}
+						{'\n'}
+					</>
+				);
+			});
+			
 
-			return ( '' !== rowName || rowContent.length ) ? (
+			return (
 				<tr>
 					<td>{rowName}</td>
-					<td>
-						{
-							rowContent.map((item, index) => {
-								if(item.includes('Inactive')) {
-									return (
-										<span key={item + '-' + index}>{item}{rowTag}{'\n'}</span>
-									);	
-								}
-								return item + '\n';
-							})
-						}
-					</td>
+					<td>{rowContent}</td>
 				</tr>
-			) : '';
+			);
 		});
 
 		return (
