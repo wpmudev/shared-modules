@@ -57,18 +57,18 @@ export class PresetsTable extends Component {
 		const rows = Children.map(this.props.children, (row) => {
 			const rowName = row.props.name ? row.props.name : '';
 			const rowStatus = row.props.status;
-			const rowContent = rowStatus.map((statusItem) => {
+			const rowContent = rowStatus.map((statusItem, index) => {
 				const itemName = statusItem.name.replace(/( - )/g, '\n').split('\n').filter(item => item);
 				const isPro = statusItem.isPro;
 				const rowTag = isPro ? (
 					<span className="sui-tag sui-tag-pro" style={{ marginLeft: '6px' }}>Pro</span>
 				) : null;
 				return (
-					<>
+					<span key={`item-${index}`}>
 						{itemName.map((item) => item).join('\n')}
 						{rowTag}
 						{'\n'}
-					</>
+					</span>
 				);
 			});
 			
