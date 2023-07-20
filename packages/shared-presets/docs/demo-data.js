@@ -77,7 +77,7 @@ export const demoContent = [
 					"Database - Inactive\n"				
 				],
 				gravatar: [
-					"Gravatar cache - Active\n"
+					"Inactive"
 				],
 				page_cache: [
 					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
@@ -159,7 +159,7 @@ export const demoContent = [
 					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
 				],
 				rss: [
-					"RSS caching - Active\n"
+					"RSS caching - Inactive\n"
 				],
 				settings: [
 					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
@@ -226,3 +226,10 @@ export const demoLang = {
 		settings: 'Settings',
 	},
 };
+
+export const demoProItems = [
+	'Remove query strings from assets',
+	'Database',
+	'Purge Varnish cache',
+	'Remove data on uninstall'
+];

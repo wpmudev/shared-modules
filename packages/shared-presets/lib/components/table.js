@@ -53,24 +53,31 @@ export class PresetsTable extends Component {
 	}
 
 	render() {
+
+		const proItems = this.props.proItems;
 		const rows = Children.map(this.props.children, (row) => {
 			const rowName = row.props.name ? row.props.name : '';
 			const rowStatus = row.props.status;
-			const rowContent = rowStatus[0].replace(/( - )/g, '\n').split('\n').filter(item => item);
+			const rowContent = rowStatus[0].split('\n').filter(item => item);
 			const rowTag = <span className="sui-tag sui-tag-pro" style={{ marginLeft: '6px'}}>Pro</span>;
+
+			let isPro = proItems.includes(rowName) && ( 1 === rowContent.length ) ? true : false;
 
 			return ( '' !== rowName || rowContent.length ) ? (
 				<tr>
 					<td>{rowName}</td>
 					<td>
 						{
-							rowContent.map((item, index) => {
-								if(item.includes('Inactive')) {
-									return (
-										<span key={item + '-' + index}>{item}{rowTag}{'\n'}</span>
-									);	
-								}
-								return item + '\n';
+							rowContent.map((item) => {
+								const newItem = item.replace(/( - )/g, '\n').split('\n').filter(item => item);
+								isPro = !isPro && proItems.includes(newItem[0]) ? true : isPro;
+								const dataItem = newItem.map((data, index, array) => {
+									const isLastItem = index === array.length - 1;
+									return isPro && isLastItem ? <span key={data + '-' + index}>{data}{rowTag}{'\n'}</span> : data + '\n';
+								});
+
+								isPro = false;
+								return dataItem;
 							})
 						}
 					</td>

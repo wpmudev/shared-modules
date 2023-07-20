@@ -235,7 +235,7 @@ export class PresetsAccordionItem extends Component {
 								</div>
 							</Header>
 
-							<PresetsTable>
+							<PresetsTable proItems={ this.props.proItems }>
 								{ this.props.children }
 							</PresetsTable>
 
