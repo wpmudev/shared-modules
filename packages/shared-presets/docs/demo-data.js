@@ -77,13 +77,13 @@ export const demoContent = [
 					"Database - Inactive\n"				
 				],
 				gravatar: [
-					"Inactive"
+					"Gravatar cache - Active\n"
 				],
 				page_cache: [
 					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
 				],
 				rss: [
-					"RSS caching - Active\n"
+					"RSS caching - Inactive\n"
 				],
 				settings: [
 					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
