@@ -83,7 +83,7 @@ export const demoContent = [
 					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
 				],
 				rss: [
-					"RSS caching - Inactive\n"
+					"RSS caching - Active\n"
 				],
 				settings: [
 					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
@@ -159,7 +159,7 @@ export const demoContent = [
 					"Page cache - Active\nFile change detection - Auto\nPurge Varnish cache - Inactive\nPurge OpCache - Inactive\nCache preloading - Inactive\n"
 				],
 				rss: [
-					"RSS caching - Inactive\n"
+					"RSS caching - Active\n"
 				],
 				settings: [
 					"High contrast mode - Inactive\nRemove settings on uninstall - Inactive\nRemove data on uninstall - Inactive\nCache control in admin bar - Active\n"
