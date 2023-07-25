@@ -1,49 +1,65 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
-
 function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
-
 function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
-
   var target = _objectWithoutPropertiesLoose$1(source, excluded);
-
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -51,60 +67,24 @@ function _objectWithoutProperties$1(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
-
 function _taggedTemplateLiteral(strings, raw) {
   if (!raw) {
     raw = strings.slice(0);
   }
-
   return Object.freeze(Object.defineProperties(strings, {
     raw: {
       value: Object.freeze(raw)
     }
   }));
 }
-
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
-
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
-
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
   if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -113,19 +93,36 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
-
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
   return arr2;
 }
-
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -137,69 +134,26 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
-
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-
   var target = _objectWithoutPropertiesLoose(source, excluded);
-
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -207,25 +161,23 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
-
+var _excluded$1 = ["label", "icon", "iconSize", "design", "color", "className", "loading"];
 var ButtonIcon = function ButtonIcon(_ref) {
   var label = _ref.label,
-      icon = _ref.icon,
-      iconSize = _ref.iconSize,
-      _ref$design = _ref.design,
-      design = _ref$design === void 0 ? "solid" : _ref$design,
-      color = _ref.color,
-      className = _ref.className,
-      loading = _ref.loading,
-      props = _objectWithoutProperties(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
-
+    icon = _ref.icon,
+    iconSize = _ref.iconSize,
+    _ref$design = _ref.design,
+    design = _ref$design === void 0 ? 'solid' : _ref$design,
+    color = _ref.color,
+    className = _ref.className,
+    loading = _ref.loading,
+    props = _objectWithoutProperties(_ref, _excluded$1);
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
     style: {
-      position: "relative"
+      position: 'relative'
     },
     "aria-hidden": "true"
   });
@@ -238,40 +190,35 @@ var ButtonIcon = function ButtonIcon(_ref) {
   className = "sui-button-icon ".concat(className || ''); // Set button color.
 
   switch (color) {
-    case "blue":
-    case "green":
-    case "red":
-    case "orange":
-    case "purple":
-    case "yellow":
-    case "white":
-      className += " sui-button-" + color;
+    case 'blue':
+    case 'green':
+    case 'red':
+    case 'orange':
+    case 'purple':
+    case 'yellow':
+    case 'white':
+      className += ' sui-button-' + color;
       break;
-
-    case "gray":
+    case 'gray':
     default:
-      className += "";
+      className += '';
       break;
   } // Set button style.
 
-
   switch (design) {
-    case "ghost":
-    case "outlined":
-      className += " sui-button-" + design;
+    case 'ghost':
+    case 'outlined':
+      className += ' sui-button-' + design;
       break;
-
-    case "solid":
+    case 'solid':
     default:
-      className += "";
+      className += '';
       break;
   } // Set loading class.
 
-
   if (loading) {
-    className += " sui-button-onload";
+    className += ' sui-button-onload';
   }
-
   var htmlTag = props.href ? 'a' : 'button';
   return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
     className: className,
@@ -285,6 +232,7 @@ var img = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAC54AAADwAgMAAACvNLKGAAA
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
+// UTILS: Set devices size.
 var screen = {
   mobile: 480,
   tablet: 783,
@@ -303,8 +251,9 @@ var maxDevice = {
   laptop: "(max-width: ".concat(screen.laptop - 1, "px)"),
   desktop: "(max-width: ".concat(screen.desktop - 1, "px)")
 };
-var BlackFriday = {}; // UTILS: Create elements.
+var BlackFriday = {};
 
+// UTILS: Create elements.
 BlackFriday.Global = createGlobalStyle(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n[class*=\"sui-2-\"]", " .sui-wrap", " {\n\n\t.sui-module-notice-black-friday {\n\n\t\t&__container {\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t\tmargin: 0 0 20px;\n\t\t\tpadding: 30px 40px;\n\t\t\tborder-radius: 4px;\n\t\t\tbackground-color: ", ";\n\t\t\t", "\n\n\t\t\t@media ", " {\n\t\t\t\ttext-align: center;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tmargin: 0 0 30px;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: flex-start;\n\t\t\t\tpadding-", ": 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\talign-items: center;\n\t\t\t}\n\n\t\t\t.sui-button-icon {\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 10px;\n\t\t\t\t", ": 10px;\n\t\t\t\tmargin-", ": 0 !important;\n\t\t\t}\n\t\t}\n\n\t\t&__ribbon {\n\t\t\tdisplay: inline-block;\n\t\t\tpadding: 10px 20px 11px;\n\t\t\tbackground-color: ", ";\n\t\t\tcolor: ", ";\n\t\t\tfont-size: 22px;\n\t\t\tline-height: 29px;\n\t\t\tfont-weight: bold;\n\t\t\tletter-spacing: normal;\n\n\t\t\t@media ", " {\n\t\t\t\tflex: 0 0 auto;\n\t\t\t\tpadding: 15px 20px 16px;\n\t\t\t}\n\t\t}\n\n\t\t&__body {\n\t\t\tmargin: 0 0 30px;\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin: 0 15px;\n\t\t\t\tpadding-", ": 65px;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-flow: row nowrap;\n\t\t\t\talign-items: center;\n\t\t\t\tpadding-right: 0;\n\t\t\t}\n\t\t}\n\n\t\t&__content {\n\t\t\tmargin: 30px 0;\n\n\t\t\t@media ", " {\n\t\t\t\tmargin-top: 0;\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tmin-width: 1px;\n\t\t\t\tflex: 1;\n\t\t\t\tmargin-bottom: 0;\n\t\t\t}\n\n\t\t\th1, h2, h3, h4, h5, h6, p, small {\n\t\t\t\tcolor: ", ";\n\t\t\t}\n\n\t\t\tp {\n\t\t\t\tmargin: 0 0 15px;\n\t\t\t\tfont-size: 18px;\n\t\t\t\tline-height: 25px;\n\n\t\t\t\t@media ", " {\n\t\t\t\t\tmargin: 0 0 5px;\n\t\t\t\t}\n\n\t\t\t\t&:last-child {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t}\n\n\t\t\t\tstrong {\n\t\t\t\t\tfont-weight: 700;\n\n\t\t\t\t\t@media ", " {\n\t\t\t\t\t\tdisplay: block;\n\t\t\t\t\t\tmargin-bottom: 20px;\n\t\t\t\t\t\tfont-size: 28px;\n\t\t\t\t\t\tline-height: 29px;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tsmall {\n\t\t\t\t\tmargin: 0;\n\t\t\t\t\tdisplay: initial;\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tline-height: 22px;\n\t\t\t\t\tfont-weight: 300;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t&__link {\n\t\t\tcursor: pointer;\n\t\t\tdisplay: inline-block;\n\t\t\tmargin: 0;\n\t\t\tpadding: 5px 30px;\n\t\t\tborder: 0;\n\t\t\tborder-radius: 30px;\n\t\t\tbackground: ", ";\n\t\t\tbox-shadow: none;\n\t\t\tcolor: ", ";\n\t\t\tfont-size: 13px;\n\t\t\tline-height: 30px;\n\t\t\tfont-weight: bold;\n\t\t\ttext-decoration: none;\n\t\t\ttransition: 0.2s ease;\n\n\t\t\t&:hover,\n\t\t\t&:focus {\n\t\t\t\tbackground: #ffffff !important;\n\t\t\t\tcolor: ", " !important;\n\t\t\t\t", "\n\t\t\t}\n\n\t\t\t&:focus {\n\t\t\t\tbox-shadow: ", ";\n\t\t\t}\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t\tflex: 0 0 auto;\n\t\t\t}\n\t\t}\n\t}\n}\n"])), function (props) {
   return props.rtl ? '[dir="rtl"]' : '';
 }, function (props) {
@@ -351,61 +300,48 @@ BlackFriday.Link = styled.a.attrs(function (_ref) {
 })(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n[class*=\"sui-2-\"] .sui-wrap & {\n\tcursor: pointer;\n\tdisplay: inline-block;\n\tmargin: 0;\n\tpadding: 5px 30px;\n\tborder: 0;\n\tborder-radius: 30px;\n\tbackground: #4DFD89;\n\tbox-shadow: none;\n\tcolor: #222;\n\tfont-size: 13px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\ttext-decoration: none;\n\ttransition: 0.2s ease;\n\n\t&:hover,\n\t&:focus {\n\t\tbackground: #fff;\n\t\tcolor: #222222 !important;\n\t}\n\n\t&:focus {\n\t\tbox-shadow: 0 0 10px 0 rgba(255,255,255,0.3);\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t\tflex: 0 0 auto;\n\t}\n}\n"])), minDevice.laptop);
 
 var _excluded = ["link", "onCloseClick", "sourceLang", "children"];
-
 function checkRTL() {
   var suiBody = document.body;
   var hasLang = suiBody.hasAttribute('dir');
   var getLang = suiBody.getAttribute('dir');
-
   if (hasLang && 'rtl' === getLang) {
     return true;
   }
-
   return false;
 }
-
 function checkSuiWrap() {
   var suiWrap = document.querySelectorAll('.sui-wrap');
-
   for (var i = 0; i < suiWrap.length; i++) {
     if (suiWrap[i].classList.contains('sui-color-accessible')) {
       return true;
     }
   }
-
   return false;
 }
-
 var NoticeBlack = function NoticeBlack(_ref) {
   var link = _ref.link,
-      onCloseClick = _ref.onCloseClick,
-      sourceLang = _ref.sourceLang,
-      children = _ref.children,
-      props = _objectWithoutProperties$1(_ref, _excluded);
-
+    onCloseClick = _ref.onCloseClick,
+    sourceLang = _ref.sourceLang,
+    children = _ref.children,
+    props = _objectWithoutProperties$1(_ref, _excluded);
   var _useState = useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isClose = _useState2[0],
-      setIsClose = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    isClose = _useState2[0],
+    setIsClose = _useState2[1];
   var _useState3 = useState(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isRTL = _useState4[0],
-      setRTL = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    isRTL = _useState4[0],
+    setRTL = _useState4[1];
   var _useState5 = useState(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isMonochrome = _useState6[0],
-      setMonochrome = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    isMonochrome = _useState6[0],
+    setMonochrome = _useState6[1];
   var closeOnClick = function closeOnClick(e) {
     setIsClose(true);
-
     if ('undefined' !== typeof onCloseClick) {
       onCloseClick(e);
     }
   };
-
   var lang = Object.assign({
     discount: '50% Off',
     closeLabel: 'Close',

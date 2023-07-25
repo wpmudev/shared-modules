@@ -4,42 +4,36 @@ import styled from 'styled-components';
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
-
 function _classCallCheck$2(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
-
 function _defineProperties$2(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
+    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
   }
 }
-
 function _createClass$2(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties$2(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties$2(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
   return Constructor;
 }
-
 function _defineProperty$2(obj, key, value) {
+  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -50,15 +44,12 @@ function _defineProperty$2(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
 function _inherits$2(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
-
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: {
       value: subClass,
@@ -66,30 +57,28 @@ function _inherits$2(subClass, superClass) {
       configurable: true
     }
   });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
+  });
   if (superClass) _setPrototypeOf$2(subClass, superClass);
 }
-
 function _getPrototypeOf$2(o) {
-  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf$2(o);
 }
-
 function _setPrototypeOf$2(o, p) {
-  _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+  _setPrototypeOf$2 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
-
   return _setPrototypeOf$2(o, p);
 }
-
 function _isNativeReflectConstruct$2() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
-
   try {
     Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
@@ -97,54 +86,57 @@ function _isNativeReflectConstruct$2() {
     return false;
   }
 }
-
 function _assertThisInitialized$2(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
-
   return self;
 }
-
 function _possibleConstructorReturn$2(self, call) {
   if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
   }
-
   return _assertThisInitialized$2(self);
 }
-
 function _createSuper$2(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$2();
-
   return function _createSuperInternal() {
     var Super = _getPrototypeOf$2(Derived),
-        result;
-
+      result;
     if (hasNativeReflectConstruct) {
       var NewTarget = _getPrototypeOf$2(this).constructor;
-
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-
     return _possibleConstructorReturn$2(this, result);
   };
 }
-
 function _taggedTemplateLiteral$1(strings, raw) {
   if (!raw) {
     raw = strings.slice(0);
   }
-
   return Object.freeze(Object.defineProperties(strings, {
     raw: {
       value: Object.freeze(raw)
     }
   }));
+}
+function _toPrimitive(input, hint) {
+  if (typeof input !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return typeof key === "symbol" ? key : String(key);
 }
 
 function _classCallCheck$1(instance, Constructor) {
@@ -152,7 +144,6 @@ function _classCallCheck$1(instance, Constructor) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
-
 function _defineProperties$1(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -162,13 +153,11 @@ function _defineProperties$1(target, props) {
     Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
-
 function _createClass$1(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties$1(Constructor, staticProps);
   return Constructor;
 }
-
 function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -180,15 +169,12 @@ function _defineProperty$1(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
 function _inherits$1(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
-
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: {
       value: subClass,
@@ -198,28 +184,23 @@ function _inherits$1(subClass, superClass) {
   });
   if (superClass) _setPrototypeOf$1(subClass, superClass);
 }
-
 function _getPrototypeOf$1(o) {
   _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf$1(o);
 }
-
 function _setPrototypeOf$1(o, p) {
   _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
-
   return _setPrototypeOf$1(o, p);
 }
-
 function _isNativeReflectConstruct$1() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
-
   try {
     Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
     return true;
@@ -227,42 +208,32 @@ function _isNativeReflectConstruct$1() {
     return false;
   }
 }
-
 function _assertThisInitialized$1(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
-
   return self;
 }
-
 function _possibleConstructorReturn$1(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   }
-
   return _assertThisInitialized$1(self);
 }
-
 function _createSuper$1(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$1();
-
   return function _createSuperInternal() {
     var Super = _getPrototypeOf$1(Derived),
-        result;
-
+      result;
     if (hasNativeReflectConstruct) {
       var NewTarget = _getPrototypeOf$1(this).constructor;
-
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-
     return _possibleConstructorReturn$1(this, result);
   };
 }
-
 function _defineProperty$1$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -274,13 +245,10 @@ function _defineProperty$1$1(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
-
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
     if (enumerableOnly) symbols = symbols.filter(function (sym) {
@@ -288,14 +256,11 @@ function ownKeys(object, enumerableOnly) {
     });
     keys.push.apply(keys, symbols);
   }
-
   return keys;
 }
-
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-
     if (i % 2) {
       ownKeys(Object(source), true).forEach(function (key) {
         _defineProperty$1$1(target, key, source[key]);
@@ -308,35 +273,26 @@ function _objectSpread2(target) {
       });
     }
   }
-
   return target;
 }
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
-
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-
   var target = _objectWithoutPropertiesLoose(source, excluded);
-
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -344,21 +300,18 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
-
 var ButtonIcon = function ButtonIcon(_ref) {
   var label = _ref.label,
-      icon = _ref.icon,
-      iconSize = _ref.iconSize,
-      _ref$design = _ref.design,
-      design = _ref$design === void 0 ? "solid" : _ref$design,
-      color = _ref.color,
-      className = _ref.className,
-      loading = _ref.loading,
-      props = _objectWithoutProperties(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
-
+    icon = _ref.icon,
+    iconSize = _ref.iconSize,
+    _ref$design = _ref.design,
+    design = _ref$design === void 0 ? "solid" : _ref$design,
+    color = _ref.color,
+    className = _ref.className,
+    loading = _ref.loading,
+    props = _objectWithoutProperties(_ref, ["label", "icon", "iconSize", "design", "color", "className", "loading"]);
   var loader = /*#__PURE__*/React.createElement("span", {
     className: "sui-icon-loader sui-loading",
     style: {
@@ -384,72 +337,57 @@ var ButtonIcon = function ButtonIcon(_ref) {
     case "white":
       className += " sui-button-" + color;
       break;
-
     case "gray":
     default:
       className += "";
       break;
   } // Set button style.
 
-
   switch (design) {
     case "ghost":
     case "outlined":
       className += " sui-button-" + design;
       break;
-
     case "solid":
     default:
       className += "";
       break;
   } // Set loading class.
 
-
   if (loading) {
     className += " sui-button-onload";
   }
-
   var htmlTag = props.href ? 'a' : 'button';
   return /*#__PURE__*/React.createElement(htmlTag, _objectSpread2({
     className: className,
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
 };
-
 var Notifications = /*#__PURE__*/function (_Component) {
   _inherits$1(Notifications, _Component);
-
   var _super = _createSuper$1(Notifications);
-
   function Notifications(props) {
     var _this;
-
     _classCallCheck$1(this, Notifications);
-
     _this = _super.call(this, props);
-
     _defineProperty$1(_assertThisInitialized$1(_this), "close", function () {
       _this.setState({
         hide: true
       });
     });
-
     _this.state = {
       hide: false
     };
     _this.close = _this.close.bind(_assertThisInitialized$1(_this));
     return _this;
   }
-
   _createClass$1(Notifications, [{
     key: "render",
     value: function render() {
       var _this2 = this;
-
       var hide = this.state.hide;
       var classMain = "sui-notice";
       var classIcon = "sui-notice-icon sui-md";
-
       switch (this.props.type) {
         case "info":
         case "success":
@@ -459,16 +397,13 @@ var Notifications = /*#__PURE__*/function (_Component) {
           classMain += " sui-notice-" + this.props.type;
           classIcon += " sui-icon-info";
           break;
-
         case "loading":
           classIcon += " sui-icon-loader sui-loading";
           break;
-
         default:
           classIcon += " sui-icon-info";
           break;
       }
-
       var message = /*#__PURE__*/React.createElement("div", {
         className: "sui-notice-message"
       }, /*#__PURE__*/React.createElement("span", {
@@ -484,7 +419,6 @@ var Notifications = /*#__PURE__*/function (_Component) {
           return _this2.close(e);
         }
       }));
-
       if (!hide) {
         return /*#__PURE__*/React.createElement("div", {
           className: classMain
@@ -492,11 +426,9 @@ var Notifications = /*#__PURE__*/function (_Component) {
           className: "sui-notice-content"
         }, message, this.props.dismiss && actions));
       }
-
       return null;
     }
   }]);
-
   return Notifications;
 }(Component);
 
@@ -505,7 +437,6 @@ function _classCallCheck(instance, Constructor) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
-
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -515,13 +446,11 @@ function _defineProperties(target, props) {
     Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
-
 function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
 }
-
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -533,33 +462,26 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
 }
-
 function _extends() {
   _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
-
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
-
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: {
       value: subClass,
@@ -569,28 +491,23 @@ function _inherits(subClass, superClass) {
   });
   if (superClass) _setPrototypeOf(subClass, superClass);
 }
-
 function _getPrototypeOf(o) {
   _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf(o);
 }
-
 function _setPrototypeOf(o, p) {
   _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
-
   return _setPrototypeOf(o, p);
 }
-
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
-
   try {
     Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
     return true;
@@ -598,134 +515,98 @@ function _isNativeReflectConstruct() {
     return false;
   }
 }
-
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
-
   return self;
 }
-
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   }
-
   return _assertThisInitialized(self);
 }
-
 function _createSuper(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
   return function _createSuperInternal() {
     var Super = _getPrototypeOf(Derived),
-        result;
-
+      result;
     if (hasNativeReflectConstruct) {
       var NewTarget = _getPrototypeOf(this).constructor;
-
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-
     return _possibleConstructorReturn(this, result);
   };
 }
-
 function _taggedTemplateLiteral(strings, raw) {
   if (!raw) {
     raw = strings.slice(0);
   }
-
   return Object.freeze(Object.defineProperties(strings, {
     raw: {
       value: Object.freeze(raw)
     }
   }));
 }
-
 function _templateObject8() {
   var data = _taggedTemplateLiteral(["\n\tmin-width: 1px;\n\tflex: 1;\n\t", "\n\tcolor: #17A8E3 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px !important;\n"]);
-
   _templateObject8 = function _templateObject8() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n\tdisplay: block;\n\t", "\n\n\tp {\n\t\toverflow: hidden;\n\t\tdisplay: -webkit-box;\n\t\t-webkit-box-orient: vertical;\n\t\tmargin: 0 !important;\n\t\tpadding: 0 !important;\n\t\tborder: 0;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\t\tletter-spacing: -0.2px;\n\t\t-webkit-line-clamp: ", ";\n\t}\n"]);
-
   _templateObject7 = function _templateObject7() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject6$1() {
   var data = _taggedTemplateLiteral(["\n\t", "\n\tmargin: 0 !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tcolor: #888 !important;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tletter-spacing: -0.2px;\n\n\t", "\n"]);
-
   _templateObject6$1 = function _templateObject6() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject5$1() {
   var data = _taggedTemplateLiteral(["\n\toverflow: hidden;\n\tdisplay: -webkit-box !important;\n\t-webkit-box-orient: vertical;\n\t", "\n\tmargin: ", " !important;\n\tpadding: 0 !important;\n\tborder: 0;\n\tfont-size: 13px !important;\n\tline-height: 18px !important;\n\tfont-weight: 500 !important;\n\tletter-spacing: -0.2px;\n\t", "\n\n\t", "\n"]);
-
   _templateObject5$1 = function _templateObject5() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject4$1() {
   var data = _taggedTemplateLiteral(["\n\t", "\n\theight: ", ";\n\tmargin: ", ";\n\t", "\n\tdisplay: block;\n\t", "\n\tbackground-color: #FFF;\n\tbackground-image: url(", ");\n\tbackground-size: cover;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n"]);
-
   _templateObject4$1 = function _templateObject4() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject3$1() {
   var data = _taggedTemplateLiteral(["\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tflex-flow: row wrap;\n\talign-items: center;\n\tmargin-top: 15px;\n"]);
-
   _templateObject3$1 = function _templateObject3() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject2$1() {
   var data = _taggedTemplateLiteral(["\n\tdisplay: flex;\n\tflex-flow: row wrap;\n\n\t+ div {\n\t\tmargin-top: 20px;\n\t}\n"]);
-
   _templateObject2$1 = function _templateObject2() {
     return data;
   };
-
   return data;
 }
-
 function _templateObject$1() {
   var data = _taggedTemplateLiteral(["\n\t", "\n\tcursor: pointer;\n\t", "\n\t", "\n\tpadding: ", ";\n\tborder-radius: 4px;\n\tbackground-color: #fff;\n\t", "\n\ttransition: 0.2s ease all;\n\n\t* {\n\t\tpointer-events: none;\n\t}\n\n\t&:hover,\n\t&:focus {\n\t\t", "\n\n\t\t", "\n\t}\n\n\t", "\n\n\t&:focus {\n\t\toutline: none;\n\t\t", "\n\t}\n\n\t@media ", " {\n\t\t", "\n\t}\n"]);
-
   _templateObject$1 = function _templateObject() {
     return data;
   };
-
   return data;
 }
-
 var aria$1 = aria$1 || {};
 aria$1.KeyCode = {
   TAB: 9,
@@ -822,38 +703,27 @@ var Excerpt = styled.div(_templateObject7(), function (props) {
 var ReadMore = styled.p(_templateObject8(), function (props) {
   return props.banner ? "" : "margin: 4px 0 0;";
 });
-
 var Post = /*#__PURE__*/function (_Component) {
   _inherits(Post, _Component);
-
   var _super = _createSuper(Post);
-
   function Post(props) {
     var _this;
-
     _classCallCheck(this, Post);
-
     _this = _super.call(this, props);
-
     _defineProperty(_assertThisInitialized(_this), "openLink", function (e) {
       var ref = e.target !== null ? e.target : e.srcElement;
-
       if (ref) {
         window.open(ref.getAttribute("data-href"), "_blank");
       }
     });
-
     _defineProperty(_assertThisInitialized(_this), "handleKeydown", function (e) {
       var key = e.which || e.keyCode;
-
       switch (key) {
         case aria$1.KeyCode.RETURN:
           _this.openLink(e);
-
           break;
       }
     });
-
     _this.state = {
       media: [],
       error: null,
@@ -863,12 +733,10 @@ var Post = /*#__PURE__*/function (_Component) {
     _this.handleKeydown = _this.handleKeydown.bind(_assertThisInitialized(_this));
     return _this;
   }
-
   _createClass(Post, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
-
       var API_URL = "https://wpmudev.com/blog/wp-json/wp/v2/media/";
       var QUERY_ID = this.props.media; // GET media using fetch.
 
@@ -890,9 +758,9 @@ var Post = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this$state = this.state,
-          media = _this$state.media,
-          error = _this$state.error,
-          isLoaded = _this$state.isLoaded;
+        media = _this$state.media,
+        error = _this$state.error,
+        isLoaded = _this$state.isLoaded;
       var translate = this.props.translate;
       var read_article = translate && translate[0].read_article ? translate[0].read_article : "Read article";
       var min_read = translate && translate[0].min_read ? translate[0].min_read : "min read";
@@ -923,7 +791,6 @@ var Post = /*#__PURE__*/function (_Component) {
           }, this.props));
         }
       }
-
       if (this.props.banner) {
         return /*#__PURE__*/React.createElement(PostWrapper, this.props, PostImage, this.props.title && "" !== this.props.title && /*#__PURE__*/React.createElement(PostTitle, {
           banner: true,
@@ -950,7 +817,6 @@ var Post = /*#__PURE__*/function (_Component) {
           "aria-hidden": "true"
         }), this.props.time, " ", min_read)));
       }
-
       return /*#__PURE__*/React.createElement(PostWrapper, this.props, /*#__PURE__*/React.createElement(PostHeader, null, PostImage, /*#__PURE__*/React.createElement("div", {
         style: {
           minWidth: "1px",
@@ -967,7 +833,6 @@ var Post = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/React.createElement(ReadMore, null, read_article));
     }
   }]);
-
   return Post;
 }(Component);
 
@@ -1014,118 +879,96 @@ var Navigation = styled.div(_templateObject5 || (_templateObject5 = _taggedTempl
 var SkipArticles = styled.a(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral$1(["\n\tposition: absolute;\n\ttop: -1000em;\n\tz-index: 1;\n\t&:focus {\n\t\tleft: 0;\n\t\ttop: 0;\n\t\tline-height: normal;\n\t\tfont-size: 13px;\n\t\tfont-weight: 500;\n\t\tpadding: 15px 23px 14px;\n\t\tbackground: #fff;\n\t\tcolor: #1286b5;\n\t\toutline: none;\n\t\tborder-radius: 3px;\n\t\tbox-shadow: 0 2px 7px 0 rgb(0 0 0 / 5%), 0 0 2px 0 #17a8e3 !important;\n\t}\n"])));
 var TutorialsSlider = /*#__PURE__*/function (_Component) {
   _inherits$2(TutorialsSlider, _Component);
-
   var _super = _createSuper$2(TutorialsSlider);
-
   function TutorialsSlider(props) {
     var _this;
-
     _classCallCheck$2(this, TutorialsSlider);
-
     _this = _super.call(this, props);
-
     _defineProperty$2(_assertThisInitialized$2(_this), "closeButtonClicked", function (e) {
       _this.hideComponent(e);
-
       if (_this.props.onCloseClick) {
         _this.props.onCloseClick(e);
       }
     });
-
     _defineProperty$2(_assertThisInitialized$2(_this), "hideComponent", function (e) {
       var sliderBox = e.currentTarget.closest(".sui-tutorials-slider-box"),
-          event = new Event("sliderTutorialClosed");
+        event = new Event("sliderTutorialClosed");
       sliderBox.dispatchEvent(event);
       sliderBox.remove();
     });
-
     _defineProperty$2(_assertThisInitialized$2(_this), "openLink", function (e) {
       var ref = e.target !== null ? e.target : e.srcElement;
-
       if (ref) {
         window.open(ref.getAttribute("data-href"), "_blank");
       }
     });
-
     _defineProperty$2(_assertThisInitialized$2(_this), "keyNavigate", function (direction) {
-      var focusedPost = document.activeElement.closest("li"); // Abort if the focused element doesn't have a li parent.
+      var focusedPost = document.activeElement.closest("li");
 
+      // Abort if the focused element doesn't have a li parent.
       if (!focusedPost) {
         return;
       }
-
       var newFocusedPost;
-
       if ("prev" === direction) {
-        newFocusedPost = focusedPost.previousElementSibling; // We reached the start of the list.
-
+        newFocusedPost = focusedPost.previousElementSibling;
+        // We reached the start of the list.
         if (!newFocusedPost) {
           newFocusedPost = focusedPost.closest("ul").lastElementChild;
         }
       } else {
-        newFocusedPost = focusedPost.nextElementSibling; // We reached the end of the list.
-
+        newFocusedPost = focusedPost.nextElementSibling;
+        // We reached the end of the list.
         if (!newFocusedPost) {
           newFocusedPost = focusedPost.closest("ul").firstElementChild;
         }
       }
-
       newFocusedPost.firstElementChild.focus();
     });
-
     _defineProperty$2(_assertThisInitialized$2(_this), "handleKeydown", function (e) {
       var key = e.which || e.keyCode;
-
       switch (key) {
         case aria.KeyCode.RETURN:
           _this.openLink(e);
-
           break;
-
         case aria.KeyCode.LEFT:
           _this.keyNavigate("prev");
-
           break;
-
         case aria.KeyCode.RIGHT:
           _this.keyNavigate("next");
-
           break;
       }
     });
-
     _defineProperty$2(_assertThisInitialized$2(_this), "handleScroll", function (e) {
       var tutorialsContainer = e.currentTarget;
       var isFirstSlide = false,
-          isLastSlide = false; // We're at the first slide.
+        isLastSlide = false;
 
+      // We're at the first slide.
       if (0 === tutorialsContainer.scrollLeft) {
         isFirstSlide = true;
-      } // We're at the last slide.
+      }
 
-
+      // We're at the last slide.
       var getSum = tutorialsContainer.scrollLeft + tutorialsContainer.offsetWidth;
-
       if (tutorialsContainer.scrollWidth === getSum) {
         isLastSlide = true;
       }
-
       _this.setState({
         isFirstSlide: isFirstSlide,
         isLastSlide: isLastSlide
       });
     });
-
     _defineProperty$2(_assertThisInitialized$2(_this), "navigationButtonClicked", function (e) {
-      var tutorialsContainer = e.currentTarget.parentNode.previousElementSibling; // Scroll to the next or previous "slide".
+      var tutorialsContainer = e.currentTarget.parentNode.previousElementSibling;
 
+      // Scroll to the next or previous "slide".
       if (e.currentTarget.classList.contains("next")) {
         tutorialsContainer.scrollLeft += tutorialsContainer.offsetWidth;
       } else {
         tutorialsContainer.scrollLeft -= tutorialsContainer.offsetWidth;
       }
     });
-
     _this.secondTutorial = /*#__PURE__*/React.createRef();
     _this.state = {
       posts: [],
@@ -1144,6 +987,9 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
+  // TODO: Check this on RTL.
+
+  // TODO: check this on RTL.
   _createClass$2(TutorialsSlider, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
@@ -1151,13 +997,11 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       if (this.state.isShowingAll !== prevState.isShowingAll && window.innerWidth < screen.tablet) {
         if (this.secondTutorial.current) {
           var tutorialToFocus;
-
           if (this.state.isShowingAll) {
             tutorialToFocus = this.secondTutorial.current.nextElementSibling;
           } else {
             tutorialToFocus = this.secondTutorial.current;
           }
-
           tutorialToFocus.firstElementChild.focus();
         }
       }
@@ -1166,10 +1010,10 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
-
       var API_URL = "https://wpmudev.com/blog/wp-json/wp/v2/posts?tutorials_categories=";
-      var QUERY_ID = this.props.category; // GET posts using fetch.
+      var QUERY_ID = this.props.category;
 
+      // GET posts using fetch.
       fetch(API_URL + QUERY_ID).then(function (response) {
         return response.json();
       }).then(function (data) {
@@ -1188,14 +1032,13 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this3 = this;
-
       var _this$state = this.state,
-          posts = _this$state.posts,
-          error = _this$state.error,
-          isLoaded = _this$state.isLoaded,
-          isShowingAll = _this$state.isShowingAll;
+        posts = _this$state.posts,
+        error = _this$state.error,
+        isLoaded = _this$state.isLoaded,
+        isShowingAll = _this$state.isShowingAll;
       var _this$props$skipTo = this.props.skipTo,
-          skipTo = _this$props$skipTo === void 0 ? '' : _this$props$skipTo;
+        skipTo = _this$props$skipTo === void 0 ? '' : _this$props$skipTo;
       var translate = this.props.translate;
       var loading = translate && translate[0].loading ? translate[0].loading : "Loading tutorials...";
       var read_article = translate && translate[0].read_article ? translate[0].read_article : "";
@@ -1231,7 +1074,6 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           }
         }));
       });
-
       if (error) {
         return /*#__PURE__*/React.createElement(Notifications, {
           type: "error",
@@ -1248,11 +1090,12 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           className: "sui-button-icon prev",
           onClick: function onClick(e) {
             return _this3.navigationButtonClicked(e);
-          } // eslint-disable-next-line prettier/prettier
+          }
+          // eslint-disable-next-line prettier/prettier
           ,
           style: {
-            visibility: this.state.isFirstSlide ? "hidden" : "visible" // eslint-disable-next-line prettier/prettier
-
+            visibility: this.state.isFirstSlide ? "hidden" : "visible"
+            // eslint-disable-next-line prettier/prettier
           }
         }, /*#__PURE__*/React.createElement("span", {
           className: "sui-icon-chevron-left sui-sm",
@@ -1264,11 +1107,12 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           className: "sui-button-icon next",
           onClick: function onClick(e) {
             return _this3.navigationButtonClicked(e);
-          } // eslint-disable-next-line prettier/prettier
+          }
+          // eslint-disable-next-line prettier/prettier
           ,
           style: {
-            visibility: this.state.isLastSlide ? "hidden" : "visible" // eslint-disable-next-line prettier/prettier
-
+            visibility: this.state.isLastSlide ? "hidden" : "visible"
+            // eslint-disable-next-line prettier/prettier
           }
         }, /*#__PURE__*/React.createElement("span", {
           className: "sui-icon-chevron-right sui-sm",
@@ -1301,7 +1145,8 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
           "aria-hidden": "true"
         }), view_all), /*#__PURE__*/React.createElement("div", {
           className: "sui-tooltip",
-          "data-tooltip": "Hide Tutorials" // eslint-disable-next-line prettier/prettier
+          "data-tooltip": "Hide Tutorials"
+          // eslint-disable-next-line prettier/prettier
           ,
           style: {
             marginRight: "-9px"
@@ -1326,7 +1171,6 @@ var TutorialsSlider = /*#__PURE__*/function (_Component) {
       }
     }
   }]);
-
   return TutorialsSlider;
 }(Component);
 

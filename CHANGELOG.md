@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.4.3](https://github.com/wpmudev/shared-modules/compare/release/1.4.2...release/1.4.3) (2023-07-25)
+
+#### ✨ New Features
+
+- `presets`
+  - Added prop to manage pro tags. [#174](https://github.com/wpmudev/shared-modules/pull/174) ([@creador-dev](https://github.com/creador-dev))
+- `upsell`
+  - New package upsell in shared modules. [#155](https://github.com/wpmudev/shared-modules/pull/155) ([@creador-dev](https://github.com/creador-dev))
+
+#### Committers: 1
+- Pawan Kumar ([@creador-dev](https://github.com/creador-dev))
+
 ## [1.4.2](https://github.com/wpmudev/shared-modules/compare/release/1.4.1...release/1.4.2) (2023-06-06)
 
 #### 🚀 Improvements
