@@ -3741,10 +3741,11 @@ var PresetsTable = /*#__PURE__*/function (_Component) {
   _createClass$3(PresetsTable, [{
     key: "render",
     value: function render() {
+      var proItems = this.props.proItems;
       var rows = Children.map(this.props.children, function (row) {
         var rowName = row.props.name ? row.props.name : '';
         var rowStatus = row.props.status;
-        var rowContent = rowStatus[0].replace(/( - )/g, '\n').split('\n').filter(function (item) {
+        var rowContent = rowStatus[0].split('\n').filter(function (item) {
           return item;
         });
         var rowTag = /*#__PURE__*/React.createElement("span", {
@@ -3753,13 +3754,20 @@ var PresetsTable = /*#__PURE__*/function (_Component) {
             marginLeft: '6px'
           }
         }, "Pro");
-        return '' !== rowName || rowContent.length ? /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, rowName), /*#__PURE__*/React.createElement("td", null, rowContent.map(function (item, index) {
-          if (item.includes('Inactive')) {
-            return /*#__PURE__*/React.createElement("span", {
-              key: item + '-' + index
-            }, item, rowTag, '\n');
-          }
-          return item + '\n';
+        var isPro = proItems.includes(rowName) && 1 === rowContent.length ? true : false;
+        return '' !== rowName || rowContent.length ? /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, rowName), /*#__PURE__*/React.createElement("td", null, rowContent.map(function (item) {
+          var newItem = item.replace(/( - )/g, '\n').split('\n').filter(function (item) {
+            return item;
+          });
+          isPro = !isPro && proItems.includes(newItem[0]) ? true : isPro;
+          var dataItem = newItem.map(function (data, index, array) {
+            var isLastItem = index === array.length - 1;
+            return isPro && isLastItem ? /*#__PURE__*/React.createElement("span", {
+              key: data + '-' + index
+            }, data, rowTag, '\n') : data + '\n';
+          });
+          isPro = false;
+          return dataItem;
         }))) : '';
       });
       return /*#__PURE__*/React.createElement(Table, this.props, /*#__PURE__*/React.createElement("tbody", null, rows));
@@ -3944,7 +3952,9 @@ var PresetsAccordionItem = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           return editAction(_this2.props.id);
         }
-      }))), /*#__PURE__*/React.createElement(PresetsTable, null, this.props.children)), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button$1, {
+      }))), /*#__PURE__*/React.createElement(PresetsTable, {
+        proItems: this.props.proItems
+      }, this.props.children)), /*#__PURE__*/React.createElement(BoxFooter, null, /*#__PURE__*/React.createElement(Button$1, {
         label: this.props.applyLabel || 'Apply',
         icon: "check",
         design: "ghost",
@@ -4392,6 +4402,8 @@ var Presets = function Presets(_ref) {
     requestsData = _ref.requestsData,
     sourceUrls = _ref.sourceUrls,
     sourceLang = _ref.sourceLang,
+    _ref$proItems = _ref.proItems,
+    proItems = _ref$proItems === void 0 ? [] : _ref$proItems,
     srcDemoData = _ref.srcDemoData,
     _ref$setDemoData = _ref.setDemoData,
     setDemoData = _ref$setDemoData === void 0 ? false : _ref$setDemoData;
@@ -4881,7 +4893,8 @@ var Presets = function Presets(_ref) {
       checkboxSelected: item.selected,
       checkboxClickHandler: function checkboxClickHandler(e) {
         return _checkboxClickHandler(item, e.target.checked);
-      }
+      },
+      proItems: proItems
     }, Object.keys(item.config.strings).map(function (name) {
       return /*#__PURE__*/React.createElement("div", {
         key: name,
