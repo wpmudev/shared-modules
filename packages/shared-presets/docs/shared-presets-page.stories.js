@@ -1,6 +1,6 @@
 import React from 'react';
 import { Presets } from '../lib/shared-presets';
-import { demoData, demoUrls, demoContent, demoLang } from './demo-data';
+import { demoData, demoUrls, demoContent, demoLang, demoProItems } from './demo-data';
 
 export default {
 	title: "Presets/Page",
@@ -11,9 +11,10 @@ export default {
 		requestsData: demoData,
 		sourceUrls: demoUrls,
 		sourceLang: {},
+		proItems: demoProItems,
 		// Below all custom props for demo only.
 		setDemoData: true,
-		srcDemoData: demoContent
+		srcDemoData: demoContent,
 	},
 	argTypes: {
 		// Hide custom props for demo from the controls table.

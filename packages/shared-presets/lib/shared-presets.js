@@ -111,6 +111,7 @@ export const Presets = ( {
 	requestsData,
 	sourceUrls,
 	sourceLang,
+	proItems = [],
 	// Below all custom props used on demo only.
 	srcDemoData,
 	setDemoData = false
@@ -661,6 +662,7 @@ export const Presets = ( {
 							checkboxId= { 'config-checkbox-' + index }
 							checkboxSelected= { item.selected }
 							checkboxClickHandler= { (e) => checkboxClickHandler( item, e.target.checked ) }
+							proItems={ proItems }
 						>
 							{ Object.keys( item.config.strings ).map( ( name ) => (
 								<div key={ name } name={ lang.settingsLabels[ name ] } status={ item.config.strings[ name ] } />

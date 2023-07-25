@@ -226,3 +226,10 @@ export const demoLang = {
 		settings: 'Settings',
 	},
 };
+
+export const demoProItems = [
+	'Remove query strings from assets',
+	'Database',
+	'Purge Varnish cache',
+	'Remove data on uninstall'
+];
