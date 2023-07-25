@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@wpmudev/shared-notifications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WPMU DEV Shared Notifications",
   "keywords": [],
   "author": "WPMU DEV (https://premium.wpmudev.org/)",
