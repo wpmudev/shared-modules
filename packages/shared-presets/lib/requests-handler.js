@@ -16,12 +16,19 @@ export default class RequestHandler {
 	 * @return {Promise}
 	 */
 	delete( configs, currentConfig ) {
-		// Delete from the Hub when the config has a Hub ID and we have an API key.
-		if ( currentConfig.hub_id ) {
-			this.deleteFromHub( currentConfig.hub_id );
+		let config = currentConfig;
+
+		// if current config is array
+		if ( Array.isArray( config ) ) {
+			config = config[0];
 		}
 
-		const configIndex = configs.findIndex( ( element ) => element.id === currentConfig.id );
+		// Delete from the Hub when the config has a Hub ID and we have an API key.
+		if ( config.hub_id ) {
+			this.deleteFromHub( config.hub_id );
+		}
+
+		const configIndex = configs.findIndex( ( element ) => element.id === config.id );
 		if ( -1 !== configIndex ) {
 			configs.splice( configIndex, 1 );
 		}
@@ -118,6 +125,7 @@ export default class RequestHandler {
 	 * @param {int} configId The ID of the config to delete.
 	 */
 	deleteFromHub( configId ) {
+		console.log( this.apiKey );
 		// Try to delete it in the Hub only if we have an API key.
 		if ( this.apiKey ) {
 			this.makeHubRequest( `/${ configId }`, 'DELETE' )
