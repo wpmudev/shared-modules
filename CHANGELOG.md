@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org/) for commit guidelines.
 
+## [1.4.4](https://github.com/wpmudev/shared-modules/compare/release/1.4.3...release/1.4.4) (2025-11-25)
+
+#### 🐛 Bug Fixes
+
+- `presets`
+    - Presets component config delete doesn't reflects on HUB. [#176](https://github.com/wpmudev/shared-modules/pull/176) ([@creador-dev](https://github.com/creador-dev))
+
+#### Committers: 1
+- Pawan Kumar ([@creador-dev](https://github.com/creador-dev))
+
 ## [1.4.3](https://github.com/wpmudev/shared-modules/compare/release/1.4.2...release/1.4.3) (2023-07-25)
 
 #### ✨ New Features
