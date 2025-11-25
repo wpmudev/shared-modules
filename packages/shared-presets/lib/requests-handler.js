@@ -125,7 +125,6 @@ export default class RequestHandler {
 	 * @param {int} configId The ID of the config to delete.
 	 */
 	deleteFromHub( configId ) {
-		console.log( this.apiKey );
 		// Try to delete it in the Hub only if we have an API key.
 		if ( this.apiKey ) {
 			this.makeHubRequest( `/${ configId }`, 'DELETE' )
