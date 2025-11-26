@@ -627,109 +627,99 @@ var isUndefined = function isUndefined(element) {
   return true;
 };
 
-function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
-        ;
-      }
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) {
+    n[e] = r[e];
   }
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
 }
 function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
+  return _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) {
+        ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
       }
     }
-    return target;
-  };
-  return _extends.apply(this, arguments);
+    return n;
+  }, _extends.apply(null, arguments);
 }
-function _objectWithoutPropertiesLoose$1(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-function _objectWithoutProperties$1(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
+        ;
+      }
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
     }
+    return a;
   }
-  return target;
-}
-function _taggedTemplateLiteral(strings, raw) {
-  if (!raw) {
-    raw = strings.slice(0);
-  }
-  return Object.freeze(Object.defineProperties(strings, {
-    raw: {
-      value: Object.freeze(raw)
-    }
-  }));
-}
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-  return arr2;
 }
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _objectWithoutProperties$1(e, t) {
+  if (null == e) return {};
+  var o,
+    r,
+    i = _objectWithoutPropertiesLoose$1(e, t);
+  if (Object.getOwnPropertySymbols) {
+    var n = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < n.length; r++) {
+      o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+    }
+  }
+  return i;
+}
+function _objectWithoutPropertiesLoose$1(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) {
+    if ({}.hasOwnProperty.call(r, n)) {
+      if (-1 !== e.indexOf(n)) continue;
+      t[n] = r[n];
+    }
+  }
+  return t;
+}
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
+function _taggedTemplateLiteral(e, t) {
+  return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, {
+    raw: {
+      value: Object.freeze(t)
+    }
+  }));
+}
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+  }
 }
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -860,7 +850,7 @@ var Button = function Button(_ref) {
     disabled: props.disabled || loading
   }, props), loading ? loader : content);
 };
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10;
 
 // UTILS: Set devices size.
 var screen = {
@@ -889,9 +879,9 @@ Discount.Body = styled.div(_templateObject6 || (_templateObject6 = _taggedTempla
 Discount.Image = styled.img(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n\tdisplay: none;\n\tflex: 0 0 auto;\n\talign-self: flex-end;\n\tmargin: 0 10px;\n\tpadding: 0 30px;\n\n\t+ div {\n\n\t\t@media ", " {\n\t\t\tpadding-left: 0 !important;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t}\n"])), device.tablet, device.tablet);
 Discount.Content = styled.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n\tmin-width: 1px;\n\tflex: 1;\n\tpadding: 20px 20px 10px;\n\n\tp {\n\t\tmargin: 12px 0 0 !important;\n\t\tcolor: #666 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\n\t\t&:first-child {\n\t\t\tmargin: 0 !important;\n\t\t}\n\n\t\t&.sui-disclaimer {\n\t\t\tdisplay: none;\n\t\t\tcolor: #888 !important;\n\n\t\t\t@media ", " {\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpadding: 30px;\n\t\ttext-align: left;\n\t}\n"])), device.tablet, device.tablet);
 Discount.Border = styled.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n\tdisplay: none;\n\talign-self: stretch;\n\tpadding: 30px 0;\n\n\tspan {\n\t\twidth: 1px;\n\t\theight: 100%;\n\t\tdisplay: block;\n\t\tbackground-color: #DDD;\n\t}\n\n\t@media ", " {\n\t\tdisplay: block;\n\t}\n"])), device.tablet);
-Discount.PriceWrapper = styled.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\tpadding: 10px 20px 30px;\n\ttext-align: center;\n\n\t.sui-button {\n\t\tmargin-top: 15px !important;\n\t\tmargin-right: 0 !important;\n\t}\n\n\t.sui-disclaimer {\n\t\tmargin: 20px 0 0 !important;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: none;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpadding: 12px 30px 20px;\n\t}\n"])), device.tablet, device.tablet);
-Discount.PriceLabel = styled.h3(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n\tcolor: #666 !important;\n\tfont-size: 12px !important;\n\tline-height: 16px !important;\n\tfont-weight: 400 !important;\n\tletter-spacing: -0.23px !important;\n\n\t@media ", " {\n\t\ttext-transform: uppercase;\n\t}\n"])), device.tablet);
-Discount.Price = styled.p(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n\tfont-size: 15px !important;\n\tline-height: 40px !important;\n\tletter-spacing: -0.27px !important;\n\n\tspan {\n\t\tmargin-right: 6px;\n\t\tcolor: #FF6D6D;\n\t\tfont-size: 18px;\n\t\tfont-weight: bold;\n\t\ttext-decoration: line-through;\n\t\tletter-spacing: -0.32px;\n\t}\n\n\tstrong {\n\t\tfont-size: 28px;\n\t\tfont-weight: bold;\n\t\tletter-spacing: -0.5px;\n\t}\n"])));
+Discount.PriceWrapper = styled.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n\tdisplay: block;\n\tpadding: 10px 20px 30px;\n\ttext-align: center;\n\n\t.sui-button {\n\t\tmargin-top: 15px !important;\n\t\tmargin-right: 0 !important;\n\t}\n\n\t.sui-disclaimer {\n\t\tmargin: 20px 0 0 !important;\n\t\tcolor: #888 !important;\n\t\tfont-size: 13px !important;\n\t\tline-height: 22px !important;\n\n\t\t@media ", " {\n\t\t\tdisplay: none;\n\t\t}\n\t}\n\n\t@media ", " {\n\t\tpadding: 12px 30px 20px;\n\t}\n"])), device.tablet, device.tablet);
+Discount.PriceLabel = styled.h3(_templateObject1 || (_templateObject1 = _taggedTemplateLiteral(["\n\tcolor: #666 !important;\n\tfont-size: 12px !important;\n\tline-height: 16px !important;\n\tfont-weight: 400 !important;\n\tletter-spacing: -0.23px !important;\n\n\t@media ", " {\n\t\ttext-transform: uppercase;\n\t}\n"])), device.tablet);
+Discount.Price = styled.p(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n\tmargin: 0 !important;\n\tcolor: #333 !important;\n\tfont-size: 15px !important;\n\tline-height: 40px !important;\n\tletter-spacing: -0.27px !important;\n\n\tspan {\n\t\tmargin-right: 6px;\n\t\tcolor: #FF6D6D;\n\t\tfont-size: 18px;\n\t\tfont-weight: bold;\n\t\ttext-decoration: line-through;\n\t\tletter-spacing: -0.32px;\n\t}\n\n\tstrong {\n\t\tfont-size: 28px;\n\t\tfont-weight: bold;\n\t\tletter-spacing: -0.5px;\n\t}\n"])));
 var _excluded = ["title", "price", "priceTime", "discount", "image", "imageRetina", "imageAlt", "disclaimer", "priceLabel", "buttonLabel", "buttonLink", "closeLabel", "onCloseClick", "children"];
 var NoticeDiscount = function NoticeDiscount(_ref) {
   var title = _ref.title,
