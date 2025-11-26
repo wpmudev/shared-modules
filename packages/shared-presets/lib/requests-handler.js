@@ -12,26 +12,18 @@ export default class RequestHandler {
 	 * Deletes a config locally and from the Hub.
 	 *
 	 * @param {array} configs Current list of local configs.
-	 * @param {Object} currentConfig Config to delete.
+	 * @param {Object|Array} currentConfig Config(s) to delete.
 	 * @return {Promise}
 	 */
 	delete( configs, currentConfig ) {
-		let config = currentConfig;
-
-		// if current config is array
-		if ( Array.isArray( config ) ) {
-			config = config[0];
-		}
+		const configsToDelete = Array.isArray( currentConfig ) ? currentConfig : [ currentConfig ];
 
 		// Delete from the Hub when the config has a Hub ID and we have an API key.
-		if ( config.hub_id ) {
-			this.deleteFromHub( config.hub_id );
-		}
-
-		const configIndex = configs.findIndex( ( element ) => element.id === config.id );
-		if ( -1 !== configIndex ) {
-			configs.splice( configIndex, 1 );
-		}
+		configsToDelete.forEach( config => {
+			if ( config.hub_id ) {
+				this.deleteFromHub( config.hub_id );
+			}
+		});
 
 		return this.updateLocalConfigsList( configs );
 	}
