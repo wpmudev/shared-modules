@@ -4661,29 +4661,21 @@ var RequestHandler = /*#__PURE__*/function () {
    * Deletes a config locally and from the Hub.
    *
    * @param {array} configs Current list of local configs.
-   * @param {Object} currentConfig Config to delete.
+   * @param {Object|Array} currentConfig Config(s) to delete.
    * @return {Promise}
    */
   _createClass$3$1(RequestHandler, [{
     key: "delete",
     value: function _delete(configs, currentConfig) {
-      var config = currentConfig;
-
-      // if current config is array
-      if (Array.isArray(config)) {
-        config = config[0];
-      }
+      var _this = this;
+      var configsToDelete = Array.isArray(currentConfig) ? currentConfig : [currentConfig];
 
       // Delete from the Hub when the config has a Hub ID and we have an API key.
-      if (config.hub_id) {
-        this.deleteFromHub(config.hub_id);
-      }
-      var configIndex = configs.findIndex(function (element) {
-        return element.id === config.id;
+      configsToDelete.forEach(function (config) {
+        if (config.hub_id) {
+          _this.deleteFromHub(config.hub_id);
+        }
       });
-      if (-1 !== configIndex) {
-        configs.splice(configIndex, 1);
-      }
       return this.updateLocalConfigsList(configs);
     }
 
@@ -4697,34 +4689,34 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "addNew",
     value: function addNew(configs, newConfig) {
-      var _this = this;
+      var _this2 = this;
       return new Promise(function (resolve, reject) {
         newConfig.id = Date.now();
-        if (_this.apiKey) {
+        if (_this2.apiKey) {
           var hubId;
-          _this.sendConfigToHub(newConfig).then(function (res) {
+          _this2.sendConfigToHub(newConfig).then(function (res) {
             hubId = res.id;
             newConfig.id = res.id;
             newConfig.hub_id = res.id;
             configs.push(newConfig);
-            return _this.updateLocalConfigsList(configs);
+            return _this2.updateLocalConfigsList(configs);
           })["catch"](function () {
             // Update the local list even if the Hub request fails.
             configs.push(newConfig);
-            return _this.updateLocalConfigsList(configs);
+            return _this2.updateLocalConfigsList(configs);
           }).then(function (updatedConfigs) {
             return resolve(updatedConfigs);
           })["catch"](function (res) {
             // There was an error saving the configs locally. Probably a schema mismatch.
             if (400 === res.status) {
               // Remove the recently submitted config from the hub.
-              _this.deleteFromHub(hubId);
+              _this2.deleteFromHub(hubId);
             }
             reject(res);
           });
         } else {
           configs.push(newConfig);
-          resolve(_this.updateLocalConfigsList(configs));
+          resolve(_this2.updateLocalConfigsList(configs));
         }
       });
     }
@@ -4802,15 +4794,15 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "syncWithHub",
     value: function syncWithHub(localConfigs) {
-      var _this2 = this;
+      var _this3 = this;
       return new Promise(function (resolve, reject) {
-        if (!_this2.apiKey) {
+        if (!_this3.apiKey) {
           resolve(localConfigs);
         }
-        _this2.makeHubRequest("?package_id=".concat(_this2.pluginData.id), 'GET').then(function (hubConfigs) {
-          return _this2.getUpdatedLocalWithHub(localConfigs, hubConfigs);
+        _this3.makeHubRequest("?package_id=".concat(_this3.pluginData.id), 'GET').then(function (hubConfigs) {
+          return _this3.getUpdatedLocalWithHub(localConfigs, hubConfigs);
         }).then(function () {
-          return _this2.updateLocalConfigsList(localConfigs);
+          return _this3.updateLocalConfigsList(localConfigs);
         }).then(function (syncRes) {
           return resolve(syncRes);
         })["catch"](function (res) {
@@ -4834,7 +4826,7 @@ var RequestHandler = /*#__PURE__*/function () {
   }, {
     key: "getUpdatedLocalWithHub",
     value: function getUpdatedLocalWithHub(localConfigs, hubConfigs) {
-      var _this3 = this;
+      var _this4 = this;
       var hubConfigsIds = hubConfigs.map(function (currentConfig) {
           return currentConfig.id;
         }),
@@ -4854,7 +4846,7 @@ var RequestHandler = /*#__PURE__*/function () {
 
           // Send to the Hub the configs that haven't been sent.
           if (!localOne.hub_id) {
-            var sendToHubPromise = _this3.sendConfigToHub(localOne).then(function (res) {
+            var sendToHubPromise = _this4.sendConfigToHub(localOne).then(function (res) {
               localConfigs[index]['id'] = res.id;
               localConfigs[index]['hub_id'] = res.id;
             });
